@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces
+END
+MulticastThreadSuper.html
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/MulticastThreadSuper.html
+END
+MulticastThreadInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/MulticastThreadInterface.html
+END
+XMLParserInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/XMLParserInterface.html
+END
+PacketBuilderInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/PacketBuilderInterface.html
+END
+ViewControllerInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/ViewControllerInterface.html
+END
+LoggerInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/LoggerInterface.html
+END
+package-frame.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/package-frame.html
+END
+package-use.html
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/package-use.html
+END
+package-summary.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/package-summary.html
+END
+MulticastSenderInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/MulticastSenderInterface.html
+END
+package-tree.html
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/package-tree.html
+END
+MulticastControllerInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/MulticastControllerInterface.html
+END
+MulticastReceiverInterface.html
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/multicastor/!svn/ver/1/JavaDoc/zisko/multicastor/program/interfaces/MulticastReceiverInterface.html
+END
