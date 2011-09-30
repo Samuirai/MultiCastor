@@ -1,6 +1,6 @@
 package zisko.multicastor.program.controller;
 
-// Fabi sein Kommentar
+// Fabi sein Kommentar veraendert
 
 import java.io.File;
 import java.io.FileNotFoundException;
