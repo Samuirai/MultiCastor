@@ -1,6 +1,5 @@
 package zisko.multicastor.program.controller;
 
-// Fabi sein Kommentar veraendert
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +13,6 @@ import org.xml.sax.SAXException;
 import zisko.multicastor.program.model.MulticastLogHandler;
 import zisko.multicastor.program.model.WrongConfigurationException;
 
-//Kommentar von Jonas (Git Test)
 
 /**
  * Main-Methode.
