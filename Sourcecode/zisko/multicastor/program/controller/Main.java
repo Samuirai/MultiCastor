@@ -1,6 +1,6 @@
 package zisko.multicastor.program.controller;
 
-// asd
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
