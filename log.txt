@@ -1,0 +1,2 @@
+[INFO][04.10.2011-11:59:47] Starting MultiCastor with a gui
+[WARNING][04.10.2011-11:59:47] Default configurationfile was not found. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.
