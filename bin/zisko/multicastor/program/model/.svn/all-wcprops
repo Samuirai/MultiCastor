@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model
+END
+WrongConfigurationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/WrongConfigurationException.java
+END
+UpdateTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/UpdateTask.java
+END
+MulticastLogHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/MulticastLogHandler.java
+END
+InputValidator.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/InputValidator.java
+END
+MulticastSender.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/MulticastSender.java
+END
+RunSnakeRun.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/RunSnakeRun.java
+END
+xmlParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/xmlParser.java
+END
+PacketAnalyzer.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/PacketAnalyzer.java
+END
+PacketBuilder.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/PacketBuilder.java
+END
+InvalidNetworkAdapterException.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/InvalidNetworkAdapterException.java
+END
+MessageCheck.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/MessageCheck.java
+END
+ByteTools.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/ByteTools.java
+END
+NetworkAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/NetworkAdapter.java
+END
+MulticastReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/MulticastReceiver.java
+END
+RegularLoggingTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/model/RegularLoggingTask.java
+END

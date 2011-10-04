@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/interfaces
+END
+PacketBuilderInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/interfaces/PacketBuilderInterface.java
+END
+MulticastSenderInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/interfaces/MulticastSenderInterface.java
+END
+MulticastThreadSuper.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/interfaces/MulticastThreadSuper.java
+END
+XMLParserInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/multicastor/!svn/ver/1/Sourcecode/zisko/multicastor/program/interfaces/XMLParserInterface.java
+END
