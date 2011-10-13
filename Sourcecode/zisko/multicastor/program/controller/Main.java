@@ -13,7 +13,6 @@ import org.xml.sax.SAXException;
 import zisko.multicastor.program.model.MulticastLogHandler;
 import zisko.multicastor.program.model.WrongConfigurationException;
 
-//TEST, please delete JT
 
 /**
  * Main-Methode.
