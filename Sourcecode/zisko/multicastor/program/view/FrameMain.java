@@ -45,7 +45,7 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelAbout panel_about;
 	/*
-	 * Weitere Standard GUI Komponenten welche benötigt werden 
+	 * Weitere Standard GUI Komponenten welche benï¿½tigt werden 
 	 */
 	private JMenuBar mb_menubar;
 	private JMenu m_menu;
@@ -78,7 +78,7 @@ public class FrameMain extends JFrame {
 	private Separator mi_separator;
 	/**
 	 * Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
 	 */
 	public FrameMain(ViewController ctrl) {
 		initWindow(ctrl);
@@ -95,7 +95,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche die Menubar initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl) {
 		mi_autoSave = new JCheckBox("AutoSave");
@@ -179,7 +179,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche die Panels initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initPanels(ViewController ctrl) {
 		panel_rec_ipv4 = new PanelTabbed(ctrl,Typ.RECEIVER_V4);
@@ -189,7 +189,7 @@ public class FrameMain extends JFrame {
 		panel_about = new PanelAbout();
 		img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
 		
-		tabpane = new JTabbedPane();
+		tabpane = new DraggableTabbedPane();
 		tabpane.addMouseListener(ctrl);
 		tabpane.addMouseMotionListener(ctrl);
 		tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
@@ -201,7 +201,7 @@ public class FrameMain extends JFrame {
 		tabpane.setIconAt(2, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6receiver.png")));
 		tabpane.setIconAt(3, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6sender.png")));
 		//tabpane.addTab(" Configuration ",img_close, panel_config);
-		tabpane.setSelectedIndex(1);
+		tabpane.setSelectedIndex(0);
 		tabpane.setFont(MiscFont.getFont(0,17));
 		tabpane.setFocusable(false);
 		tabpane.addChangeListener(ctrl);
@@ -210,7 +210,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche das Frame initialisiert
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initWindow(ViewController ctrl) {
 	    try {
@@ -382,7 +382,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Hilfsfunktion welche das aktuell durch die Radiobuttons selektierte Userlevel ausliest
-	 * @return das aktuell ausgewählte Userlevel
+	 * @return das aktuell ausgewï¿½hlte Userlevel
 	 */
 	public Userlevel getSelectedUserlevel(){
 		Userlevel ret = Userlevel.UNDEFINED;
