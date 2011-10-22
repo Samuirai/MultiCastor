@@ -54,3 +54,447 @@
 [INFO][21.10.2011-20:38:37] Starting MultiCastor with a gui
 [INFO][21.10.2011-20:38:37] Default Configurationfile loaded.
 [INFO][21.10.2011-20:38:37] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:20:10] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:20:10] Default Configurationfile loaded.
+[INFO][22.10.2011-12:20:10] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:21:07] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:21:07] Default Configurationfile loaded.
+[INFO][22.10.2011-12:21:07] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:21:21] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:21:21] Default Configurationfile loaded.
+[INFO][22.10.2011-12:21:21] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:35:20] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:35:20] Default Configurationfile loaded.
+[INFO][22.10.2011-12:35:20] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:37:37] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:37:37] Default Configurationfile loaded.
+[INFO][22.10.2011-12:37:37] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:44:15] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:44:15] Default Configurationfile loaded.
+[INFO][22.10.2011-12:44:15] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-12:58:05] Starting MultiCastor with a gui
+[INFO][22.10.2011-12:58:05] Default Configurationfile loaded.
+[INFO][22.10.2011-12:58:05] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-13:01:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-13:01:52] Default Configurationfile loaded.
+[INFO][22.10.2011-13:01:52] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-13:02:54] Starting MultiCastor with a gui
+[INFO][22.10.2011-13:02:54] Default Configurationfile loaded.
+[INFO][22.10.2011-13:02:54] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-13:03:10] Starting MultiCastor with a gui
+[INFO][22.10.2011-13:03:10] Default Configurationfile loaded.
+[INFO][22.10.2011-13:03:10] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-13:03:41] Starting MultiCastor with a gui
+[INFO][22.10.2011-13:03:41] Default Configurationfile loaded.
+[INFO][22.10.2011-13:03:41] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-13:04:50] Starting MultiCastor with a gui
+[INFO][22.10.2011-13:04:50] Default Configurationfile loaded.
+[INFO][22.10.2011-13:04:50] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-13:07:15] Starting MultiCastor with a gui
+[INFO][22.10.2011-13:07:15] Default Configurationfile loaded.
+[INFO][22.10.2011-13:07:15] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:40:17] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:40:17] Default Configurationfile loaded.
+[INFO][22.10.2011-15:40:17] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:40:55] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:40:55] Default Configurationfile loaded.
+[INFO][22.10.2011-15:40:55] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:41:23] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:41:23] Default Configurationfile loaded.
+[INFO][22.10.2011-15:41:23] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:42:49] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:42:49] Default Configurationfile loaded.
+[INFO][22.10.2011-15:42:49] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:43:11] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:43:11] Default Configurationfile loaded.
+[INFO][22.10.2011-15:43:11] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:43:48] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:43:48] Default Configurationfile loaded.
+[INFO][22.10.2011-15:43:48] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:45:16] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:45:16] Default Configurationfile loaded.
+[INFO][22.10.2011-15:45:16] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:45:33] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:45:34] Default Configurationfile loaded.
+[INFO][22.10.2011-15:45:34] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:46:00] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:46:01] Default Configurationfile loaded.
+[INFO][22.10.2011-15:46:01] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:47:13] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:47:13] Default Configurationfile loaded.
+[INFO][22.10.2011-15:47:13] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:48:51] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:48:51] Default Configurationfile loaded.
+[INFO][22.10.2011-15:48:51] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:49:22] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:49:22] Default Configurationfile loaded.
+[INFO][22.10.2011-15:49:22] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:54:58] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:54:58] Default Configurationfile loaded.
+[INFO][22.10.2011-15:54:58] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:55:24] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:55:24] Default Configurationfile loaded.
+[INFO][22.10.2011-15:55:24] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:55:39] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:55:39] Default Configurationfile loaded.
+[INFO][22.10.2011-15:55:39] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:56:25] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:56:25] Default Configurationfile loaded.
+[INFO][22.10.2011-15:56:25] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:57:23] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:57:24] Default Configurationfile loaded.
+[INFO][22.10.2011-15:57:24] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-15:58:04] Starting MultiCastor with a gui
+[INFO][22.10.2011-15:58:04] Default Configurationfile loaded.
+[INFO][22.10.2011-15:58:04] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:02:21] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:02:21] Default Configurationfile loaded.
+[INFO][22.10.2011-16:02:21] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:06:49] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:06:49] Default Configurationfile loaded.
+[INFO][22.10.2011-16:06:49] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:07:06] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:07:06] Default Configurationfile loaded.
+[INFO][22.10.2011-16:07:06] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:07:33] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:07:33] Default Configurationfile loaded.
+[INFO][22.10.2011-16:07:33] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:13:45] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:13:45] Default Configurationfile loaded.
+[INFO][22.10.2011-16:13:45] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:14:00] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:14:00] Default Configurationfile loaded.
+[INFO][22.10.2011-16:14:00] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:15:51] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:15:51] Default Configurationfile loaded.
+[INFO][22.10.2011-16:15:51] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:16:29] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:16:29] Default Configurationfile loaded.
+[INFO][22.10.2011-16:16:29] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:17:23] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:17:23] Default Configurationfile loaded.
+[INFO][22.10.2011-16:17:23] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:18:40] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:18:41] Default Configurationfile loaded.
+[INFO][22.10.2011-16:18:41] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:24:14] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:24:15] Default Configurationfile loaded.
+[INFO][22.10.2011-16:24:15] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:24:58] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:24:59] Default Configurationfile loaded.
+[INFO][22.10.2011-16:24:59] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:25:27] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:25:27] Default Configurationfile loaded.
+[INFO][22.10.2011-16:25:27] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:32:20] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:32:20] Default Configurationfile loaded.
+[INFO][22.10.2011-16:32:20] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:35:47] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:35:47] Default Configurationfile loaded.
+[INFO][22.10.2011-16:35:47] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:36:23] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:36:23] Default Configurationfile loaded.
+[INFO][22.10.2011-16:36:23] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:36:54] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:36:54] Default Configurationfile loaded.
+[INFO][22.10.2011-16:36:54] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:44:30] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:44:30] Default Configurationfile loaded.
+[INFO][22.10.2011-16:44:30] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-16:58:58] Starting MultiCastor with a gui
+[INFO][22.10.2011-16:58:58] Default Configurationfile loaded.
+[INFO][22.10.2011-16:58:58] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:00:34] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:00:34] Default Configurationfile loaded.
+[INFO][22.10.2011-17:00:34] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:14:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:14:52] Default Configurationfile loaded.
+[INFO][22.10.2011-17:14:52] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:15:08] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:15:08] Default Configurationfile loaded.
+[INFO][22.10.2011-17:15:08] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:15:27] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:15:27] Default Configurationfile loaded.
+[INFO][22.10.2011-17:15:27] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:16:55] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:16:55] Default Configurationfile loaded.
+[INFO][22.10.2011-17:16:55] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:17:56] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:17:56] Default Configurationfile loaded.
+[INFO][22.10.2011-17:17:56] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:19:31] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:19:32] Default Configurationfile loaded.
+[INFO][22.10.2011-17:19:32] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:19:56] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:19:57] Default Configurationfile loaded.
+[INFO][22.10.2011-17:19:57] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:23:27] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:23:27] Default Configurationfile loaded.
+[INFO][22.10.2011-17:23:27] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:24:04] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:24:04] Default Configurationfile loaded.
+[INFO][22.10.2011-17:24:04] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:27:02] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:27:03] Default Configurationfile loaded.
+[INFO][22.10.2011-17:27:03] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:28:33] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:28:33] Default Configurationfile loaded.
+[INFO][22.10.2011-17:28:33] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:31:41] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:31:41] Default Configurationfile loaded.
+[INFO][22.10.2011-17:31:41] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:32:27] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:32:27] Default Configurationfile loaded.
+[INFO][22.10.2011-17:32:27] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:37:35] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:37:36] Default Configurationfile loaded.
+[INFO][22.10.2011-17:37:36] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:40:42] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:40:42] Default Configurationfile loaded.
+[INFO][22.10.2011-17:40:42] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:41:54] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:41:54] Default Configurationfile loaded.
+[INFO][22.10.2011-17:41:54] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:42:20] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:42:20] Default Configurationfile loaded.
+[INFO][22.10.2011-17:42:20] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:42:39] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:42:39] Default Configurationfile loaded.
+[INFO][22.10.2011-17:42:39] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:43:21] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:43:22] Default Configurationfile loaded.
+[INFO][22.10.2011-17:43:22] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:43:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:43:52] Default Configurationfile loaded.
+[INFO][22.10.2011-17:43:52] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:44:08] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:44:09] Default Configurationfile loaded.
+[INFO][22.10.2011-17:44:09] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:45:31] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:45:31] Default Configurationfile loaded.
+[INFO][22.10.2011-17:45:31] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:45:53] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:45:53] Default Configurationfile loaded.
+[INFO][22.10.2011-17:45:53] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:46:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:46:52] Default Configurationfile loaded.
+[INFO][22.10.2011-17:46:52] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:47:08] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:47:08] Default Configurationfile loaded.
+[INFO][22.10.2011-17:47:08] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-17:57:47] Starting MultiCastor with a gui
+[INFO][22.10.2011-17:57:47] Default Configurationfile loaded.
+[INFO][22.10.2011-17:57:47] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:00:39] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:00:40] Default Configurationfile loaded.
+[INFO][22.10.2011-18:00:40] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:01:34] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:01:34] Default Configurationfile loaded.
+[INFO][22.10.2011-18:01:34] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:01:46] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:01:46] Default Configurationfile loaded.
+[INFO][22.10.2011-18:01:46] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:04:27] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:04:27] Default Configurationfile loaded.
+[INFO][22.10.2011-18:04:27] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:05:28] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:05:28] Default Configurationfile loaded.
+[INFO][22.10.2011-18:05:28] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:10:16] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:10:17] Default Configurationfile loaded.
+[INFO][22.10.2011-18:10:17] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:15:50] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:15:50] Default Configurationfile loaded.
+[INFO][22.10.2011-18:15:50] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:17:33] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:17:33] Default Configurationfile loaded.
+[INFO][22.10.2011-18:17:33] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:19:32] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:19:32] Default Configurationfile loaded.
+[INFO][22.10.2011-18:19:32] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:23:29] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:23:29] Default Configurationfile loaded.
+[INFO][22.10.2011-18:23:29] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-18:25:08] Starting MultiCastor with a gui
+[INFO][22.10.2011-18:25:08] Default Configurationfile loaded.
+[INFO][22.10.2011-18:25:08] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-19:57:31] Starting MultiCastor with a gui
+[INFO][22.10.2011-19:57:31] Default Configurationfile loaded.
+[INFO][22.10.2011-19:57:31] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:00:37] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:00:37] Default Configurationfile loaded.
+[INFO][22.10.2011-21:00:37] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:00:43] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:00:43] Default Configurationfile loaded.
+[INFO][22.10.2011-21:00:43] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:04:26] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:04:26] Default Configurationfile loaded.
+[INFO][22.10.2011-21:04:26] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:05:45] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:05:45] Default Configurationfile loaded.
+[INFO][22.10.2011-21:05:45] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:08:47] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:08:47] Default Configurationfile loaded.
+[INFO][22.10.2011-21:08:47] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:09:18] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:09:18] Default Configurationfile loaded.
+[INFO][22.10.2011-21:09:18] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:10:16] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:10:16] Default Configurationfile loaded.
+[INFO][22.10.2011-21:10:16] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:12:32] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:12:32] Default Configurationfile loaded.
+[INFO][22.10.2011-21:12:32] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:25:37] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:25:37] Default Configurationfile loaded.
+[INFO][22.10.2011-21:25:37] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:27:26] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:27:26] Default Configurationfile loaded.
+[INFO][22.10.2011-21:27:26] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:29:59] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:29:59] Default Configurationfile loaded.
+[INFO][22.10.2011-21:29:59] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:30:23] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:30:23] Default Configurationfile loaded.
+[INFO][22.10.2011-21:30:23] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:33:31] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:33:31] Default Configurationfile loaded.
+[INFO][22.10.2011-21:33:31] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:54:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:54:52] Default Configurationfile loaded.
+[INFO][22.10.2011-21:54:52] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:58:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:58:52] Default Configurationfile loaded.
+[INFO][22.10.2011-21:58:52] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-21:59:18] Starting MultiCastor with a gui
+[INFO][22.10.2011-21:59:18] Default Configurationfile loaded.
+[INFO][22.10.2011-21:59:18] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:23:39] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:23:39] Default Configurationfile loaded.
+[INFO][22.10.2011-22:23:39] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:26:33] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:26:33] Default Configurationfile loaded.
+[INFO][22.10.2011-22:26:33] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:28:50] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:28:50] Default Configurationfile loaded.
+[INFO][22.10.2011-22:28:50] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:36:52] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:36:53] Default Configurationfile loaded.
+[INFO][22.10.2011-22:36:53] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:38:30] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:38:30] Default Configurationfile loaded.
+[INFO][22.10.2011-22:38:30] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:38:42] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:38:42] Default Configurationfile loaded.
+[INFO][22.10.2011-22:38:42] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:41:57] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:41:57] Default Configurationfile loaded.
+[INFO][22.10.2011-22:41:57] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:54:26] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:54:26] Default Configurationfile loaded.
+[INFO][22.10.2011-22:54:26] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:54:53] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:54:53] Default Configurationfile loaded.
+[INFO][22.10.2011-22:54:53] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:55:36] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:55:36] Default Configurationfile loaded.
+[INFO][22.10.2011-22:55:36] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-22:59:31] Starting MultiCastor with a gui
+[INFO][22.10.2011-22:59:31] Default Configurationfile loaded.
+[INFO][22.10.2011-22:59:31] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:00:07] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:00:07] Default Configurationfile loaded.
+[INFO][22.10.2011-23:00:07] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:06:59] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:06:59] Default Configurationfile loaded.
+[INFO][22.10.2011-23:06:59] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:07:38] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:07:38] Default Configurationfile loaded.
+[INFO][22.10.2011-23:07:39] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:09:42] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][22.10.2011-23:09:49] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][22.10.2011-23:09:50] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:09:49] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:25] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:25] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:27] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:27] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[FINEST][22.10.2011-23:10:36] /224.0.0.1	18512	null	0	1	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[SEVERE][22.10.2011-23:10:28] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:28] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:54] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:54] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:56] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:56] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:57] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:57] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:58] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:10:58] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:00] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:00] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:01] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:01] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:02] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:02] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:02] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:02] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:03] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:03] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:03] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:03] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[INFO][22.10.2011-23:11:10] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:11:10] Default Configurationfile loaded.
+[INFO][22.10.2011-23:11:10] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][22.10.2011-23:11:10] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:11:10] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:11:15] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][22.10.2011-23:11:16] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][22.10.2011-23:11:38] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:46] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:55] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:11:58] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[FINEST][22.10.2011-23:12:08] /224.0.0.1	18512	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[INFO][22.10.2011-23:12:43] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:12:43] Default Configurationfile loaded.
+[INFO][22.10.2011-23:12:43] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][22.10.2011-23:12:43] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:12:43] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:13:06] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][22.10.2011-23:13:06] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:18:42] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:18:42] Default Configurationfile loaded.
+[INFO][22.10.2011-23:18:42] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][22.10.2011-23:18:42] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:18:42] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:18:45] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][22.10.2011-23:18:48] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:18:57] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][22.10.2011-23:19:05] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][22.10.2011-23:19:05] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:19:05] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:19:08] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:19:08] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:19:10] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:19:10] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[FINEST][22.10.2011-23:19:40] /224.0.0.1	18512	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[SEVERE][22.10.2011-23:19:44] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:19:44] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[INFO][22.10.2011-23:20:30] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:20:30] Default Configurationfile loaded.
+[INFO][22.10.2011-23:20:30] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][22.10.2011-23:20:30] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:20:30] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:20:32] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][22.10.2011-23:20:42] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][22.10.2011-23:20:42] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:20:42] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:20:45] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[SEVERE][22.10.2011-23:20:45] Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+[INFO][22.10.2011-23:22:29] Starting MultiCastor with a gui
+[INFO][22.10.2011-23:22:30] Default Configurationfile loaded.
+[INFO][22.10.2011-23:22:30] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][22.10.2011-23:22:30] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:22:30] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][22.10.2011-23:22:33] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][22.10.2011-23:22:34] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][22.10.2011-23:22:37] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
