@@ -9,7 +9,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
 import javax.swing.Icon;
 
@@ -26,7 +30,7 @@ public class DraggableTabbedPane extends JTabbedPane {
   private Image tabImage = null;
   private Point currentMouseLocation = null;
   private int draggedTabIndex = 0;
-
+  
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
    *  ich, wenn ich mit der Maus klicke(mouseDragged) über einem tab bin.
@@ -89,11 +93,12 @@ public class DraggableTabbedPane extends JTabbedPane {
           if(tabNumber >= 0) {
         	  
         	  Component comp = getComponentAt(draggedTabIndex);
+        	  Component buttonTabComp = getTabComponentAt(draggedTabIndex);
         	  String title = getTitleAt(draggedTabIndex);
-        	  Icon draggedTabIcon = DraggableTabbedPane.this.getIconAt(draggedTabIndex);
         	  removeTabAt(draggedTabIndex);
+
         	  insertTab(title, null, comp, null, tabNumber);
-        	  DraggableTabbedPane.this.setIconAt(tabNumber, draggedTabIcon);
+        	  setTabComponentAt(tabNumber, buttonTabComp);
         	  DraggableTabbedPane.this.setSelectedIndex(tabNumber); 
           }
         }

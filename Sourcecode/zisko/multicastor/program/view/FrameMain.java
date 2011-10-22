@@ -13,8 +13,13 @@ import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
 /**
  * Hauptfenster des MultiCastor Tools
+ * 
+ * In Version 2 wurde CheckBox und RadioButton Farbgebungsfehler gefixt
+ * Außerdem Drag&Drop Tabs durch DraggableTabbedPane eingeführt
+ * 
+ * @version 1.5
  * @author Daniel Becker
- *
+ * @author Filip Haase
  */
 @SuppressWarnings("serial")
 public class FrameMain extends JFrame {
@@ -23,7 +28,7 @@ public class FrameMain extends JFrame {
 	/**
 	 * Das Tabpanel mit welchem man durch die Programmteile schalten kann.
 	 */
-	private JTabbedPane tabpane;
+	private DraggableTabbedPane tabpane;
 	/**
 	 *  Das IPv4Receiver Panel
 	 */
@@ -41,6 +46,10 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelTabbed panel_sen_ipv6;
 	/**
+	 * TODO
+	 */
+	private PanelPlus panel_plus;
+	/**
 	 *  Das About Panel
 	 */
 	private PanelAbout panel_about;
@@ -53,9 +62,9 @@ public class FrameMain extends JFrame {
 	private JMenu m_scale;
 	private JMenu m_info;
 	private ButtonGroup bg_scale;
-	private JRadioButton rb_beginner;
-	private JRadioButton rb_expert;
-	private JRadioButton rb_custom;
+	private JRadioButtonMenuItem rb_beginner;
+	private JRadioButtonMenuItem rb_expert;
+	private JRadioButtonMenuItem rb_custom;
 	private JMenuItem mi_saveconfig;
 	private JMenuItem mi_loadconfig;
 	private JMenuItem mi_exit;
@@ -64,8 +73,7 @@ public class FrameMain extends JFrame {
 	private JMenuItem mi_profile1;
 	private JMenuItem mi_profile2;
 	private JMenuItem mi_profile3;
-	private JMenuItem mi_aSave;
-	private JCheckBox mi_autoSave;
+	private JCheckBoxMenuItem mi_autoSave;
 	private ImageIcon img_close;
 	private FrameFileChooser fc_save;
 	public Vector<String> getLastConfigs() {
@@ -85,23 +93,19 @@ public class FrameMain extends JFrame {
 		initMenuBar(ctrl);
 		initPanels(ctrl);
 		setVisible(true);
-		//System.out.println("<PROGRAM START>");
 		this.addComponentListener(ctrl);
 		this.addKeyListener(ctrl);
 		this.addWindowListener(ctrl);
-//		System.out.println("p: "+tabpane.getIconAt(4).toString());
-//		System.out.println("w: "+tabpane.getIconAt(4).getIconWidth());
-//		System.out.println("h: "+tabpane.getIconAt(4).getIconHeight());
 	}
 	/**
 	 * Funktion welche die Menubar initialisiert.
 	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl) {
-		mi_autoSave = new JCheckBox("AutoSave");
+		mi_autoSave = new JCheckBoxMenuItem("AutoSave");
 		mi_autoSave.setFont(MiscFont.getFont(0,14));
 		mi_autoSave.addItemListener(ctrl);
-		mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+		//mi_autoSave.setIcon( new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
 		mi_saveconfig = new JMenuItem("Save Configuration",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
 		mi_saveconfig.setFont(MiscFont.getFont(0,14));
 		mi_saveconfig.addActionListener(ctrl);
@@ -125,13 +129,13 @@ public class FrameMain extends JFrame {
 		mi_about = new JMenuItem("About",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/info.png")));
 		mi_about.setFont(MiscFont.getFont(0,14));
 		mi_about.addActionListener(ctrl);
-		rb_beginner = new JRadioButton("Beginner");
+		rb_beginner = new JRadioButtonMenuItem("Beginner");
 		rb_beginner.setFont(MiscFont.getFont(0,14));
 		rb_beginner.addItemListener(ctrl);
-		rb_expert = new JRadioButton("Expert",true);
+		rb_expert = new JRadioButtonMenuItem("Expert",true);
 		rb_expert.setFont(MiscFont.getFont(0,14));
 		rb_expert.addItemListener(ctrl);
-		rb_custom = new JRadioButton("Custom");
+		rb_custom = new JRadioButtonMenuItem("Custom");
 		rb_custom.setFont(MiscFont.getFont(0,14));
 		rb_custom.addItemListener(ctrl);
 		bg_scale.add(rb_beginner);
@@ -186,20 +190,24 @@ public class FrameMain extends JFrame {
 		panel_sen_ipv4 = new PanelTabbed(ctrl,Typ.SENDER_V4);
 		panel_rec_ipv6 = new PanelTabbed(ctrl,Typ.RECEIVER_V6);
 		panel_sen_ipv6 = new PanelTabbed(ctrl,Typ.SENDER_V6);
+		panel_plus = new PanelPlus(this);
 		panel_about = new PanelAbout();
-		img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
+		//img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
 		
 		tabpane = new DraggableTabbedPane();
 		tabpane.addMouseListener(ctrl);
-		tabpane.addMouseMotionListener(ctrl);
 		tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
+		tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 		tabpane.addTab(" Sender IPv4 ", panel_sen_ipv4);
+		tabpane.setTabComponentAt(1, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
 		tabpane.addTab(" Receiver IPv6 ", panel_rec_ipv6);
+		tabpane.setTabComponentAt(2, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 		tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
-		tabpane.setIconAt(0, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4receiver.png")));
-		tabpane.setIconAt(1, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4sender.png")));
-		tabpane.setIconAt(2, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6receiver.png")));
-		tabpane.setIconAt(3, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6sender.png")));
+		tabpane.setTabComponentAt(3, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+		tabpane.addTab(" About ", panel_about);
+		tabpane.setTabComponentAt(4, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/about.png"));
+		tabpane.addTab( " + ", panel_plus);
+
 		//tabpane.addTab(" Configuration ",img_close, panel_config);
 		tabpane.setSelectedIndex(0);
 		tabpane.setFont(MiscFont.getFont(0,17));
@@ -261,23 +269,6 @@ public class FrameMain extends JFrame {
 		}
 		return ret;
 	}
-	/**
-	 * Funktion welche den Button des About Panel hovered.
-	 * @param hover Boolean was angibt ob der Button gehovered ist.
-	 */
-	public void setAboutCloseHovered(boolean hover){
-		ImageIcon hover_icon;
-		if(hover){
-			aboutPanelState=2;
-			hover_icon = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon_hover.gif"));
-			tabpane.setIconAt(4, hover_icon);
-		}
-		else{
-			aboutPanelState=1;
-			hover_icon = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
-			tabpane.setIconAt(4, hover_icon);
-		}
-	}
 	public PanelTabbed getPanel_rec_ipv4() {
 		return panel_rec_ipv4;
 	}
@@ -322,11 +313,11 @@ public class FrameMain extends JFrame {
 		return bg_scale;
 	}
 
-	public JRadioButton getRb_beginner() {
+	public JRadioButtonMenuItem getRb_beginner() {
 		return rb_beginner;
 	}
 
-	public JRadioButton getRb_expert() {
+	public JRadioButtonMenuItem getRb_expert() {
 		return rb_expert;
 	}
 
@@ -398,11 +389,11 @@ public class FrameMain extends JFrame {
 		return ret;
 	}
 
-	public JRadioButton getRb_custom() {
+	public JRadioButtonMenuItem getRb_custom() {
 		return rb_custom;
 	}
 
-	public JCheckBox getMi_autoSave() {
+	public JCheckBoxMenuItem getMi_autoSave() {
 		return mi_autoSave;
 	}
 	public void setLevel(Userlevel level) {
@@ -443,11 +434,11 @@ public class FrameMain extends JFrame {
 	}
 	public void setAutoSave(boolean b){
 		if(b){
-			mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/check.png")));
+			//mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/check.png")));
 			mi_autoSave.setSelected(true);
 		}
 		else{
-			mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+			//mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
 			mi_autoSave.setSelected(false);
 		}
 	}
