@@ -2,10 +2,10 @@
 <MultiCastor>
     <Multicasts>
         <RECEIVER_V4>
-            <active>true</active>
+            <active>false</active>
             <groupIp>224.0.0.1</groupIp>
             <sourceIp/>
-            <udpPort>19561</udpPort>
+            <udpPort>18512</udpPort>
             <packetLength>0</packetLength>
             <ttl>0</ttl>
             <packetRateDesired>0</packetRateDesired>
@@ -15,7 +15,7 @@
             <active>false</active>
             <groupIp>224.0.0.1</groupIp>
             <sourceIp/>
-            <udpPort>18512</udpPort>
+            <udpPort>19561</udpPort>
             <packetLength>0</packetLength>
             <ttl>0</ttl>
             <packetRateDesired>0</packetRateDesired>

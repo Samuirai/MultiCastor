@@ -21,10 +21,13 @@ import javax.swing.JTabbedPane;
 @SuppressWarnings("serial")
 public class DraggableTabbedPane extends JTabbedPane {
 
-  private boolean dragging = false;
-  private Image tabImage = null;
-  private Point currentMouseLocation = null;
-  private int draggedTabIndex = 0;
+	  private boolean dragging = false;
+	  private Image tabImage = null;
+	  private Point currentMouseLocation = null;
+	  private int draggedTabIndex = 0;
+	  private int mouseRelX;
+	  private int mouseRelY;
+	  private Rectangle bounds;
   
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
@@ -42,8 +45,8 @@ public class DraggableTabbedPane extends JTabbedPane {
 
           if(tabNumber >= 0) {
             draggedTabIndex = tabNumber;
-            Rectangle bounds = getUI().getTabBounds(DraggableTabbedPane.this, tabNumber);
-
+            bounds = getUI().getTabBounds(DraggableTabbedPane.this, tabNumber);
+            
             // Paint the tabbed pane to a buffer
             Image totalImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics totalGraphics = totalImage.getGraphics();
@@ -56,16 +59,27 @@ public class DraggableTabbedPane extends JTabbedPane {
             // Paint just the dragged tab to the buffer
             tabImage = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_INT_ARGB);
             Graphics graphics = tabImage.getGraphics();
-            graphics.drawImage(totalImage, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x + bounds.width, bounds.y+bounds.height, DraggableTabbedPane.this);
+            graphics.drawImage(totalImage, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x+bounds.width, bounds.y+bounds.height, DraggableTabbedPane.this);
 
+            mouseRelX = e.getX()-bounds.x;
+            mouseRelY = bounds.y;
+            
             dragging = true;
             repaint();
           }
         } else {
-          currentMouseLocation = e.getPoint();
+        	int X = (int)e.getPoint().getX()-mouseRelX;
+        	int Y = mouseRelY;
+        	currentMouseLocation = new Point(X,Y);
 
-          // Need to repaint
-          repaint();
+        	if(getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10) != draggedTabIndex){
+        		int returnValue = insertIt(e);
+        		if(returnValue!=-1)
+        			draggedTabIndex = returnValue;
+        	}
+
+        	// Need to repaint
+        	repaint();
         }
 
         super.mouseDragged(e);
@@ -84,18 +98,8 @@ public class DraggableTabbedPane extends JTabbedPane {
 
         if(dragging) {
           int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);
-
-          if(tabNumber >= 0) {
-        	  
-        	  Component comp = getComponentAt(draggedTabIndex);
-        	  Component buttonTabComp = getTabComponentAt(draggedTabIndex);
-        	  String title = getTitleAt(draggedTabIndex);
-        	  removeTabAt(draggedTabIndex);
-
-        	  insertTab(title, null, comp, null, tabNumber);
-        	  setTabComponentAt(tabNumber, buttonTabComp);
-        	  DraggableTabbedPane.this.setSelectedIndex(tabNumber); 
-          }
+          if(tabNumber >= 0)
+        	  insertIt(e);
         }
 
         dragging = false;
@@ -103,6 +107,24 @@ public class DraggableTabbedPane extends JTabbedPane {
       }
     });
   }
+
+  private int insertIt(MouseEvent e){
+      int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);
+
+      if(tabNumber >= 0 && tabNumber != getTabCount()-1 && draggedTabIndex != getTabCount()-1) {
+        Component comp = getComponentAt(draggedTabIndex);
+  	  	Component buttonTabComp = getTabComponentAt(draggedTabIndex);
+        String title = getTitleAt(draggedTabIndex);
+        removeTabAt(draggedTabIndex);
+        
+        insertTab(title, null, comp, null, tabNumber);
+  	  	setTabComponentAt(tabNumber, buttonTabComp);
+  	  	setSelectedIndex(tabNumber);
+        return tabNumber;
+      }  
+      return -1;
+  }
+
 
   /**
    * Diese Methode dient dazu das Bild des Tabs zu zeichnen der derzeit gedraggt wird.

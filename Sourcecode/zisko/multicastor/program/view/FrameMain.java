@@ -201,8 +201,6 @@ public class FrameMain extends JFrame {
 		tabpane.setTabComponentAt(2, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 		tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
 		tabpane.setTabComponentAt(3, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
-		tabpane.addTab(" About ", panel_about);
-		tabpane.setTabComponentAt(4, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/about.png"));
 		tabpane.addTab( " + ", panel_plus);
 
 		//tabpane.addTab(" Configuration ",img_close, panel_config);

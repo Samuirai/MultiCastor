@@ -618,3 +618,151 @@
 [FINEST][23.10.2011-02:29:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
 [FINEST][23.10.2011-02:30:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
 [FINEST][23.10.2011-02:31:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[INFO][23.10.2011-02:43:14] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:43:14] Default Configurationfile loaded.
+[INFO][23.10.2011-02:43:14] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:43:14] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:43:14] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:43:14] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:45:51] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:45:51] Default Configurationfile loaded.
+[INFO][23.10.2011-02:45:51] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:45:51] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:45:51] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:45:51] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:46:36] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:46:36] Default Configurationfile loaded.
+[INFO][23.10.2011-02:46:36] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:46:36] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:46:36] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:46:36] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:46:47] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:47:54] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:47:55] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:47:55] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:48:00] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:55:47] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:55:47] Default Configurationfile loaded.
+[INFO][23.10.2011-02:55:48] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:55:48] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:55:48] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:56:26] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:56:26] Default Configurationfile loaded.
+[INFO][23.10.2011-02:56:26] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:56:26] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:56:26] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:56:57] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:56:57] Default Configurationfile loaded.
+[INFO][23.10.2011-02:56:57] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:56:57] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:56:57] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:18:36] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:18:36] Default Configurationfile loaded.
+[INFO][23.10.2011-13:18:36] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:18:36] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:18:36] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:43:01] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:43:01] Default Configurationfile loaded.
+[INFO][23.10.2011-13:43:01] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:43:01] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:43:01] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:45:02] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:45:02] Default Configurationfile loaded.
+[INFO][23.10.2011-13:45:02] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:45:02] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:45:02] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:46:54] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:46:55] Default Configurationfile loaded.
+[INFO][23.10.2011-13:46:55] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:46:55] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:46:55] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:47:05] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:47:06] Default Configurationfile loaded.
+[INFO][23.10.2011-13:47:06] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:47:06] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:47:06] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:47:50] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:47:50] Default Configurationfile loaded.
+[INFO][23.10.2011-13:47:50] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:47:50] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:47:50] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:50:21] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:50:21] Default Configurationfile loaded.
+[INFO][23.10.2011-13:50:21] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:50:21] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:50:21] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:50:34] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:50:34] Default Configurationfile loaded.
+[INFO][23.10.2011-13:50:34] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:50:34] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:50:34] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:51:38] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:51:38] Default Configurationfile loaded.
+[INFO][23.10.2011-13:51:38] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:51:38] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:51:38] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:53:19] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:53:19] Default Configurationfile loaded.
+[INFO][23.10.2011-13:53:19] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:53:19] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:53:19] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:53:53] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:53:53] Default Configurationfile loaded.
+[INFO][23.10.2011-13:53:53] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:53:53] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:53:53] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:56:11] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:56:11] Default Configurationfile loaded.
+[INFO][23.10.2011-13:56:11] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:56:11] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:56:11] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:57:32] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:57:32] Default Configurationfile loaded.
+[INFO][23.10.2011-13:57:32] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:57:32] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:57:32] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:58:22] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:58:22] Default Configurationfile loaded.
+[INFO][23.10.2011-13:58:22] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:58:22] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:58:22] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-13:59:40] Starting MultiCastor with a gui
+[INFO][23.10.2011-13:59:40] Default Configurationfile loaded.
+[INFO][23.10.2011-13:59:40] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:59:40] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-13:59:40] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:00:30] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:00:30] Default Configurationfile loaded.
+[INFO][23.10.2011-14:00:30] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:00:30] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:00:30] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:02:47] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:02:48] Default Configurationfile loaded.
+[INFO][23.10.2011-14:02:48] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:02:48] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:02:48] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:04:54] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:04:54] Default Configurationfile loaded.
+[INFO][23.10.2011-14:04:54] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:04:54] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:04:54] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:07:02] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:07:02] Default Configurationfile loaded.
+[INFO][23.10.2011-14:07:03] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:07:03] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:07:03] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:07:23] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:07:23] Default Configurationfile loaded.
+[INFO][23.10.2011-14:07:23] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:07:23] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:07:23] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:08:08] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:08:08] Default Configurationfile loaded.
+[INFO][23.10.2011-14:08:08] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:08:08] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:08:08] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-14:08:25] Starting MultiCastor with a gui
+[INFO][23.10.2011-14:08:25] Default Configurationfile loaded.
+[INFO][23.10.2011-14:08:25] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:08:25] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-14:08:25] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
