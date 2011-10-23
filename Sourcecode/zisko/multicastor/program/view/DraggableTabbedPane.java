@@ -9,13 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
-import javax.swing.Icon;
 
 /**
  * Die Klasse DraggableTabbedPane erbt von JTabbedPane und lässt zusätzlich zu JTabbed Pane
@@ -24,6 +18,7 @@ import javax.swing.Icon;
  * @author Filip Haase
  *
  */
+@SuppressWarnings("serial")
 public class DraggableTabbedPane extends JTabbedPane {
 
   private boolean dragging = false;

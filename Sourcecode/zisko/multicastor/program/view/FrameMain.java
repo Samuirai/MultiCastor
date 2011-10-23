@@ -1,9 +1,6 @@
 package zisko.multicastor.program.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.io.File;
-import java.util.Locale;
 import java.util.Vector;
 
 import javax.swing.*;

@@ -1071,14 +1071,14 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Programmteil welcher im Vordergrund ist.
 	 */
 	public Typ getSelectedTab() {
+		String title = f.getTabpane().getTitleAt(f.getTabpane().getSelectedIndex());
 		Typ typ;
-		switch(f.getTabpane().getSelectedIndex()){
-			case 0: typ = Typ.RECEIVER_V4; break;
-			case 1: typ = Typ.SENDER_V4; break;
-			case 2: typ = Typ.RECEIVER_V6; break;
-			case 3: typ = Typ.SENDER_V6; break;
-			default: typ = Typ.UNDEFINED; break;
-		}
+		if(title.equals(" Receiver IPv4 ")) typ = Typ.RECEIVER_V4;
+		else if(title.equals(" Sender IPv4 ")) typ = Typ.SENDER_V4;
+		else if(title.equals(" Receiver IPv6 ")) typ = Typ.RECEIVER_V6;
+		else if(title.equals(" Sender IPv6 ")) typ = Typ.SENDER_V6;
+		else typ = Typ.UNDEFINED;
+
 		return typ;
 	}
 	/**

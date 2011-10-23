@@ -165,7 +165,7 @@ public class MulticastController{
 	
 	/**
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden Thread und startet diesen falls notwendig.
-	 * @param m MulticastData-Objekt das hinzugefügt werden soll.
+	 * @param m MulticastData-Objekt das hinzugefï¿½gt werden soll.
 	 */
 	public void addMC(MulticastData m) {
 		// Erzeugt den passenden MulticastThreadSuper
@@ -189,7 +189,7 @@ public class MulticastController{
 	
 	/**
 	 * Diese Methode muss aufgerufen werden, wenn sich Einstellungen des Multicasts aendern. 
-	 * Zum Beispeil die GroupIP. Hier wird der vorhandene Multicast geloescht und anschließend
+	 * Zum Beispeil die GroupIP. Hier wird der vorhandene Multicast geloescht und anschlieï¿½end
 	 * der Multicast neu erzeugt.
 	 * @param m Refernez auf das Datenobjekt, welches veraendert wurde.
 	 */
@@ -387,7 +387,7 @@ public class MulticastController{
 	 * Loads data from autoSave() method.
 	 * @return Vector of UserInputData objects. This Vector contains between one and four objects. One for each tab in View at most.
 	 */
-	Vector<UserInputData> loadAutoSave(){	// noch bei Daniel nachhoeren ob es ok ist, wenn da ein leerer Vector zurück kommt!!!!!!!!!
+	Vector<UserInputData> loadAutoSave(){	// noch bei Daniel nachhoeren ob es ok ist, wenn da ein leerer Vector zurï¿½ck kommt!!!!!!!!!
 		return userInputData;
 	}
 
@@ -523,7 +523,7 @@ public class MulticastController{
 			}
 		}	    
 	    if(!skip){
-	    	 // Füge Multicast hinzu
+	    	 // Fï¿½ge Multicast hinzu
 	    	 for(MulticastData m : multicasts){
 	    		 if 	( 	((m.getTyp().equals(Typ.RECEIVER_V4)&&Receiver_v4	))||
 		 	    			((m.getTyp().equals(Typ.RECEIVER_V6)&&Receiver_v6	))||
@@ -694,6 +694,7 @@ public class MulticastController{
 	 */
 	public MulticastData getMC(int index,MulticastData.Typ multicastDataTyp){
 		try{
+			//System.out.println("Index: " + index + getMCVector(multicastDataTyp).toString());
 			return (MulticastData) getMCVector(multicastDataTyp).get(index);
 		}catch(IndexOutOfBoundsException e){
 			logger.log(Level.SEVERE, "IndexOutOfBoundsException in MulticastController - getMC");

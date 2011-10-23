@@ -498,3 +498,123 @@
 [INFO][22.10.2011-23:22:33] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
 [INFO][22.10.2011-23:22:34] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
 [INFO][22.10.2011-23:22:37] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-01:23:21] Starting MultiCastor with a gui
+[INFO][23.10.2011-01:23:21] Default Configurationfile loaded.
+[INFO][23.10.2011-01:23:21] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-01:23:21] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-01:38:23] Starting MultiCastor with a gui
+[INFO][23.10.2011-01:38:23] Default Configurationfile loaded.
+[INFO][23.10.2011-01:38:23] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-01:38:23] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-01:38:31] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][23.10.2011-01:38:31] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:31] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:36] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:36] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:38] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:38] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:39] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:39] IndexOutOfBoundsException in MulticastController - getMC
+[INFO][23.10.2011-01:38:46] Starting MultiCastor with a gui
+[INFO][23.10.2011-01:38:46] Default Configurationfile loaded.
+[INFO][23.10.2011-01:38:46] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-01:38:46] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-01:38:46] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-01:38:48] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-01:38:50] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-01:38:55] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-01:38:59] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][23.10.2011-01:38:59] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:38:59] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:39:05] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:39:04] IndexOutOfBoundsException in MulticastController - getMC
+[INFO][23.10.2011-01:45:12] Starting MultiCastor with a gui
+[INFO][23.10.2011-01:45:12] Default Configurationfile loaded.
+[INFO][23.10.2011-01:45:12] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-01:45:12] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-01:45:12] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-01:45:19] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-01:46:20] Starting MultiCastor with a gui
+[INFO][23.10.2011-01:46:20] Default Configurationfile loaded.
+[INFO][23.10.2011-01:46:20] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-01:46:20] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-01:46:22] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-01:46:27] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-01:46:29] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][23.10.2011-01:46:29] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-01:46:29] IndexOutOfBoundsException in MulticastController - getMC
+[INFO][23.10.2011-02:02:54] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:02:54] Default Configurationfile loaded.
+[INFO][23.10.2011-02:02:54] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:02:54] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:02:54] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:04:45] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:04:45] Default Configurationfile loaded.
+[INFO][23.10.2011-02:04:45] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:04:45] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:04:45] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:04:51] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:04:52] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:04:54] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:05:00] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:05:05] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:05:13] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][23.10.2011-02:05:13] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-02:05:13] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-02:05:16] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-02:05:16] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-02:05:18] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-02:05:18] IndexOutOfBoundsException in MulticastController - getMC
+[INFO][23.10.2011-02:06:26] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:06:26] Default Configurationfile loaded.
+[INFO][23.10.2011-02:06:26] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:06:26] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:06:26] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[SEVERE][23.10.2011-02:06:29] IndexOutOfBoundsException in MulticastController - getMC
+[INFO][23.10.2011-02:07:02] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:07:02] Default Configurationfile loaded.
+[INFO][23.10.2011-02:07:02] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:07:02] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:07:02] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:07:12] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:07:13] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:07:16] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:07:21] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[SEVERE][23.10.2011-02:07:21] IndexOutOfBoundsException in MulticastController - getMC
+[SEVERE][23.10.2011-02:07:21] IndexOutOfBoundsException in MulticastController - getMC
+[INFO][23.10.2011-02:16:41] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:16:41] Default Configurationfile loaded.
+[INFO][23.10.2011-02:16:41] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:16:41] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:16:41] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:16:48] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:16:49] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:16:52] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:17:00] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:17:02] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:19:00] Starting MultiCastor with a gui
+[INFO][23.10.2011-02:19:00] Default Configurationfile loaded.
+[INFO][23.10.2011-02:19:00] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:19:00] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][23.10.2011-02:19:10] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:19:14] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:19:29] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[INFO][23.10.2011-02:19:30] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:19:51] Multicast added: RECEIVER_V4_-1_/224.0.0.1
+[INFO][23.10.2011-02:19:53] RECEIVER_V4_-1_/224.0.0.1: Started Receiver with MC Object.
+[FINEST][23.10.2011-02:19:57] /224.0.0.1	19561	null	0	1	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[INFO][23.10.2011-02:20:52] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:20:56] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[FINEST][23.10.2011-02:20:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[INFO][23.10.2011-02:21:57] RECEIVER_V4_0_/224.0.0.1: Left Multicastgroup of MC Object.
+[INFO][23.10.2011-02:22:01] RECEIVER_V4_0_/224.0.0.1: Started Receiver with MC Object.
+[FINEST][23.10.2011-02:22:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:23:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:24:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:25:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:26:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:27:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:28:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:29:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:30:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
+[FINEST][23.10.2011-02:31:57] /224.0.0.1	19561	null	0	0	0	0	0	0	0	0	RECEIVER_V4	0	UNDEFINED	SINGLE
