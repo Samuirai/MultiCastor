@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -164,6 +165,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==f.getMi_exit()){
 			closeProgram();
 		}
+		
+		// V1.5: Wenn "Titel aendern" im Menue ausgewaehlt wurde, oeffne einen InputDialog
+		else if (e.getSource() == f.getMi_setTitle()) {
+			f.setBaseTitle(JOptionPane.showInputDialog("Bitte geben Sie einen neuen Titel ein", f.getBaseTitle()));
+			f.updateTitle();
+		}
+		
 		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getTb_active()){
 			toggleBTactive(Typ.SENDER_V4);
 		}

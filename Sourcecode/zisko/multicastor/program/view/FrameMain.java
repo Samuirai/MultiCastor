@@ -73,6 +73,10 @@ public class FrameMain extends JFrame {
 	private JMenuItem mi_profile2;
 	private JMenuItem mi_profile3;
 	private JCheckBoxMenuItem mi_autoSave;
+	
+	// V1.5: Set individual title
+	private JMenuItem mi_setTitle;
+	
 	private ImageIcon img_close;
 	private FrameFileChooser fc_save;
 	public Vector<String> getLastConfigs() {
@@ -106,6 +110,12 @@ public class FrameMain extends JFrame {
 		baseTitle = "MultiCastor";
 		updateTitle();
 	}
+	public String getBaseTitle() {
+		return baseTitle;
+	}
+	public void setBaseTitle(String baseTitle) {
+		this.baseTitle = baseTitle;
+	}
 	/**
 	 * Funktion welche die Menubar initialisiert.
 	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
@@ -115,6 +125,12 @@ public class FrameMain extends JFrame {
 		mi_autoSave.setFont(MiscFont.getFont(0,14));
 		mi_autoSave.addItemListener(ctrl);
 		//mi_autoSave.setIcon( new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+		
+		// V1.5: Menue-Eintrag zum Aendern des Fenster-Titels
+		mi_setTitle = new JMenuItem("Change Window-Title", new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/title.png")));
+		mi_setTitle.setFont(MiscFont.getFont(0,14));
+		mi_setTitle.addActionListener(ctrl);
+		
 		mi_saveconfig = new JMenuItem("Save Configuration",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
 		mi_saveconfig.setFont(MiscFont.getFont(0,14));
 		mi_saveconfig.addActionListener(ctrl);
@@ -156,7 +172,7 @@ public class FrameMain extends JFrame {
 		m_options.setFont(MiscFont.getFont(0,16));
 		m_scale = new JMenu("User Level");
 		m_scale.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/users.png")));
-		m_scale.setFont(MiscFont.getFont(0,16));
+		m_scale.setFont(MiscFont.getFont(0,14));
 		m_info = new JMenu("Info");
 		m_info.setFont(MiscFont.getFont(0,16));
 		m_info.add(mi_about);
@@ -166,6 +182,10 @@ public class FrameMain extends JFrame {
 		//m_scale.add(rb_custom);
 		m_options.add(m_scale);
 		m_options.add(mi_autoSave);
+		
+		// V1.5: SetTitle-Menueitem hinzufuegen
+		m_options.add(mi_setTitle);
+		
 		m_menu.add(mi_saveconfig);
 		m_menu.add(mi_loadconfig);
 
@@ -182,6 +202,12 @@ public class FrameMain extends JFrame {
 		mb_menubar.add(m_options);
 		mb_menubar.add(m_info);
 		setJMenuBar(mb_menubar);
+	}
+	public JMenuItem getMi_setTitle() {
+		return mi_setTitle;
+	}
+	public void setMi_setTitle(JMenuItem miSetTitle) {
+		mi_setTitle = miSetTitle;
 	}
 	/**
 	 * Hilfsfunktion zum Abfrage des Snake Menu Items
@@ -452,11 +478,11 @@ public class FrameMain extends JFrame {
 	}
 	
 	/**
-	 * Methode zum updaten des Fenster-Titels
+	 * V1.5: Methode zum updaten des Fenster-Titels
 	 * @author Matthis Hauschild
 	 * @author Jonas Traub
 	 */
 	public void updateTitle() {
-		setTitle(baseTitle + " - " + tabpane.getTitleAt(tabpane.getSelectedIndex()));
+		setTitle(baseTitle + (baseTitle.isEmpty() ? "" : ": ") + tabpane.getTitleAt(tabpane.getSelectedIndex()).trim());
 	}
 }
