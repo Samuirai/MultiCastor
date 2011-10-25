@@ -15,7 +15,10 @@ import javax.swing.JTabbedPane;
  * Die Klasse DraggableTabbedPane erbt von JTabbedPane und lässt zusätzlich zu JTabbed Pane
  * ein grafish ansprechendes verschieben von Tabs per Drag&Drop zu.
  * 
+ * @version 1.5
  * @author Filip Haase
+ * @author Jonas Traub
+ * @author Matthis Hauschild
  *
  */
 @SuppressWarnings("serial")
@@ -28,13 +31,15 @@ public class DraggableTabbedPane extends JTabbedPane {
 	  private int mouseRelX;
 	  private int mouseRelY;
 	  private Rectangle bounds;
-  
+
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
    *  ich, wenn ich mit der Maus klicke(mouseDragged) über einem tab bin.
    *  Wenn Ja wird ein Bild des "gedragten" Tabs in den Buffer gezeichnet.
+   *  
+   *  @param parentFrame Referenz auf GUI-Frame
    */
-  public DraggableTabbedPane() {
+  public DraggableTabbedPane(final FrameMain parentFrame) {
     super();
     addMouseMotionListener(new MouseMotionAdapter() {
       public void mouseDragged(MouseEvent e) {
@@ -95,11 +100,15 @@ public class DraggableTabbedPane extends JTabbedPane {
      */
     addMouseListener(new MouseAdapter() {
       public void mouseReleased(MouseEvent e) {
-
+    	  // V1.5: Sobald ein neuer Tab ausgewaehlt wurde, wird der Titel des Frames aktualisiert
+    	  parentFrame.updateTitle();
+    	
         if(dragging) {
           int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);
           if(tabNumber >= 0)
         	  insertIt(e);
+
+
         }
 
         dragging = false;

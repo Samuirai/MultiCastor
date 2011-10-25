@@ -17,6 +17,8 @@ import zisko.multicastor.program.data.UserlevelData.Userlevel;
  * @version 1.5
  * @author Daniel Becker
  * @author Filip Haase
+ * @author Jonas Traub
+ * @author Matthis Hauschild
  */
 @SuppressWarnings("serial")
 public class FrameMain extends JFrame {
@@ -81,6 +83,12 @@ public class FrameMain extends JFrame {
 	private Userlevel level = Userlevel.EXPERT;
 	private Vector<String> lastConfigs=new Vector<String>();
 	private Separator mi_separator;
+	
+	/**
+	 * V1.5: Variable zur Speicherung des Basistitels
+	 */
+	private String baseTitle;
+	
 	/**
 	 * Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
 	 * @param ctrl Ben�tigte Referenz zum GUI Controller
@@ -93,6 +101,10 @@ public class FrameMain extends JFrame {
 		this.addComponentListener(ctrl);
 		this.addKeyListener(ctrl);
 		this.addWindowListener(ctrl);
+		
+		// V1.5: Standartwert fuer Basistitel setzen
+		baseTitle = "MultiCastor";
+		updateTitle();
 	}
 	/**
 	 * Funktion welche die Menubar initialisiert.
@@ -191,7 +203,8 @@ public class FrameMain extends JFrame {
 		panel_about = new PanelAbout();
 		//img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
 		
-		tabpane = new DraggableTabbedPane();
+		// V1.5: Referenz auf sich selbst, wird übergeben, um Titel zu refreshen
+		tabpane = new DraggableTabbedPane(this);
 		tabpane.addMouseListener(ctrl);
 		tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
 		tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
@@ -228,7 +241,7 @@ public class FrameMain extends JFrame {
 		//setResizable(false);
 		setMinimumSize(new Dimension(640,489));
 		setMaximumSize(new Dimension(1920,1080));
-		setTitle("MultiCastor");
+		
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//getClass().getResourceAsStream("/zisko/multicastor/resources/images/icon.png").
@@ -436,5 +449,14 @@ public class FrameMain extends JFrame {
 			//mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
 			mi_autoSave.setSelected(false);
 		}
+	}
+	
+	/**
+	 * Methode zum updaten des Fenster-Titels
+	 * @author Matthis Hauschild
+	 * @author Jonas Traub
+	 */
+	public void updateTitle() {
+		setTitle(baseTitle + " - " + tabpane.getTitleAt(tabpane.getSelectedIndex()));
 	}
 }
