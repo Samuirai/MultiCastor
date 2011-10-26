@@ -37,12 +37,13 @@ public class PanelTabbed extends JPanel {
 	private ArrayList<TableColumn> columns;
 
 	/**
-	 * Konstruktor für einen kompletten Programmteil in der GUI.
+	 * Konstruktor fï¿½r einen kompletten Programmteil in der GUI.
 	 * Hierbei werden alle Komponenten fertig initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
 	 * @param typ Gibt an um welchen Programmteil es sich handelt
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
+		if (typ==Typ.RECEIVER_V4||typ==Typ.RECEIVER_V6||typ==Typ.SENDER_V6||typ==Typ.SENDER_V4){
 		setLayout(new BorderLayout());
 		initControlPanel(ctrl);
 		initConfigPanel(ctrl, typ);
@@ -71,19 +72,21 @@ public class PanelTabbed extends JPanel {
 		add(pan_left, BorderLayout.WEST);
 		add(pan_table,BorderLayout.CENTER);
 		add(pan_status, BorderLayout.SOUTH);
+		}
 	}
+	
 	/**
 	 * Initialisiert die Statusbar
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehï¿½rt
 	 */
 	private void initStatusPanel(ViewController ctrl, Typ typ) {
 		pan_status = new PanelStatusBar();
 	}
 	/**
 	 * Initialisiert den Graph und die Console der GUI
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehören
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehoeren
 	 */
 	private void initConsolePanel(ViewController ctrl, Typ typ) {
 		tab_console = new JTabbedPane();
@@ -93,7 +96,9 @@ public class PanelTabbed extends JPanel {
 		ta_console.setEditable(false);
 		console_scrollpane = new JScrollPane(ta_console);
 		console_scrollpane.setPreferredSize(new Dimension(300, 100));
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+
+		// V1.5: L2_SENDER und L3_SENDER hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L3_SENDER || typ == Typ.L2_SENDER){
 			pan_graph = new PanelGraph(500, "sec", "Packets per Second (total)", false);
 		}
 		else{
@@ -106,8 +111,8 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Initialisiert die Tabelle
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehï¿½rt
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();
@@ -136,8 +141,8 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Resettet das Aussehen der Tabelle auf das Standard Aussehen
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehï¿½rt
 	 */
 	public void setTableModel(ViewController ctrl, Typ typ) {
 		model = new MiscTableModel(ctrl,typ);
@@ -161,7 +166,9 @@ public class PanelTabbed extends JPanel {
 		colmodel.getColumn(3).setPreferredWidth(60);
 		colmodel.getColumn(4).setPreferredWidth(60);
 		colmodel.getColumn(5).setPreferredWidth(60);
-		if(typ == Typ.SENDER_V4 || typ ==Typ.SENDER_V6){
+		
+		// V1.5: L2 und L3 Sender hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			colmodel.getColumn(6).setMinWidth(50);
 			colmodel.getColumn(7).setMinWidth(100);
 			colmodel.getColumn(8).setMinWidth(60);

@@ -48,7 +48,28 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelTabbed panel_sen_ipv6;
 	/**
-	 * TODO
+	 
+	 *  Das Layer 2 Receiver Panel
+	 *  neu in V1.5
+	 */
+	private PanelTabbed panel_rec_lay2;
+	/**
+	 *  Das Layer 2 Sender Panel
+	 *  neu in V1.5
+	 */
+	private PanelTabbed panel_sen_lay2;
+	/**
+	 *  Das Layer 3 Receiver Panel
+	 *  neu in V1.5
+	 */
+	private PanelTabbed panel_rec_lay3;
+	/**
+	 *  Das Layer 3 Sender Panel
+	 *  neu in V1.5
+	 */
+	private PanelTabbed panel_sen_lay3;
+	/**
+	 * V1.5: Panel zum �ffnen neuer Tabs
 	 */
 	private PanelPlus panel_plus;
 	/**
@@ -236,6 +257,11 @@ public class FrameMain extends JFrame {
 		panel_sen_ipv4 = new PanelTabbed(ctrl,Typ.SENDER_V4);
 		panel_rec_ipv6 = new PanelTabbed(ctrl,Typ.RECEIVER_V6);
 		panel_sen_ipv6 = new PanelTabbed(ctrl,Typ.SENDER_V6);
+		//v1.5: Added new Tabs: L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
+		panel_rec_lay2 = new PanelTabbed(ctrl,Typ.L2_RECEIVER);
+		panel_sen_lay2 = new PanelTabbed(ctrl,Typ.L2_SENDER);
+		panel_rec_lay3 = new PanelTabbed(ctrl,Typ.L3_RECEIVER);
+		panel_sen_lay3 = new PanelTabbed(ctrl,Typ.L3_SENDER);
 		panel_plus = new PanelPlus(this);
 		panel_about = new PanelAbout();
 		//img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
@@ -243,14 +269,26 @@ public class FrameMain extends JFrame {
 		// V1.5: Referenz auf sich selbst, wird übergeben, um Titel zu refreshen
 		tabpane = new DraggableTabbedPane(this);
 		tabpane.addMouseListener(ctrl);
+		// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
+		int i=0;
 		tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
-		tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 		tabpane.addTab(" Sender IPv4 ", panel_sen_ipv4);
-		tabpane.setTabComponentAt(1, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
 		tabpane.addTab(" Receiver IPv6 ", panel_rec_ipv6);
-		tabpane.setTabComponentAt(2, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 		tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
-		tabpane.setTabComponentAt(3, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+		// V1.5: Neue Panels L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
+		tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+		tabpane.addTab(" L2 Sender ", panel_sen_lay2);
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+		tabpane.addTab(" L3 Receiver ", panel_rec_lay3);
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+		tabpane.addTab(" L3 Sender ", panel_sen_lay3);
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+		// V1.5: + Panel zum �ffnen neuer Tabs
 		tabpane.addTab( " + ", panel_plus);
 
 		//tabpane.addTab(" Configuration ",img_close, panel_config);
@@ -261,6 +299,7 @@ public class FrameMain extends JFrame {
 		//tabpane.setForegroundAt(1, Color.red);
 		add(tabpane);
 	}
+
 	/**
 	 * Funktion welche das Frame initialisiert
 	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
@@ -310,6 +349,11 @@ public class FrameMain extends JFrame {
 			case SENDER_V6: ret=panel_sen_ipv6;break;
 			case RECEIVER_V4: ret=panel_rec_ipv4;break;
 			case RECEIVER_V6: ret=panel_rec_ipv6;break;
+			//V1.5 Panels f�r L2/L3 hinzugef�gt
+			case L2_SENDER: ret=panel_sen_lay2; break;
+			case L3_SENDER: ret=panel_sen_lay3;break;
+			case L2_RECEIVER: ret=panel_rec_lay2;break;
+			case L3_RECEIVER: ret=panel_rec_lay3;break;
 			default: System.out.println("Error in FrameMain - getPanelPart"); break;
 		}
 		return ret;
@@ -328,6 +372,38 @@ public class FrameMain extends JFrame {
 
 	public PanelTabbed getPanel_sen_ipv6() {
 		return panel_sen_ipv6;
+	}
+	
+	public PanelTabbed getPanel_rec_lay2() {
+		return panel_rec_lay2;
+	}
+	
+	public void setPanel_rec_lay2(PanelTabbed panelRecLay2) {
+		panel_rec_lay2 = panelRecLay2;
+	}
+	
+	public PanelTabbed getPanel_sen_lay2() {
+		return panel_sen_lay2;
+	}
+	
+	public void setPanel_sen_lay2(PanelTabbed panelSenLay2) {
+		panel_sen_lay2 = panelSenLay2;
+	}
+	
+	public PanelTabbed getPanel_rec_lay3() {
+		return panel_rec_lay3;
+	}
+	
+	public void setPanel_rec_lay3(PanelTabbed panelRecLay3) {
+		panel_rec_lay3 = panelRecLay3;
+	}
+	
+	public PanelTabbed getPanel_sen_lay3() {
+		return panel_sen_lay3;
+	}
+	
+	public void setPanel_sen_lay3(PanelTabbed panelSenLay3) {
+		panel_sen_lay3 = panelSenLay3;
 	}
 
 	public PanelAbout getPanel_about() {
@@ -400,9 +476,11 @@ public class FrameMain extends JFrame {
 	public int getAboutPanelState(){
 		return aboutPanelState;
 	}
+	
 	public void setAboutPanelState(int i){
 		aboutPanelState=i;
 	}
+	
 	public void setAboutPanelVisible(boolean visible){
 		if(visible){
 			aboutPanelState=1;

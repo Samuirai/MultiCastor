@@ -50,7 +50,8 @@ public class MulticastData {
 	// Eigene Datentypen
 	//********************************************	
 	public enum Typ {
-		UNDEFINED, SENDER_V4, RECEIVER_V4, SENDER_V6, RECEIVER_V6, CONFIG
+		// 1.5 Added L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER
+		UNDEFINED, SENDER_V4, RECEIVER_V4, SENDER_V6, RECEIVER_V6, CONFIG, L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER
 	}
 	
 	public enum Source {

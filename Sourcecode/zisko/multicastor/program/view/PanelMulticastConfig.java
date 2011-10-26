@@ -17,7 +17,7 @@ import zisko.multicastor.program.model.NetworkAdapter;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 /**
- * Das KonfigurationPanel für Multicasts (links unten im Programm).
+ * Das KonfigurationPanel fï¿½r Multicasts (links unten im Programm).
  * Dient zum Einstellen und Erstellen von Multicast Sendern und Receivern
  * @author Daniel Becker
  *
@@ -49,8 +49,8 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	/**
 	 * Konstruktor welcher das komplette Configuration Panel initialisiert
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
 		setBorder(new MiscBorder("MultiCast Configuration"));
@@ -62,7 +62,7 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	/**
 	 * Initialisiert die Standard Textfelder des KonfigurationsPanels
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	private void createGUIstandard(Typ typ) {
 		tf_groupIPaddress.setToolTipText("Enter MultiCast group IP address here!");
@@ -70,16 +70,17 @@ public class PanelMulticastConfig extends JPanel {
 		add(pan_groupIPaddress);
 		add(pan_udp_port);
 		add(tb_active);
-		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6){
+		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefügt
+		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
 			add(pan_ttl);
 		}
 	}
 	/**
-	 * Funktion welche die spezifischen Textfelder für einen Programmteil erstellt.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * Funktion welche die spezifischen Textfelder fï¿½r einen Programmteil erstellt.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		Vector<InetAddress> temp = null;
@@ -94,7 +95,9 @@ public class PanelMulticastConfig extends JPanel {
 		bt_enter.setBounds(120,180,95,25);
 		bt_enter.setFont(MiscFont.getFont(0,12));
 		bt_enter.setEnabled(false);
-		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6){
+		
+		//V1.5: Layer 2 und Layer 3 Tabs hinzugefügt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
+		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 			pan_packetrate=new JPanel();
 			pan_packetlength=new JPanel();
 			pan_ttl=new JPanel();
@@ -142,11 +145,13 @@ public class PanelMulticastConfig extends JPanel {
 				temp = NetworkAdapter.getipv6Adapters();
 			}
 			for(int i = 0 ; i < temp.size(); i++){
+				/*
+				 * TODO [JT] neuen Typ einfügen
+				 */
 				if(typ == Typ.SENDER_V4){
 					try {
 						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1)+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 					} catch (SocketException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 							//(0)temp.get(i).toString().substring(1));
@@ -155,7 +160,6 @@ public class PanelMulticastConfig extends JPanel {
 					try {
 						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1).split("%")[0]+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 					} catch (SocketException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -181,6 +185,18 @@ public class PanelMulticastConfig extends JPanel {
 		if(typ == Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){ 
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
 			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
+		}
+		//V1.5: Added new Tabs
+		else if (typ == Typ.L2_SENDER || typ==Typ.L2_RECEIVER){
+			/*
+			 * TODO [JT] neuen Typ anpassen
+			 */
+		}
+		//V1.5: Added new Tabs
+		else if (typ == Typ.L3_SENDER || typ==Typ.L3_RECEIVER){
+			/*
+			 * TODO [JT] neuen Typ anpassen
+			 */
 		}
 		else{ //IPv6
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));
@@ -289,6 +305,11 @@ public class PanelMulticastConfig extends JPanel {
 		bt_enter = btEnter;
 	}
 	public String getSourceIP(Typ typ, int i){
+		/*
+		 * TODO [MH/JT] neuen Typ einfuegen
+		 * Hier müssen die Networkadapter für den Kombinierten L3-Tab referenziert werden.
+		 * Hier müssen die Networkadapter für MMRP referenziert werden.
+		 */
 		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
 			return NetworkAdapter.getipv4Adapters().get(i).toString().substring(1);
 		}
@@ -297,6 +318,11 @@ public class PanelMulticastConfig extends JPanel {
 		}
 	}
 	public InetAddress getSelectedAddress(Typ typ){
+		/*
+		 * TODO [MH/JT] neuen Typ einfuegen
+		 * Funktionale Anforderung: Wie soll denn die Eingabeprüfung im Kombitab sein
+		 * MMRP Eingabeprüfung erstellen.
+		 */
 		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
 			return InputValidator.checkIPv4(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
 		}
