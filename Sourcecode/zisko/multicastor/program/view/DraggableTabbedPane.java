@@ -100,8 +100,6 @@ public class DraggableTabbedPane extends JTabbedPane {
      */
     addMouseListener(new MouseAdapter() {
       public void mouseReleased(MouseEvent e) {
-    	  // V1.5: Sobald ein neuer Tab ausgewaehlt wurde, wird der Titel des Frames aktualisiert
-    	  parentFrame.updateTitle();
     	
         if(dragging) {
           int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);

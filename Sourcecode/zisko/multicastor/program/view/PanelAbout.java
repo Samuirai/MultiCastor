@@ -1,8 +1,8 @@
 package zisko.multicastor.program.view;
 
 /**
- * Das About-Panel. Enthält Informationen zu dem Zisko-Team und der Programmversion. 
- * @author Thomas Lüder
+ * Das About-Panel. Enthï¿½lt Informationen zu dem Zisko-Team und der Programmversion. 
+ * @author Thomas Lï¿½der
  */
 
 @SuppressWarnings("serial")
@@ -39,7 +39,7 @@ public class PanelAbout extends javax.swing.JPanel{
         panel_about.setPreferredSize(new java.awt.Dimension(965, 380));
         panel_about.setRequestFocusEnabled(false);
 
-        lb_image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/mc.png")));
+        lb_image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/mc2.png")));
 
         javax.swing.GroupLayout panel_aboutLayout = new javax.swing.GroupLayout(panel_about);
         panel_about.setLayout(panel_aboutLayout);
