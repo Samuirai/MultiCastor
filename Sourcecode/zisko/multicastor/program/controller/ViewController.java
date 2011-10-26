@@ -655,7 +655,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn eine Spalte zur Tabelle hinzugef�gt wird.
 	 */
 	public void columnAdded(TableColumnModelEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override	
@@ -663,7 +662,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn sich der Aussenabstand der Tabellenspalte �ndert.
 	 */
 	public void columnMarginChanged(ChangeEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -682,7 +680,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn eine Spalte aus der Tabelle entfernt wird.
 	 */
 	public void columnRemoved(TableColumnModelEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -690,7 +687,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn eine Andere Spalte in der Tabelle selektiert wird.
 	 */
 	public void columnSelectionChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -706,7 +702,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener unsichtbar gemacht wird.
 	 */
 	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -714,7 +709,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener verschoben wird.
 	 */
 	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -739,7 +733,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener sichtbar gemacht wird.
 	 */
 	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	/**
@@ -1175,7 +1168,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -1524,7 +1516,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche Aufgerufen wird wenn eine Taste der Tastatur losgelassen wird.
 	 */
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -1653,7 +1644,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * MouseEvent welches auf das Verlassen einer Komponente der Maus reagiert.
 	 */
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -1669,7 +1659,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * MouseEvent welches auf Loslassen einer Maustaste reagiert.
 	 */
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	/**
@@ -2328,7 +2317,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster Object aktiviert wird
 	 */
 	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -2336,7 +2324,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster geschlossen wird
 	 */
 	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -2351,7 +2338,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster Object deaktiviert wird
 	 */
 	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -2359,7 +2345,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster de-minimiert wurde
 	 */
 	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -2367,7 +2352,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster minimiert wurde
 	 */
 	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
@@ -2375,7 +2359,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster ge�ffnet wird
 	 */
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 }

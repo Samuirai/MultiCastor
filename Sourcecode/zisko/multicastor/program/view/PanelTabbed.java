@@ -37,9 +37,9 @@ public class PanelTabbed extends JPanel {
 	private ArrayList<TableColumn> columns;
 
 	/**
-	 * Konstruktor für einen kompletten Programmteil in der GUI.
+	 * Konstruktor fï¿½r einen kompletten Programmteil in der GUI.
 	 * Hierbei werden alle Komponenten fertig initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
 	 * @param typ Gibt an um welchen Programmteil es sich handelt
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
@@ -74,16 +74,16 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Initialisiert die Statusbar
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehï¿½rt
 	 */
 	private void initStatusPanel(ViewController ctrl, Typ typ) {
 		pan_status = new PanelStatusBar();
 	}
 	/**
 	 * Initialisiert den Graph und die Console der GUI
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehören
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehï¿½ren
 	 */
 	private void initConsolePanel(ViewController ctrl, Typ typ) {
 		tab_console = new JTabbedPane();
@@ -93,6 +93,9 @@ public class PanelTabbed extends JPanel {
 		ta_console.setEditable(false);
 		console_scrollpane = new JScrollPane(ta_console);
 		console_scrollpane.setPreferredSize(new Dimension(300, 100));
+		/*
+		 * TODO [MH] neuen Typ einfuegen
+		 */
 		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
 			pan_graph = new PanelGraph(500, "sec", "Packets per Second (total)", false);
 		}
@@ -106,8 +109,8 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Initialisiert die Tabelle
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehï¿½rt
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();
@@ -136,8 +139,8 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Resettet das Aussehen der Tabelle auf das Standard Aussehen
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehï¿½rt
 	 */
 	public void setTableModel(ViewController ctrl, Typ typ) {
 		model = new MiscTableModel(ctrl,typ);
@@ -161,6 +164,9 @@ public class PanelTabbed extends JPanel {
 		colmodel.getColumn(3).setPreferredWidth(60);
 		colmodel.getColumn(4).setPreferredWidth(60);
 		colmodel.getColumn(5).setPreferredWidth(60);
+		/*
+		 * TODO [MH] neuen Typ einfuegen
+		 */
 		if(typ == Typ.SENDER_V4 || typ ==Typ.SENDER_V6){
 			colmodel.getColumn(6).setMinWidth(50);
 			colmodel.getColumn(7).setMinWidth(100);

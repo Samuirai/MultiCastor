@@ -48,7 +48,7 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelTabbed panel_sen_ipv6;
 	/**
-	 * TODO
+	 * TODO an FH: Beschreibung hinzufuegen
 	 */
 	private PanelPlus panel_plus;
 	/**

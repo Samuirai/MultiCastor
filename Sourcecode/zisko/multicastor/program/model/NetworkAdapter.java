@@ -15,11 +15,11 @@ import zisko.multicastor.program.data.MulticastData.Typ;
  */
 public abstract class NetworkAdapter {
 	/**
-	 * Vector welcher alle vorgebenen IPv4 Netzwerkadressen im System hält.
+	 * Vector welcher alle vorgebenen IPv4 Netzwerkadressen im System hï¿½lt.
 	 */
 	public static Vector<InetAddress> ipv4Interfaces=new Vector<InetAddress>();
 	/**
-	 * Vector welcher alle vorgebenen IPv6 Netzwerkadressen im System hält.
+	 * Vector welcher alle vorgebenen IPv6 Netzwerkadressen im System hï¿½lt.
 	 */
 	public static Vector<InetAddress> ipv6Interfaces=new Vector<InetAddress>();
 	
@@ -32,7 +32,6 @@ public abstract class NetworkAdapter {
 		try {
 			adapters = NetworkInterface.getNetworkInterfaces();
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		while(adapters.hasMoreElements()){
@@ -58,24 +57,24 @@ public abstract class NetworkAdapter {
 		}
 	}
 	/**
-	 * Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zurück gibt.
+	 * Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zurï¿½ck gibt.
 	 * @return Vector mit IPv4 Adressen
 	 */
 	public static Vector getipv4Adapters(){
 		return ipv4Interfaces;
 	}
 	/**
-	 * Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zurück gibt.
+	 * Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zurï¿½ck gibt.
 	 * @return Vector mit IPv6 Adressen
 	 */
 	public static Vector getipv6Adapters(){
 		return ipv6Interfaces;
 	}
 	/**
-	 * Überprüft ob eine bestimmte IP Adresse im System vergeben ist.
+	 * ï¿½berprï¿½ft ob eine bestimmte IP Adresse im System vergeben ist.
 	 * @param typ Unterscheidet ob es sich um IPv4 oder IPv6 Adresse handelt.
-	 * @param address Adresse welche überprüft werden soll
-	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zurückgegeben, ansonsten -1
+	 * @param address Adresse welche ï¿½berprï¿½ft werden soll
+	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zurï¿½ckgegeben, ansonsten -1
 	 */
 	public static int findAddressIndex(Typ typ, String address){
 		int ret = -1;
