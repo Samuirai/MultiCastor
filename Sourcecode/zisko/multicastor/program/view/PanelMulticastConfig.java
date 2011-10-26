@@ -26,10 +26,6 @@ import zisko.multicastor.program.view.MiscBorder.BorderType;
 public class PanelMulticastConfig extends JPanel {
 	private JTextField tf_groupIPaddress;
 	private WideComboBox cb_sourceIPaddress;
-	private JSlider sl_ttl;
-	private JSlider sl_port;
-	private JSlider sl_length;
-	private JSlider sl_rate;
 	private JTextField tf_udp_port;
 	private JTextField tf_ttl;
 	private JTextField tf_udp_packetlength;
@@ -70,7 +66,7 @@ public class PanelMulticastConfig extends JPanel {
 		add(pan_groupIPaddress);
 		add(pan_udp_port);
 		add(tb_active);
-		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefügt
+		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefï¿½gt
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
@@ -96,7 +92,7 @@ public class PanelMulticastConfig extends JPanel {
 		bt_enter.setFont(MiscFont.getFont(0,12));
 		bt_enter.setEnabled(false);
 		
-		//V1.5: Layer 2 und Layer 3 Tabs hinzugefügt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
+		//V1.5: Layer 2 und Layer 3 Tabs hinzugefï¿½gt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 			pan_packetrate=new JPanel();
 			pan_packetlength=new JPanel();
@@ -146,7 +142,7 @@ public class PanelMulticastConfig extends JPanel {
 			}
 			for(int i = 0 ; i < temp.size(); i++){
 				/*
-				 * TODO [JT] neuen Typ einfügen
+				 * TODO [JT] neuen Typ einfï¿½gen
 				 */
 				if(typ == Typ.SENDER_V4){
 					try {
@@ -190,13 +186,19 @@ public class PanelMulticastConfig extends JPanel {
 		else if (typ == Typ.L2_SENDER || typ==Typ.L2_RECEIVER){
 			/*
 			 * TODO [JT] neuen Typ anpassen
+			 * Hier gehoert kein IPv4 hin
 			 */
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		//V1.5: Added new Tabs
 		else if (typ == Typ.L3_SENDER || typ==Typ.L3_RECEIVER){
 			/*
 			 * TODO [JT] neuen Typ anpassen
+			 * Hier gehoert kein IPv4 hin
 			 */
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		else{ //IPv6
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));
@@ -307,8 +309,8 @@ public class PanelMulticastConfig extends JPanel {
 	public String getSourceIP(Typ typ, int i){
 		/*
 		 * TODO [MH/JT] neuen Typ einfuegen
-		 * Hier müssen die Networkadapter für den Kombinierten L3-Tab referenziert werden.
-		 * Hier müssen die Networkadapter für MMRP referenziert werden.
+		 * Hier mï¿½ssen die Networkadapter fï¿½r den Kombinierten L3-Tab referenziert werden.
+		 * Hier mï¿½ssen die Networkadapter fï¿½r MMRP referenziert werden.
 		 */
 		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
 			return NetworkAdapter.getipv4Adapters().get(i).toString().substring(1);
@@ -320,8 +322,8 @@ public class PanelMulticastConfig extends JPanel {
 	public InetAddress getSelectedAddress(Typ typ){
 		/*
 		 * TODO [MH/JT] neuen Typ einfuegen
-		 * Funktionale Anforderung: Wie soll denn die Eingabeprüfung im Kombitab sein
-		 * MMRP Eingabeprüfung erstellen.
+		 * Funktionale Anforderung: Wie soll denn die Eingabeprï¿½fung im Kombitab sein
+		 * MMRP Eingabeprï¿½fung erstellen.
 		 */
 		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
 			return InputValidator.checkIPv4(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
