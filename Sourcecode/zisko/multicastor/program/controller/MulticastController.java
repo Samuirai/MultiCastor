@@ -728,11 +728,17 @@ public class MulticastController{
 	private Vector<MulticastData> getMCVector(MulticastData.Typ multicastDataTyp){
 		Vector<MulticastData> vector = null;
 		switch(multicastDataTyp){
-		// TODO jump
 			case RECEIVER_V4: vector = mc_receiver_v4;break;
 			case RECEIVER_V6: vector = mc_receiver_v6;break;
 			case SENDER_V4: vector = mc_sender_v4;break;
 			case SENDER_V6: vector = mc_sender_v6;break;
+			/*
+			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!!
+			 */
+			case L2_RECEIVER: vector = mc_receiver_v4;break;
+			case L2_SENDER: vector = mc_sender_v4;break;
+			case L3_RECEIVER: vector = mc_receiver_v4;break;
+			case L3_SENDER: vector = mc_sender_v4;break;
 			default: logger.log(Level.SEVERE, "Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");return null;
 		}
 		return vector;
