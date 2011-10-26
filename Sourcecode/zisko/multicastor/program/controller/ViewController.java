@@ -1170,6 +1170,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Hilfsfunktion zum Testen des Programm mits realen daten, durch diese Funktion k�nnen extrem gro�e
 	 * Datenmengen simuliert werden.
 	 */
+	@SuppressWarnings("unused")
 	private void insertTestData(){
 		for(int i = 1 ; i < 6 ; i++){
 			getPanConfig(Typ.SENDER_V4).getTf_groupIPaddress().setText("224.0.0."+i);

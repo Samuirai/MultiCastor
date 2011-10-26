@@ -27,10 +27,6 @@ import zisko.multicastor.program.view.MiscBorder.BorderType;
 public class PanelMulticastConfig extends JPanel {
 	private JTextField tf_groupIPaddress;
 	private WideComboBox cb_sourceIPaddress;
-	private JSlider sl_ttl;
-	private JSlider sl_port;
-	private JSlider sl_length;
-	private JSlider sl_rate;
 	private JTextField tf_udp_port;
 	private JTextField tf_ttl;
 	private JTextField tf_udp_packetlength;
@@ -193,13 +189,19 @@ public class PanelMulticastConfig extends JPanel {
 		else if (typ == Typ.L2_SENDER || typ==Typ.L2_RECEIVER){
 			/*
 			 * TODO [JT] neuen Typ anpassen
+			 * Hier gehoert kein IPv4 hin
 			 */
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		//V1.5: Added new Tabs
 		else if (typ == Typ.L3_SENDER || typ==Typ.L3_RECEIVER){
 			/*
 			 * TODO [JT] neuen Typ anpassen
+			 * Hier gehoert kein IPv4 hin
 			 */
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		else{ //IPv6
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));

@@ -1,23 +1,17 @@
 package zisko.multicastor.program.view;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Vector;
-
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
+ * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kï¿½mmert.
  * @author Daniel Becker
  *
  */
+@SuppressWarnings("serial")
 public class MiscTableModel extends AbstractTableModel {
 	private Typ typ=Typ.UNDEFINED;
 	private boolean stateCheckboxEnabled = true;
@@ -27,19 +21,19 @@ public class MiscTableModel extends AbstractTableModel {
 		this.ctrl=ctrl;
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefügt wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefï¿½gt wird.
 	 */
 	public void insertUpdate(){
 		fireTableRowsInserted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast gelsï¿½cht wird.
 	 */
 	public void deleteUpdate(){
 		fireTableRowsDeleted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast geändert wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast geï¿½ndert wird.
 	 */
 	public void changeUpdate(){
 		fireTableRowsUpdated(0, ctrl.getMCCount(typ));
@@ -50,7 +44,8 @@ public class MiscTableModel extends AbstractTableModel {
 	 */
 	public Class<?> getColumnClass(int columnIndex) {
 		Class<?> ret = null;
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0: ret = Boolean.class; break;
 				case 1: ret = String.class; break;
@@ -66,7 +61,8 @@ public class MiscTableModel extends AbstractTableModel {
 				default: ret = null; break;
 			}  	
 		}
-		if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0: ret = Boolean.class; break;
 				case 1: ret = String.class; break;
@@ -86,14 +82,16 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Spalten zurück gibt.
+	 * Funktion welche die Anzahl an Spalten zurï¿½ck gibt.
 	 */
 	public int getColumnCount() {
 		int ret = 0;
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			ret = 11;
 		}
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			ret = 11;
 		}
 		return ret;
@@ -104,7 +102,8 @@ public class MiscTableModel extends AbstractTableModel {
 	 */
 	public String getColumnName(int columnIndex) {
 		String ret=null;
-		if(typ==Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0: ret = "STATE"; break; 
 				case 1:	ret = "ID"; break; 		
@@ -120,7 +119,8 @@ public class MiscTableModel extends AbstractTableModel {
 				default: ret = "error!"; break;
 			}
 		}
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0: ret = "STATE"; break;
 				case 1:	ret = "ID"; break; 		
@@ -140,19 +140,20 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Tabellenreihen zurück gibt.
+	 * Funktion welche die Anzahl an Tabellenreihen zurï¿½ck gibt.
 	 */
 	public int getRowCount() {
 		return ctrl.getMCCount(typ);
 	}
 	@Override
 	/**
-	 * Funktion welche die Daten für eine jeweilige Tabellenzelle anfordert
+	 * Funktion welche die Daten fï¿½r eine jeweilige Tabellenzelle anfordert
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex){
 		MulticastData data = ctrl.getMCData(rowIndex, typ);
 		Object ret = null;
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0: ret=new Boolean(data.isActive()); break; 
 				case 1: ret=data.getSenderID(); break;
@@ -168,7 +169,8 @@ public class MiscTableModel extends AbstractTableModel {
 				default: System.out.println("TABLEMODEL GETVALUE ERROR");
 			}
 		}
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0: ret=new Boolean(data.isActive()); break; 
 				case 1: ret=data.getSenderID(); break;
@@ -204,7 +206,8 @@ public class MiscTableModel extends AbstractTableModel {
 	 */
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		MulticastData data = ctrl.getMCData(rowIndex, typ);
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0:	
 					if((Boolean)aValue){
@@ -228,7 +231,8 @@ public class MiscTableModel extends AbstractTableModel {
 				default: System.out.println("Table Model Error - SetValueAt() - SENDER");
 			}
 		}
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6){
+		// V1.5: L2 und L3 hinzugefuegt
+		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0:
 					if((Boolean)aValue){
