@@ -15,7 +15,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,12 +32,13 @@ import javax.swing.plaf.basic.BasicButtonUI;
  * @author Filip Haase
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class ButtonTabComponent extends JPanel{
 
 	private final JTabbedPane pane;
 	
 	public ButtonTabComponent(final JTabbedPane pPane, String path){
-		// Set the Layout(that Labal is left and Button right)
+		// Set the Layout(that Label is left and Button right)
 		super(new FlowLayout(FlowLayout.LEFT,0,0));
 		// Set the Pane(remember it's final, we need to do this here)
 		this.pane = pPane;

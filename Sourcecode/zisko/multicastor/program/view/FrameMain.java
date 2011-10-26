@@ -5,6 +5,9 @@ import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.JPopupMenu.Separator;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
@@ -109,6 +112,14 @@ public class FrameMain extends JFrame {
 		// V1.5: Standartwert fuer Basistitel setzen
 		baseTitle = "MultiCastor";
 		updateTitle();
+		tabpane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTitle();
+			}
+		});
+		
 	}
 	public String getBaseTitle() {
 		return baseTitle;
