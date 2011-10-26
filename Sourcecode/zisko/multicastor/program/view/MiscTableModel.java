@@ -14,10 +14,11 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
+ * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kï¿½mmert.
  * @author Daniel Becker
  *
  */
+@SuppressWarnings("serial")
 public class MiscTableModel extends AbstractTableModel {
 	private Typ typ=Typ.UNDEFINED;
 	private boolean stateCheckboxEnabled = true;
@@ -27,19 +28,19 @@ public class MiscTableModel extends AbstractTableModel {
 		this.ctrl=ctrl;
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefügt wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefï¿½gt wird.
 	 */
 	public void insertUpdate(){
 		fireTableRowsInserted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast gelsï¿½cht wird.
 	 */
 	public void deleteUpdate(){
 		fireTableRowsDeleted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast geändert wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast geï¿½ndert wird.
 	 */
 	public void changeUpdate(){
 		fireTableRowsUpdated(0, ctrl.getMCCount(typ));
@@ -86,7 +87,7 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Spalten zurück gibt.
+	 * Funktion welche die Anzahl an Spalten zurï¿½ck gibt.
 	 */
 	public int getColumnCount() {
 		int ret = 0;
@@ -140,14 +141,14 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Tabellenreihen zurück gibt.
+	 * Funktion welche die Anzahl an Tabellenreihen zurï¿½ck gibt.
 	 */
 	public int getRowCount() {
 		return ctrl.getMCCount(typ);
 	}
 	@Override
 	/**
-	 * Funktion welche die Daten für eine jeweilige Tabellenzelle anfordert
+	 * Funktion welche die Daten fï¿½r eine jeweilige Tabellenzelle anfordert
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex){
 		MulticastData data = ctrl.getMCData(rowIndex, typ);

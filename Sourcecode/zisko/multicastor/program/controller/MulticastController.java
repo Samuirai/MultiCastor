@@ -728,6 +728,7 @@ public class MulticastController{
 	private Vector<MulticastData> getMCVector(MulticastData.Typ multicastDataTyp){
 		Vector<MulticastData> vector = null;
 		switch(multicastDataTyp){
+		// TODO jump
 			case RECEIVER_V4: vector = mc_receiver_v4;break;
 			case RECEIVER_V6: vector = mc_receiver_v6;break;
 			case SENDER_V4: vector = mc_sender_v4;break;
