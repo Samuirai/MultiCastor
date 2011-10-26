@@ -1,120 +1,95 @@
 package zisko.multicastor.program.view;
 
 import java.awt.Dimension;
+import java.awt.Font;
+
 import javax.swing.*;
 import zisko.multicastor.program.controller.ViewController;
 /**
- * Das Kontrollpanel für Multicasts. 
- * Mit diesem Panel können Multicasts gestartet, gestoppt und gelöscht werden.
+ * Das Kontrollpanel fï¿½r Multicasts. 
+ * Mit diesem Panel kï¿½nnen Multicasts gestartet, gestoppt und gelï¿½scht werden.
  * @author Daniel Becker
  *
  */
 @SuppressWarnings("serial")
 public class PanelMulticastControl extends JPanel {
-	private JButton start;
-	private JButton stop;
+	
+	private JButton start_stop;
 	private JButton delete;
-	private JButton select_all;
-	private JButton deselect_all;
+	private JButton select_deselect_all;
 	private JButton newmulticast;
 
 	/**
-	 * Konstruktor für das Kontrollpanel welcher alle zugehörigen GUI Komponenten initialisiert.
-	 * @param ctrl Benötigete Referenz zum GUI Controller
+	 * Konstruktor fï¿½r das Kontrollpanel welcher alle zugehï¿½rigen GUI Komponenten initialisiert.
+	 * @param ctrl Benï¿½tigete Referenz zum GUI Controller
 	 */
 	public PanelMulticastControl(ViewController ctrl){
 		setBorder(new MiscBorder("MultiCast Control"));
 		setLayout(null);
-		setPreferredSize(new Dimension(225,150));
+		setPreferredSize(new Dimension(225,85));
 		initButtons(ctrl);
 	}
 	/**
 	 * Hilfsfunktion welche die Buttons des Kontrollpanels initialisier
-	 * @param ctrl Benötigete Referenz zum GUI Controller
+	 * @param ctrl Benï¿½tigete Referenz zum GUI Controller
 	 */
 	private void initButtons(ViewController ctrl) {
-		start = new JButton("Start");
-		stop = new JButton("Stop");
+		
+		start_stop = new JButton("Start / Stop");
 		delete = new JButton("Delete");
-		select_all = new JButton("Select All");
-		deselect_all = new JButton("Deselect All");
+		select_deselect_all = new JButton("(De-)Select All");
 		newmulticast = new JButton("New");
-		start.setEnabled(false);
-		stop.setEnabled(false);
+		start_stop.setEnabled(false);
 		delete.setEnabled(false);
 		
-		start.setFont(MiscFont.getFont());
-		stop.setFont(MiscFont.getFont());
+		Font myFont = new Font("Helvetica", Font.BOLD,11);
+		start_stop.setFont(myFont);
 		delete.setFont(MiscFont.getFont());
-		select_all.setFont(MiscFont.getFont());
-		deselect_all.setFont(MiscFont.getFont());
+		select_deselect_all.setFont(MiscFont.getFont());
 		newmulticast.setFont(MiscFont.getFont());
 		
-		start.setFocusable(false);
-		stop.setFocusable(false);
+		start_stop.setFocusable(false);
 		delete.setFocusable(false);
-		select_all.setFocusable(false);
-		deselect_all.setFocusable(false);
+		select_deselect_all.setFocusable(false);
 		newmulticast.setFocusable(false);
 		
-		start.setBounds(135,20,70,30);
-		stop.setBounds(135,60,70,30);
-		delete.setBounds(15,100,110,30);
-		select_all.setBounds(15,20,110,30);
-		deselect_all.setBounds(15,60,110,30);
-		newmulticast.setBounds(135,100,70,30);
-		start.addActionListener(ctrl);
-		stop.addActionListener(ctrl);
-		select_all.addActionListener(ctrl);
-		deselect_all.addActionListener(ctrl);
+		select_deselect_all.setBounds(10,20,100,25);
+		delete.setBounds(115,20,100,25);
+		newmulticast.setBounds(10,50,100,25);
+		start_stop.setBounds(115,50,100,25);
+		
+		start_stop.addActionListener(ctrl);
+		select_deselect_all.addActionListener(ctrl);
 		newmulticast.addActionListener(ctrl);
 		delete.addActionListener(ctrl);
-		add(start);
-		add(select_all);
-		add(stop);
-		add(deselect_all);
-		add(delete);
+		add(start_stop);
 		add(newmulticast);
+		add(select_deselect_all);
+		add(delete);
 	}
 
-	public JButton getStart() {
-		return start;
+	public JButton getStartStop() {
+		return start_stop;
 	}
-
-	public JButton getStop() {
-		return stop;
-	}
-
+	
 	public JButton getDelete() {
 		return delete;
 	}
 
-	public JButton getSelect_all() {
-		return select_all;
+	public JButton getSelectDeselect_all() {
+		return select_deselect_all;
 	}
 
-	public JButton getDeselect_all() {
-		return deselect_all;
-	}
-
-	public void setStart(JButton start) {
-		this.start = start;
-	}
-
-	public void setStop(JButton stop) {
-		this.stop = stop;
+	public void setStartStop(JButton start) {
+		this.start_stop = start;
 	}
 
 	public void setDelete(JButton delete) {
 		this.delete = delete;
 	}
 
-	public void setSelect_all(JButton selectAll) {
-		select_all = selectAll;
-	}
-
-	public void setDeselect_all(JButton deselectAll) {
-		deselect_all = deselectAll;
+	public void setSelectDeselect_all(JButton selectAll) {
+		select_deselect_all = selectAll;
 	}
 
 	public JButton getNewmulticast() {

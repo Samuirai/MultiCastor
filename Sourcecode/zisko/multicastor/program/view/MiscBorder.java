@@ -8,14 +8,14 @@ import java.util.Vector;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 /**
- * Hilfsklasse zum verwalten der Ränder für Textfelder.
+ * Hilfsklasse zum verwalten der Rï¿½nder fï¿½r Textfelder.
  * @author Daniel Becker 
  *
  */
 @SuppressWarnings("serial")
 public class MiscBorder extends TitledBorder {
 	/**
-	 * Enum welches bestimmt ob der Rahmen rot, grün oder neutral gezeichnet werden muss, 
+	 * Enum welches bestimmt ob der Rahmen rot, grï¿½n oder neutral gezeichnet werden muss, 
 	 * je nach dem ob ein Korrekter Input vorliegt.
 	 * @author Daniel Becker
 	 *
@@ -31,7 +31,7 @@ public class MiscBorder extends TitledBorder {
 	public enum BorderTitle{
 		IPv4GROUP, IPv4SOURCE, IPv6GROUP, IPv6SOURCE, PORT, RATE, LENGTH, TTL 
 	}
-	private static String[] ipv4Names = {"IPv4 Group Address","IPv4 Network Interface","UDP Port","Packet Rate", "Packet Length", "Time to Live", "IPv6 Group Address","IPv6 Network Interface" };
+	private static String[] ipv4Names = {"IP Group Address","IP Network Interface","UDP Port","Packet Rate", "Packet Length", "Time to Live", "IP Group Address","IP Network Interface" };
 	private static Vector<TitledBorder> b_neutral = new Vector<TitledBorder>();
 	private static Vector<TitledBorder> b_true = new Vector<TitledBorder>();
 	private static Vector<TitledBorder> b_false = new Vector<TitledBorder>();
@@ -43,8 +43,8 @@ public class MiscBorder extends TitledBorder {
 	static Font f = MiscFont.getFont(0,12);
 	private Color c = Color.black;
 	/**
-	 * initialisiert die 3 Vectoren welche die fertigen Ränder halten, so müssen zur Laufzeit keine neuen genertiert werden.
-	 * Die können abgefragt werden sobald sie benötigt werden.
+	 * initialisiert die 3 Vectoren welche die fertigen Rï¿½nder halten, so mï¿½ssen zur Laufzeit keine neuen genertiert werden.
+	 * Die kï¿½nnen abgefragt werden sobald sie benï¿½tigt werden.
 	 */
 	static {
 		for(int i = 0; i < ipv4Names.length; i++){

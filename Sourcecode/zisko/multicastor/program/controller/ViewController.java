@@ -139,6 +139,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * die Komponente zu identifizieren bei welcher die Interaktion stattgefunden hat.
 	 */
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource()==f.getMi_saveconfig()){
 			//System.out.println("Saving!");
 			f.getFc_save().toggle();
@@ -205,7 +206,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getDelete()){
 			pressBTDelete(Typ.RECEIVER_V6);
 		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDeselect_all()){
+		/*else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDeselect_all()){
 			pressBTDeselectAll(Typ.SENDER_V4);
 		}
 		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getDeselect_all()){
@@ -228,7 +229,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getSelect_all()){
 			pressBTSelectAll(Typ.RECEIVER_V6);
-		}
+		}*/
 		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getNewmulticast()){
 			pressBTNewMC(Typ.SENDER_V4);
 		}
@@ -241,7 +242,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getNewmulticast()){
 			pressBTNewMC(Typ.RECEIVER_V6);
 		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getStop()){
+		/*else if(e.getSource()==getPanControl(Typ.SENDER_V4).getStop()){
 			pressBTStop(Typ.SENDER_V4);
 		}
 		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getStop()){
@@ -264,7 +265,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getStart()){
 			pressBTStart(Typ.RECEIVER_V6);
-		}
+		}*/
 		else if(e.getSource()==getFrame().getFc_save().getChooser()){
 			saveFileEvent(e);
 		}
@@ -1376,7 +1377,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 													levelDataRv6.isGraph());
 			//configure visibility settings for control panel
 			//configure visibility settings for start button
-			getPanControl(Typ.SENDER_V4).getStart().setVisible(levelDataSv4.isStartButton());
+			/*getPanControl(Typ.SENDER_V4).getStart().setVisible(levelDataSv4.isStartButton());
 			getPanControl(Typ.SENDER_V6).getStart().setVisible(levelDataSv6.isStartButton());
 			getPanControl(Typ.RECEIVER_V4).getStart().setVisible(levelDataRv4.isStartButton());
 			getPanControl(Typ.RECEIVER_V6).getStart().setVisible(levelDataRv6.isStartButton());
@@ -1395,7 +1396,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanControl(Typ.SENDER_V6).getDeselect_all().setVisible(levelDataSv6.isDeselectAllButton());
 			getPanControl(Typ.RECEIVER_V4).getDeselect_all().setVisible(levelDataRv4.isDeselectAllButton());
 			getPanControl(Typ.RECEIVER_V6).getDeselect_all().setVisible(levelDataRv6.isDeselectAllButton());
-			//configure visibility settings for new multicast button
+			//configure visibility settings for new multicast button*/
 			getPanControl(Typ.SENDER_V4).getNewmulticast().setVisible(levelDataSv4.isNewButton());
 			getPanControl(Typ.SENDER_V6).getNewmulticast().setVisible(levelDataSv6.isNewButton());
 			getPanControl(Typ.RECEIVER_V4).getNewmulticast().setVisible(levelDataRv4.isNewButton());
@@ -1908,36 +1909,36 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(selectedLine.length == 1){
 			getPanControl(typ).getDelete().setEnabled(true);
 			if(getMCData(selectedLine[0],typ).isActive()){
-				getPanControl(typ).getStart().setEnabled(false);
-				getPanControl(typ).getStop().setEnabled(true);
+				//getPanControl(typ).getStart().setEnabled(false);
+				//getPanControl(typ).getStop().setEnabled(true);
 			}
 			else{
-				getPanControl(typ).getStart().setEnabled(true);
-				getPanControl(typ).getStop().setEnabled(false);
+				//getPanControl(typ).getStart().setEnabled(true);
+				//getPanControl(typ).getStop().setEnabled(false);
 			}
 		}
 		else if(selectedLine.length == 0){
-			getPanControl(typ).getStart().setEnabled(false);
-			getPanControl(typ).getStop().setEnabled(false);
+			//getPanControl(typ).getStart().setEnabled(false);
+			//getPanControl(typ).getStop().setEnabled(false);
 			getPanControl(typ).getDelete().setEnabled(false);
 		}
 		else{
 			getPanControl(typ).getDelete().setEnabled(true);
 			for(int i = 1 ; i < selectedLine.length ; i++){
 				if(getMCData(selectedLine[i-1], typ).isActive() && getMCData(selectedLine[i], typ).isActive()){
-					getPanControl(typ).getStart().setEnabled(false);
+					//getPanControl(typ).getStart().setEnabled(false);
 				}
 				else{
-					getPanControl(typ).getStart().setEnabled(true);
+					//getPanControl(typ).getStart().setEnabled(true);
 					break;
 				}
 			}
 			for(int i = 1 ; i < selectedLine.length ; i++){
 				if((!getMCData(selectedLine[i-1], typ).isActive()) && (!getMCData(selectedLine[i], typ).isActive())){
-					getPanControl(typ).getStop().setEnabled(false);	
+					//getPanControl(typ).getStop().setEnabled(false);	
 				}
 				else{
-					getPanControl(typ).getStop().setEnabled(true);
+					//getPanControl(typ).getStop().setEnabled(true);
 					break;
 				}
 			}
@@ -1951,12 +1952,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 private void setTBactive(boolean b, Typ typ) {
 		if(b){
 			getPanConfig(typ).getTb_active().setSelected(true);
-			getPanConfig(typ).getTb_active().setText("active");
+			getPanConfig(typ).getTb_active().setText("Active");
 			getPanConfig(typ).getTb_active().setForeground(new Color(0,175,0));
 		}
 		else{
 			getPanConfig(typ).getTb_active().setSelected(false);
-			getPanConfig(typ).getTb_active().setText("inactive");
+			getPanConfig(typ).getTb_active().setText("Inactive");
 			getPanConfig(typ).getTb_active().setForeground(new Color(200,0,0));
 		}
 	}
