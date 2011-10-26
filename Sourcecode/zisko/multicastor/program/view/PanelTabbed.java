@@ -43,6 +43,7 @@ public class PanelTabbed extends JPanel {
 	 * @param typ Gibt an um welchen Programmteil es sich handelt
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
+		if (typ==Typ.RECEIVER_V4||typ==Typ.RECEIVER_V6||typ==Typ.SENDER_V6||typ==Typ.SENDER_V4){
 		setLayout(new BorderLayout());
 		initControlPanel(ctrl);
 		initConfigPanel(ctrl, typ);
@@ -71,7 +72,9 @@ public class PanelTabbed extends JPanel {
 		add(pan_left, BorderLayout.WEST);
 		add(pan_table,BorderLayout.CENTER);
 		add(pan_status, BorderLayout.SOUTH);
+		}
 	}
+	
 	/**
 	 * Initialisiert die Statusbar
 	 * @param ctrl Ben�tigte Referenz zum GUI Controller
