@@ -1,2 +1,28 @@
 [INFO][04.10.2011-11:59:47] Starting MultiCastor with a gui
 [WARNING][04.10.2011-11:59:47] Default configurationfile was not found. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.
+[INFO][25.10.2011-17:28:01] Starting MultiCastor with a gui
+[INFO][25.10.2011-17:28:01] Default Configurationfile loaded.
+[INFO][25.10.2011-17:28:01] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][25.10.2011-22:09:05] Starting MultiCastor with a gui
+[INFO][25.10.2011-22:09:05] Default Configurationfile loaded.
+[INFO][25.10.2011-22:09:05] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][25.10.2011-22:12:10] Starting MultiCastor with a gui
+[INFO][25.10.2011-22:12:10] Default Configurationfile loaded.
+[INFO][25.10.2011-22:12:10] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][25.10.2011-22:13:30] Starting MultiCastor with a gui
+[INFO][25.10.2011-22:13:30] Default Configurationfile loaded.
+[INFO][25.10.2011-22:13:30] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][26.10.2011-18:42:36] Starting MultiCastor with a gui
+[INFO][26.10.2011-18:42:36] Default Configurationfile loaded.
+[INFO][26.10.2011-18:42:36] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][26.10.2011-18:48:24] Starting MultiCastor with a gui
+[INFO][26.10.2011-18:48:24] Default Configurationfile loaded.
+[INFO][26.10.2011-18:48:24] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][26.10.2011-19:23:32] Starting MultiCastor with a gui
+[INFO][26.10.2011-19:23:32] Default Configurationfile loaded.
+[INFO][26.10.2011-19:23:32] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
+[INFO][26.10.2011-19:37:50] Updatetime is rather long: 461 ms !!!!!!!!!!!!
+[WARNING][26.10.2011-19:37:50] Updating the user interface takes very long. Consider the help for more information.
+[INFO][26.10.2011-19:40:10] Starting MultiCastor with a gui
+[INFO][26.10.2011-19:40:10] Default Configurationfile loaded.
+[INFO][26.10.2011-19:40:10] In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.
