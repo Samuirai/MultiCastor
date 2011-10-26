@@ -1,20 +1,27 @@
 package zisko.multicastor.program.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.io.File;
-import java.util.Locale;
 import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.JPopupMenu.Separator;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
 /**
  * Hauptfenster des MultiCastor Tools
+ * 
+ * In Version 2 wurde CheckBox und RadioButton Farbgebungsfehler gefixt
+ * AuÃŸerdem Drag&Drop Tabs durch DraggableTabbedPane eingefÃ¼hrt
+ * 
+ * @version 1.5
  * @author Daniel Becker
- *
+ * @author Filip Haase
+ * @author Jonas Traub
+ * @author Matthis Hauschild
  */
 @SuppressWarnings("serial")
 public class FrameMain extends JFrame {
@@ -23,7 +30,7 @@ public class FrameMain extends JFrame {
 	/**
 	 * Das Tabpanel mit welchem man durch die Programmteile schalten kann.
 	 */
-	private JTabbedPane tabpane;
+	private DraggableTabbedPane tabpane;
 	/**
 	 *  Das IPv4Receiver Panel
 	 */
@@ -41,11 +48,15 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelTabbed panel_sen_ipv6;
 	/**
+	 * TODO
+	 */
+	private PanelPlus panel_plus;
+	/**
 	 *  Das About Panel
 	 */
 	private PanelAbout panel_about;
 	/*
-	 * Weitere Standard GUI Komponenten welche benötigt werden 
+	 * Weitere Standard GUI Komponenten welche benï¿½tigt werden 
 	 */
 	private JMenuBar mb_menubar;
 	private JMenu m_menu;
@@ -53,9 +64,9 @@ public class FrameMain extends JFrame {
 	private JMenu m_scale;
 	private JMenu m_info;
 	private ButtonGroup bg_scale;
-	private JRadioButton rb_beginner;
-	private JRadioButton rb_expert;
-	private JRadioButton rb_custom;
+	private JRadioButtonMenuItem rb_beginner;
+	private JRadioButtonMenuItem rb_expert;
+	private JRadioButtonMenuItem rb_custom;
 	private JMenuItem mi_saveconfig;
 	private JMenuItem mi_loadconfig;
 	private JMenuItem mi_exit;
@@ -64,8 +75,11 @@ public class FrameMain extends JFrame {
 	private JMenuItem mi_profile1;
 	private JMenuItem mi_profile2;
 	private JMenuItem mi_profile3;
-	private JMenuItem mi_aSave;
-	private JCheckBox mi_autoSave;
+	private JCheckBoxMenuItem mi_autoSave;
+	
+	// V1.5: Set individual title
+	private JMenuItem mi_setTitle;
+	
 	private ImageIcon img_close;
 	private FrameFileChooser fc_save;
 	public Vector<String> getLastConfigs() {
@@ -76,32 +90,58 @@ public class FrameMain extends JFrame {
 	private Userlevel level = Userlevel.EXPERT;
 	private Vector<String> lastConfigs=new Vector<String>();
 	private Separator mi_separator;
+	
+	/**
+	 * V1.5: Variable zur Speicherung des Basistitels
+	 */
+	private String baseTitle;
+	
 	/**
 	 * Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
 	 */
 	public FrameMain(ViewController ctrl) {
 		initWindow(ctrl);
 		initMenuBar(ctrl);
 		initPanels(ctrl);
 		setVisible(true);
-		//System.out.println("<PROGRAM START>");
 		this.addComponentListener(ctrl);
 		this.addKeyListener(ctrl);
 		this.addWindowListener(ctrl);
-//		System.out.println("p: "+tabpane.getIconAt(4).toString());
-//		System.out.println("w: "+tabpane.getIconAt(4).getIconWidth());
-//		System.out.println("h: "+tabpane.getIconAt(4).getIconHeight());
+		
+		// V1.5: Standartwert fuer Basistitel setzen
+		baseTitle = "MultiCastor";
+		updateTitle();
+		tabpane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				updateTitle();
+			}
+		});
+		
+	}
+	public String getBaseTitle() {
+		return baseTitle;
+	}
+	public void setBaseTitle(String baseTitle) {
+		this.baseTitle = baseTitle;
 	}
 	/**
 	 * Funktion welche die Menubar initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl) {
-		mi_autoSave = new JCheckBox("AutoSave");
+		mi_autoSave = new JCheckBoxMenuItem("AutoSave");
 		mi_autoSave.setFont(MiscFont.getFont(0,14));
 		mi_autoSave.addItemListener(ctrl);
-		mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+		//mi_autoSave.setIcon( new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+		
+		// V1.5: Menue-Eintrag zum Aendern des Fenster-Titels
+		mi_setTitle = new JMenuItem("Change Window-Title", new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/title.png")));
+		mi_setTitle.setFont(MiscFont.getFont(0,14));
+		mi_setTitle.addActionListener(ctrl);
+		
 		mi_saveconfig = new JMenuItem("Save Configuration",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
 		mi_saveconfig.setFont(MiscFont.getFont(0,14));
 		mi_saveconfig.addActionListener(ctrl);
@@ -125,13 +165,13 @@ public class FrameMain extends JFrame {
 		mi_about = new JMenuItem("About",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/info.png")));
 		mi_about.setFont(MiscFont.getFont(0,14));
 		mi_about.addActionListener(ctrl);
-		rb_beginner = new JRadioButton("Beginner");
+		rb_beginner = new JRadioButtonMenuItem("Beginner");
 		rb_beginner.setFont(MiscFont.getFont(0,14));
 		rb_beginner.addItemListener(ctrl);
-		rb_expert = new JRadioButton("Expert",true);
+		rb_expert = new JRadioButtonMenuItem("Expert",true);
 		rb_expert.setFont(MiscFont.getFont(0,14));
 		rb_expert.addItemListener(ctrl);
-		rb_custom = new JRadioButton("Custom");
+		rb_custom = new JRadioButtonMenuItem("Custom");
 		rb_custom.setFont(MiscFont.getFont(0,14));
 		rb_custom.addItemListener(ctrl);
 		bg_scale.add(rb_beginner);
@@ -143,7 +183,7 @@ public class FrameMain extends JFrame {
 		m_options.setFont(MiscFont.getFont(0,16));
 		m_scale = new JMenu("User Level");
 		m_scale.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/users.png")));
-		m_scale.setFont(MiscFont.getFont(0,16));
+		m_scale.setFont(MiscFont.getFont(0,14));
 		m_info = new JMenu("Info");
 		m_info.setFont(MiscFont.getFont(0,16));
 		m_info.add(mi_about);
@@ -153,6 +193,10 @@ public class FrameMain extends JFrame {
 		//m_scale.add(rb_custom);
 		m_options.add(m_scale);
 		m_options.add(mi_autoSave);
+		
+		// V1.5: SetTitle-Menueitem hinzufuegen
+		m_options.add(mi_setTitle);
+		
 		m_menu.add(mi_saveconfig);
 		m_menu.add(mi_loadconfig);
 
@@ -170,6 +214,12 @@ public class FrameMain extends JFrame {
 		mb_menubar.add(m_info);
 		setJMenuBar(mb_menubar);
 	}
+	public JMenuItem getMi_setTitle() {
+		return mi_setTitle;
+	}
+	public void setMi_setTitle(JMenuItem miSetTitle) {
+		mi_setTitle = miSetTitle;
+	}
 	/**
 	 * Hilfsfunktion zum Abfrage des Snake Menu Items
 	 * @return Das Snake Menu Item
@@ -179,29 +229,32 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche die Panels initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initPanels(ViewController ctrl) {
 		panel_rec_ipv4 = new PanelTabbed(ctrl,Typ.RECEIVER_V4);
 		panel_sen_ipv4 = new PanelTabbed(ctrl,Typ.SENDER_V4);
 		panel_rec_ipv6 = new PanelTabbed(ctrl,Typ.RECEIVER_V6);
 		panel_sen_ipv6 = new PanelTabbed(ctrl,Typ.SENDER_V6);
+		panel_plus = new PanelPlus(this);
 		panel_about = new PanelAbout();
-		img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
+		//img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
 		
-		tabpane = new JTabbedPane();
+		// V1.5: Referenz auf sich selbst, wird Ã¼bergeben, um Titel zu refreshen
+		tabpane = new DraggableTabbedPane(this);
 		tabpane.addMouseListener(ctrl);
-		tabpane.addMouseMotionListener(ctrl);
 		tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
+		tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 		tabpane.addTab(" Sender IPv4 ", panel_sen_ipv4);
+		tabpane.setTabComponentAt(1, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
 		tabpane.addTab(" Receiver IPv6 ", panel_rec_ipv6);
+		tabpane.setTabComponentAt(2, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 		tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
-		tabpane.setIconAt(0, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4receiver.png")));
-		tabpane.setIconAt(1, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4sender.png")));
-		tabpane.setIconAt(2, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6receiver.png")));
-		tabpane.setIconAt(3, new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6sender.png")));
+		tabpane.setTabComponentAt(3, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+		tabpane.addTab( " + ", panel_plus);
+
 		//tabpane.addTab(" Configuration ",img_close, panel_config);
-		tabpane.setSelectedIndex(1);
+		tabpane.setSelectedIndex(0);
 		tabpane.setFont(MiscFont.getFont(0,17));
 		tabpane.setFocusable(false);
 		tabpane.addChangeListener(ctrl);
@@ -210,7 +263,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche das Frame initialisiert
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initWindow(ViewController ctrl) {
 	    try {
@@ -225,7 +278,7 @@ public class FrameMain extends JFrame {
 		//setResizable(false);
 		setMinimumSize(new Dimension(640,489));
 		setMaximumSize(new Dimension(1920,1080));
-		setTitle("MultiCastor");
+		
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//getClass().getResourceAsStream("/zisko/multicastor/resources/images/icon.png").
@@ -260,23 +313,6 @@ public class FrameMain extends JFrame {
 			default: System.out.println("Error in FrameMain - getPanelPart"); break;
 		}
 		return ret;
-	}
-	/**
-	 * Funktion welche den Button des About Panel hovered.
-	 * @param hover Boolean was angibt ob der Button gehovered ist.
-	 */
-	public void setAboutCloseHovered(boolean hover){
-		ImageIcon hover_icon;
-		if(hover){
-			aboutPanelState=2;
-			hover_icon = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon_hover.gif"));
-			tabpane.setIconAt(4, hover_icon);
-		}
-		else{
-			aboutPanelState=1;
-			hover_icon = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
-			tabpane.setIconAt(4, hover_icon);
-		}
 	}
 	public PanelTabbed getPanel_rec_ipv4() {
 		return panel_rec_ipv4;
@@ -322,11 +358,11 @@ public class FrameMain extends JFrame {
 		return bg_scale;
 	}
 
-	public JRadioButton getRb_beginner() {
+	public JRadioButtonMenuItem getRb_beginner() {
 		return rb_beginner;
 	}
 
-	public JRadioButton getRb_expert() {
+	public JRadioButtonMenuItem getRb_expert() {
 		return rb_expert;
 	}
 
@@ -382,7 +418,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Hilfsfunktion welche das aktuell durch die Radiobuttons selektierte Userlevel ausliest
-	 * @return das aktuell ausgewählte Userlevel
+	 * @return das aktuell ausgewï¿½hlte Userlevel
 	 */
 	public Userlevel getSelectedUserlevel(){
 		Userlevel ret = Userlevel.UNDEFINED;
@@ -398,11 +434,11 @@ public class FrameMain extends JFrame {
 		return ret;
 	}
 
-	public JRadioButton getRb_custom() {
+	public JRadioButtonMenuItem getRb_custom() {
 		return rb_custom;
 	}
 
-	public JCheckBox getMi_autoSave() {
+	public JCheckBoxMenuItem getMi_autoSave() {
 		return mi_autoSave;
 	}
 	public void setLevel(Userlevel level) {
@@ -443,12 +479,21 @@ public class FrameMain extends JFrame {
 	}
 	public void setAutoSave(boolean b){
 		if(b){
-			mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/check.png")));
+			//mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/check.png")));
 			mi_autoSave.setSelected(true);
 		}
 		else{
-			mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+			//mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
 			mi_autoSave.setSelected(false);
 		}
+	}
+	
+	/**
+	 * V1.5: Methode zum updaten des Fenster-Titels
+	 * @author Matthis Hauschild
+	 * @author Jonas Traub
+	 */
+	public void updateTitle() {
+		setTitle(baseTitle + (baseTitle.isEmpty() ? "" : ": ") + tabpane.getTitleAt(tabpane.getSelectedIndex()).trim());
 	}
 }

@@ -1,7 +1,89 @@
 <?xml version="1.0"?>
 <MultiCastor>
-    <Multicasts/>
+    <Multicasts>
+        <RECEIVER_V4>
+            <active>false</active>
+            <groupIp>224.0.0.1</groupIp>
+            <sourceIp/>
+            <udpPort>18512</udpPort>
+            <packetLength>0</packetLength>
+            <ttl>0</ttl>
+            <packetRateDesired>0</packetRateDesired>
+            <typ>RECEIVER_V4</typ>
+        </RECEIVER_V4>
+        <RECEIVER_V4>
+            <active>false</active>
+            <groupIp>224.0.0.1</groupIp>
+            <sourceIp/>
+            <udpPort>19561</udpPort>
+            <packetLength>0</packetLength>
+            <ttl>0</ttl>
+            <packetRateDesired>0</packetRateDesired>
+            <typ>RECEIVER_V4</typ>
+        </RECEIVER_V4>
+    </Multicasts>
     <UserlevelData/>
-    <UserInputData/>
+    <UserInputData>
+        <RECEIVER_V4>
+            <selectedTab>RECEIVER_V4</selectedTab>
+            <selectedUserlevel>BEGINNER</selectedUserlevel>
+            <groupadress/>
+            <networkInterface>0</networkInterface>
+            <port/>
+            <ttl/>
+            <packetrate/>
+            <packetlength/>
+            <activeButton>false</activeButton>
+            <selectedRows>[I@14b84c7</selectedRows>
+            <columnOrderString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnOrderString>
+            <columnVisibilityString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnVisibilityString>
+            <isAutoSaveEnabled>false</isAutoSaveEnabled>
+        </RECEIVER_V4>
+        <RECEIVER_V4>
+            <selectedTab>RECEIVER_V4</selectedTab>
+            <selectedUserlevel>BEGINNER</selectedUserlevel>
+            <groupadress/>
+            <networkInterface>0</networkInterface>
+            <port/>
+            <ttl/>
+            <packetrate/>
+            <packetlength/>
+            <activeButton>false</activeButton>
+            <selectedRows>[I@d61aef</selectedRows>
+            <columnOrderString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnOrderString>
+            <columnVisibilityString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnVisibilityString>
+            <isAutoSaveEnabled>false</isAutoSaveEnabled>
+        </RECEIVER_V4>
+        <RECEIVER_V4>
+            <selectedTab>RECEIVER_V4</selectedTab>
+            <selectedUserlevel>BEGINNER</selectedUserlevel>
+            <groupadress/>
+            <networkInterface>0</networkInterface>
+            <port/>
+            <ttl/>
+            <packetrate/>
+            <packetlength/>
+            <activeButton>false</activeButton>
+            <selectedRows>[I@fa5ff3</selectedRows>
+            <columnOrderString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnOrderString>
+            <columnVisibilityString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnVisibilityString>
+            <isAutoSaveEnabled>false</isAutoSaveEnabled>
+        </RECEIVER_V4>
+        <RECEIVER_V4>
+            <selectedTab>RECEIVER_V4</selectedTab>
+            <selectedUserlevel>BEGINNER</selectedUserlevel>
+            <groupadress/>
+            <networkInterface>0</networkInterface>
+            <port/>
+            <ttl/>
+            <packetrate/>
+            <packetlength/>
+            <activeButton>false</activeButton>
+            <selectedRows>[I@82674b</selectedRows>
+            <columnOrderString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnOrderString>
+            <columnVisibilityString>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</columnVisibilityString>
+            <isAutoSaveEnabled>false</isAutoSaveEnabled>
+        </RECEIVER_V4>
+    </UserInputData>
     <PathData/>
 </MultiCastor>
