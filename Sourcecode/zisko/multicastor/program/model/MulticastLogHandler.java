@@ -11,7 +11,7 @@ import zisko.multicastor.program.controller.ViewController;
 
 /**
  * Selbstdefinierter Handler, der die zu loggenden Nachrichten formatiert und ausgibt.
- * @author Thomas Lüder
+ * @author Thomas Lï¿½der
  */
 
 public class MulticastLogHandler extends ConsoleHandler	{
@@ -26,7 +26,7 @@ public class MulticastLogHandler extends ConsoleHandler	{
 		}
 	
 	/**
-	 * Überladener Konstruktor. Hier mit Übergabe vom GUI-Controller.
+	 * ï¿½berladener Konstruktor. Hier mit ï¿½bergabe vom GUI-Controller.
 	 * @param gui Die Referenz zum GUI-Controller
 	 */
 	
@@ -71,7 +71,7 @@ public class MulticastLogHandler extends ConsoleHandler	{
 		//Ausgabe in Datei log.txt
 		try {
 			BufferedWriter os = new BufferedWriter(new FileWriter("log.txt",true));
-			os.write(message_file + "\n");
+			os.write(message_file + "\r\n");
 		    os.close();
 		} catch (IOException e) {
 			System.out.println("Log file could not be written to disk. Please check if you have writing permission in the MultiCastor directory.");
