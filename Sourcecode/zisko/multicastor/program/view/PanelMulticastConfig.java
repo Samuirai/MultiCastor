@@ -65,13 +65,15 @@ public class PanelMulticastConfig extends JPanel {
 		tf_groupIPaddress.setToolTipText("Enter MultiCast group IP address here!");
 		add(bt_enter);
 		add(pan_groupIPaddress);
-		add(pan_udp_port);
+		if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+			add(pan_udp_port);
 		add(tb_active);
 		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugef�gt
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
-			add(pan_ttl);
+			if(typ == Typ.L2_SENDER)
+				add(pan_ttl);
 		}
 	}
 	/**
@@ -138,7 +140,8 @@ public class PanelMulticastConfig extends JPanel {
 			ListCellRenderer renderer = cb_sourceIPaddress.getRenderer();
 			((JLabel) renderer).setHorizontalAlignment(SwingConstants.CENTER);
 			cb_sourceIPaddress.addItemListener(ctrl);
-			if(typ == Typ.SENDER_V4){
+			if(typ == Typ.L3_SENDER){
+				//TODO unterscheidung zwischen IPv4 und IPv6
 				temp = NetworkAdapter.getipv4Adapters();
 			}else{
 				temp = NetworkAdapter.getipv6Adapters();
@@ -147,7 +150,15 @@ public class PanelMulticastConfig extends JPanel {
 				/*
 				 * TODO [JT] neuen Typ einf�gen
 				 */
-				if(typ == Typ.SENDER_V4){
+				if(typ == Typ.L3_SENDER || typ == Typ.L2_SENDER){
+					try {
+						cb_sourceIPaddress.addItem(/*temp.get(i).toString().substring(1)+"   "+*/NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
+					} catch (SocketException e) {
+						e.printStackTrace();
+					}
+							//(0)temp.get(i).toString().substring(1));
+				}
+				/*if(typ == Typ.SENDER_V4){
 					try {
 						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1)+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 					} catch (SocketException e) {
@@ -161,7 +172,7 @@ public class PanelMulticastConfig extends JPanel {
 					} catch (SocketException e) {
 						e.printStackTrace();
 					}
-				}
+				}*/
 			}
 			pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
 			add(pan_sourceIPaddress);
@@ -200,10 +211,10 @@ public class PanelMulticastConfig extends JPanel {
 			 * TODO [JT] neuen Typ anpassen
 			 * Hier gehoert kein IPv4 hin
 			 */
-			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
-			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3Group, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3Source, BorderType.NEUTRAL));
 		}
-		else{ //IPv6
+		else{ //Layer2
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));
 			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.NEUTRAL));
 		}

@@ -9,6 +9,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JTabbedPane;
 
 /**
@@ -25,12 +28,14 @@ import javax.swing.JTabbedPane;
 public class DraggableTabbedPane extends JTabbedPane {
 
 	  private boolean dragging = false;
+	  private boolean draggingPlus = false;
 	  private Image tabImage = null;
 	  private Point currentMouseLocation = null;
 	  private int draggedTabIndex = 0;
 	  private int mouseRelX;
 	  private int mouseRelY;
 	  private Rectangle bounds;
+	  private FrameMain frame;
 
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
@@ -41,14 +46,19 @@ public class DraggableTabbedPane extends JTabbedPane {
    */
   public DraggableTabbedPane(final FrameMain parentFrame) {
     super();
+    frame = parentFrame;
+    
     addMouseMotionListener(new MouseMotionAdapter() {
       public void mouseDragged(MouseEvent e) {
 
-        if(!dragging) {
+        if(!dragging && !draggingPlus) {
           // Gets the tab index based on the mouse position
           int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), e.getY());
-
-          if(tabNumber >= 0) {
+          
+          //TabCount-1 is the Plus Tab therefore set an extra flag and not dragging
+          if(tabNumber==getTabCount()-1){
+        	  draggingPlus = true;
+          }else if(tabNumber >= 0 ) {
             draggedTabIndex = tabNumber;
             bounds = getUI().getTabBounds(DraggableTabbedPane.this, tabNumber);
             
@@ -105,9 +115,9 @@ public class DraggableTabbedPane extends JTabbedPane {
           int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);
           if(tabNumber >= 0)
         	  insertIt(e);
-
-
         }
+        
+        if(draggingPlus) draggingPlus = false;
 
         dragging = false;
         tabImage = null;
@@ -118,7 +128,7 @@ public class DraggableTabbedPane extends JTabbedPane {
   private int insertIt(MouseEvent e){
       int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);
 
-      if(tabNumber >= 0 && tabNumber != getTabCount()-1 && draggedTabIndex != getTabCount()-1) {
+      if(tabNumber >= 0 && tabNumber != getTabCount()-1 && draggedTabIndex != getTabCount()-1  && !draggingPlus) {
         Component comp = getComponentAt(draggedTabIndex);
   	  	Component buttonTabComp = getTabComponentAt(draggedTabIndex);
         String title = getTitleAt(draggedTabIndex);
@@ -146,4 +156,76 @@ public class DraggableTabbedPane extends JTabbedPane {
       g.drawImage(tabImage, currentMouseLocation.x, currentMouseLocation.y, this);
     }
   }
+  
+  public void openTab(String command){
+		Map<String, Integer> openTabs = new HashMap<String, Integer>();
+		
+		int openTabsCount = getTabCount();
+		
+		for(int i =0; i < openTabsCount; i++)
+			openTabs.put(getTitleAt(i),i);
+		
+		if(command.equals("open_layer3_r")){
+			//Prüfen ob Tab bereits geöffnet ist
+			if(openTabs.containsKey(" L3 Receiver "))
+				//Wenn ja holen wir uns die ID und focusieren(öffnen) ihn
+				setSelectedIndex(openTabs.get(" L3 Receiver "));
+			else{
+				insertTab(" L3 Receiver ", null, frame.getPanel_rec_lay3(), null, openTabsCount-1);
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6receiver.png"));
+				setSelectedIndex(openTabsCount-1);
+			}
+			frame.getMi_open_l3r().setSelected(true);
+		}else if(command.equals("open_layer3_s")){
+			if(openTabs.containsKey(" L3 Sender "))
+				setSelectedIndex(openTabs.get(" L3 Sender "));
+			else{
+				insertTab(" L3 Sender ", null, frame.getPanel_sen_lay3(), null, openTabsCount-1);
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6sender.png"));
+				setSelectedIndex(openTabsCount-1);
+			}
+			frame.getMi_open_l3s().setSelected(true);
+		}else if(command.equals("open_layer2_s")){
+			if(openTabs.containsKey(" L2 Sender "))
+				setSelectedIndex(openTabs.get(" L2 Sender "));
+			else{
+				insertTab(" L2 Sender ", null, frame.getPanel_sen_lay2(), null, openTabsCount-1);
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4sender.png"));
+				setSelectedIndex(openTabsCount-1);
+			}
+			frame.getMi_open_l2s().setSelected(true);
+		}else if(command.equals("open_layer2_r")){
+			if(openTabs.containsKey(" L2 Receiver "))
+				setSelectedIndex(openTabs.get(" L2 Receiver "));
+			else{
+				insertTab(" L2 Receiver ", null, frame.getPanel_sen_lay2(), null, openTabsCount-1);
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+				setSelectedIndex(openTabsCount-1);
+			}
+			frame.getMi_open_l2r().setSelected(true);
+		}else if(command.equals("open_about")){
+			if(openTabs.containsKey(" About "))
+				setSelectedIndex(openTabs.get(" About "));
+			else{
+				insertTab(" About ", null, frame.getPanel_about(), null, openTabsCount-1);
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/about.png"));
+				setSelectedIndex(openTabsCount-1);
+			}
+			frame.getMi_open_about().setSelected(true);
+		}  
+  }
+  
+  public void closeTab(String command){
+	  if(command.equals(" L3 Receiver ")){
+			frame.getMi_open_l3r().setSelected(false);
+	  }else if(command.equals(" L3 Sender ")){
+			frame.getMi_open_l3s().setSelected(false);
+	  }else if(command.equals(" L2 Receiver ")){
+			frame.getMi_open_l2r().setSelected(false);
+	  }else if(command.equals(" L2 Sender ")){
+			frame.getMi_open_l2s().setSelected(false);
+	  }else if(command.equals(" About "))
+		  	frame.getMi_open_about().setSelected(false);
+  }
+
 }

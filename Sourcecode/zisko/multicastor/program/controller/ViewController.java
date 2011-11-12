@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
@@ -140,7 +141,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==f.getMi_saveconfig()){
+		//V1.5: Wenn "Views" ausgewählt werden
+		if(e.getActionCommand().startsWith("open_layer") || e.getActionCommand().equals("open_about")){
+			f.getTabpane().openTab(e.getActionCommand());
+		}
+		
+		//V1.5: Help TODO 
+		else if(e.getSource()==f.getMi_help()){
+			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");
+		}
+		
+		//V1.5: Language TODO
+		else if(e.getSource()==f.getMi_language()){
+			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");			
+		}else if(e.getSource()==f.getMi_saveconfig()){
 			//System.out.println("Saving!");
 			f.getFc_save().toggle();
 		}

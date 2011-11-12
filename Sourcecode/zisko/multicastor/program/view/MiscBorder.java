@@ -29,9 +29,9 @@ public class MiscBorder extends TitledBorder {
 	 *
 	 */
 	public enum BorderTitle{
-		IPv4GROUP, IPv4SOURCE, IPv6GROUP, IPv6SOURCE, PORT, RATE, LENGTH, TTL 
+		IPv4GROUP, IPv4SOURCE, IPv6GROUP, IPv6SOURCE, PORT, RATE, LENGTH, TTL, L3Group, L3Source
 	}
-	private static String[] ipv4Names = {"IP Group Address","IP Network Interface","UDP Port","Packet Rate", "Packet Length", "Time to Live", "IP Group Address","IP Network Interface" };
+	private static String[] ipv4Names = {"IP Group Address","IP Network Interface","UDP Port","Packet Rate", "Packet Length", "Time to Live", "IP Group Address","IP Network Interface", "Mac Group Adress", "Network Interface"};
 	private static Vector<TitledBorder> b_neutral = new Vector<TitledBorder>();
 	private static Vector<TitledBorder> b_true = new Vector<TitledBorder>();
 	private static Vector<TitledBorder> b_false = new Vector<TitledBorder>();
@@ -93,6 +93,8 @@ public class MiscBorder extends TitledBorder {
 					case TTL: ret = b_neutral.get(5);  break;
 					case IPv6GROUP: ret = b_neutral.get(6); break;
 					case IPv6SOURCE: ret = b_neutral.get(7); break;
+					case L3Group: ret = b_neutral.get(8); break;
+					case L3Source: ret = b_neutral.get(9); break;
 				}
 				break;
 			case TRUE:
@@ -105,7 +107,9 @@ public class MiscBorder extends TitledBorder {
 					case TTL: ret = b_true.get(5);  break;
 					case IPv6GROUP: ret = b_true.get(6); break;
 					case IPv6SOURCE: ret = b_true.get(7); break;
-			}
+					case L3Group: ret = b_true.get(8); break;
+					case L3Source: ret = b_true.get(9); break;
+				}
 			break;
 			case FALSE:
 				switch(title){
@@ -117,6 +121,8 @@ public class MiscBorder extends TitledBorder {
 					case TTL: ret = b_false.get(5);  break;
 					case IPv6GROUP: ret = b_false.get(6); break;
 					case IPv6SOURCE: ret = b_false.get(7); break;
+					case L3Group: ret = b_false.get(8); break;
+					case L3Source: ret = b_false.get(9); break;
 			}
 		}
 		return ret;

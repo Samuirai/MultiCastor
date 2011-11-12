@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.basic.BasicButtonUI;
@@ -27,17 +28,17 @@ import javax.swing.plaf.basic.BasicButtonUI;
  * Tabs (Titeln) benutzt wird. 
  * 
  * Links steht dabei jeweils ein Icon
- * in der Mitte der Titel und rechts ein schließen Button.
+ * in der Mitte der Titel und rechts ein Schließen Button.
  * 
  * @author Filip Haase
- * @version 1.0
+ * @version 1.5
  */
 @SuppressWarnings("serial")
 public class ButtonTabComponent extends JPanel{
 
-	private final JTabbedPane pane;
+	private final DraggableTabbedPane pane;
 	
-	public ButtonTabComponent(final JTabbedPane pPane, String path){
+	public ButtonTabComponent(final DraggableTabbedPane pPane, String path){
 		// Set the Layout(that Label is left and Button right)
 		super(new FlowLayout(FlowLayout.LEFT,0,0));
 		// Set the Pane(remember it's final, we need to do this here)
@@ -93,7 +94,13 @@ public class ButtonTabComponent extends JPanel{
         public void actionPerformed(ActionEvent e) {
             int i = pane.indexOfTabComponent(ButtonTabComponent.this);
             if (i != -1) {
-                pane.remove(i);
+            	/*int n = JOptionPane.showConfirmDialog(null, "In diesem tab befinden sich aktive Sender/Reciever. \n" +
+            			"Beim schleißen werden diese deaktiviert. Möchten Sie fortfahren? ");
+            	if(n == JOptionPane.YES_OPTION){*/
+            		//Hier noch Pausieren lassen
+            		pane.closeTab(pane.getTitleAt(i));
+            		pane.remove(i);
+            	//}
             }
         }
  
