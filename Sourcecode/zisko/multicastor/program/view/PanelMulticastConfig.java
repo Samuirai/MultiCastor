@@ -65,14 +65,14 @@ public class PanelMulticastConfig extends JPanel {
 		tf_groupIPaddress.setToolTipText("Enter MultiCast group IP address here!");
 		add(bt_enter);
 		add(pan_groupIPaddress);
-		if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
 			add(pan_udp_port);
 		add(tb_active);
 		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugef�gt
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
-			if(typ == Typ.L2_SENDER)
+			if(typ == Typ.L3_SENDER)
 				add(pan_ttl);
 		}
 	}
@@ -197,7 +197,7 @@ public class PanelMulticastConfig extends JPanel {
 			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		//V1.5: Added new Tabs
-		else if (typ == Typ.L2_SENDER || typ==Typ.L2_RECEIVER){
+		else if (typ == Typ.L3_SENDER || typ==Typ.L3_RECEIVER){
 			/*
 			 * TODO [JT] neuen Typ anpassen
 			 * Hier gehoert kein IPv4 hin
@@ -206,13 +206,13 @@ public class PanelMulticastConfig extends JPanel {
 			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		//V1.5: Added new Tabs
-		else if (typ == Typ.L3_SENDER || typ==Typ.L3_RECEIVER){
+		else if (typ == Typ.L2_SENDER || typ==Typ.L2_RECEIVER){
 			/*
 			 * TODO [JT] neuen Typ anpassen
 			 * Hier gehoert kein IPv4 hin
 			 */
-			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3Group, BorderType.NEUTRAL));
-			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3Source, BorderType.NEUTRAL));
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2Group, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2Source, BorderType.NEUTRAL));
 		}
 		else{ //Layer2
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));

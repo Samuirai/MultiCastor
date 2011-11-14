@@ -14,14 +14,14 @@ import zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION;
 
 /**
  * Zeichnet einen Grafen auf einer Flache mit einer
- * Höhe von 100 Pixeln und einer variablen Breite.
+ * Hï¿½he von 100 Pixeln und einer variablen Breite.
  * Der Graph selber ist 66 Pixel hoch (fest) und ebenfalls variabel breit (wird bei resize gestaucht).
- * Mittels der Update-Funktion kann ein Funktionswert hinzugefügt werden.
- * Es werden die letzten 62 Werte (Die 60 Sekunden der Skala + Ursprung + einen Wert außerhalb der Skala
- * (übergang zum rechten Rand)) in einem Array gespeichert.
- * Sind 62 Werte erreicht, werden die ersten Werte wieder überschrieben usw.
+ * Mittels der Update-Funktion kann ein Funktionswert hinzugefï¿½gt werden.
+ * Es werden die letzten 62 Werte (Die 60 Sekunden der Skala + Ursprung + einen Wert auï¿½erhalb der Skala
+ * (ï¿½bergang zum rechten Rand)) in einem Array gespeichert.
+ * Sind 62 Werte erreicht, werden die ersten Werte wieder ï¿½berschrieben usw.
  * 
- * @author Jannik Müller
+ * @author Jannik Mï¿½ller
  */
 
 @SuppressWarnings("serial")
@@ -40,16 +40,16 @@ public class PanelGraph extends JPanel {
   private int 		actualValue		= 0;
   Font 				graphFont 		= new Font("SansSerif", Font.PLAIN, 9);
   
-  //Variablen für das zeichnen der Funktionswerte
+  //Variablen fï¿½r das zeichnen der Funktionswerte
   private int		yCoord1 		= 0,
 		  			yCoord2 		= 0,
 					ursprungX		= 0,
 					ursprungY		= 0;
-  private double	pixProX			= 0.0,	// Pixel, die pro X-/Y-Einheit zur verfügung stehen
+  private double	pixProX			= 0.0,	// Pixel, die pro X-/Y-Einheit zur verfï¿½gung stehen
 					pixProY			= 0.0,
-					x				= 0.0;	// Zwischenspeicher für x-Werte an mehreren Stellen
+					x				= 0.0;	// Zwischenspeicher fï¿½r x-Werte an mehreren Stellen
   
-  //Variablen für "double Buffering"
+  //Variablen fï¿½r "double Buffering"
   private final GraphicsConfiguration myGraphicConf = GraphicsEnvironment
 	.getLocalGraphicsEnvironment()
 	.getDefaultScreenDevice()
@@ -62,10 +62,10 @@ public class PanelGraph extends JPanel {
   
   /**
    * Einziger Konstruktor der Klasse
-   * @param maxY der höchst mögliche Y-Wert (int)
+   * @param maxY der hï¿½chst mï¿½gliche Y-Wert (int)
    * @param labelOfX Beschriftung der X-Achse (String)
    * @param labelOfY Beschriftung der Y-Achse (String)
-   * @param staticScale Bestimmt ob der höchstmögliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)
+   * @param staticScale Bestimmt ob der hï¿½chstmï¿½gliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)
    */
   public PanelGraph(int maxY, String labelOfX, String labelOfY, boolean staticScale){
     //Panel Konfiguration
@@ -82,7 +82,7 @@ public class PanelGraph extends JPanel {
   }
   
   /**
-   * Gibt die aktuelle und damit bevorzugte Größe des Panels zurück
+   * Gibt die aktuelle und damit bevorzugte Grï¿½ï¿½e des Panels zurï¿½ck
    * @return eine Dimension
    */
   public Dimension getPreferredSize(){
@@ -104,11 +104,11 @@ public class PanelGraph extends JPanel {
    * Dabei wird "x" inkrementiert.
    * <p/>
    * staticScale true:
-   * <br>   - Funktionswerte > maxY (maximaler Y-Wert, bei Konstruktoraufruf anzugeben) werden maxY groß
+   * <br>   - Funktionswerte > maxY (maximaler Y-Wert, bei Konstruktoraufruf anzugeben) werden maxY groï¿½
    * <br>   - Funktionswerte < 0 werden 0
    * <p/>
    * staticScale false: Skala wird ggf. angepasst.
-   * Dazu wird ein counter benutzt, um zu überprüfen, ob die Werte dauerhaft
+   * Dazu wird ein counter benutzt, um zu ï¿½berprï¿½fen, ob die Werte dauerhaft
    * klein bleiben. Ist der Count bei einem gewissen Wert,
    * wird die Skala wieder angepasst. MaxY sinkt nicht unter 10.
    * <br> - value > maximaler Y-Wert: max. Y-Wert wird gleich value
@@ -118,7 +118,7 @@ public class PanelGraph extends JPanel {
    * @param repaint bestimmt, ob ein Repaint des Panels erfolgt
    */
   public void updateGraph(int value, boolean repaint){
-	//Pointer erhöhen oder bei Erreichen vom letzten Wert "Umbruch" auf 0
+	//Pointer erhï¿½hen oder bei Erreichen vom letzten Wert "Umbruch" auf 0
 	if((dataPointer+1)<numberOfValues)	dataPointer++;
 	else								dataPointer = 0;
 	
@@ -126,11 +126,11 @@ public class PanelGraph extends JPanel {
 	if(value<0)		value = 0;
 	//Ist der maxY-Wert fest?
 	if(staticScale){
-		//Prüfen ob Werte im "Rahmen" liegen
+		//Prï¿½fen ob Werte im "Rahmen" liegen
 		if(value>maxY)	value = maxY;
 	}
 	else{
-		//Skala soll angepasst werden, wenn sich die Y-Werte verändern
+		//Skala soll angepasst werden, wenn sich die Y-Werte verï¿½ndern
 		if(value > maxY){
 									maxY 		  = value;
 									dynScaleCount = 0;
@@ -140,7 +140,7 @@ public class PanelGraph extends JPanel {
 		
 		if(dynScaleCount>10){
 			dynScaleCount-=5;
-			//höchsten Y-Wert herausfinden und ihn als (3/4) maxY verwenden. Minimaler Y-Wert: 10
+			//hï¿½chsten Y-Wert herausfinden und ihn als (3/4) maxY verwenden. Minimaler Y-Wert: 10
 			maxY = 10;
 			for(int i=0;i<data.length;i++)	if(maxY<(data[i]*4/3))	maxY = (data[i]*4/3);
 		}
@@ -151,7 +151,7 @@ public class PanelGraph extends JPanel {
   }
   
   /**
-   * Macht dasselbe wie moveSnake, aber macht zusätzlich ein viewUpdate
+   * Macht dasselbe wie moveSnake, aber macht zusï¿½tzlich ein viewUpdate
    * @param d
    */
   public void moveSnakeAndUpdateView(SNAKE_DIRECTION d){
@@ -162,7 +162,7 @@ public class PanelGraph extends JPanel {
   }
   
   /**
-   * Getter für den maximalen Y-Wert der Skala
+   * Getter fï¿½r den maximalen Y-Wert der Skala
    * @return den maximalen Y-Wert
    */
   public int getMaxY(){
@@ -170,7 +170,7 @@ public class PanelGraph extends JPanel {
   }
   
   /**
-   * Setter für den maximalen Y-Wert der Skala
+   * Setter fï¿½r den maximalen Y-Wert der Skala
    * @param maxY der neue maximale Y-Wert
    */
   public void setMaxY(int maxY){
@@ -179,7 +179,7 @@ public class PanelGraph extends JPanel {
 
 
 /**
- *  "Wrapper"-Methode für das eigentliche painten des Graphen
+ *  "Wrapper"-Methode fï¿½r das eigentliche painten des Graphen
  *  (findet in paintContent(Graphics g) statt).
  *  hier wird der Double-Buffer realisiert
  */
@@ -193,13 +193,13 @@ protected void paintComponent(Graphics g)
   
 /**
  *  Wird nur von der paintComponent(Graphics g) Methode verwendet.
- *  Diese Methode ist für das eigentliche Zeichnen des Graphen zuständig.
+ *  Diese Methode ist fï¿½r das eigentliche Zeichnen des Graphen zustï¿½ndig.
  */
 private void paintContent(Graphics g){
     
     pixProY			= 60.0 / (double) maxY;
     
-    //Variables, da möglicherweise ein resize stattgefunden hat
+    //Variables, da mï¿½glicherweise ein resize stattgefunden hat
     //wird die Breite jedes mal neu gesetzt
     int x2 		= panelSize.width-5,	//X-Wert der letzten Y-Achse des Rasters (bei 60)
     	x3 		= panelSize.width;		//X-Wert des Rands des Graphen (und des Panels)
@@ -208,7 +208,7 @@ private void paintContent(Graphics g){
     						  			//(fest, Stauchung erst ab hier)
     ursprungY	= 75;		  			//Y-Wert des Ursprungs ist bei 75 Pixeln
     
-    //Setzen der Schrift-Einstellungen für den Graphen 
+    //Setzen der Schrift-Einstellungen fï¿½r den Graphen 
     g.setFont(graphFont);
     
     //Farbe der Graphen-Linien
@@ -222,7 +222,7 @@ private void paintContent(Graphics g){
     
     // Y-Achsen Zeichnen (Raster)
     // Wegen ungeraden Werten die in der Summe zu sichtbaren
-    // Ungenauigkeiten führen, hier an wichtigen Stellen so lange es geht double-Werte
+    // Ungenauigkeiten fï¿½hren, hier an wichtigen Stellen so lange es geht double-Werte
     int 	time = 0;		//Zeitwert, an X-Achse aufgetragen
     		x	 = 0.0;
     for(int i=6;i>=0;i--){
@@ -250,8 +250,8 @@ private void paintContent(Graphics g){
     //Zeigt den aktuellen Wert in der rechten oberen Ecke, wenn der Panel nicht zu klein ist
     //oder im Datenarray an der Stelle dataPointer nicht noch der Initialisierungswert steht
     //(In dem Fall wird 0 als aktuellen Wert gesetzt)
-    //Zu klein wäre das Panel bei
-    //der ungefähren lblY-String - Breite + Platzhalter und dem aktuellen Wert
+    //Zu klein wï¿½re das Panel bei
+    //der ungefï¿½hren lblY-String - Breite + Platzhalter und dem aktuellen Wert
     if(data[dataPointer]!=Integer.MIN_VALUE)	actualValue = data[dataPointer];
     if(lblY.length()*5+35<x2)					g.drawString("Aktuell: " + actualValue, (x2-70), 9);
     
@@ -262,18 +262,18 @@ private void paintContent(Graphics g){
  * Da Werte wie der maximale Y-Wert und die Anzahl der Pixel in X-Richtung variabel sind
  * und geteilte Werte wie die Anzahl der Pixel pro Y-Einheit / pro Sekunde
  * damit nicht vorhersehbar sind, sind diese sehr ungerade.
- * Um die Ungenauigkeit für die einzelnen Koordinaten so klein wie möglich zu halten, wird
- * möglichst lange mit Gleitkommazahlen gerechnet.
+ * Um die Ungenauigkeit fï¿½r die einzelnen Koordinaten so klein wie mï¿½glich zu halten, wird
+ * mï¿½glichst lange mit Gleitkommazahlen gerechnet.
  */
     
     // Steht der dataPointer noch auf -1 (Initialwert), wurden noch keine Daten empfangen
-    // und der gesamte Codeblock zum Funktion zeichnen übersprungen
+    // und der gesamte Codeblock zum Funktion zeichnen ï¿½bersprungen
     if(dataPointer!=-1){
 	    // Pixel pro X-Wert (Sekunde)
 	    pixProX 	=	(double)gWidth/60.0;
 	    g.setColor(Color.GREEN);
 	    
-	    // 1. Hälfte der Werte zeichnen (Werte an den Stellen dataPointer bis 0)
+	    // 1. Hï¿½lfte der Werte zeichnen (Werte an den Stellen dataPointer bis 0)
 	    x 	= ursprungX;
 	    for(int i=dataPointer;i>0;i--,	x+=pixProX){
 	    	//Wenn Wert ungleich Initialisierungswert
@@ -302,7 +302,7 @@ private void paintContent(Graphics g){
 						(int)(x+pixProX), 	(ursprungY - yCoord2));
 	    }
 	    
-	    //2. Hälfte der Werte zeichnen (Werte an den Stellen numberOfValues bis dataPointer)
+	    //2. Hï¿½lfte der Werte zeichnen (Werte an den Stellen numberOfValues bis dataPointer)
 	    x = ursprungX + ((dataPointer+1)*pixProX);
 	    for(int i=(numberOfValues-1);i>(dataPointer+1);i--,	 x+=pixProX){
 	    	//Wenn Wert ungleich Initialisierungswert

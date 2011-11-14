@@ -984,6 +984,16 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					getPanTabbed(getSelectedTab()).getPan_recGraph().resize(new Dimension(getFrame().getSize().width-262,100));
 				}
 			}
+			else if(getSelectedTab() == Typ.L2_RECEIVER || getSelectedTab() == Typ.L3_RECEIVER){
+				if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
+					getPanTabbed(getSelectedTab()).getPan_recGraph().resize(new Dimension(getFrame().getSize().width-262,100));
+				}
+			}
+			else if(getSelectedTab() == Typ.L2_SENDER || getSelectedTab() == Typ.L3_SENDER){
+				if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
+					getPanTabbed(getSelectedTab()).getPan_graph().resize(new Dimension(getFrame().getSize().width-262,100));
+				}
+			}
 	}
 	/**
 	 * Hilfsfunktion welche das Frame zur�ckgibt in welchem das MultiCastor Tool gezeichnet wird.
@@ -1066,6 +1076,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case RECEIVER_V4: ret=f.getPanel_rec_ipv4(); break;
 			case SENDER_V6: ret=f.getPanel_sen_ipv6(); break;
 			case RECEIVER_V6: ret=f.getPanel_rec_ipv6(); break;
+			case L2_SENDER: ret=f.getPanel_sen_lay2(); break;
+			case L2_RECEIVER: ret=f.getPanel_rec_lay2(); break;
+			case L3_SENDER: ret=f.getPanel_sen_lay3(); break;
+			case L3_RECEIVER: ret=f.getPanel_rec_lay3(); break;
 		}
 		return ret;
 	}
@@ -1090,6 +1104,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(title.equals(" Sender IPv4 ")) typ = Typ.SENDER_V4;
 		else if(title.equals(" Receiver IPv6 ")) typ = Typ.RECEIVER_V6;
 		else if(title.equals(" Sender IPv6 ")) typ = Typ.SENDER_V6;
+		else if(title.equals(" L3 Sender ")) typ = Typ.L3_SENDER;
+		else if(title.equals(" L3 Receiver ")) typ = Typ.L3_RECEIVER;
+		else if(title.equals(" L2 Sender ")) typ = Typ.L2_SENDER;
+		else if(title.equals(" L2 Receiver ")) typ = Typ.L2_RECEIVER;
 		else typ = Typ.UNDEFINED;
 
 		return typ;
@@ -1113,6 +1131,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case RECEIVER_V4: tablepart=f.getPanel_rec_ipv4().getTable(); break;
 			case SENDER_V6: tablepart=f.getPanel_sen_ipv6().getTable(); break;
 			case RECEIVER_V6: tablepart=f.getPanel_rec_ipv6().getTable(); break;
+			case L2_RECEIVER: tablepart=f.getPanel_rec_lay2().getTable(); break;
+			case L2_SENDER: tablepart=f.getPanel_sen_lay2().getTable(); break;
+			case L3_RECEIVER: tablepart=f.getPanel_rec_lay3().getTable(); break;
+			case L3_SENDER: tablepart=f.getPanel_sen_lay3().getTable(); break;
 		}
 		return tablepart;
 	}

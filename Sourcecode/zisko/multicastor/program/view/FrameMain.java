@@ -345,8 +345,8 @@ public class FrameMain extends JFrame {
 		tabpane.addMouseListener(ctrl);
 		// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
 		int i=0;
-		//tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+		tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
+		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 		//tabpane.addTab(" Sender IPv4 ", panel_sen_ipv4);
 		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
 		//tabpane.addTab(" Receiver IPv6 ", panel_rec_ipv6);
