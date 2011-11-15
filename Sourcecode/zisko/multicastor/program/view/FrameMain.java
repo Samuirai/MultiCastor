@@ -201,6 +201,7 @@ public class FrameMain extends JFrame {
 		bg_scale = new ButtonGroup();
 		mi_about = new JMenuItem("About",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/info.png")));
 		mi_about.setFont(MiscFont.getFont(0,14));
+		mi_about.setActionCommand("open_about");
 		mi_about.addActionListener(ctrl);
 		rb_beginner = new JRadioButtonMenuItem("Beginner");
 		rb_beginner.setFont(MiscFont.getFont(0,14));
