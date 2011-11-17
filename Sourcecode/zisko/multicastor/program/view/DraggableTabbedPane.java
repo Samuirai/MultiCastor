@@ -198,7 +198,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 			if(openTabs.containsKey(" L2 Receiver "))
 				setSelectedIndex(openTabs.get(" L2 Receiver "));
 			else{
-				insertTab(" L2 Receiver ", null, frame.getPanel_sen_lay2(), null, openTabsCount-1);
+				insertTab(" L2 Receiver ", null, frame.getPanel_rec_lay2(), null, openTabsCount-1);
 				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 				setSelectedIndex(openTabsCount-1);
 			}
