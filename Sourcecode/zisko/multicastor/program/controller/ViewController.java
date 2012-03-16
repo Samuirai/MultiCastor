@@ -140,7 +140,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * die Komponente zu identifizieren bei welcher die Interaktion stattgefunden hat.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		
+
+		//V1.5: Wenn Draggable Tabbed Pane entfernt wurde
+		if(f.isPaneDel())
+			f.openPane();
 		//V1.5: Wenn "Views" ausgewählt werden
 		if(e.getActionCommand().startsWith("open_layer") || e.getActionCommand().equals("open_about")){
 			f.getTabpane().openTab(e.getActionCommand());

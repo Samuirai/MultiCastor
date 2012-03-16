@@ -100,6 +100,7 @@ public class ButtonTabComponent extends JPanel{
             		//Hier noch Pausieren lassen
             		pane.closeTab(pane.getTitleAt(i));
             		pane.remove(i);
+            		pane.lookIfWeCan();
             	//}
             }
         }
