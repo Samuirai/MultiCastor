@@ -227,5 +227,12 @@ public class DraggableTabbedPane extends JTabbedPane {
 	  }else if(command.equals(" About "))
 		  	frame.getMi_open_about().setSelected(false);
   }
+  
+  //TODO testen & vlt. entfernen
+  public void lookIfWeCan(){
+	  if(getTabCount() == 2){
+		  frame.removePane();
+	  }
+  }
 
 }
