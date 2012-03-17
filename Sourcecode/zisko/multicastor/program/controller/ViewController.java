@@ -1064,6 +1064,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case RECEIVER_V4: statusbarpart=f.getPanel_rec_ipv4().getPan_status(); break;
 			case SENDER_V6: statusbarpart=f.getPanel_sen_ipv6().getPan_status(); break;
 			case RECEIVER_V6: statusbarpart=f.getPanel_rec_ipv6().getPan_status(); break;
+			case L2_SENDER: statusbarpart=f.getPanel_sen_lay2().getPan_status(); break;
+			case L2_RECEIVER: statusbarpart=f.getPanel_rec_lay2().getPan_status(); break;
+			case L3_SENDER: statusbarpart=f.getPanel_sen_lay3().getPan_status(); break;
+			case L3_RECEIVER: statusbarpart=f.getPanel_rec_lay3().getPan_status(); break;
 		}
 		return statusbarpart;
 	}
