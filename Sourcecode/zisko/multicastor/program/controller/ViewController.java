@@ -1034,6 +1034,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case RECEIVER_V4: configpart=f.getPanel_rec_ipv4().getPan_config(); break;
 			case SENDER_V6: configpart=f.getPanel_sen_ipv6().getPan_config(); break;
 			case RECEIVER_V6: configpart=f.getPanel_rec_ipv6().getPan_config(); break;
+			case L2_SENDER: configpart=f.getPanel_sen_lay2().getPan_config(); break;
+			case L2_RECEIVER: configpart=f.getPanel_rec_lay2().getPan_config(); break;
+			case L3_SENDER: configpart=f.getPanel_sen_lay3().getPan_config(); break;
+			case L3_RECEIVER: configpart=f.getPanel_rec_lay3().getPan_config(); break;
 		}
 		return configpart;
 	}
@@ -1049,6 +1053,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case RECEIVER_V4: controlpart=f.getPanel_rec_ipv4().getPan_control(); break;
 			case SENDER_V6: controlpart=f.getPanel_sen_ipv6().getPan_control(); break;
 			case RECEIVER_V6: controlpart=f.getPanel_rec_ipv6().getPan_control(); break;
+			case L2_SENDER: controlpart=f.getPanel_sen_lay2().getPan_control(); break;
+			case L2_RECEIVER: controlpart=f.getPanel_rec_lay2().getPan_control(); break;
+			case L3_SENDER: controlpart=f.getPanel_sen_lay3().getPan_control(); break;
+			case L3_RECEIVER: controlpart=f.getPanel_rec_lay3().getPan_control(); break;
 		}
 		return controlpart;
 	}
@@ -2090,7 +2098,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(getPanTabbed(typ).getTab_console().getSelectedIndex()==0){
 			if(getPanTabbed(typ).getPan_graph().isVisible() && getPanTabbed(typ).getTab_console().isVisible()){
 				//System.out.println("panel graph visible");
-				if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+				if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 					showupdate = 	!getPanConfig(typ).getCb_sourceIPaddress().isPopupVisible() &&
 									!PopUpMenu.isPopUpVisible();
 				}
@@ -2103,7 +2111,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 		//check which tab is selected and update graph for specific program part
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			//System.out.println("showupdate "+showupdate);
 			getPanTabbed(typ).getPan_graph().updateGraph(mc.getPPSSender(typ), showupdate);
 		}
