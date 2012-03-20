@@ -187,6 +187,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 		
+		/* v1.5 Neue Actionlistener fuer Layer3 */
+		else if(e.getSource() == getPanConfig(Typ.L3_SENDER).getBt_enter()){
+			pressBTenter(Typ.L3_SENDER);
+		} else if(e.getSource() == getPanConfig(Typ.L3_RECEIVER).getBt_enter()){
+			pressBTenter(Typ.L3_RECEIVER);
+		}
+		
+		//--------------------
+		
 		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getTb_active()){
 			toggleBTactive(Typ.SENDER_V4);
 		}
@@ -389,7 +398,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
          }
     }
 	 /**
-	  * Funktion welche eni neues Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.
+	  * Funktion welche ein neues Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.
 	  * @param mcd neu erstelltes Multicast DatenObjekt welches verarbeitet werden soll.
 	  */
 	public void addMC(MulticastData mcd){
@@ -421,6 +430,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Ge�nderters Multicast Datenobjekt.
 	 */
 	private MulticastData changeMCData(MulticastData mcd, MulticastData.Typ typ){
+		// TODO [MH] hier soll die das neue MC Object gebaut werden mit L3 allgemein 
 		switch(typ){
 			case SENDER_V4:
 				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
@@ -504,64 +514,93 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void changeNetworkInterface(Typ typ) {
 		PanelMulticastConfig configpart = getPanConfig(typ);
 		int selectedIndex = configpart.getTf_sourceIPaddress().getSelectedIndex();
-		if(selectedIndex != 0){
-			if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
+		
+		if(selectedIndex != 0) {
+			if(typ == Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
 				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
-				if(typ==Typ.SENDER_V4){
+				if(typ==Typ.L3_SENDER){
 					input[0][1]=true;
-				}
-				else{
+				} else {
 					input[1][1]=true;
 				}
 			}
-			else{
-				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.TRUE));
-				if(typ==Typ.SENDER_V6){
-					input[2][1]=true;
-				}
-				else{
-					input[3][1]=true;
-				}
-			}
-		}
-		else if(getSelectedRows(typ).length > 1 && configpart.getCb_sourceIPaddress().getItemAt(0).equals("...")){
-			if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
+		} else if(getSelectedRows(typ).length > 1 && configpart.getCb_sourceIPaddress().getItemAt(0).equals("...")){
+			if(typ==Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
 				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
-				if(typ==Typ.SENDER_V4){
+				if(typ==Typ.L3_SENDER){
 					input[0][1]=true;
-				}
-				else{
+				} else {
 					input[1][1]=true;
 				}
 			}
-			else{
-				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.TRUE));
-				if(typ==Typ.SENDER_V6){
-					input[2][1]=true;
-				}
-				else{
-					input[3][1]=true;
-				}
-			}
-		}
-		else{
+		} else {
 			switch(typ){
-				case SENDER_V4: input[0][1]=false;  break;
-				case RECEIVER_V4: input[1][1]=false;  break;
-				case SENDER_V6: input[2][1]=false;  break;
-				case RECEIVER_V6: input[3][1]=false;  break;
+				case L3_SENDER: input[0][1] = false;  break;
+				case L3_RECEIVER: input[1][1] = false;  break;
 			}
-			if(typ == Typ.SENDER_V6){
-				configpart.getPan_sourceIPaddress()
-				.setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.NEUTRAL));
-			}
-			else{
-				configpart.getPan_sourceIPaddress()
-				.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
-			}
-			
+			configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		checkInput(typ);
+		
+		// TODO [MH] spaeter entfernen
+//		if(selectedIndex != 0){
+//			if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
+//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
+//				if(typ==Typ.SENDER_V4){
+//					input[0][1]=true;
+//				}
+//				else{
+//					input[1][1]=true;
+//				}
+//			}
+//			else{
+//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.TRUE));
+//				if(typ==Typ.SENDER_V6){
+//					input[2][1]=true;
+//				}
+//				else{
+//					input[3][1]=true;
+//				}
+//			}
+//		}
+//		else if(getSelectedRows(typ).length > 1 && configpart.getCb_sourceIPaddress().getItemAt(0).equals("...")){
+//			if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
+//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
+//				if(typ==Typ.SENDER_V4){
+//					input[0][1]=true;
+//				}
+//				else{
+//					input[1][1]=true;
+//				}
+//			}
+//			else{
+//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.TRUE));
+//				if(typ==Typ.SENDER_V6){
+//					input[2][1]=true;
+//				}
+//				else{
+//					input[3][1]=true;
+//				}
+//			}
+//		}
+//		else{
+//			switch(typ){
+//				case SENDER_V4: input[0][1]=false;  break;
+//				case RECEIVER_V4: input[1][1]=false;  break;
+//				case SENDER_V6: input[2][1]=false;  break;
+//				case RECEIVER_V6: input[3][1]=false;  break;
+//			}
+//			if(typ == Typ.SENDER_V6){
+//				configpart.getPan_sourceIPaddress()
+//				.setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.NEUTRAL));
+//			}
+//			else{
+//				configpart.getPan_sourceIPaddress()
+//				.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
+//			}
+//			
+//		}
+//		checkInput(typ);
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn sich der Inhalt eines Textfelds im Konfigurations Panel �ndert.
@@ -814,8 +853,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				}	
 			}
 		}
-		//XXX
-		input[1][2] = true;
 //		if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
 //			if((InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText())!= null) 
 //			|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))){
@@ -866,6 +903,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //				.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));
 //			}			
 //		}
+		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
+			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+		}
 		checkInput(typ);
 	}
 	/**
@@ -874,35 +914,47 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private void docEventTFlength(Typ typ){
 		switch(typ){
-			case SENDER_V4:
-				if((InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
-				|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_packetlength().getText().equals("..."))){
-					getPanConfig(typ).getPan_packetlength()
-					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
+			case L3_SENDER:
+				// TODO [MH] Hier ist noch nicht klar, ob v4 oder v6 ausgewaehlt wurde, also ist beides gueltig und sollte 
+				// beim klick auf add nochmal verifiziert werden.
+				if(
+					(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0) ||
+					(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
+				) {
+					getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
 					input[0][5]=true;
-				}
-				else{
-					getPanConfig(typ).getPan_packetlength()
-					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
+				} else {
+					getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
 					input[0][5]=false;
 				}
-				break;
-			case SENDER_V6:
-				if((InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
-				|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_packetlength().getText().equals("..."))){
-					getPanConfig(typ).getPan_packetlength()
-					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
-					input[2][5]=true;
-				}
-				else{
-					getPanConfig(typ).getPan_packetlength()
-					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
-					input[2][5]=false;
-				}
+//			case SENDER_V4:
+//				if((InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
+//				|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_packetlength().getText().equals("..."))){
+//					getPanConfig(typ).getPan_packetlength()
+//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
+//					input[0][5]=true;
+//				}
+//				else{
+//					getPanConfig(typ).getPan_packetlength()
+//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
+//					input[0][5]=false;
+//				}
+//				break;
+//			case SENDER_V6:
+//				if((InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
+//				|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_packetlength().getText().equals("..."))){
+//					getPanConfig(typ).getPan_packetlength()
+//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
+//					input[2][5]=true;
+//				}
+//				else{
+//					getPanConfig(typ).getPan_packetlength()
+//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
+//					input[2][5]=false;
+//				}
 		}
 		if(getPanConfig(typ).getTf_udp_packetlength().getText().equalsIgnoreCase("")){					
-			getPanConfig(typ).getPan_packetlength()
-			.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.NEUTRAL));					
+			getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.NEUTRAL));					
 		}
 		checkInput(typ);
 	}
@@ -911,40 +963,29 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem das Port Feld ge�ndert wurde.
 	 */
 	private void docEventTFport(Typ typ){
-		if((InputValidator.checkPort(getPanConfig(typ).getTf_udp_port().getText()) > 0)
-		|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_port().getText().equals("..."))){
+		if(
+			(InputValidator.checkPort(getPanConfig(typ).getTf_udp_port().getText()) > 0) || 
+			(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_port().getText().equals("..."))
+		){
 			getPanConfig(typ).getPan_udp_port().setBorder(MiscBorder.getBorder(BorderTitle.PORT, BorderType.TRUE));
-			if(typ==Typ.SENDER_V4){
+			if(typ == Typ.L3_SENDER){
 				input[0][2]=true;		
 			}
-			else if(typ == Typ.RECEIVER_V4){
+			else if(typ == Typ.L3_RECEIVER){
 				input[1][2]=true;
 			}
-			else if(typ == Typ.SENDER_V6){
-				input[2][2]=true;
-			}
-			else if(typ == Typ.RECEIVER_V6){
-				input[3][2]=true;
-			}
-		}
-		else{
+		} else {
 			getPanConfig(typ).getPan_udp_port().setBorder(MiscBorder.getBorder(BorderTitle.PORT, BorderType.FALSE));
-			if(typ==Typ.SENDER_V4){
-				input[0][2]=false;		
+			if(typ == Typ.L3_SENDER){
+				input[0][2] = false;		
 			}
-			else if(typ == Typ.RECEIVER_V4){
-				input[1][2]=false;
-			}
-			else if(typ == Typ.SENDER_V6){
-				input[2][2]=false;
-			}
-			else if(typ == Typ.RECEIVER_V6){
-				input[3][2]=false;
+			else if(typ == Typ.L3_RECEIVER){
+				input[1][2] = false;
 			}
 		}
+		
 		if(getPanConfig(typ).getTf_udp_port().getText().equalsIgnoreCase("")){		
-			getPanConfig(typ).getPan_udp_port()
-			.setBorder(MiscBorder.getBorder(BorderTitle.PORT, BorderType.NEUTRAL));
+			getPanConfig(typ).getPan_udp_port().setBorder(MiscBorder.getBorder(BorderTitle.PORT, BorderType.NEUTRAL));
 		}		
 		checkInput(typ);
 	}
@@ -953,30 +994,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem das Packet Rate Feld ge�ndert wurde.
 	 */
 	private void docEventTFrate(Typ typ){
-		if((InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText())> 0)
-		|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_packetrate().getText().equals("..."))){
-			getPanConfig(typ).getPan_packetrate()
-			.setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.TRUE));
-			if(typ == Typ.SENDER_V4){
+		if(
+			(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText())> 0) || 
+			(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_packetrate().getText().equals("..."))
+		){
+			getPanConfig(typ).getPan_packetrate().setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.TRUE));
+			if(typ == Typ.L3_SENDER){
 				input[0][4]=true;
-			}
-			else if(typ == Typ.SENDER_V6){
-				input[2][4]=true;
 			}
 		}
 		else{
-			getPanConfig(typ).getPan_packetrate()
-			.setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.FALSE));
-			if(typ == Typ.SENDER_V4){
+			getPanConfig(typ).getPan_packetrate().setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.FALSE));
+			if(typ == Typ.L3_SENDER){
 				input[0][4]=false;
-			}
-			else if(typ == Typ.SENDER_V6){
-				input[2][4]=false;
 			}
 		}
 		if(getPanConfig(typ).getTf_packetrate().getText().equalsIgnoreCase("")){					
-			getPanConfig(typ).getPan_packetrate()
-			.setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.NEUTRAL));					
+			getPanConfig(typ).getPan_packetrate().setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.NEUTRAL));					
 		}
 		checkInput(typ);
 	}
@@ -985,30 +1019,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem das TTL Feld ge�ndert wurde.
 	 */
 	private void docEventTFttl(Typ typ){
-		if((InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText())> 0)
-		|| 	(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_ttl().getText().equals("..."))){
-			getPanConfig(typ).getPan_ttl()
-			.setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.TRUE));
-			if(typ == Typ.SENDER_V4){
+		if(
+			(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText())> 0) ||
+			(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_ttl().getText().equals("..."))
+		){
+			getPanConfig(typ).getPan_ttl().setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.TRUE));
+			if(typ == Typ.L3_SENDER){
 				input[0][3]=true;
-			}
-			else if(typ == Typ.SENDER_V6){
-				input[2][3]=true;
 			}
 		}
 		else{
-			getPanConfig(typ).getPan_ttl()
-			.setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.FALSE));
-			if(typ == Typ.SENDER_V4){
+			getPanConfig(typ).getPan_ttl().setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.FALSE));
+			if(typ == Typ.L3_SENDER){
 				input[0][3]=false;
-			}
-			else if(typ == Typ.SENDER_V6){
-				input[2][3]=false;
 			}
 		}
 		if(getPanConfig(typ).getTf_ttl().getText().equalsIgnoreCase("")){					
-			getPanConfig(typ).getPan_ttl()
-			.setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.NEUTRAL));					
+			getPanConfig(typ).getPan_ttl().setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.NEUTRAL));					
 		}
 		checkInput(typ);
 	}
@@ -1309,10 +1336,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn Inhalt in ein Feld des Configuration Panel eingetrgen wird.
 	 */
 	public void insertUpdate(DocumentEvent source) {
-		if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getDocument()){
+		if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getDocument()) {
 			docEventTFgrp(Typ.L3_SENDER);
 		} else if (source.getDocument() == getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().getDocument()) {
 			docEventTFgrp(Typ.L3_RECEIVER);
+		} else if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_udp_port().getDocument()) {
+			docEventTFport(Typ.L3_SENDER);
+		} else if(source.getDocument() == getPanConfig(Typ.L3_RECEIVER).getTf_udp_port().getDocument()) {
+			docEventTFport(Typ.L3_RECEIVER);
+		} else if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_ttl().getDocument()) {
+			docEventTFttl(Typ.L3_SENDER);
+		} else if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_packetrate().getDocument()) {
+			docEventTFrate(Typ.L3_SENDER);
+		} else if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().getDocument()) {
+			docEventTFlength(Typ.L3_SENDER);
 		}
 		// TODO [MH] sollte spaeter rausgeworfen werden koennen.
 		//KEY Event in IPv4 Sender - GroupAddress
@@ -1380,6 +1417,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void itemStateChanged(ItemEvent arg0) {
 		if(arg0.getStateChange() == arg0.SELECTED){
+			
+			if(arg0.getSource() == getPanConfig(Typ.L3_SENDER).getTf_sourceIPaddress()){
+				changeNetworkInterface(Typ.L3_SENDER);
+			}
+			// TODO [MH] Receiver depending on morgen discussion einbauen
+			// TODO [MH] kram rausschmeissen
 			if(arg0.getSource() == getPanConfig(Typ.SENDER_V4).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.SENDER_V4);
 			}
