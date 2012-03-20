@@ -235,12 +235,14 @@ public class FrameMain extends JFrame {
 		mi_open_l2r.setFont(MiscFont.getFont(0, 14));
 		mi_open_l2r.setActionCommand("open_layer2_r");
 		mi_open_l2r.addActionListener(ctrl);
-		m_view.add(mi_open_l2r);
+		// TODO [MH] Nur fuer V1.5 rausgenommen
+//		m_view.add(mi_open_l2r);
 		mi_open_l2s = new JCheckBoxMenuItem("Layer2 Sender");
 		mi_open_l2s.setFont(MiscFont.getFont(0, 14));
 		mi_open_l2s.setActionCommand("open_layer2_s");
 		mi_open_l2s.addActionListener(ctrl);
-		m_view.add(mi_open_l2s);
+		// TODO [MH] Nur fuer V1.5 rausgenommen
+//		m_view.add(mi_open_l2s);
 		mi_open_l3r = new JCheckBoxMenuItem("Layer3 Receiver");
 		mi_open_l3r.setFont(MiscFont.getFont(0, 14));
 		mi_open_l3r.setActionCommand("open_layer3_r");
@@ -361,12 +363,13 @@ public class FrameMain extends JFrame {
 		//tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
 		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
 		// V1.5: Neue Panels L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
-		tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
-		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
-		mi_open_l2r.setSelected(true);
-		tabpane.addTab(" L2 Sender ", panel_sen_lay2);
-		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
-		mi_open_l2s.setSelected(true);
+		/* TODO [MH] Nur fuer V1.5 rausgenommen */
+//		tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
+//		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+//		mi_open_l2r.setSelected(true);
+//		tabpane.addTab(" L2 Sender ", panel_sen_lay2);
+//		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+//		mi_open_l2s.setSelected(true);
 		tabpane.addTab(" L3 Receiver ", panel_rec_lay3);
 		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 		mi_open_l3r.setSelected(true);
