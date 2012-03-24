@@ -10,6 +10,7 @@ import javax.net.ssl.HostnameVerifier;
 
 import org.junit.Test;
 
+import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.model.MulticastSender;
@@ -93,8 +94,8 @@ private void setupIPv4(){
 		MulticastData myBean = new MulticastData(groupIp, sourceIp, udpPort, packetLength, ttl, packetRateDesired, active, typ);
 		
 		Logger logger = Logger.getLogger("zisko.multicastor.testcases.model");
-			myMcSender = new MulticastSender(myBean, logger);
-
+		// [TODO FH]should not look like this... usually it is without MulticastController stuff
+		myMcSender = new MulticastSender(myBean, logger, new MulticastController(null, null));
 		Thread myThread = new Thread(myMcSender);
 		myMcSender.setActive(true, sm);
 		myThread.start();

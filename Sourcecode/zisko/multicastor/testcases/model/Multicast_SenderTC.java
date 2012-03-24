@@ -12,6 +12,7 @@ import javax.management.Query;
 import org.junit.Assert;
 import org.junit.Test;
 
+import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.model.MulticastReceiver;
@@ -20,9 +21,9 @@ import zisko.multicastor.program.model.NetworkAdapter;
 import zisko.multicastor.program.model.PacketBuilder;
 
 /**
- * UNGÜLTIGE USEREINGABEN WERDEN VOM IMPUTVALIDATOR ABGEFANGEN
- * Methode setActive wird aus zeitgründen nur indirekt getestet (da ohne aktivierten Sender keine
- * Veränderung, muss das aktivieren des Senders erfolgt sein)
+ * UNGï¿½LTIGE USEREINGABEN WERDEN VOM IMPUTVALIDATOR ABGEFANGEN
+ * Methode setActive wird aus zeitgrï¿½nden nur indirekt getestet (da ohne aktivierten Sender keine
+ * Verï¿½nderung, muss das aktivieren des Senders erfolgt sein)
  * @author muellerj
  *
  */
@@ -82,7 +83,7 @@ public class Multicast_SenderTC {
 	}
 
 	public void testIpv4(){
-		//Für jede gültige,konfigurierte IPv4-Adresse:
+		//Fï¿½r jede gï¿½ltige,konfigurierte IPv4-Adresse:
 		Vector<InetAddress> sourceIPv4 = NetworkAdapter.ipv4Interfaces;
 		
 		for(int i=0; i<sourceIPv4.size();i++){
@@ -145,9 +146,9 @@ public class Multicast_SenderTC {
 			runSenderAndReceiver();
 
 //ANALYSE
-			//Überhaupt etwas angekommen?
+			//ï¿½berhaupt etwas angekommen?
 			Assert.assertTrue(mcDataReceived.getPacketRateMeasured()!=0);
-			//Wurden die Daten richtig übertragen?
+			//Wurden die Daten richtig ï¿½bertragen?
 			Assert.assertEquals(ttl_1, mcDataReceived.getTtl());
 			Assert.assertEquals(packetLength_ipV6_1, mcDataReceived.getPacketLength());
 			staticTests();			
@@ -196,7 +197,9 @@ public class Multicast_SenderTC {
 	
 	private void runSenderAndReceiver(){
 		Logger logger = Logger.getLogger("zisko.multicastor.testcases.model");
-		myMcSender = new MulticastSender(mcData, logger);
+		
+		// [TODO FH]should not look like this... usually it is without MulticastController stuff
+		myMcSender = new MulticastSender(mcData, logger, new MulticastController(null, null));
 		myMcReceiver = new MulticastReceiver(mcDataReceived, logger);
 		
 		//Receiver starten

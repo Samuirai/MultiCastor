@@ -12,17 +12,21 @@ import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 
 /**
- * Die MultiCastSender-Klasse kümmert sich um das tatsächliche Senden der Multicast-
- * Objekte über das Netzwerk.
+ * Die MultiCastSender-Klasse kï¿½mmert sich um das tatsï¿½chliche Senden der Multicast-
+ * Objekte ï¿½ber das Netzwerk.
  * Sie extended {@link MulticastThreadSuper}, ist also ein Runnable.
- * Ein MultiCastSender hat eine Grundkonfiguration, die nicht mehr abgeändert werden kann,
- * wie zum Beispiel die gesetzten IPs. Soll diese Grundkonfiguration geändert werden, muss
- * eine neue Instanz der Klasse gebildet werden. Das Erleichtert die nächträgliche Analyse,
+ * Ein MultiCastSender hat eine Grundkonfiguration, die nicht mehr abgeï¿½ndert werden kann,
+ * wie zum Beispiel die gesetzten IPs. Soll diese Grundkonfiguration geï¿½ndert werden, muss
+ * eine neue Instanz der Klasse gebildet werden. Das Erleichtert die nï¿½chtrï¿½gliche Analyse,
  * Da das Objekt eindeutig einem "Test" zuordnungsbar ist.
  * @author jannik
  *
@@ -31,7 +35,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	private PacketBuilder 	myPacketBuilder;
 	
 	/**
-	 * Variablen für die verschiedenen Sendemethoden
+	 * Variablen fï¿½r die verschiedenen Sendemethoden
 	 */
 	public static enum		sendingMethod 	{	/**
 												 * Senden unter Volllast, ohne auf die angegebene
@@ -41,7 +45,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 												
 												/**
 												 * Alle Pakete werden am Anfang der Sekunde gesendet,
-												 * danach wird der Thread für den Rest der Sekunde in den
+												 * danach wird der Thread fï¿½r den Rest der Sekunde in den
 												 * sleep geschickt
 												 */
 												PEAK,
@@ -49,43 +53,44 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 												/**
 												 * Nach jedem Paket wird eine errechnete Zeitspanne
 												 * der thread auf sleep gesetzt
-												 * (lässt zur Zeit keine hohen Paketraten zu)
+												 * (lï¿½sst zur Zeit keine hohen Paketraten zu)
 												 */
 												SLEEP_MULTIPLE
 											};
 	private sendingMethod	usedMethod		 			=	sendingMethod.PEAK;
 	private int 			packetRateDes;
 							
-	//Variablen für die Verbindung
+	//Variablen fï¿½r die Verbindung
 	private MulticastSocket mcSocket;
 	private InetAddress   	mcGroupIp;
 	private InetAddress		sourceIp;
 	private int 		  	udpPort;
 	private byte 			ttl;
 	
-	//Variablen für das Senden
+	//Variablen fï¿½r das Senden
 	private boolean 		isSending 		 			= false;
 	private long			pausePeriodMs;
 	private int				pausePeriodNs,
 							totalPacketCount			= 0;
 	
-	//Variablen für Logging
+	//Variablen fï¿½r Logging
 	private Logger 	messages;
 	SimpleDateFormat 		sdf 						= new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss");
 	int						resetablePcktCnt 			= 0,
 							cumulatedResetablePcktCnt 	= 0;
+	private MulticastController mCtrl;
 	
 	
 	/**
 	 * Einziger Konstruktor der Klasse (Sieht man vom Konstruktor der Superklasse ab).
-	 * Im Konstruktor wird die hostID gesetzt (entspricht dem hostnamen des Geräts),
+	 * Im Konstruktor wird die hostID gesetzt (entspricht dem hostnamen des Gerï¿½ts),
 	 * der MultiCastSocket initialisiert, das Network-Interface
-	 * über das die Multicasts gesendet werden sollen gesetzt und das Datenpaket
+	 * ï¿½ber das die Multicasts gesendet werden sollen gesetzt und das Datenpaket
 	 * mit dem {@link PacketBuilder} erstellt.
-	 * @param mcBean Das {@link MulticastData}-Object, dass alle für den Betrieb nötigen Daten enthält.
-	 * @param _messages Eine {@link Queue}, über den der Sender seine Ausgaben an den Controller weitergibt.
+	 * @param mcBean Das {@link MulticastData}-Object, dass alle fï¿½r den Betrieb nï¿½tigen Daten enthï¿½lt.
+	 * @param _messages Eine {@link Queue}, ï¿½ber den der Sender seine Ausgaben an den Controller weitergibt.
 	 */
-	public MulticastSender(MulticastData mcBean, Logger _logger){
+	public MulticastSender(MulticastData mcBean, Logger _logger, MulticastController mcCtrl){
 		super(mcBean);
 		
 		//Den hostName setzen
@@ -95,7 +100,8 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 			proclaim(1, "Unable to get Host-Name. Error is: " + e.getMessage());
 		}
 		
-		//Übrige Variablen initialisieren
+		//ï¿½brige Variablen initialisieren
+		this.mCtrl = mcCtrl;
 		messages				= _logger;
 		myPacketBuilder 		= new PacketBuilder(mcData);
 		udpPort					= mcData.getUdpPort();
@@ -129,15 +135,15 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 			proclaim(1, "While setting the Source IP "  + sourceIp + ": " + e.getMessage());
 		} 
 		
-		//Länge der Pause zwischen den Multicasts in Millisekunden und Nanusekunden setzen
+		//Lï¿½nge der Pause zwischen den Multicasts in Millisekunden und Nanusekunden setzen
 		pausePeriodMs = (int)  (1000.0 / (double)mcData.getPacketRateDesired());	//Pause in Milisekunden
 		pausePeriodNs = (int)(((1000.0 / (double)mcData.getPacketRateDesired())-(double)pausePeriodMs)*1000000.0);	//"Rest"-Pausenzeit(alles kleiner als 1ms) in ns
 	}
 
 	/**
-	 * Wird der Methode true übergeben, meldet diese sich bei der Multicastgruppe an
+	 * Wird der Methode true ï¿½bergeben, meldet diese sich bei der Multicastgruppe an
 	 * und startet zu senden.
-	 * Wird der Methode false übergeben, stoppt sie das senden der Multicasts und
+	 * Wird der Methode false ï¿½bergeben, stoppt sie das senden der Multicasts und
 	 * veranlasst damit auch das Abmelden von der Multicastgruppe.
 	 * @param active boolean
 	 */
@@ -145,7 +151,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	public void setActive(boolean active) {
 		if(active) {
 			//Setzen der ThreadID, da diese evtl.
-			//im Controller noch einmal geändert wird
+			//im Controller noch einmal geï¿½ndert wird
 			myPacketBuilder.alterThreadID(mcData.getThreadID());
 			isSending = true;
 			mcData.setActive(true);
@@ -161,9 +167,9 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	
 	/**
 	 * Siehe public void setActive(boolean active).
-	 * Es lässt sich zusätzlich die Art und Weise angeben, mit der gesendet wird (diese
-	 * Möglichkeit wird in der aktuellen Version nur auf Modulebene unterstützt
-	 * und zielt auf spätere Versionen des ByteTools und Testzwecke ab)
+	 * Es lï¿½sst sich zusï¿½tzlich die Art und Weise angeben, mit der gesendet wird (diese
+	 * Mï¿½glichkeit wird in der aktuellen Version nur auf Modulebene unterstï¿½tzt
+	 * und zielt auf spï¿½tere Versionen des ByteTools und Testzwecke ab)
 	 * @param active true=senden, false=nicht senden
 	 * @param _method Art und Weise des Sendens
 	 */
@@ -178,14 +184,15 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	 * ausgegeben und das Senden wird garnicht erst gestartet.
 	 * Gelingt das Beitreten, wird so lange gesendet, bis setActive(false) aufgerufen wird.
 	 * Auf Modulebene kann bei setActive() festgelegt werden, auf welche Art und Weise
-	 * gesendet wird. Im Tool wird in dieser Version ausschließlich PEAK verwendet.
+	 * gesendet wird. Im Tool wird in dieser Version ausschlieï¿½lich PEAK verwendet.
 	 */
 	@Override
-	public void run() {
-		//Paketzähler auf 0 setzen
+	public void run(){
+		//Paketzï¿½hler auf 0 setzen
 		totalPacketCount			= 0;
 		resetablePcktCnt			= 0;
 		cumulatedResetablePcktCnt	= 0;
+		int ioExceptionCnt = 0;
 		
 		//Der Multicastgruppe beitreten
 		try{
@@ -193,7 +200,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 			proclaim(2, "Joined Multicast-group " + mcData.getGroupIp() + " as sender using method " + usedMethod + ".");
 		}catch(IOException e){
 			proclaim(1, "Was not able to join multicast-group " + mcData.getGroupIp() + ": " + e.getMessage());
-			//Überspringen der Sende-Whileschleife
+			//ï¿½berspringen der Sende-Whileschleife
 			isSending = false;
 			mcData.setActive(false);
 		}
@@ -222,10 +229,11 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 		
 		//So lange senden, bis setActive(false) aufgerufen wird
 		//Variable 'usedMethod' bestimmt auf welche Art und Weise.
-		//Wurde bei setActive keine Methode angegeben, wird standartmäßig die
+		//Wurde bei setActive keine Methode angegeben, wird standartmï¿½ï¿½ig die
 		//PEAK-Methode verwendet.
 		switch(usedMethod){
-			case NO_SLEEP:		//ohne sleep, unter Volllast
+			case NO_SLEEP:	
+					//ohne sleep, unter Volllast
 						while(isSending){
 							try{
 								mcSocket.send(new DatagramPacket(myPacketBuilder.getPacket(),
@@ -242,12 +250,13 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 							}
 						}
 						break;
-			case PEAK:	//Misst wie lange er sendt um die Paketrate zu erhalten
+			case PEAK:	
+						//Misst wie lange er sendt um die Paketrate zu erhalten
 						//und sleept den Rest der Sekunde
 						long endTime	= 0,
 							 timeLeft	= 0;
 						while(isSending){
-							//Sleep wenn noch etwas von der letzten Sekunde übrig
+							//Sleep wenn noch etwas von der letzten Sekunde ï¿½brig
 							timeLeft = endTime-System.nanoTime();
 							if(timeLeft>0)	try{
 												Thread.sleep(timeLeft/1000000, (int) (timeLeft%1000000));
@@ -266,7 +275,26 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 									else						totalPacketCount = 0;
 									resetablePcktCnt++;
 								}catch(IOException e1){
-									proclaim(1, "While sending: " + e1.getMessage());
+									Object[] options = { "Stop Sender", "Reattemp to connect"};
+									
+									if(ioExceptionCnt == 0)
+										JOptionPane.showMessageDialog(new JFrame(), "Problem with sending via IP '"+sourceIp+
+												"'. Trying to reconnect...");
+
+									if(ioExceptionCnt == 10)
+										 if( JOptionPane.showOptionDialog(null, "Sender is still not working correctly.\n"+
+													"Because sending via IP " +sourceIp+ " is not reachable " , "Sending warning",
+													JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+													null, options, options[0]) == 0){
+											 isSending = false;
+											 this.setActive(false);
+											 mCtrl.stopMC(mcData);
+										 }else
+											 ioExceptionCnt = 0;
+									
+								
+
+									ioExceptionCnt ++;
 								}
 							}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
 						}
@@ -332,7 +360,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	}
 	
 	/**
-	 * Methode über die die Kommunikation zum MultiCastController realisiert wird.
+	 * Methode ï¿½ber die die Kommunikation zum MultiCastController realisiert wird.
 	 * @param level unterscheidet zwischen Fehlern und Status-Meldungen
 	 * @param mssg Die zu sendende Nachricht (String)
 	 */
