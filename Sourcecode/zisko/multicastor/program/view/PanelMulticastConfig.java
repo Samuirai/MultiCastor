@@ -141,7 +141,7 @@ public class PanelMulticastConfig extends JPanel {
 			((JLabel) renderer).setHorizontalAlignment(SwingConstants.CENTER);
 			cb_sourceIPaddress.addItemListener(ctrl);
 			if(typ == Typ.L3_SENDER){
-				//TODO unterscheidung zwischen IPv4 und IPv6
+				//TODO [MH] unterscheidung zwischen IPv4 und IPv6
 				temp = NetworkAdapter.getipv4Adapters();
 			}else{
 				temp = NetworkAdapter.getipv6Adapters();

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<MultiCastor>
+    <Language>de</Language>
+    <AutomaticSave>off</AutomaticSave>
+    <WindowName>MCastor2.0</WindowName>
+    <Userlevel>expert</Userlevel>
+    <Tabs>
+        <Tab>L2 Sender</Tab>
+        <Tab>L2 Receiver</Tab>
+        <Tab selected="selected">L3 Sender</Tab>
+        <Tab>L3 Receiver</Tab>
+    </Tabs>
+    <DefaultSettings>    
+        <L2>
+            <Sender>
+                <Adress></Adress>
+                <NetworkInterface></NetworkInterface>
+                <PacketRate></PacketRate>
+                <PacketLength></PacketLength>
+            </Sender>
+            <Receiver>
+                <Adress></Adress>
+            </Receiver>
+        </L2>
+        <L3>
+            <Sender>
+                <Adress></Adress>
+                <NetworkInterface></NetworkInterface>
+                <Port></Port>
+                <TTL></TTL>
+                <PacketRate></PacketRate>
+                <PacketLength></PacketLength>
+            </Sender>
+            <Receiver>
+                <Adress></Adress>
+                <Port></Port>
+            </Receiver>
+        </L3>
+    </DefaultSettings>
+</MultiCastor>

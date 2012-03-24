@@ -76,6 +76,8 @@ public class MulticastController{
 	/** Loesst eine Aktualisierung der Durchschnittswerte in der Datenhaltung aus und speichert diese mittels Logger. */
 	private RegularLoggingTask regularLoggingTask;
 	
+	private int printTableIntervall;
+	
 	// Config
 	/** Informationen zum wiederherstellen des letzten GUI Status */
 	private Vector<UserInputData> userInputData;
@@ -88,8 +90,6 @@ public class MulticastController{
 	/** Speicher die Standardwerte fuer Userlevel: Beginner */
 	private Vector<MulticastData> defaultValuesUserlevelData;
 
-	
-	
 	/**
 	 * Erzeugt einen MulticastController.
 	 * @param viewController Ist dieses Objekt nicht null werden darueber MessageBoxen mit Status- oder 
@@ -99,7 +99,21 @@ public class MulticastController{
 	 * dies in den Systemoutput geschrieben.
 	 */
 	public MulticastController(ViewController viewController, Logger logger){
+		this(viewController, logger, 60000);
+	}
+	
+	/**
+	 * Erzeugt einen MulticastController.
+	 * @param viewController Ist dieses Objekt nicht null werden darueber MessageBoxen mit Status- oder 
+	 * Fehlermeldungen dem Nutzer angezeigt.
+	 * @param logger Der Logger darf nicht null sein. Er wird benoetigt um Programmereignisse 
+	 * und regelmaessig ermittelte Durchschnittswerte zu loggen. Wird null uebergeben wird
+	 * dies in den Systemoutput geschrieben.
+	 * @param setzt die intervall zeit fŸr den konsolen tabellen output
+	 */
+	public MulticastController(ViewController viewController, Logger logger, int pPrintTableIntervall){
 		super();
+		this.printTableIntervall = pPrintTableIntervall;
 		// MC_Data
 		mc_sender_v4 = new Vector<MulticastData>();
 		mc_sender_v6 = new Vector<MulticastData>();
@@ -156,13 +170,15 @@ public class MulticastController{
 			
 		regularLoggingTask = new RegularLoggingTask(logger,mcMap_sender_v4, mcMap_sender_v6, mcMap_receiver_v4, mcMap_receiver_v6);
 		timer3 = new Timer();
-		timer3.schedule(regularLoggingTask, 60000, 60000);
+		timer3.schedule(regularLoggingTask, this.printTableIntervall, this.printTableIntervall); // default 60000
 	}	
 	
 	// ****************************************************
 	// Multicast-Steuerung
 	// ****************************************************
 	
+
+
 	/**
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden Thread und startet diesen falls notwendig.
 	 * @param m MulticastData-Objekt das hinzugefï¿½gt werden soll.
@@ -170,11 +186,19 @@ public class MulticastController{
 	public void addMC(MulticastData m) {
 		// Erzeugt den passenden MulticastThreadSuper
 		MulticastThreadSuper t = null; 
+//		// TODO [MH] to be removed
+//		if((m.getTyp() == MulticastData.Typ.L3_SENDER)) {
+//			t = new MulticastSender(m, logger);
+//		} else if ((m.getTyp() == MulticastData.Typ.L3_RECEIVER)) {
+//			t = new MulticastReceiver(m, logger);
+//		}
+
 		if((m.getTyp() == MulticastData.Typ.SENDER_V4)||(m.getTyp() == MulticastData.Typ.SENDER_V6)){
 			t = new MulticastSender(m, logger);
 		} else if ((m.getTyp() == MulticastData.Typ.RECEIVER_V4)||(m.getTyp() == MulticastData.Typ.RECEIVER_V6)){
 			t = new MulticastReceiver(m, logger);
 		}
+		
 		// Fuegt Multicasts zu der entsprechenden Map hinzu
 		getMCVector(m).add(0, m);
 		getMCMap(m).put(m,t);
@@ -756,6 +780,13 @@ public class MulticastController{
 			case RECEIVER_V6: map = mcMap_receiver_v6;break;
 			case SENDER_V4: map = mcMap_sender_v4;break;
 			case SENDER_V6: map = mcMap_sender_v6;break;
+			/*
+			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!!
+			 */
+			case L2_RECEIVER: map = mcMap_receiver_v4;break;
+			case L2_SENDER: map = mcMap_sender_v4;break;
+			case L3_RECEIVER: map = mcMap_receiver_v4;break;
+			case L3_SENDER: map = mcMap_sender_v4;break;
 			default: logger.log(Level.SEVERE, "Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");return null;
 		}
 		return map;
@@ -768,5 +799,13 @@ public class MulticastController{
 	 */
 	private Map<MulticastData,MulticastThreadSuper> getMCMap(MulticastData m){
 		return getMCMap(m.getTyp());
+	}
+	
+	/**
+	 * setzt das Zeitintervall fŸr die Ausgabe der Tabelle auf der Konsole
+	 * @param printTableTime Zeitintervall in milliseconds
+	 */
+	public void setPrintTableTime(int printTableTime) {
+		this.printTableIntervall = printTableTime;
 	}
 }
