@@ -16,18 +16,22 @@ import zisko.multicastor.program.model.WrongConfigurationException;
 
 /**
  * Main-Methode.
- * @author Thomas Lüder
+ * @author Thomas Lï¿½der
  */
 
 public class Main {
 
+	private static long MIN_MAX_HEAP = 32000;
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die 
-	 * Parameter ein, die dem Programm übegeben wurden und startet den entsprechenden Programmteil.
-	 * @param args Ein Feld aus Strings, das die Parameter enthält, die dem Programm in der Kommandozeile übergeben wurden.
+	 * Parameter ein, die dem Programm ï¿½begeben wurden und startet den entsprechenden Programmteil.
+	 * @param args Ein Feld aus Strings, das die Parameter enthï¿½lt, die dem Programm in der Kommandozeile ï¿½bergeben wurden.
 	 */
 	
 	public static void main(String[] args) {
+		//V1.5 [FH] PrÃ¼fen nach maximaler Heap-Size und ggf. Fehler ausgeben
+		long real_max_memory = Runtime.getRuntime().maxMemory();
+		
 		//Initialisierung
 		ViewController gui;
 		MulticastController controller;
@@ -40,12 +44,13 @@ public class Main {
 		logger.setLevel(Level.FINEST);
 
 		//Hauptprogrammteil - Parameter aus der Kommandozeile auswerten
+		//V1.5 [FH]
 		if(args.length==0) {
 			gui = new ViewController();
 			controller = new MulticastController(gui,logger);
 			gui.initialize(controller);
 			
-			//Handler für formatierte Ausgabe in der Konsole- und GUI-Konsole
+			//Handler fï¿½r formatierte Ausgabe in der Konsole- und GUI-Konsole
 			consoleHandlerWithGUI = new MulticastLogHandler(gui);
 			consoleHandlerWithGUI.setLevel(Level.FINEST);
 			logger.addHandler(consoleHandlerWithGUI);
@@ -73,7 +78,7 @@ public class Main {
 					try {
 						controller = new MulticastController(null,logger);
 						//System.out.println("Parsing");
-						//Handler für formatierte Ausgabe in der Konsole
+						//Handler fï¿½r formatierte Ausgabe in der Konsole
 						consoleHandler = new MulticastLogHandler();
 						consoleHandler.setLevel(Level.FINEST);
 						logger.addHandler(consoleHandler);
@@ -132,7 +137,7 @@ public class Main {
 							controller = new MulticastController(gui,logger);
 							gui.initialize(controller);
 							
-							//Handler für formatierte Ausgabe in der Konsole- und GUI-Konsole
+							//Handler fï¿½r formatierte Ausgabe in der Konsole- und GUI-Konsole
 							consoleHandlerWithGUI = new MulticastLogHandler(gui);
 							consoleHandlerWithGUI.setLevel(Level.FINEST);
 							logger.addHandler(consoleHandlerWithGUI);

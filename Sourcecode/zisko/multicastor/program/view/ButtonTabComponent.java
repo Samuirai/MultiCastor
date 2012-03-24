@@ -49,7 +49,7 @@ public class ButtonTabComponent extends JPanel{
 		if(pane == null)
 			throw new NullPointerException("The parent TabbedPane is null");
 		
-		// Set the Labal with the Title of the right Compononent of the DraggableTabbedPane
+		// Set the Label with the Title of the right Compononent of the DraggableTabbedPane
 		JLabel label = new JLabel(new ImageIcon(getClass().getResource(path))){
 			public String getText(){
 				//This gets the index of this Component (or -1 if its not contained in a TabbedPane)
