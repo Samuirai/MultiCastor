@@ -86,6 +86,7 @@ public class UpdateTask extends TimerTask {
 				viewController.viewUpdate();
 			}
 		}
+		
 		//V1.5 [FH] added !MemoryWarning, because if we have a memory warning it is always taking longer
 		if (!memoryWarnedForLog && ((System.nanoTime() - time1) / 1000000) > 200) {
 			// System.out.println("Updatetime is rather long: " +
