@@ -76,6 +76,8 @@ public class MulticastController{
 	/** Loesst eine Aktualisierung der Durchschnittswerte in der Datenhaltung aus und speichert diese mittels Logger. */
 	private RegularLoggingTask regularLoggingTask;
 	
+	private int printTableIntervall;
+	
 	// Config
 	/** Informationen zum wiederherstellen des letzten GUI Status */
 	private Vector<UserInputData> userInputData;
@@ -88,8 +90,6 @@ public class MulticastController{
 	/** Speicher die Standardwerte fuer Userlevel: Beginner */
 	private Vector<MulticastData> defaultValuesUserlevelData;
 
-	
-	
 	/**
 	 * Erzeugt einen MulticastController.
 	 * @param viewController Ist dieses Objekt nicht null werden darueber MessageBoxen mit Status- oder 
@@ -99,7 +99,21 @@ public class MulticastController{
 	 * dies in den Systemoutput geschrieben.
 	 */
 	public MulticastController(ViewController viewController, Logger logger){
+		this(viewController, logger, 60000);
+	}
+	
+	/**
+	 * Erzeugt einen MulticastController.
+	 * @param viewController Ist dieses Objekt nicht null werden darueber MessageBoxen mit Status- oder 
+	 * Fehlermeldungen dem Nutzer angezeigt.
+	 * @param logger Der Logger darf nicht null sein. Er wird benoetigt um Programmereignisse 
+	 * und regelmaessig ermittelte Durchschnittswerte zu loggen. Wird null uebergeben wird
+	 * dies in den Systemoutput geschrieben.
+	 * @param setzt die intervall zeit fŸr den konsolen tabellen output
+	 */
+	public MulticastController(ViewController viewController, Logger logger, int pPrintTableIntervall){
 		super();
+		this.printTableIntervall = pPrintTableIntervall;
 		// MC_Data
 		mc_sender_v4 = new Vector<MulticastData>();
 		mc_sender_v6 = new Vector<MulticastData>();
@@ -156,13 +170,15 @@ public class MulticastController{
 			
 		regularLoggingTask = new RegularLoggingTask(logger,mcMap_sender_v4, mcMap_sender_v6, mcMap_receiver_v4, mcMap_receiver_v6);
 		timer3 = new Timer();
-		timer3.schedule(regularLoggingTask, 60000, 60000);
+		timer3.schedule(regularLoggingTask, this.printTableIntervall, this.printTableIntervall); // default 60000
 	}	
 	
 	// ****************************************************
 	// Multicast-Steuerung
 	// ****************************************************
 	
+
+
 	/**
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden Thread und startet diesen falls notwendig.
 	 * @param m MulticastData-Objekt das hinzugefï¿½gt werden soll.
@@ -768,5 +784,13 @@ public class MulticastController{
 	 */
 	private Map<MulticastData,MulticastThreadSuper> getMCMap(MulticastData m){
 		return getMCMap(m.getTyp());
+	}
+	
+	/**
+	 * setzt das Zeitintervall fŸr die Ausgabe der Tabelle auf der Konsole
+	 * @param printTableTime Zeitintervall in milliseconds
+	 */
+	public void setPrintTableTime(int printTableTime) {
+		this.printTableIntervall = printTableTime;
 	}
 }

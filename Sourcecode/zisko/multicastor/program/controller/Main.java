@@ -71,7 +71,7 @@ public class Main {
 					
 					String pfad=args[1];
 					try {
-						controller = new MulticastController(null,logger);
+						controller = new MulticastController(null,logger,4000);
 						//System.out.println("Parsing");
 						//Handler für formatierte Ausgabe in der Konsole
 						consoleHandler = new MulticastLogHandler();

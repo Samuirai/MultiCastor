@@ -187,7 +187,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   						throwWrongContentException(stag,val,mcNummer);
 						    					}
 					    					}
-					    					else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    					else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    						throwEmptyContentException(stag, val, mcNummer);
 					    					}
 					    			case sourceIp: if(!val.isEmpty()){
@@ -197,7 +197,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   						if(InputValidator.checkv4Adapters(adr)==true){
 							   							mcd.setSourceIp(adr);
 							   						}
-							   						else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+							   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 							   							logger.log(Level.WARNING, "Invalid Network Adapter. Network Interface has been set to localhost.");
 							   							adr = ( Inet4Address ) InputValidator.checkIPv4("127.0.0.1");
 							   							mcd.setSourceIp(adr);
@@ -210,7 +210,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   						if(InputValidator.checkv6Adapters(adr)==true){
 							   							mcd.setSourceIp(adr);
 							   						}
-							   						else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+							   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 							   							logger.log(Level.WARNING,"Invalid Network Adapter. Network Interface has been set to localhost.");
 							   							adr = ( Inet6Address ) InputValidator.checkIPv6("::1");
 							   							mcd.setSourceIp(adr);
@@ -220,7 +220,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   					else{
 							   						throwWrongContentException(stag, val, mcNummer);
 						    					}
-					    			}else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    				throwEmptyContentException(stag, val, mcNummer);
 			    					}
 					    			case udpPort: if(!val.isEmpty()) {
@@ -230,37 +230,37 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 					    							throwWrongContentException(stag, val, mcNummer);
 						    					}
 					    						break;
-					    			}else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    				throwEmptyContentException(stag, val, mcNummer);
 			    					}
 					    			case packetLength: if(!val.isEmpty()){
 					    				if(InputValidator.checkIPv4PacketLength(val) > 0 || InputValidator.checkIPv6PacketLength(val) > 0)
 					    					mcd.setPacketLength(Integer.parseInt(val)); 
-					    				else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    					throwWrongContentException(stag, val, mcNummer);
 				    					}
 					    				break;
-					    			}else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    				throwEmptyContentException(stag, val, mcNummer);
 			    					}
 					    			case ttl: if(!val.isEmpty()){
 					    				if(InputValidator.checkTimeToLive(val)>0)
 					    						mcd.setTtl(Integer.parseInt(val)); 
-					    				else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    					throwWrongContentException(stag, val, mcNummer);
 				    					}
 					    				break;
-					    			}else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    				throwEmptyContentException(stag, val, mcNummer);
 			    					}
 					    			case packetRateDesired: if(!val.isEmpty()){
 					    				if(InputValidator.checkPacketRate(val)>0)
 					    						mcd.setPacketRateDesired(Integer.parseInt(val)); 
-					    				else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    					throwWrongContentException(stag, val, mcNummer);
 				    					}
 					    				break;
-					    			}else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    				throwEmptyContentException(stag, val, mcNummer);
 			    					}
 					    			case typ: if(!val.isEmpty()) 
@@ -273,7 +273,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 					    						throwWrongContentException(stag, val, mcNummer);
 					    					}
 					    					break;
-					    				}else if(mcList.item(i).getNodeName()=="SENDER_V4"||mcList.item(i).getNodeName()=="SENDER_V6"){
+					    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 					    					throwEmptyContentException(stag, val, mcNummer);
 				    					}
 					    		}
