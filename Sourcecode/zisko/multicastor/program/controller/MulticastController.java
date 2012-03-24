@@ -170,11 +170,19 @@ public class MulticastController{
 	public void addMC(MulticastData m) {
 		// Erzeugt den passenden MulticastThreadSuper
 		MulticastThreadSuper t = null; 
+//		// TODO [MH] to be removed
+//		if((m.getTyp() == MulticastData.Typ.L3_SENDER)) {
+//			t = new MulticastSender(m, logger);
+//		} else if ((m.getTyp() == MulticastData.Typ.L3_RECEIVER)) {
+//			t = new MulticastReceiver(m, logger);
+//		}
+
 		if((m.getTyp() == MulticastData.Typ.SENDER_V4)||(m.getTyp() == MulticastData.Typ.SENDER_V6)){
 			t = new MulticastSender(m, logger);
 		} else if ((m.getTyp() == MulticastData.Typ.RECEIVER_V4)||(m.getTyp() == MulticastData.Typ.RECEIVER_V6)){
 			t = new MulticastReceiver(m, logger);
 		}
+		
 		// Fuegt Multicasts zu der entsprechenden Map hinzu
 		getMCVector(m).add(0, m);
 		getMCMap(m).put(m,t);
@@ -756,6 +764,13 @@ public class MulticastController{
 			case RECEIVER_V6: map = mcMap_receiver_v6;break;
 			case SENDER_V4: map = mcMap_sender_v4;break;
 			case SENDER_V6: map = mcMap_sender_v6;break;
+			/*
+			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!!
+			 */
+			case L2_RECEIVER: map = mcMap_receiver_v4;break;
+			case L2_SENDER: map = mcMap_sender_v4;break;
+			case L3_RECEIVER: map = mcMap_receiver_v4;break;
+			case L3_SENDER: map = mcMap_sender_v4;break;
 			default: logger.log(Level.SEVERE, "Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");return null;
 		}
 		return map;
