@@ -56,9 +56,6 @@ public class MulticastLogHandler extends ConsoleHandler	{
 		String message_window=(record.getMessage());
 		
 		System.out.println(message);
-		System.out.println("Max-Heap size:" + Runtime.getRuntime().maxMemory());
-		System.out.println("Free-Heap size:" + Runtime.getRuntime().freeMemory());
-		System.out.println("Total-Heap size:" + Runtime.getRuntime().totalMemory());
 
 		//Zeigt Info-Fenster an, wenn Fehler oder Warnungen auftreten
 		//Nur wenn GUI gestartet ist
