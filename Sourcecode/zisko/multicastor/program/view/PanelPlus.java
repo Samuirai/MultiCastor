@@ -6,85 +6,120 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+
+import zisko.multicastor.program.lang.LanguageManager;
 
 @SuppressWarnings("serial")
 public class PanelPlus extends JPanel implements ActionListener{
 	
+	private JButton l2s;
+	private JButton l2r;
+	private JButton l3s;
+	private JButton l3r;
+	private JButton about;
+	private JLabel l2sText;
+	JLabel l2rText;
+	JLabel l3sText;
+	JLabel l3rText;
+	JLabel aboutText;
+	
+	private LanguageManager lang;
+	
 	private FrameMain frame;
-    private DraggableTabbedPane pane;
 	public PanelPlus(FrameMain pFrame){
 		frame = pFrame;
-		pane = frame.getTabpane();
-		initComponents();
+		lang=LanguageManager.getInstance();
+		initComponents(true);
 	}
 	
-    private void initComponents() {
-    	GridBagLayout gridBayLayout = new GridBagLayout();
-        this.setLayout(gridBayLayout);
+	public void reloadLanguage(){
+		initComponents(false);
+	}
+	
+    private void initComponents(boolean firstInit) {
+    	    	
+    	if (firstInit){
+    		GridBagLayout gridBayLayout = new GridBagLayout();
+            this.setLayout(gridBayLayout);
+        	
+        	l2s = new JButton();
+        	l2s.setMinimumSize(new Dimension(100, 100));
+        	gridBayLayout.setConstraints(l2s, new GridBagConstraints (0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
+        	l2s.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4sender.png")));
+        	l2s.setFont(MiscFont.getFont(0,17));
+        	l2s.setActionCommand("open_layer2_s");
+        	l2s.addActionListener(this);
+        	add(l2s);
+        	l2sText = new JLabel();
+        	gridBayLayout.setConstraints(l2sText, new GridBagConstraints (1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
+        	add(l2sText);
+        	
+        	l2r = new JButton();
+        	gridBayLayout.setConstraints(l2r, new GridBagConstraints (0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
+        	l2r.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4receiver.png")));
+        	l2r.setFont(MiscFont.getFont(0,17));
+        	l2r.setActionCommand("open_layer2_r");
+        	l2r.addActionListener(this);
+        	add(l2r);
+        	l2rText = new JLabel();
+        	gridBayLayout.setConstraints(l2rText, new GridBagConstraints (1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
+        	add(l2rText);
+        	
+        	l3s = new JButton();
+        	gridBayLayout.setConstraints(l3s, new GridBagConstraints (0, 2, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
+        	l3s.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6sender.png")));
+        	l3s.setFont(MiscFont.getFont(0,17));
+        	l3s.setActionCommand("open_layer3_s");
+        	l3s.addActionListener(this);
+        	add(l3s);
+        	l3sText = new JLabel();
+        	gridBayLayout.setConstraints(l3sText, new GridBagConstraints (1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
+        	add(l3sText);
+        	
+        	l3r = new JButton();
+        	gridBayLayout.setConstraints(l3r, new GridBagConstraints (0, 3, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
+        	l3r.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6receiver.png")));
+        	l3r.setFont(MiscFont.getFont(0,17));
+        	l3r.setActionCommand("open_layer3_r");
+        	l3r.addActionListener(this);
+        	add(l3r);
+        	l3rText = new JLabel();
+        	gridBayLayout.setConstraints(l3rText, new GridBagConstraints (1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
+        	add(l3rText);
+        	
+        	about = new JButton();
+        	gridBayLayout.setConstraints(about, new GridBagConstraints (0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
+        	about.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/about.png")));
+        	about.setFont(MiscFont.getFont(0,17));
+        	about.setActionCommand("open_about");
+        	about.addActionListener(this);
+        	add(about);
+        	aboutText = new JLabel();
+        	gridBayLayout.setConstraints(aboutText, new GridBagConstraints (1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
+        	add(aboutText);
+    	}
     	
-    	JButton ipv4_s = new JButton("Layer2 Sender");
-    	ipv4_s.setMinimumSize(new Dimension(100, 100));
-    	gridBayLayout.setConstraints(ipv4_s, new GridBagConstraints (0, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
-    	ipv4_s.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4sender.png")));
-    	ipv4_s.setFont(MiscFont.getFont(0,17));
-    	ipv4_s.setActionCommand("open_layer2_s");
-    	ipv4_s.addActionListener(this);
-    	add(ipv4_s);
-    	JLabel ipv4_s_t = new JLabel("Opens the Layer2 (with MMRP) Sender Panel. If the Tab is currently Closed the Tab gets opened. If it's open it get focused.");
-    	gridBayLayout.setConstraints(ipv4_s_t, new GridBagConstraints (1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
-    	add(ipv4_s_t);
+    	l2s.setText(lang.getProperty("mi.layer2Sender"));
+    	l2r.setText(lang.getProperty("mi.layer2Receiver"));
+    	l3s.setText(lang.getProperty("mi.layer3Sender"));
+    	l3r.setText(lang.getProperty("mi.layer3Receiver"));
+    	about.setText(lang.getProperty("mi.about"));
     	
-    	JButton ipv4_r = new JButton("Layer2 Receiver");
-    	gridBayLayout.setConstraints(ipv4_r, new GridBagConstraints (0, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
-    	ipv4_r.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4receiver.png")));
-    	ipv4_r.setFont(MiscFont.getFont(0,17));
-    	ipv4_r.setActionCommand("open_layer2_r");
-    	ipv4_r.addActionListener(this);
-    	add(ipv4_r);
-    	JLabel ipv4_r_t = new JLabel("Opens the Layer2 Receiver Panel. If the Tab is currently Closed the Tab gets opened. If it's open it get focused.");
-    	gridBayLayout.setConstraints(ipv4_r_t, new GridBagConstraints (1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
-    	add(ipv4_r_t);
+    	l2sText.setText(lang.getProperty("plus.l2sDescription"));
+    	l2rText.setText(lang.getProperty("plus.l2rDescription"));
+    	l3sText.setText(lang.getProperty("plus.l3sDescription"));
+    	l3rText.setText(lang.getProperty("plus.l3rDescription"));
+    	aboutText.setText(lang.getProperty("plus.aboutDescription"));
     	
-    	JButton ipv6_s = new JButton("Layer3 Sender");
-    	gridBayLayout.setConstraints(ipv6_s, new GridBagConstraints (0, 2, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
-    	ipv6_s.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6sender.png")));
-    	ipv6_s.setFont(MiscFont.getFont(0,17));
-    	ipv6_s.setActionCommand("open_layer3_s");
-    	ipv6_s.addActionListener(this);
-    	add(ipv6_s);
-    	JLabel ipv6_s_t = new JLabel("Opens the Layer3 Sender Panel. If the Tab is currently Closed the Tab gets opened. If it's open it get focused.");
-    	gridBayLayout.setConstraints(ipv6_s_t, new GridBagConstraints (1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
-    	add(ipv6_s_t);
-    	
-    	JButton ipv6_r = new JButton("Layer3 Receiver");
-    	gridBayLayout.setConstraints(ipv6_r, new GridBagConstraints (0, 3, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
-    	ipv6_r.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6receiver.png")));
-    	ipv6_r.setFont(MiscFont.getFont(0,17));
-    	ipv6_r.setActionCommand("open_layer3_r");
-    	ipv6_r.addActionListener(this);
-    	add(ipv6_r);
-    	JLabel ipv6_r_t = new JLabel("Opens the Layer3 Receiver Panel. If the Tab is currently Closed the Tab gets opened. If it's open it get focused.");
-    	gridBayLayout.setConstraints(ipv6_r_t, new GridBagConstraints (1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
-    	add(ipv6_r_t);
-    	
-    	JButton about = new JButton("About");
-    	gridBayLayout.setConstraints(about, new GridBagConstraints (0, 4, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
-    	about.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/about.png")));
-    	about.setFont(MiscFont.getFont(0,17));
-    	about.setActionCommand("open_about");
-    	about.addActionListener(this);
-    	add(about);
-    	JLabel about_t = new JLabel("Opens the About Panel. If the Tab is currently Closed the Tab gets opened. If it's open it get focused.");
-    	gridBayLayout.setConstraints(about_t, new GridBagConstraints (1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
-    	add(about_t);    	
+    	if (!firstInit){
+    		//do Layout is needes for for auto resize elements
+    		doLayout();
+    	}
     }
 
 	public void actionPerformed(ActionEvent e) {
