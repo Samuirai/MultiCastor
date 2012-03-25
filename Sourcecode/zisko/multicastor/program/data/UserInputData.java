@@ -1,8 +1,5 @@
 package zisko.multicastor.program.data;
 import java.util.ArrayList;
-import java.util.Vector;
-
-import javax.swing.JSeparator;
 
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;

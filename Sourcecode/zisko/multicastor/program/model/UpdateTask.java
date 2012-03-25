@@ -16,26 +16,22 @@ import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 public class UpdateTask extends TimerTask {
 	private ViewController viewController;
 	private Logger logger;
-	private Map<MulticastData, MulticastThreadSuper> mc_sender_v4;
+	private Map<MulticastData, MulticastThreadSuper> mc_sender_l3;
 	private Map<MulticastData, MulticastThreadSuper> mc_sender_v6;
-	private Map<MulticastData, MulticastThreadSuper> mc_receiver_v4;
+	private Map<MulticastData, MulticastThreadSuper> mc_receiver_l3;
 	private Map<MulticastData, MulticastThreadSuper> mc_receiver_v6;
 	
 	//V1.5 [FH] edded that memory warning is only appearing once
 	private boolean memoryWarned = false;
 
 	public UpdateTask(Logger logger,
-			Map<MulticastData, MulticastThreadSuper> mcSenderV4,
-			Map<MulticastData, MulticastThreadSuper> mcSenderV6,
-			Map<MulticastData, MulticastThreadSuper> mcReceiverV4,
-			Map<MulticastData, MulticastThreadSuper> mcReceiverV6,
+			Map<MulticastData, MulticastThreadSuper> mcSenderL3,
+			Map<MulticastData, MulticastThreadSuper> mcReceiverL3,
 			ViewController viewController) {
 		super();
 		this.logger = logger;
-		mc_sender_v4 = mcSenderV4;
-		mc_sender_v6 = mcSenderV6;
-		mc_receiver_v4 = mcReceiverV4;
-		mc_receiver_v6 = mcReceiverV6;
+		mc_sender_l3 = mcSenderL3;
+		mc_receiver_l3 = mcReceiverL3;
 		this.viewController = viewController;
 	}
 
@@ -59,19 +55,14 @@ public class UpdateTask extends TimerTask {
 			this.memoryWarned = true;
 		}
 
-		for (int i = 0; i < 4; i++) {
+		//TODO [MH] tbr
+		for (int i = 0; i < 2; i++) {
 			switch (i) {
 			case 0:
-				v = mc_sender_v4;
+				v = mc_sender_l3;
 				break;
 			case 1:
-				v = mc_sender_v6;
-				break;
-			case 2:
-				v = mc_receiver_v4;
-				break;
-			case 3:
-				v = mc_receiver_v6;
+				v = mc_receiver_l3;
 				break;
 			}
 			for (Entry<MulticastData, MulticastThreadSuper> m : v.entrySet()) {
@@ -81,6 +72,22 @@ public class UpdateTask extends TimerTask {
 				}
 			}
 		}
+//		for (int i = 0; i < 2; i++) {
+//			switch (i) {
+//			case 0:
+//				v = mc_sender_v4;
+//				break;
+//			case 1:
+//				v = mc_sender_v6;
+//				break;
+//			}
+//			for (Entry<MulticastData, MulticastThreadSuper> m : v.entrySet()) {
+//				value = m.getValue();
+//				if (value.getMultiCastData().isActive()) {
+//					value.update();
+//				}
+//			}
+//		}
 		if (viewController != null) {
 			if (viewController.isInitFinished()) {
 				viewController.viewUpdate();

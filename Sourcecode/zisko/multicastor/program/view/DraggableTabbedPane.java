@@ -14,6 +14,8 @@ import java.util.Map;
 
 import javax.swing.JTabbedPane;
 
+import zisko.multicastor.program.lang.LanguageManager;
+
 /**
  * Die Klasse DraggableTabbedPane erbt von JTabbedPane und lässt zusätzlich zu JTabbed Pane
  * ein grafish ansprechendes verschieben von Tabs per Drag&Drop zu.
@@ -36,6 +38,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 	  private int mouseRelY;
 	  private Rectangle bounds;
 	  private FrameMain frame;
+	  private LanguageManager lang;
 
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
@@ -46,6 +49,8 @@ public class DraggableTabbedPane extends JTabbedPane {
    */
   public DraggableTabbedPane(final FrameMain parentFrame) {
     super();
+    
+    lang=LanguageManager.getInstance();
     frame = parentFrame;
     
     addMouseMotionListener(new MouseMotionAdapter() {
@@ -167,47 +172,47 @@ public class DraggableTabbedPane extends JTabbedPane {
 		
 		if(command.equals("open_layer3_r")){
 			//Prüfen ob Tab bereits geöffnet ist
-			if(openTabs.containsKey(" L3 Receiver "))
+			if(openTabs.containsKey(" "+lang.getProperty("tab.l3r")+" "))
 				//Wenn ja holen wir uns die ID und focusieren(öffnen) ihn
-				setSelectedIndex(openTabs.get(" L3 Receiver "));
+				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l3r")+" "));
 			else{
-				insertTab(" L3 Receiver ", null, frame.getPanel_rec_lay3(), null, openTabsCount-1);
+				insertTab(" "+lang.getProperty("tab.l3r")+" ", null, frame.getPanel_rec_lay3(), null, openTabsCount-1);
 				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l3r().setSelected(true);
 		}else if(command.equals("open_layer3_s")){
-			if(openTabs.containsKey(" L3 Sender "))
-				setSelectedIndex(openTabs.get(" L3 Sender "));
+			if(openTabs.containsKey(" "+lang.getProperty("tab.l3s")+" "))
+				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l3s")+" "));
 			else{
-				insertTab(" L3 Sender ", null, frame.getPanel_sen_lay3(), null, openTabsCount-1);
+				insertTab(" "+lang.getProperty("tab.l3s")+" ", null, frame.getPanel_sen_lay3(), null, openTabsCount-1);
 				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6sender.png"));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l3s().setSelected(true);
 		}else if(command.equals("open_layer2_s")){
-			if(openTabs.containsKey(" L2 Sender "))
-				setSelectedIndex(openTabs.get(" L2 Sender "));
+			if(openTabs.containsKey(" "+lang.getProperty("tab.l2s")+" "))
+				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l2s")+" "));
 			else{
-				insertTab(" L2 Sender ", null, frame.getPanel_sen_lay2(), null, openTabsCount-1);
+				insertTab(" "+lang.getProperty("tab.l2s")+" ", null, frame.getPanel_sen_lay2(), null, openTabsCount-1);
 				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4sender.png"));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l2s().setSelected(true);
 		}else if(command.equals("open_layer2_r")){
-			if(openTabs.containsKey(" L2 Receiver "))
-				setSelectedIndex(openTabs.get(" L2 Receiver "));
+			if(openTabs.containsKey(" "+lang.getProperty("tab.l2r")+" "))
+				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l2r")+" "));
 			else{
-				insertTab(" L2 Receiver ", null, frame.getPanel_rec_lay2(), null, openTabsCount-1);
+				insertTab(" "+lang.getProperty("tab.l2r")+" ", null, frame.getPanel_rec_lay2(), null, openTabsCount-1);
 				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l2r().setSelected(true);
 		}else if(command.equals("open_about")){
-			if(openTabs.containsKey(" About "))
-				setSelectedIndex(openTabs.get(" About "));
+			if(openTabs.containsKey(" "+lang.getProperty("mi.about")+" "))
+				setSelectedIndex(openTabs.get(" "+lang.getProperty("mi.about")+" "));
 			else{
-				insertTab(" About ", null, frame.getPanel_about(), null, openTabsCount-1);
+				insertTab(" "+lang.getProperty("mi.about")+" ", null, frame.getPanel_about(), null, openTabsCount-1);
 				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/about.png"));
 				setSelectedIndex(openTabsCount-1);
 			}
@@ -216,15 +221,15 @@ public class DraggableTabbedPane extends JTabbedPane {
   }
   
   public void closeTab(String command){
-	  if(command.equals(" L3 Receiver ")){
+	  if(command.equals(" "+lang.getProperty("tab.l3r")+" ")){
 			frame.getMi_open_l3r().setSelected(false);
-	  }else if(command.equals(" L3 Sender ")){
+	  }else if(command.equals(" "+lang.getProperty("tab.l3s")+" ")){
 			frame.getMi_open_l3s().setSelected(false);
-	  }else if(command.equals(" L2 Receiver ")){
+	  }else if(command.equals(" "+lang.getProperty("tab.l2r")+" ")){
 			frame.getMi_open_l2r().setSelected(false);
-	  }else if(command.equals(" L2 Sender ")){
+	  }else if(command.equals(" "+lang.getProperty("tab.l2s")+" ")){
 			frame.getMi_open_l2s().setSelected(false);
-	  }else if(command.equals(" About "))
+	  }else if(command.equals(" "+lang.getProperty("mi.about")+" "))
 		  	frame.getMi_open_about().setSelected(false);
   }
   

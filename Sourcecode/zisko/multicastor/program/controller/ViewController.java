@@ -18,13 +18,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.net.InetAddress;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
@@ -56,6 +54,7 @@ import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.InputValidator;
 import zisko.multicastor.program.model.NetworkAdapter;
 /**
@@ -128,17 +127,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private UserInputData inputData_R6;
 	
+	private LanguageManager lang;
+	
 	/**
 	 * Standardkonstruktor der GUI, hierbei wird die GUI noch nicht initialisiert!
 	 */
 	public ViewController(){
-		//initialize(null);
+		lang=LanguageManager.getInstance();
 	}
 	/**
 	 * Implementierung des ActionListeners, betrifft die meisten GUI Komponenten.
 	 * Diese Funktion wird aufgerufen wenn eine Interaktion mit einer GUI Komponente stattfindet, welche
 	 * den ActionListener dieser ViewController Klasse hï¿½lt. Die IF-THEN-ELSEIF Abragen dienen dazu 
 	 * die Komponente zu identifizieren bei welcher die Interaktion stattgefunden hat.
+	 * @throws NeedRestartException 
 	 */
 	public void actionPerformed(ActionEvent e) {
 
@@ -156,9 +158,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		//V1.5: Language TODO
-		else if(e.getSource()==f.getMi_language()){
-			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");			
-		}else if(e.getSource()==f.getMi_saveconfig()){
+		else if(e.getSource()==f.getM_language()){
+			JOptionPane.showMessageDialog(f, "Die Änderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
+		}
+		
+		//TODO: Böser Testcode!
+		else if (e.getActionCommand().startsWith("change_lang_to")){
+			LanguageManager.setCurrentLanguage(e.getActionCommand().replaceFirst("change_lang_to_", ""));
+			f.reloadLanguage();
+			f.repaint();
+		}
+		
+		
+		
+		else if(e.getSource()==f.getMi_saveconfig()){
 			//System.out.println("Saving!");
 			f.getFc_save().toggle();
 		}
@@ -1282,10 +1295,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(title.equals(" Sender IPv4 ")) typ = Typ.SENDER_V4;
 		else if(title.equals(" Receiver IPv6 ")) typ = Typ.RECEIVER_V6;
 		else if(title.equals(" Sender IPv6 ")) typ = Typ.SENDER_V6;
-		else if(title.equals(" L3 Sender ")) typ = Typ.L3_SENDER;
-		else if(title.equals(" L3 Receiver ")) typ = Typ.L3_RECEIVER;
-		else if(title.equals(" L2 Sender ")) typ = Typ.L2_SENDER;
-		else if(title.equals(" L2 Receiver ")) typ = Typ.L2_RECEIVER;
+		else if(title.equals(" "+lang.getProperty("tab.l3s")+" ")) typ = Typ.L3_SENDER;
+		else if(title.equals(" "+lang.getProperty("tab.l3r")+" ")) typ = Typ.L3_RECEIVER;
+		else if(title.equals(" "+lang.getProperty("tab.l2s")+" ")) typ = Typ.L2_SENDER;
+		else if(title.equals(" "+lang.getProperty("tab.l2r")+" ")) typ = Typ.L2_RECEIVER;
 		else typ = Typ.UNDEFINED;
 
 		return typ;
@@ -1329,30 +1342,40 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Gibt den Insgesamten Traffic des IPv4SENDER und IPv6SENDER als String zurï¿½ck (Mbit/s) im Format "##0.000"
 	 */
 	public String getTotalTrafficDown(){
-		 DecimalFormat ret = new DecimalFormat("##0.000");
-		 double sum = 0.0;
-		 for(int i = 0; i < getTable(Typ.RECEIVER_V4).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 for(int i = 0; i < getTable(Typ.RECEIVER_V6).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 return ret.format(sum);
+		DecimalFormat ret = new DecimalFormat("##0.000");
+		double sum = 0.0;
+		 // TODO [MH] tbr
+//		 for(int i = 0; i < getTable(Typ.RECEIVER_V4).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+//		 for(int i = 0; i < getTable(Typ.RECEIVER_V6).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+		for(int i = 0; i < getTable(Typ.L3_RECEIVER).getModel().getRowCount(); i++){
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 5)).replace(",", "."));
+	 	}
+		return ret.format(sum);
 	 }
 	/**
 	 * Hilfsfunktion zum Berechnen des insgesamten Traffics welcher vom Multicast Tool verschickt wird (IPv4 & IPv6).
 	 */
 	public String getTotalTrafficUP(){
-		 DecimalFormat ret = new DecimalFormat("##0.000");
-		 double sum = 0.0;
-		 for(int i = 0; i < getTable(Typ.SENDER_V4).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 for(int i = 0; i < getTable(Typ.SENDER_V6).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 return ret.format(sum);
-	 }
+		DecimalFormat ret = new DecimalFormat("##0.000");
+		double sum = 0.0;
+		
+		 // TODO [MH] tbr
+//		 for(int i = 0; i < getTable(Typ.SENDER_V4).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+//		 for(int i = 0; i < getTable(Typ.SENDER_V6).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+		
+		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
+	 	}
+		return ret.format(sum);
+	}
 	/**
 	 * Funktion welche aufgerufen wird wenn Hide im PopupMenu des Tabellenkopfs gedrï¿½ckt wurde
 	 */
@@ -1498,6 +1521,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		}
 		autoSave();
 	}
+	@SuppressWarnings({ "static-access", "static-access" })
 	@Override
 	/**
 	 * Funktion welche aufgerufen wird wenn eine GUI Komponente mit dem ItemListener selektiert oder deselektiert wird.
@@ -2297,7 +2321,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 		//check which tab is selected and update graph for specific program part
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			//System.out.println("showupdate "+showupdate);
 			getPanTabbed(typ).getPan_graph().updateGraph(mc.getPPSSender(typ), showupdate);
 		}
@@ -2350,6 +2374,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Implementierung des ListSelectionListeners, sorgt fï¿½r korrektes Verhalten der GUI
 	 * beim Selektieren und Deselektieren von einer oder mehreren Zeilen in der Tabelle.
 	 */
+	// TODO [MH] hier muss bestimmt noch wat jemacht werden
 	public void valueChanged(ListSelectionEvent e) {
 		if(e.getSource()==getTable(Typ.SENDER_V4).getSelectionModel()){
 			listSelectionEventFired(Typ.SENDER_V4);
