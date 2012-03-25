@@ -238,7 +238,7 @@ public class PacketAnalyzerTest extends TestCase {
 		}
 		
 		/**
-		 * Testet was bei falscher Arraygröße passiert
+		 * Testet was bei falscher Arraygrï¿½ï¿½e passiert
 		 */
 		@Test
 		public void testAnalysePacket5(){

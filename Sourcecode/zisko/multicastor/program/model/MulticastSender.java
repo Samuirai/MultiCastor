@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
+import zisko.multicastor.program.data.MulticastData.senderState;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 
@@ -90,6 +91,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	 * @param mcBean Das {@link MulticastData}-Object, dass alle f�r den Betrieb n�tigen Daten enth�lt.
 	 * @param _messages Eine {@link Queue}, �ber den der Sender seine Ausgaben an den Controller weitergibt.
 	 */
+	//V1.5 [FH] Added MulticastController for Networkfail foo
 	public MulticastSender(MulticastData mcBean, Logger _logger, MulticastController mcCtrl){
 		super(mcBean);
 		
@@ -192,6 +194,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 		totalPacketCount			= 0;
 		resetablePcktCnt			= 0;
 		cumulatedResetablePcktCnt	= 0;
+		//V1.5 [FH] Added this for networkfail foo
 		int ioExceptionCnt = 0;
 		
 		//Der Multicastgruppe beitreten
@@ -274,12 +277,26 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 									if(totalPacketCount<65535)	totalPacketCount++;
 									else						totalPacketCount = 0;
 									resetablePcktCnt++;
-								}catch(IOException e1){
-									Object[] options = { "Stop Sender", "Reattemp to connect"};
 									
+									//V1.5 [FH] added for networkfail foo
+									if(ioExceptionCnt != 0){
+										mcData.setSenders(senderState.SINGLE);
+										proclaim(2, "Sender is working again");
+										JOptionPane.showMessageDialog(new JFrame(), "Sender is working again");
+										ioExceptionCnt = 0;
+									}
+									
+								}catch(IOException e1){
+									//V1.5 [FH] Made this Code work
+									Object[] options = { "Stop Sender", "Reattemp to connect"};
+
+									 mcData.setSenders(senderState.NETWORK_ERROR);
+									 
 									if(ioExceptionCnt == 0)
-										JOptionPane.showMessageDialog(new JFrame(), "Problem with sending via IP '"+sourceIp+
+										proclaim(1, "Problem with sending via IP '"+sourceIp+
 												"'. Trying to reconnect...");
+										//JOptionPane.showMessageDialog(new JFrame(), "Problem with sending via IP '"+sourceIp+
+												//"'. Trying to reconnect...");
 
 									if(ioExceptionCnt == 10)
 										 if( JOptionPane.showOptionDialog(null, "Sender is still not working correctly.\n"+

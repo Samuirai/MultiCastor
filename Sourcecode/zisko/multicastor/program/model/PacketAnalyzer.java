@@ -70,7 +70,7 @@ public class PacketAnalyzer {
 	
 	/** Used to track how much the SenderID changes. */
 	private int senderChanges = 0;
-	/** Speichert wann die letzte Änderung war. */
+	/** Speichert wann die letzte ï¿½nderung war. */
 	private int recently_changed = 0;
 	
 	/** Wird genutzt, wenn fuer eine gewisse Zeit keine Pakete mehr empfangen wurden. */
@@ -86,7 +86,7 @@ public class PacketAnalyzer {
 	 * So kann die naechste erwartete Paketnummer berechnet werden. */
 	int internerPacketCount = 0;
 	/** Wird fuer PacketLostPerSecond genutzt. Hier werden fehlende Paketnummern 
-	 * eingetragen, auf die anschließend geprueft wird. */
+	 * eingetragen, auf die anschlieï¿½end geprueft wird. */
 	Vector<Integer> missingPackets;
 	
 	/**
@@ -97,11 +97,11 @@ public class PacketAnalyzer {
 	 */
 	public PacketAnalyzer(MulticastData multicastData, Logger logger){
 		if (multicastData==null){
-			System.out.println("Böser Fehler!!! multicastData ist null im PacketAnalyzer.");
+			System.out.println("Bï¿½ser Fehler!!! multicastData ist null im PacketAnalyzer.");
 		}
 		mcData = multicastData;
 		if(logger == null){
-			System.out.println("Böser Fehler!!! Message Queue ist null im PacketAnalyzer.");
+			System.out.println("Bï¿½ser Fehler!!! Message Queue ist null im PacketAnalyzer.");
 		}
 		this.logger = logger;
 		missingPackets = new Vector<Integer>();
@@ -370,12 +370,18 @@ public class PacketAnalyzer {
 		trafficAvgHelper += traffic;
 		
 		// PacketsLostPerSecond
+		mcData.addPacketLoss(missingPackets.size());
 		mcData.setPacketLossPerSecond(missingPackets.size());
 		plpsAvgHelper += missingPackets.size();
 		missingPackets.removeAllElements();	
 		//log("update - Ende");`
 		
 		updateMinHelper++;
+	}
+	
+	//V1.5 [FH] 
+	public long getPacketCount(){
+		return this.packetCount;
 	}
 	
 	/**

@@ -461,6 +461,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
 					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
 				}
+				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
+				}
+				System.out.println("Source-Adress:" + mcd.getSourceIp());
 			break;
 			case RECEIVER_V6:
 				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
@@ -575,6 +579,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				break;
 			case RECEIVER_V4:	
 				if(	input[1][0] &&
+					input[1][1] &&
 					input[1][2]){
 					f.getPanel_rec_ipv4().getPan_config().getBt_enter().setEnabled(true);
 				}
@@ -1886,9 +1891,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		setBTStartStopDelete(typ);
 	}
 	
-	public void bla(){
-		System.out.println("bla");
-	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der Stop Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Stop Button gedr�ckt wurde

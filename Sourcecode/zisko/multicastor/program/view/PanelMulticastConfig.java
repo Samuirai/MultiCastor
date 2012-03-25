@@ -17,7 +17,7 @@ import zisko.multicastor.program.model.NetworkAdapter;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 /**
- * Das KonfigurationPanel für Multicasts (links unten im Programm).
+ * Das KonfigurationPanel fï¿½r Multicasts (links unten im Programm).
  * Dient zum Einstellen und Erstellen von Multicast Sendern und Receivern
  * @author Daniel Becker
  *
@@ -49,8 +49,8 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	/**
 	 * Konstruktor welcher das komplette Configuration Panel initialisiert
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
 		setBorder(new MiscBorder("MultiCast Configuration"));
@@ -62,7 +62,7 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	/**
 	 * Initialisiert die Standard Textfelder des KonfigurationsPanels
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	private void createGUIstandard(Typ typ) {
 		tf_groupIPaddress.setToolTipText("Enter MultiCast group IP address here!");
@@ -77,9 +77,9 @@ public class PanelMulticastConfig extends JPanel {
 		}
 	}
 	/**
-	 * Funktion welche die spezifischen Textfelder für einen Programmteil erstellt.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * Funktion welche die spezifischen Textfelder fï¿½r einen Programmteil erstellt.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		Vector<InetAddress> temp = null;
@@ -94,7 +94,7 @@ public class PanelMulticastConfig extends JPanel {
 		bt_enter.setBounds(120,180,95,25);
 		bt_enter.setFont(MiscFont.getFont(0,12));
 		bt_enter.setEnabled(false);
-		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6){
+		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6){
 			pan_packetrate=new JPanel();
 			pan_packetlength=new JPanel();
 			pan_ttl=new JPanel();
@@ -136,13 +136,14 @@ public class PanelMulticastConfig extends JPanel {
 			ListCellRenderer renderer = cb_sourceIPaddress.getRenderer();
 			((JLabel) renderer).setHorizontalAlignment(SwingConstants.CENTER);
 			cb_sourceIPaddress.addItemListener(ctrl);
-			if(typ == Typ.SENDER_V4){
+			if(typ == Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
 				temp = NetworkAdapter.getipv4Adapters();
 			}else{
 				temp = NetworkAdapter.getipv6Adapters();
 			}
 			for(int i = 0 ; i < temp.size(); i++){
-				if(typ == Typ.SENDER_V4){
+				//V1.5 [FH] Added for RECEIVERs
+				if(typ == Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
 					try {
 						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1)+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 					} catch (SocketException e) {
@@ -151,7 +152,7 @@ public class PanelMulticastConfig extends JPanel {
 					}
 							//(0)temp.get(i).toString().substring(1));
 				}
-				else if(typ == Typ.SENDER_V6){
+				else if(typ == Typ.SENDER_V6  || typ == Typ.RECEIVER_V6){
 					try {
 						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1).split("%")[0]+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 					} catch (SocketException e) {

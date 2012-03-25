@@ -14,7 +14,7 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
+ * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kï¿½mmert.
  * @author Daniel Becker
  *
  */
@@ -27,19 +27,19 @@ public class MiscTableModel extends AbstractTableModel {
 		this.ctrl=ctrl;
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefügt wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefï¿½gt wird.
 	 */
 	public void insertUpdate(){
 		fireTableRowsInserted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast gelsï¿½cht wird.
 	 */
 	public void deleteUpdate(){
 		fireTableRowsDeleted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast geändert wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast geï¿½ndert wird.
 	 */
 	public void changeUpdate(){
 		fireTableRowsUpdated(0, ctrl.getMCCount(typ));
@@ -86,7 +86,7 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Spalten zurück gibt.
+	 * Funktion welche die Anzahl an Spalten zurï¿½ck gibt.
 	 */
 	public int getColumnCount() {
 		int ret = 0;
@@ -130,8 +130,8 @@ public class MiscTableModel extends AbstractTableModel {
 				case 5: ret = "Mbit/s"; break;
 				case 6:	ret = "PORT"; break;			
 				case 7:	ret = "LOSS/S"; break;
-				case 8:	ret = "AVG INT"; break;
-				case 9:	ret = "#INT"; break;
+				case 8:	ret = "LOSST"; break;
+				case 9:	ret = "RCVD"; break;
 				case 10: ret = "SRC"; break;
 				default: ret = "error!"; break;
 			}
@@ -140,14 +140,14 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Tabellenreihen zurück gibt.
+	 * Funktion welche die Anzahl an Tabellenreihen zurï¿½ck gibt.
 	 */
 	public int getRowCount() {
 		return ctrl.getMCCount(typ);
 	}
 	@Override
 	/**
-	 * Funktion welche die Daten für eine jeweilige Tabellenzelle anfordert
+	 * Funktion welche die Daten fï¿½r eine jeweilige Tabellenzelle anfordert
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex){
 		MulticastData data = ctrl.getMCData(rowIndex, typ);
@@ -178,9 +178,10 @@ public class MiscTableModel extends AbstractTableModel {
 				case 5: ret=new DecimalFormat("##0.000").format((data.getTraffic()/1024.0/1024.0*8.0)); break;
 				case 6: ret=new Integer(data.getUdpPort()); break;
 				case 7: ret=new Integer(data.getPacketLossPerSecond()); break;
-				case 8: ret=new Integer(data.getAverageInterruptionTime()); break;
-				case 9: ret=new Integer(data.getNumberOfInterruptions()); break;
-				case 10: ret = data.getPacketSource().toString(); break;
+				case 8: ret=new Integer(data.getPacketLosst()); break;
+				case 9: ret=new Integer(data.getPacketReceived()); break;
+				//case 10: ret = data.getPacketSource().toString(); break;
+				case 10: ret = data.getSourceIp().toString().substring(1); break;
 				default: System.out.println("TABLEMODEL GETVALUE ERROR");
 			}
 		}

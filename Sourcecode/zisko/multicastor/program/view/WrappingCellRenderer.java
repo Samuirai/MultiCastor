@@ -10,8 +10,8 @@ import zisko.multicastor.program.data.MulticastData.senderState;
 /**
  * Klasse welche die Farben in der Tabelle verwaltet, hierbei muss unterschieden werden ob Multicasts aktiv,
  * inaktiv, selektiert oder deselektiert sind. Weiterhin unterscheidet die Farbe der Tabellenzeilen ob ein
- * Empfänger von einem Sender empfängt (Grün), von mehreren Sender empfängt (Orange) oder erst kürzlich 
- * eine Änderung in der Art der Daten die empfangen wurden festgestellt hat (Gelb)
+ * Empfï¿½nger von einem Sender empfï¿½ngt (Grï¿½n), von mehreren Sender empfï¿½ngt (Orange) oder erst kï¿½rzlich 
+ * eine ï¿½nderung in der Art der Daten die empfangen wurden festgestellt hat (Gelb)
  * @author Daniel Becker
  *
  */
@@ -32,6 +32,9 @@ public class WrappingCellRenderer implements TableCellRenderer {
         if(!isSelected){
         	if(((Boolean)table.getModel().getValueAt(row, 0)).booleanValue()){
             	switch(ctrl.getMCData(row, ctrl.getSelectedTab()).getSenders()){
+            		case NETWORK_ERROR:
+            			rendererComponent.setBackground(Color.red);
+	            		rendererComponent.setForeground(Color.yellow);             			
 	            	case SINGLE:         	
 	            		rendererComponent.setBackground(Color.green);
 	            		rendererComponent.setForeground(Color.black); 
@@ -59,7 +62,11 @@ public class WrappingCellRenderer implements TableCellRenderer {
         else{
         	if(((Boolean)table.getModel().getValueAt(row, 0)).booleanValue()){
         	 	switch(ctrl.getMCData(row, ctrl.getSelectedTab()).getSenders()){
-	            	case SINGLE:         	
+        	 		case NETWORK_ERROR:
+        	 			rendererComponent.setBackground(Color.red);
+            			rendererComponent.setForeground(Color.yellow);
+            			break;
+        	 		case SINGLE:         	
 	            		rendererComponent.setBackground(new Color(0,175,0));
 	    	        	rendererComponent.setForeground(Color.white);
 	            		break;

@@ -31,6 +31,7 @@ public class MulticastData {
 	private int numberOfInterruptions = -1; 
 	private int averageInterruptionTime = -1;
 	private int packetLossPerSecond = -1;
+	private int packetLoss = -1;
 	private int jitter = -1;
 	private int traffic = -1;
 	/** Shows if data from multiple Senders is received */
@@ -57,8 +58,9 @@ public class MulticastData {
 		UNDEFINED, HIRSCHMANN, MULTICASTOR
 	}
 	
+	// V1.5 [FH] Added Networ_error
 	public enum senderState {
-		NONE, SINGLE, RECENTLY_CHANGED, MULTIPLE
+		NONE, SINGLE, RECENTLY_CHANGED, MULTIPLE, NETWORK_ERROR
 	}
 	
 	//********************************************
@@ -126,6 +128,7 @@ public class MulticastData {
 		packetCount = d;
 		traffic = d;
 		trafficAvg = d;
+		packetLoss = d;
 		packetSource = Source.UNDEFINED;
 	}
 
@@ -342,5 +345,15 @@ public class MulticastData {
 	}
 	public int getMaxInterruptionTime() {
 		return maxInterruptionTime;
+	}
+	public int getPacketReceived() {
+		return (int) this.packetCount;
+	}
+	public int getPacketLosst() {
+		return this.packetLoss;
+	}
+	public void addPacketLoss(int size) {
+		this.packetLoss += size;
+		
 	}
 }

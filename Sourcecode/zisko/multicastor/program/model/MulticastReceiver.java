@@ -2,6 +2,7 @@ package zisko.multicastor.program.model;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketTimeoutException;
 import java.util.Queue;
@@ -49,13 +50,18 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		try {
 			multicastSocket = new MulticastSocket(m.getUdpPort());
 			// Der Empfaenger nutzt alle verfuegbaren Netzwerkschnittstellen
-			//	multicastSocket.setInterface(mcData.getSourceIp());
+			//System.out.println(mcData.getSourceIp());
+			//byte [] b = new byte[] {(byte)127,(byte)0,(byte)0,(byte)1};
+			//multicastSocket.setInterface(InetAddress.getByAddress(b));
+			//System.out.println("InetAddress:" + InetAddress.getByAddress(b));
+			multicastSocket.setInterface(mcData.getSourceIp());
 		}catch(IOException e){
 			logger.log(Level.WARNING, "'" + e.getMessage() + "' Versuche default Port 4711 zu setzen...");
 			try{
 				int udpPort = 4711;
 				mcData.setUdpPort(udpPort);
 				multicastSocket = new MulticastSocket(udpPort);
+				multicastSocket.setInterface(mcData.getSourceIp());
 			}catch(IOException e2){
 				logger.log(Level.WARNING, e.getMessage());
 				return;
@@ -92,9 +98,11 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		// Join MultiCast-Group
 		//********************************************
 		try {
+			System.out.println("Group IP:" + mcData.getGroupIp());
 			multicastSocket.joinGroup(mcData.getGroupIp());
 			logger.log(Level.INFO, mcData.identify() + ": Started Receiver with MC Object.");
 		} catch (IOException e1) {
+			//e1.printStackTrace();
 			// Setzt Aktivwerte wieder auf false und gibt eine Fehlermeldung aus
 			mcData.setActive(false);
 			active = false;
@@ -137,16 +145,21 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		
 		// local variables
 		DatagramPacket datagram = new DatagramPacket(buf, length);
+		int counter = 0;
+		packetAnalyzer.resetValues();
 
 		while(active){
 			try {
 				multicastSocket.setSoTimeout(1000);
 				multicastSocket.receive(datagram);
+				
 				packetAnalyzer.setTimeout(false);
 				//********************************************
 				// Analyse received packet
 				//********************************************
 				packetAnalyzer.analyzePacket(datagram.getData());
+				mcData.setPacketCount(packetAnalyzer.getPacketCount());
+				//System.out.println(packetAnalyzer.getPacketCount());
 			} catch (IOException e) {
 				if(e instanceof SocketTimeoutException){
 					// bei Timeout erfaehrt es der PacketAnalyzer wegen Interrupts
