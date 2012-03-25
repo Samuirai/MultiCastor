@@ -175,7 +175,7 @@ public class MulticastController{
 		
 	//	AllesLaden(); // sollte von Thomas gemacht werden
 		
-		updateTask = new UpdateTask(logger,mcMap_sender_v4, mcMap_sender_v6, mcMap_receiver_v4, mcMap_receiver_v6,view_controller);
+		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000,1000);
 		
@@ -657,16 +657,11 @@ public class MulticastController{
 	 * @return Sum of all sent packets. Returns 0 if typ is invalid.
 	 */
 	public int getPPSSender(MulticastData.Typ typ) {
-		// TODO [MH] muss auch noch angepasst werden lay3
 		int count = 0;
 		
-		if(typ.equals(MulticastData.Typ.SENDER_V4)){
-			for(MulticastData ms: mc_sender_v4){
-				count += ((MulticastSenderInterface) mcMap_sender_v4.get(ms)).getMultiCastData().getPacketRateMeasured();
-			}
-		} else if(typ.equals(MulticastData.Typ.SENDER_V6)){
-			for(MulticastData ms: mc_sender_v6){
-				count += ((MulticastSenderInterface) mcMap_sender_v6.get(ms)).getMultiCastData().getPacketRateMeasured();
+		if(typ.equals(MulticastData.Typ.L3_SENDER)){
+			for(MulticastData ms: mc_sender_l3){
+				count += ((MulticastSenderInterface) mcMap_sender_l3.get(ms)).getMultiCastData().getPacketRateMeasured();
 			}
 		}	
 		return count;

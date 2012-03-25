@@ -1357,13 +1357,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		 for(int i = 0; i < getTable(Typ.SENDER_V6).getModel().getRowCount(); i++){
 //			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
 //		 }
-		//XXX
-		System.out.println("rowcount: " + getTable(Typ.L3_SENDER).getModel().getRowCount());
-		
 		
 		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
-			//XXX
-			System.out.println("firstvalue sender: " + getTable(Typ.L3_SENDER).getModel().getValueAt(0, 3));
 			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
 	 	}
 		return ret.format(sum);
@@ -2312,7 +2307,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 		//check which tab is selected and update graph for specific program part
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			//System.out.println("showupdate "+showupdate);
 			getPanTabbed(typ).getPan_graph().updateGraph(mc.getPPSSender(typ), showupdate);
 		}
