@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<MultiCastor>
+    <L2>
+        <Sender>
+            <Adress></Adress>
+            <NetworkInterface></NetworkInterface>
+            <PacketRate></PacketRate>
+            <PacketLength></PacketLength>
+        </Sender>
+        <Receiver>
+            <Adress></Adress>
+        </Receiver>
+    </L2>
+    <L3>
+        <Sender>
+            <Adress></Adress>
+            <NetworkInterface></NetworkInterface>
+            <Port></Port>
+            <TTL></TTL>
+            <PacketRate></PacketRate>
+            <PacketLength></PacketLength>
+        </Sender>
+        <Receiver>
+            <Adress></Adress>
+            <Port></Port>
+        </Receiver>
+    </L3>
+    <Meta>
+        <ComputerName></ComputerName>
+        <SaveDate></SaveDate>
+    </Meta>
+</MultiCastor>

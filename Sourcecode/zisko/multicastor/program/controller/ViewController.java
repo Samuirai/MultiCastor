@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.net.InetAddress;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -434,6 +435,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.changeMC(mcd);
 		updateTable(mcd.getTyp(),UpdateTyp.UPDATE);
 	}
+		
 	/**
 	 * Hilfsfunktion welche den momentanen Input des KonfigurationsPanels in ein Multicast Datenobjekt schreibt.
 	 * Wird ben�tigt zum anlegen neuer Multicast sowie zum �ndern vorhandener Multicasts.
@@ -442,82 +444,167 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Ge�nderters Multicast Datenobjekt.
 	 */
 	private MulticastData changeMCData(MulticastData mcd, MulticastData.Typ typ){
-		// TODO [MH] hier soll die das neue MC Object gebaut werden mit L3 allgemein 
-		switch(typ){
-			case SENDER_V4:
-				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
-				}
-				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
-				}
-				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
-					mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
-					}
-				}
-				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
-					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setTtl(InputValidator.checkTimeToLive("32"));
-					}
-				}
-				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
-					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-					}
-				}
-				
-			break;
-			case SENDER_V6:
-				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-					mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
-				}
-				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
-				}
-				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
-					mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
-					}
-				}
-				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
-					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setTtl(InputValidator.checkTimeToLive("32"));
-					}
-				}
-				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
-					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-					}
-				}
-			break;
-			case RECEIVER_V4:
-				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
-				}
-			break;
-			case RECEIVER_V6:
-				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-					mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
-				}
-			break;
-			default: System.out.println("changeMCData(Multicastdata mcd) - ERROR");
+		// TODO [MH] hier soll die das neue MC Object gebaut werden mit L3 allgemein
+		boolean isIPv4;
+		
+		/* Is IPv4 or IPv6? */
+		if (InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null) {
+			isIPv4 = true;
+		} else {
+			isIPv4 = false;
 		}
+				
+		switch(typ) {
+			case L3_SENDER:
+				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
+					if (isIPv4) {
+						mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
+					} else {
+						mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
+					}
+				}
+				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
+				}
+				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
+					if (isIPv4) {
+						mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
+						if(getSelectedUserLevel() == Userlevel.BEGINNER){
+							mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
+						}
+					} else {
+						mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
+						if(getSelectedUserLevel() == Userlevel.BEGINNER){
+							mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
+						}
+					}
+				}
+				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
+					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
+					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+						mcd.setTtl(InputValidator.checkTimeToLive("32"));
+					}
+				}
+				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
+					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
+					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
+					}
+				}
+				break;
+			case L3_RECEIVER:
+				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
+					if (isIPv4) {
+						mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
+					} else {
+						mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
+					}
+				}
+				break;
+			default:
+				System.out.println("changeMCData(Multicastdata mcd) - ERROR");
+		}
+		
 		if(!getPanConfig(typ).getTf_udp_port().getText().equals("...")){
 			mcd.setUdpPort(InputValidator.checkPort(getPanConfig(typ).getTf_udp_port().getText()));
 		}
 		if(!getPanConfig(typ).getTb_active().getText().equals("multiple")){
 			mcd.setActive(getPanConfig(typ).getTb_active().isSelected());
 		}
-		mcd.setTyp(typ);
+		
+		// TODO [MH] funktioniert das so?
+		if (typ == MulticastData.Typ.L3_SENDER) {
+			if (isIPv4) {
+				mcd.setTyp(MulticastData.Typ.SENDER_V4);
+			} else {
+				mcd.setTyp(MulticastData.Typ.SENDER_V6);
+			}
+		} else if (typ == MulticastData.Typ.L3_RECEIVER) {
+			if (isIPv4) {
+				mcd.setTyp(MulticastData.Typ.RECEIVER_V4);
+			} else {
+				mcd.setTyp(MulticastData.Typ.RECEIVER_V6);
+			}
+		}
 		//System.out.println(mcd.toString());
 		return mcd;
+		
+		
+//		switch(typ){
+//			case SENDER_V4:
+//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
+//					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
+//				}
+//				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+//					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
+//				}
+//				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
+//					mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
+//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+//						mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
+//					}
+//				}
+//				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
+//					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
+//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+//						mcd.setTtl(InputValidator.checkTimeToLive("32"));
+//					}
+//				}
+//				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
+//					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
+//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+//						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
+//					}
+//				}
+//				
+//			break;
+//			case SENDER_V6:
+//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
+//					mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
+//				}
+//				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+//					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
+//				}
+//				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
+//					mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
+//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+//						mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
+//					}
+//				}
+//				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
+//					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
+//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+//						mcd.setTtl(InputValidator.checkTimeToLive("32"));
+//					}
+//				}
+//				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
+//					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
+//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+//						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
+//					}
+//				}
+//			break;
+//			case RECEIVER_V4:
+//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
+//					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
+//				}
+//			break;
+//			case RECEIVER_V6:
+//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
+//					mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
+//				}
+//			break;
+//			default: System.out.println("changeMCData(Multicastdata mcd) - ERROR");
+//		}
+//		if(!getPanConfig(typ).getTf_udp_port().getText().equals("...")){
+//			mcd.setUdpPort(InputValidator.checkPort(getPanConfig(typ).getTf_udp_port().getText()));
+//		}
+//		if(!getPanConfig(typ).getTb_active().getText().equals("multiple")){
+//			mcd.setActive(getPanConfig(typ).getTb_active().isSelected());
+//		}
+//		mcd.setTyp(typ);
+//		//System.out.println(mcd.toString());
+//		return mcd;
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der User das Netzwerk Interface in einem Sender �ndert.
@@ -1174,12 +1261,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public PanelTabbed getPanTabbed(Typ typ){
 		PanelTabbed ret = null;
 		switch(typ){
-			case SENDER_V4: ret=f.getPanel_sen_ipv4(); break;
-			case RECEIVER_V4: ret=f.getPanel_rec_ipv4(); break;
-			case SENDER_V6: ret=f.getPanel_sen_ipv6(); break;
-			case RECEIVER_V6: ret=f.getPanel_rec_ipv6(); break;
+			case SENDER_V4: ret=f.getPanel_sen_lay3(); break;
+			case RECEIVER_V4: ret=f.getPanel_rec_lay3(); break;
+			case SENDER_V6: ret=f.getPanel_sen_lay3(); break;
+			case RECEIVER_V6: ret=f.getPanel_rec_lay3(); break;
 			case L2_SENDER: ret=f.getPanel_sen_lay2(); break;
 			case L2_RECEIVER: ret=f.getPanel_rec_lay2(); break;
+			// TODO [MH] muessten eigentlich geloescht werden koennen (lay3)
 			case L3_SENDER: ret=f.getPanel_sen_lay3(); break;
 			case L3_RECEIVER: ret=f.getPanel_rec_lay3(); break;
 		}
@@ -1864,6 +1952,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem der Add Button gedr�ckt wurde
 	 */
 	private void pressBTAdd(Typ typ) {
+		// TODO [MH] Hier nochmal eine Methode, die ueberprueft, ob v4 und v6 mit packet length und netzwerk adapter passen
 		this.addMC(changeMCData(new MulticastData(), typ));
 		clearInput(typ);
 	}
