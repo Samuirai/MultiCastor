@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
@@ -55,6 +54,7 @@ import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.InputValidator;
 import zisko.multicastor.program.model.NetworkAdapter;
 /**
@@ -138,6 +138,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Diese Funktion wird aufgerufen wenn eine Interaktion mit einer GUI Komponente stattfindet, welche
 	 * den ActionListener dieser ViewController Klasse hï¿½lt. Die IF-THEN-ELSEIF Abragen dienen dazu 
 	 * die Komponente zu identifizieren bei welcher die Interaktion stattgefunden hat.
+	 * @throws NeedRestartException 
 	 */
 	public void actionPerformed(ActionEvent e) {
 
@@ -155,9 +156,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		//V1.5: Language TODO
-		else if(e.getSource()==f.getMi_language()){
-			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");			
-		}else if(e.getSource()==f.getMi_saveconfig()){
+		else if(e.getSource()==f.getM_language()){
+			JOptionPane.showMessageDialog(f, "Die Änderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
+		}
+		
+		//TODO: Böser Testcode!
+		else if (e.getActionCommand().startsWith("change_lang_to")){
+			LanguageManager.setCurrentLanguage(e.getActionCommand().replaceFirst("change_lang_to_", ""));
+			f.reloadLanguage();
+			f.repaint();
+		}
+		
+		
+		
+		else if(e.getSource()==f.getMi_saveconfig()){
 			//System.out.println("Saving!");
 			f.getFc_save().toggle();
 		}

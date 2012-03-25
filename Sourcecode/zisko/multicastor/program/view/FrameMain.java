@@ -11,6 +11,7 @@ import javax.swing.event.ChangeListener;
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
+import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Hauptfenster des MultiCastor Tools
  * 
@@ -26,6 +27,8 @@ import zisko.multicastor.program.data.UserlevelData.Userlevel;
 @SuppressWarnings("serial")
 public class FrameMain extends JFrame {
 
+	private LanguageManager lang=LanguageManager.getInstance();
+	
 	//GUI element variables
 	/**
 	 * Das Tabpanel mit welchem man durch die Programmteile schalten kann.
@@ -76,14 +79,13 @@ public class FrameMain extends JFrame {
 	 *  Das About Panel
 	 */
 	private PanelAbout panel_about;
-	
 	/**
 	 * V1.5: Zum entfernen der TabPane 
 	 */
 	private boolean paneDel = false;
 	private String subTitle;
 	/*
-	 * Weitere Standard GUI Komponenten welche benï¿½tigt werden 
+	 * Weitere Standard GUI Komponenten welche benötigt werden 
 	 */
 	private JMenuBar mb_menubar;
 	private JMenu m_menu;
@@ -92,13 +94,15 @@ public class FrameMain extends JFrame {
 	private JMenu m_info;
 	private JMenu m_view;
 	private ButtonGroup bg_scale;
+	private ButtonGroup bg_userLevel;
 	private JRadioButtonMenuItem rb_beginner;
 	private JRadioButtonMenuItem rb_expert;
 	private JRadioButtonMenuItem rb_custom;
+	private JRadioButtonMenuItem[] mi_languages;
 	private JMenuItem mi_saveconfig;
 	private JMenuItem mi_loadconfig;
 	private JMenuItem mi_exit;
-	private JMenuItem mi_language;
+	private JMenu m_language;
 	private JMenuItem mi_about;
 	private JMenuItem mi_help;
 	private JMenuItem mi_snake;
@@ -120,8 +124,8 @@ public class FrameMain extends JFrame {
 	public Vector<String> getLastConfigs() {
 		return lastConfigs;
 	}
-	private FrameFileChooser fc_load;
 	private int aboutPanelState = 0; // 0 = invisible, 1 = visible, closeButton unhovered, 2 = visible close button hovered
+	private FrameFileChooser fc_load;
 	private Userlevel level = Userlevel.EXPERT;
 	private Vector<String> lastConfigs=new Vector<String>();
 	private Separator mi_separator;
@@ -131,14 +135,18 @@ public class FrameMain extends JFrame {
 	 */
 	private String baseTitle;
 	
+	//TODO: maybe unused
+	ViewController ctrl;
+	
 	/**
 	 * Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
 	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
 	 */
 	public FrameMain(ViewController ctrl) {
+		this.ctrl=ctrl;
 		initWindow(ctrl);
-		initMenuBar(ctrl);
-		initPanels(ctrl);
+		initMenuBar(ctrl,true);
+		initPanels(ctrl, true);
 		setVisible(true);
 		this.addComponentListener(ctrl);
 		this.addKeyListener(ctrl);
@@ -162,142 +170,203 @@ public class FrameMain extends JFrame {
 	public void setBaseTitle(String baseTitle) {
 		this.baseTitle = baseTitle;
 	}
+	
+	public void reloadLanguage(){
+		initMenuBar(ctrl,false);
+		this.initPanels(ctrl, false);
+		repaint();
+	}
+	
 	/**
 	 * Funktion welche die Menubar initialisiert.
-	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
 	 */
-	private void initMenuBar(ViewController ctrl) {
-		mi_autoSave = new JCheckBoxMenuItem("AutoSave");
-		mi_autoSave.setFont(MiscFont.getFont(0,14));
-		mi_autoSave.addItemListener(ctrl);
-		//mi_autoSave.setIcon( new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/uncheck.png")));
+	private void initMenuBar(ViewController ctrl,boolean firstInit) {
+		if (firstInit){
+			mi_autoSave = new JCheckBoxMenuItem();
+			mi_autoSave.addItemListener(ctrl);
+			mi_autoSave.setFont(MiscFont.getFont(0,14));
+			
+			mi_setTitle = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/title.png")));
+			mi_setTitle.setFont(MiscFont.getFont(0,14));
+			mi_setTitle.addActionListener(ctrl);
+			
+			m_language = new JMenu();
+			m_language.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/language.png")));
+			m_language.setFont(MiscFont.getFont(0,14));
+			
+			bg_userLevel=new ButtonGroup();
+			
+			mi_saveconfig = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
+			mi_saveconfig.setFont(MiscFont.getFont(0,14));
+			mi_saveconfig.addActionListener(ctrl);
+			
+			mi_loadconfig = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
+			mi_loadconfig.setFont(MiscFont.getFont(0,14));
+			mi_loadconfig.addActionListener(ctrl);
+			
+			mi_profile1 = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
+			mi_profile1.setFont(MiscFont.getFont(0,14));
+			mi_profile1.addActionListener(ctrl);
+			mi_profile1.setActionCommand("lastConfig1");
+			
+			mi_profile2 = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
+			mi_profile2.setFont(MiscFont.getFont(0,14));
+			mi_profile2.addActionListener(ctrl);
+			mi_profile2.setActionCommand("lastConfig2");
+			
+			mi_profile3 = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
+			mi_profile3.setFont(MiscFont.getFont(0,14));
+			mi_profile3.addActionListener(ctrl);
+			mi_profile3.setActionCommand("lastConfig3");
+			
+			mi_separator = new Separator();
+			
+			mi_snake = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ksnake.png")));
+			mi_snake.setFont(MiscFont.getFont(0,14));
+			mi_snake.addActionListener(ctrl);
+			
+			mi_help = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/help.png")));
+			mi_help.setFont(MiscFont.getFont(0,14));
+			mi_help.addActionListener(ctrl);
+			
+			mi_exit = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/exit.png")));
+			mi_exit.setFont(MiscFont.getFont(0,14));
+			mi_exit.addActionListener(ctrl);
+			
+			bg_scale = new ButtonGroup();
+			
+			mi_about = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/info.png")));
+			mi_about.setFont(MiscFont.getFont(0,14));
+			mi_about.setActionCommand("open_about");
+			mi_about.addActionListener(ctrl);
+			
+			rb_beginner = new JRadioButtonMenuItem();
+			rb_beginner.setFont(MiscFont.getFont(0,14));
+			rb_beginner.addItemListener(ctrl);
+			
+			rb_expert = new JRadioButtonMenuItem("",true);
+			rb_expert.setFont(MiscFont.getFont(0,14));
+			rb_expert.addItemListener(ctrl);
+			
+			rb_custom = new JRadioButtonMenuItem();
+			rb_custom.setFont(MiscFont.getFont(0,14));
+			rb_custom.addItemListener(ctrl);
+			
+			m_menu = new JMenu();
+			m_menu.setFont(MiscFont.getFont(0,16));
+			
+			m_options = new JMenu();
+			m_options.setFont(MiscFont.getFont(0,16));
+			
+			m_scale = new JMenu();
+			m_scale.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/users.png")));
+			m_scale.setFont(MiscFont.getFont(0,14));
+			
+			m_view = new JMenu();
+			m_view.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/view.png")));
+			m_view.setFont(MiscFont.getFont(0,14));
+			
+			mi_open_l2r = new JCheckBoxMenuItem();
+			mi_open_l2r.setFont(MiscFont.getFont(0, 14));
+			mi_open_l2r.setActionCommand("open_layer2_r");
+			mi_open_l2r.addActionListener(ctrl);
+			
+			mi_open_l2s = new JCheckBoxMenuItem();
+			mi_open_l2s.setFont(MiscFont.getFont(0, 14));
+			mi_open_l2s.setActionCommand("open_layer2_s");
+			mi_open_l2s.addActionListener(ctrl);
+			
+			mi_open_l3r = new JCheckBoxMenuItem();
+			mi_open_l3r.setFont(MiscFont.getFont(0, 14));
+			mi_open_l3r.setActionCommand("open_layer3_r");
+			mi_open_l3r.addActionListener(ctrl);
+			
+			mi_open_l3s = new JCheckBoxMenuItem();
+			mi_open_l3s.setFont(MiscFont.getFont(0, 14));
+			mi_open_l3s.setActionCommand("open_layer3_s");
+			mi_open_l3s.addActionListener(ctrl);
+			
+			mi_open_about = new JCheckBoxMenuItem(lang.getProperty("mi.about"));
+			mi_open_about.setFont(MiscFont.getFont(0, 14));
+			mi_open_about.setActionCommand("open_about");
+			mi_open_about.addActionListener(ctrl);
+			
+			m_info = new JMenu();
+			m_info.setFont(MiscFont.getFont(0,16));
+			
+			mb_menubar = new JMenuBar();
+			
+			//Create Language Buttons
+			mi_languages=new JRadioButtonMenuItem[LanguageManager.languages.length];
+			for (int i=0;i<LanguageManager.languages.length;i++){
+				mi_languages[i]=new JRadioButtonMenuItem(LanguageManager.languages[i].replaceAll(".lang",""));
+				if (mi_languages[i].getText().equals(LanguageManager.getCurrentLanguage())) mi_languages[i].setSelected(true);
+				m_language.add(mi_languages[i]);
+				mi_languages[i].setFont(MiscFont.getFont(0,14));
+				mi_languages[i].setActionCommand("change_lang_to_"+mi_languages[i].getText());
+				mi_languages[i].addActionListener(ctrl);
+				bg_userLevel.add(mi_languages[i]);
+			}
+			
+			bg_scale.add(rb_expert);
+			bg_scale.add(rb_beginner);
+			bg_scale.add(rb_custom);
+			m_view.add(mi_open_l2r);
+			m_view.add(mi_open_l2s);
+			m_view.add(mi_open_l3s);
+			m_view.add(mi_open_l3r);
+			m_view.add(mi_open_about);
+			m_info.add(mi_snake);
+			m_info.add(mi_about);
+			m_info.add(mi_help);
+			m_scale.add(rb_expert);
+			m_scale.add(rb_beginner);
+			m_options.add(m_scale);
+			m_options.add(m_view);
+			m_options.add(m_language);
+			m_options.add(mi_setTitle);
+			m_options.add(mi_autoSave);
+			m_menu.add(mi_saveconfig);
+			m_menu.add(mi_loadconfig);
+			mb_menubar.add(m_menu);
+			mb_menubar.add(m_options);
+			mb_menubar.add(m_info);
+			setJMenuBar(mb_menubar);
+			
+		}
+				
+		mi_autoSave.setText(lang.getProperty("mi.autoSave"));
+		mi_setTitle.setText(lang.getProperty("mi.changeWindowTitle"));	
+		m_language.setText(lang.getProperty("mi.language"));
+		mi_saveconfig.setText(lang.getProperty("mi.saveConfiguration"));
+		mi_loadconfig.setText(lang.getProperty("mi.loadConfiguration"));
+		mi_profile1.setText("mi.errorFileNotFound");
+		mi_profile2.setText("mi.errorFileNotFound");
+		mi_profile3.setText("mi.errorFileNotFound");
+		mi_snake.setText(lang.getProperty("mi.snake"));
+		mi_help.setText(lang.getProperty("mi.help"));
+		mi_exit.setText(lang.getProperty("mi.exit"));
+		mi_about.setText(lang.getProperty("mi.about"));
+		rb_beginner.setText(lang.getProperty("mi.beginner"));
+		rb_expert.setText(lang.getProperty("mi.expert"));
+		rb_custom.setText(lang.getProperty("mi.custom"));
+		m_menu.setText(lang.getProperty("mi.menu"));
+		m_options.setText(lang.getProperty("mi.options"));
+		m_scale.setText(lang.getProperty("mi.userLevel"));
+		m_view.setText(lang.getProperty("mi.views"));
+		mi_open_l2r.setText(lang.getProperty("mi.layer2Receiver"));
+		mi_open_l2s.setText(lang.getProperty("mi.layer2Sender"));
+		mi_open_l3r.setText(lang.getProperty("mi.layer3Receiver"));
+		mi_open_l3s.setText(lang.getProperty("mi.layer3Sender"));
+		m_info.setText(lang.getProperty("mi.info"));
 		
-		// V1.5: Menue-Eintrag zum Aendern des Fenster-Titels
-		mi_setTitle = new JMenuItem("Change Window-Title", new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/title.png")));
-		mi_setTitle.setFont(MiscFont.getFont(0,14));
-		mi_setTitle.addActionListener(ctrl);
-		
-		//V1.5: Choose Language
-		mi_language = new JMenuItem("Language", new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/language.png")));
-		mi_language.setFont(MiscFont.getFont(0, 14));
-		mi_language.addActionListener(ctrl);
-		
-		mi_saveconfig = new JMenuItem("Save Configuration",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
-		mi_saveconfig.setFont(MiscFont.getFont(0,14));
-		mi_saveconfig.addActionListener(ctrl);
-		mi_loadconfig = new JMenuItem("Load Configuration",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
-		mi_loadconfig.setFont(MiscFont.getFont(0,14));
-		mi_loadconfig.addActionListener(ctrl);
-		mi_profile1 = new JMenuItem("error file not found",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
-		mi_profile1.setFont(MiscFont.getFont(0,14));
-		mi_profile2 = new JMenuItem("error file not found",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
-		mi_profile2.setFont(MiscFont.getFont(0,14));
-		mi_profile3 = new JMenuItem("error file not found",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
-		mi_profile3.setFont(MiscFont.getFont(0,14));
-		mi_separator = new Separator();
-		mi_snake = new JMenuItem("Snake",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ksnake.png")));
-		mi_snake.setFont(MiscFont.getFont(0,14));
-		mi_snake.addActionListener(ctrl);
-		mi_help = new JMenuItem("Help", new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/help.png")));
-		mi_help.setFont(MiscFont.getFont(0,14));
-		mi_help.addActionListener(ctrl);
-		mi_exit = new JMenuItem("Exit", new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/exit.png")));
-		mi_exit.setFont(MiscFont.getFont(0,14));
-		mi_exit.addActionListener(ctrl);
-		bg_scale = new ButtonGroup();
-		mi_about = new JMenuItem("About",new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/info.png")));
-		mi_about.setFont(MiscFont.getFont(0,14));
-		mi_about.setActionCommand("open_about");
-		mi_about.addActionListener(ctrl);
-		rb_beginner = new JRadioButtonMenuItem("Beginner");
-		rb_beginner.setFont(MiscFont.getFont(0,14));
-		rb_beginner.addItemListener(ctrl);
-		rb_expert = new JRadioButtonMenuItem("Expert",true);
-		rb_expert.setFont(MiscFont.getFont(0,14));
-		rb_expert.addItemListener(ctrl);
-		rb_custom = new JRadioButtonMenuItem("Custom");
-		rb_custom.setFont(MiscFont.getFont(0,14));
-		rb_custom.addItemListener(ctrl);
-		bg_scale.add(rb_expert);
-		bg_scale.add(rb_beginner);
-		bg_scale.add(rb_custom);
-		m_menu = new JMenu("Menu");
-		m_menu.setFont(MiscFont.getFont(0,16));
-		m_options = new JMenu("Options");
-		m_options.setFont(MiscFont.getFont(0,16));
-		m_scale = new JMenu("User Level");
-		m_scale.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/users.png")));
-		m_scale.setFont(MiscFont.getFont(0,14));
-		m_view = new JMenu("Views");
-		m_view.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/view.png")));
-		m_view.setFont(MiscFont.getFont(0,14));
-		mi_open_l2r = new JCheckBoxMenuItem("Layer2 Receiver");
-		mi_open_l2r.setFont(MiscFont.getFont(0, 14));
-		mi_open_l2r.setActionCommand("open_layer2_r");
-		mi_open_l2r.addActionListener(ctrl);
-		// TODO [MH] Nur fuer V1.5 rausgenommen
-		m_view.add(mi_open_l2r);
-//		m_view.add(mi_open_l2r);
-		mi_open_l2s = new JCheckBoxMenuItem("Layer2 Sender");
-		mi_open_l2s.setFont(MiscFont.getFont(0, 14));
-		mi_open_l2s.setActionCommand("open_layer2_s");
-		mi_open_l2s.addActionListener(ctrl);
-		// TODO [MH] Nur fuer V1.5 rausgenommen
-		m_view.add(mi_open_l2s);
-//		m_view.add(mi_open_l2s);
-		mi_open_l3r = new JCheckBoxMenuItem("Layer3 Receiver");
-		mi_open_l3r.setFont(MiscFont.getFont(0, 14));
-		mi_open_l3r.setActionCommand("open_layer3_r");
-		mi_open_l3r.addActionListener(ctrl);
-		m_view.add(mi_open_l3r);
-		mi_open_l3s = new JCheckBoxMenuItem("Layer3 Sender");
-		mi_open_l3s.setFont(MiscFont.getFont(0, 14));
-		mi_open_l3s.setActionCommand("open_layer3_s");
-		mi_open_l3s.addActionListener(ctrl);
-		m_view.add(mi_open_l3s);
-		mi_open_about = new JCheckBoxMenuItem("About");
-		mi_open_about.setFont(MiscFont.getFont(0, 14));
-		mi_open_about.setActionCommand("open_about");
-		mi_open_about.addActionListener(ctrl);
-		m_view.add(mi_open_about);
-		m_info = new JMenu("Info");
-		m_info.setFont(MiscFont.getFont(0,16));
-		m_info.add(mi_snake);
-		m_info.add(mi_about);
-		m_info.add(mi_help);
-		m_scale.add(rb_expert);
-		m_scale.add(rb_beginner);
-		//m_scale.add(rb_custom);
-		m_options.add(m_scale);
-		m_options.add(m_view);
-		// V1.5: Language Dialog
-		m_options.add(mi_language);
-		// V1.5: SetTitle-Menueitem hinzufuegen
-		m_options.add(mi_setTitle);
-		m_options.add(mi_autoSave);
-		
-		m_menu.add(mi_saveconfig);
-		m_menu.add(mi_loadconfig);
-
-		mi_profile1.addActionListener(ctrl);
-		mi_profile1.setActionCommand("lastConfig1");
-		mi_profile2.addActionListener(ctrl);
-		mi_profile2.setActionCommand("lastConfig2");
-		mi_profile3.addActionListener(ctrl);
-		mi_profile3.setActionCommand("lastConfig3");
-		m_menu.add(new Separator());
-		m_menu.add(mi_exit);
-		mb_menubar = new JMenuBar();
-		mb_menubar.add(m_menu);
-		mb_menubar.add(m_options);
-		mb_menubar.add(m_info);
-		setJMenuBar(mb_menubar);
 	}
-	public JMenuItem getMi_language() {
-		return mi_language;
+	public JMenuItem getM_language() {
+		return m_language;
 	}
-	public void setMi_language(JMenuItem miLanguage) {
-		mi_language = miLanguage;
+	public void setMi_language(JMenu miLanguage) {
+		m_language = miLanguage;
 	}
 	public JMenuItem getMi_help() {
 		return mi_help;
@@ -337,25 +406,66 @@ public class FrameMain extends JFrame {
 	 * Funktion welche die Panels initialisiert.
 	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
-	private void initPanels(ViewController ctrl) {
-		panel_rec_ipv4 = new PanelTabbed(ctrl,Typ.RECEIVER_V4);
-		panel_sen_ipv4 = new PanelTabbed(ctrl,Typ.SENDER_V4);
-		panel_rec_ipv6 = new PanelTabbed(ctrl,Typ.RECEIVER_V6);
-		panel_sen_ipv6 = new PanelTabbed(ctrl,Typ.SENDER_V6);
-		//v1.5: Added new Tabs: L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
-		panel_rec_lay2 = new PanelTabbed(ctrl,Typ.L2_RECEIVER);
-		panel_sen_lay2 = new PanelTabbed(ctrl,Typ.L2_SENDER);
-		panel_rec_lay3 = new PanelTabbed(ctrl,Typ.L3_RECEIVER);
-		panel_sen_lay3 = new PanelTabbed(ctrl,Typ.L3_SENDER);
-		panel_plus = new PanelPlus(this);
-		panel_about = new PanelAbout();
-		//img_close = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/close_icon.gif"));
+	private void initPanels(ViewController ctrl, boolean firstInit) {
+		if (firstInit){
+			panel_rec_ipv4 = new PanelTabbed(ctrl,Typ.RECEIVER_V4);
+			panel_sen_ipv4 = new PanelTabbed(ctrl,Typ.SENDER_V4);
+			panel_rec_ipv6 = new PanelTabbed(ctrl,Typ.RECEIVER_V6);
+			panel_sen_ipv6 = new PanelTabbed(ctrl,Typ.SENDER_V6);
+			//v1.5: Added new Tabs: L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
+			panel_rec_lay2 = new PanelTabbed(ctrl,Typ.L2_RECEIVER);
+			panel_sen_lay2 = new PanelTabbed(ctrl,Typ.L2_SENDER);
+			panel_rec_lay3 = new PanelTabbed(ctrl,Typ.L3_RECEIVER);
+			panel_sen_lay3 = new PanelTabbed(ctrl,Typ.L3_SENDER);
+			panel_plus = new PanelPlus(this);
+			panel_about = new PanelAbout();
+			
+			// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
+			int i=0;
+			// V1.5: Referenz auf sich selbst, wird übergeben, um Titel zu refreshen
+			tabpane = new DraggableTabbedPane(this);
+			tabpane.addMouseListener(ctrl);
+			
+			tabpane.addTab(" "+lang.getProperty("tab.l2r")+" ", panel_rec_lay2);
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+			
+			tabpane.addTab(" "+lang.getProperty("tab.l2s")+" ", panel_sen_lay2);
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+			
+			tabpane.addTab(" "+lang.getProperty("tab.l3r")+" ", panel_rec_lay3);
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
+			
+			tabpane.addTab(" "+lang.getProperty("tab.l3s")+" ", panel_sen_lay3);
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+			
+			// V1.5: + Panel zum öffnen neuer Tabs
+			tabpane.addTab( " + ", panel_plus);
+		}
+		else {
+			for (int i=0;i<tabpane.getTabCount();i++){
+				if(tabpane.getComponentAt(i)==panel_rec_lay2) tabpane.setTitleAt(i, " "+lang.getProperty("tab.l2r")+" ");
+				else if(tabpane.getComponentAt(i)==panel_sen_lay2) tabpane.setTitleAt(i, " "+lang.getProperty("tab.l2s")+" ");
+				else if(tabpane.getComponentAt(i)==panel_rec_lay3) tabpane.setTitleAt(i, " "+lang.getProperty("tab.l3r")+" ");
+				else if(tabpane.getComponentAt(i)==panel_sen_lay3) tabpane.setTitleAt(i, " "+lang.getProperty("tab.l3s")+" ");
+				//New Layout is required for auto resize of the tabs
+				if (tabpane.getTabComponentAt(i)!=null)tabpane.getTabComponentAt(i).doLayout();
+			}
+		}
 		
-		// V1.5: Referenz auf sich selbst, wird Ã¼bergeben, um Titel zu refreshen
-		tabpane = new DraggableTabbedPane(this);
-		tabpane.addMouseListener(ctrl);
-		// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
-		int i=0;
+		if (firstInit){
+			mi_open_l2r.setSelected(true);
+			mi_open_l2s.setSelected(true);
+			mi_open_l3r.setSelected(true);
+			mi_open_l3s.setSelected(true);
+			//tabpane.addTab(" Configuration ",img_close, panel_config);
+			tabpane.setSelectedIndex(0);
+			tabpane.setFont(MiscFont.getFont(0,17));
+			tabpane.setFocusable(false);
+			tabpane.addChangeListener(ctrl);
+			//tabpane.setForegroundAt(1, Color.red);
+			add(tabpane);
+		}
+		
 		//tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
 		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 		//tabpane.addTab(" Sender IPv4 ", panel_sen_ipv4);
@@ -364,36 +474,14 @@ public class FrameMain extends JFrame {
 		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
 		//tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
 		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
-		// V1.5: Neue Panels L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
-		/* TODO [MH] Nur fuer V1.5 rausgenommen */
-		tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
-		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
-		mi_open_l2r.setSelected(true);
-		tabpane.addTab(" L2 Sender ", panel_sen_lay2);
-		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
-		mi_open_l2s.setSelected(true);
-//		tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
-//		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
-//		mi_open_l2r.setSelected(true);
-//		tabpane.addTab(" L2 Sender ", panel_sen_lay2);
-//		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
-//		mi_open_l2s.setSelected(true);
-		tabpane.addTab(" L3 Receiver ", panel_rec_lay3);
-		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
-		mi_open_l3r.setSelected(true);
-		tabpane.addTab(" L3 Sender ", panel_sen_lay3);
-		tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
-		mi_open_l3s.setSelected(true);
-		// V1.5: + Panel zum ï¿½ffnen neuer Tabs
-		tabpane.addTab( " + ", panel_plus);
-
-		//tabpane.addTab(" Configuration ",img_close, panel_config);
-		tabpane.setSelectedIndex(0);
-		tabpane.setFont(MiscFont.getFont(0,17));
-		tabpane.setFocusable(false);
-		tabpane.addChangeListener(ctrl);
-		//tabpane.setForegroundAt(1, Color.red);
-		add(tabpane);
+		//V1.5: Neue Panels L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
+		//tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
+		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+		//mi_open_l2r.setSelected(true);
+		//tabpane.addTab(" L2 Sender ", panel_sen_lay2);
+		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+		//mi_open_l2s.setSelected(true);
+		/* TODO [MH] Nur fuer V1.5 rausgenommen [JT] --> Warum nur V1.5... die Tabs kommen nicht wieder oder?*/
 	}
 
 	/**
@@ -423,6 +511,7 @@ public class FrameMain extends JFrame {
 		fc_save = new FrameFileChooser(ctrl, true);
 		fc_load = new FrameFileChooser(ctrl, false);
 	}
+	
 	public FrameFileChooser getFc_save() {
 		return fc_save;
 	}
@@ -576,6 +665,8 @@ public class FrameMain extends JFrame {
 	public void setAboutPanelState(int i){
 		aboutPanelState=i;
 	}
+	
+	//TODO HIER WEITER MACHEN MIT LANG FILE!
 	
 	public void setAboutPanelVisible(boolean visible){
 		if(visible){
