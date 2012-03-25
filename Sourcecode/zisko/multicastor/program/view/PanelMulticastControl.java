@@ -30,7 +30,7 @@ public class PanelMulticastControl extends JPanel {
 		initButtons(ctrl);
 	}
 	/**
-	 * Hilfsfunktion welche die Buttons des Kontrollpanels initialisier
+	 * Hilfsfunktion welche die Buttons des Kontrollpanels initialisiert
 	 * @param ctrl Ben�tigete Referenz zum GUI Controller
 	 */
 	private void initButtons(ViewController ctrl) {

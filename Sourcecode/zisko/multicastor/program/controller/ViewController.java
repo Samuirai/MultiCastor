@@ -157,19 +157,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");
 		}
 		
-		//V1.5: Language TODO
-		else if(e.getSource()==f.getM_language()){
-			JOptionPane.showMessageDialog(f, "Die Änderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
-		}
-		
-		//TODO: Böser Testcode!
+		// v1.5 Wird aufgerufen, wenn Language gewechselt werden soll
 		else if (e.getActionCommand().startsWith("change_lang_to")){
 			LanguageManager.setCurrentLanguage(e.getActionCommand().replaceFirst("change_lang_to_", ""));
 			f.reloadLanguage();
 			f.repaint();
 		}
-		
-		
 		
 		else if(e.getSource()==f.getMi_saveconfig()){
 			//System.out.println("Saving!");
@@ -202,50 +195,72 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		/* v1.5 Neue Actionlistener fuer Layer3 */
+		
+		/* Add Button im Config Panel */
 		else if(e.getSource() == getPanConfig(Typ.L3_SENDER).getBt_enter()){
 			pressBTenter(Typ.L3_SENDER);
 		} else if(e.getSource() == getPanConfig(Typ.L3_RECEIVER).getBt_enter()){
 			pressBTenter(Typ.L3_RECEIVER);
+		} 
+		/* Active/Inactive Button im Config Panel */
+		else if(e.getSource()==getPanConfig(Typ.L3_SENDER).getTb_active()){
+			toggleBTactive(Typ.L3_SENDER);
+		} else if(e.getSource()==getPanConfig(Typ.L3_RECEIVER).getTb_active()){
+			toggleBTactive(Typ.L3_RECEIVER);
+		}
+		/* Delete Button im Control Panel */
+		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getDelete()){
+			pressBTDelete(Typ.L3_SENDER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getDelete()){
+			pressBTDelete(Typ.L3_RECEIVER);
+		}
+		/* New Button im Control Panel*/
+		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getNewmulticast()){
+			pressBTNewMC(Typ.L3_SENDER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getNewmulticast()){
+			pressBTNewMC(Typ.L3_RECEIVER);
 		}
 		
 		//--------------------
 		
-		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getTb_active()){
-			toggleBTactive(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V4).getTb_active()){
-			toggleBTactive(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanConfig(Typ.SENDER_V6).getTb_active()){
-			toggleBTactive(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V6).getTb_active()){
-			toggleBTactive(Typ.RECEIVER_V6);
-		}
-		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getBt_enter()){
-			pressBTenter(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V4).getBt_enter()){
-			pressBTenter(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanConfig(Typ.SENDER_V6).getBt_enter()){
-			pressBTenter(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V6).getBt_enter()){
-			pressBTenter(Typ.RECEIVER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDelete()){
-			pressBTDelete(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getDelete()){
-			pressBTDelete(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getDelete()){
-			pressBTDelete(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getDelete()){
-			pressBTDelete(Typ.RECEIVER_V6);
-		}
+//		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getTb_active()){
+//			toggleBTactive(Typ.SENDER_V4);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V4).getTb_active()){
+//			toggleBTactive(Typ.RECEIVER_V4);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.SENDER_V6).getTb_active()){
+//			toggleBTactive(Typ.SENDER_V6);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V6).getTb_active()){
+//			toggleBTactive(Typ.RECEIVER_V6);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getBt_enter()){
+//			pressBTenter(Typ.SENDER_V4);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V4).getBt_enter()){
+//			pressBTenter(Typ.RECEIVER_V4);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.SENDER_V6).getBt_enter()){
+//			pressBTenter(Typ.SENDER_V6);
+//		}
+//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V6).getBt_enter()){
+//			pressBTenter(Typ.RECEIVER_V6);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDelete()){
+//			pressBTDelete(Typ.SENDER_V4);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getDelete()){
+//			pressBTDelete(Typ.RECEIVER_V4);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getDelete()){
+//			pressBTDelete(Typ.SENDER_V6);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getDelete()){
+//			pressBTDelete(Typ.RECEIVER_V6);
+//		}
 		/*else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDeselect_all()){
 			pressBTDeselectAll(Typ.SENDER_V4);
 		}
@@ -795,11 +810,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void clearInput(Typ typ){
 		if(initFinished){
 			//System.out.println("clearinput");
-			getPanConfig(typ).getTf_groupIPaddress().setText("-");
-			getPanConfig(typ).getTf_udp_port().setText("-");
-			getPanConfig(typ).getTf_groupIPaddress().setText("");;
+			getPanConfig(typ).getTf_groupIPaddress().setText("");
 			getPanConfig(typ).getTf_udp_port().setText("");
-			if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6){
+			if(typ==Typ.L3_SENDER){
 				getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
 				getPanConfig(typ).getTf_ttl().setText("");
 				getPanConfig(typ).getTf_packetrate().setText("");;
@@ -1788,14 +1801,17 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void listSelectionEventFired(Typ typ) {
 		PanelTabbed tabpart = null;
 		switch(typ){
+		// TODO [MH] tbr
 			case SENDER_V4: tabpart=f.getPanel_sen_ipv4(); break;
 			case RECEIVER_V4: tabpart=f.getPanel_rec_ipv4(); break;
 			case SENDER_V6: tabpart=f.getPanel_sen_ipv6(); break;
 			case RECEIVER_V6: tabpart=f.getPanel_rec_ipv6(); break;
+			
+			case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
+			case L3_RECEIVER: tabpart=f.getPanel_rec_lay3(); break;
 		}
 		int[] selectedRows = tabpart.getTable().getSelectedRows();
-		tabpart.getPan_status().getLb_multicasts_selected()
-		.setText(selectedRows.length+" Multicasts Selected ");
+		tabpart.getPan_status().getLb_multicasts_selected().setText(selectedRows.length+" Multicasts Selected ");
 		if(selectedRows.length > 1){
 			multipleSelect(typ);
 		}
@@ -1807,7 +1823,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			//System.out.println("Index: "+NetworkAdapter.findAddressIndex(typ, getMCData(selectedRows[0],typ).getSourceIp().toString()));
 			//tabpart.getPan_config().getTf_sourceIPaddress().setText(getMCData(selectedRows[0],typ).getSourceIp().toString().substring(1));;
 			tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());;;
-			if(typ==Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+			if(typ==Typ.L3_SENDER){
 				getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
 				getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
 				tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);
@@ -1924,7 +1940,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private void multipleSelect(Typ typ) {
 		getPanConfig(typ).getBt_enter().setText("Change All");
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		if(typ == Typ.L3_SENDER){
 			getPanConfig(typ).getTf_sourceIPaddress().removeItemListener(this);
 			getPanConfig(typ).getTf_packetrate().getDocument().removeDocumentListener(this);
 			getPanConfig(typ).getTf_udp_packetlength().getDocument().removeDocumentListener(this);
@@ -2376,17 +2392,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	// TODO [MH] hier muss bestimmt noch wat jemacht werden
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource()==getTable(Typ.SENDER_V4).getSelectionModel()){
-			listSelectionEventFired(Typ.SENDER_V4);
+//		if(e.getSource()==getTable(Typ.SENDER_V4).getSelectionModel()){
+//			listSelectionEventFired(Typ.SENDER_V4);
+//		}
+//		if(e.getSource()==getTable(Typ.RECEIVER_V4).getSelectionModel()){
+//			listSelectionEventFired(Typ.RECEIVER_V4);
+//		}
+//		if(e.getSource()==getTable(Typ.SENDER_V6).getSelectionModel()){
+//			listSelectionEventFired(Typ.SENDER_V6);
+//		}
+//		if(e.getSource()==getTable(Typ.RECEIVER_V6).getSelectionModel()){
+//			listSelectionEventFired(Typ.RECEIVER_V6);
+//		}
+		if(e.getSource()==getTable(Typ.L3_SENDER).getSelectionModel()){
+			listSelectionEventFired(Typ.L3_SENDER);
 		}
-		if(e.getSource()==getTable(Typ.RECEIVER_V4).getSelectionModel()){
-			listSelectionEventFired(Typ.RECEIVER_V4);
-		}
-		if(e.getSource()==getTable(Typ.SENDER_V6).getSelectionModel()){
-			listSelectionEventFired(Typ.SENDER_V6);
-		}
-		if(e.getSource()==getTable(Typ.RECEIVER_V6).getSelectionModel()){
-			listSelectionEventFired(Typ.RECEIVER_V6);
+		if(e.getSource()==getTable(Typ.L3_RECEIVER).getSelectionModel()){
+			listSelectionEventFired(Typ.L3_RECEIVER);
 		}
 		autoSave();
 	}
