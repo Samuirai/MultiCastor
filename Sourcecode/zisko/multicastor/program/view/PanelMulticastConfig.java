@@ -3,7 +3,6 @@ package zisko.multicastor.program.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -13,6 +12,7 @@ import javax.swing.*;
 
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.InputValidator;
 import zisko.multicastor.program.model.NetworkAdapter;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
@@ -38,8 +38,10 @@ public class PanelMulticastConfig extends JPanel {
 	private JPanel pan_ttl;
 	private JPanel pan_packetlength;
 	private JPanel pan_packetrate;
-	private JToggleButton tb_active;
+	private JToggleButton bt_active;
 	private JButton bt_enter;
+	private LanguageManager lang;
+	private MiscBorder mainBorder;
 	
 	public WideComboBox getCb_sourceIPaddress() {
 		return cb_sourceIPaddress;
@@ -50,7 +52,8 @@ public class PanelMulticastConfig extends JPanel {
 	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
-		setBorder(new MiscBorder("MultiCast Configuration"));
+		lang=LanguageManager.getInstance();
+		setBorder(mainBorder = new MiscBorder(lang.getProperty("miscBorder.mcConfig")));
 		setLayout(null);
 		setPreferredSize(new Dimension(225, 239));
 		createAddressFields(ctrl, typ); //GUI Elements for IPv4
@@ -67,8 +70,8 @@ public class PanelMulticastConfig extends JPanel {
 		add(pan_groupIPaddress);
 		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
 			add(pan_udp_port);
-		add(tb_active);
-		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefï¿½gt
+		add(bt_active);
+		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefügt
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
@@ -76,6 +79,13 @@ public class PanelMulticastConfig extends JPanel {
 				add(pan_ttl);
 		}
 	}
+	
+	public void reloadLanguage(){
+		bt_active.setText(lang.getProperty("button.inactive"));
+		bt_enter.setText(lang.getProperty("button.add"));
+		mainBorder.setTitle(lang.getProperty("miscBorder.mcConfig"));
+	}
+	
 	/**
 	 * Funktion welche die spezifischen Textfelder fï¿½r einen Programmteil erstellt.
 	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
@@ -84,19 +94,19 @@ public class PanelMulticastConfig extends JPanel {
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		
 		Vector<InetAddress> temp = null;
-		tb_active = new JToggleButton("Inactive");
-		tb_active.setForeground(Color.red);
-		tb_active.setFont(MiscFont.getFont(0,11));
+		bt_active = new JToggleButton(lang.getProperty("button.inactive"));
+		bt_active.setForeground(Color.red);
+		bt_active.setFont(MiscFont.getFont(0,11));
 		pan_groupIPaddress=new JPanel();
 		pan_sourceIPaddress=new JPanel();
 		pan_udp_port=new JPanel();
-		bt_enter = new JButton("Add");
+		bt_enter = new JButton(lang.getProperty("button.add"));
 		bt_enter.addActionListener(ctrl);
 		bt_enter.setBounds(115,204,100,25);
 		bt_enter.setFont(MiscFont.getFont(0,11));
 		bt_enter.setEnabled(false);
 		
-		//V1.5: Layer 2 und Layer 3 Tabs hinzugefï¿½gt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
+		//V1.5: Layer 2 und Layer 3 Tabs hinzugefügt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 			
 			pan_packetrate=new JPanel();
@@ -148,7 +158,7 @@ public class PanelMulticastConfig extends JPanel {
 			}
 			for(int i = 0 ; i < temp.size(); i++){
 				/*
-				 * TODO [JT] neuen Typ einfï¿½gen
+				 * TODO [JT] neuen Typ einfügen
 				 */
 				if(typ == Typ.L3_SENDER || typ == Typ.L2_SENDER){
 					try {
@@ -188,9 +198,9 @@ public class PanelMulticastConfig extends JPanel {
 		pan_udp_port.setLayout(null);
 		pan_udp_port.setBorder(MiscBorder.getBorder(BorderTitle.PORT, BorderType.NEUTRAL));
 		pan_groupIPaddress.setBounds(5,20,215,40);
-		tb_active.setBounds(10,204,100,25);
-		tb_active.setFocusable(false);
-		tb_active.addActionListener(ctrl);	
+		bt_active.setBounds(10,204,100,25);
+		bt_active.setFocusable(false);
+		bt_active.addActionListener(ctrl);	
 		
 		if(typ == Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){ 
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
@@ -287,7 +297,7 @@ public class PanelMulticastConfig extends JPanel {
 	}
 
 	public JToggleButton getTb_active() {
-		return tb_active;
+		return bt_active;
 	}
 
 	public JButton getBt_enter() {
@@ -314,7 +324,7 @@ public class PanelMulticastConfig extends JPanel {
 	}
 
 	public void setTb_active(JToggleButton cbActive) {
-		tb_active = cbActive;
+		bt_active = cbActive;
 	}
 
 	public void setBt_enter(JButton btEnter) {
