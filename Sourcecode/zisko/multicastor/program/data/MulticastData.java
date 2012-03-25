@@ -2,8 +2,6 @@ package zisko.multicastor.program.data;
 
 import java.net.InetAddress;
 
-import javax.net.ssl.HostnameVerifier;
-
 /**
  * Diese Bean-Klasse h�llt Informationen �ber einen Multicast.
  * Objekte von dieser Klasse werden daf�r benutzt Multicast-

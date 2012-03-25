@@ -18,7 +18,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.net.InetAddress;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -1512,6 +1511,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		}
 		autoSave();
 	}
+	@SuppressWarnings({ "static-access", "static-access" })
 	@Override
 	/**
 	 * Funktion welche aufgerufen wird wenn eine GUI Komponente mit dem ItemListener selektiert oder deselektiert wird.
