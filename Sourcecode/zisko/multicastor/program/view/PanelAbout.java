@@ -17,8 +17,7 @@ public class PanelAbout extends javax.swing.JPanel{
      */
     
     public PanelAbout() {
-    	
-        initComponents();
+    	initComponents();
     }
     
 	/**

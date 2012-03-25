@@ -128,11 +128,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private UserInputData inputData_R6;
 	
+	private LanguageManager lang;
+	
 	/**
 	 * Standardkonstruktor der GUI, hierbei wird die GUI noch nicht initialisiert!
 	 */
 	public ViewController(){
-		//initialize(null);
+		lang=LanguageManager.getInstance();
 	}
 	/**
 	 * Implementierung des ActionListeners, betrifft die meisten GUI Komponenten.
@@ -1294,10 +1296,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(title.equals(" Sender IPv4 ")) typ = Typ.SENDER_V4;
 		else if(title.equals(" Receiver IPv6 ")) typ = Typ.RECEIVER_V6;
 		else if(title.equals(" Sender IPv6 ")) typ = Typ.SENDER_V6;
-		else if(title.equals(" L3 Sender ")) typ = Typ.L3_SENDER;
-		else if(title.equals(" L3 Receiver ")) typ = Typ.L3_RECEIVER;
-		else if(title.equals(" L2 Sender ")) typ = Typ.L2_SENDER;
-		else if(title.equals(" L2 Receiver ")) typ = Typ.L2_RECEIVER;
+		else if(title.equals(" "+lang.getProperty("tab.l3s")+" ")) typ = Typ.L3_SENDER;
+		else if(title.equals(" "+lang.getProperty("tab.l3r")+" ")) typ = Typ.L3_RECEIVER;
+		else if(title.equals(" "+lang.getProperty("tab.l2s")+" ")) typ = Typ.L2_SENDER;
+		else if(title.equals(" "+lang.getProperty("tab.l2r")+" ")) typ = Typ.L2_RECEIVER;
 		else typ = Typ.UNDEFINED;
 
 		return typ;

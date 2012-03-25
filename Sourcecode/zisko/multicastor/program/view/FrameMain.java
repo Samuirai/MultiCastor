@@ -173,7 +173,7 @@ public class FrameMain extends JFrame {
 	
 	public void reloadLanguage(){
 		initMenuBar(ctrl,false);
-		this.initPanels(ctrl, false);
+		initPanels(ctrl, false);
 		repaint();
 	}
 	
@@ -464,6 +464,9 @@ public class FrameMain extends JFrame {
 			tabpane.addChangeListener(ctrl);
 			//tabpane.setForegroundAt(1, Color.red);
 			add(tabpane);
+		}
+		else{
+			panel_plus.reloadLanguage();
 		}
 		
 		//tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
@@ -774,42 +777,42 @@ public class FrameMain extends JFrame {
 		subTitle = title;
 		paneDel = true;
 
-		if(title.equals(" L2 Sender "))
+		if(title.equals(" "+lang.getProperty("tab.l2s")+" "))
 			add(panel_sen_lay2);
-		else if(title.equals(" L3 Sender "))
+		else if(title.equals(" "+lang.getProperty("tab.l3s")+" "))
 			add(panel_sen_lay3);
-		else if(title.equals(" L2 Receiver "))
+		else if(title.equals(" "+lang.getProperty("tab.l2r")+" "))
 			add(panel_rec_lay2);
-		else if(title.equals(" L3 Sender "))
-			add(panel_sen_lay3);
-		else if(title.equals(" About "))
+		else if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
+			add(panel_rec_lay3);
+		else if(title.equals(" "+lang.getProperty("mi.about")+" "))
 			add(panel_about);
 
 	}
 
 	public void openPane() {
-		if(subTitle.equals(" L2 Sender ")){
+		if(subTitle.equals(" "+lang.getProperty("tab.l2s")+" ")){
 			remove(panel_sen_lay2);
 			tabpane.insertTab(" L2 Sender ", null, panel_sen_lay2, null, 0);
 			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
 
-		}else if(subTitle.equals(" L3 Sender ")){
+		}else if(subTitle.equals(" "+lang.getProperty("tab.l3s")+" ")){
 			remove(panel_sen_lay3);
-			tabpane.insertTab(" L3 Sender ", null, panel_sen_lay3, null, 0);
+			tabpane.insertTab(" "+lang.getProperty("tab.l3s")+" ", null, panel_sen_lay3, null, 0);
 			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
 			
-		}else if(subTitle.equals(" L2 Receiver ")){
+		}else if(subTitle.equals(" "+lang.getProperty("tab.l2r")+" ")){
 			remove(panel_rec_lay2);
-			tabpane.insertTab(" L2 Receiver ", null, panel_rec_lay2, null, 0);
+			tabpane.insertTab(" "+lang.getProperty("tab.l2r")+" ", null, panel_rec_lay2, null, 0);
 			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
 		
-		}else if(subTitle.equals(" L3 Receiver ")){
+		}else if(subTitle.equals(" "+lang.getProperty("tab.l3r")+" ")){
 			remove(panel_rec_lay3);
-			tabpane.insertTab(" L3 Receiver ", null, panel_rec_lay3, null, 0);
+			tabpane.insertTab(" "+lang.getProperty("tab.l3r")+" ", null, panel_rec_lay3, null, 0);
 			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
-		}else if(subTitle.equals(" About ")){
+		}else if(subTitle.equals(" "+lang.getProperty("mi.about")+" ")){
 			remove(panel_about);
-			tabpane.insertTab(" About ", null, panel_about, null, 0);
+			tabpane.insertTab(" "+lang.getProperty("mi.about")+" ", null, panel_about, null, 0);
 			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/about.png"));
 		}
 			
