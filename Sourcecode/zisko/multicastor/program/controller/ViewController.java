@@ -1329,30 +1329,45 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Gibt den Insgesamten Traffic des IPv4SENDER und IPv6SENDER als String zur�ck (Mbit/s) im Format "##0.000"
 	 */
 	public String getTotalTrafficDown(){
-		 DecimalFormat ret = new DecimalFormat("##0.000");
-		 double sum = 0.0;
-		 for(int i = 0; i < getTable(Typ.RECEIVER_V4).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 for(int i = 0; i < getTable(Typ.RECEIVER_V6).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 return ret.format(sum);
+		DecimalFormat ret = new DecimalFormat("##0.000");
+		double sum = 0.0;
+		 // TODO [MH] tbr
+//		 for(int i = 0; i < getTable(Typ.RECEIVER_V4).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+//		 for(int i = 0; i < getTable(Typ.RECEIVER_V6).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+		for(int i = 0; i < getTable(Typ.L3_RECEIVER).getModel().getRowCount(); i++){
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 5)).replace(",", "."));
+	 	}
+		return ret.format(sum);
 	 }
 	/**
 	 * Hilfsfunktion zum Berechnen des insgesamten Traffics welcher vom Multicast Tool verschickt wird (IPv4 & IPv6).
 	 */
 	public String getTotalTrafficUP(){
-		 DecimalFormat ret = new DecimalFormat("##0.000");
-		 double sum = 0.0;
-		 for(int i = 0; i < getTable(Typ.SENDER_V4).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 for(int i = 0; i < getTable(Typ.SENDER_V6).getModel().getRowCount(); i++){
-			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
-		 }
-		 return ret.format(sum);
-	 }
+		DecimalFormat ret = new DecimalFormat("##0.000");
+		double sum = 0.0;
+		
+		 // TODO [MH] tbr
+//		 for(int i = 0; i < getTable(Typ.SENDER_V4).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+//		 for(int i = 0; i < getTable(Typ.SENDER_V6).getModel().getRowCount(); i++){
+//			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
+//		 }
+		//XXX
+		System.out.println("rowcount: " + getTable(Typ.L3_SENDER).getModel().getRowCount());
+		
+		
+		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
+			//XXX
+			System.out.println("firstvalue sender: " + getTable(Typ.L3_SENDER).getModel().getValueAt(0, 3));
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
+	 	}
+		return ret.format(sum);
+	}
 	/**
 	 * Funktion welche aufgerufen wird wenn Hide im PopupMenu des Tabellenkopfs gedr�ckt wurde
 	 */
@@ -2350,6 +2365,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Implementierung des ListSelectionListeners, sorgt f�r korrektes Verhalten der GUI
 	 * beim Selektieren und Deselektieren von einer oder mehreren Zeilen in der Tabelle.
 	 */
+	// TODO [MH] hier muss bestimmt noch wat jemacht werden
 	public void valueChanged(ListSelectionEvent e) {
 		if(e.getSource()==getTable(Typ.SENDER_V4).getSelectionModel()){
 			listSelectionEventFired(Typ.SENDER_V4);

@@ -46,6 +46,10 @@ public class MulticastController{
 	private Vector<MulticastData> mc_receiver_v4;
 	/** Haelt Referenzen auf alle MulticastData-Objekte vom Typ Receiver_v6 */
 	private Vector<MulticastData> mc_receiver_v6;
+	// TODO [MH] die alten vectoren evtl entfernen
+	/* v1.5 Ein Vector fuer Layer3 Receiver und Sender */
+	private Vector<MulticastData> mc_sender_l3;
+	private Vector<MulticastData> mc_receiver_l3;
 	
 	/** In der Map werden MulticastData-Objekte auf MulticastTrehadSuper-Objekte abgebildet um die Verbindung von MulticastData-Objektu zu MulticastThreadSuper herstellen zu koennen. */
 	private Map<MulticastData,MulticastThreadSuper> mcMap_sender_v4;
@@ -55,6 +59,12 @@ public class MulticastController{
 	private Map<MulticastData,MulticastThreadSuper> mcMap_receiver_v4;
 	/** In der Map werden MulticastData-Objekte auf MulticastTrehadSuper-Objekte abgebildet um die Verbindung von MulticastData-Objektu zu MulticastThreadSuper herstellen zu koennen. */
 	private Map<MulticastData,MulticastThreadSuper> mcMap_receiver_v6;
+	
+	// TODO [MH] to be removed oben
+	/* v1.5 Eine neue Map fuer Layer3 Receiver und Sender */
+	private Map<MulticastData,MulticastThreadSuper> mcMap_receiver_l3;
+	private Map<MulticastData,MulticastThreadSuper> mcMap_sender_l3;
+	
 	/** Diese Map bildet MulticastData-Objekte auf Threads ab, um von einem Multicast direkt mit dem entsprechenden Thread kommunizieren zu koennen. Dies wird vor allem beim Beenden der Multicasts genutzt. */
 	private Map<MulticastData, Thread> threads;
 	/** Interner Threadcounter, der beim Anlegen oder Starten eines MulticastSenders hochgezaehlt wird und diesem den Wert als ThreadID mitgibt. */
@@ -119,11 +129,20 @@ public class MulticastController{
 		mc_sender_v6 = new Vector<MulticastData>();
 		mc_receiver_v4 = new Vector<MulticastData>();
 		mc_receiver_v6 = new Vector<MulticastData>();
+		// TODO [MH] oben evtl loeschen
+		/* v1.5 */
+		mc_sender_l3 = new Vector<MulticastData>();
+		mc_receiver_l3 = new Vector<MulticastData>();
+		
 		// Thread-Maps
 		mcMap_sender_v4 = new HashMap<MulticastData,MulticastThreadSuper>();
 		mcMap_sender_v6 = new HashMap<MulticastData,MulticastThreadSuper>();
 		mcMap_receiver_v4 = new HashMap<MulticastData,MulticastThreadSuper>();
 		mcMap_receiver_v6 = new HashMap<MulticastData,MulticastThreadSuper>();
+		// TODO [MH] oben loeschen
+		/* v1.5 */
+		mcMap_receiver_l3 = new HashMap<MulticastData,MulticastThreadSuper>();
+		mcMap_sender_l3 = new HashMap<MulticastData,MulticastThreadSuper>();
 		// other
 		threads = new HashMap<MulticastData, Thread>();
 		view_controller = viewController;
@@ -199,7 +218,7 @@ public class MulticastController{
 			t = new MulticastReceiver(m, logger);
 		}
 		
-		// Fuegt Multicasts zu der entsprechenden Map hinzu
+		// Fuegt Multicasts zu der entsprechenden Map und Vector hinzu
 		getMCVector(m).add(0, m);
 		getMCMap(m).put(m,t);
 		
@@ -425,6 +444,7 @@ public class MulticastController{
 	 * @param Receiver_v6 Wenn <code>true</code> werden Multicasts vom Typ Receiver_v6 gespeichert.
 	 */
 	public void saveConfig(String s, boolean Sender_v4, boolean Sender_v6, boolean Receiver_v4, boolean Receiver_v6) {
+		// TODO [MH] muss noch an lay3 angepasst werden
 		// Sammelt alle zu speichernden Multicasts in einem Vektor
 		Vector<MulticastData> v = new Vector<MulticastData>();
 		if(Sender_v4){
@@ -478,6 +498,7 @@ public class MulticastController{
 	 * Speichert die Standardkonfigurationsdatei.
 	 */
 	private void saveCompleteConfig(){
+		//TODO [MH] muss auch noch an lay3 angepasst werden
 		Vector<MulticastData> v = new Vector<MulticastData>();
 		v.addAll(mc_sender_v4);
 		v.addAll(mc_sender_v6);
@@ -636,6 +657,7 @@ public class MulticastController{
 	 * @return Sum of all sent packets. Returns 0 if typ is invalid.
 	 */
 	public int getPPSSender(MulticastData.Typ typ) {
+		// TODO [MH] muss auch noch angepasst werden lay3
 		int count = 0;
 		
 		if(typ.equals(MulticastData.Typ.SENDER_V4)){
@@ -654,6 +676,7 @@ public class MulticastController{
 	 * Stops all Multicasts Threads and removes them from corresponding vectors.
 	 */
 	public void destroy(){
+		// TODO [MH] muss auch noch angepasst werden lay3
 		//System.out.println("test");
 		saveCompleteConfig();
 		Map<MulticastData, MulticastThreadSuper> v = null;
@@ -752,17 +775,19 @@ public class MulticastController{
 	private Vector<MulticastData> getMCVector(MulticastData.Typ multicastDataTyp){
 		Vector<MulticastData> vector = null;
 		switch(multicastDataTyp){
-			case RECEIVER_V4: vector = mc_receiver_v4;break;
-			case RECEIVER_V6: vector = mc_receiver_v6;break;
-			case SENDER_V4: vector = mc_sender_v4;break;
-			case SENDER_V6: vector = mc_sender_v6;break;
+		//TODO [MH] tbr
+			case RECEIVER_V4: vector = mc_receiver_l3;break;
+			case RECEIVER_V6: vector = mc_receiver_l3;break;
+			case SENDER_V4: vector = mc_sender_l3;break;
+			case SENDER_V6: vector = mc_sender_l3;break;
 			/*
-			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!!
+			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!! Layer2
 			 */
 			case L2_RECEIVER: vector = mc_receiver_v4;break;
 			case L2_SENDER: vector = mc_sender_v4;break;
-			case L3_RECEIVER: vector = mc_receiver_v4;break;
-			case L3_SENDER: vector = mc_sender_v4;break;
+			/* v1.5 */ 
+			case L3_RECEIVER: vector = mc_receiver_l3;break;
+			case L3_SENDER: vector = mc_sender_l3;break;
 			default: logger.log(Level.SEVERE, "Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");return null;
 		}
 		return vector;
@@ -776,17 +801,19 @@ public class MulticastController{
 	private Map<MulticastData,MulticastThreadSuper> getMCMap(MulticastData.Typ multicastDataTyp){
 		Map<MulticastData,MulticastThreadSuper> map = null;
 		switch(multicastDataTyp){
-			case RECEIVER_V4: map = mcMap_receiver_v4;break;
-			case RECEIVER_V6: map = mcMap_receiver_v6;break;
-			case SENDER_V4: map = mcMap_sender_v4;break;
-			case SENDER_V6: map = mcMap_sender_v6;break;
+		// TODO [MH] tbr
+			case RECEIVER_V4: map = mcMap_receiver_l3;break;
+			case RECEIVER_V6: map = mcMap_receiver_l3;break;
+			case SENDER_V4: map = mcMap_sender_l3;break;
+			case SENDER_V6: map = mcMap_sender_l3;break;
 			/*
-			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!!
+			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!! Layer2
 			 */
 			case L2_RECEIVER: map = mcMap_receiver_v4;break;
 			case L2_SENDER: map = mcMap_sender_v4;break;
-			case L3_RECEIVER: map = mcMap_receiver_v4;break;
-			case L3_SENDER: map = mcMap_sender_v4;break;
+			/* v1.5 */
+			case L3_RECEIVER: map = mcMap_receiver_l3;break;
+			case L3_SENDER: map = mcMap_sender_l3;break;
 			default: logger.log(Level.SEVERE, "Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");return null;
 		}
 		return map;

@@ -24,13 +24,11 @@ public class MiscTableModel extends AbstractTableModel {
 	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugef�gt wird.
 	 */
 	public void insertUpdate(){
-		System.out.println("update");
-		System.out.println(typ);
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
-			System.out.println("ich bin hier und mache es");
-			fireTableRowsInserted(0, ctrl.getMCCount(Typ.SENDER_V4));
-			fireTableRowsInserted(0, ctrl.getMCCount(Typ.SENDER_V6));
-		}
+		//XXX
+		System.out.println("Typ: " + typ);
+		System.out.println("Count: " + ctrl.getMCCount(typ));
+		fireTableRowsInserted(0, ctrl.getMCCount(typ));
+		
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Multicast gels�cht wird.
@@ -158,6 +156,10 @@ public class MiscTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex){
 		MulticastData data = ctrl.getMCData(rowIndex, typ);
 		Object ret = null;
+		
+		//XXX
+//		System.out.println("datatyp: " + data.getTyp());
+		
 		// V1.5: L2 und L3 hinzugefuegt
 		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){

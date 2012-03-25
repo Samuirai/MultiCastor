@@ -59,6 +59,7 @@ public class UpdateTask extends TimerTask {
 			this.memoryWarned = true;
 		}
 
+		//TODO [MH] tbr
 		for (int i = 0; i < 4; i++) {
 			switch (i) {
 			case 0:
@@ -81,6 +82,22 @@ public class UpdateTask extends TimerTask {
 				}
 			}
 		}
+//		for (int i = 0; i < 2; i++) {
+//			switch (i) {
+//			case 0:
+//				v = mc_sender_v4;
+//				break;
+//			case 1:
+//				v = mc_sender_v6;
+//				break;
+//			}
+//			for (Entry<MulticastData, MulticastThreadSuper> m : v.entrySet()) {
+//				value = m.getValue();
+//				if (value.getMultiCastData().isActive()) {
+//					value.update();
+//				}
+//			}
+//		}
 		if (viewController != null) {
 			if (viewController.isInitFinished()) {
 				viewController.viewUpdate();
