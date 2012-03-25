@@ -150,12 +150,13 @@ public class PanelMulticastConfig extends JPanel {
 			ListCellRenderer renderer = cb_sourceIPaddress.getRenderer();
 			((JLabel) renderer).setHorizontalAlignment(SwingConstants.CENTER);
 			cb_sourceIPaddress.addItemListener(ctrl);
-			if(typ == Typ.L3_SENDER){
-				//TODO [MH] unterscheidung zwischen IPv4 und IPv6
-				temp = NetworkAdapter.getipv4Adapters();
-			}else{
-				temp = NetworkAdapter.getipv6Adapters();
-			}
+//			if(typ == Typ.L3_SENDER){
+//				//TODO [MH] unterscheidung zwischen IPv4 und IPv6
+//				temp = NetworkAdapter.getipv4Adapters();
+//			}else{
+//				temp = NetworkAdapter.getipv6Adapters();
+//			}
+			temp = NetworkAdapter.getipv6Adapters();
 			for(int i = 0 ; i < temp.size(); i++){
 				/*
 				 * TODO [JT] neuen Typ einfügen
