@@ -184,7 +184,9 @@ public class MiscTableModel extends AbstractTableModel {
 				case 7: ret=new Integer(data.getPacketLossPerSecond()); break;
 				case 8: ret=new Integer(data.getAverageInterruptionTime()); break;
 				case 9: ret=new Integer(data.getNumberOfInterruptions()); break;
-				case 10: ret = data.getPacketSource().toString(); break;
+				//case 10: ret = data.getPacketSource().toString(); break;
+				//V1.5 [FH] Changed to network interface
+				case 10: ret = data.getSourceIp().toString().substring(1); break;
 				default: System.out.println("TABLEMODEL GETVALUE ERROR");
 			}
 		}

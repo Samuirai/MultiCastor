@@ -3,12 +3,14 @@ package zisko.multicastor.program.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Vector;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
@@ -71,7 +73,7 @@ public class PanelMulticastConfig extends JPanel {
 		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
 			add(pan_udp_port);
 		add(bt_active);
-		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefügt
+		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefï¿½gt
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
@@ -106,7 +108,28 @@ public class PanelMulticastConfig extends JPanel {
 		bt_enter.setFont(MiscFont.getFont(0,11));
 		bt_enter.setEnabled(false);
 		
-		//V1.5: Layer 2 und Layer 3 Tabs hinzugefügt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
+		//V1.5 [FH] Use cb_sourceIPadress for all kinds
+		cb_sourceIPaddress = new WideComboBox();
+		cb_sourceIPaddress.addItem("");
+		cb_sourceIPaddress.setBounds(5,15,205,20);
+		cb_sourceIPaddress.setFont(MiscFont.getFont(0,12));
+		cb_sourceIPaddress.setBorder(null);
+		cb_sourceIPaddress.addItemListener(ctrl);
+		
+		temp = NetworkAdapter.getipv6Adapters();
+		for(int i = 0 ; i < temp.size(); i++){
+				try {
+					cb_sourceIPaddress.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
+				} catch (SocketException e) {
+					e.printStackTrace();
+				}
+		}
+
+		
+		pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
+		add(pan_sourceIPaddress);
+		
+		//V1.5: Layer 2 und Layer 3 Tabs hinzugefï¿½gt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
 		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 			
 			pan_packetrate=new JPanel();
@@ -142,57 +165,11 @@ public class PanelMulticastConfig extends JPanel {
 			pan_packetlength.add(tf_udp_packetlength,BorderLayout.CENTER);
 			pan_ttl.add(tf_ttl,BorderLayout.CENTER);
 			pan_packetrate.add(tf_packetrate,BorderLayout.CENTER);
-			cb_sourceIPaddress = new WideComboBox();
-			cb_sourceIPaddress.addItem("");
-			cb_sourceIPaddress.setBounds(5,15,205,20);
-			cb_sourceIPaddress.setFont(MiscFont.getFont(0,12));
-			cb_sourceIPaddress.setBorder(null);
-			ListCellRenderer renderer = cb_sourceIPaddress.getRenderer();
-			((JLabel) renderer).setHorizontalAlignment(SwingConstants.CENTER);
-			cb_sourceIPaddress.addItemListener(ctrl);
-//			if(typ == Typ.L3_SENDER){
-//				//TODO [MH] unterscheidung zwischen IPv4 und IPv6
-//				temp = NetworkAdapter.getipv4Adapters();
-//			}else{
-//				temp = NetworkAdapter.getipv6Adapters();
-//			}
-			temp = NetworkAdapter.getipv6Adapters();
-			for(int i = 0 ; i < temp.size(); i++){
-				/*
-				 * TODO [JT] neuen Typ einfügen
-				 */
-				if(typ == Typ.L3_SENDER || typ == Typ.L2_SENDER){
-					try {
-						cb_sourceIPaddress.addItem(/*temp.get(i).toString().substring(1)+"   "+*/NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
-					} catch (SocketException e) {
-						e.printStackTrace();
-					}
-							//(0)temp.get(i).toString().substring(1));
-				}
-				/*if(typ == Typ.SENDER_V4){
-					try {
-						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1)+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
-					} catch (SocketException e) {
-						e.printStackTrace();
-					}
-							//(0)temp.get(i).toString().substring(1));
-				}
-				else if(typ == Typ.SENDER_V6){
-					try {
-						cb_sourceIPaddress.addItem(temp.get(i).toString().substring(1).split("%")[0]+"   "+NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
-					} catch (SocketException e) {
-						e.printStackTrace();
-					}
-				}*/
-			}
-			pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
-			add(pan_sourceIPaddress);
-			pan_udp_port.setBounds(5,100,105,40);
-			
 		}
-		else {
-			pan_udp_port.setBounds(5,60,105,40);
-		}
+		
+		//V1.5 [FH] Use this bounds for sender and receiver
+		pan_udp_port.setBounds(5,100,105,40);
+		
 		pan_groupIPaddress.setLayout(null);
 		pan_sourceIPaddress.setLayout(null);
 		pan_sourceIPaddress.setBounds(5,60,215,40);
@@ -344,18 +321,31 @@ public class PanelMulticastConfig extends JPanel {
 			return NetworkAdapter.getipv6Adapters().get(i).toString().substring(1).split("%")[0];
 		}
 	}
-	public InetAddress getSelectedAddress(Typ typ){
+	public InetAddress getSelectedAddress(Typ typ, boolean isIPv4){
 		/*
 		 * TODO [MH/JT] neuen Typ einfuegen
 		 * Funktionale Anforderung: Wie soll denn die Eingabeprï¿½fung im Kombitab sein
 		 * MMRP Eingabeprï¿½fung erstellen.
 		 */
-		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
+		
+		/*if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
 			return InputValidator.checkIPv4(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
 		}
 		else{
 			return InputValidator.checkIPv6(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
-		}
+		}*/
+		System.out.println(typ);
+		
+		// V1.5 [FH] Added L3 with IPv4 Stuff
+		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
+			if(isIPv4)
+				return InputValidator.checkIPv4(getSourceIP(Typ.RECEIVER_V4, cb_sourceIPaddress.getSelectedIndex()-1));
+			else
+				return InputValidator.checkIPv6(getSourceIP(Typ.RECEIVER_V6, cb_sourceIPaddress.getSelectedIndex()-1));
+		//This is wrong, we need to fix this for MMRP when we do L2 Panels
+		else
+			return InputValidator.checkIPv6(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
+				
 		
 	}
 	public int getSelectedSourceIndex(){

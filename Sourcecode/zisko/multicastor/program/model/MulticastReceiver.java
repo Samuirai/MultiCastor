@@ -49,7 +49,7 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		try {
 			multicastSocket = new MulticastSocket(m.getUdpPort());
 			// Der Empfaenger nutzt alle verfuegbaren Netzwerkschnittstellen
-			//	multicastSocket.setInterface(mcData.getSourceIp());
+			multicastSocket.setInterface(mcData.getSourceIp());
 		}catch(IOException e){
 			logger.log(Level.WARNING, "'" + e.getMessage() + "' Versuche default Port 4711 zu setzen...");
 			try{
