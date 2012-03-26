@@ -334,7 +334,6 @@ public class PanelMulticastConfig extends JPanel {
 		else{
 			return InputValidator.checkIPv6(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
 		}*/
-		System.out.println(typ);
 		
 		// V1.5 [FH] Added L3 with IPv4 Stuff
 		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)

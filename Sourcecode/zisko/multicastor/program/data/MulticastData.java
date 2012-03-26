@@ -44,6 +44,9 @@ public class MulticastData {
 	private long packetLossPerSecondAvg = -1;
 	private long trafficAvg = -1;
 	
+	//V1.5 [FH] added packetLost
+	private int packetLostCount = -1;
+	
 	//********************************************
 	// Eigene Datentypen
 	//********************************************	
@@ -123,6 +126,7 @@ public class MulticastData {
 		jitter = d;
 		jitterAvg = d;
 		packetCount = d;
+		packetLostCount = d;
 		traffic = d;
 		trafficAvg = d;
 		packetSource = Source.UNDEFINED;
@@ -341,5 +345,14 @@ public class MulticastData {
 	}
 	public int getMaxInterruptionTime() {
 		return maxInterruptionTime;
+	}
+	public void addLostPackets(int lost){
+		this.packetLostCount += lost;
+	}
+	public int getLostPackets() {
+		return packetLostCount;
+	}
+	public int getReceivedPackets() {
+		return (int)packetCount;
 	}
 }

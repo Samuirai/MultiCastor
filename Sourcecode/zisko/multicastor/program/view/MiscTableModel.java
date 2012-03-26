@@ -131,8 +131,11 @@ public class MiscTableModel extends AbstractTableModel {
 				case 5: ret = "Mbit/s"; break;
 				case 6:	ret = "PORT"; break;			
 				case 7:	ret = "LOSS/S"; break;
-				case 8:	ret = "AVG INT"; break;
-				case 9:	ret = "#INT"; break;
+				//Changed this 2 Values to Lost and Received
+				//case 8:	ret = "AVG INT"; break;
+				//case 9:	ret = "#INT"; break;
+				case 8:	ret = "LOST"; break;
+				case 9:	ret = "RCVD"; break;				
 				case 10: ret = "SRC"; break;
 				default: ret = "error!"; break;
 			}
@@ -182,8 +185,8 @@ public class MiscTableModel extends AbstractTableModel {
 				case 5: ret=new DecimalFormat("##0.000").format((data.getTraffic()/1024.0/1024.0*8.0)); break;
 				case 6: ret=new Integer(data.getUdpPort()); break;
 				case 7: ret=new Integer(data.getPacketLossPerSecond()); break;
-				case 8: ret=new Integer(data.getAverageInterruptionTime()); break;
-				case 9: ret=new Integer(data.getNumberOfInterruptions()); break;
+				case 8: ret=new Integer(data.getLostPackets()); break;
+				case 9: ret=new Integer(data.getReceivedPackets()); break;
 				//case 10: ret = data.getPacketSource().toString(); break;
 				//V1.5 [FH] Changed to network interface
 				case 10: ret = data.getSourceIp().toString().substring(1); break;
