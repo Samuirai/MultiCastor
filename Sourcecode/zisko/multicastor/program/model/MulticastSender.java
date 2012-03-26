@@ -201,7 +201,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 		cumulatedResetablePcktCnt	= 0;
 		
 		//V1.5 [FH] Added for network-fails
-		int ioExceptionCnt = -1;
+		int ioExceptionCnt = 0;
 		
 		//Der Multicastgruppe beitreten
 		try{
@@ -287,7 +287,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 							resetablePcktCnt++;
 							
 							//V1.5 [FH] added for networkfail foo
-							if(ioExceptionCnt != 0 || ioExceptionCnt == -1){
+							if(ioExceptionCnt != 0){
 								mcData.setSenders(senderState.SINGLE);
 								proclaim(2, "Sender is working again");
 								JOptionPane.showMessageDialog(new JFrame(), "Sender is working again");
@@ -297,9 +297,6 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 						}catch(IOException e1){
 							//V1.5 [FH] Made this Code work
 							Object[] options = { "Stop Sender", "Reattemp to connect"};
-							
-							if(ioExceptionCnt == -1)
-								ioExceptionCnt = 0;
 
 							 mcData.setSenders(senderState.NETWORK_ERROR);
 							 
