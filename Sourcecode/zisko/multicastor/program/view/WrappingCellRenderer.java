@@ -48,6 +48,10 @@ public class WrappingCellRenderer implements TableCellRenderer {
 	            		rendererComponent.setBackground(Color.green);
 	            		rendererComponent.setForeground(Color.black); 
 	            		break;
+	            	case NETWORK_ERROR:
+	            		rendererComponent.setBackground(Color.red);
+	            		rendererComponent.setForeground(Color.yellow);
+	            		break;
 	            	default:
             	}
         	}
@@ -74,6 +78,10 @@ public class WrappingCellRenderer implements TableCellRenderer {
 	            	case NONE:
 	            		rendererComponent.setBackground(new Color(0,175,0));
 	    	        	rendererComponent.setForeground(Color.white);
+	            		break;
+	            	case NETWORK_ERROR:
+	            		rendererComponent.setBackground(Color.red);
+	            		rendererComponent.setForeground(Color.yellow);
 	            		break;
 	            	default:
         	 	}

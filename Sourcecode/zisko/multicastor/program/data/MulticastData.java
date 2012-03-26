@@ -60,7 +60,7 @@ public class MulticastData {
 	}
 	
 	public enum senderState {
-		NONE, SINGLE, RECENTLY_CHANGED, MULTIPLE
+		NONE, SINGLE, RECENTLY_CHANGED, MULTIPLE, NETWORK_ERROR
 	}
 	
 	//********************************************
