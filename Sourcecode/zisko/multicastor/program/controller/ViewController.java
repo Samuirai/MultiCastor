@@ -1795,7 +1795,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		int[] selectedRows = tabpart.getTable().getSelectedRows();
 		tabpart.getPan_status().getLb_multicasts_selected()
-		.setText(selectedRows.length+" Multicasts Selected ");
+		.setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
 		if(selectedRows.length > 1){
 			multipleSelect(typ);
 		}
@@ -2034,7 +2034,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
 			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
 		}
-		getPanStatus(typ).getLb_multicasts_selected().setText("0 Multicasts Selected ");
+		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+" ");
 		
 	}
 	/**
@@ -2059,7 +2059,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		clearInput(typ);
 		getTable(typ).clearSelection();
 		setBTStartStopDelete(typ);
-		getPanStatus(typ).getLb_multicasts_selected().setText("0 Multicasts Selected ");
+		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+"");
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der Select All Button gedr�ckt wird.
@@ -2344,13 +2344,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		PanelTabbed tabpart = getPanTabbed(typ);
 		switch(utyp){
 			case INSERT:	tabpart.getTableModel().insertUpdate();
-							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" Multicasts Total");
+							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
 							if(initFinished){
 								clearInput(typ);
 							}
 							break;
 			case DELETE:	tabpart.getTableModel().deleteUpdate();
-							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" Multicasts Total");
+							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
 							if(initFinished){
 								clearInput(typ);
 							}
@@ -2400,6 +2400,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			updateTablePart(typ);
 			updateGraph(typ);
 			getPanStatus(typ).updateTraffic(this);
+			getPanStatus(typ).getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
+			PanelTabbed tabpart = null;
+			switch(typ){
+				case SENDER_V4: tabpart=f.getPanel_sen_ipv4(); break;
+				case RECEIVER_V4: tabpart=f.getPanel_rec_ipv4(); break;
+				case SENDER_V6: tabpart=f.getPanel_sen_ipv6(); break;
+				case RECEIVER_V6: tabpart=f.getPanel_rec_ipv6(); break;
+				case L2_SENDER: tabpart=f.getPanel_sen_lay2(); break;
+				case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
+				case L2_RECEIVER: tabpart=f.getPanel_rec_lay2(); break;
+				case L3_RECEIVER: tabpart=f.getPanel_rec_lay3();
+			}
+			int[] selectedRows = tabpart.getTable().getSelectedRows();
+			getPanStatus(typ).getLb_multicasts_selected().setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
 		}
 	}
 	/**
