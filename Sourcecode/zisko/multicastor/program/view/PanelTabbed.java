@@ -10,6 +10,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
+import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Ein Panel welches jeweils einen kompletten Programmteil beinhaltet. 
  * Durch diese Panels kann man im Programm tabben.
@@ -35,6 +36,8 @@ public class PanelTabbed extends JPanel {
 	private MiscTableModel model;
 	private boolean popupsAllowed = true;
 	private ArrayList<TableColumn> columns;
+	private LanguageManager lang;
+	private MiscBorder tablePanelBorder;
 
 	/**
 	 * Konstruktor fï¿½r einen kompletten Programmteil in der GUI.
@@ -43,6 +46,7 @@ public class PanelTabbed extends JPanel {
 	 * @param typ Gibt an um welchen Programmteil es sich handelt
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
+		lang=LanguageManager.getInstance();
 		setLayout(new BorderLayout());
 		initControlPanel(ctrl);
 		initConfigPanel(ctrl, typ);
@@ -57,7 +61,6 @@ public class PanelTabbed extends JPanel {
 		pan_options.add(pan_control,BorderLayout.NORTH);
 		pan_options.add(pan_config, BorderLayout.EAST);
 		
-		
 		// Space Panel, a Buffer for Resizing below the Left Panel
 		pan_space = new JPanel();
 		
@@ -71,6 +74,14 @@ public class PanelTabbed extends JPanel {
 		add(pan_left, BorderLayout.WEST);
 		add(pan_table,BorderLayout.CENTER);
 		add(pan_status, BorderLayout.SOUTH);
+	}
+	
+	public void reloadLanguage(){
+		pan_control.reloadLanguage();
+		pan_config.reloadLanguage();
+		tablePanelBorder.setTitle(lang.getProperty("miscBorder.mcOverwiew"));
+		tab_console.setTitleAt(0, lang.getProperty("tab.graph"));
+		tab_console.setTitleAt(1, lang.getProperty("tab.console"));
 	}
 	
 	/**
@@ -102,15 +113,15 @@ public class PanelTabbed extends JPanel {
 		else{
 			pan_graph = new ReceiverGraph(ctrl);
 		}
-		tab_console.addTab("Graph", pan_graph);;
-		tab_console.addTab("Console", console_scrollpane);
+		tab_console.addTab(lang.getProperty("tab.graph"), pan_graph);
+		tab_console.addTab(lang.getProperty("tab.console"), console_scrollpane);
 //		pan_graph.setVisible(false);
 //		tab_console.remove(0);
 	}
 	/**
 	 * Initialisiert die Tabelle
-	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehï¿½rt
+	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();
@@ -133,7 +144,7 @@ public class PanelTabbed extends JPanel {
 		table_scrollpane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		table_scrollpane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		pan_table.setLayout(new BorderLayout());
-		pan_table.setBorder(new MiscBorder("MultiCast Overview"));
+		pan_table.setBorder(tablePanelBorder = new MiscBorder(lang.getProperty("miscBorder.mcOverwiew")));
 		pan_table.add(tab_console,BorderLayout.SOUTH);
 		pan_table.add(table_scrollpane,BorderLayout.CENTER);
 	}

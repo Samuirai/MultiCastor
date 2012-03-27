@@ -41,16 +41,18 @@ public class UpdateTask extends TimerTask {
 		long time1 = System.nanoTime();
 		Map<MulticastData, MulticastThreadSuper> v = null;
 		boolean memoryWarnedForLog = false; 
+		Runtime rt= Runtime.getRuntime();
 		
 		// V1.5 [FH] Prüfung des Memories. Ob noch mehr als 10% frei sind
-		if (!memoryWarned && Runtime.getRuntime().freeMemory() < Runtime.getRuntime().totalMemory()*0.1) {
+		if (!memoryWarned && rt.freeMemory()+ (rt.maxMemory()-rt.totalMemory()) 
+				< rt.maxMemory()*0.1) {
 			logger
 					.warning("Your memory is about to expire.(<10% remaining)\n"
 							+ "Please be careful, save your files and "
 							+ "try to free memory with closing of sender/reciever or tabs.\n\n" +
-									"Free Memory: " + Runtime.getRuntime().freeMemory()/(1024*1024) + "\n" +
-									"Total Allocated Memory: " + Runtime.getRuntime().totalMemory()/(1024*1024) + "\n" +
-									"Maximum Memory for JVM:  " + Runtime.getRuntime().maxMemory()/(1024*1024) );
+									"Free Memory: " + rt.freeMemory()/(1024*1024) + "\n" +
+									"Total Allocated Memory: " + rt.totalMemory()/(1024*1024) + "\n" +
+									"Maximum Memory for JVM:  " + rt.maxMemory()/(1024*1024) );
 			memoryWarnedForLog = true;
 			this.memoryWarned = true;
 		}
@@ -93,6 +95,7 @@ public class UpdateTask extends TimerTask {
 				viewController.viewUpdate();
 			}
 		}
+		
 		//V1.5 [FH] added !MemoryWarning, because if we have a memory warning it is always taking longer
 		if (!memoryWarnedForLog && ((System.nanoTime() - time1) / 1000000) > 200) {
 			// System.out.println("Updatetime is rather long: " +

@@ -174,6 +174,7 @@ public class FrameMain extends JFrame {
 	public void reloadLanguage(){
 		initMenuBar(ctrl,false);
 		initPanels(ctrl, false);
+		MiscBorder.reloadLanguage();
 		repaint();
 	}
 	
@@ -467,6 +468,10 @@ public class FrameMain extends JFrame {
 		}
 		else{
 			panel_plus.reloadLanguage();
+			panel_rec_lay2.reloadLanguage();
+			panel_sen_lay2.reloadLanguage();
+			panel_rec_lay3.reloadLanguage();
+			panel_sen_lay3.reloadLanguage();
 		}
 		
 		//tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);

@@ -7,6 +7,8 @@ import java.util.Vector;
 
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
+import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Hilfsklasse zum verwalten der R�nder f�r Textfelder.
  * @author Daniel Becker 
@@ -23,6 +25,7 @@ public class MiscBorder extends TitledBorder {
 	public enum BorderType{
 		NEUTRAL, TRUE, FALSE
 	}
+	
 	/**
 	 * Enum welches bestimmt um welchen Rahmen es sich handelt
 	 * @author Daniel Becker
@@ -31,7 +34,7 @@ public class MiscBorder extends TitledBorder {
 	public enum BorderTitle{
 		IPv4GROUP, IPv4SOURCE, IPv6GROUP, IPv6SOURCE, PORT, RATE, LENGTH, TTL, L2Group, L2Source
 	}
-	private static String[] ipv4Names = {"IP Group Address","IP Network Interface","UDP Port","Packet Rate", "Packet Length", "Time to Live", "IP Group Address","IP Network Interface", "Mac Group Adress", "Network Interface"};
+	
 	private static Vector<TitledBorder> b_neutral = new Vector<TitledBorder>();
 	private static Vector<TitledBorder> b_true = new Vector<TitledBorder>();
 	private static Vector<TitledBorder> b_false = new Vector<TitledBorder>();
@@ -40,19 +43,10 @@ public class MiscBorder extends TitledBorder {
 	private static Color neutralLineColor=  new Color(240,240,240);
 	private static Color neutralTextColor= Color.gray;
 	private static Color lineColor=Color.lightGray;
-	static Font f = MiscFont.getFont(0,12);
-	private Color c = Color.black;
-	/**
-	 * initialisiert die 3 Vectoren welche die fertigen R�nder halten, so m�ssen zur Laufzeit keine neuen genertiert werden.
-	 * Die k�nnen abgefragt werden sobald sie ben�tigt werden.
-	 */
-	static {
-		for(int i = 0; i < ipv4Names.length; i++){
-			b_neutral.add(createBorder(ipv4Names[i], neutralTextColor, neutralLineColor));
-			b_true.add(createBorder(ipv4Names[i], enabledColor, enabledColor));
-			b_false.add(createBorder(ipv4Names[i], disabledColor, disabledColor));			
-		}
-	}
+	private static LanguageManager lang;
+	private static Font f = MiscFont.getFont(0,12);
+	private static Color c = Color.black;
+	
 	/**
 	 * Kontruktor welcher eine LineBorder mit einem Bestimmten Namen erstellt.
 	 * @param title Der Name der neuen LineBorder.
@@ -74,6 +68,37 @@ public class MiscBorder extends TitledBorder {
 		TitledBorder b = new TitledBorder(new LineBorder(lineColor), title, TitledBorder.LEFT, TitledBorder.TOP, f, titleColor);
 		return b;
 	}
+	
+	public static void reloadLanguage(){
+		String[] ipv4Names={
+			lang.getProperty("miscBorder.ipGroupAddress"),
+			lang.getProperty("miscBorder.ipNetworkInterface"),
+			lang.getProperty("miscBorder.udpPort"),
+			lang.getProperty("miscBorder.packetRate"),
+			lang.getProperty("miscBorder.packetLength"),
+			lang.getProperty("miscBorder.timeToLive"),
+			lang.getProperty("miscBorder.ipGroupAddress"),
+			lang.getProperty("miscBorder.ipNetworkInterface"),
+			lang.getProperty("miscBorder.MacGroupAddress"),
+			lang.getProperty("miscBorder.NetworkInterface")
+		};
+		if (b_neutral.size()==0){
+			for(int i = 0; i < ipv4Names.length; i++){
+				b_neutral.add(createBorder(ipv4Names[i], neutralTextColor, neutralLineColor));
+				b_true.add(createBorder(ipv4Names[i], enabledColor, enabledColor));
+				b_false.add(createBorder(ipv4Names[i], disabledColor, disabledColor));			
+			}	
+		}
+		else{
+			for(int i = 0; i < ipv4Names.length; i++){
+				b_neutral.get(i).setTitle(ipv4Names[i]);
+				b_true.get(i).setTitle(ipv4Names[i]);
+				b_false.get(i).setTitle(ipv4Names[i]);
+			}
+		}
+		
+	}
+	
 	/**
 	 * Statische Funktion zum Abrufen einer LineBorder
 	 * @param title Name der LineBorder (Titel)
@@ -81,51 +106,54 @@ public class MiscBorder extends TitledBorder {
 	 * @return die erstellte LineBorder
 	 */
 	public static TitledBorder getBorder(BorderTitle title, BorderType bordertype){
-		TitledBorder ret = null;
+		if (b_neutral.size()==0){
+			lang=LanguageManager.getInstance();
+			reloadLanguage();
+		}
 		switch(bordertype){
 			case NEUTRAL:
 				switch(title){
-					case IPv4GROUP: ret = b_neutral.get(0);  break;
-					case IPv4SOURCE: ret = b_neutral.get(1);  break;
-					case PORT: ret = b_neutral.get(2);  break;
-					case RATE: ret = b_neutral.get(3);  break;
-					case LENGTH: ret = b_neutral.get(4);  break;
-					case TTL: ret = b_neutral.get(5);  break;
-					case IPv6GROUP: ret = b_neutral.get(6); break;
-					case IPv6SOURCE: ret = b_neutral.get(7); break;
-					case L2Group: ret = b_neutral.get(8); break;
-					case L2Source: ret = b_neutral.get(9); break;
+					case IPv4GROUP:		return b_neutral.get(0);
+					case IPv4SOURCE: 	return b_neutral.get(1);
+					case PORT: 			return b_neutral.get(2);
+					case RATE: 			return b_neutral.get(3);
+					case LENGTH: 		return b_neutral.get(4);
+					case TTL: 			return b_neutral.get(5);
+					case IPv6GROUP: 	return b_neutral.get(6);
+					case IPv6SOURCE: 	return b_neutral.get(7);
+					case L2Group: 		return b_neutral.get(8);
+					case L2Source: 		return b_neutral.get(9);
 				}
 				break;
 			case TRUE:
 				switch(title){
-					case IPv4GROUP: ret = b_true.get(0);  break;
-					case IPv4SOURCE: ret = b_true.get(1);  break;
-					case PORT: ret = b_true.get(2);  break;
-					case RATE: ret = b_true.get(3);  break;
-					case LENGTH: ret = b_true.get(4);  break;
-					case TTL: ret = b_true.get(5);  break;
-					case IPv6GROUP: ret = b_true.get(6); break;
-					case IPv6SOURCE: ret = b_true.get(7); break;
-					case L2Group: ret = b_true.get(8); break;
-					case L2Source: ret = b_true.get(9); break;
+					case IPv4GROUP: 	return b_true.get(0);
+					case IPv4SOURCE: 	return b_true.get(1);
+					case PORT: 			return b_true.get(2);
+					case RATE: 			return b_true.get(3);
+					case LENGTH: 		return b_true.get(4);
+					case TTL: 			return b_true.get(5);
+					case IPv6GROUP: 	return b_true.get(6);
+					case IPv6SOURCE: 	return b_true.get(7);
+					case L2Group: 		return b_true.get(8);
+					case L2Source: 		return b_true.get(9);
 				}
 			break;
 			case FALSE:
 				switch(title){
-					case IPv4GROUP: ret = b_false.get(0);  break;
-					case IPv4SOURCE: ret = b_false.get(1);  break;
-					case PORT: ret = b_false.get(2);  break;
-					case RATE: ret = b_false.get(3);  break;
-					case LENGTH: ret = b_false.get(4);  break;
-					case TTL: ret = b_false.get(5);  break;
-					case IPv6GROUP: ret = b_false.get(6); break;
-					case IPv6SOURCE: ret = b_false.get(7); break;
-					case L2Group: ret = b_false.get(8); break;
-					case L2Source: ret = b_false.get(9); break;
+					case IPv4GROUP: 	return b_false.get(0);
+					case IPv4SOURCE: 	return b_false.get(1);
+					case PORT: 			return b_false.get(2);
+					case RATE: 			return b_false.get(3);
+					case LENGTH: 		return b_false.get(4);
+					case TTL: 			return b_false.get(5);
+					case IPv6GROUP: 	return b_false.get(6);
+					case IPv6SOURCE: 	return b_false.get(7);
+					case L2Group: 		return b_false.get(8);
+					case L2Source: 		return b_false.get(9);
 			}
 		}
-		return ret;
+		return null;
 	}
 	
 }

@@ -7,6 +7,11 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import org.xml.sax.SAXException;
 
 import zisko.multicastor.program.model.MulticastLogHandler;
@@ -25,7 +30,7 @@ public class Main {
 	
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die
-	 * Parameter ein, die dem Programm ï¿½begeben wurden und startet den
+	 * Parameter ein, die dem Programm übegeben wurden und startet den
 	 * entsprechenden Programmteil.
 	 * 
 	 * @param args
@@ -60,6 +65,13 @@ public class Main {
 			logger.severe("Not enough memory. You have " + Main.REAL_MAX_HEAP/(1024*1024)
 					+ " MB, but you need min " + Main.MIN_MAX_HEAP/(1024*1024)
 					+ " MB to start MultiCastor");
+			
+			if (args.length == 0 || !args[0].equals("-g"))
+				JOptionPane.showMessageDialog(new JFrame(), "Not enough memory.\n"
+						+ "You have " + Main.REAL_MAX_HEAP/(1024*1024)
+						+ " MB \nbut you need min " + Main.MIN_MAX_HEAP/(1024*1024)
+						+ " MB \nto start MultiCastor", "MultiCastor: MemoryError", JOptionPane.WARNING_MESSAGE);
+			
 			System.exit(1);
 		}else if (args.length == 0) {
 			gui = new ViewController();

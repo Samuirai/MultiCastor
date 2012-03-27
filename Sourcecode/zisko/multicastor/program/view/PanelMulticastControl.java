@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.*;
 import zisko.multicastor.program.controller.ViewController;
+import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Das Kontrollpanel f�r Multicasts. 
  * Mit diesem Panel k�nnen Multicasts gestartet, gestoppt und gel�scht werden.
@@ -18,54 +19,73 @@ public class PanelMulticastControl extends JPanel {
 	private JButton delete;
 	private JButton select_deselect_all;
 	private JButton newmulticast;
+	private LanguageManager lang;
+	private ViewController ctrl;
+	private MiscBorder mainBorder;
 
 	/**
 	 * Konstruktor f�r das Kontrollpanel welcher alle zugeh�rigen GUI Komponenten initialisiert.
 	 * @param ctrl Ben�tigete Referenz zum GUI Controller
 	 */
 	public PanelMulticastControl(ViewController ctrl){
-		setBorder(new MiscBorder("MultiCast Control"));
+		this.ctrl=ctrl;
+		lang=LanguageManager.getInstance();
+		setBorder(mainBorder=new MiscBorder(lang.getProperty("miscBorder.mcControl")));
 		setLayout(null);
 		setPreferredSize(new Dimension(225,85));
-		initButtons(ctrl);
+		initButtons(ctrl,true);
 	}
+	
+	public void reloadLanguage(){
+		mainBorder.setTitle(lang.getProperty("miscBorder.mcControl"));
+		initButtons(ctrl,false);
+	}
+	
 	/**
 	 * Hilfsfunktion welche die Buttons des Kontrollpanels initialisiert
 	 * @param ctrl Ben�tigete Referenz zum GUI Controller
 	 */
-	private void initButtons(ViewController ctrl) {
+	private void initButtons(ViewController ctrl,boolean firstInit) {
 		
-		start_stop = new JButton("Start / Stop");
-		delete = new JButton("Delete");
-		select_deselect_all = new JButton("(De-)Select All");
-		newmulticast = new JButton("New");
-		start_stop.setEnabled(false);
-		delete.setEnabled(false);
+		if (firstInit){
+			start_stop = new JButton();
+			delete = new JButton();
+			select_deselect_all = new JButton();
+			newmulticast = new JButton();
+			
+			start_stop.setEnabled(false);
+			delete.setEnabled(false);
+			
+			Font myFont = new Font("Helvetica", Font.BOLD,11);
+			start_stop.setFont(myFont);
+			delete.setFont(MiscFont.getFont());
+			select_deselect_all.setFont(MiscFont.getFont());
+			newmulticast.setFont(MiscFont.getFont());
+			
+			start_stop.setFocusable(false);
+			delete.setFocusable(false);
+			select_deselect_all.setFocusable(false);
+			newmulticast.setFocusable(false);
+			
+			select_deselect_all.setBounds(10,20,100,25);
+			delete.setBounds(115,20,100,25);
+			newmulticast.setBounds(10,50,100,25);
+			start_stop.setBounds(115,50,100,25);
+			
+			start_stop.addActionListener(ctrl);
+			select_deselect_all.addActionListener(ctrl);
+			newmulticast.addActionListener(ctrl);
+			delete.addActionListener(ctrl);
+			add(start_stop);
+			add(newmulticast);
+			add(select_deselect_all);
+			add(delete);
+		}
 		
-		Font myFont = new Font("Helvetica", Font.BOLD,11);
-		start_stop.setFont(myFont);
-		delete.setFont(MiscFont.getFont());
-		select_deselect_all.setFont(MiscFont.getFont());
-		newmulticast.setFont(MiscFont.getFont());
-		
-		start_stop.setFocusable(false);
-		delete.setFocusable(false);
-		select_deselect_all.setFocusable(false);
-		newmulticast.setFocusable(false);
-		
-		select_deselect_all.setBounds(10,20,100,25);
-		delete.setBounds(115,20,100,25);
-		newmulticast.setBounds(10,50,100,25);
-		start_stop.setBounds(115,50,100,25);
-		
-		start_stop.addActionListener(ctrl);
-		select_deselect_all.addActionListener(ctrl);
-		newmulticast.addActionListener(ctrl);
-		delete.addActionListener(ctrl);
-		add(start_stop);
-		add(newmulticast);
-		add(select_deselect_all);
-		add(delete);
+		start_stop.setText(lang.getProperty("button.start")+" / "+lang.getProperty("button.stop"));
+		delete.setText(lang.getProperty("button.delete"));
+		select_deselect_all.setText(lang.getProperty("button.deSelectAll"));
+		newmulticast.setText(lang.getProperty("button.new"));
 	}
 
 	public JButton getStartStop() {

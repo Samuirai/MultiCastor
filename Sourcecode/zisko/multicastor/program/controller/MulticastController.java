@@ -119,7 +119,7 @@ public class MulticastController{
 	 * @param logger Der Logger darf nicht null sein. Er wird benoetigt um Programmereignisse 
 	 * und regelmaessig ermittelte Durchschnittswerte zu loggen. Wird null uebergeben wird
 	 * dies in den Systemoutput geschrieben.
-	 * @param setzt die intervall zeit fŸr den konsolen tabellen output
+	 * @param setzt die intervall zeit fï¿½r den konsolen tabellen output
 	 */
 	public MulticastController(ViewController viewController, Logger logger, int pPrintTableIntervall){
 		super();
@@ -214,6 +214,8 @@ public class MulticastController{
 
 		if((m.getTyp() == MulticastData.Typ.SENDER_V4)||(m.getTyp() == MulticastData.Typ.SENDER_V6)){
 			t = new MulticastSender(m, logger);
+			//V1.5 [FH] Added MulticastController to stop it in case of network error
+			((MulticastSender) t).setMCtrl(this);
 		} else if ((m.getTyp() == MulticastData.Typ.RECEIVER_V4)||(m.getTyp() == MulticastData.Typ.RECEIVER_V6)){
 			t = new MulticastReceiver(m, logger);
 		}
@@ -824,7 +826,7 @@ public class MulticastController{
 	}
 	
 	/**
-	 * setzt das Zeitintervall fŸr die Ausgabe der Tabelle auf der Konsole
+	 * setzt das Zeitintervall fï¿½r die Ausgabe der Tabelle auf der Konsole
 	 * @param printTableTime Zeitintervall in milliseconds
 	 */
 	public void setPrintTableTime(int printTableTime) {

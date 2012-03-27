@@ -158,6 +158,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		// v1.5 Wird aufgerufen, wenn Language gewechselt werden soll
+		else if(e.getSource()==f.getM_language()){
+			JOptionPane.showMessageDialog(f, "Die �nderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
+		}
+		
 		else if (e.getActionCommand().startsWith("change_lang_to")){
 			LanguageManager.setCurrentLanguage(e.getActionCommand().replaceFirst("change_lang_to_", ""));
 			f.reloadLanguage();
@@ -480,7 +484,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					}
 				}
 				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, isIPv4));	
 				}
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
 					if (isIPv4) {
@@ -515,6 +519,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					} else {
 						mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
 					}
+				}
+				//V1.5 [FH] Added source IP for receiver (network interface)
+				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, isIPv4));	
 				}
 				break;
 			default:
@@ -748,7 +756,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				// TODO [MH] das getselectedrows auch hierein tun, wenn eintraege funzen
 				break;
 			case L3_RECEIVER:
-				if (input[1][0] && input[1][2]) {
+				if (input[1][0] && 
+					input[1][1] &&	
+					input[1][2]) {
 					getPanConfig(typ).getBt_enter().setEnabled(true);
 				} else {
 					getPanConfig(typ).getBt_enter().setEnabled(false);
@@ -812,14 +822,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			//System.out.println("clearinput");
 			getPanConfig(typ).getTf_groupIPaddress().setText("");
 			getPanConfig(typ).getTf_udp_port().setText("");
-			if(typ==Typ.L3_SENDER){
-				getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
+			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
+			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
+			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
+			if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 				getPanConfig(typ).getTf_ttl().setText("");
 				getPanConfig(typ).getTf_packetrate().setText("");;
 				getPanConfig(typ).getTf_udp_packetlength().setText("");;
-				getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
-				getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
-				getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
 			}
 			getPanConfig(typ).getTb_active().setSelected(false);
 			getPanConfig(typ).getTb_active().setText("inactive");
@@ -1546,6 +1555,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			if(arg0.getSource() == getPanConfig(Typ.L3_SENDER).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.L3_SENDER);
 			}
+			if(arg0.getSource() == getPanConfig(Typ.L3_RECEIVER).getTf_sourceIPaddress()){
+				changeNetworkInterface(Typ.L3_RECEIVER);
+			}
 			// TODO [MH] Receiver depending on morgen discussion einbauen
 			// TODO [MH] kram rausschmeissen
 			if(arg0.getSource() == getPanConfig(Typ.SENDER_V4).getTf_sourceIPaddress()){
@@ -1811,7 +1823,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case L3_RECEIVER: tabpart=f.getPanel_rec_lay3(); break;
 		}
 		int[] selectedRows = tabpart.getTable().getSelectedRows();
-		tabpart.getPan_status().getLb_multicasts_selected().setText(selectedRows.length+" Multicasts Selected ");
+		tabpart.getPan_status().getLb_multicasts_selected().setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
 		if(selectedRows.length > 1){
 			multipleSelect(typ);
 		}
@@ -2050,7 +2062,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
 			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
 		}
-		getPanStatus(typ).getLb_multicasts_selected().setText("0 Multicasts Selected ");
+		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+" ");
 		
 	}
 	/**
@@ -2075,7 +2087,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		clearInput(typ);
 		getTable(typ).clearSelection();
 		setBTStartStopDelete(typ);
-		getPanStatus(typ).getLb_multicasts_selected().setText("0 Multicasts Selected ");
+		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+"");
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der Select All Button gedr�ckt wird.
@@ -2360,13 +2372,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		PanelTabbed tabpart = getPanTabbed(typ);
 		switch(utyp){
 			case INSERT:	tabpart.getTableModel().insertUpdate();
-							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" Multicasts Total");
+							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
 							if(initFinished){
 								clearInput(typ);
 							}
 							break;
 			case DELETE:	tabpart.getTableModel().deleteUpdate();
-							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" Multicasts Total");
+							tabpart.getPan_status().getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
 							if(initFinished){
 								clearInput(typ);
 							}
@@ -2422,6 +2434,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			updateTablePart(typ);
 			updateGraph(typ);
 			getPanStatus(typ).updateTraffic(this);
+			getPanStatus(typ).getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
+			PanelTabbed tabpart = null;
+			switch(typ){
+				case SENDER_V4: tabpart=f.getPanel_sen_ipv4(); break;
+				case RECEIVER_V4: tabpart=f.getPanel_rec_ipv4(); break;
+				case SENDER_V6: tabpart=f.getPanel_sen_ipv6(); break;
+				case RECEIVER_V6: tabpart=f.getPanel_rec_ipv6(); break;
+				case L2_SENDER: tabpart=f.getPanel_sen_lay2(); break;
+				case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
+				case L2_RECEIVER: tabpart=f.getPanel_rec_lay2(); break;
+				case L3_RECEIVER: tabpart=f.getPanel_rec_lay3();
+			}
+			int[] selectedRows = tabpart.getTable().getSelectedRows();
+			getPanStatus(typ).getLb_multicasts_selected().setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
 		}
 	}
 	/**
