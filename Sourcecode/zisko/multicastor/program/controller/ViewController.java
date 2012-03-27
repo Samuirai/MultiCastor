@@ -464,7 +464,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Ge�nderters Multicast Datenobjekt.
 	 */
 	private MulticastData changeMCData(MulticastData mcd, MulticastData.Typ typ){
-		// TODO [MH] hier soll die das neue MC Object gebaut werden mit L3 allgemein
 		boolean isIPv4;
 		
 		/* Is IPv4 or IPv6? */
@@ -536,7 +535,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			mcd.setActive(getPanConfig(typ).getTb_active().isSelected());
 		}
 		
-		// TODO [MH] funktioniert das so?
 		if (typ == MulticastData.Typ.L3_SENDER) {
 			if (isIPv4) {
 				mcd.setTyp(MulticastData.Typ.SENDER_V4);
@@ -550,85 +548,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				mcd.setTyp(MulticastData.Typ.RECEIVER_V6);
 			}
 		}
-		//System.out.println(mcd.toString());
 		return mcd;
-		
-		
-//		switch(typ){
-//			case SENDER_V4:
-//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-//					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
-//				}
-//				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-//					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
-//				}
-//				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
-//					mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-//						mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
-//					}
-//				}
-//				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
-//					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
-//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-//						mcd.setTtl(InputValidator.checkTimeToLive("32"));
-//					}
-//				}
-//				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
-//					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-//						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-//					}
-//				}
-//				
-//			break;
-//			case SENDER_V6:
-//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-//					mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
-//				}
-//				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-//					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
-//				}
-//				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
-//					mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-//						mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
-//					}
-//				}
-//				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
-//					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
-//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-//						mcd.setTtl(InputValidator.checkTimeToLive("32"));
-//					}
-//				}
-//				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
-//					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-//					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-//						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-//					}
-//				}
-//			break;
-//			case RECEIVER_V4:
-//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-//					mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
-//				}
-//			break;
-//			case RECEIVER_V6:
-//				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")){
-//					mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
-//				}
-//			break;
-//			default: System.out.println("changeMCData(Multicastdata mcd) - ERROR");
-//		}
-//		if(!getPanConfig(typ).getTf_udp_port().getText().equals("...")){
-//			mcd.setUdpPort(InputValidator.checkPort(getPanConfig(typ).getTf_udp_port().getText()));
-//		}
-//		if(!getPanConfig(typ).getTb_active().getText().equals("multiple")){
-//			mcd.setActive(getPanConfig(typ).getTb_active().isSelected());
-//		}
-//		mcd.setTyp(typ);
-//		//System.out.println(mcd.toString());
-//		return mcd;
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der User das Netzwerk Interface in einem Sender �ndert.
@@ -956,31 +876,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
 					input[0][5]=false;
 				}
-//			case SENDER_V4:
-//				if((InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
-//				|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_packetlength().getText().equals("..."))){
-//					getPanConfig(typ).getPan_packetlength()
-//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
-//					input[0][5]=true;
-//				}
-//				else{
-//					getPanConfig(typ).getPan_packetlength()
-//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
-//					input[0][5]=false;
-//				}
-//				break;
-//			case SENDER_V6:
-//				if((InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
-//				|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_udp_packetlength().getText().equals("..."))){
-//					getPanConfig(typ).getPan_packetlength()
-//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
-//					input[2][5]=true;
-//				}
-//				else{
-//					getPanConfig(typ).getPan_packetlength()
-//					.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
-//					input[2][5]=false;
-//				}
 		}
 		if(getPanConfig(typ).getTf_udp_packetlength().getText().equalsIgnoreCase("")){					
 			getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.NEUTRAL));					
@@ -1465,7 +1360,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			if(arg0.getSource() == getPanConfig(Typ.L3_RECEIVER).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.L3_RECEIVER);
 			}
-			// TODO [MH] Receiver depending on morgen discussion einbauen
 			// TODO [MH] kram rausschmeissen
 			if(arg0.getSource() == getPanConfig(Typ.SENDER_V4).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.SENDER_V4);
@@ -2084,11 +1978,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(e.getActionCommand().equals("ApproveSelection")){
 			FrameFileChooser fc_save = getFrame().getFc_save();
 			//System.out.println("selected File: "+fc_save.getSelectedFile());
+			//TODO [MH] speichern noch an lay3 anpassen
 			mc.saveConfig(	fc_save.getSelectedFile(), 
 							fc_save.isCbSenderV4Selected(), 
-							fc_save.isCbSenderV6Selected(), 
-							fc_save.isCbReceiverV4Selected(), 
-							fc_save.isCbReceiverV6Selected());
+							fc_save.isCbReceiverV4Selected());
 			f.updateLastConfigs(fc_save.getSelectedFile());
 			fc_save.getChooser().rescanCurrentDirectory();
 			fc_save.toggle();
@@ -2309,7 +2202,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Implementierung des ListSelectionListeners, sorgt f�r korrektes Verhalten der GUI
 	 * beim Selektieren und Deselektieren von einer oder mehreren Zeilen in der Tabelle.
 	 */
-	// TODO [MH] hier muss bestimmt noch wat jemacht werden
 	public void valueChanged(ListSelectionEvent e) {
 //		if(e.getSource()==getTable(Typ.SENDER_V4).getSelectionModel()){
 //			listSelectionEventFired(Typ.SENDER_V4);
