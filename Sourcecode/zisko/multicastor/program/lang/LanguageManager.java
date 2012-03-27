@@ -142,9 +142,7 @@ public class LanguageManager extends Properties{
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Can not read the language file at\nLanguage/"+currentLanguage+".lang\nCan not change language!");
 			} catch (InvalidLanguageFileException e) {
-				//TODO: Hier muss noch was besseres gebaut werden!
 				JOptionPane.showMessageDialog(null, "The language file at\nLanguage/"+currentLanguage+".lang\nis invalid. Can not change language.\n Missing value "+e.getErrorKey()+" at index "+e.getErrorIndex()+".");
-				System.exit(1);
 			}
 		}
 	}
