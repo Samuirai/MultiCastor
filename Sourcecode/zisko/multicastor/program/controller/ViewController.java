@@ -750,67 +750,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					input[0][5]
 				){
 					getPanConfig(typ).getBt_enter().setEnabled(true);
+				} else if(getSelectedRows(getSelectedTab()).length <=1){
+					getPanConfig(typ).getBt_enter().setEnabled(false);
 				} else {
 					getPanConfig(typ).getBt_enter().setEnabled(false);
 				}
-				// TODO [MH] das getselectedrows auch hierein tun, wenn eintraege funzen
 				break;
 			case L3_RECEIVER:
 				if (input[1][0] && 
 					input[1][1] &&	
 					input[1][2]) {
 					getPanConfig(typ).getBt_enter().setEnabled(true);
+				} else if(getSelectedRows(getSelectedTab()).length <=1){
+					getPanConfig(typ).getBt_enter().setEnabled(false);
 				} else {
 					getPanConfig(typ).getBt_enter().setEnabled(false);
 				}
-				// TODO [MH] das getselectedrows auch hierein tun, wenn eintraege funzen
 				break;
-		// TODO [MH] Alte Eintraege entfernen, wenn das neue laeuft
-		// ausserdem wird input[0] jetzt fuer L3_Sender verwendet
-//			case SENDER_V4:
-//				if(	input[0][0] &&
-//					input[0][1] &&
-//					input[0][2] &&
-//					input[0][3] &&
-//					input[0][4] &&
-//					input[0][5]){
-//							getPanConfig(typ).getBt_enter().setEnabled(true);
-//				}
-//				else if(getSelectedRows(getSelectedTab()).length <=1){
-//					getPanConfig(typ).getBt_enter().setEnabled(false);
-//				}
-//				break;
-//			case RECEIVER_V4:	
-//				if(	input[1][0] &&
-//					input[1][2]){
-//					f.getPanel_rec_ipv4().getPan_config().getBt_enter().setEnabled(true);
-//				}
-//				else if(getSelectedRows(typ).length <=1){
-//					f.getPanel_rec_ipv4().getPan_config().getBt_enter().setEnabled(false);
-//				}
-//				break;
-//			case SENDER_V6:		
-//				if(	input[2][0] &&
-//					input[2][1] &&
-//					input[2][2] &&
-//					input[2][3] &&
-//					input[2][4] &&
-//					input[2][5]){
-//					f.getPanel_sen_ipv6().getPan_config().getBt_enter().setEnabled(true);
-//				}
-//				else if(getSelectedRows(getSelectedTab()).length <=1){
-//					f.getPanel_sen_ipv6().getPan_config().getBt_enter().setEnabled(false);
-//				}
-//				break;
-//			case RECEIVER_V6:	
-//				if(	input[3][0] &&
-//					input[3][2]){
-//					f.getPanel_rec_ipv6().getPan_config().getBt_enter().setEnabled(true);
-//				}
-//				else if(getSelectedRows(getSelectedTab()).length <=1){
-//					f.getPanel_rec_ipv6().getPan_config().getBt_enter().setEnabled(false);
-//				}
-//				break;
 		}
 	}
 	/**
@@ -955,11 +911,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private void docEventTFgrp(Typ typ){
 		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
-			// TODO [MH] das table equals ... noch hinzufuegen, nachdem man eintraege adden kann
 			if(
 				(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null) ||
-				(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText())!= null)
+				(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText())!= null) ||
+				(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))
 			) {
+				System.out.println("hiere!");
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.TRUE));
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = true;
@@ -975,56 +932,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				}	
 			}
 		}
-//		if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
-//			if((InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText())!= null) 
-//			|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))){
-//				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.TRUE));
-//				if(typ==Typ.SENDER_V4){
-//					input[0][0]=true;		
-//				}
-//				else{
-//					input[1][0]=true;
-//				}
-//			}
-//			else{
-//				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.FALSE));
-//				if(typ==Typ.SENDER_V4){
-//					input[0][0]=false;		
-//				}
-//				else{
-//					input[1][0]=false;
-//				}
-//			}
-//			if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
-//				getPanConfig(typ).getPan_groupIPaddress()
-//				.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
-//			}
-//		}
-//		else if(typ==Typ.SENDER_V6 || typ == Typ.RECEIVER_V6){
-//			if((InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText())!= null)
-//			|| (getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))){
-//				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.TRUE));
-//				if(typ==Typ.SENDER_V6){
-//					input[2][0]=true;		
-//				}
-//				else{
-//					input[3][0]=true;
-//				}
-//			}
-//			else{
-//				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.FALSE));
-//				if(typ==Typ.SENDER_V6){
-//					input[2][0]=false;		
-//				}
-//				else{
-//					input[3][0]=false;
-//				}
-//			}
-//			if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
-//				getPanConfig(typ).getPan_groupIPaddress()
-//				.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));
-//			}			
-//		}
 		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
 		}
