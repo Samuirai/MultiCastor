@@ -25,7 +25,6 @@ public class LanguageManager extends Properties{
 	
 	private static String currentLanguage;
 	private static LanguageManager instance;
-	//TODO List all our Keys here
 	private static String[] keys = {
 		"mi.autoSave",
 		"mi.changeWindowTitle",
@@ -104,10 +103,13 @@ public class LanguageManager extends Properties{
 			loadLanguage(currentLang);
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Can not find the language file at\n"+currentLang+"\nCan not start Multicastor.");
+			System.exit(1);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Can not read the language file at\n"+currentLang+"\nCan not start Multicastor.");
+			System.exit(1);
 		} catch (InvalidLanguageFileException e) {
 			JOptionPane.showMessageDialog(null, "The language file at\n"+currentLang+"\nis invalid. Can not start Multicastor.\n Missing value "+e.getErrorKey()+" at index "+e.getErrorIndex()+".");
+			System.exit(1);
 		}
 	}
 
@@ -136,14 +138,13 @@ public class LanguageManager extends Properties{
 		try {
 				getInstance().loadLanguage("Language/"+currentLanguage+".lang");
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Can not find the language file at\nLanguage/"+currentLanguage+".lang\nCan not change language!");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Can not read the language file at\nLanguage/"+currentLanguage+".lang\nCan not change language!");
 			} catch (InvalidLanguageFileException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//TODO: Hier muss noch was besseres gebaut werden!
+				JOptionPane.showMessageDialog(null, "The language file at\nLanguage/"+currentLanguage+".lang\nis invalid. Can not change language.\n Missing value "+e.getErrorKey()+" at index "+e.getErrorIndex()+".");
+				System.exit(1);
 			}
 		}
 	}
