@@ -114,3 +114,7 @@ info.longUpdateTime		 =Die Aktualisierungszeit ist sehr lange
 warning.longUpdateTime	 =Die Aktualisierung des GUI dauert sehr lange. Konsultieren sie das Benutzerhandbuch für mehr Informationen.
 
 warning.invalidNetAdapter=Ungültiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.
+
+toolTip.closeThisTab	 =schließe diese Registerkarte
+
+message.setNewTitle		 =Bitte geben sie einen neuen Titel ein

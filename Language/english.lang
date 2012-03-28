@@ -114,3 +114,7 @@ info.longUpdateTime		 =Updatetime is rather long
 warning.longUpdateTime	 =Updating the user interface takes very long. Consider the help for more information.
 
 warning.invalidNetAdapter=Invalid Network Adapter. Network Interface has been set to localhost.
+
+toolTip.closeThisTab	 =close this tab
+
+message.setNewTitle		 =Please enter a new title
