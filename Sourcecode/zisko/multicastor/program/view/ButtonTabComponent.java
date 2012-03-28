@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicButtonUI;
 
+import zisko.multicastor.program.lang.LanguageManager;
+
 /**
  * Die Klasse ButtonTabComponent ist ein Panel das in den 
  * Tabs (Titeln) benutzt wird. 
@@ -35,6 +37,7 @@ import javax.swing.plaf.basic.BasicButtonUI;
 public class ButtonTabComponent extends JPanel{
 
 	private final DraggableTabbedPane pane;
+	private LanguageManager lang=LanguageManager.getInstance();
 	
 	public ButtonTabComponent(final DraggableTabbedPane pPane, String path){
 		// Set the Layout(that Label is left and Button right)
@@ -72,7 +75,7 @@ public class ButtonTabComponent extends JPanel{
         public TabButton() {
             int size = 17;
             setPreferredSize(new Dimension(size, size));
-            setToolTipText("close this tab");
+            setToolTipText(lang.getProperty("toolTip.closeThisTab"));
             //Make the button looks the same for all Laf's
             setUI(new BasicButtonUI());
             //Make it transparent
