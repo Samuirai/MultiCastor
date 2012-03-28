@@ -33,6 +33,7 @@ import org.xml.sax.SAXException;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
+import zisko.multicastor.program.lang.LanguageManager;
 
 /**
  * @author Daniela Gerz
@@ -42,6 +43,8 @@ import zisko.multicastor.program.data.UserlevelData;
 public class xmlParser implements zisko.multicastor.program.interfaces.XMLParserInterface
 {
 	private Logger logger;
+	private LanguageManager lang=LanguageManager.getInstance();
+	
 	private enum mcdTag{
 		active, groupIp, sourceIp, udpPort, packetLength, ttl,
 		packetRateDesired, typ,
@@ -198,7 +201,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   							mcd.setSourceIp(adr);
 							   						}
 							   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-							   							logger.log(Level.WARNING, "Invalid Network Adapter. Network Interface has been set to localhost.");
+							   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
 							   							adr = ( Inet4Address ) InputValidator.checkIPv4("127.0.0.1");
 							   							mcd.setSourceIp(adr);
 							   						}
@@ -211,7 +214,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   							mcd.setSourceIp(adr);
 							   						}
 							   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-							   							logger.log(Level.WARNING,"Invalid Network Adapter. Network Interface has been set to localhost.");
+							   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
 							   							adr = ( Inet6Address ) InputValidator.checkIPv6("::1");
 							   							mcd.setSourceIp(adr);
 							   						}

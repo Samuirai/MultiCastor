@@ -29,7 +29,7 @@ tab.console			=Konsole
 plus.l2rDescription		=Öffnet die Schicht 2 Empfänger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 plus.l2sDescription		=Öffnet die Schicht 2 Sender Registerkarte (mit MMRP). Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 plus.l3rDescription		=Öffnet die Schicht 3 Empfänger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
-plus.l3sDescription		=Öffnet die Schicht 2 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
+plus.l3sDescription		=Öffnet die Schicht 3 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 plus.aboutDescription	=Öffnet die Über Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 miscBorder.mcOverwiew	=MultiCast Übersicht
 miscBorder.mcControl=MultiCast Steuerung
@@ -64,3 +64,53 @@ graph.lostPackets	=Verlorene Pakete
 graph.measuredPacketRate=ermittelte Paketrate
 graph.packetsPerSec	=Pakete pro Sekunde (Summe)
 graph.current		=Aktuell
+
+# Will create a message like: Not enough memory. You have XXX MB. You need minimum XXX MB to start MultiCastor.
+# MC will show this message if there are not enough free memory in heap.
+error.memory.part1	=Nicht genug Speicher. Sie verfügen über 
+error.memory.part2	=Sie benötigen mindestens
+error.memory.part3	=um MultiCastor zu starten.
+error.memory.title	=MultiCastor: Speicherfehler
+
+# MC will show this message if there are less them 10% free memory in heap.
+warning.memory.title=Ihr Arbeitsspeicher ist fast voll.(<10% verbleibend)\n\
+ Bitte versuchen sie ihre Dateien zu speichern und \
+ versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schließen.\n\n
+warning.memory.freeMemory =Freier Speicher
+warning.memory.allocMemory=Aktuell reservierter Speicher
+warning.memory.maxMemory  =Maximal verfügbarer Speicher
+
+logger.info.startWithGui=MultiCastor gestartet mit GUI
+logger.info.startNoGui	=MultiCastor gestartet ohne GUI
+logger.into.startGuiFile=MultiCastor gestartet mit GUI und Datei
+
+error.config.notSpecified=Konfigurationsdatei nicht angegeben.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benötigt,\n\
+ um MultiCastor ohne GUI zu starten.
+
+error.config.wrongFormat =Die Konfigurationsdatei hat das falsche Format oder ist beschädigt. Bitte nutzen sie eine gültige Konfigurationsdatei.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benötigt,\n\
+ um MultiCastor ohne GUI zu starten.
+ 
+error.invalidParameter	 =Kein gültiger Parameter.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.
+
+error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte prüfen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.
+
+console.helptext		 =Nutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benötigt,\n\
+ um MultiCastor ohne GUI zu starten.\n\n\
+ Für mehr Informationen zu gültigen Konfigurationsdateien\n\
+ lesen sie bitte das Benutzerhandbuch.\n\n\
+ Optionen:\n\
+ \t\t-h\tZeigt diese Hilfenachricht an\n\
+ \t\t-g\tStartet MultiCastor ohne\n\
+ \t\t\teine grafische Benutzeroberfläche
+
+info.longUpdateTime		 =Die Aktualisierungszeit ist sehr lange
+warning.longUpdateTime	 =Die Aktualisierung des GUI dauert sehr lange. Konsultieren sie das Benutzerhandbuch für mehr Informationen.
+
+warning.invalidNetAdapter=Ungültiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.

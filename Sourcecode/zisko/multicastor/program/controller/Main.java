@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import org.xml.sax.SAXException;
 
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.MulticastLogHandler;
 import zisko.multicastor.program.model.WrongConfigurationException;
 
@@ -25,6 +26,7 @@ public class Main {
 
 	public static final long MIN_MAX_HEAP = 32 * 1024 * 1024;
 	public static long REAL_MAX_HEAP;
+	private static LanguageManager lang=LanguageManager.getInstance();
 	
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die
@@ -60,15 +62,14 @@ public class Main {
 			consoleHandler.setLevel(Level.FINEST);
 			logger.addHandler(consoleHandler);
 			
-			logger.severe("Not enough memory. You have " + Main.REAL_MAX_HEAP/(1024*1024)
-					+ " MB, but you need min " + Main.MIN_MAX_HEAP/(1024*1024)
-					+ " MB to start MultiCastor");
+			logger.severe(lang.getProperty("error.memory.part1")+" " + Main.REAL_MAX_HEAP/(1024*1024)
+					+ " MB. "+lang.getProperty("error.memory.part2")+" " + Main.MIN_MAX_HEAP/(1024*1024)
+					+ " MB "+lang.getProperty("error.memory.part3"));
 			
 			if (args.length == 0 || !args[0].equals("-g"))
-				JOptionPane.showMessageDialog(new JFrame(), "Not enough memory.\n"
-						+ "You have " + Main.REAL_MAX_HEAP/(1024*1024)
-						+ " MB \nbut you need min " + Main.MIN_MAX_HEAP/(1024*1024)
-						+ " MB \nto start MultiCastor", "MultiCastor: MemoryError", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), lang.getProperty("error.memory.part1")+" " + Main.REAL_MAX_HEAP/(1024*1024)
+						+ " MB. "+lang.getProperty("error.memory.part2")+" " + Main.MIN_MAX_HEAP/(1024*1024)
+						+ " MB "+lang.getProperty("error.memory.part3"), lang.getProperty("error.memory.title"), JOptionPane.WARNING_MESSAGE);
 			
 			System.exit(1);
 		}else if (args.length == 0) {
@@ -82,7 +83,7 @@ public class Main {
 			logger.addHandler(consoleHandlerWithGUI);
 			
 
-			logger.info("Starting MultiCastor with a gui");
+			logger.info(lang.getProperty("logger.info.startWithGui"));
 
 			controller.loadCompleteConfig();
 
@@ -92,11 +93,7 @@ public class Main {
 		} else if (args[0].equals("-g")) {
 			// System.out.println("Parameter -g mitgegeben");
 			if (args.length == 1) {
-				System.out
-						.println("Configuration file not specified.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t"
-								+ "type 'java -jar multiCastor.jar -h' for more information\n\n"
-								+ "To start the tool without a graphical user interface,\n"
-								+ "the configuration-file-path is required.");
+				System.out.println(lang.getProperty("error.config.notSpecified"));
 			} else {
 				// File checkfile = new File(args[1]);
 				// if(checkfile.exists()) {
@@ -110,24 +107,18 @@ public class Main {
 					consoleHandler = new MulticastLogHandler();
 					consoleHandler.setLevel(Level.FINEST);
 					logger.addHandler(consoleHandler);
-					logger.info("Starting MultiCastor without a gui");
+					logger.info(lang.getProperty("logger.info.startNoGui"));
 
 					controller.loadConfigWithoutGUI(pfad);
 
 				} catch (FileNotFoundException e) {
 					System.out
-							.println("Configuration file not found.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t"
-									+ "type 'java -jar multiCastor.jar -h' for more information\n\n"
-									+ "To start the tool without a graphical user interface,\n"
-									+ "the configuration-file-path is required.");
+							.println(lang.getProperty("error.config.notSpecified"));
 					// e.printStackTrace();
 					System.exit(0);
 				} catch (SAXException e) {
 					System.out
-							.println("Configuration file in wrong format or corrupted. Please use a valid configuration file.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t"
-									+ "type 'java -jar multiCastor.jar -h' for more information\n\n"
-									+ "To start the tool without a graphical user interface,\n"
-									+ "the configuration-file-path is required.");
+							.println(lang.getProperty("error.config.wrongFormat"));
 					// e.printStackTrace();
 					System.exit(0);
 				} catch (IOException e) {
@@ -136,10 +127,7 @@ public class Main {
 					System.exit(0);
 				} catch (WrongConfigurationException e) {
 					System.out
-							.println("Configuration file in wrong format or corrupted. Please use a valid configuration file.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t"
-									+ "type 'java -jar multiCastor.jar -h' for more information\n\n"
-									+ "To start the tool without a graphical user interface,\n"
-									+ "the configuration-file-path is required.");
+							.println(lang.getProperty("error.config.wrongFormat"));
 					e.printStackTrace();
 					System.exit(0);
 				}
@@ -150,16 +138,7 @@ public class Main {
 		} else if (args[0].equals("-h")) {
 			// System.out.println("Parameter -h mitgegeben");
 			System.out
-					.println("Usage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t"
-							+ "type 'java -jar multiCastor.jar -h' for more information\n\n"
-							+ "To start the tool without a graphical user interface,\n"
-							+ "the configuration-file-path is required.\n\n"
-							+ "For more information about a valid configuration file\n"
-							+ "consult the user manual.\n\n"
-							+ "Options:\n"
-							+ "\t\t-h\tdisplays this help-message\n"
-							+ "\t\t-g\tstart the MultiCastor-Tool without\n"
-							+ "\t\t\ta graphical user interface");
+					.println(lang.getProperty("console.helptext"));
 		} else if (args.length != 0) {
 			File checkfile = new File(args[0]);
 			if (checkfile.exists()) {
@@ -172,7 +151,7 @@ public class Main {
 				consoleHandlerWithGUI = new MulticastLogHandler(gui);
 				consoleHandlerWithGUI.setLevel(Level.FINEST);
 				logger.addHandler(consoleHandlerWithGUI);
-				logger.info("Starting MultiCastor with a gui and file");
+				logger.info(lang.getProperty("logger.into.startGuiFile"));
 
 				controller.loadConfigFile(args[0], true, true, true, true);
 
@@ -181,9 +160,7 @@ public class Main {
 				}
 			} else {
 				// System.out.println("Falscher Parameter mitgegeben");
-				System.out
-						.println("Not a valid parameter.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t"
-								+ "type 'java -jar multiCastor.jar -h' for more information");
+				System.out.println(lang.getProperty("error.invalidParameter"));
 			}
 		}
 	}
