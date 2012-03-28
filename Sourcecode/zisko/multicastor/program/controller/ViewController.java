@@ -159,10 +159,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		//V1.5: Language TODO
 		else if(e.getSource()==f.getM_language()){
-			JOptionPane.showMessageDialog(f, "Die Änderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
+			JOptionPane.showMessageDialog(f, "Die ï¿½nderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
 		}
 		
-		//TODO: Böser Testcode!
+		//TODO: Bï¿½ser Testcode!
 		else if (e.getActionCommand().startsWith("change_lang_to")){
 			LanguageManager.setCurrentLanguage(e.getActionCommand().replaceFirst("change_lang_to_", ""));
 			f.reloadLanguage();
@@ -465,7 +465,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					}
 				}
 				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ));	
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, isIPv4));	
 				}
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
 					if (isIPv4) {
@@ -500,6 +500,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					} else {
 						mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
 					}
+				}
+				//V1.5 [FH] Added source IP for receiver (network interface)
+				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, isIPv4));	
 				}
 				break;
 			default:
@@ -733,7 +737,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				// TODO [MH] das getselectedrows auch hierein tun, wenn eintraege funzen
 				break;
 			case L3_RECEIVER:
-				if (input[1][0] && input[1][2]) {
+				if (input[1][0] && 
+					input[1][1] &&	
+					input[1][2]) {
 					getPanConfig(typ).getBt_enter().setEnabled(true);
 				} else {
 					getPanConfig(typ).getBt_enter().setEnabled(false);
@@ -799,14 +805,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getTf_udp_port().setText("-");
 			getPanConfig(typ).getTf_groupIPaddress().setText("");;
 			getPanConfig(typ).getTf_udp_port().setText("");
-			if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6){
-				getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
+			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
+			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
+			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
+			if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 				getPanConfig(typ).getTf_ttl().setText("");
 				getPanConfig(typ).getTf_packetrate().setText("");;
 				getPanConfig(typ).getTf_udp_packetlength().setText("");;
-				getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
-				getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
-				getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
 			}
 			getPanConfig(typ).getTb_active().setSelected(false);
 			getPanConfig(typ).getTb_active().setText("inactive");
@@ -1532,6 +1537,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			
 			if(arg0.getSource() == getPanConfig(Typ.L3_SENDER).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.L3_SENDER);
+			}
+			if(arg0.getSource() == getPanConfig(Typ.L3_RECEIVER).getTf_sourceIPaddress()){
+				changeNetworkInterface(Typ.L3_RECEIVER);
 			}
 			// TODO [MH] Receiver depending on morgen discussion einbauen
 			// TODO [MH] kram rausschmeissen
