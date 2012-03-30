@@ -111,9 +111,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Datenobjekt welches den Input des IPv4 Senders enth�lt.
 	 */
 	private UserInputData inputData_S4;
-	public boolean isInitFinished() {
-		return initFinished;
-	}
 	/**
 	 * Datenobjekt welches den Input des IPv6 Senders enth�lt.
 	 */
@@ -127,7 +124,16 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private UserInputData inputData_R6;
 	
+	private UserInputData inputData_L3;
+	private UserInputData inputData_R3;
+	private UserInputData inputData_L2;
+	private UserInputData inputData_R2;
+	
 	private LanguageManager lang;
+	
+	public boolean isInitFinished() {
+		return initFinished;
+	}
 	
 	/**
 	 * Standardkonstruktor der GUI, hierbei wird die GUI noch nicht initialisiert!
@@ -836,7 +842,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText())!= null) ||
 				(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))
 			) {
-				System.out.println("hiere!");
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.TRUE));
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = true;
@@ -1214,10 +1219,16 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void initialize(MulticastController p_mc){
 		mc = p_mc;
+		// TODO [MH] tbr
 		inputData_S4 = new UserInputData();
 		inputData_S6 = new UserInputData();
 		inputData_R4 = new UserInputData();
 		inputData_R6 = new UserInputData();
+		
+		inputData_L3 = new UserInputData();
+		inputData_R3 = new UserInputData();
+		// TODO Layer 2
+		
 		//levelData = new UserlevelData();
 		f = new FrameMain(this);
 		addKeyAndContainerListenerToAll(f);
@@ -1666,12 +1677,16 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void loadFileEvent(ActionEvent e) {
 		if(e.getActionCommand().equals("ApproveSelection")){
 			FrameFileChooser fc_load = getFrame().getFc_load();
+			// TODO Fuer Layer2 anpassen
 			loadConfig(	fc_load.getSelectedFile(),
-						fc_load.isCbSenderV4Selected(),
-						fc_load.isCbSenderV6Selected(),
-						fc_load.isCbReceiverV4Selected(),
-						fc_load.isCbReceiverV4Selected(),
-						fc_load.isCbIncrementalSelected());
+						fc_load.isCbSenderL3Selected(),
+//						fc_load.isCbSenderL2Selected(),
+						false,
+						fc_load.isCbReceiverL3Selected(),
+//						fc_load.isCbReceiverL2Selected(),
+						false,
+						fc_load.isCbIncrementalSelected()
+			);
 
 			fc_load.getChooser().rescanCurrentDirectory();
 			fc_load.toggle();
@@ -1680,23 +1695,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getFrame().getFc_load().toggle();
 		}
 	}
-	private void loadConfig(String s, boolean sv4, boolean sv6, boolean rv4, boolean rv6, boolean incremental) {
+	private void loadConfig(String s, boolean sl3, boolean sl2, boolean rl3, boolean rl2, boolean incremental) {
 		if(incremental){
 			//System.out.println("incremental selected");
-			if(sv4){
-				deleteAllMulticasts(Typ.SENDER_V4);
+			if(sl3){
+				deleteAllMulticasts(Typ.L3_SENDER);
 			}
-			if(sv6){
-				deleteAllMulticasts(Typ.SENDER_V6);
+			if(sl2){
+				deleteAllMulticasts(Typ.L2_SENDER);
 			}
-			if(rv4){
-				deleteAllMulticasts(Typ.RECEIVER_V4);
+			if(rl3){
+				deleteAllMulticasts(Typ.L3_RECEIVER);
 			}
-			if(rv6){
-				deleteAllMulticasts(Typ.RECEIVER_V6);
+			if(rl2){
+				deleteAllMulticasts(Typ.L2_RECEIVER);
 			}	
 		}
-		mc.loadConfigFile(s,sv4,sv6,rv4,rv6);
+		mc.loadConfigFile(s,sl3,sl2,rl3,rl2);
 	}
 	@Override
 	/**
@@ -1980,8 +1995,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			//System.out.println("selected File: "+fc_save.getSelectedFile());
 			//TODO [MH] speichern noch an lay3 anpassen
 			mc.saveConfig(	fc_save.getSelectedFile(), 
-							fc_save.isCbSenderV4Selected(), 
-							fc_save.isCbReceiverV4Selected());
+							fc_save.isCbSenderL3Selected(), 
+							fc_save.isCbReceiverL3Selected());
 			f.updateLastConfigs(fc_save.getSelectedFile());
 			fc_save.getChooser().rescanCurrentDirectory();
 			fc_save.toggle();
@@ -2311,10 +2326,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public UserInputData getUserInputData(Typ typ){
 		UserInputData ret = null;
 		switch(typ){
+		// TODO [MH] sollte entfernt werden koennen
 			case SENDER_V4: ret = inputData_S4; break;
 			case SENDER_V6: ret = inputData_S6; break;
 			case RECEIVER_V4: ret = inputData_R4; break;
 			case RECEIVER_V6: ret = inputData_R6; break;
+			
+			case L3_SENDER: ret = inputData_L3; break;
+			case L3_RECEIVER: ret = inputData_R3; break;
+			// TODO L2 hinzufuegen
 		}
 		return ret;
 	}
@@ -2324,7 +2344,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param input UserInputData Objekt welches aus der permanenten Konfigurationsdatei gelesen wird
 	 * @param typ Bestimmt den Programmteil f�r welchen die Tabelle angepasst werden soll
 	 */
-	public void setColumnSettings(UserInputData input, Typ typ){
+	public void setColumnSettings(UserInputData input, Typ typ) {
+		System.out.println("input: " + input);
+		System.out.println("typ: " + typ);
 		ArrayList<TableColumn> columns = getPanTabbed(typ).getColumns();
 		ArrayList<Integer> saved_visibility = input.getColumnVisbility();
 		ArrayList<Integer> saved_order = input.getColumnOrder();

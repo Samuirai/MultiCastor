@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import zisko.multicastor.program.controller.ViewController;
 /**
- * FileChooser für Speichern und Laden von Config Files
+ * FileChooser fï¿½r Speichern und Laden von Config Files
  * @author Daniel Becker
  *
  */
@@ -28,32 +28,32 @@ public class FrameFileChooser extends JFrame {
 	 */
 	private FileNameExtensionFilter filter;
 	/**
-	 * Hilfsvariable welche bestimmt um was für eine Art von Dialog es sich handelt (Speichern/Laden).
+	 * Hilfsvariable welche bestimmt um was fï¿½r eine Art von Dialog es sich handelt (Speichern/Laden).
 	 */
 	private boolean typeSave;
 	/**
 	 * Checkbox welche angibt ob der SenderV4 Programmteil gespeichert/geladen werden soll.
 	 */
-	private JCheckBox cb_senderV4;
+	private JCheckBox cb_senderL3;
 	/**
 	 * Checkbox welche angibt ob der SenderV6 Programmteil gespeichert/geladen werden soll.
 	 */
-	private JCheckBox cb_senderV6;
+	private JCheckBox cb_senderL2;
 	/**
 	 * Checkbox welche angibt ob der ReceiverV4 Programmteil gespeichert/geladen werden soll.
 	 */
-	private JCheckBox cb_receiverV4;
+	private JCheckBox cb_receiverL3;
 	/**
 	 * Checkbox welche angibt ob der ReceiverV6 Programmteil gespeichert/geladen werden soll.
 	 */
-	private JCheckBox cb_receiverV6;
+	private JCheckBox cb_receiverL2;
 	/**
 	 * Checkbox welche angibt ob inkrementell geladen werden soll oder nicht.
 	 */
 	private JCheckBox cb_incremental;
 	/**
 	 * Kontruktir des FileChoosers
-	 * @param ctrl Benöigte Referenz zum GUI Controller
+	 * @param ctrl Benï¿½igte Referenz zum GUI Controller
 	 * @param save gibt an ob es sich um einen Datei speichern Dialog handelt
 	 */
 	public FrameFileChooser(ViewController ctrl, boolean save){
@@ -69,31 +69,31 @@ public class FrameFileChooser extends JFrame {
 		JPanel selection = new JPanel();
 		selection.setLayout(null);
 		selection.setPreferredSize(new Dimension(600,60));
-		cb_senderV4 = new JCheckBox("Sender IPv4",true);
-		cb_senderV6 = new JCheckBox("Sender IPv6",true);
-		cb_receiverV4 = new JCheckBox("Receiver IPv4",true);
-		cb_receiverV6 = new JCheckBox("Receiver IPv6",true);
+		cb_senderL3 = new JCheckBox("Layer3 Sender",true);
+		cb_senderL2 = new JCheckBox("Layer2 (not yet)",true);
+		cb_receiverL3 = new JCheckBox("Layer3 Receiver",true);
+		cb_receiverL2 = new JCheckBox("Layer2 (not yet)",true);
 		
-		cb_senderV4.setFont(MiscFont.getFont());
-		cb_senderV6.setFont(MiscFont.getFont());
-		cb_receiverV4.setFont(MiscFont.getFont());
-		cb_receiverV6.setFont(MiscFont.getFont());
+		cb_senderL3.setFont(MiscFont.getFont());
+		cb_senderL2.setFont(MiscFont.getFont());
+		cb_receiverL3.setFont(MiscFont.getFont());
+		cb_receiverL2.setFont(MiscFont.getFont());
 		
-		cb_senderV4.setFocusable(false);
-		cb_senderV6.setFocusable(false);
-		cb_receiverV4.setFocusable(false);
-		cb_receiverV6.setFocusable(false);
+		cb_senderL3.setFocusable(false);
+		cb_senderL2.setFocusable(false);
+		cb_receiverL3.setFocusable(false);
+		cb_receiverL2.setFocusable(false);
 		
-		cb_senderV4.setBounds(10,0,90,20);
-		cb_senderV6.setBounds(10,30,90,20);
-		cb_receiverV4.setBounds(110,0,100,20);
-		cb_receiverV6.setBounds(110,30,100,20);
+		cb_senderL3.setBounds(10,0,150,20);
+		cb_senderL2.setBounds(10,30,150,20);
+		cb_receiverL3.setBounds(170,0,150,20);
+		cb_receiverL2.setBounds(170,30,150,20);
 		
 		
-		selection.add(cb_senderV4);
-		selection.add(cb_senderV6);
-		selection.add(cb_receiverV4);
-		selection.add(cb_receiverV6);
+		selection.add(cb_senderL3);
+		selection.add(cb_senderL2);
+		selection.add(cb_receiverL3);
+		selection.add(cb_receiverL2);
 		if(!typeSave){
 			cb_incremental = new JCheckBox("Incremental Load");
 			cb_incremental.setFont(MiscFont.getFont());
@@ -105,7 +105,7 @@ public class FrameFileChooser extends JFrame {
 	}
 	/**
 	 * Initialisiert die Dateiauswahl.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initFileChooser(ViewController ctrl) {
 		filter = new FileNameExtensionFilter("XML Config Files", "xml");
@@ -124,14 +124,14 @@ public class FrameFileChooser extends JFrame {
 		add(chooser, BorderLayout.CENTER);
 	}
 	/**
-	 * Setzt den Fenstertitel für Laden
+	 * Setzt den Fenstertitel fï¿½r Laden
 	 */
 	private void initLoad() {
 		setTitle("Load Configuration");
 		
 	}
 	/**
-	 * Setzt den Fenstertitel für Speichern
+	 * Setzt den Fenstertitel fï¿½r Speichern
 	 */
 	private void initSave() {
 		setTitle("Save Configuration");
@@ -172,32 +172,32 @@ public class FrameFileChooser extends JFrame {
 	public boolean isTypeSave() {
 		return typeSave;
 	}
-	public JCheckBox getCb_senderV4() {
-		return cb_senderV4;
+	public JCheckBox getCb_senderL3() {
+		return cb_senderL3;
 	}
-	public JCheckBox getCb_senderV6() {
-		return cb_senderV6;
+	public JCheckBox getCb_senderL2() {
+		return cb_senderL2;
 	}
-	public JCheckBox getCb_receiverV4() {
-		return cb_receiverV4;
+	public JCheckBox getCb_receiverL3() {
+		return cb_receiverL3;
 	}
-	public JCheckBox getCb_receiverV6() {
-		return cb_receiverV6;
+	public JCheckBox getCb_receiverL2() {
+		return cb_receiverL2;
 	}
 	public JCheckBox getCb_incremental() {
 		return cb_incremental;
 	}
-	public boolean isCbSenderV4Selected(){
-		return cb_senderV4.isSelected();
+	public boolean isCbSenderL3Selected(){
+		return cb_senderL3.isSelected();
 	}
-	public boolean isCbSenderV6Selected(){
-		return cb_senderV6.isSelected();
+	public boolean isCbSenderL2Selected(){
+		return cb_senderL2.isSelected();
 	}
-	public boolean isCbReceiverV4Selected(){
-		return cb_receiverV4.isSelected();
+	public boolean isCbReceiverL3Selected(){
+		return cb_receiverL3.isSelected();
 	}
-	public boolean isCbReceiverV6Selected(){
-		return cb_receiverV6.isSelected();
+	public boolean isCbReceiverL2Selected(){
+		return cb_receiverL2.isSelected();
 	}
 	public boolean isCbIncrementalSelected(){
 		return cb_incremental.isSelected();
