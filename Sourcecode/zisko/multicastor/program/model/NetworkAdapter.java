@@ -60,14 +60,14 @@ public abstract class NetworkAdapter {
 	 * Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zur�ck gibt.
 	 * @return Vector mit IPv4 Adressen
 	 */
-	public static Vector getipv4Adapters(){
+	public static Vector<InetAddress> getipv4Adapters(){
 		return ipv4Interfaces;
 	}
 	/**
 	 * Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zur�ck gibt.
 	 * @return Vector mit IPv6 Adressen
 	 */
-	public static Vector getipv6Adapters(){
+	public static Vector<InetAddress> getipv6Adapters(){
 		return ipv6Interfaces;
 	}
 	/**

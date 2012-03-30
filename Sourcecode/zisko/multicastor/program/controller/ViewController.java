@@ -18,6 +18,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -831,20 +834,60 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.deleteMC(mcd);
 		updateTable(mcd.getTyp(),UpdateTyp.DELETE);
 	}
+	
+	/**
+	 * Funktion, welche die ComboBox mit den richtigen Netzwerkadaptern fuellt.
+	 * @param typ Programmteil in welchem die Box geupdated werden soll.
+	 * @param isIPv4 true bei IPv4 und false bei IPv6
+	 */
+	private void insertNetworkAdapters(Typ typ, boolean isIPv4) {
+		/* Als erstes die CB leeren */
+		getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
+		getPanConfig(typ).getCb_sourceIPaddress().addItem("");
+		
+		Vector<InetAddress> temp = null;
+		if (isIPv4) {
+			temp = NetworkAdapter.getipv4Adapters();
+			
+		} else {
+			temp = NetworkAdapter.getipv6Adapters();
+		}
+		if (temp != null) {
+			for(int i = 0 ; i < temp.size(); i++){
+				try {
+					getPanConfig(typ).getCb_sourceIPaddress().addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
+				} catch (SocketException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Input des Group IP Adress Felds ge�ndert wurde.
 	 * @param typ Programmteil in welchem das Group IP Adress Feld ge�ndert wurde.
 	 */
 	private void docEventTFgrp(Typ typ){
+		boolean isIPv4 = InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null;
+		boolean isIPv6 = InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()) != null; 
+		
 		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			if(
-				(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null) ||
-				(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText())!= null) ||
+				isIPv4 || isIPv6 ||
 				(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))
 			) {
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.TRUE));
+				/* Lade die richtigen Netzwerkinterfaces */
+				if (isIPv4) {
+					insertNetworkAdapters(typ, true);
+				} else if (isIPv6) {
+					insertNetworkAdapters(typ, false);
+				}
+				
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = true;
+					getPanConfig(typ).getTf_udp_packetlength().setText("");
+					getPanConfig(typ).getTf_udp_packetlength().setEnabled(true);
 				} else {
 					input[1][0] = true;
 				}
@@ -852,13 +895,30 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.FALSE));
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = false;
+					// TODO [MH] languagemanager
+					getPanConfig(typ).getTf_udp_packetlength().setEnabled(false);
+					getPanConfig(typ).getTf_udp_packetlength().setText("IP first");
 				} else {
 					input[1][0] = false;
-				}	
+				}
+				/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
+				getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
+				// TODO [MH] languagemanager
+				getPanConfig(typ).getCb_sourceIPaddress().addItem("Please choose IP first");
+				
 			}
 		}
 		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
+			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
+			// TODO [MH] languagemanager
+			getPanConfig(typ).getCb_sourceIPaddress().addItem("Please choose IP first");
+			
+			if (typ == Typ.L3_SENDER) {
+				getPanConfig(typ).getTf_udp_packetlength().setEnabled(false);
+				getPanConfig(typ).getTf_udp_packetlength().setText("IP first");
+			}
 		}
 		checkInput(typ);
 	}
@@ -1625,12 +1685,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void listSelectionEventFired(Typ typ) {
 		PanelTabbed tabpart = null;
 		switch(typ){
-		// TODO [MH] tbr
-			case SENDER_V4: tabpart=f.getPanel_sen_ipv4(); break;
-			case RECEIVER_V4: tabpart=f.getPanel_rec_ipv4(); break;
-			case SENDER_V6: tabpart=f.getPanel_sen_ipv6(); break;
-			case RECEIVER_V6: tabpart=f.getPanel_rec_ipv6(); break;
-			
 			case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
 			case L3_RECEIVER: tabpart=f.getPanel_rec_lay3(); break;
 		}
@@ -1646,12 +1700,18 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0],typ).getGroupIp().toString().substring(1));
 			//System.out.println("Index: "+NetworkAdapter.findAddressIndex(typ, getMCData(selectedRows[0],typ).getSourceIp().toString()));
 			//tabpart.getPan_config().getTf_sourceIPaddress().setText(getMCData(selectedRows[0],typ).getSourceIp().toString().substring(1));;
-			tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());;;
+			tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());
+
+//			tabpart.getPan_config().getCb_sourceIPaddress().removeItemAt(0);
+//			tabpart.getPan_config().getCb_sourceIPaddress().insertItemAt("", 0);
+//			tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);
+			tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
+				NetworkAdapter.findAddressIndex(
+					getMCData(selectedRows[0], typ).getTyp(), getMCData(selectedRows[0],typ).getSourceIp().toString()
+				)+1
+			);
+			
 			if(typ==Typ.L3_SENDER){
-				getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
-				getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
-				tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);
-				tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(NetworkAdapter.findAddressIndex(typ, getMCData(selectedRows[0],typ).getSourceIp().toString())+1);
 				tabpart.getPan_config().getTf_ttl().setText(""+getMCData(selectedRows[0],typ).getTtl());;
 				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());;
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());;
@@ -2218,18 +2278,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * beim Selektieren und Deselektieren von einer oder mehreren Zeilen in der Tabelle.
 	 */
 	public void valueChanged(ListSelectionEvent e) {
-//		if(e.getSource()==getTable(Typ.SENDER_V4).getSelectionModel()){
-//			listSelectionEventFired(Typ.SENDER_V4);
-//		}
-//		if(e.getSource()==getTable(Typ.RECEIVER_V4).getSelectionModel()){
-//			listSelectionEventFired(Typ.RECEIVER_V4);
-//		}
-//		if(e.getSource()==getTable(Typ.SENDER_V6).getSelectionModel()){
-//			listSelectionEventFired(Typ.SENDER_V6);
-//		}
-//		if(e.getSource()==getTable(Typ.RECEIVER_V6).getSelectionModel()){
-//			listSelectionEventFired(Typ.RECEIVER_V6);
-//		}
 		if(e.getSource()==getTable(Typ.L3_SENDER).getSelectionModel()){
 			listSelectionEventFired(Typ.L3_SENDER);
 		}

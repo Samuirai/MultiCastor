@@ -135,6 +135,7 @@ public class FrameMain extends JFrame {
 	private String baseTitle;
 	
 	//TODO: maybe unused
+	// [MH] definitiv nicht, wird zB gebraucht, um die ActionListener bei den ganzen GUI Komponenten zu registrieren
 	ViewController ctrl;
 	
 	/**

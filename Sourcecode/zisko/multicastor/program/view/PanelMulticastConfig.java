@@ -110,20 +110,26 @@ public class PanelMulticastConfig extends JPanel {
 		
 		//V1.5 [FH] Use cb_sourceIPadress for all kinds
 		cb_sourceIPaddress = new WideComboBox();
-		cb_sourceIPaddress.addItem("");
+		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
+			// TODO [MH] Languagefilekram einbauen
+			cb_sourceIPaddress.addItem("Please choose IP first");
+		} else {
+			cb_sourceIPaddress.addItem("");
+		}
 		cb_sourceIPaddress.setBounds(5,15,205,20);
 		cb_sourceIPaddress.setFont(MiscFont.getFont(0,12));
 		cb_sourceIPaddress.setBorder(null);
 		cb_sourceIPaddress.addItemListener(ctrl);
 		
-		temp = NetworkAdapter.getipv6Adapters();
-		for(int i = 0 ; i < temp.size(); i++){
-				try {
-					cb_sourceIPaddress.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
-				} catch (SocketException e) {
-					e.printStackTrace();
-				}
-		}
+		
+//		temp = NetworkAdapter.getipv6Adapters();
+//		for(int i = 0 ; i < temp.size(); i++){
+//				try {
+//					cb_sourceIPaddress.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
+//				} catch (SocketException e) {
+//					e.printStackTrace();
+//				}
+//		}
 
 		
 		pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
@@ -145,6 +151,10 @@ public class PanelMulticastConfig extends JPanel {
 			pan_packetlength.setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.NEUTRAL));
 			pan_ttl.setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.NEUTRAL));
 			tf_udp_packetlength = new JTextField();
+			if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
+				// TODO [MH] languagemangager 
+				tf_udp_packetlength.setText("IP first");
+			}
 			tf_packetrate = new JTextField();
 			tf_ttl = new JTextField();
 			tf_udp_packetlength.setBounds(5,15,95,20);
