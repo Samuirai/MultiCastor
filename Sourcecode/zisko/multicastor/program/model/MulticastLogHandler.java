@@ -8,6 +8,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import zisko.multicastor.program.controller.ViewController;
+import zisko.multicastor.program.lang.LanguageManager;
 
 /**
  * Selbstdefinierter Handler, der die zu loggenden Nachrichten formatiert und ausgibt.
@@ -16,6 +17,7 @@ import zisko.multicastor.program.controller.ViewController;
 
 public class MulticastLogHandler extends ConsoleHandler	{
 	private ViewController viewController;
+	private LanguageManager lang=LanguageManager.getInstance();
 	
 	/**
 	 * Normaler Konstruktor. 
@@ -74,8 +76,7 @@ public class MulticastLogHandler extends ConsoleHandler	{
 			os.write(message_file + "\r\n");
 		    os.close();
 		} catch (IOException e) {
-			System.out.println("Log file could not be written to disk. Please check if you have writing permission in the MultiCastor directory.");
-			//System.out.println("Logdatei konnte nicht erstellt werden. Bitte prüfen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.");
+			System.out.println(lang.getProperty("error.logfile.canNotWrite"));
 			e.printStackTrace();
 		}
 	}

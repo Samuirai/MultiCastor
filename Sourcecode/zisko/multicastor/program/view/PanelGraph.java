@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION;
 
 /**
@@ -60,6 +61,8 @@ public class PanelGraph extends JPanel {
   private SnakeGimmick mySG = null;
   public Boolean runSnake = false;
   
+  protected LanguageManager lang;
+  
   /**
    * Einziger Konstruktor der Klasse
    * @param maxY der höchst mögliche Y-Wert (int)
@@ -68,13 +71,14 @@ public class PanelGraph extends JPanel {
    * @param staticScale Bestimmt ob der höchstmögliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)
    */
   public PanelGraph(int maxY, String labelOfX, String labelOfY, boolean staticScale){
-    //Panel Konfiguration
+    lang=LanguageManager.getInstance();
+	//Panel Konfiguration
     setBackground(Color.BLACK);
     //setBorder(BorderFactory.createLineBorder(Color.red));
     
     //Initialisieren
     data            	= new int[numberOfValues]; //Daten der letzten Minute + jetzt (Sekunde 0-60) speicherbar
-    this.maxY       	= maxY;
+    this.maxY     		= maxY;
     this.staticScale	= staticScale;
     lblX            	= labelOfX;
     lblY            	= labelOfY;
@@ -253,7 +257,7 @@ private void paintContent(Graphics g){
     //Zu klein wï¿½re das Panel bei
     //der ungefï¿½hren lblY-String - Breite + Platzhalter und dem aktuellen Wert
     if(data[dataPointer]!=Integer.MIN_VALUE)	actualValue = data[dataPointer];
-    if(lblY.length()*5+35<x2)					g.drawString("Aktuell: " + actualValue, (x2-70), 9);
+    if(lblY.length()*5+35<x2)					g.drawString(lang.getProperty("graph.current")+": " + actualValue, (x2-70), 9);
     
 /*
  * +++ Funktionswert zeichnen, von links (aktueller Wert) bis rechts +++
@@ -353,5 +357,19 @@ public int moveSnake(SnakeGimmick.SNAKE_DIRECTION d){
 		  data[i] = Integer.MIN_VALUE;
 	  }
 	  dynScaleCount = 0;
-  }	
+  }
+
+  	public void setLblX(String lblX) {
+		this.lblX = lblX;
+	}
+	
+	public void setLblY(String lblY) {
+		this.lblY = lblY;
+	}
+
+	public void reloadLanguage(){
+		lblX=lang.getProperty("graph.sec");
+		lblY=lang.getProperty("graph.packetsPerSec");
+	}
+
 }

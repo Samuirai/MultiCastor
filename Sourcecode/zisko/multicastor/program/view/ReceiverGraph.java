@@ -54,11 +54,11 @@ public class ReceiverGraph extends PanelGraph{
 	 * @param ctrl der {@link viewController} der ReceiverGraph-Instanz
 	 */
 	public ReceiverGraph(ViewController ctrl){
-		super(50, "time", "Y: ", false);
+		super(50, "", "", false);
 		this.setLayout(null);
 		
 //Radiobuttons zum Umschalten zwischen den Graphen
-		jitterRB 		= new JRadioButton("Jitter", true);
+		jitterRB 		= new JRadioButton("", true);
 		jitterRB.addItemListener(ctrl);
 		jitterRB.setActionCommand("jitter");
 		jitterRB.setLocation(30, 0);
@@ -67,7 +67,7 @@ public class ReceiverGraph extends PanelGraph{
 		jitterRB.setForeground(Color.LIGHT_GRAY);
 		jitterRB.setFont(rbFont);
 		
-		lostPktsRB 		= new JRadioButton("Lost Packets");
+		lostPktsRB 		= new JRadioButton();
 		lostPktsRB.addItemListener(ctrl);
 		lostPktsRB.setActionCommand("lostPackets");
 		lostPktsRB.setLocation(80, 0);
@@ -76,7 +76,7 @@ public class ReceiverGraph extends PanelGraph{
 		lostPktsRB.setForeground(Color.LIGHT_GRAY);
 		lostPktsRB.setFont(rbFont);
 		
-		measPktRtRB		= new JRadioButton("Measured Packet Rate");
+		measPktRtRB		= new JRadioButton();
 		measPktRtRB.addItemListener(ctrl);
 		measPktRtRB.setActionCommand("measuredPacketRate");
 		measPktRtRB.setLocation(160, 0);
@@ -95,6 +95,8 @@ public class ReceiverGraph extends PanelGraph{
 		this.add(jitterRB);
 		this.add(lostPktsRB);
 		this.add(measPktRtRB);
+		
+		reloadLanguage();
 	}
 	
 	/**
@@ -160,5 +162,13 @@ public class ReceiverGraph extends PanelGraph{
 				lostPktsRB.repaint();
 				measPktRtRB.repaint();
 		}
+	}
+	
+	public void reloadLanguage(){
+		setLblX(lang.getProperty("graph.time"));
+		setLblY(lang.getProperty("graph.y"));
+		jitterRB.setText(lang.getProperty("graph.jitter"));
+		lostPktsRB.setText(lang.getProperty("graph.lostPackets"));
+		measPktRtRB.setText(lang.getProperty("graph.measuredPacketRate"));
 	}
 }

@@ -197,7 +197,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		// V1.5: Wenn "Titel aendern" im Menue ausgewaehlt wurde, oeffne einen InputDialog
 		else if (e.getSource() == f.getMi_setTitle()) {
-			String temp = JOptionPane.showInputDialog("Bitte geben Sie einen neuen Titel ein", f.getBaseTitle());
+			String temp = JOptionPane.showInputDialog(lang.getProperty("message.setNewTitle"), f.getBaseTitle());
 			if (temp != null) {
 				f.setBaseTitle(temp);
 				f.updateTitle();

@@ -18,6 +18,9 @@ import zisko.multicastor.program.controller.ViewController;
  *
  */
 @SuppressWarnings("serial")
+
+//TODO: Diese Klasse sollte raus fliegen... Deshalb wurde hier auch nichts übersetzt!!!
+
 public class FrameFileChooser extends JFrame {
 	/**
 	 * JFileChooser Menu welches angepasst wird je nach dem ob es sich um einen Speichern oder Laden Dialog handelt.

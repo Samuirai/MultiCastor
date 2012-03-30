@@ -17,7 +17,6 @@ import zisko.multicastor.program.lang.LanguageManager;
  * 
  * In Version 2 wurde CheckBox und RadioButton Farbgebungsfehler gefixt
  * Außerdem Drag&Drop Tabs durch DraggableTabbedPane eingeführt
- * 
  * @version 1.5
  * @author Daniel Becker
  * @author Filip Haase
@@ -183,6 +182,7 @@ public class FrameMain extends JFrame {
 	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl,boolean firstInit) {
+		
 		if (firstInit){
 			mi_autoSave = new JCheckBoxMenuItem();
 			mi_autoSave.addItemListener(ctrl);
@@ -336,7 +336,7 @@ public class FrameMain extends JFrame {
 			setJMenuBar(mb_menubar);
 			
 		}
-				
+		
 		mi_autoSave.setText(lang.getProperty("mi.autoSave"));
 		mi_setTitle.setText(lang.getProperty("mi.changeWindowTitle"));	
 		m_language.setText(lang.getProperty("mi.language"));

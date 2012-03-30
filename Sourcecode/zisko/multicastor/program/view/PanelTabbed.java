@@ -82,6 +82,7 @@ public class PanelTabbed extends JPanel {
 		tablePanelBorder.setTitle(lang.getProperty("miscBorder.mcOverwiew"));
 		tab_console.setTitleAt(0, lang.getProperty("tab.graph"));
 		tab_console.setTitleAt(1, lang.getProperty("tab.console"));
+		pan_graph.reloadLanguage();
 	}
 	
 	/**
@@ -108,7 +109,7 @@ public class PanelTabbed extends JPanel {
 
 		// V1.5: L2_SENDER und L3_SENDER hinzugefuegt
 		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L3_SENDER || typ == Typ.L2_SENDER){
-			pan_graph = new PanelGraph(500, "sec", "Packets per Second (total)", false);
+			pan_graph = new PanelGraph(500, lang.getProperty("graph.sec"), lang.getProperty("graph.packetsPerSec"), false);
 		}
 		else{
 			pan_graph = new ReceiverGraph(ctrl);

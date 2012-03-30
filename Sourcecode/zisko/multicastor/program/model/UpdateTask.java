@@ -2,24 +2,21 @@ package zisko.multicastor.program.model;
 
 import java.util.Map;
 import java.util.TimerTask;
-import java.util.Vector;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import zisko.multicastor.program.controller.Main;
-import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
+import zisko.multicastor.program.lang.LanguageManager;
 
 public class UpdateTask extends TimerTask {
 	private ViewController viewController;
 	private Logger logger;
 	private Map<MulticastData, MulticastThreadSuper> mc_sender_l3;
-	private Map<MulticastData, MulticastThreadSuper> mc_sender_v6;
 	private Map<MulticastData, MulticastThreadSuper> mc_receiver_l3;
-	private Map<MulticastData, MulticastThreadSuper> mc_receiver_v6;
+	private LanguageManager lang=LanguageManager.getInstance();
 	
 	//V1.5 [FH] edded that memory warning is only appearing once
 	private boolean memoryWarned = false;
@@ -43,16 +40,13 @@ public class UpdateTask extends TimerTask {
 		boolean memoryWarnedForLog = false; 
 		Runtime rt= Runtime.getRuntime();
 		
-		// V1.5 [FH] PrÃ¼fung des Memories. Ob noch mehr als 10% frei sind
+		// V1.5 [FH] Prüfung des Memories. Ob noch mehr als 10% frei sind
 		if (!memoryWarned && rt.freeMemory()+ (rt.maxMemory()-rt.totalMemory()) 
 				< rt.maxMemory()*0.1) {
-			logger
-					.warning("Your memory is about to expire.(<10% remaining)\n"
-							+ "Please be careful, save your files and "
-							+ "try to free memory with closing of sender/reciever or tabs.\n\n" +
-									"Free Memory: " + rt.freeMemory()/(1024*1024) + "\n" +
-									"Total Allocated Memory: " + rt.totalMemory()/(1024*1024) + "\n" +
-									"Maximum Memory for JVM:  " + rt.maxMemory()/(1024*1024) );
+			logger.warning(lang.getProperty("warning.memory.title") +
+									lang.getProperty("warning.memory.freeMemory") + ": " + rt.freeMemory()/(1024*1024) + "\n" +
+									lang.getProperty("warning.memory.allocMemory") + ": " + rt.totalMemory()/(1024*1024) + "\n" +
+									lang.getProperty("warning.memory.maxMemory") + ":  " + rt.maxMemory()/(1024*1024) );
 			memoryWarnedForLog = true;
 			this.memoryWarned = true;
 		}
@@ -100,15 +94,12 @@ public class UpdateTask extends TimerTask {
 		if (!memoryWarnedForLog && ((System.nanoTime() - time1) / 1000000) > 200) {
 			// System.out.println("Updatetime is rather long: " +
 			// ((System.nanoTime() - time1)/1000000) + " ms !!!!!!!!!!!!");
-			logger.log(Level.INFO, "Updatetime is rather long: "
+			logger.log(Level.INFO, lang.getProperty("info.longUpdateTime") + ": "
 					+ ((System.nanoTime() - time1) / 1000000)
 					+ " ms !!!!!!!!!!!!");
 			if (((System.nanoTime() - time1) / 1000000) > 300)
 				if (viewController != null)
-					logger
-							.log(
-									Level.WARNING,
-									"Updating the user interface takes very long. Consider the help for more information.");
+					logger.log(Level.WARNING,lang.getProperty("warning.longUpdateTime"));
 		}
 
 	}
