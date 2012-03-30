@@ -236,104 +236,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTNewMC(Typ.L3_RECEIVER);
 		}
 		
-		//--------------------
-		
-//		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getTb_active()){
-//			toggleBTactive(Typ.SENDER_V4);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V4).getTb_active()){
-//			toggleBTactive(Typ.RECEIVER_V4);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.SENDER_V6).getTb_active()){
-//			toggleBTactive(Typ.SENDER_V6);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V6).getTb_active()){
-//			toggleBTactive(Typ.RECEIVER_V6);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.SENDER_V4).getBt_enter()){
-//			pressBTenter(Typ.SENDER_V4);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V4).getBt_enter()){
-//			pressBTenter(Typ.RECEIVER_V4);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.SENDER_V6).getBt_enter()){
-//			pressBTenter(Typ.SENDER_V6);
-//		}
-//		else if(e.getSource()==getPanConfig(Typ.RECEIVER_V6).getBt_enter()){
-//			pressBTenter(Typ.RECEIVER_V6);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDelete()){
-//			pressBTDelete(Typ.SENDER_V4);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getDelete()){
-//			pressBTDelete(Typ.RECEIVER_V4);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getDelete()){
-//			pressBTDelete(Typ.SENDER_V6);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getDelete()){
-//			pressBTDelete(Typ.RECEIVER_V6);
-//		}
-		/*else if(e.getSource()==getPanControl(Typ.SENDER_V4).getDeselect_all()){
-			pressBTDeselectAll(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getDeselect_all()){
-			pressBTDeselectAll(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getDeselect_all()){
-			pressBTDeselectAll(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getDeselect_all()){
-			pressBTDeselectAll(Typ.RECEIVER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getSelect_all()){
-			pressBTSelectAll(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getSelect_all()){
-			pressBTSelectAll(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getSelect_all()){
-			pressBTSelectAll(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getSelect_all()){
-			pressBTSelectAll(Typ.RECEIVER_V6);
-		}*/
-		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getNewmulticast()){
-			pressBTNewMC(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getNewmulticast()){
-			pressBTNewMC(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getNewmulticast()){
-			pressBTNewMC(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getNewmulticast()){
-			pressBTNewMC(Typ.RECEIVER_V6);
-		}
-		/*else if(e.getSource()==getPanControl(Typ.SENDER_V4).getStop()){
-			pressBTStop(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getStop()){
-			pressBTStop(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getStop()){
-			pressBTStop(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getStop()){
-			pressBTStop(Typ.RECEIVER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V4).getStart()){
-			pressBTStart(Typ.SENDER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V4).getStart()){
-			pressBTStart(Typ.RECEIVER_V4);
-		}
-		else if(e.getSource()==getPanControl(Typ.SENDER_V6).getStart()){
-			pressBTStart(Typ.SENDER_V6);
-		}
-		else if(e.getSource()==getPanControl(Typ.RECEIVER_V6).getStart()){
-			pressBTStart(Typ.RECEIVER_V6);
-		}*/
+
 		else if(e.getSource()==getFrame().getFc_save().getChooser()){
 			saveFileEvent(e);
 		}
@@ -1357,66 +1260,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		} else if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().getDocument()) {
 			docEventTFlength(Typ.L3_SENDER);
 		}
-		// TODO [MH] sollte spaeter rausgeworfen werden koennen.
-		//KEY Event in IPv4 Sender - GroupAddress
-//		if(source.getDocument() == getPanConfig(Typ.SENDER_V4).getTf_groupIPaddress().getDocument()){
-//			docEventTFgrp(Typ.SENDER_V4);
-//		}
-//		//KEY Event in IPv4 Receiver - GroupAddress
-//		else if(source.getDocument() == getPanConfig(Typ.RECEIVER_V4).getTf_groupIPaddress().getDocument()){
-//			docEventTFgrp(Typ.RECEIVER_V4);			
-//		}
-//		//KEY Event in IPv6 Sender - GroupAddress
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V6).getTf_groupIPaddress().getDocument()){
-//			docEventTFgrp(Typ.SENDER_V6);				
-//		}
-//		//KEY Event in IPv6 Receiver - GroupAddress
-//		else if(source.getDocument() == getPanConfig(Typ.RECEIVER_V6).getTf_groupIPaddress().getDocument()){
-//			docEventTFgrp(Typ.RECEIVER_V6);			
-//		}
-//		//KEY Event in IPv4 Sender - UDP Port
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V4).getTf_udp_port().getDocument()){
-//			docEventTFport(Typ.SENDER_V4);
-//		}
-//		//KEY Event in IPv4 Receiver - UDP Port
-//		else if(source.getDocument() == getPanConfig(Typ.RECEIVER_V4).getTf_udp_port().getDocument()){
-//			docEventTFport(Typ.RECEIVER_V4);
-//		}
-//		//KEY Event in IPv6 Sender - UDP Port
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V6).getTf_udp_port().getDocument()){
-//			docEventTFport(Typ.SENDER_V6);
-//		}
-//		//KEY Event in IPv6 Receiver - UDP Port
-//		else if(source.getDocument() == getPanConfig(Typ.RECEIVER_V6).getTf_udp_port().getDocument()){
-//			docEventTFport(Typ.RECEIVER_V6);
-//		}
-//		//KEY Event in IPv4 Sender - TTL
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V4).getTf_ttl().getDocument()){
-//			docEventTFttl(Typ.SENDER_V4);
-//		}
-//		//KEY Event in IPv6 Sender - TTL
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V6).getTf_ttl().getDocument()){
-//			docEventTFttl(Typ.SENDER_V6);
-//		}
-//		//KEY Event in IPv4 Sender - PacketRate
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V4).getTf_packetrate().getDocument()){
-//			docEventTFrate(Typ.SENDER_V4);
-//		}
-//		//KEY Event in IPv6 Sender - PacketRate
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V6).getTf_packetrate().getDocument()){
-//			docEventTFrate(Typ.SENDER_V6);
-//		}
-//		//KEY Event in IPv4 Sender - PacketLength
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V4).getTf_udp_packetlength().getDocument()){
-//			docEventTFlength(Typ.SENDER_V4);
-//		}
-//		//KEY Event in IPv6 Sender - PacketLength
-//		else if(source.getDocument() == getPanConfig(Typ.SENDER_V6).getTf_udp_packetlength().getDocument()){
-//			docEventTFlength(Typ.SENDER_V6);
-//		}
 		autoSave();
 	}
-	@SuppressWarnings({ "static-access", "static-access" })
+	@SuppressWarnings({ "static-access" })
 	@Override
 	/**
 	 * Funktion welche aufgerufen wird wenn eine GUI Komponente mit dem ItemListener selektiert oder deselektiert wird.

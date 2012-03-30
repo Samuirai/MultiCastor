@@ -60,6 +60,7 @@ public class PanelMulticastConfig extends JPanel {
 		setPreferredSize(new Dimension(225, 239));
 		createAddressFields(ctrl, typ); //GUI Elements for IPv4
 		createGUIstandard(typ);
+		setToolTips(typ);
 
 	}
 	/**
@@ -67,7 +68,6 @@ public class PanelMulticastConfig extends JPanel {
 	 * @param typ Gibt an zu welchem Programmteil das Panel geh�rt.
 	 */
 	private void createGUIstandard(Typ typ) {
-		tf_groupIPaddress.setToolTipText("Enter MultiCast group IP address here!");
 		add(bt_enter);
 		add(pan_groupIPaddress);
 		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
@@ -79,6 +79,39 @@ public class PanelMulticastConfig extends JPanel {
 			add(pan_packetlength);
 			if(typ == Typ.L3_SENDER)
 				add(pan_ttl);
+		}
+	}
+	
+	private void setToolTips(Typ typ) {
+		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
+			tf_groupIPaddress.setToolTipText(
+				"<html>" +
+				"Select a Multicast IP Address, either IPv4 or IPv6.<br />" +
+				"IPv4: 224.0.0.0 to 239.255.255.255<br />" +
+				"IPv6: FF00:: to FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF</html>"
+			);
+			cb_sourceIPaddress.setToolTipText("Specify the IP address first, then select an interface");
+			tf_udp_port.setToolTipText("Specify an UDP port (1 to 65535).");
+			
+			if (typ == Typ.L3_SENDER) {
+				tf_ttl.setToolTipText("Specify the time to live (1 to 32)");
+				tf_packetrate.setToolTipText("Specify the packetrate (1 to 65535)");
+				tf_udp_packetlength.setToolTipText(
+					"<html>" +
+					"Specify the packetlength<br />" +
+					"IPv4: 52 to 65507<br />" +
+					"IPv6: 52 to 65527" +
+					"</html>"
+				);
+			}
+		} else if (typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER) {
+			tf_groupIPaddress.setToolTipText("Select a multicast MAC Address (80:00:00:00:00:00 to ff:ff:ff:ff:ff:fe)");
+			cb_sourceIPaddress.setToolTipText("Select a network interface for multicast");
+			
+			if(typ == Typ.L2_SENDER) {
+				tf_packetrate.setToolTipText("Specify the packetrate (1 to 65535)");
+				tf_udp_packetlength.setToolTipText("Specfiy the packetlength (64 to 1520 Byte)");
+			}
 		}
 	}
 	
@@ -95,7 +128,6 @@ public class PanelMulticastConfig extends JPanel {
 	 */
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		
-		Vector<InetAddress> temp = null;
 		bt_active = new JToggleButton(lang.getProperty("button.inactive"));
 		bt_active.setForeground(Color.red);
 		bt_active.setFont(MiscFont.getFont(0,11));
@@ -120,17 +152,6 @@ public class PanelMulticastConfig extends JPanel {
 		cb_sourceIPaddress.setFont(MiscFont.getFont(0,12));
 		cb_sourceIPaddress.setBorder(null);
 		cb_sourceIPaddress.addItemListener(ctrl);
-		
-		
-//		temp = NetworkAdapter.getipv6Adapters();
-//		for(int i = 0 ; i < temp.size(); i++){
-//				try {
-//					cb_sourceIPaddress.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
-//				} catch (SocketException e) {
-//					e.printStackTrace();
-//				}
-//		}
-
 		
 		pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
 		add(pan_sourceIPaddress);
