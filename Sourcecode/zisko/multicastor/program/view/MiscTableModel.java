@@ -13,9 +13,10 @@ import zisko.multicastor.program.data.MulticastData.Typ;
  */
 @SuppressWarnings("serial")
 public class MiscTableModel extends AbstractTableModel {
-	private Typ typ=Typ.UNDEFINED;
+	private Typ typ = Typ.UNDEFINED;
 	private boolean stateCheckboxEnabled = true;
 	private ViewController ctrl;
+	
 	public MiscTableModel(ViewController ctrl, Typ typ){;
 		this.typ=typ;
 		this.ctrl=ctrl;
