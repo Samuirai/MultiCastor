@@ -33,22 +33,22 @@ public class FrameMain extends JFrame {
 	 * Das Tabpanel mit welchem man durch die Programmteile schalten kann.
 	 */
 	private DraggableTabbedPane tabpane;
-	/**
-	 *  Das IPv4Receiver Panel
-	 */
-	private PanelTabbed panel_rec_ipv4;
-	/**
-	 *  Das IPv4Sender Panel
-	 */
-	private PanelTabbed panel_sen_ipv4;
-	/**
-	 *  Das IPv6Receiver Panel
-	 */
-	private PanelTabbed panel_rec_ipv6;
-	/**
-	 *  Das IPv6Sender Panel
-	 */
-	private PanelTabbed panel_sen_ipv6;
+//	/**
+//	 *  Das IPv4Receiver Panel
+//	 */
+//	private PanelTabbed panel_rec_ipv4;
+//	/**
+//	 *  Das IPv4Sender Panel
+//	 */
+//	private PanelTabbed panel_sen_ipv4;
+//	/**
+//	 *  Das IPv6Receiver Panel
+//	 */
+//	private PanelTabbed panel_rec_ipv6;
+//	/**
+//	 *  Das IPv6Sender Panel
+//	 */
+//	private PanelTabbed panel_sen_ipv6;
 	/**
 	 
 	 *  Das Layer 2 Receiver Panel
@@ -410,10 +410,6 @@ public class FrameMain extends JFrame {
 	 */
 	private void initPanels(ViewController ctrl, boolean firstInit) {
 		if (firstInit){
-			panel_rec_ipv4 = new PanelTabbed(ctrl,Typ.RECEIVER_V4);
-			panel_sen_ipv4 = new PanelTabbed(ctrl,Typ.SENDER_V4);
-			panel_rec_ipv6 = new PanelTabbed(ctrl,Typ.RECEIVER_V6);
-			panel_sen_ipv6 = new PanelTabbed(ctrl,Typ.SENDER_V6);
 			//v1.5: Added new Tabs: L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
 			panel_rec_lay2 = new PanelTabbed(ctrl,Typ.L2_RECEIVER);
 			panel_sen_lay2 = new PanelTabbed(ctrl,Typ.L2_SENDER);
@@ -474,23 +470,6 @@ public class FrameMain extends JFrame {
 			panel_rec_lay3.reloadLanguage();
 			panel_sen_lay3.reloadLanguage();
 		}
-		
-		//tabpane.addTab(" Receiver IPv4 ", panel_rec_ipv4);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
-		//tabpane.addTab(" Sender IPv4 ", panel_sen_ipv4);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
-		//tabpane.addTab(" Receiver IPv6 ", panel_rec_ipv6);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
-		//tabpane.addTab(" Sender IPv6 ", panel_sen_ipv6);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
-		//V1.5: Neue Panels L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
-		//tabpane.addTab(" L2 Receiver ", panel_rec_lay2);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
-		//mi_open_l2r.setSelected(true);
-		//tabpane.addTab(" L2 Sender ", panel_sen_lay2);
-		//tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
-		//mi_open_l2s.setSelected(true);
-		/* TODO [MH] Nur fuer V1.5 rausgenommen [JT] --> Warum nur V1.5... die Tabs kommen nicht wieder oder?*/
 	}
 
 	/**
@@ -529,8 +508,9 @@ public class FrameMain extends JFrame {
 		return fc_load;
 	}
 
+	// TODO [MH] wird nie aufgerufen, macht man getter rein, die man nicht braucht?
 	public Dimension getGraphSize(){
-		return panel_rec_ipv4.getGraphSize();
+		return panel_rec_lay3.getGraphSize();
 	}
 
 	public DraggableTabbedPane getTabpane() {
@@ -539,11 +519,7 @@ public class FrameMain extends JFrame {
 	public PanelTabbed getPanelPart(Typ typ){
 		PanelTabbed ret = null;
 		switch(typ){
-			case SENDER_V4: ret=panel_sen_ipv4; break;
-			case SENDER_V6: ret=panel_sen_ipv6;break;
-			case RECEIVER_V4: ret=panel_rec_ipv4;break;
-			case RECEIVER_V6: ret=panel_rec_ipv6;break;
-			//V1.5 Panels f�r L2/L3 hinzugef�gt
+			//V1.5 Panels fuer L2/L3 hinzugefuegt
 			case L2_SENDER: ret=panel_sen_lay2; break;
 			case L3_SENDER: ret=panel_sen_lay3;break;
 			case L2_RECEIVER: ret=panel_rec_lay2;break;
@@ -551,21 +527,6 @@ public class FrameMain extends JFrame {
 			default: System.out.println("Error in FrameMain - getPanelPart"); break;
 		}
 		return ret;
-	}
-	public PanelTabbed getPanel_rec_ipv4() {
-		return panel_rec_ipv4;
-	}
-
-	public PanelTabbed getPanel_sen_ipv4() {
-		return panel_sen_ipv4;
-	}
-
-	public PanelTabbed getPanel_rec_ipv6() {
-		return panel_rec_ipv6;
-	}
-
-	public PanelTabbed getPanel_sen_ipv6() {
-		return panel_sen_ipv6;
 	}
 	
 	public PanelTabbed getPanel_rec_lay2() {

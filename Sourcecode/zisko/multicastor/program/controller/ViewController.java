@@ -348,7 +348,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	  */
 	public void addMC(MulticastData mcd){
 		mc.addMC(mcd);
-		updateTable(mcd.getTyp(),UpdateTyp.INSERT);
+		/* Im MulticastData Objekt ist der Typ IPv4 oder IPv6, fuer die Table muss das natuerlich nach Layer3 gemappt werden. */
+		if (mcd.getTyp() == Typ.SENDER_V4 || mcd.getTyp() == Typ.SENDER_V6) {
+			updateTable(Typ.L3_SENDER, UpdateTyp.INSERT);
+		} else if (mcd.getTyp() == Typ.RECEIVER_V4 || mcd.getTyp() == Typ.RECEIVER_V6) {
+			updateTable(Typ.L3_RECEIVER, UpdateTyp.INSERT);
+		} else {
+			// TODO Layer2
+			System.out.println("Muss hier Layer2 hin, oder ist das gar kein MCD?");
+		}
 	}
 	@Override
 	/**
@@ -496,66 +504,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
 		}
 		checkInput(typ);
-		
-		// TODO [MH] spaeter entfernen
-//		if(selectedIndex != 0){
-//			if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
-//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
-//				if(typ==Typ.SENDER_V4){
-//					input[0][1]=true;
-//				}
-//				else{
-//					input[1][1]=true;
-//				}
-//			}
-//			else{
-//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.TRUE));
-//				if(typ==Typ.SENDER_V6){
-//					input[2][1]=true;
-//				}
-//				else{
-//					input[3][1]=true;
-//				}
-//			}
-//		}
-//		else if(getSelectedRows(typ).length > 1 && configpart.getCb_sourceIPaddress().getItemAt(0).equals("...")){
-//			if(typ==Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
-//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
-//				if(typ==Typ.SENDER_V4){
-//					input[0][1]=true;
-//				}
-//				else{
-//					input[1][1]=true;
-//				}
-//			}
-//			else{
-//				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.TRUE));
-//				if(typ==Typ.SENDER_V6){
-//					input[2][1]=true;
-//				}
-//				else{
-//					input[3][1]=true;
-//				}
-//			}
-//		}
-//		else{
-//			switch(typ){
-//				case SENDER_V4: input[0][1]=false;  break;
-//				case RECEIVER_V4: input[1][1]=false;  break;
-//				case SENDER_V6: input[2][1]=false;  break;
-//				case RECEIVER_V6: input[3][1]=false;  break;
-//			}
-//			if(typ == Typ.SENDER_V6){
-//				configpart.getPan_sourceIPaddress()
-//				.setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.NEUTRAL));
-//			}
-//			else{
-//				configpart.getPan_sourceIPaddress()
-//				.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
-//			}
-//			
-//		}
-//		checkInput(typ);
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn sich der Inhalt eines Textfelds im Konfigurations Panel �ndert.
@@ -735,7 +683,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void deleteMC(MulticastData mcd){
 		mc.deleteMC(mcd);
-		updateTable(mcd.getTyp(),UpdateTyp.DELETE);
+		/* [MH] Im MulticastData Objekt ist der Typ IPv4 oder IPv6, fuer die Table muss das natuerlich nach Layer3 gemappt werden. */
+		if (mcd.getTyp() == Typ.SENDER_V4 || mcd.getTyp() == Typ.SENDER_V6) {
+			updateTable(Typ.L3_SENDER, UpdateTyp.DELETE);
+		} else if (mcd.getTyp() == Typ.RECEIVER_V4 || mcd.getTyp() == Typ.RECEIVER_V6) {
+			updateTable(Typ.L3_RECEIVER, UpdateTyp.DELETE);
+		} else {
+			// TODO Layer2
+			System.out.println("Muss hier Layer2 hin, oder ist das gar kein MCD?");
+		}
 	}
 	
 	/**
@@ -997,10 +953,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private PanelMulticastConfig getPanConfig(Typ typ){
 		PanelMulticastConfig configpart = null;
 		switch(typ){
-			case SENDER_V4: configpart=f.getPanel_sen_ipv4().getPan_config(); break;
-			case RECEIVER_V4: configpart=f.getPanel_rec_ipv4().getPan_config(); break;
-			case SENDER_V6: configpart=f.getPanel_sen_ipv6().getPan_config(); break;
-			case RECEIVER_V6: configpart=f.getPanel_rec_ipv6().getPan_config(); break;
 			case L2_SENDER: configpart=f.getPanel_sen_lay2().getPan_config(); break;
 			case L2_RECEIVER: configpart=f.getPanel_rec_lay2().getPan_config(); break;
 			case L3_SENDER: configpart=f.getPanel_sen_lay3().getPan_config(); break;
@@ -1016,10 +968,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private PanelMulticastControl getPanControl(Typ typ){
 		PanelMulticastControl controlpart = null;
 		switch(typ){
-			case SENDER_V4: controlpart=f.getPanel_sen_ipv4().getPan_control(); break;
-			case RECEIVER_V4: controlpart=f.getPanel_rec_ipv4().getPan_control(); break;
-			case SENDER_V6: controlpart=f.getPanel_sen_ipv6().getPan_control(); break;
-			case RECEIVER_V6: controlpart=f.getPanel_rec_ipv6().getPan_control(); break;
 			case L2_SENDER: controlpart=f.getPanel_sen_lay2().getPan_control(); break;
 			case L2_RECEIVER: controlpart=f.getPanel_rec_lay2().getPan_control(); break;
 			case L3_SENDER: controlpart=f.getPanel_sen_lay3().getPan_control(); break;
@@ -1035,10 +983,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private PanelStatusBar getPanStatus(Typ typ){
 		PanelStatusBar statusbarpart = null;
 		switch(typ){
-			case SENDER_V4: statusbarpart=f.getPanel_sen_ipv4().getPan_status(); break;
-			case RECEIVER_V4: statusbarpart=f.getPanel_rec_ipv4().getPan_status(); break;
-			case SENDER_V6: statusbarpart=f.getPanel_sen_ipv6().getPan_status(); break;
-			case RECEIVER_V6: statusbarpart=f.getPanel_rec_ipv6().getPan_status(); break;
 			case L2_SENDER: statusbarpart=f.getPanel_sen_lay2().getPan_status(); break;
 			case L2_RECEIVER: statusbarpart=f.getPanel_rec_lay2().getPan_status(); break;
 			case L3_SENDER: statusbarpart=f.getPanel_sen_lay3().getPan_status(); break;
@@ -1054,13 +998,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public PanelTabbed getPanTabbed(Typ typ){
 		PanelTabbed ret = null;
 		switch(typ){
-			case SENDER_V4: ret=f.getPanel_sen_lay3(); break;
-			case RECEIVER_V4: ret=f.getPanel_rec_lay3(); break;
-			case SENDER_V6: ret=f.getPanel_sen_lay3(); break;
-			case RECEIVER_V6: ret=f.getPanel_rec_lay3(); break;
 			case L2_SENDER: ret=f.getPanel_sen_lay2(); break;
 			case L2_RECEIVER: ret=f.getPanel_rec_lay2(); break;
-			// TODO [MH] muessten eigentlich geloescht werden koennen (lay3)
 			case L3_SENDER: ret=f.getPanel_sen_lay3(); break;
 			case L3_RECEIVER: ret=f.getPanel_rec_lay3(); break;
 		}
@@ -1083,11 +1022,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public Typ getSelectedTab() {
 		String title = f.getTabpane().getTitleAt(f.getTabpane().getSelectedIndex());
 		Typ typ;
-		if(title.equals(" Receiver IPv4 ")) typ = Typ.RECEIVER_V4;
-		else if(title.equals(" Sender IPv4 ")) typ = Typ.SENDER_V4;
-		else if(title.equals(" Receiver IPv6 ")) typ = Typ.RECEIVER_V6;
-		else if(title.equals(" Sender IPv6 ")) typ = Typ.SENDER_V6;
-		else if(title.equals(" "+lang.getProperty("tab.l3s")+" ")) typ = Typ.L3_SENDER;
+		if(title.equals(" "+lang.getProperty("tab.l3s")+" ")) typ = Typ.L3_SENDER;
 		else if(title.equals(" "+lang.getProperty("tab.l3r")+" ")) typ = Typ.L3_RECEIVER;
 		else if(title.equals(" "+lang.getProperty("tab.l2s")+" ")) typ = Typ.L2_SENDER;
 		else if(title.equals(" "+lang.getProperty("tab.l2r")+" ")) typ = Typ.L2_RECEIVER;
@@ -1110,10 +1045,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public JTable getTable(Typ typ){
 		JTable tablepart = null;
 		switch(typ){
-			case SENDER_V4: tablepart=f.getPanel_sen_ipv4().getTable(); break;
-			case RECEIVER_V4: tablepart=f.getPanel_rec_ipv4().getTable(); break;
-			case SENDER_V6: tablepart=f.getPanel_sen_ipv6().getTable(); break;
-			case RECEIVER_V6: tablepart=f.getPanel_rec_ipv6().getTable(); break;
 			case L2_RECEIVER: tablepart=f.getPanel_rec_lay2().getTable(); break;
 			case L2_SENDER: tablepart=f.getPanel_sen_lay2().getTable(); break;
 			case L3_RECEIVER: tablepart=f.getPanel_rec_lay3().getTable(); break;
@@ -1136,13 +1067,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public String getTotalTrafficDown(){
 		DecimalFormat ret = new DecimalFormat("##0.000");
 		double sum = 0.0;
-		 // TODO [MH] tbr
-//		 for(int i = 0; i < getTable(Typ.RECEIVER_V4).getModel().getRowCount(); i++){
-//			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
-//		 }
-//		 for(int i = 0; i < getTable(Typ.RECEIVER_V6).getModel().getRowCount(); i++){
-//			 sum = sum + Double.parseDouble(((String) getTable(Typ.RECEIVER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
-//		 }
+		
 		for(int i = 0; i < getTable(Typ.L3_RECEIVER).getModel().getRowCount(); i++){
 			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 5)).replace(",", "."));
 	 	}
@@ -1154,14 +1079,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public String getTotalTrafficUP(){
 		DecimalFormat ret = new DecimalFormat("##0.000");
 		double sum = 0.0;
-		
-		 // TODO [MH] tbr
-//		 for(int i = 0; i < getTable(Typ.SENDER_V4).getModel().getRowCount(); i++){
-//			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V4).getModel().getValueAt(i, 5)).replace(",", "."));
-//		 }
-//		 for(int i = 0; i < getTable(Typ.SENDER_V6).getModel().getRowCount(); i++){
-//			 sum = sum + Double.parseDouble(((String) getTable(Typ.SENDER_V6).getModel().getValueAt(i, 5)).replace(",", "."));
-//		 }
 		
 		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
 			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
@@ -1182,11 +1099,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void initialize(MulticastController p_mc){
 		mc = p_mc;
-		// TODO [MH] tbr
-		inputData_S4 = new UserInputData();
-		inputData_S6 = new UserInputData();
-		inputData_R4 = new UserInputData();
-		inputData_R6 = new UserInputData();
 		
 		inputData_L3 = new UserInputData();
 		inputData_R3 = new UserInputData();
@@ -1204,38 +1116,40 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	/**
 	 * Hilfsfunktion zum Testen des Programm mits realen daten, durch diese Funktion k�nnen extrem gro�e
 	 * Datenmengen simuliert werden.
+	 * [MH] Ab v1.5 umgestellt auf Layer3
 	 */
 	@SuppressWarnings("unused")
 	private void insertTestData(){
+		// TODO [MH] nochmal testen
 		for(int i = 1 ; i < 6 ; i++){
-			getPanConfig(Typ.SENDER_V4).getTf_groupIPaddress().setText("224.0.0."+i);
-			getPanConfig(Typ.SENDER_V4).getCb_sourceIPaddress().setSelectedIndex(1);
-			getPanConfig(Typ.SENDER_V4).getTf_udp_port().setText("4000"+i);
-			getPanConfig(Typ.SENDER_V4).getTf_ttl().setText("32");
-			getPanConfig(Typ.SENDER_V4).getTf_packetrate().setText(""+10*i);
-			getPanConfig(Typ.SENDER_V4).getTf_udp_packetlength().setText("2048");
-			getPanConfig(Typ.SENDER_V4).getTb_active().setSelected(true);
-			pressBTAdd(Typ.SENDER_V4);
+			getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().setText("224.0.0."+i);
+			getPanConfig(Typ.L3_SENDER).getCb_sourceIPaddress().setSelectedIndex(1);
+			getPanConfig(Typ.L3_SENDER).getTf_udp_port().setText("4000"+i);
+			getPanConfig(Typ.L3_SENDER).getTf_ttl().setText("32");
+			getPanConfig(Typ.L3_SENDER).getTf_packetrate().setText(""+10*i);
+			getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().setText("2048");
+			getPanConfig(Typ.L3_SENDER).getTb_active().setSelected(true);
+			pressBTAdd(Typ.L3_SENDER);
 			//Thread.sleep(100);
 			
-			getPanConfig(Typ.RECEIVER_V4).getTf_groupIPaddress().setText("224.0.0."+i);
-			getPanConfig(Typ.RECEIVER_V4).getTf_udp_port().setText("4000"+i);
-			getPanConfig(Typ.RECEIVER_V4).getTb_active().setSelected(true);
-			pressBTAdd(Typ.RECEIVER_V4);
+			getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().setText("224.0.0."+i);
+			getPanConfig(Typ.L3_RECEIVER).getTf_udp_port().setText("4000"+i);
+			getPanConfig(Typ.L3_RECEIVER).getTb_active().setSelected(true);
+			pressBTAdd(Typ.L3_RECEIVER);
 			//Thread.sleep(100);
-			getPanConfig(Typ.SENDER_V6).getTf_groupIPaddress().setText("ff00::"+i);
-			getPanConfig(Typ.SENDER_V6).getCb_sourceIPaddress().setSelectedIndex(1);
-			getPanConfig(Typ.SENDER_V6).getTf_udp_port().setText("4000"+i);
-			getPanConfig(Typ.SENDER_V6).getTf_ttl().setText("32");
-			getPanConfig(Typ.SENDER_V6).getTf_packetrate().setText(""+10*i);
-			getPanConfig(Typ.SENDER_V6).getTf_udp_packetlength().setText("1024");
-			getPanConfig(Typ.SENDER_V6).getTb_active().setSelected(true);
-			pressBTAdd(Typ.SENDER_V6);
+			getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().setText("ff00::"+i);
+			getPanConfig(Typ.L3_SENDER).getCb_sourceIPaddress().setSelectedIndex(1);
+			getPanConfig(Typ.L3_SENDER).getTf_udp_port().setText("4000"+i);
+			getPanConfig(Typ.L3_SENDER).getTf_ttl().setText("32");
+			getPanConfig(Typ.L3_SENDER).getTf_packetrate().setText(""+10*i);
+			getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().setText("1024");
+			getPanConfig(Typ.L3_SENDER).getTb_active().setSelected(true);
+			pressBTAdd(Typ.L3_SENDER);
 			//Thread.sleep(100);
-			getPanConfig(Typ.RECEIVER_V6).getTf_groupIPaddress().setText("ff00::"+i);
-			getPanConfig(Typ.RECEIVER_V6).getTf_udp_port().setText("4000"+i);
-			getPanConfig(Typ.RECEIVER_V6).getTb_active().setSelected(true);
-			pressBTAdd(Typ.RECEIVER_V6);
+			getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().setText("ff00::"+i);
+			getPanConfig(Typ.L3_RECEIVER).getTf_udp_port().setText("4000"+i);
+			getPanConfig(Typ.L3_RECEIVER).getTb_active().setSelected(true);
+			pressBTAdd(Typ.L3_RECEIVER);
 			//Thread.sleep(100);
 		}
 		
@@ -1278,42 +1192,42 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				changeNetworkInterface(Typ.L3_RECEIVER);
 			}
 			// TODO [MH] kram rausschmeissen
-			if(arg0.getSource() == getPanConfig(Typ.SENDER_V4).getTf_sourceIPaddress()){
-				changeNetworkInterface(Typ.SENDER_V4);
-			}
-			else if(arg0.getSource() == getPanConfig(Typ.RECEIVER_V4).getTf_sourceIPaddress()){
-				changeNetworkInterface(Typ.RECEIVER_V4);
-			}
-			else if(arg0.getSource() == getPanConfig(Typ.SENDER_V6).getTf_sourceIPaddress()){
-				changeNetworkInterface(Typ.SENDER_V6);
-			}
-			else if(arg0.getSource() == getPanConfig(Typ.RECEIVER_V6).getTf_sourceIPaddress()){
-				changeNetworkInterface(Typ.RECEIVER_V6);
-			}
-			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getLostPktsRB()){
-				//System.out.println("RECEIVER_V4 - LostPacketsRB");
-				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
-			}
-			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getJitterRB()){
-				//System.out.println("RECEIVER_V4 - JitterRB");
-				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.JITTER);
-			}
-			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getMeasPktRtRB()){
-				//System.out.println("RECEIVER_V4 - MeasPktRtRB");
-				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.MEASPKT);
-			}
-			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getLostPktsRB()){
-				//System.out.println("RECEIVER_V6 - LostPacketsRB");
-				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
-			}
-			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getJitterRB()){
-				//System.out.println("RECEIVER_V6 - JitterRB");
-				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.JITTER);
-			}
-			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getMeasPktRtRB()){
-				//System.out.println("RECEIVER_V6 - MeasPktRtRB");
-				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.MEASPKT);
-			}
+//			if(arg0.getSource() == getPanConfig(Typ.SENDER_V4).getTf_sourceIPaddress()){
+//				changeNetworkInterface(Typ.L3_SENDER);
+//			}
+//			else if(arg0.getSource() == getPanConfig(Typ.RECEIVER_V4).getTf_sourceIPaddress()){
+//				changeNetworkInterface(Typ.RECEIVER_V4);
+//			}
+//			else if(arg0.getSource() == getPanConfig(Typ.SENDER_V6).getTf_sourceIPaddress()){
+//				changeNetworkInterface(Typ.SENDER_V6);
+//			}
+//			else if(arg0.getSource() == getPanConfig(Typ.RECEIVER_V6).getTf_sourceIPaddress()){
+//				changeNetworkInterface(Typ.RECEIVER_V6);
+//			}
+//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getLostPktsRB()){
+//				//System.out.println("RECEIVER_V4 - LostPacketsRB");
+//				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
+//			}
+//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getJitterRB()){
+//				//System.out.println("RECEIVER_V4 - JitterRB");
+//				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.JITTER);
+//			}
+//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getMeasPktRtRB()){
+//				//System.out.println("RECEIVER_V4 - MeasPktRtRB");
+//				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.MEASPKT);
+//			}
+//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getLostPktsRB()){
+//				//System.out.println("RECEIVER_V6 - LostPacketsRB");
+//				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
+//			}
+//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getJitterRB()){
+//				//System.out.println("RECEIVER_V6 - JitterRB");
+//				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.JITTER);
+//			}
+//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getMeasPktRtRB()){
+//				//System.out.println("RECEIVER_V6 - MeasPktRtRB");
+//				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.MEASPKT);
+//			}
 			else if(arg0.getSource() == f.getRb_beginner()){
 				changeUserLevel(Userlevel.BEGINNER);
 				//System.out.println("userlevel beginner");
@@ -1794,6 +1708,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem der Add Button gedr�ckt wurde
 	 */
 	private void pressBTenter(Typ typ) {
+		// TODO [MH] @Jonas Hier failts in anderen Sprachen
 		if(getPanConfig(typ).getBt_enter().getText().equals("Add")){
 			pressBTAdd(typ);
 		}
@@ -1855,15 +1770,22 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param s Nachricht welche in der Konsole der GUI ausgegeben werden soll
 	 */
 	public void printConsole(String s){
-		getFrame().getPanelPart(Typ.SENDER_V4).getTa_console().append(s+"\n");
-		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().append(s+"\n");
-		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().append(s+"\n");
-		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().append(s+"\n");
-		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().getText().length());
-		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().getText().length());
-		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().getText().length());
+//		getFrame().getPanelPart(Typ.SENDER_V4).getTa_console().append(s+"\n");
+//		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().append(s+"\n");
+//		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().append(s+"\n");
+//		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().append(s+"\n");
+//		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().getText().length());
+//		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().getText().length());
+//		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().getText().length());
 
-		
+		getFrame().getPanelPart(Typ.L3_SENDER).getTa_console().append(s+"\n");
+		getFrame().getPanelPart(Typ.L3_RECEIVER).getTa_console().append(s+"\n");
+		getFrame().getPanelPart(Typ.L2_SENDER).getTa_console().append(s+"\n");
+		getFrame().getPanelPart(Typ.L2_RECEIVER).getTa_console().append(s+"\n");
+		getFrame().getPanelPart(Typ.L3_SENDER).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.L3_SENDER).getTa_console().getText().length());
+		getFrame().getPanelPart(Typ.L3_RECEIVER).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.L3_RECEIVER).getTa_console().getText().length());
+		getFrame().getPanelPart(Typ.L2_SENDER).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.L2_SENDER).getTa_console().getText().length());
+		getFrame().getPanelPart(Typ.L2_RECEIVER).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.L2_RECEIVER).getTa_console().getText().length());
 	}
 	
 	/**
@@ -2133,7 +2055,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		autoSave();
 	}
 	/**
-	 * Diese Funktion bildet die eigentliche Schnittstelle zum MulticastController und erm�glicht
+	 * Diese Funktion bildet die eigentliche Schnittstelle zum MulticastController und ermoeglicht
 	 * die GUI zu einem bestimmen Zeitpunkt zu updaten.
 	 */
 	public void viewUpdate(){
@@ -2145,10 +2067,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanStatus(typ).getLb_multicast_count().setText(getMCCount(typ)+" "+lang.getProperty("status.mcTotal"));
 			PanelTabbed tabpart = null;
 			switch(typ){
-				case SENDER_V4: tabpart=f.getPanel_sen_ipv4(); break;
-				case RECEIVER_V4: tabpart=f.getPanel_rec_ipv4(); break;
-				case SENDER_V6: tabpart=f.getPanel_sen_ipv6(); break;
-				case RECEIVER_V6: tabpart=f.getPanel_rec_ipv6(); break;
 				case L2_SENDER: tabpart=f.getPanel_sen_lay2(); break;
 				case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
 				case L2_RECEIVER: tabpart=f.getPanel_rec_lay2(); break;
@@ -2214,17 +2132,17 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	}
 	/**
 	 * Hilfsfunktion zur Bestimmung des UserInputData Objekts anhand des Typs.
-	 * @param typ Programmteil f�r welchen das UserInputData Objekt angefordert wird
-	 * @return Gibt das UserInputData Objekt des entsprechenden Typs zur�ck
+	 * @param typ Programmteil fuer welchen das UserInputData Objekt angefordert wird
+	 * @return Gibt das UserInputData Objekt des entsprechenden Typs zurueck
 	 */
 	public UserInputData getUserInputData(Typ typ){
 		UserInputData ret = null;
 		switch(typ){
-		// TODO [MH] sollte entfernt werden koennen
-			case SENDER_V4: ret = inputData_S4; break;
-			case SENDER_V6: ret = inputData_S6; break;
-			case RECEIVER_V4: ret = inputData_R4; break;
-			case RECEIVER_V6: ret = inputData_R6; break;
+		// TODO [MH] tbr
+//			case SENDER_V4: ret = inputData_S4; break;
+//			case SENDER_V6: ret = inputData_S6; break;
+//			case RECEIVER_V4: ret = inputData_R4; break;
+//			case RECEIVER_V6: ret = inputData_R6; break;
 			
 			case L3_SENDER: ret = inputData_L3; break;
 			case L3_RECEIVER: ret = inputData_R3; break;

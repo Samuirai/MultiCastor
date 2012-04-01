@@ -177,13 +177,7 @@ public class MulticastController{
 	public void addMC(MulticastData m) {
 		// Erzeugt den passenden MulticastThreadSuper
 		MulticastThreadSuper t = null; 
-//		// TODO [MH] to be removed
-//		if((m.getTyp() == MulticastData.Typ.L3_SENDER)) {
-//			t = new MulticastSender(m, logger);
-//		} else if ((m.getTyp() == MulticastData.Typ.L3_RECEIVER)) {
-//			t = new MulticastReceiver(m, logger);
-//		}
-
+		
 		if((m.getTyp() == MulticastData.Typ.SENDER_V4)||(m.getTyp() == MulticastData.Typ.SENDER_V6)){
 			t = new MulticastSender(m, logger);
 			//V1.5 [FH] Added MulticastController to stop it in case of network error

@@ -86,7 +86,7 @@ public class Main {
 			logger.info(lang.getProperty("logger.info.startWithGui"));
 
 			controller.loadCompleteConfig();
-
+			
 			for (Handler h : logger.getHandlers()) {
 				h.close();
 			}
