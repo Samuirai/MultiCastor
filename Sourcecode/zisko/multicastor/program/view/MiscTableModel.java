@@ -47,7 +47,7 @@ public class MiscTableModel extends AbstractTableModel {
 	public Class<?> getColumnClass(int columnIndex) {
 		Class<?> ret = null;
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0: ret = Boolean.class; break;
 				case 1: ret = String.class; break;
@@ -64,7 +64,7 @@ public class MiscTableModel extends AbstractTableModel {
 			}  	
 		}
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
+		if(typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0: ret = Boolean.class; break;
 				case 1: ret = String.class; break;
@@ -89,11 +89,11 @@ public class MiscTableModel extends AbstractTableModel {
 	public int getColumnCount() {
 		int ret = 0;
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			ret = 11;
 		}
 		// V1.5: L2 und L3 hinzugefuegt
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
+		else if(typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			ret = 11;
 		}
 		return ret;
@@ -105,7 +105,7 @@ public class MiscTableModel extends AbstractTableModel {
 	public String getColumnName(int columnIndex) {
 		String ret=null;
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0: ret = "STATE"; break; 
 				case 1:	ret = "ID"; break; 		
@@ -122,7 +122,7 @@ public class MiscTableModel extends AbstractTableModel {
 			}
 		}
 		// V1.5: L2 und L3 hinzugefuegt
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
+		else if(typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0: ret = "STATE"; break;
 				case 1:	ret = "ID"; break; 		
@@ -159,7 +159,7 @@ public class MiscTableModel extends AbstractTableModel {
 		Object ret = null;
 		
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0: ret=new Boolean(data.isActive()); break; 
 				case 1: ret=data.getSenderID(); break;
@@ -176,7 +176,7 @@ public class MiscTableModel extends AbstractTableModel {
 			}
 		}
 		// V1.5: L2 und L3 hinzugefuegt
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
+		else if(typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0: ret=new Boolean(data.isActive()); break; 
 				case 1: ret=data.getSenderID(); break;
@@ -215,7 +215,7 @@ public class MiscTableModel extends AbstractTableModel {
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		MulticastData data = ctrl.getMCData(rowIndex, typ);
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 			switch(columnIndex){
 				case 0:	
 					if((Boolean)aValue){
@@ -240,7 +240,7 @@ public class MiscTableModel extends AbstractTableModel {
 			}
 		}
 		// V1.5: L2 und L3 hinzugefuegt
-		else if(typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6 || typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
+		else if(typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
 			switch(columnIndex){
 				case 0:
 					if((Boolean)aValue){

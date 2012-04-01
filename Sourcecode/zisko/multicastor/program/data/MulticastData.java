@@ -110,7 +110,7 @@ public class MulticastData {
 	public void resetValues(){
 		int d = 0;
 		
-		if((typ == Typ.RECEIVER_V4)||(typ == Typ.RECEIVER_V6)){
+		if(typ == Typ.L3_RECEIVER){
 			ttl = d;
 			packetRateDesired = d;
 			packetLength = d;
@@ -271,14 +271,13 @@ public class MulticastData {
 	}
 	
 	public String toStringConsole(){
-		if(		(typ == Typ.SENDER_V4)
-			||	(typ == Typ.SENDER_V6))
+		if (typ == Typ.L3_SENDER)
 			return groupIp + "\t" + udpPort + "\t" + sourceIp + "\t" + packetRateDesired + "\t"
 			       + threadID + "\t" + ttl + "\t" + packetCount + "\t" + typ + "\t" + getSenderID() + "\t"; 
 		
-			return groupIp + "\t" + udpPort + "\t" + sourceIp + "\t" + jitter + "\t" 
-				+ numberOfInterruptions + "\t" + packetLossPerSecond + "\t" + packetRateDesired + "\t"
-				+ packetRateMeasured + "\t" + threadID + "\t" + ttl + "\t" + packetCount + "\t" + typ + "\t" + getSenderID() + "\t" + packetSource + "\t" + senders;
+		return groupIp + "\t" + udpPort + "\t" + sourceIp + "\t" + jitter + "\t" 
+			+ numberOfInterruptions + "\t" + packetLossPerSecond + "\t" + packetRateDesired + "\t"
+			+ packetRateMeasured + "\t" + threadID + "\t" + ttl + "\t" + packetCount + "\t" + typ + "\t" + getSenderID() + "\t" + packetSource + "\t" + senders;
 	}
 	
 	public String identify(){

@@ -74,7 +74,7 @@ public class PanelMulticastConfig extends JPanel {
 			add(pan_udp_port);
 		add(bt_active);
 		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugef�gt
-		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
+		if(typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
 			if(typ == Typ.L3_SENDER)
@@ -327,6 +327,7 @@ public class PanelMulticastConfig extends JPanel {
 		 * Hier m�ssen die Networkadapter f�r den Kombinierten L3-Tab referenziert werden.
 		 * Hier m�ssen die Networkadapter f�r MMRP referenziert werden.
 		 */
+		// XXX [MH] hier gleich mal schauen
 		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
 			return NetworkAdapter.getipv4Adapters().get(i).toString().substring(1);
 		}

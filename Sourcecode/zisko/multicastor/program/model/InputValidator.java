@@ -46,9 +46,10 @@ public class InputValidator {
 	 * @param address Das {@link java.net.InetAddress}-Objekt welches geprüft werden soll
 	 * @return boolean Existiert ein Interface mit der gegebenen Adresse true, falls kein Interface mit der Adresse existier false
 	 */
+	// TODO [MH] mit naechster Methode zusammenlegen
 	public static Boolean checkv4Adapters(InetAddress address)
 	{
-		if(NetworkAdapter.findAddressIndex(Typ.SENDER_V4,address.toString() )==-1)
+		if(NetworkAdapter.findAddressIndex(address.toString() )==-1)
 			return false;
 		else
 			return true;
@@ -61,7 +62,7 @@ public class InputValidator {
 	 */
 	public static Boolean checkv6Adapters(InetAddress address)
 	{
-		if(NetworkAdapter.findAddressIndex(Typ.SENDER_V6,address.toString())==-1)
+		if(NetworkAdapter.findAddressIndex(address.toString())==-1)
 			return false;
 		else
 			return true;

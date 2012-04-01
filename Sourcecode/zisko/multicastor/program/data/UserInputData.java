@@ -7,7 +7,7 @@ import zisko.multicastor.program.data.UserlevelData.Userlevel;
 public class UserInputData {
 	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> läuft über columnOrderString
 	private ArrayList<Integer> columnVisibility; // siehe columnVisiblityString
-	private String selectedTab = Typ.SENDER_V4.toString();
+	private String selectedTab = Typ.L3_SENDER.toString();
 	private String selectedUserlevel = Userlevel.EXPERT.toString();
 	private String groupadress = "";
 	private String isAutoSaveEnabled =""; //neu

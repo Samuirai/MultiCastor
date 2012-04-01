@@ -178,11 +178,11 @@ public class MulticastController{
 		// Erzeugt den passenden MulticastThreadSuper
 		MulticastThreadSuper t = null; 
 		
-		if((m.getTyp() == MulticastData.Typ.SENDER_V4)||(m.getTyp() == MulticastData.Typ.SENDER_V6)){
+		if(m.getTyp() == MulticastData.Typ.L3_SENDER) {
 			t = new MulticastSender(m, logger);
 			//V1.5 [FH] Added MulticastController to stop it in case of network error
 			((MulticastSender) t).setMCtrl(this);
-		} else if ((m.getTyp() == MulticastData.Typ.RECEIVER_V4)||(m.getTyp() == MulticastData.Typ.RECEIVER_V6)){
+		} else if (m.getTyp() == MulticastData.Typ.L3_RECEIVER){
 			t = new MulticastReceiver(m, logger);
 		}
 		
@@ -257,7 +257,7 @@ public class MulticastController{
 				
 				// Thread ID nur bei Sendern setzen. 
 				//   Beim Receiver wird der Wert aus dem Datenpaket ausgelesen.
-				if((m.getTyp()==MulticastData.Typ.SENDER_V4)||(m.getTyp()==MulticastData.Typ.SENDER_V6)){
+				if(m.getTyp() == MulticastData.Typ.L3_SENDER){
 					m.setThreadID(threadCounter);
 					threadCounter++;
 				} else { // Receiver haben den GroupJoin ausgelagert.
@@ -721,12 +721,8 @@ public class MulticastController{
 		Vector<MulticastData> vector = null;
 		switch(multicastDataTyp){
 		/* v1.5 */ 
-			case L3_RECEIVER:
-			case RECEIVER_V4:
-			case RECEIVER_V6: vector = mc_receiver_l3; break;
-			case L3_SENDER:
-			case SENDER_V4:
-			case SENDER_V6: vector = mc_sender_l3; break;
+			case L3_RECEIVER: vector = mc_receiver_l3; break;
+			case L3_SENDER: vector = mc_sender_l3; break;
 			/*
 			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!! Layer2
 			 */
@@ -747,12 +743,8 @@ public class MulticastController{
 		Map<MulticastData,MulticastThreadSuper> map = null;
 		switch(multicastDataTyp){
 			/* v1.5 */
-			case L3_RECEIVER:
-			case RECEIVER_V4:
-			case RECEIVER_V6: map = mcMap_receiver_l3; break;
-			case L3_SENDER:
-			case SENDER_V4:
-			case SENDER_V6: map = mcMap_sender_l3; break;
+			case L3_RECEIVER: map = mcMap_receiver_l3; break;
+			case L3_SENDER: map = mcMap_sender_l3; break;
 			/*
 			 * TODO Unbedingt anpassen! Hier ist der falsche Vektor drin!!! Layer2
 			 */

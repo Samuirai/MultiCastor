@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import zisko.multicastor.program.controller.ViewController.MessageTyp;
+import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 /**
  * Abstrakte Hilfsklasse welche die Netzwerkadapter des Systems ausliest und nach IPv4 und IPv6 sortiert.
@@ -14,6 +15,10 @@ import zisko.multicastor.program.data.MulticastData.Typ;
  *
  */
 public abstract class NetworkAdapter {
+	
+	public enum IPType {
+		IPv4, IPv6
+	}
 	/**
 	 * Vector welcher alle vorgebenen IPv4 Netzwerkadressen im System h�lt.
 	 */
@@ -76,9 +81,9 @@ public abstract class NetworkAdapter {
 	 * @param address Adresse welche �berpr�ft werden soll
 	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zur�ckgegeben, ansonsten -1
 	 */
-	public static int findAddressIndex(Typ typ, String address){
+	public static int findAddressIndex(String address){
 		int ret = -1;
-		if(typ == Typ.SENDER_V4 || typ == Typ.RECEIVER_V4){
+		if(getAddressType(address) == IPType.IPv4){
 			for(int i = 0; i < ipv4Interfaces.size() ; i++){
 				//System.out.println("comparing index "+i+": \""+ipv4Interfaces.get(i).toString()+"\" against \""+address+"\"");
 				if(ipv4Interfaces.get(i).toString().equals(address)){
@@ -86,8 +91,7 @@ public abstract class NetworkAdapter {
 					ret = i;
 				}
 			}
-		}
-		else if(typ == Typ.SENDER_V6 || typ == Typ.RECEIVER_V6){
+		} else if(getAddressType(address) == IPType.IPv6){
 			for(int i = 0; i < ipv6Interfaces.size() ; i++){
 				if(ipv6Interfaces.get(i).toString().startsWith(address)){
 					ret = i;
@@ -95,5 +99,14 @@ public abstract class NetworkAdapter {
 			}
 		}
 		return ret;
+	}
+	
+	public static IPType getAddressType(String address) {
+		if (InputValidator.checkIPv4(address) != null) {
+			return IPType.IPv4;
+		} else if (InputValidator.checkIPv6(address) != null) {
+			return IPType.IPv6;
+		}
+		return null;
 	}
 }

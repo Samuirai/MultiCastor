@@ -348,15 +348,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	  */
 	public void addMC(MulticastData mcd){
 		mc.addMC(mcd);
-		/* Im MulticastData Objekt ist der Typ IPv4 oder IPv6, fuer die Table muss das natuerlich nach Layer3 gemappt werden. */
-		if (mcd.getTyp() == Typ.SENDER_V4 || mcd.getTyp() == Typ.SENDER_V6) {
-			updateTable(Typ.L3_SENDER, UpdateTyp.INSERT);
-		} else if (mcd.getTyp() == Typ.RECEIVER_V4 || mcd.getTyp() == Typ.RECEIVER_V6) {
-			updateTable(Typ.L3_RECEIVER, UpdateTyp.INSERT);
-		} else {
-			// TODO Layer2
-			System.out.println("Muss hier Layer2 hin, oder ist das gar kein MCD?");
-		}
+		updateTable(mcd.getTyp(), UpdateTyp.INSERT);
 	}
 	@Override
 	/**
@@ -455,19 +447,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			mcd.setActive(getPanConfig(typ).getTb_active().isSelected());
 		}
 		
-		if (typ == MulticastData.Typ.L3_SENDER) {
-			if (isIPv4) {
-				mcd.setTyp(MulticastData.Typ.SENDER_V4);
-			} else {
-				mcd.setTyp(MulticastData.Typ.SENDER_V6);
-			}
-		} else if (typ == MulticastData.Typ.L3_RECEIVER) {
-			if (isIPv4) {
-				mcd.setTyp(MulticastData.Typ.RECEIVER_V4);
-			} else {
-				mcd.setTyp(MulticastData.Typ.RECEIVER_V6);
-			}
-		}
+		mcd.setTyp(typ);
 		return mcd;
 	}
 	/**
@@ -561,7 +541,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
 			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
 			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
-			if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
+			if(typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 				getPanConfig(typ).getTf_ttl().setText("");
 				getPanConfig(typ).getTf_packetrate().setText("");;
 				getPanConfig(typ).getTf_udp_packetlength().setText("");;
@@ -683,15 +663,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void deleteMC(MulticastData mcd){
 		mc.deleteMC(mcd);
-		/* [MH] Im MulticastData Objekt ist der Typ IPv4 oder IPv6, fuer die Table muss das natuerlich nach Layer3 gemappt werden. */
-		if (mcd.getTyp() == Typ.SENDER_V4 || mcd.getTyp() == Typ.SENDER_V6) {
-			updateTable(Typ.L3_SENDER, UpdateTyp.DELETE);
-		} else if (mcd.getTyp() == Typ.RECEIVER_V4 || mcd.getTyp() == Typ.RECEIVER_V6) {
-			updateTable(Typ.L3_RECEIVER, UpdateTyp.DELETE);
-		} else {
-			// TODO Layer2
-			System.out.println("Muss hier Layer2 hin, oder ist das gar kein MCD?");
-		}
+		updateTable(mcd.getTyp(), UpdateTyp.DELETE);
 	}
 	
 	/**
@@ -900,26 +872,17 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				getTable(getSelectedTab()).setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			}
 		}
-			if(getSelectedTab() == Typ.SENDER_V4 || getSelectedTab() == Typ.SENDER_V6){
-				if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
-					getPanTabbed(getSelectedTab()).getPan_graph().resize(new Dimension(getFrame().getSize().width-262,100));
-				}
+		//TODO [MH] muss hier nicht getPan_recGraph() aufgerufen werden?
+		if(getSelectedTab() == Typ.L2_RECEIVER || getSelectedTab() == Typ.L3_RECEIVER){
+			if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
+				getPanTabbed(getSelectedTab()).getPan_recGraph().resize(new Dimension(getFrame().getSize().width-262,100));
 			}
-			else if(getSelectedTab() == Typ.RECEIVER_V4 || getSelectedTab() == Typ.RECEIVER_V6){
-				if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
-					getPanTabbed(getSelectedTab()).getPan_recGraph().resize(new Dimension(getFrame().getSize().width-262,100));
-				}
+		}
+		else if(getSelectedTab() == Typ.L2_SENDER || getSelectedTab() == Typ.L3_SENDER){
+			if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
+				getPanTabbed(getSelectedTab()).getPan_graph().resize(new Dimension(getFrame().getSize().width-262,100));
 			}
-			else if(getSelectedTab() == Typ.L2_RECEIVER || getSelectedTab() == Typ.L3_RECEIVER){
-				if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
-					getPanTabbed(getSelectedTab()).getPan_recGraph().resize(new Dimension(getFrame().getSize().width-262,100));
-				}
-			}
-			else if(getSelectedTab() == Typ.L2_SENDER || getSelectedTab() == Typ.L3_SENDER){
-				if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
-					getPanTabbed(getSelectedTab()).getPan_graph().resize(new Dimension(getFrame().getSize().width-262,100));
-				}
-			}
+		}
 	}
 	/**
 	 * Hilfsfunktion welche das Frame zur�ckgibt in welchem das MultiCastor Tool gezeichnet wird.
@@ -1192,18 +1155,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				changeNetworkInterface(Typ.L3_RECEIVER);
 			}
 			// TODO [MH] kram rausschmeissen
-//			if(arg0.getSource() == getPanConfig(Typ.SENDER_V4).getTf_sourceIPaddress()){
-//				changeNetworkInterface(Typ.L3_SENDER);
-//			}
-//			else if(arg0.getSource() == getPanConfig(Typ.RECEIVER_V4).getTf_sourceIPaddress()){
-//				changeNetworkInterface(Typ.RECEIVER_V4);
-//			}
-//			else if(arg0.getSource() == getPanConfig(Typ.SENDER_V6).getTf_sourceIPaddress()){
-//				changeNetworkInterface(Typ.SENDER_V6);
-//			}
-//			else if(arg0.getSource() == getPanConfig(Typ.RECEIVER_V6).getTf_sourceIPaddress()){
-//				changeNetworkInterface(Typ.RECEIVER_V6);
-//			}
 //			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getLostPktsRB()){
 //				//System.out.println("RECEIVER_V4 - LostPacketsRB");
 //				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
@@ -1466,9 +1417,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //			tabpart.getPan_config().getCb_sourceIPaddress().insertItemAt("", 0);
 //			tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);
 			tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
-				NetworkAdapter.findAddressIndex(
-					getMCData(selectedRows[0], typ).getTyp(), getMCData(selectedRows[0],typ).getSourceIp().toString()
-				)+1
+				NetworkAdapter.findAddressIndex(getMCData(selectedRows[0],typ).getSourceIp().toString())+1
 			);
 			
 			if(typ==Typ.L3_SENDER){
@@ -1483,7 +1432,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			clearInput(typ);
 			tabpart.getPan_config().getBt_enter().setText("Add");
 			tabpart.getPan_config().getTf_groupIPaddress().setEnabled(true);
-			if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6){
+			if(typ==Typ.L3_SENDER){
 				tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);				
 			}
 			tabpart.getPan_config().getTf_udp_port().setEnabled(true);
@@ -1644,7 +1593,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else{
 			PanelMulticastConfig config = getPanConfig(typ);
-			if((typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6)
+			if((typ == Typ.L3_SENDER)
 			&& (config.getTf_groupIPaddress().getText().equals("..."))
 			&& (config.getCb_sourceIPaddress().getSelectedIndex()==0)
 			&& (config.getTf_udp_port().getText().equals("..."))
@@ -1655,7 +1604,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			&& (config.getTb_active().getText().equals("multiple"))){
 				showMessage(MessageTyp.INFO, "No changes were made.\n\"...\" keeps old values!");
 			}
-			else if((typ == Typ.RECEIVER_V4 || typ == Typ.RECEIVER_V6)
+			else if((typ == Typ.L3_RECEIVER)
 					&& (config.getTf_groupIPaddress().getText().equals("..."))
 					&& (config.getTf_udp_port().getText().equals("..."))
 					&& (config.getTb_active().getText().equals("multiple"))){
@@ -1692,7 +1641,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void pressBTDeselectAll(Typ typ) {
 		getTable(typ).clearSelection();
 		setBTStartStopDelete(typ);
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		if(typ == Typ.L3_SENDER){
 			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
 			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
 			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
@@ -1978,7 +1927,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(getPanTabbed(typ).getTab_console().getSelectedIndex()==0){
 			if(getPanTabbed(typ).getPan_graph().isVisible() && getPanTabbed(typ).getTab_console().isVisible()){
 				//System.out.println("panel graph visible");
-				if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6 || typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+				if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
 					showupdate = 	!getPanConfig(typ).getCb_sourceIPaddress().isPopupVisible() &&
 									!PopUpMenu.isPopUpVisible();
 				}
