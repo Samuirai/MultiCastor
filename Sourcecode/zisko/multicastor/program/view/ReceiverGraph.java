@@ -139,8 +139,6 @@ public class ReceiverGraph extends PanelGraph{
 	 * @param mcData
 	 */
 	public void updateGraph(MulticastData[] mcDataArray, boolean repaint){
-		// TODO [MH] irgendwann tritt hier eine NullPointerException auf beim Anlegen eines Receivers
-		// evtl nochmal nachschauen, wann/wie
 		int newValue=0;
 		if(mcDataArray.length!=0){
 			switch(curValueType){

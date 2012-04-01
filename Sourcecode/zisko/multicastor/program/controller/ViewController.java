@@ -766,20 +766,25 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem das Packet Length Feld ge�ndert wurde.
 	 */
 	private void docEventTFlength(Typ typ){
-		switch(typ){
-			case L3_SENDER:
-				// TODO [MH] Hier ist noch nicht klar, ob v4 oder v6 ausgewaehlt wurde, also ist beides gueltig und sollte 
-				// beim klick auf add nochmal verifiziert werden.
-				if(
-					(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0) ||
-					(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)
-				) {
+		if (typ == Typ.L3_SENDER) {
+			if (NetworkAdapter.getAddressType(getPanConfig(typ).getTf_groupIPaddress().getText()) == IPType.IPv4) {
+				if((InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()) > 0)) {
 					getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
 					input[0][5]=true;
 				} else {
 					getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
 					input[0][5]=false;
 				}
+			} else {
+				if((InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText())> 0)) {
+						getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
+						input[0][5]=true;
+					} else {
+						getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
+						input[0][5]=false;
+					} 
+					
+			}
 		}
 		if(getPanConfig(typ).getTf_udp_packetlength().getText().equalsIgnoreCase("")){					
 			getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.NEUTRAL));					
