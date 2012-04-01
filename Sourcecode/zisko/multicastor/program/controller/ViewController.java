@@ -60,6 +60,7 @@ import zisko.multicastor.program.data.UserlevelData.Userlevel;
 import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.InputValidator;
 import zisko.multicastor.program.model.NetworkAdapter;
+import zisko.multicastor.program.model.NetworkAdapter.IPType;
 /**
  * Steuerungsklasse des GUI
  * @author	Daniel Becker
@@ -110,26 +111,38 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public void setInitFinished(boolean initFinished) {
 		this.initFinished = initFinished;
 	}
-	/**
-	 * Datenobjekt welches den Input des IPv4 Senders enth�lt.
-	 */
-	private UserInputData inputData_S4;
-	/**
-	 * Datenobjekt welches den Input des IPv6 Senders enth�lt.
-	 */
-	private UserInputData inputData_S6;
-	/**
-	 * Datenobjekt welches den Input des IPv4 Receivers enth�lt.
-	 */
-	private UserInputData inputData_R4;
-	/**
-	 * Datenobjekt welches den Input des IPv6 Receivers enth�lt.
-	 */
-	private UserInputData inputData_R6;
+//	/**
+//	 * Datenobjekt welches den Input des IPv4 Senders enth�lt.
+//	 */
+//	private UserInputData inputData_S4;
+//	/**
+//	 * Datenobjekt welches den Input des IPv6 Senders enth�lt.
+//	 */
+//	private UserInputData inputData_S6;
+//	/**
+//	 * Datenobjekt welches den Input des IPv4 Receivers enth�lt.
+//	 */
+//	private UserInputData inputData_R4;
+//	/**
+//	 * Datenobjekt welches den Input des IPv6 Receivers enth�lt.
+//	 */
+//	private UserInputData inputData_R6;
 	
-	private UserInputData inputData_L3;
+	/**
+	 * Datenobjekt welches den Input des Layer3 Senders enthaelt.
+	 */
+	private UserInputData inputData_S3;
+	/**
+	 * Datenobjekt welches den Input des Layer3 Receivers enthaelt.
+	 */
 	private UserInputData inputData_R3;
-	private UserInputData inputData_L2;
+	/**
+	 * Datenobjekt welches den Input des Layer2 Senders enthaelt.
+	 */
+	private UserInputData inputData_S2;
+	/**
+	 * Datenobjekt welches den Input des Layer2 Receivers enthaelt.
+	 */
 	private UserInputData inputData_R2;
 	
 	private LanguageManager lang;
@@ -376,34 +389,29 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @return Ge�nderters Multicast Datenobjekt.
 	 */
 	private MulticastData changeMCData(MulticastData mcd, MulticastData.Typ typ){
-		boolean isIPv4;
+		NetworkAdapter.IPType iptype;
 		
-		/* Is IPv4 or IPv6? */
-		if (InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null) {
-			isIPv4 = true;
-		} else {
-			isIPv4 = false;
-		}
+		iptype = NetworkAdapter.getAddressType(getPanConfig(typ).getTf_groupIPaddress().getText());
 				
 		switch(typ) {
 			case L3_SENDER:
 				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
-					if (isIPv4) {
+					if (iptype == IPType.IPv4) {
 						mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
-					} else {
+					} else if (iptype == IPType.IPv6) {
 						mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
 					}
 				}
 				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, isIPv4));	
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, iptype));	
 				}
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
-					if (isIPv4) {
+					if (iptype == IPType.IPv4) {
 						mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
 						if(getSelectedUserLevel() == Userlevel.BEGINNER){
 							mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
 						}
-					} else {
+					} else if (iptype == IPType.IPv6) {
 						mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
 						if(getSelectedUserLevel() == Userlevel.BEGINNER){
 							mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
@@ -425,15 +433,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				break;
 			case L3_RECEIVER:
 				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
-					if (isIPv4) {
+					if (iptype == IPType.IPv4) {
 						mcd.setGroupIp(InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()));
-					} else {
+					} else if (iptype == IPType.IPv6) {
 						mcd.setGroupIp(InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()));
 					}
 				}
 				//V1.5 [FH] Added source IP for receiver (network interface)
 				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
-					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, isIPv4));	
+					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, iptype));	
 				}
 				break;
 			default:
@@ -979,7 +987,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		return ret;
 	}
 	/**
-	 * Hilfsfunktion welche den Programmteil zur�ckgibt welcher im Moment per Tab selektiert ist.
+	 * Hilfsfunktion welche den Programmteil zurueckgibt welcher im Moment per Tab selektiert ist.
 	 * @return Programmteil welcher im Vordergrund ist.
 	 */
 	public Typ getSelectedTab() {
@@ -1063,9 +1071,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public void initialize(MulticastController p_mc){
 		mc = p_mc;
 		
-		inputData_L3 = new UserInputData();
+		inputData_S3 = new UserInputData();
 		inputData_R3 = new UserInputData();
-		// TODO Layer 2
+		inputData_S2 = new UserInputData();
+		inputData_R2 = new UserInputData();
 		
 		//levelData = new UserlevelData();
 		f = new FrameMain(this);
@@ -1205,163 +1214,165 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		autoSave();
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn der User �ber das Menu UserLevel das Benutzerlevel einstellt.
+	 * Funktion welche aufgerufen wird wenn der User ueber das Menu UserLevel das Benutzerlevel einstellt.
 	 * @param level Nutzerlevel welches eingestellt wurde in der Menubar.
 	 */
 	private void selectUserLevel(Userlevel level){
-		switch(level){
-		case BEGINNER: f.getRb_beginner().setSelected(true); break;
-		case EXPERT: f.getRb_expert().setSelected(true);; break;
-		case CUSTOM: f.getRb_custom().setSelected(true);; break;
-		default: f.getRb_expert().setSelected(true);; break;
-		}
+		// TODO [MH] UserLevel soll geloescht werden
+//		switch(level){
+//		case BEGINNER: f.getRb_beginner().setSelected(true); break;
+//		case EXPERT: f.getRb_expert().setSelected(true);; break;
+//		case CUSTOM: f.getRb_custom().setSelected(true);; break;
+//		default: f.getRb_expert().setSelected(true);; break;
+//		}
 	}
 	private void changeUserLevel(Userlevel level) {
-		//load userlevel data
-		UserlevelData levelDataSv4 = mc.getUserLevel(Typ.SENDER_V4, level);
-		UserlevelData levelDataSv6 = mc.getUserLevel(Typ.SENDER_V6, level);
-		UserlevelData levelDataRv4 = mc.getUserLevel(Typ.RECEIVER_V4, level);
-		UserlevelData levelDataRv6 = mc.getUserLevel(Typ.RECEIVER_V6, level);
-		if(levelDataSv4 != null && levelDataSv6 !=null && levelDataRv4 != null && levelDataRv6!=null){
-			//configure visibility settings for panels
-			getPanTabbed(Typ.SENDER_V4).setPanels(	levelDataSv4.isConfigPanel(), 
-													levelDataSv4.isControlPanel(), 
-													levelDataSv4.isStatusBar(), 
-													levelDataSv4.isConsole(),
-													levelDataSv4.isGraph());
-			getPanTabbed(Typ.SENDER_V6).setPanels(	levelDataSv6.isConfigPanel(), 
-													levelDataSv6.isControlPanel(), 
-													levelDataSv6.isStatusBar(), 
-													levelDataSv6.isConsole(),
-													levelDataSv6.isGraph());
-			getPanTabbed(Typ.RECEIVER_V4).setPanels(levelDataRv4.isConfigPanel(), 
-													levelDataRv4.isControlPanel(), 
-													levelDataRv4.isStatusBar(), 
-													levelDataRv4.isConsole(),
-													levelDataRv4.isGraph());
-			getPanTabbed(Typ.RECEIVER_V4).setPanels(levelDataRv6.isConfigPanel(), 
-													levelDataRv6.isControlPanel(), 
-													levelDataRv6.isStatusBar(), 
-													levelDataRv6.isConsole(),
-													levelDataRv6.isGraph());
-			//configure visibility settings for control panel
-			//configure visibility settings for start button
-			/*getPanControl(Typ.SENDER_V4).getStart().setVisible(levelDataSv4.isStartButton());
-			getPanControl(Typ.SENDER_V6).getStart().setVisible(levelDataSv6.isStartButton());
-			getPanControl(Typ.RECEIVER_V4).getStart().setVisible(levelDataRv4.isStartButton());
-			getPanControl(Typ.RECEIVER_V6).getStart().setVisible(levelDataRv6.isStartButton());
-			//configure visibility settings for stop button
-			getPanControl(Typ.SENDER_V4).getStop().setVisible(levelDataSv4.isStopButton());
-			getPanControl(Typ.SENDER_V6).getStop().setVisible(levelDataSv6.isStopButton());
-			getPanControl(Typ.RECEIVER_V4).getStop().setVisible(levelDataRv4.isStopButton());
-			getPanControl(Typ.RECEIVER_V6).getStop().setVisible(levelDataRv6.isStopButton());
-			//configure visibility settings for select all button
-			getPanControl(Typ.SENDER_V4).getSelect_all().setVisible(levelDataSv4.isSelectAllButton());
-			getPanControl(Typ.SENDER_V6).getSelect_all().setVisible(levelDataSv6.isSelectAllButton());
-			getPanControl(Typ.RECEIVER_V4).getSelect_all().setVisible(levelDataRv4.isSelectAllButton());
-			getPanControl(Typ.RECEIVER_V6).getSelect_all().setVisible(levelDataRv6.isSelectAllButton());
-			//configure visibility settings for deselect all button
-			getPanControl(Typ.SENDER_V4).getDeselect_all().setVisible(levelDataSv4.isDeselectAllButton());
-			getPanControl(Typ.SENDER_V6).getDeselect_all().setVisible(levelDataSv6.isDeselectAllButton());
-			getPanControl(Typ.RECEIVER_V4).getDeselect_all().setVisible(levelDataRv4.isDeselectAllButton());
-			getPanControl(Typ.RECEIVER_V6).getDeselect_all().setVisible(levelDataRv6.isDeselectAllButton());
-			//configure visibility settings for new multicast button*/
-			getPanControl(Typ.SENDER_V4).getNewmulticast().setVisible(levelDataSv4.isNewButton());
-			getPanControl(Typ.SENDER_V6).getNewmulticast().setVisible(levelDataSv6.isNewButton());
-			getPanControl(Typ.RECEIVER_V4).getNewmulticast().setVisible(levelDataRv4.isNewButton());
-			getPanControl(Typ.RECEIVER_V6).getNewmulticast().setVisible(levelDataRv6.isNewButton());
-			//configure visibility settings for delete button
-			getPanControl(Typ.SENDER_V4).getDelete().setVisible(levelDataSv4.isDeleteButton());
-			getPanControl(Typ.SENDER_V6).getDelete().setVisible(levelDataSv6.isDeleteButton());
-			getPanControl(Typ.RECEIVER_V4).getDelete().setVisible(levelDataRv4.isDeleteButton());
-			getPanControl(Typ.RECEIVER_V6).getDelete().setVisible(levelDataRv6.isDeleteButton());
-			//configure visibility settings for config panel
-			//configure visibility settings for group ip address field
-			getPanConfig(Typ.SENDER_V4).getPan_groupIPaddress().setVisible(levelDataSv4.isGroupIpField());
-			getPanConfig(Typ.SENDER_V6).getPan_groupIPaddress().setVisible(levelDataSv6.isGroupIpField());
-			getPanConfig(Typ.RECEIVER_V4).getPan_groupIPaddress().setVisible(levelDataRv4.isGroupIpField());
-			getPanConfig(Typ.RECEIVER_V6).getPan_groupIPaddress().setVisible(levelDataRv6.isGroupIpField());
-			//configure visibility settings for source ip address field
-			getPanConfig(Typ.SENDER_V4).getPan_sourceIPaddress().setVisible(levelDataSv4.isSourceIpField());
-			getPanConfig(Typ.SENDER_V6).getPan_sourceIPaddress().setVisible(levelDataSv6.isSourceIpField());
-			//configure visibility settings for port field
-			getPanConfig(Typ.SENDER_V4).getPan_udp_port().setVisible(levelDataSv4.isPortField());
-			getPanConfig(Typ.SENDER_V6).getPan_udp_port().setVisible(levelDataSv6.isPortField());
-			getPanConfig(Typ.RECEIVER_V4).getPan_udp_port().setVisible(levelDataRv4.isPortField());
-			getPanConfig(Typ.RECEIVER_V6).getPan_udp_port().setVisible(levelDataRv6.isPortField());
-			//configure visibility settings for TTL field
-			getPanConfig(Typ.SENDER_V4).getPan_ttl().setVisible(levelDataSv4.isTtlField());
-			getPanConfig(Typ.SENDER_V6).getPan_ttl().setVisible(levelDataSv6.isTtlField());
-			//configure visibility settings for packetlength field
-			getPanConfig(Typ.SENDER_V4).getPan_packetlength().setVisible(levelDataSv4.isPacketLengthField());
-			getPanConfig(Typ.SENDER_V6).getPan_packetlength().setVisible(levelDataSv6.isPacketLengthField());
-			//configure visibility settings for packetrate field
-			getPanConfig(Typ.SENDER_V4).getPan_packetrate().setVisible(levelDataSv4.isPacketRateField());
-			getPanConfig(Typ.SENDER_V6).getPan_packetrate().setVisible(levelDataSv6.isPacketRateField());
-			//configure visibility settings for active button
-			getPanConfig(Typ.SENDER_V4).getTb_active().setVisible(levelDataSv4.isActiveField());
-			getPanConfig(Typ.SENDER_V6).getTb_active().setVisible(levelDataSv6.isActiveField());
-			getPanConfig(Typ.RECEIVER_V4).getTb_active().setVisible(levelDataRv4.isActiveField());
-			getPanConfig(Typ.RECEIVER_V6).getTb_active().setVisible(levelDataRv6.isActiveField());
-			//configure visibility settings for enter button
-			getPanConfig(Typ.SENDER_V4).getBt_enter().setVisible(levelDataSv4.isEnterField());
-			getPanConfig(Typ.SENDER_V6).getBt_enter().setVisible(levelDataSv4.isEnterField());
-			getPanConfig(Typ.RECEIVER_V4).getBt_enter().setVisible(levelDataSv4.isEnterField());
-			getPanConfig(Typ.RECEIVER_V6).getBt_enter().setVisible(levelDataSv4.isEnterField());
-			//configure visibility settings for menu items
-			//configure visibility settings for load dialog
-			f.getMi_loadconfig().setVisible(levelDataSv4.isLoadConfigDialog());
-			f.getMi_loadconfig().setVisible(levelDataSv6.isLoadConfigDialog());
-			f.getMi_loadconfig().setVisible(levelDataRv4.isLoadConfigDialog());
-			f.getMi_loadconfig().setVisible(levelDataRv6.isLoadConfigDialog());
-			//configure visibility settings for save dialog
-			f.getMi_saveconfig().setVisible(levelDataSv4.isSaveConfigDialog());
-			f.getMi_saveconfig().setVisible(levelDataSv6.isSaveConfigDialog());
-			f.getMi_saveconfig().setVisible(levelDataRv4.isSaveConfigDialog());
-			f.getMi_saveconfig().setVisible(levelDataRv6.isSaveConfigDialog());
-			//configure visibility settings for userlevel dialog
-			f.getM_scale().setVisible(levelDataSv4.isUserLevelRadioGrp());
-			f.getM_scale().setVisible(levelDataSv6.isUserLevelRadioGrp());
-			f.getM_scale().setVisible(levelDataRv4.isUserLevelRadioGrp());
-			f.getM_scale().setVisible(levelDataRv6.isUserLevelRadioGrp());
-			//configure visibility settings for autosave dialog
-			f.getMi_autoSave().setVisible(levelDataSv4.isAutoSaveCheckbox());
-			f.getMi_autoSave().setVisible(levelDataSv6.isAutoSaveCheckbox());
-			f.getMi_autoSave().setVisible(levelDataRv4.isAutoSaveCheckbox());
-			f.getMi_autoSave().setVisible(levelDataRv6.isAutoSaveCheckbox());
-			//configure visibility settings for snake dialog
-			f.getMi_snake().setVisible(levelDataSv4.isSnakeGame());
-			f.getMi_snake().setVisible(levelDataSv6.isSnakeGame());
-			f.getMi_snake().setVisible(levelDataRv4.isSnakeGame());
-			f.getMi_snake().setVisible(levelDataRv6.isSnakeGame());
-			//configure access rights in multicast table
-			//configure state checkbox access in column 0 in jtable
-			getTableModel(Typ.SENDER_V4).setStateCheckboxEnabled(levelDataSv4.isStartStopCheckBox());
-			getTableModel(Typ.SENDER_V6).setStateCheckboxEnabled(levelDataSv6.isStartStopCheckBox());
-			getTableModel(Typ.RECEIVER_V4).setStateCheckboxEnabled(levelDataRv4.isStartStopCheckBox());
-			getTableModel(Typ.RECEIVER_V6).setStateCheckboxEnabled(levelDataRv6.isStartStopCheckBox());
-			//configure popup menu for jtable columns
-			getPanTabbed(Typ.SENDER_V4).setPopupsAllowed(levelDataSv4.isPopupsEnabled());
-			getPanTabbed(Typ.SENDER_V6).setPopupsAllowed(levelDataSv6.isPopupsEnabled());
-			getPanTabbed(Typ.RECEIVER_V4).setPopupsAllowed(levelDataRv4.isPopupsEnabled());
-			getPanTabbed(Typ.RECEIVER_V6).setPopupsAllowed(levelDataRv6.isPopupsEnabled());
-			f.setLevel(level);
-		}
-		else{
-			resetRBGroupTo(f.getLevel());
-		}
+		// TODO [MH] UserLevel soll geloescht werden
+//		//load userlevel data
+//		UserlevelData levelDataSv4 = mc.getUserLevel(Typ.SENDER_V4, level);
+//		UserlevelData levelDataSv6 = mc.getUserLevel(Typ.SENDER_V6, level);
+//		UserlevelData levelDataRv4 = mc.getUserLevel(Typ.RECEIVER_V4, level);
+//		UserlevelData levelDataRv6 = mc.getUserLevel(Typ.RECEIVER_V6, level);
+//		if(levelDataSv4 != null && levelDataSv6 !=null && levelDataRv4 != null && levelDataRv6!=null){
+//			//configure visibility settings for panels
+//			getPanTabbed(Typ.SENDER_V4).setPanels(	levelDataSv4.isConfigPanel(), 
+//													levelDataSv4.isControlPanel(), 
+//													levelDataSv4.isStatusBar(), 
+//													levelDataSv4.isConsole(),
+//													levelDataSv4.isGraph());
+//			getPanTabbed(Typ.SENDER_V6).setPanels(	levelDataSv6.isConfigPanel(), 
+//													levelDataSv6.isControlPanel(), 
+//													levelDataSv6.isStatusBar(), 
+//													levelDataSv6.isConsole(),
+//													levelDataSv6.isGraph());
+//			getPanTabbed(Typ.RECEIVER_V4).setPanels(levelDataRv4.isConfigPanel(), 
+//													levelDataRv4.isControlPanel(), 
+//													levelDataRv4.isStatusBar(), 
+//													levelDataRv4.isConsole(),
+//													levelDataRv4.isGraph());
+//			getPanTabbed(Typ.RECEIVER_V4).setPanels(levelDataRv6.isConfigPanel(), 
+//													levelDataRv6.isControlPanel(), 
+//													levelDataRv6.isStatusBar(), 
+//													levelDataRv6.isConsole(),
+//													levelDataRv6.isGraph());
+//			//configure visibility settings for control panel
+//			//configure visibility settings for start button
+//			/*getPanControl(Typ.SENDER_V4).getStart().setVisible(levelDataSv4.isStartButton());
+//			getPanControl(Typ.SENDER_V6).getStart().setVisible(levelDataSv6.isStartButton());
+//			getPanControl(Typ.RECEIVER_V4).getStart().setVisible(levelDataRv4.isStartButton());
+//			getPanControl(Typ.RECEIVER_V6).getStart().setVisible(levelDataRv6.isStartButton());
+//			//configure visibility settings for stop button
+//			getPanControl(Typ.SENDER_V4).getStop().setVisible(levelDataSv4.isStopButton());
+//			getPanControl(Typ.SENDER_V6).getStop().setVisible(levelDataSv6.isStopButton());
+//			getPanControl(Typ.RECEIVER_V4).getStop().setVisible(levelDataRv4.isStopButton());
+//			getPanControl(Typ.RECEIVER_V6).getStop().setVisible(levelDataRv6.isStopButton());
+//			//configure visibility settings for select all button
+//			getPanControl(Typ.SENDER_V4).getSelect_all().setVisible(levelDataSv4.isSelectAllButton());
+//			getPanControl(Typ.SENDER_V6).getSelect_all().setVisible(levelDataSv6.isSelectAllButton());
+//			getPanControl(Typ.RECEIVER_V4).getSelect_all().setVisible(levelDataRv4.isSelectAllButton());
+//			getPanControl(Typ.RECEIVER_V6).getSelect_all().setVisible(levelDataRv6.isSelectAllButton());
+//			//configure visibility settings for deselect all button
+//			getPanControl(Typ.SENDER_V4).getDeselect_all().setVisible(levelDataSv4.isDeselectAllButton());
+//			getPanControl(Typ.SENDER_V6).getDeselect_all().setVisible(levelDataSv6.isDeselectAllButton());
+//			getPanControl(Typ.RECEIVER_V4).getDeselect_all().setVisible(levelDataRv4.isDeselectAllButton());
+//			getPanControl(Typ.RECEIVER_V6).getDeselect_all().setVisible(levelDataRv6.isDeselectAllButton());
+//			//configure visibility settings for new multicast button*/
+//			getPanControl(Typ.SENDER_V4).getNewmulticast().setVisible(levelDataSv4.isNewButton());
+//			getPanControl(Typ.SENDER_V6).getNewmulticast().setVisible(levelDataSv6.isNewButton());
+//			getPanControl(Typ.RECEIVER_V4).getNewmulticast().setVisible(levelDataRv4.isNewButton());
+//			getPanControl(Typ.RECEIVER_V6).getNewmulticast().setVisible(levelDataRv6.isNewButton());
+//			//configure visibility settings for delete button
+//			getPanControl(Typ.SENDER_V4).getDelete().setVisible(levelDataSv4.isDeleteButton());
+//			getPanControl(Typ.SENDER_V6).getDelete().setVisible(levelDataSv6.isDeleteButton());
+//			getPanControl(Typ.RECEIVER_V4).getDelete().setVisible(levelDataRv4.isDeleteButton());
+//			getPanControl(Typ.RECEIVER_V6).getDelete().setVisible(levelDataRv6.isDeleteButton());
+//			//configure visibility settings for config panel
+//			//configure visibility settings for group ip address field
+//			getPanConfig(Typ.SENDER_V4).getPan_groupIPaddress().setVisible(levelDataSv4.isGroupIpField());
+//			getPanConfig(Typ.SENDER_V6).getPan_groupIPaddress().setVisible(levelDataSv6.isGroupIpField());
+//			getPanConfig(Typ.RECEIVER_V4).getPan_groupIPaddress().setVisible(levelDataRv4.isGroupIpField());
+//			getPanConfig(Typ.RECEIVER_V6).getPan_groupIPaddress().setVisible(levelDataRv6.isGroupIpField());
+//			//configure visibility settings for source ip address field
+//			getPanConfig(Typ.SENDER_V4).getPan_sourceIPaddress().setVisible(levelDataSv4.isSourceIpField());
+//			getPanConfig(Typ.SENDER_V6).getPan_sourceIPaddress().setVisible(levelDataSv6.isSourceIpField());
+//			//configure visibility settings for port field
+//			getPanConfig(Typ.SENDER_V4).getPan_udp_port().setVisible(levelDataSv4.isPortField());
+//			getPanConfig(Typ.SENDER_V6).getPan_udp_port().setVisible(levelDataSv6.isPortField());
+//			getPanConfig(Typ.RECEIVER_V4).getPan_udp_port().setVisible(levelDataRv4.isPortField());
+//			getPanConfig(Typ.RECEIVER_V6).getPan_udp_port().setVisible(levelDataRv6.isPortField());
+//			//configure visibility settings for TTL field
+//			getPanConfig(Typ.SENDER_V4).getPan_ttl().setVisible(levelDataSv4.isTtlField());
+//			getPanConfig(Typ.SENDER_V6).getPan_ttl().setVisible(levelDataSv6.isTtlField());
+//			//configure visibility settings for packetlength field
+//			getPanConfig(Typ.SENDER_V4).getPan_packetlength().setVisible(levelDataSv4.isPacketLengthField());
+//			getPanConfig(Typ.SENDER_V6).getPan_packetlength().setVisible(levelDataSv6.isPacketLengthField());
+//			//configure visibility settings for packetrate field
+//			getPanConfig(Typ.SENDER_V4).getPan_packetrate().setVisible(levelDataSv4.isPacketRateField());
+//			getPanConfig(Typ.SENDER_V6).getPan_packetrate().setVisible(levelDataSv6.isPacketRateField());
+//			//configure visibility settings for active button
+//			getPanConfig(Typ.SENDER_V4).getTb_active().setVisible(levelDataSv4.isActiveField());
+//			getPanConfig(Typ.SENDER_V6).getTb_active().setVisible(levelDataSv6.isActiveField());
+//			getPanConfig(Typ.RECEIVER_V4).getTb_active().setVisible(levelDataRv4.isActiveField());
+//			getPanConfig(Typ.RECEIVER_V6).getTb_active().setVisible(levelDataRv6.isActiveField());
+//			//configure visibility settings for enter button
+//			getPanConfig(Typ.SENDER_V4).getBt_enter().setVisible(levelDataSv4.isEnterField());
+//			getPanConfig(Typ.SENDER_V6).getBt_enter().setVisible(levelDataSv4.isEnterField());
+//			getPanConfig(Typ.RECEIVER_V4).getBt_enter().setVisible(levelDataSv4.isEnterField());
+//			getPanConfig(Typ.RECEIVER_V6).getBt_enter().setVisible(levelDataSv4.isEnterField());
+//			//configure visibility settings for menu items
+//			//configure visibility settings for load dialog
+//			f.getMi_loadconfig().setVisible(levelDataSv4.isLoadConfigDialog());
+//			f.getMi_loadconfig().setVisible(levelDataSv6.isLoadConfigDialog());
+//			f.getMi_loadconfig().setVisible(levelDataRv4.isLoadConfigDialog());
+//			f.getMi_loadconfig().setVisible(levelDataRv6.isLoadConfigDialog());
+//			//configure visibility settings for save dialog
+//			f.getMi_saveconfig().setVisible(levelDataSv4.isSaveConfigDialog());
+//			f.getMi_saveconfig().setVisible(levelDataSv6.isSaveConfigDialog());
+//			f.getMi_saveconfig().setVisible(levelDataRv4.isSaveConfigDialog());
+//			f.getMi_saveconfig().setVisible(levelDataRv6.isSaveConfigDialog());
+//			//configure visibility settings for userlevel dialog
+//			f.getM_scale().setVisible(levelDataSv4.isUserLevelRadioGrp());
+//			f.getM_scale().setVisible(levelDataSv6.isUserLevelRadioGrp());
+//			f.getM_scale().setVisible(levelDataRv4.isUserLevelRadioGrp());
+//			f.getM_scale().setVisible(levelDataRv6.isUserLevelRadioGrp());
+//			//configure visibility settings for autosave dialog
+//			f.getMi_autoSave().setVisible(levelDataSv4.isAutoSaveCheckbox());
+//			f.getMi_autoSave().setVisible(levelDataSv6.isAutoSaveCheckbox());
+//			f.getMi_autoSave().setVisible(levelDataRv4.isAutoSaveCheckbox());
+//			f.getMi_autoSave().setVisible(levelDataRv6.isAutoSaveCheckbox());
+//			//configure visibility settings for snake dialog
+//			f.getMi_snake().setVisible(levelDataSv4.isSnakeGame());
+//			f.getMi_snake().setVisible(levelDataSv6.isSnakeGame());
+//			f.getMi_snake().setVisible(levelDataRv4.isSnakeGame());
+//			f.getMi_snake().setVisible(levelDataRv6.isSnakeGame());
+//			//configure access rights in multicast table
+//			//configure state checkbox access in column 0 in jtable
+//			getTableModel(Typ.SENDER_V4).setStateCheckboxEnabled(levelDataSv4.isStartStopCheckBox());
+//			getTableModel(Typ.SENDER_V6).setStateCheckboxEnabled(levelDataSv6.isStartStopCheckBox());
+//			getTableModel(Typ.RECEIVER_V4).setStateCheckboxEnabled(levelDataRv4.isStartStopCheckBox());
+//			getTableModel(Typ.RECEIVER_V6).setStateCheckboxEnabled(levelDataRv6.isStartStopCheckBox());
+//			//configure popup menu for jtable columns
+//			getPanTabbed(Typ.SENDER_V4).setPopupsAllowed(levelDataSv4.isPopupsEnabled());
+//			getPanTabbed(Typ.SENDER_V6).setPopupsAllowed(levelDataSv6.isPopupsEnabled());
+//			getPanTabbed(Typ.RECEIVER_V4).setPopupsAllowed(levelDataRv4.isPopupsEnabled());
+//			getPanTabbed(Typ.RECEIVER_V6).setPopupsAllowed(levelDataRv6.isPopupsEnabled());
+//			f.setLevel(level);
+//		}
+//		else{
+//			resetRBGroupTo(f.getLevel());
+//		}
 	}
 	private void resetRBGroupTo(Userlevel level) {
-		//System.out.println("userlevel "+level);
-		switch(level){
-			case BEGINNER: f.getRb_beginner().setSelected(true); break;
-			case EXPERT: f.getRb_expert().setSelected(true); break;
-			case CUSTOM: f.getRb_custom().setSelected(true); break;
-		}
-		
+		// TODO [MH] UserLevel soll geloescht werden
+//		//System.out.println("userlevel "+level);
+//		switch(level){
+//			case BEGINNER: f.getRb_beginner().setSelected(true); break;
+//			case EXPERT: f.getRb_expert().setSelected(true); break;
+//			case CUSTOM: f.getRb_custom().setSelected(true); break;
+//		}
 	}
 	/**
-	 * Funktion welche Aufgerufen wird wenn eine Taste der Tastatur gedr�ckt wird.
+	 * Funktion welche Aufgerufen wird wenn eine Taste der Tastatur gedrueckt wird.
 	 */
 	public void keyPressed(KeyEvent arg0) {
 		switch(arg0.getKeyCode()){
@@ -2030,54 +2041,54 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Konfigurationsdatei.
 	 */
 	public void submitInputData(){
-		// TODO [MH] muss umgestellt werden
-		// was macht die Funktion eigentlich genau? oO
-			inputData_S4.setSelectedTab(getSelectedTab());
-			inputData_S6.setSelectedTab(getSelectedTab());
-			inputData_R4.setSelectedTab(getSelectedTab());
-			inputData_R6.setSelectedTab(getSelectedTab());
-			inputData_S4.setSelectedRowsArray(getSelectedRows(Typ.SENDER_V4));
-			inputData_S6.setSelectedRowsArray(getSelectedRows(Typ.SENDER_V6));
-			inputData_R4.setSelectedRowsArray(getSelectedRows(Typ.RECEIVER_V4));
-			inputData_R6.setSelectedRowsArray(getSelectedRows(Typ.RECEIVER_V6));
-			inputData_S4.setNetworkInterface(getPanConfig(Typ.SENDER_V4).getSelectedSourceIndex());
-			inputData_S6.setNetworkInterface(getPanConfig(Typ.SENDER_V6).getSelectedSourceIndex());
-			inputData_S4.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_S6.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_R4.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_R6.setSelectedUserlevel(f.getSelectedUserlevel());			
-			inputData_S4.setGroupadress(getPanConfig(Typ.SENDER_V4).getTf_groupIPaddress().getText());
-			inputData_S6.setGroupadress(getPanConfig(Typ.SENDER_V6).getTf_groupIPaddress().getText());	
-			inputData_R4.setGroupadress(getPanConfig(Typ.RECEIVER_V4).getTf_groupIPaddress().getText());
-			inputData_R6.setGroupadress(getPanConfig(Typ.RECEIVER_V6).getTf_groupIPaddress().getText());
-			inputData_S4.setPort(getPanConfig(Typ.SENDER_V4).getTf_udp_port().getText());
-			inputData_S6.setPort(getPanConfig(Typ.SENDER_V6).getTf_udp_port().getText());
-			inputData_R4.setPort(getPanConfig(Typ.RECEIVER_V4).getTf_udp_port().getText());
-			inputData_R6.setPort(getPanConfig(Typ.RECEIVER_V6).getTf_udp_port().getText());		
-			inputData_S4.setTtl(getPanConfig(Typ.SENDER_V4).getTf_ttl().getText());
-			inputData_S6.setTtl(getPanConfig(Typ.SENDER_V6).getTf_ttl().getText());			
-			inputData_S4.setPacketrate(getPanConfig(Typ.SENDER_V4).getTf_packetrate().getText());
-			inputData_S6.setPacketrate(getPanConfig(Typ.SENDER_V6).getTf_packetrate().getText());		
-			inputData_S4.setPacketlength(getPanConfig(Typ.SENDER_V4).getTf_udp_packetlength().getText());
-			inputData_S6.setPacketlength(getPanConfig(Typ.SENDER_V6).getTf_udp_packetlength().getText());		
-			inputData_S4.setActiveButton(getPanConfig(Typ.SENDER_V4).getTb_active().isSelected());
-			inputData_S6.setActiveButton(getPanConfig(Typ.SENDER_V6).getTb_active().isSelected());
-			inputData_R4.setActiveButton(getPanConfig(Typ.RECEIVER_V4).getTb_active().isSelected());
-			inputData_R6.setActiveButton(getPanConfig(Typ.RECEIVER_V6).getTb_active().isSelected());	
-			inputData_S4.setSelectedRows(getSelectedRows(Typ.SENDER_V4));
-			inputData_S6.setSelectedRows(getSelectedRows(Typ.SENDER_V6));
-			inputData_R4.setSelectedRows(getSelectedRows(Typ.RECEIVER_V4));
-			inputData_R6.setSelectedRows(getSelectedRows(Typ.RECEIVER_V6));
-			inputData_S4.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
-			inputData_S6.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
-			inputData_R4.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
-			inputData_R6.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+		// TODO [MH] Configaenderungen hier
+		// Hier sind die gesamten GUI Einstellungen auszulesen zum Speichern
+			inputData_S3.setSelectedTab(getSelectedTab());
+			inputData_S2.setSelectedTab(getSelectedTab());
+			inputData_R3.setSelectedTab(getSelectedTab());
+			inputData_R2.setSelectedTab(getSelectedTab());
+			inputData_S3.setSelectedRowsArray(getSelectedRows(Typ.L3_SENDER));
+			inputData_S2.setSelectedRowsArray(getSelectedRows(Typ.L2_SENDER));
+			inputData_R3.setSelectedRowsArray(getSelectedRows(Typ.L3_RECEIVER));
+			inputData_R2.setSelectedRowsArray(getSelectedRows(Typ.L2_RECEIVER));
+			inputData_S3.setNetworkInterface(getPanConfig(Typ.L3_SENDER).getSelectedSourceIndex());
+			inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());
+			inputData_S3.setSelectedUserlevel(f.getSelectedUserlevel());
+			inputData_S2.setSelectedUserlevel(f.getSelectedUserlevel());
+			inputData_R3.setSelectedUserlevel(f.getSelectedUserlevel());
+			inputData_R2.setSelectedUserlevel(f.getSelectedUserlevel());			
+			inputData_S3.setGroupadress(getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getText());
+			inputData_S2.setGroupadress(getPanConfig(Typ.L2_SENDER).getTf_groupIPaddress().getText());	
+			inputData_R3.setGroupadress(getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().getText());
+			inputData_R2.setGroupadress(getPanConfig(Typ.L2_RECEIVER).getTf_groupIPaddress().getText());
+			inputData_S3.setPort(getPanConfig(Typ.L3_SENDER).getTf_udp_port().getText());
+			inputData_S2.setPort(getPanConfig(Typ.L2_SENDER).getTf_udp_port().getText());
+			inputData_R3.setPort(getPanConfig(Typ.L3_RECEIVER).getTf_udp_port().getText());
+			inputData_R2.setPort(getPanConfig(Typ.L2_RECEIVER).getTf_udp_port().getText());		
+			inputData_S3.setTtl(getPanConfig(Typ.L3_SENDER).getTf_ttl().getText());
+			inputData_S2.setTtl(getPanConfig(Typ.L2_SENDER).getTf_ttl().getText());			
+			inputData_S3.setPacketrate(getPanConfig(Typ.L3_SENDER).getTf_packetrate().getText());
+			inputData_S2.setPacketrate(getPanConfig(Typ.L2_SENDER).getTf_packetrate().getText());		
+			inputData_S3.setPacketlength(getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().getText());
+			inputData_S2.setPacketlength(getPanConfig(Typ.L2_SENDER).getTf_udp_packetlength().getText());		
+			inputData_S3.setActiveButton(getPanConfig(Typ.L3_SENDER).getTb_active().isSelected());
+			inputData_S2.setActiveButton(getPanConfig(Typ.L2_SENDER).getTb_active().isSelected());
+			inputData_R3.setActiveButton(getPanConfig(Typ.L3_RECEIVER).getTb_active().isSelected());
+			inputData_R2.setActiveButton(getPanConfig(Typ.L2_RECEIVER).getTb_active().isSelected());	
+			inputData_S3.setSelectedRows(getSelectedRows(Typ.L3_SENDER));
+			inputData_S2.setSelectedRows(getSelectedRows(Typ.L2_SENDER));
+			inputData_R3.setSelectedRows(getSelectedRows(Typ.L3_RECEIVER));
+			inputData_R2.setSelectedRows(getSelectedRows(Typ.L2_RECEIVER));
+			inputData_S3.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+			inputData_S2.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+			inputData_R3.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+			inputData_R2.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
 			
 			Vector<UserInputData> packet = new Vector<UserInputData>();
-			packet.add(inputData_R4);
-			packet.add(inputData_S4);
-			packet.add(inputData_R6);
-			packet.add(inputData_S6);
+			packet.add(inputData_S3);
+			packet.add(inputData_R3);
+			packet.add(inputData_S2);
+			packet.add(inputData_R2);
 			mc.autoSave(packet);
 	}
 	/**
@@ -2088,15 +2099,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public UserInputData getUserInputData(Typ typ){
 		UserInputData ret = null;
 		switch(typ){
-		// TODO [MH] tbr
-//			case SENDER_V4: ret = inputData_S4; break;
-//			case SENDER_V6: ret = inputData_S6; break;
-//			case RECEIVER_V4: ret = inputData_R4; break;
-//			case RECEIVER_V6: ret = inputData_R6; break;
-			
-			case L3_SENDER: ret = inputData_L3; break;
+			case L3_SENDER: ret = inputData_S3; break;
 			case L3_RECEIVER: ret = inputData_R3; break;
-			// TODO L2 hinzufuegen
+			case L2_SENDER: ret = inputData_S2; break;
+			case L2_RECEIVER: ret = inputData_R2; break;
 		}
 		return ret;
 	}
@@ -2138,14 +2144,14 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		Vector<UserInputData> loaded = mc.loadAutoSave();
 		//System.out.println("loaded.size "+loaded.size());
 		if((loaded != null) && (loaded.size()==4)){
-			inputData_R4 = loaded.get(0);
-			inputData_S4 = loaded.get(1);
-			inputData_R6 = loaded.get(2);
-			inputData_S6 = loaded.get(3);		
-			loadAutoSavePart(inputData_R4, Typ.RECEIVER_V4);
-			loadAutoSavePart(inputData_S4, Typ.SENDER_V4);
-			loadAutoSavePart(inputData_R6, Typ.RECEIVER_V6);
-			loadAutoSavePart(inputData_S6, Typ.SENDER_V6);
+			inputData_S3 = loaded.get(0);
+			inputData_R3 = loaded.get(1);
+			inputData_S2 = loaded.get(2);
+			inputData_R2 = loaded.get(3);		
+			loadAutoSavePart(inputData_S3, Typ.L3_SENDER);
+			loadAutoSavePart(inputData_R3, Typ.L3_RECEIVER);
+			loadAutoSavePart(inputData_S2, Typ.L2_SENDER);
+			loadAutoSavePart(inputData_R2, Typ.L2_RECEIVER);
 			f.setLastConfigs(mc.getLastConfigs(), false);
 			//System.out.println("size: "+mc.getLastConfigs().size());
 		}
@@ -2160,10 +2166,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public void loadAutoSavePart(UserInputData data, Typ typ){
 		//System.out.println("typ: "+typ);
 		switch(data.getTyp()){
-			case RECEIVER_V4: f.getTabpane().setSelectedIndex(0); break;
-			case SENDER_V4: f.getTabpane().setSelectedIndex(1); break;
-			case RECEIVER_V6: f.getTabpane().setSelectedIndex(2); break;
-			case SENDER_V6: f.getTabpane().setSelectedIndex(3); break;
+			case L3_SENDER: f.getTabpane().setSelectedIndex(0); break;
+			case L3_RECEIVER: f.getTabpane().setSelectedIndex(1); break;
+			case L2_SENDER: f.getTabpane().setSelectedIndex(2); break;
+			case L2_RECEIVER: f.getTabpane().setSelectedIndex(3); break;
 			default:  f.getTabpane().setSelectedIndex(0);
 		}
 		f.setAutoSave((data.isAutoSaveEnabled()));
@@ -2177,7 +2183,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			//System.out.println("toggle bt");
 			setTBactive(true, typ);
 		}
-		if(typ == Typ.SENDER_V4 || typ == Typ.SENDER_V6){
+		if(typ == Typ.L3_SENDER){
 			//System.out.println("adapter index: "+data.getSourceAdressIndex());
 			getPanConfig(typ).getCb_sourceIPaddress().setSelectedIndex(data.getSourceAdressIndex());
 			//System.out.println("packetrate: "+data.getPacketrate());

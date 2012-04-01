@@ -32,7 +32,7 @@ public class MultiCastSenderTC {
 					averageIntTime		= 0,
 					packetLossPerSecond = 0,
 					jitter				= 0;
-	Typ				typ					= Typ.RECEIVER_V4;
+	Typ				typ					= Typ.L3_RECEIVER;
 	
 private void setupIPv4(){
 		
@@ -57,7 +57,7 @@ private void setupIPv4(){
 		averageIntTime		= 0;
 		packetLossPerSecond = 0;
 		jitter				= 0;
-		typ					= Typ.SENDER_V4;
+		typ					= Typ.L3_SENDER;
 	}
 	
 	private void setupIPv6(){
@@ -83,7 +83,7 @@ private void setupIPv4(){
 		averageIntTime		= 0;
 		packetLossPerSecond = 0;
 		jitter				= 0;
-		typ					= Typ.SENDER_V6;
+		typ					= Typ.L2_SENDER;
 	}
 	
 	public void testLauf(sendingMethod sm) {		

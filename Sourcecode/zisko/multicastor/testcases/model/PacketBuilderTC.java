@@ -23,7 +23,7 @@ public class PacketBuilderTC{
 	boolean			active				= false;
 	int		 		udpPort	 			= 4711;
 
-	Typ				typ					= Typ.RECEIVER_V4;
+	Typ				typ					= Typ.L3_RECEIVER;
 
 	//geprüfte Werte
 	String			hostID_normal		= "",

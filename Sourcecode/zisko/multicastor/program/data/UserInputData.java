@@ -51,12 +51,11 @@ public class UserInputData {
 		return activeButton;
 	}
 	public void setSelectedTab(Typ typ) {
-		// TODO [MH] aendern bzw wech damit
 		switch(typ){
-			case SENDER_V4: selectedTab = Typ.SENDER_V4.toString(); break;
-			case SENDER_V6: selectedTab = Typ.SENDER_V6.toString(); break;
-			case RECEIVER_V4: selectedTab = Typ.RECEIVER_V4.toString(); break;
-			case RECEIVER_V6: selectedTab = Typ.RECEIVER_V6.toString(); break;
+			case L3_SENDER: selectedTab = Typ.L3_SENDER.toString(); break;
+			case L2_SENDER: selectedTab = Typ.L2_SENDER.toString(); break;
+			case L3_RECEIVER: selectedTab = Typ.L3_RECEIVER.toString(); break;
+			case L2_RECEIVER: selectedTab = Typ.L2_RECEIVER.toString(); break;
 			case CONFIG: selectedTab = Typ.CONFIG.toString(); break;
 			default: selectedTab = Typ.UNDEFINED.toString(); break;
 		}
@@ -238,17 +237,17 @@ public class UserInputData {
 	}
 	public Typ getTyp(){
 		Typ ret = Typ.UNDEFINED;
-		if(selectedTab.equals(Typ.SENDER_V4.toString())){
-			ret = Typ.SENDER_V4;
+		if(selectedTab.equals(Typ.L3_SENDER.toString())){
+			ret = Typ.L3_SENDER;
 		}
-		else if(selectedTab.equals(Typ.SENDER_V6.toString())){
-			ret = Typ.SENDER_V6;
+		else if(selectedTab.equals(Typ.L2_SENDER.toString())){
+			ret = Typ.L2_SENDER;
 		}
-		else if(selectedTab.equals(Typ.RECEIVER_V4.toString())){
-			ret = Typ.RECEIVER_V4;
+		else if(selectedTab.equals(Typ.L3_RECEIVER.toString())){
+			ret = Typ.L3_RECEIVER;
 		}
-		else if(selectedTab.equals(Typ.RECEIVER_V6.toString())){
-			ret = Typ.RECEIVER_V6;
+		else if(selectedTab.equals(Typ.L2_RECEIVER.toString())){
+			ret = Typ.L2_RECEIVER;
 		}
 		return ret;
 	}

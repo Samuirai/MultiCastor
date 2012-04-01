@@ -334,7 +334,7 @@ public class MulticastController{
 
 	/**
 	 * Gibt ULD zu den entsprechenden Parametern zurueck.
-	 * @param typ Chooses tab like RECEIVER_V4,RECEIVER_V6,SENDER_V4,SENDER_V6
+	 * @param typ Chooses tab like L3_RECEIVER, L3_SENDER, L2_RECEIVER, L2_SENDER
 	 * @param userlevel Chooses userlevel like beginner,expert,custom
 	 */
 	public UserlevelData getUserLevel(MulticastData.Typ typ, UserlevelData.Userlevel userlevel) {	
@@ -406,18 +406,16 @@ public class MulticastController{
 	 * Speichert eine Konfigurationsdatei an den angegebenen Pfad. Hierbei werden nur die
 	 * Multicasts von Typen mit uebergebenem True gespeichert.
 	 * @param s Pfad zur Konfigurationsdatei
-	 * @param Sender_v4 Wenn <code>true</code> werden Multicasts vom Typ Sender_v4 gespeichert.
-	 * @param Sender_v6 Wenn <code>true</code> werden Multicasts vom Typ Sender_v6 gespeichert.
-	 * @param Receiver_v4 Wenn <code>true</code> werden Multicasts vom Typ Receiver_v4 gespeichert.
-	 * @param Receiver_v6 Wenn <code>true</code> werden Multicasts vom Typ Receiver_v6 gespeichert.
+	 * @param l3_sender Wenn <code>true</code> werden Multicasts vom Typ L3_SENDER gespeichert.
+	 * @param l3_receiver Wenn <code>true</code> werden Multicasts vom Typ L3_RECEIVER gespeichert.
 	 */
-	public void saveConfig(String s, boolean Sender_l3, boolean Receiver_l3) {
+	public void saveConfig(String s, boolean l3_sender, boolean l3_receiver) {
 		// Sammelt alle zu speichernden Multicasts in einem Vektor
 		Vector<MulticastData> v = new Vector<MulticastData>();
-		if(Sender_l3){
+		if(l3_sender){
 			v.addAll(mc_sender_l3);
 		}
-		if(Receiver_l3){
+		if(l3_receiver){
 			v.addAll(mc_receiver_l3);
 		}
 		saveConfig(s, false, v);
@@ -428,8 +426,8 @@ public class MulticastController{
 	 * Diese Funktion sollte 
 	 * @param s String to Configuration file
 	 */
-	public void loadConfigFile(String s, boolean Sender_v4, boolean Sender_v6, boolean Receiver_v4, boolean Receiver_v6){
-		loadConfig(s, false, Sender_v4, Sender_v6, Receiver_v4, Receiver_v6);
+	public void loadConfigFile(String s, boolean l3_sender, boolean l2_sender, boolean l3_receiver, boolean l2_receiver){
+		loadConfig(s, false, l3_sender, l2_sender, l3_receiver, l2_receiver);
 	}
 	
 	/**
@@ -470,12 +468,12 @@ public class MulticastController{
 	 * Laedt eine Konfigurationsdatei und fuegt markierte Multicasts hinzu.
 	 * @param path Pfad zur Konfigurationsdatei, die geladen werden soll.
 	 * @param complete Wenn hier true gesetzt ist, wird der Standardpfad genommen und MCD + UID + ULD geladen.
-	 * @param Sender_v4 Wenn true wird Sender_v4 geladen.
-	 * @param Sender_v6 Wenn true wird Sender_v6 geladen.
-	 * @param Receiver_v4 Wenn true wird Receiver_v4 geladen.
-	 * @param Receiver_v6 Wenn true wird Receiver_v4 geladen.
+	 * @param l3_sender Wenn true werden L3_SENDER geladen.
+	 * @param l2_sender Wenn true werden L2_SENDER geladen.
+	 * @param l3_receiver Wenn true werden L3_RECEIVER geladen.
+	 * @param l2_receiver Wenn true werden L2_RECEIVER geladen.
 	 */
-	private void loadConfig(String path, boolean complete, boolean Sender_v4, boolean Sender_v6, boolean Receiver_v4, boolean Receiver_v6){
+	private void loadConfig(String path, boolean complete, boolean l3_sender, boolean l2_sender, boolean l3_receiver, boolean l2_receiver){
 		final String p = "MultiCastor.xml";
 		// Diese Vektoren werden geladen
 		Vector<MulticastData> multicasts = new Vector<MulticastData>();
@@ -526,16 +524,17 @@ public class MulticastController{
 			}
 		}	    
 	    if(!skip){
-	    	 // F�ge Multicast hinzu
-	    	 for(MulticastData m : multicasts){
-	    		 if 	( 	((m.getTyp().equals(Typ.RECEIVER_V4)&&Receiver_v4	))||
-		 	    			((m.getTyp().equals(Typ.RECEIVER_V6)&&Receiver_v6	))||
-		 	    			((m.getTyp().equals(Typ.SENDER_V4)	&&Sender_v4		))||
-		 	    			((m.getTyp().equals(Typ.SENDER_V6)	&&Sender_v6		))
-		 	    		){
-	 	    		view_controller.addMC(m);
-	    		 }
-	    	 }
+	    	// Fuege Multicast hinzu
+	    	for(MulticastData m : multicasts){
+	    		if (
+	    			(m.getTyp().equals(Typ.L3_RECEIVER) && l3_receiver)||
+		 	    	(m.getTyp().equals(Typ.L2_RECEIVER) && l2_receiver)||
+		 	    	(m.getTyp().equals(Typ.L3_SENDER) && l3_sender)||
+		 	    	(m.getTyp().equals(Typ.L2_SENDER) && l2_sender)
+		 	    ){
+	    			view_controller.addMC(m);
+	    		}
+	    	}
 	    	 
 	 	    if(userlevelData.size() < 4){
 	 	    	// log("Error in loadConfigFile - ConfigFile did not contain 12 userLevelData objects (this is ignored for test purposes)");
@@ -611,7 +610,7 @@ public class MulticastController{
 	/**
 	 * 
 	 * Adds up the measuredPacketRate from MulticastSenders
-	 * @param typ Specifies wehter Sender_v4 or Sender_v6 is returned.
+	 * @param typ Specifies whether L2_SENDER or L3_SENDER is returned.
 	 * @return Sum of all sent packets. Returns 0 if typ is invalid.
 	 */
 	public int getPPSSender(MulticastData.Typ typ) {
@@ -622,6 +621,7 @@ public class MulticastController{
 				count += ((MulticastSenderInterface) mcMap_sender_l3.get(ms)).getMultiCastData().getPacketRateMeasured();
 			}
 		}	
+		// TODO Layer2
 		return count;
 	}
 	

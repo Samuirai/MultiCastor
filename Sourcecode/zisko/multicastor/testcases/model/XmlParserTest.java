@@ -176,8 +176,8 @@ public class XmlParserTest extends TestCase
 		assertEquals(32, v1.get(0).getTtl());
 		assertEquals(100, v1.get(0).getPacketLength());
 		assertEquals(20, v1.get(0).getPacketRateDesired());
-		assertEquals(MulticastData.Typ.SENDER_V4, v1.get(0).getTyp());
-		assertEquals(MulticastData.Typ.SENDER_V6, v1.get(1).getTyp());
+		assertEquals(MulticastData.Typ.L3_SENDER, v1.get(0).getTyp());
+		assertEquals(MulticastData.Typ.L2_SENDER, v1.get(1).getTyp());
 
 		assertEquals(UserlevelData.Userlevel.EXPERT, v2.get(0).getUserlevel());
 		assertEquals(true,v2.get(0).isActiveField());

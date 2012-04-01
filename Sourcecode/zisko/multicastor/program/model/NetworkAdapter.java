@@ -102,9 +102,9 @@ public abstract class NetworkAdapter {
 	}
 	
 	public static IPType getAddressType(String address) {
-		if (InputValidator.checkIPv4(address) != null) {
+		if (InputValidator.checkMC_IPv4(address) != null) {
 			return IPType.IPv4;
-		} else if (InputValidator.checkIPv6(address) != null) {
+		} else if (InputValidator.checkMC_IPv6(address) != null) {
 			return IPType.IPv6;
 		}
 		return null;

@@ -17,6 +17,7 @@ import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.InputValidator;
 import zisko.multicastor.program.model.NetworkAdapter;
+import zisko.multicastor.program.model.NetworkAdapter.IPType;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 /**
@@ -321,43 +322,28 @@ public class PanelMulticastConfig extends JPanel {
 	public void setBt_enter(JButton btEnter) {
 		bt_enter = btEnter;
 	}
-	public String getSourceIP(Typ typ, int i){
-		/*
-		 * TODO [MH/JT] neuen Typ einfuegen
-		 * Hier m�ssen die Networkadapter f�r den Kombinierten L3-Tab referenziert werden.
-		 * Hier m�ssen die Networkadapter f�r MMRP referenziert werden.
-		 */
-		// XXX [MH] hier gleich mal schauen
-		if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
+	public String getSourceIP(int i, IPType iptype){
+		// TODO Hier muessen die Networkadapter fuer MMRP referenziert werden.
+		if (iptype == IPType.IPv4) {
 			return NetworkAdapter.getipv4Adapters().get(i).toString().substring(1);
-		}
-		else{
+		} else if (iptype == IPType.IPv6) {
 			return NetworkAdapter.getipv6Adapters().get(i).toString().substring(1).split("%")[0];
 		}
+		return null;
 	}
-	public InetAddress getSelectedAddress(Typ typ, boolean isIPv4){
-		/*
-		 * TODO [MH/JT] neuen Typ einfuegen
-		 * Funktionale Anforderung: Wie soll denn die Eingabepr�fung im Kombitab sein
-		 * MMRP Eingabepr�fung erstellen.
-		 */
-		
-		/*if(typ==Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){
-			return InputValidator.checkIPv4(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
-		}
-		else{
-			return InputValidator.checkIPv6(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
-		}*/
-		
+
+	public InetAddress getSelectedAddress(Typ typ, IPType iptype){
 		// V1.5 [FH] Added L3 with IPv4 Stuff
+		/* [MH] Changed to iptype */
 		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
-			if(isIPv4)
-				return InputValidator.checkIPv4(getSourceIP(Typ.RECEIVER_V4, cb_sourceIPaddress.getSelectedIndex()-1));
+			if(iptype == IPType.IPv4)
+				return InputValidator.checkIPv4(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
 			else
-				return InputValidator.checkIPv6(getSourceIP(Typ.RECEIVER_V6, cb_sourceIPaddress.getSelectedIndex()-1));
-		//This is wrong, we need to fix this for MMRP when we do L2 Panels
+				return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
+		// TODO MMRP Eingabepruefung erstellen
+		// This is wrong, we need to fix this for MMRP when we do L2 Panels
 		else
-			return InputValidator.checkIPv6(getSourceIP(typ, cb_sourceIPaddress.getSelectedIndex()-1));
+			return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
 				
 		
 	}
