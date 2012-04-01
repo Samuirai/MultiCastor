@@ -33,22 +33,7 @@ public class FrameMain extends JFrame {
 	 * Das Tabpanel mit welchem man durch die Programmteile schalten kann.
 	 */
 	private DraggableTabbedPane tabpane;
-//	/**
-//	 *  Das IPv4Receiver Panel
-//	 */
-//	private PanelTabbed panel_rec_ipv4;
-//	/**
-//	 *  Das IPv4Sender Panel
-//	 */
-//	private PanelTabbed panel_sen_ipv4;
-//	/**
-//	 *  Das IPv6Receiver Panel
-//	 */
-//	private PanelTabbed panel_rec_ipv6;
-//	/**
-//	 *  Das IPv6Sender Panel
-//	 */
-//	private PanelTabbed panel_sen_ipv6;
+
 	/**
 	 
 	 *  Das Layer 2 Receiver Panel
@@ -135,7 +120,7 @@ public class FrameMain extends JFrame {
 	private String baseTitle;
 	
 	//TODO: maybe unused
-	// [MH] definitiv nicht, wird zB gebraucht, um die ActionListener bei den ganzen GUI Komponenten zu registrieren
+	// [MH] nutzt JT jetzt in reloadLanguage()
 	ViewController ctrl;
 	
 	/**

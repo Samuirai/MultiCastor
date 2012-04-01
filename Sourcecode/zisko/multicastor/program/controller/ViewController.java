@@ -1628,7 +1628,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem der Add Button gedr�ckt wurde
 	 */
 	private void pressBTAdd(Typ typ) {
-		// TODO [MH] Hier nochmal eine Methode, die ueberprueft, ob v4 und v6 mit packet length und netzwerk adapter passen
 		this.addMC(changeMCData(new MulticastData(), typ));
 		clearInput(typ);
 	}
@@ -2082,6 +2081,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Konfigurationsdatei.
 	 */
 	public void submitInputData(){
+		// TODO [MH] muss umgestellt werden
+		// was macht die Funktion eigentlich genau? oO
 			inputData_S4.setSelectedTab(getSelectedTab());
 			inputData_S6.setSelectedTab(getSelectedTab());
 			inputData_R4.setSelectedTab(getSelectedTab());

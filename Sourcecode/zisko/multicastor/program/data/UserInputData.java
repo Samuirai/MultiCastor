@@ -51,6 +51,7 @@ public class UserInputData {
 		return activeButton;
 	}
 	public void setSelectedTab(Typ typ) {
+		// TODO [MH] aendern bzw wech damit
 		switch(typ){
 			case SENDER_V4: selectedTab = Typ.SENDER_V4.toString(); break;
 			case SENDER_V6: selectedTab = Typ.SENDER_V6.toString(); break;

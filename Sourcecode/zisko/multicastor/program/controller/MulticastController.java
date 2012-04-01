@@ -722,9 +722,9 @@ public class MulticastController{
 		switch(multicastDataTyp){
 		/* v1.5 */ 
 			case L3_RECEIVER:
-			case L3_SENDER:
 			case RECEIVER_V4:
-			case RECEIVER_V6:
+			case RECEIVER_V6: vector = mc_receiver_l3; break;
+			case L3_SENDER:
 			case SENDER_V4:
 			case SENDER_V6: vector = mc_sender_l3; break;
 			/*
@@ -748,9 +748,9 @@ public class MulticastController{
 		switch(multicastDataTyp){
 			/* v1.5 */
 			case L3_RECEIVER:
-			case L3_SENDER:
 			case RECEIVER_V4:
-			case RECEIVER_V6:
+			case RECEIVER_V6: map = mcMap_receiver_l3; break;
+			case L3_SENDER:
 			case SENDER_V4:
 			case SENDER_V6: map = mcMap_sender_l3; break;
 			/*
