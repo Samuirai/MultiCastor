@@ -480,7 +480,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		if(selectedIndex != 0) {
 			if(typ == Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
-				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
+				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.TRUE));
 				if(typ==Typ.L3_SENDER){
 					input[0][1]=true;
 				} else {
@@ -489,7 +489,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		} else if(getSelectedRows(typ).length > 1 && configpart.getCb_sourceIPaddress().getItemAt(0).equals("...")){
 			if(typ==Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
-				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
+				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.TRUE));
 				if(typ==Typ.L3_SENDER){
 					input[0][1]=true;
 				} else {
@@ -501,7 +501,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				case L3_SENDER: input[0][1] = false;  break;
 				case L3_RECEIVER: input[1][1] = false;  break;
 			}
-			configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
+			configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.NEUTRAL));
 		}
 		checkInput(typ);
 	}
@@ -735,7 +735,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				isIPv4 || isIPv6 ||
 				(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))
 			) {
-				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.TRUE));
+				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.TRUE));
 				/* Lade die richtigen Netzwerkinterfaces */
 				if (isIPv4) {
 					insertNetworkAdapters(typ, true);
@@ -751,7 +751,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					input[1][0] = true;
 				}
 			} else {
-				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.FALSE));
+				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.FALSE));
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = false;
 					// TODO [MH] languagemanager
@@ -768,7 +768,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
-			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
+			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
 			// TODO [MH] languagemanager
@@ -1593,7 +1593,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getTf_packetrate().getDocument().removeDocumentListener(this);
 			getPanConfig(typ).getTf_udp_packetlength().getDocument().removeDocumentListener(this);
 			getPanConfig(typ).getTf_ttl().getDocument().removeDocumentListener(this);
-			getPanConfig(typ).getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.TRUE));
+			getPanConfig(typ).getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.TRUE));
 			getPanConfig(typ).getPan_packetrate().setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.TRUE));
 			getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
 			getPanConfig(typ).getPan_ttl().setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.TRUE));
@@ -1611,7 +1611,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		getPanConfig(typ).getTf_groupIPaddress().getDocument().removeDocumentListener(this);
 		getPanConfig(typ).getTf_udp_port().getDocument().removeDocumentListener(this);
-		getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.TRUE));
+		getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.TRUE));
 		getPanConfig(typ).getPan_udp_port().setBorder(MiscBorder.getBorder(BorderTitle.PORT, BorderType.TRUE));
 		getPanConfig(typ).getTf_groupIPaddress().setText("...");
 		getPanConfig(typ).getTf_udp_port().setText("...");

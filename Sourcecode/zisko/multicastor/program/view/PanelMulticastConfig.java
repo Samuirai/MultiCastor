@@ -157,7 +157,7 @@ public class PanelMulticastConfig extends JPanel {
 		add(pan_sourceIPaddress);
 		
 		//V1.5: Layer 2 und Layer 3 Tabs hinzugef�gt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
-		if(typ==Typ.SENDER_V4 || typ==Typ.SENDER_V6 || typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
+		if(typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 			
 			pan_packetrate=new JPanel();
 			pan_packetlength=new JPanel();
@@ -211,31 +211,13 @@ public class PanelMulticastConfig extends JPanel {
 		bt_active.setFocusable(false);
 		bt_active.addActionListener(ctrl);	
 		
-		if(typ == Typ.SENDER_V4 || typ==Typ.RECEIVER_V4){ 
-			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
-			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
-		}
 		//V1.5: Added new Tabs
-		else if (typ == Typ.L3_SENDER || typ==Typ.L3_RECEIVER){
-			/*
-			 * TODO [JT] neuen Typ anpassen
-			 * Hier gehoert kein IPv4 hin
-			 */
-			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4GROUP, BorderType.NEUTRAL));
-			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv4SOURCE, BorderType.NEUTRAL));
-		}
-		//V1.5: Added new Tabs
-		else if (typ == Typ.L2_SENDER || typ==Typ.L2_RECEIVER){
-			/*
-			 * TODO [JT] neuen Typ anpassen
-			 * Hier gehoert kein IPv4 hin
-			 */
+		if (typ == Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.NEUTRAL));
+		} else if (typ == Typ.L2_SENDER || typ == Typ.L2_RECEIVER){
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2Group, BorderType.NEUTRAL));
 			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2Source, BorderType.NEUTRAL));
-		}
-		else{ //Layer2
-			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6GROUP, BorderType.NEUTRAL));
-			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.IPv6SOURCE, BorderType.NEUTRAL));
 		}
 
 		tf_udp_port = new JTextField();		

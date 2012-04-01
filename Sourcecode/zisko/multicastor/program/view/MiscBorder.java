@@ -32,7 +32,7 @@ public class MiscBorder extends TitledBorder {
 	 *
 	 */
 	public enum BorderTitle{
-		IPv4GROUP, IPv4SOURCE, IPv6GROUP, IPv6SOURCE, PORT, RATE, LENGTH, TTL, L2Group, L2Source
+		L3GROUP, L3SOURCE, PORT, RATE, LENGTH, TTL, L2Group, L2Source
 	}
 	
 	private static Vector<TitledBorder> b_neutral = new Vector<TitledBorder>();
@@ -113,44 +113,38 @@ public class MiscBorder extends TitledBorder {
 		switch(bordertype){
 			case NEUTRAL:
 				switch(title){
-					case IPv4GROUP:		return b_neutral.get(0);
-					case IPv4SOURCE: 	return b_neutral.get(1);
+					case L3GROUP:		return b_neutral.get(0);
+					case L3SOURCE: 		return b_neutral.get(1);
 					case PORT: 			return b_neutral.get(2);
 					case RATE: 			return b_neutral.get(3);
 					case LENGTH: 		return b_neutral.get(4);
 					case TTL: 			return b_neutral.get(5);
-					case IPv6GROUP: 	return b_neutral.get(6);
-					case IPv6SOURCE: 	return b_neutral.get(7);
-					case L2Group: 		return b_neutral.get(8);
-					case L2Source: 		return b_neutral.get(9);
+					case L2Group: 		return b_neutral.get(6);
+					case L2Source: 		return b_neutral.get(7);
 				}
 				break;
 			case TRUE:
 				switch(title){
-					case IPv4GROUP: 	return b_true.get(0);
-					case IPv4SOURCE: 	return b_true.get(1);
+					case L3GROUP: 		return b_true.get(0);
+					case L3SOURCE: 		return b_true.get(1);
 					case PORT: 			return b_true.get(2);
 					case RATE: 			return b_true.get(3);
 					case LENGTH: 		return b_true.get(4);
 					case TTL: 			return b_true.get(5);
-					case IPv6GROUP: 	return b_true.get(6);
-					case IPv6SOURCE: 	return b_true.get(7);
-					case L2Group: 		return b_true.get(8);
-					case L2Source: 		return b_true.get(9);
+					case L2Group: 		return b_true.get(6);
+					case L2Source: 		return b_true.get(7);
 				}
 			break;
 			case FALSE:
 				switch(title){
-					case IPv4GROUP: 	return b_false.get(0);
-					case IPv4SOURCE: 	return b_false.get(1);
+					case L3GROUP: 		return b_false.get(0);
+					case L3SOURCE: 		return b_false.get(1);
 					case PORT: 			return b_false.get(2);
 					case RATE: 			return b_false.get(3);
 					case LENGTH: 		return b_false.get(4);
 					case TTL: 			return b_false.get(5);
-					case IPv6GROUP: 	return b_false.get(6);
-					case IPv6SOURCE: 	return b_false.get(7);
-					case L2Group: 		return b_false.get(8);
-					case L2Source: 		return b_false.get(9);
+					case L2Group: 		return b_false.get(6);
+					case L2Source: 		return b_false.get(7);
 			}
 		}
 		return null;
