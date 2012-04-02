@@ -197,7 +197,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   					if(InputValidator.checkIPv4(val) != null )
 							   					{
 							   						Inet4Address adr = ( Inet4Address ) InputValidator.checkIPv4(val);
-							   						if(InputValidator.checkv4Adapters(adr)==true){
+							   						if(InputValidator.checkAdapters(adr)==true){
 							   							mcd.setSourceIp(adr);
 							   						}
 							   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
@@ -210,7 +210,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 							   					else if(InputValidator.checkIPv6(val) != null )
 							   					{
 							   						Inet6Address adr = ( Inet6Address ) InputValidator.checkIPv6(val);
-							   						if(InputValidator.checkv6Adapters(adr)==true){
+							   						if(InputValidator.checkAdapters(adr)==true){
 							   							mcd.setSourceIp(adr);
 							   						}
 							   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER

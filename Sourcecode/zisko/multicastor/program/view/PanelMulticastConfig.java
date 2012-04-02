@@ -144,7 +144,7 @@ public class PanelMulticastConfig extends JPanel {
 		//V1.5 [FH] Use cb_sourceIPadress for all kinds
 		cb_sourceIPaddress = new WideComboBox();
 		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
-			// TODO [MH] Languagefilekram einbauen
+			// TODO @JT languagemanager (MH)
 			cb_sourceIPaddress.addItem("Please choose IP first");
 		} else {
 			cb_sourceIPaddress.addItem("");
@@ -174,7 +174,7 @@ public class PanelMulticastConfig extends JPanel {
 			pan_ttl.setBorder(MiscBorder.getBorder(BorderTitle.TTL, BorderType.NEUTRAL));
 			tf_udp_packetlength = new JTextField();
 			if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
-				// TODO [MH] languagemangager 
+				// TODO @JT languagemanager (MH) 
 				tf_udp_packetlength.setText("IP first");
 			}
 			tf_packetrate = new JTextField();

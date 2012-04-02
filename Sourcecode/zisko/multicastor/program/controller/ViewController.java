@@ -734,7 +734,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.FALSE));
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = false;
-					// TODO [MH] languagemanager
+					// TODO @JT languagemanager (MH)
 					getPanConfig(typ).getTf_udp_packetlength().setEnabled(false);
 					getPanConfig(typ).getTf_udp_packetlength().setText("IP first");
 				} else {
@@ -742,7 +742,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				}
 				/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 				getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
-				// TODO [MH] languagemanager
+				// TODO @JT languagemanager (MH)
 				getPanConfig(typ).getCb_sourceIPaddress().addItem("Please choose IP first");
 				
 			}
@@ -751,7 +751,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
-			// TODO [MH] languagemanager
+			// TODO @JT languagemanager (MH)
 			getPanConfig(typ).getCb_sourceIPaddress().addItem("Please choose IP first");
 			
 			if (typ == Typ.L3_SENDER) {
@@ -873,8 +873,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		checkInput(typ);
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn die Fenstergr��e ge�ndert wurde. 
-	 * Passt die Komponenten der GUI auf die neue Gr��e an.
+	 * Funktion welche aufgerufen wird wenn die Fenstergroesse geaendert wurde. 
+	 * Passt die Komponenten der GUI auf die neue Groesse an.
 	 */
 	private void frameResizeEvent() {
 		if(getSelectedTab() != Typ.UNDEFINED){
@@ -885,9 +885,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				getTable(getSelectedTab()).setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			}
 		}
-		//TODO [MH] muss hier nicht getPan_recGraph() aufgerufen werden?
 		if(getSelectedTab() == Typ.L2_RECEIVER || getSelectedTab() == Typ.L3_RECEIVER){
-			if(getPanTabbed(getSelectedTab()).getPan_graph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
+			if(getPanTabbed(getSelectedTab()).getPan_recGraph().isVisible() && getPanTabbed(getSelectedTab()).getTab_console().isVisible()){
 				getPanTabbed(getSelectedTab()).getPan_recGraph().resize(new Dimension(getFrame().getSize().width-262,100));
 			}
 		}
@@ -1161,53 +1160,41 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void itemStateChanged(ItemEvent arg0) {
 		if(arg0.getStateChange() == arg0.SELECTED){
-			
+			/* Auswahl eines Netzwerkinterfaces */
 			if(arg0.getSource() == getPanConfig(Typ.L3_SENDER).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.L3_SENDER);
-			}
-			if(arg0.getSource() == getPanConfig(Typ.L3_RECEIVER).getTf_sourceIPaddress()){
+			} else if(arg0.getSource() == getPanConfig(Typ.L3_RECEIVER).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.L3_RECEIVER);
 			}
-			// TODO [MH] kram rausschmeissen
-//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getLostPktsRB()){
-//				//System.out.println("RECEIVER_V4 - LostPacketsRB");
-//				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
-//			}
-//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getJitterRB()){
-//				//System.out.println("RECEIVER_V4 - JitterRB");
-//				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.JITTER);
-//			}
-//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().getMeasPktRtRB()){
-//				//System.out.println("RECEIVER_V4 - MeasPktRtRB");
-//				getPanTabbed(Typ.RECEIVER_V4).getPan_recGraph().selectionChanged(valueType.MEASPKT);
-//			}
-//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getLostPktsRB()){
-//				//System.out.println("RECEIVER_V6 - LostPacketsRB");
-//				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
-//			}
-//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getJitterRB()){
-//				//System.out.println("RECEIVER_V6 - JitterRB");
-//				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.JITTER);
-//			}
-//			else if(arg0.getSource() == getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().getMeasPktRtRB()){
-//				//System.out.println("RECEIVER_V6 - MeasPktRtRB");
-//				getPanTabbed(Typ.RECEIVER_V6).getPan_recGraph().selectionChanged(valueType.MEASPKT);
-//			}
-			else if(arg0.getSource() == f.getRb_beginner()){
-				changeUserLevel(Userlevel.BEGINNER);
-				//System.out.println("userlevel beginner");
+			/* Auswahl des Lost Packages Graphen im Receiver */
+			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getLostPktsRB()){
+				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
 			}
-			else if(arg0.getSource() == f.getRb_expert()){
-				changeUserLevel(Userlevel.EXPERT);
-				//System.out.println("userlevel expert");
+			/* Auswahl des Jitter Graphen im Receiver */
+			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getJitterRB()){
+				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.JITTER);
 			}
-			else if(arg0.getSource() == f.getRb_custom()){
-				changeUserLevel(Userlevel.CUSTOM);
-				//System.out.println("userlevel custom");
+			/* Auswahl des Measured Packages Graphen im Receiver */
+			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getMeasPktRtRB()){
+				System.out.println("RECEIVER_V4 - MeasPktRtRB");
+				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.MEASPKT);
 			}
-
-		}
-		else{
+			// TODO Layer2 Receiver Buttons einbauen
+			
+			// TODO UserLevel soll geloescht werden (MH)
+//			else if(arg0.getSource() == f.getRb_beginner()){
+//				changeUserLevel(Userlevel.BEGINNER);
+//				//System.out.println("userlevel beginner");
+//			}
+//			else if(arg0.getSource() == f.getRb_expert()){
+//				changeUserLevel(Userlevel.EXPERT);
+//				//System.out.println("userlevel expert");
+//			}
+//			else if(arg0.getSource() == f.getRb_custom()){
+//				changeUserLevel(Userlevel.CUSTOM);
+//				//System.out.println("userlevel custom");
+//			}
+		} else {
 			if(arg0.getSource() == f.getMi_autoSave()){
 				if(arg0.getStateChange() == ItemEvent.DESELECTED)
 				submitInputData();
@@ -1223,7 +1210,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param level Nutzerlevel welches eingestellt wurde in der Menubar.
 	 */
 	private void selectUserLevel(Userlevel level){
-		// TODO [MH] UserLevel soll geloescht werden
+		// TODO UserLevel soll geloescht werden (MH)
 //		switch(level){
 //		case BEGINNER: f.getRb_beginner().setSelected(true); break;
 //		case EXPERT: f.getRb_expert().setSelected(true);; break;
@@ -1232,7 +1219,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		}
 	}
 	private void changeUserLevel(Userlevel level) {
-		// TODO [MH] UserLevel soll geloescht werden
+		// TODO UserLevel soll geloescht werden (MH)
 //		//load userlevel data
 //		UserlevelData levelDataSv4 = mc.getUserLevel(Typ.SENDER_V4, level);
 //		UserlevelData levelDataSv6 = mc.getUserLevel(Typ.SENDER_V6, level);
@@ -1368,7 +1355,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		}
 	}
 	private void resetRBGroupTo(Userlevel level) {
-		// TODO [MH] UserLevel soll geloescht werden
+		// TODO UserLevel soll geloescht werden (MH)
 //		//System.out.println("userlevel "+level);
 //		switch(level){
 //			case BEGINNER: f.getRb_beginner().setSelected(true); break;
@@ -1672,7 +1659,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem der Add Button gedr�ckt wurde
 	 */
 	private void pressBTenter(Typ typ) {
-		// TODO [MH] @Jonas Hier failts in anderen Sprachen
+		// TODO @JT Hier failts in anderen Sprachen (MH)
 		if(getPanConfig(typ).getBt_enter().getText().equals("Add")){
 			pressBTAdd(typ);
 		}

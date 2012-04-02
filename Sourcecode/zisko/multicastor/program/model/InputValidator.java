@@ -42,27 +42,13 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Prüft ob ein valider IPv4-Netzwerkadapter mit der angegebenen Adresse existiert.
+	 * Prüft ob ein valider Netzwerkadapter (IPv4 oder IPv6) mit der angegebenen Adresse existiert.
 	 * @param address Das {@link java.net.InetAddress}-Objekt welches geprüft werden soll
-	 * @return boolean Existiert ein Interface mit der gegebenen Adresse true, falls kein Interface mit der Adresse existier false
+	 * @return boolean Existiert ein Interface mit der gegebenen Adresse true, falls kein Interface mit der Adresse existiert false
 	 */
-	// TODO [MH] mit naechster Methode zusammenlegen
-	public static Boolean checkv4Adapters(InetAddress address)
+	public static Boolean checkAdapters(InetAddress address)
 	{
-		if(NetworkAdapter.findAddressIndex(address.toString() )==-1)
-			return false;
-		else
-			return true;
-	}
-	
-	/**
-	 * Prüft ob ein valider IPv6-Netzwerkadapter mit der angegebenen Adresse existiert.
-	 * @param address Das {@link java.net.InetAddress}-Objekt welches geprüft werden soll
-	 * @return boolean Existiert ein Interface mit der gegebenen Adresse true, falls kein Interface mit der Adresse existier false
-	 */
-	public static Boolean checkv6Adapters(InetAddress address)
-	{
-		if(NetworkAdapter.findAddressIndex(address.toString())==-1)
+		if(NetworkAdapter.findAddressIndex(address.toString()) == -1)
 			return false;
 		else
 			return true;
