@@ -124,10 +124,10 @@ public class PanelMulticastConfig extends JPanel {
 			case L3_RECEIVER: tabpart=ctrl.getFrame().getPanel_rec_lay3(); break;
 		}
 		
-		if (tabpart!=null && tabpart.getTable().getSelectedRows().length==1){
+		if (tabpart!=null && tabpart.getTable().getSelectedRowCount()==1){
 			bt_enter.setText(lang.getProperty("button.change"));
 		}
-		else if (tabpart!=null && tabpart.getTable().getSelectedRows().length>1){
+		else if (tabpart!=null && tabpart.getTable().getSelectedRowCount()>1){
 			bt_enter.setText(lang.getProperty("button.changeAll"));
 		}
 		else{
