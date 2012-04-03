@@ -10,6 +10,7 @@ import java.util.Vector;
  * @author Daniel Becker
  *
  */
+@SuppressWarnings("serial")
 public class WideComboBox extends JComboBox{ 
  
     public WideComboBox() { 

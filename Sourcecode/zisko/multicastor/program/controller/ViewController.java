@@ -54,7 +54,6 @@ import zisko.multicastor.program.view.SnakeGimmick;
 import zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
-import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
 import zisko.multicastor.program.lang.LanguageManager;

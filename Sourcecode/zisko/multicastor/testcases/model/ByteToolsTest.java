@@ -2,8 +2,6 @@ package zisko.multicastor.testcases.model;
 
 import static org.junit.Assert.*;
 
-import java.awt.image.ConvolveOp;
-
 import org.junit.Before;
 import org.junit.Test;
 

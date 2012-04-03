@@ -6,7 +6,6 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 import zisko.multicastor.program.controller.ViewController;
-import zisko.multicastor.program.data.MulticastData.senderState;
 /**
  * Klasse welche die Farben in der Tabelle verwaltet, hierbei muss unterschieden werden ob Multicasts aktiv,
  * inaktiv, selektiert oder deselektiert sind. Weiterhin unterscheidet die Farbe der Tabellenzeilen ob ein
