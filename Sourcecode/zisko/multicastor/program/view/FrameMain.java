@@ -84,7 +84,11 @@ public class FrameMain extends JFrame {
 	private JRadioButtonMenuItem rb_custom;
 	private JRadioButtonMenuItem[] mi_languages;
 	private JMenuItem mi_saveconfig;
+	private JMenuItem mi_saveSelectedMc;
+	private JMenuItem mi_saveAllMc;
 	private JMenuItem mi_loadconfig;
+	private JMenuItem mi_loadAdditionalMc;
+	private JMenuItem mi_loadMc;
 	private JMenuItem mi_exit;
 	private JMenu m_language;
 	private JMenuItem mi_about;
@@ -188,9 +192,25 @@ public class FrameMain extends JFrame {
 			mi_saveconfig.setFont(MiscFont.getFont(0,14));
 			mi_saveconfig.addActionListener(ctrl);
 			
+			mi_saveSelectedMc = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
+			mi_saveSelectedMc.setFont(MiscFont.getFont(0,14));
+			mi_saveSelectedMc.addActionListener(ctrl);
+			
+			mi_saveAllMc = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/save.png")));
+			mi_saveAllMc.setFont(MiscFont.getFont(0,14));
+			mi_saveAllMc.addActionListener(ctrl);
+			
 			mi_loadconfig = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
 			mi_loadconfig.setFont(MiscFont.getFont(0,14));
 			mi_loadconfig.addActionListener(ctrl);
+			
+			mi_loadAdditionalMc = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
+			mi_loadAdditionalMc.setFont(MiscFont.getFont(0,14));
+			mi_loadAdditionalMc.addActionListener(ctrl);
+			
+			mi_loadMc = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
+			mi_loadMc.setFont(MiscFont.getFont(0,14));
+			mi_loadMc.addActionListener(ctrl);
 			
 			mi_profile1 = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/load.png")));
 			mi_profile1.setFont(MiscFont.getFont(0,14));
@@ -315,7 +335,11 @@ public class FrameMain extends JFrame {
 			m_options.add(mi_setTitle);
 			m_options.add(mi_autoSave);
 			m_menu.add(mi_saveconfig);
+			m_menu.add(mi_saveAllMc);
+			m_menu.add(mi_saveSelectedMc);
 			m_menu.add(mi_loadconfig);
+			m_menu.add(mi_loadMc);
+			m_menu.add(mi_loadAdditionalMc);
 			mb_menubar.add(m_menu);
 			mb_menubar.add(m_options);
 			mb_menubar.add(m_info);
@@ -327,7 +351,11 @@ public class FrameMain extends JFrame {
 		mi_setTitle.setText(lang.getProperty("mi.changeWindowTitle"));	
 		m_language.setText(lang.getProperty("mi.language"));
 		mi_saveconfig.setText(lang.getProperty("mi.saveConfiguration"));
+		mi_saveAllMc.setText(lang.getProperty("mi.saveAllMc"));
+		mi_saveSelectedMc.setText(lang.getProperty("mi.saveSelectedMc"));
 		mi_loadconfig.setText(lang.getProperty("mi.loadConfiguration"));
+		mi_loadMc.setText(lang.getProperty("mi.loadMc"));
+		mi_loadAdditionalMc.setText(lang.getProperty("mi.loadAdditionalMc"));
 		mi_profile1.setText("mi.errorFileNotFound");
 		mi_profile2.setText("mi.errorFileNotFound");
 		mi_profile3.setText("mi.errorFileNotFound");
@@ -774,5 +802,17 @@ public class FrameMain extends JFrame {
 
 	public boolean isPaneDel() {
 		return paneDel;
+	}
+	public JMenuItem getMi_saveSelectedMc() {
+		return mi_saveSelectedMc;
+	}
+	public JMenuItem getMi_saveAllMc() {
+		return mi_saveAllMc;
+	}
+	public JMenuItem getMi_loadAdditionalMc() {
+		return mi_loadAdditionalMc;
+	}
+	public JMenuItem getMi_loadMc() {
+		return mi_loadMc;
 	}
 }

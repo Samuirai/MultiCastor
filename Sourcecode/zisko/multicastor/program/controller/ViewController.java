@@ -188,11 +188,29 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			//System.out.println("Saving!");
 			f.getFc_save().toggle();
 		}
+		
+		else if(e.getSource()==f.getMi_saveAllMc()){
+			//TODO JT Neues Feature!
+		}
+		
+		else if(e.getSource()==f.getMi_saveSelectedMc()){
+			//TODO JT Neues Feature!
+		}
+		
 		else if(e.getSource()==f.getMi_loadconfig()){
 			//System.out.println("Loading!");
 			f.getFc_load().toggle();
 			setColumnSettings(getUserInputData(getSelectedTab()), getSelectedTab());
 		}
+		
+		else if(e.getSource()==f.getMi_loadMc()){
+			//TODO MH Neues Feature!
+		}
+		
+		else if(e.getSource()==f.getMi_loadAdditionalMc()){
+			//TODO JT Neues Feature!
+		}
+		
 		else if(e.getSource()==f.getMi_snake()){
 			if(getSelectedTab()!=Typ.UNDEFINED && getSelectedTab()!=Typ.CONFIG){
 				if(getFrame().getPanelPart(getSelectedTab()).getPan_graph().runSnake)
