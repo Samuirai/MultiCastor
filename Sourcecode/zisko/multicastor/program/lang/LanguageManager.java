@@ -147,6 +147,14 @@ public class LanguageManager extends Properties{
 		"warning.longUpdateTime",
 		"warning.invalidNetAdapter",
 		"toolTip.closeThisTab",
+		"toolTip.mcAddressRange",
+		"toolTip.ipFirst",
+		"toolTip.specifyUDPPort",
+		"toolTip.specifyTTL",
+		"toolTip.specifyPacketRate",
+		"toolTip.specifyPacketLength",
+		"toolTip.selectNetInterface",
+		"toolTip.selectMacAddress",
 		"message.setNewTitle"
 	};
 	

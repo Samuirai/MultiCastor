@@ -120,6 +120,14 @@ warning.longUpdateTime	 =Updating the user interface takes very long. Consider t
 
 warning.invalidNetAdapter=Invalid Network Adapter. Network Interface has been set to localhost.
 
-toolTip.closeThisTab	 =close this tab
+toolTip.closeThisTab		=close this tab
+toolTip.mcAddressRange		=Select a Multicast IP Address, either IPv4 or IPv6
+toolTip.ipFirst				=Specify the IP address first, then select an interface
+toolTip.specifyUDPPort		=Specify an UDP port
+toolTip.specifyTTL			=Specify the time to live
+toolTip.specifyPacketRate	=Specify the packetrate
+toolTip.specifyPacketLength	=Specify the packetlength
+toolTip.selectNetInterface	=Select a network interface for multicast
+toolTip.selectMacAddress	=Select a multicast MAC Address
 
 message.setNewTitle		 =Please enter a new title

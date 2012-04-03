@@ -120,6 +120,14 @@ warning.longUpdateTime	 =Die Aktualisierung des GUI dauert sehr lange. Konsultie
 
 warning.invalidNetAdapter=Ungültiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.
 
-toolTip.closeThisTab	 =schließe diese Registerkarte
+toolTip.closeThisTab	 	=schließe diese Registerkarte
+toolTip.mcAddressRange		=Wählen sie eine Multicast IP Adresse (IPV4 oder IPV6)
+toolTip.ipFirst				=Geben sie erst eine IP Adresse an und wählen sie dann das Netzwerkinterace
+toolTip.specifyUDPPort		=Geben sie den UDP Port an
+toolTip.specifyTTL			=Geben sie die Lebenszeit an
+toolTip.specifyPacketRate	=Spezifizieren sie die Paketrate
+toolTip.specifyPacketLength	=Spezifizieren sie die Paketlänge
+toolTip.selectNetInterface	=Wählen sie ein Netzwerkinterface für Multicast
+toolTip.selectMacAddress	=Wählen sie eine Multicast Mac Adresse
 
 message.setNewTitle		 =Bitte geben sie einen neuen Titel ein

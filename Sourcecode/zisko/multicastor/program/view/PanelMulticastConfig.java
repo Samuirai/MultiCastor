@@ -41,6 +41,7 @@ public class PanelMulticastConfig extends JPanel {
 	private LanguageManager lang;
 	private MiscBorder mainBorder;
 	private ViewController ctrl;
+	private Typ typ;
 	
 	public WideComboBox getCb_sourceIPaddress() {
 		return cb_sourceIPaddress;
@@ -52,6 +53,7 @@ public class PanelMulticastConfig extends JPanel {
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
 		this.ctrl=ctrl;
+		this.typ=typ;
 		lang=LanguageManager.getInstance();
 		setBorder(mainBorder = new MiscBorder(lang.getProperty("miscBorder.mcConfig")));
 		setLayout(null);
@@ -84,31 +86,31 @@ public class PanelMulticastConfig extends JPanel {
 		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			tf_groupIPaddress.setToolTipText(
 				"<html>" +
-				"Select a Multicast IP Address, either IPv4 or IPv6.<br />" +
-				"IPv4: 224.0.0.0 to 239.255.255.255<br />" +
-				"IPv6: FF00:: to FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF</html>"
+				lang.getProperty("toolTip.mcAddressRange")+"<br />" +
+				"IPv4: 224.0.0.0 - 239.255.255.255<br />" +
+				"IPv6: FF00:: - FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF</html>"
 			);
-			cb_sourceIPaddress.setToolTipText("Specify the IP address first, then select an interface");
-			tf_udp_port.setToolTipText("Specify an UDP port (1 to 65535).");
+			cb_sourceIPaddress.setToolTipText(lang.getProperty("toolTip.ipFirst"));
+			tf_udp_port.setToolTipText(lang.getProperty("toolTip.specifyUDPPort")+" (1 - 65535).");
 			
 			if (typ == Typ.L3_SENDER) {
-				tf_ttl.setToolTipText("Specify the time to live (1 to 32)");
-				tf_packetrate.setToolTipText("Specify the packetrate (1 to 65535)");
+				tf_ttl.setToolTipText(lang.getProperty("toolTip.specifyTTL")+" (1 - 32)");
+				tf_packetrate.setToolTipText(lang.getProperty("toolTip.specifyPacketRate")+" (1 - 65535)");
 				tf_udp_packetlength.setToolTipText(
 					"<html>" +
-					"Specify the packetlength<br />" +
-					"IPv4: 52 to 65507<br />" +
-					"IPv6: 52 to 65527" +
+					lang.getProperty("toolTip.specifyPacketLength")+"<br />" +
+					"IPv4: 52 - 65507<br />" +
+					"IPv6: 52 - 65527" +
 					"</html>"
 				);
 			}
 		} else if (typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER) {
-			tf_groupIPaddress.setToolTipText("Select a multicast MAC Address (80:00:00:00:00:00 to ff:ff:ff:ff:ff:fe)");
-			cb_sourceIPaddress.setToolTipText("Select a network interface for multicast");
+			tf_groupIPaddress.setToolTipText(lang.getProperty("toolTip.selectMacAddress")+" (80:00:00:00:00:00 - ff:ff:ff:ff:ff:fe)");
+			cb_sourceIPaddress.setToolTipText(lang.getProperty("toolTip.selectNetInterface"));
 			
 			if(typ == Typ.L2_SENDER) {
-				tf_packetrate.setToolTipText("Specify the packetrate (1 to 65535)");
-				tf_udp_packetlength.setToolTipText("Specfiy the packetlength (64 to 1520 Byte)");
+				tf_packetrate.setToolTipText(lang.getProperty("toolTip.specifyPacketRate")+" (1 - 65535)");
+				tf_udp_packetlength.setToolTipText(lang.getProperty("toolTip.specifyPacketLength")+" (64 - 1520 Byte)");
 			}
 		}
 	}
@@ -134,6 +136,8 @@ public class PanelMulticastConfig extends JPanel {
 		
 		bt_active.setText(lang.getProperty("button.inactive"));
 		mainBorder.setTitle(lang.getProperty("miscBorder.mcConfig"));
+		
+		setToolTips(typ);
 	}
 	
 	/**
