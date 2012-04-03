@@ -2033,7 +2033,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Konfigurationsdatei.
 	 */
 	public void submitInputData(){
-		// TODO [MH] Configaenderungen hier
+		// TODO [MH] GUIConfigaenderungen hier
 		// Hier sind die gesamten GUI Einstellungen auszulesen zum Speichern
 			inputData_S3.setSelectedTab(getSelectedTab());
 			inputData_S2.setSelectedTab(getSelectedTab());
