@@ -40,7 +40,6 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 
-import zisko.multicastor.program.view.FrameFileChooser;
 import zisko.multicastor.program.view.FrameMain;
 import zisko.multicastor.program.view.MiscBorder;
 import zisko.multicastor.program.view.MiscFont;
@@ -566,7 +565,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private void clearInput(Typ typ){
 		if(initFinished){
-			//System.out.println("clearinput");
 			getPanConfig(typ).getTf_groupIPaddress().setText("");
 			getPanConfig(typ).getTf_udp_port().setText("");
 			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
@@ -730,6 +728,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem das Group IP Adress Feld ge�ndert wurde.
 	 */
 	private void docEventTFgrp(Typ typ){
+		// TODO [MH] umschreiben zu NetworkAdapter.getAdressType
 		boolean isIPv4 = InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null;
 		boolean isIPv6 = InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()) != null; 
 		
@@ -1435,11 +1434,17 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0],typ).getGroupIp().toString().substring(1));
 			tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());
 
+			IPType iptype = NetworkAdapter.getAddressType(tabpart.getPan_config().getTf_groupIPaddress().getText());
+			if (iptype == IPType.IPv4) {
+				insertNetworkAdapters(typ, true);
+			} else if (iptype == IPType.IPv6) {
+				insertNetworkAdapters(typ, false);
+			}
 			tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
-				NetworkAdapter.findAddressIndex(getMCData(selectedRows[0],typ).getSourceIp().toString())+1
+				NetworkAdapter.findAddressIndex(getMCData(selectedRows[0],typ).getSourceIp().toString().substring(1))+1
 			);
 			
-			if(typ==Typ.L3_SENDER){
+			if(typ == Typ.L3_SENDER){
 				tabpart.getPan_config().getTf_ttl().setText(""+getMCData(selectedRows[0],typ).getTtl());;
 				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());;
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());;
@@ -1471,18 +1476,18 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
         int ret = chooser.showOpenDialog(f);
         
         if (ret == JFileChooser.APPROVE_OPTION) {
-        	loadConfig(chooser.getSelectedFile().toString(), incremental);
+        	loadMulticastConfig(chooser.getSelectedFile().toString(), incremental);
         }
 	}
 	
-	private void loadConfig(String path, boolean incremental) {
+	private void loadMulticastConfig(String path, boolean incremental) {
 		if(!incremental){
 			deleteAllMulticasts(Typ.L3_SENDER);
 			deleteAllMulticasts(Typ.L2_SENDER);
 			deleteAllMulticasts(Typ.L3_RECEIVER);
 			deleteAllMulticasts(Typ.L2_RECEIVER);
 		}
-		mc.loadMulticastConfig(path, true);
+		mc.loadMulticastConfig(path, false);
 	}
 	@Override
 	/**

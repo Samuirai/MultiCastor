@@ -48,7 +48,7 @@ public class InputValidator {
 	 */
 	public static Boolean checkAdapters(InetAddress address)
 	{
-		if(NetworkAdapter.findAddressIndex(address.toString()) == -1)
+		if(NetworkAdapter.findAddressIndex(address.toString().substring(1)) == -1)
 			return false;
 		else
 			return true;

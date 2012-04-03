@@ -196,7 +196,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    				if(!val.isEmpty()) {
 				   					if(InputValidator.checkIPv4(val) != null) {
 				   						Inet4Address adr = ( Inet4Address ) InputValidator.checkIPv4(val);
-				   						if(InputValidator.checkAdapters(adr)==true){
+				   						if(InputValidator.checkAdapters(adr)==true) {
 				   							mcd.setSourceIp(adr);
 				   						}
 				   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
