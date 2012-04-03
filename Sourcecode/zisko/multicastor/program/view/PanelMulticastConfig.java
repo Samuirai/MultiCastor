@@ -40,6 +40,7 @@ public class PanelMulticastConfig extends JPanel {
 	private JButton bt_enter;
 	private LanguageManager lang;
 	private MiscBorder mainBorder;
+	private ViewController ctrl;
 	
 	public WideComboBox getCb_sourceIPaddress() {
 		return cb_sourceIPaddress;
@@ -50,6 +51,7 @@ public class PanelMulticastConfig extends JPanel {
 	 * @param typ Gibt an zu welchem Programmteil das Panel gehï¿½rt.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
+		this.ctrl=ctrl;
 		lang=LanguageManager.getInstance();
 		setBorder(mainBorder = new MiscBorder(lang.getProperty("miscBorder.mcConfig")));
 		setLayout(null);
@@ -112,8 +114,25 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	
 	public void reloadLanguage(){
+		PanelTabbed tabpart = null;
+		
+		//TODO @SK/FH Hier muss noch L2 dazu??? -> Ändert bei Sprachwechsel Buttonbeschriftung abhängig davon welcher Tab gerade ausgewählt ist.
+		switch(ctrl.getSelectedTab()){
+			case L3_SENDER: tabpart=ctrl.getFrame().getPanel_sen_lay3(); break;
+			case L3_RECEIVER: tabpart=ctrl.getFrame().getPanel_rec_lay3(); break;
+		}
+		
+		if (tabpart!=null && tabpart.getTable().getSelectedRows().length==1){
+			bt_enter.setText(lang.getProperty("button.change"));
+		}
+		else if (tabpart!=null && tabpart.getTable().getSelectedRows().length>1){
+			bt_enter.setText(lang.getProperty("button.changeAll"));
+		}
+		else{
+			bt_enter.setText(lang.getProperty("button.add"));
+		}
+		
 		bt_active.setText(lang.getProperty("button.inactive"));
-		bt_enter.setText(lang.getProperty("button.add"));
 		mainBorder.setTitle(lang.getProperty("miscBorder.mcConfig"));
 	}
 	
