@@ -394,13 +394,7 @@ public class MulticastController{
 		saveCompleteConfig();
 	}
 	
-	/**
-	 * Loads data from autoSave() method.
-	 * @return Vector of UserInputData objects. This Vector contains between one and four objects. One for each tab in View at most.
-	 */
-	Vector<UserInputData> loadAutoSave(){	// noch bei Daniel nachhoeren ob es ok ist, wenn da ein leerer Vector zur�ck kommt!!!!!!!!!
-		return userInputData;
-	}
+
 
 	/**
 	 * Speichert eine Konfigurationsdatei an den angegebenen Pfad. Hierbei werden nur die
@@ -419,15 +413,6 @@ public class MulticastController{
 			v.addAll(mc_receiver_l3);
 		}
 		saveConfig(s, false, v);
-	}
-	
-	/**
-	 * Laedt die Konfigurationsdatei am angegebenen Pfad. Fehlermeldungen werden ausgegeben.
-	 * Diese Funktion sollte 
-	 * @param s String to Configuration file
-	 */
-	public void loadConfigFile(String s, boolean l3_sender, boolean l2_sender, boolean l3_receiver, boolean l2_receiver){
-		loadConfig(s, false, l3_sender, l2_sender, l3_receiver, l2_receiver);
 	}
 	
 	/**
@@ -465,23 +450,58 @@ public class MulticastController{
 	}
 	
 	/**
+	 * Laedt die ULD-Objekte aus dem JAR-file.
+	 */
+	private void defaultUserlevelDataLaden(){
+		try {
+			xml_parser.loadDefaultULD(defaultValuesUserlevelData, userlevelDataDefault);
+		} catch (Exception e) { // darf nicht passieren
+			logger.log(Level.SEVERE, "Default UserlevelData could not be loaded.");		
+//			System.out.println(((WrongConfigurationException) e).getErrorMessage());
+//			e.printStackTrace();
+//			System.out.println(e.getClass());
+		}
+	}
+		
+	/**
+	 * Loads data from autoSave() method.
+	 * @return Vector of UserInputData objects. This Vector contains between one and four objects. One for each tab in View at most.
+	 */
+	Vector<UserInputData> loadAutoSave(){	// noch bei Daniel nachhoeren ob es ok ist, wenn da ein leerer Vector zur�ck kommt!!!!!!!!!
+		return userInputData;
+	}
+	
+	// TODO [MH] tbr
+//	/**
+//	 * Laedt die Konfigurationsdatei am angegebenen Pfad. Fehlermeldungen werden ausgegeben.
+//	 * Diese Funktion sollte 
+//	 * @param s String to Configuration file
+//	 */
+//	public void loadConfigFile(String s, boolean l3_sender, boolean l2_sender, boolean l3_receiver, boolean l2_receiver){
+//		loadConfig(s, false, l3_sender, l2_sender, l3_receiver, l2_receiver);
+//	}
+
+	
+	public void loadDefaultMulticastConfig() {
+		loadMulticastConfig("", true);
+	}
+	
+	/**
 	 * Laedt eine Konfigurationsdatei und fuegt markierte Multicasts hinzu.
 	 * @param path Pfad zur Konfigurationsdatei, die geladen werden soll.
-	 * @param complete Wenn hier true gesetzt ist, wird der Standardpfad genommen und MCD + UID + ULD geladen.
-	 * @param l3_sender Wenn true werden L3_SENDER geladen.
-	 * @param l2_sender Wenn true werden L2_SENDER geladen.
-	 * @param l3_receiver Wenn true werden L3_RECEIVER geladen.
-	 * @param l2_receiver Wenn true werden L2_RECEIVER geladen.
+	 * @param useDefaultXML Wenn hier true gesetzt ist, wird der Standardpfad genommen und MCD + UID + ULD geladen.
 	 */
-	private void loadConfig(String path, boolean complete, boolean l3_sender, boolean l2_sender, boolean l3_receiver, boolean l2_receiver){
-		final String p = "MultiCastor.xml";
-		// Diese Vektoren werden geladen
+	public void loadMulticastConfig(String path, boolean useDefaultXML){
+		// TODO [MH] ternaerer Operator nutzen
+		final String defaultXML = "MultiCastor.xml";
+
+		/* Nach dem Laden stehen hier alle MulticastData Objecte drin */
 		Vector<MulticastData> multicasts = new Vector<MulticastData>();
 		String message = new String();
 		boolean skip = false;
-		if(complete){
+		if(useDefaultXML){
 			try {
-				 xml_parser.loadConfig(p,multicasts,userlevelData,userInputData,lastConfigs);
+				 xml_parser.loadMultiCastConfig(defaultXML, multicasts);
 				 logger.log(Level.INFO, "Default Configurationfile loaded.");
 			} catch (Exception e) {
 				if(e instanceof FileNotFoundException){
@@ -502,7 +522,7 @@ public class MulticastController{
 			}
 		} else {
 			try {
-				 xml_parser.loadConfig(path,multicasts,userlevelData);
+				 xml_parser.loadMultiCastConfig(path, multicasts);
 				 logger.log(Level.INFO, "Configurationfile loaded: "+path);
 			} catch (Exception e) {
 				if(e instanceof FileNotFoundException){
@@ -523,59 +543,27 @@ public class MulticastController{
 				logger.log(Level.WARNING, message);
 			}
 		}	    
-	    if(!skip){
+	    if(!skip) {
 	    	// Fuege Multicast hinzu
 	    	for(MulticastData m : multicasts){
 	    		if (
-	    			(m.getTyp().equals(Typ.L3_RECEIVER) && l3_receiver)||
-		 	    	(m.getTyp().equals(Typ.L2_RECEIVER) && l2_receiver)||
-		 	    	(m.getTyp().equals(Typ.L3_SENDER) && l3_sender)||
-		 	    	(m.getTyp().equals(Typ.L2_SENDER) && l2_sender)
+	    			m.getTyp().equals(Typ.L3_RECEIVER) ||
+		 	    	m.getTyp().equals(Typ.L2_RECEIVER) ||
+		 	    	m.getTyp().equals(Typ.L3_SENDER) ||
+		 	    	m.getTyp().equals(Typ.L2_SENDER)
 		 	    ){
 	    			view_controller.addMC(m);
 	    		}
 	    	}
-	    	 
-	 	    if(userlevelData.size() < 4){
-	 	    	// log("Error in loadConfigFile - ConfigFile did not contain 12 userLevelData objects (this is ignored for test purposes)");
-	 	    	logger.log(Level.INFO,"In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.");
-	 	    }
+	    	
+	    	// TODO [MH] tbr
+//	 	    if(userlevelData.size() < 4){
+//	 	    	// log("Error in loadConfigFile - ConfigFile did not contain 12 userLevelData objects (this is ignored for test purposes)");
+//	 	    	logger.log(Level.INFO,"In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.");
+//	 	    }
 	    }
-	    view_controller.loadAutoSave();
-	}
-	
-	/**
-	 * Fuegt zum lastConfigs-Vektor einen Pfad hinzu
-	 * @param path Pfad zur Konfigurationsdatei
-	 */
-	private void addLastConfigs(String path){
-		if(lastConfigs.size()<3){
-			lastConfigs.add(0,path);
-		} else {
-			lastConfigs.remove(2);
-			lastConfigs.add(0,path);
-		}
-	}
-	
-	/**
-	 * Laedt die Configurationsdatei, die im gleichen Ordner wie MultiCastor liegt.
-	 */
-	public void loadCompleteConfig(){
-		loadConfig("", true, true, true, true, true);
-	}
-	
-	/**
-	 * Laedt die ULD-Objekte aus dem JAR-file.
-	 */
-	private void defaultUserlevelDataLaden(){
-		try {
-			xml_parser.loadDefaultULD(defaultValuesUserlevelData, userlevelDataDefault);
-		} catch (Exception e) { // darf nicht passieren
-			logger.log(Level.SEVERE, "Default UserlevelData could not be loaded.");		
-//			System.out.println(((WrongConfigurationException) e).getErrorMessage());
-//			e.printStackTrace();
-//			System.out.println(e.getClass());
-		}
+	    // TODO [MH] GUIConfigLoad woanders hin
+//	    view_controller.loadAutoSave();
 	}
 	
 	/**
@@ -589,10 +577,9 @@ public class MulticastController{
 	 */
 	public void loadConfigWithoutGUI(String path) throws FileNotFoundException, SAXException, IOException, WrongConfigurationException{
 		Vector<MulticastData> v = new Vector<MulticastData>();
-		Vector<UserlevelData> u = new Vector<UserlevelData>(); // wird nicht wirklich genutzt.	
-		xml_parser.loadConfig(path,v,u);
-		if(v!=null){
-			for(MulticastData m : v){
+		xml_parser.loadMultiCastConfig(path, v);
+		if(v != null){
+			for (MulticastData m : v){
 				//System.out.println("Found Multicast: " + m);
 				addMC(m); // hier vllt. nur adden wenn man auch starten will, da das leider nicht mehr geht
 			/*	if(m.isActive()){ // Startet auf aktiv gesetzte Multicasts aus der Konfigurationsdatei
@@ -600,6 +587,19 @@ public class MulticastController{
 					startMC(m);
 				} */
 			}
+		}
+	}
+	
+	/**
+	 * Fuegt zum lastConfigs-Vektor einen Pfad hinzu
+	 * @param path Pfad zur Konfigurationsdatei
+	 */
+	private void addLastConfigs(String path){
+		if(lastConfigs.size()<3){
+			lastConfigs.add(0,path);
+		} else {
+			lastConfigs.remove(2);
+			lastConfigs.add(0,path);
 		}
 	}
 	

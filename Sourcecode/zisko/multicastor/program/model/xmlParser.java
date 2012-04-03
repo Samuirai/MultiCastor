@@ -71,220 +71,223 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		this.logger = logger;
 	}
 	
-	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
-	{
-		Document doc = parseDocument(pfad);
-			    
-		/*
-		 * Ab hier die Daten aus dem XML 
-		 * ausgelesen und in Vektor Objekte gespeichert.
-		 * Die Daten werden in folgender Reihe ausgelesen
-		 * 1. MultiCastData (<mc> im XML ) in den Vektor v1
-		 * 2. UserLevelData (<ud> im XML ) in den Vektor v2
-		 * 3. Pfade  ( <Paths> im XML ) in den Vektor v3
-		 */
+	@Override
+	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException {
+		Document doc = parseDocument(path);
 		
-		if(v1 != null){
-			loadMulticastData(doc, v1);
+		if (v != null) {
+			loadMulticastData(doc, v);
 		}
-		if(v2 != null){
-			loadUserlevelData(doc, v2);
-		}
-		if(v3 != null){
-			loadUserInputData(doc,v3);
-		}
-		if(v3 != null){
-			loadPathData(doc, v4);
-		}
-		
 	}
 	
-	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
-	{
-		loadConfig(pfad, v1, v2, null, null);
-	}
+//	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
+//	{
+//		Document doc = parseDocument(pfad);
+//			    
+//		/*
+//		 * Ab hier die Daten aus dem XML 
+//		 * ausgelesen und in Vektor Objekte gespeichert.
+//		 * Die Daten werden in folgender Reihe ausgelesen
+//		 * 1. MultiCastData (<mc> im XML ) in den Vektor v1
+//		 * 2. UserLevelData (<ud> im XML ) in den Vektor v2
+//		 * 3. Pfade  ( <Paths> im XML ) in den Vektor v3
+//		 */
+//		
+//		if(v1 != null){
+//			loadMulticastData(doc, v1);
+//		}
+//		if(v2 != null){
+//			loadUserlevelData(doc, v2);
+//		}
+//		if(v3 != null){
+//			loadUserInputData(doc,v3);
+//		}
+//		if(v3 != null){
+//			loadPathData(doc, v4);
+//		}
+//		
+//	}
+//	
+//	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
+//	{
+//		loadConfig(pfad, v1, v2, null, null);
+//	}
 	
-	private void loadMulticastData(Document doc, Vector<MulticastData> v1) throws WrongConfigurationException
-	{    
-			    //********************************************************
-			    // Lese die MultiCast Konfigurationsdaten aus dem XML
-			    //********************************************************
-		
-			    //Suche den Tag Multicasts
-			    NodeList multicasts = doc.getElementsByTagName("Multicasts");
-			    
-			    //Der Tag "Multicasts" ist nur 1 Mal vorhanden,
-			    //wenn das XML korrekt ist
-			    if(multicasts.getLength()==1)
-			    {
-			    	//Lösche bisherige Einstellungen
-				    v1.clear();
-				    
-			    	//Erstelle neues MulticastData Objekt
-			    	MulticastData mcd;
-			    	
-			    	//Finde alle ChildNodes von Multicasts
-			    	//Diese sind L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER oder UNDEFINED
-			    	NodeList mcList = multicasts.item(0).getChildNodes();
-			    	
-			    	//Zähle alle Multicast Tags
-			    	int mcNummer = 0;
-			    	
-			    	//Iteration L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
-			    	for(int i=0; i<mcList.getLength(); i++) {   
-			    		//Evaluiere nur L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
-			    		if(mcList.item(i).getNodeName().equals("#text")) {
-			    			//System.out.println("raus:"+mcList.item(i).getNodeName());
-			    			continue;
-			    		}
-			    		mcNummer++;
-			    		
-			    		//System.out.println("NODENAME:"+mcList.item(i).getNodeName());
-			    		//System.out.println("NR"+(mcNummer));
-			    		
-			    		mcd = new MulticastData();
-			    		Node configNode;
-				    	Element configValue;
-				    	
-			    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
-			    		NodeList configList=mcList.item(i).getChildNodes();
-			    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
-			    		for(int j=0; j<configList.getLength(); j++)
-			    		{
-				    		configNode=configList.item(j);
+	private void loadMulticastData(Document doc, Vector<MulticastData> v) throws WrongConfigurationException {    
+	    //********************************************************
+	    // Lese die MultiCast Konfigurationsdaten aus dem XML
+	    //********************************************************
 
-				    		if(configNode.getNodeType()== Node.ELEMENT_NODE)
-					    	{
-					    		configValue = (Element)configNode;
-					    		String val = configValue.getTextContent();
-					    		String stag = configValue.getTagName();
-					    		mcdTag tag = mcdTag.valueOf(stag);
-					    			
-					    		switch(tag) {
-					    			case active: 
-					    				if(val.equals("true")) {
-				    						mcd.setActive(true);
-				    						break;
-				    					} else {
-				    						mcd.setActive(false);
-				    						break;
-				    					}
-					    			case groupIp: 
-					    				if(!val.isEmpty()) {
-						   					if(InputValidator.checkMC_IPv4(val) != null )
-						   					{	
-						   						Inet4Address adr = ( Inet4Address ) InputValidator.checkMC_IPv4(val);
-						   						mcd.setGroupIp(adr);
-						   						break;
-						   					}
-						   					else if(InputValidator.checkMC_IPv6(val) != null )
-						   					{
-						   						Inet6Address adr = ( Inet6Address ) InputValidator.checkMC_IPv6(val);
-						   						mcd.setGroupIp(adr);
-						   						break;
-						   					}
-						   					else{
-						   						throwWrongContentException(stag,val,mcNummer);
-					    					}
-				    					} else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-				    						throwEmptyContentException(stag, val, mcNummer);
-				    					}
-					    			case sourceIp: 
-					    				if(!val.isEmpty()) {
-						   					if(InputValidator.checkIPv4(val) != null) {
-						   						Inet4Address adr = ( Inet4Address ) InputValidator.checkIPv4(val);
-						   						if(InputValidator.checkAdapters(adr)==true){
-						   							mcd.setSourceIp(adr);
-						   						}
-						   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
-						   							adr = ( Inet4Address ) InputValidator.checkIPv4("127.0.0.1");
-						   							mcd.setSourceIp(adr);
-						   						}
-						   						break;
-						   					}
-						   					else if(InputValidator.checkIPv6(val) != null )
-						   					{
-						   						Inet6Address adr = ( Inet6Address ) InputValidator.checkIPv6(val);
-						   						if(InputValidator.checkAdapters(adr)==true){
-						   							mcd.setSourceIp(adr);
-						   						}
-						   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
-						   							adr = ( Inet6Address ) InputValidator.checkIPv6("::1");
-						   							mcd.setSourceIp(adr);
-						   						}
-						   						break;
-						   					}
-						   					else{
-						   						throwWrongContentException(stag, val, mcNummer);
-					    					}
-					    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-					    					throwEmptyContentException(stag, val, mcNummer);
-					    				}
-					    			case udpPort: 
-					    				if(!val.isEmpty()) {
-				    						if(InputValidator.checkPort(val)>0)
-				    							mcd.setUdpPort(Integer.parseInt(val)); 
-				    						else{
-				    							throwWrongContentException(stag, val, mcNummer);
-					    					}
-				    						break;
-					    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-					    					throwEmptyContentException(stag, val, mcNummer);
-					    				}
-					    			case packetLength: 
-					    				if(!val.isEmpty()){
-						    				if(InputValidator.checkIPv4PacketLength(val) > 0 || InputValidator.checkIPv6PacketLength(val) > 0)
-						    					mcd.setPacketLength(Integer.parseInt(val)); 
-						    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						    					throwWrongContentException(stag, val, mcNummer);
-					    					}
-						    				break;
-						    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						    				throwEmptyContentException(stag, val, mcNummer);
-				    					}
-					    			case ttl: 
-					    				if(!val.isEmpty()){
-						    				if(InputValidator.checkTimeToLive(val)>0)
-						    						mcd.setTtl(Integer.parseInt(val)); 
-						    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						    					throwWrongContentException(stag, val, mcNummer);
-					    					}
-						    				break;
-						    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						    				throwEmptyContentException(stag, val, mcNummer);
-				    					}
-					    			case packetRateDesired: 
-					    				if(!val.isEmpty()){
-						    				if(InputValidator.checkPacketRate(val)>0)
-						    						mcd.setPacketRateDesired(Integer.parseInt(val)); 
-						    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						    					throwWrongContentException(stag, val, mcNummer);
-					    					}
-						    				break;
-						    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-						    				throwEmptyContentException(stag, val, mcNummer);
-				    					}
-					    			case typ: 
-					    				if(!val.isEmpty()) {
-					    					MulticastData.Typ typ = MulticastData.Typ.valueOf(val);
-					    					if(typ != null){
-					    						mcd.setTyp(typ);
-					    					}
-					    					else{
-					    						throwWrongContentException(stag, val, mcNummer);
-					    					}
-					    					break;
-					    				} else if (mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
-					    					throwEmptyContentException(stag, val, mcNummer);
-				    					}
-					    		}
-					    	} //end of if
-			    		}//end of for
-			    		v1.add(mcd);
-			    	}//end of for
-			    }//end of if
+	    //Suche den Tag Multicasts
+		NodeList multicasts = doc.getElementsByTagName("Multicasts");
+	    
+	    //Der Tag "Multicasts" ist nur 1 Mal vorhanden,
+	    //wenn das XML korrekt ist
+	    if(multicasts.getLength()==1) {
+	    	//Lösche bisherige Einstellungen
+		    v.clear();
+	    	//Erstelle neues MulticastData Objekt
+	    	MulticastData mcd;
+	    	//Finde alle ChildNodes von Multicasts
+	    	//Diese sind L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER oder UNDEFINED
+	    	NodeList mcList = multicasts.item(0).getChildNodes();
+	    	
+	    	//Zähle alle Multicast Tags
+	    	int mcNummer = 0;
+	    	
+	    	//Iteration L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
+	    	for(int i=0; i<mcList.getLength(); i++) {   
+	    		//Evaluiere nur L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
+	    		if(mcList.item(i).getNodeName().equals("#text")) {
+	    			//System.out.println("raus:"+mcList.item(i).getNodeName());
+	    			continue;
+	    		}
+	    		mcNummer++;
+	    		
+	    		//System.out.println("NODENAME:"+mcList.item(i).getNodeName());
+	    		//System.out.println("NR"+(mcNummer));
+	    		
+	    		mcd = new MulticastData();
+	    		Node configNode;
+		    	Element configValue;
+		    	
+	    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
+	    		NodeList configList=mcList.item(i).getChildNodes();
+	    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+	    		for(int j=0; j<configList.getLength(); j++) {
+		    		configNode=configList.item(j);
+
+		    		if(configNode.getNodeType()== Node.ELEMENT_NODE) {
+			    		configValue = (Element)configNode;
+			    		String val = configValue.getTextContent();
+			    		String stag = configValue.getTagName();
+			    		mcdTag tag = mcdTag.valueOf(stag);
+			    			
+			    		switch(tag) {
+			    			case active: 
+			    				if(val.equals("true")) {
+		    						mcd.setActive(true);
+		    						break;
+		    					} else {
+		    						mcd.setActive(false);
+		    						break;
+		    					}
+			    			case groupIp: 
+			    				if(!val.isEmpty()) {
+				   					if(InputValidator.checkMC_IPv4(val) != null )
+				   					{	
+				   						Inet4Address adr = ( Inet4Address ) InputValidator.checkMC_IPv4(val);
+				   						mcd.setGroupIp(adr);
+				   						break;
+				   					}
+				   					else if(InputValidator.checkMC_IPv6(val) != null )
+				   					{
+				   						Inet6Address adr = ( Inet6Address ) InputValidator.checkMC_IPv6(val);
+				   						mcd.setGroupIp(adr);
+				   						break;
+				   					}
+				   					else{
+				   						throwWrongContentException(stag,val,mcNummer);
+			    					}
+		    					} else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+		    						throwEmptyContentException(stag, val, mcNummer);
+		    					}
+			    			case sourceIp: 
+			    				if(!val.isEmpty()) {
+				   					if(InputValidator.checkIPv4(val) != null) {
+				   						Inet4Address adr = ( Inet4Address ) InputValidator.checkIPv4(val);
+				   						if(InputValidator.checkAdapters(adr)==true){
+				   							mcd.setSourceIp(adr);
+				   						}
+				   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
+				   							adr = ( Inet4Address ) InputValidator.checkIPv4("127.0.0.1");
+				   							mcd.setSourceIp(adr);
+				   						}
+				   						break;
+				   					}
+				   					else if(InputValidator.checkIPv6(val) != null )
+				   					{
+				   						Inet6Address adr = ( Inet6Address ) InputValidator.checkIPv6(val);
+				   						if(InputValidator.checkAdapters(adr)==true){
+				   							mcd.setSourceIp(adr);
+				   						}
+				   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
+				   							adr = ( Inet6Address ) InputValidator.checkIPv6("::1");
+				   							mcd.setSourceIp(adr);
+				   						}
+				   						break;
+				   					}
+				   					else{
+				   						throwWrongContentException(stag, val, mcNummer);
+			    					}
+			    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+			    					throwEmptyContentException(stag, val, mcNummer);
+			    				}
+			    			case udpPort: 
+			    				if(!val.isEmpty()) {
+		    						if(InputValidator.checkPort(val)>0)
+		    							mcd.setUdpPort(Integer.parseInt(val)); 
+		    						else{
+		    							throwWrongContentException(stag, val, mcNummer);
+			    					}
+		    						break;
+			    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+			    					throwEmptyContentException(stag, val, mcNummer);
+			    				}
+			    			case packetLength: 
+			    				if(!val.isEmpty()){
+				    				if(InputValidator.checkIPv4PacketLength(val) > 0 || InputValidator.checkIPv6PacketLength(val) > 0)
+				    					mcd.setPacketLength(Integer.parseInt(val)); 
+				    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				    					throwWrongContentException(stag, val, mcNummer);
+			    					}
+				    				break;
+				    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				    				throwEmptyContentException(stag, val, mcNummer);
+		    					}
+			    			case ttl: 
+			    				if(!val.isEmpty()){
+				    				if(InputValidator.checkTimeToLive(val)>0)
+				    						mcd.setTtl(Integer.parseInt(val)); 
+				    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				    					throwWrongContentException(stag, val, mcNummer);
+			    					}
+				    				break;
+				    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				    				throwEmptyContentException(stag, val, mcNummer);
+		    					}
+			    			case packetRateDesired: 
+			    				if(!val.isEmpty()){
+				    				if(InputValidator.checkPacketRate(val)>0)
+				    						mcd.setPacketRateDesired(Integer.parseInt(val)); 
+				    				else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				    					throwWrongContentException(stag, val, mcNummer);
+			    					}
+				    				break;
+				    			}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				    				throwEmptyContentException(stag, val, mcNummer);
+		    					}
+			    			case typ: 
+			    				if(!val.isEmpty()) {
+			    					MulticastData.Typ typ = MulticastData.Typ.valueOf(val);
+			    					if(typ != null){
+			    						mcd.setTyp(typ);
+			    					}
+			    					else{
+			    						throwWrongContentException(stag, val, mcNummer);
+			    					}
+			    					break;
+			    				} else if (mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+			    					throwEmptyContentException(stag, val, mcNummer);
+		    					}
+			    		} // end of switch
+			    	} //end of if
+	    		}//end of for
+	    		v.add(mcd);
+	    	}//end of for
+	    }//end of if
 	}	
 
 

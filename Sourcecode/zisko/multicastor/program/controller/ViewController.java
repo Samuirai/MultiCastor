@@ -266,15 +266,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getActionCommand().equals("PopupCheckBox")){
 			popUpCheckBoxPressed();
 		}
-		else if(e.getActionCommand().equals("lastConfig1")){
-			loadConfig(f.getLastConfigs().get(0), true, true, true, true, true);
-		}
-		else if(e.getActionCommand().equals("lastConfig2")){
-			loadConfig(f.getLastConfigs().get(1), true, true, true, true, true);
-		}
-		else if(e.getActionCommand().equals("lastConfig3")){
-			loadConfig(f.getLastConfigs().get(2), true, true, true, true, true);
-		}
 		autoSave();
 	}
 	/**
@@ -1443,22 +1434,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 	}
 	/**
-	 * Funktion welche ausgel�st wird, wenn der User versucht eine Konfigurationsdatei mit dem "Datei Laden"
+	 * Funktion welche ausgeloest wird, wenn der User versucht eine Konfigurationsdatei mit dem "Datei Laden"
 	 * Dialog zu laden.
 	 */
 	private void loadFileEvent(ActionEvent e) {
+		// TODO [MH] hier ansetzen fuer normalen FileChooser
+		// hier auch das incrementell ansetzen
 		if(e.getActionCommand().equals("ApproveSelection")){
 			FrameFileChooser fc_load = getFrame().getFc_load();
-			// TODO Fuer Layer2 anpassen
-			loadConfig(	fc_load.getSelectedFile(),
-						fc_load.isCbSenderL3Selected(),
-//						fc_load.isCbSenderL2Selected(),
-						false,
-						fc_load.isCbReceiverL3Selected(),
-//						fc_load.isCbReceiverL2Selected(),
-						false,
-						fc_load.isCbIncrementalSelected()
-			);
+			loadConfig(fc_load.getSelectedFile(), false);
 
 			fc_load.getChooser().rescanCurrentDirectory();
 			fc_load.toggle();
@@ -1467,23 +1451,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getFrame().getFc_load().toggle();
 		}
 	}
-	private void loadConfig(String s, boolean sl3, boolean sl2, boolean rl3, boolean rl2, boolean incremental) {
-		if(incremental){
-			//System.out.println("incremental selected");
-			if(sl3){
-				deleteAllMulticasts(Typ.L3_SENDER);
-			}
-			if(sl2){
-				deleteAllMulticasts(Typ.L2_SENDER);
-			}
-			if(rl3){
-				deleteAllMulticasts(Typ.L3_RECEIVER);
-			}
-			if(rl2){
-				deleteAllMulticasts(Typ.L2_RECEIVER);
-			}	
+	
+	private void loadConfig(String path, boolean incremental) {
+		if(!incremental){
+			deleteAllMulticasts(Typ.L3_SENDER);
+			deleteAllMulticasts(Typ.L2_SENDER);
+			deleteAllMulticasts(Typ.L3_RECEIVER);
+			deleteAllMulticasts(Typ.L2_RECEIVER);
 		}
-		mc.loadConfigFile(s,sl3,sl2,rl3,rl2);
+		mc.loadMulticastConfig(path, false);
 	}
 	@Override
 	/**
