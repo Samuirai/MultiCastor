@@ -398,6 +398,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    }
 			 }		 
 	
+	//TODO @[CW] Hier müsste Userlevel noch raus!
 	private void loadUserInputData(Document doc, Vector<UserInputData> v3) throws SAXException, FileNotFoundException, IOException
 	{
 		
@@ -561,70 +562,74 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}
 	
 	private void saveMulticastData(Document doc, Element root, Vector<MulticastData> v1)
-	{	//********************************************************
-	    // Schreibe die MultiCast Konfigurationsdaten in das XML
-	    //********************************************************
+	{ 	// ********************************************************
+		// Schreibe die MultiCast Konfigurationsdaten in das XML
+		// ********************************************************
 
-		 //Erzeugt Root Element für die MultiCast Konfigurationen
-         Element multicasts = doc.createElement("Multicasts");
-         root.appendChild(multicasts);
-         
-        //Für alle verschiedenen Konfigurationen
-	         for(int count=0; count<v1.size();count++)
-	         {
-	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-	        	 //Füge dementsprechend ein Kind Element hinzu
-	        	 MulticastData.Typ typ = v1.get(count).getTyp();
-	        	 Element mcdTyp = doc.createElement(typ.toString());
-	        	 multicasts.appendChild(mcdTyp);
-	        	 
-		         //Für alle vorhandenen Einstellungen
-	        	 for(mcdTag tag : mcdTag.values())
-		         {
-		        	 Element mcdElement = doc.createElement(tag.toString());
-		        	 Text text =doc.createTextNode("");
-		             Integer converter = new Integer(0);
-		             
-		        	 switch(tag)
-		        	 {
-		        	 	case active: Boolean b = new Boolean(v1.get(count).isActive());
-		        	 			text = doc.createTextNode(b.toString());
-		        	 			break;
-		        	 	case groupIp: if(v1.get(count).getGroupIp()!=null)
-		        	 				text = doc.createTextNode(v1.get(count).getGroupIp().getHostAddress());
-		        	 			break;
-		        	 	case sourceIp: if(v1.get(count).getSourceIp()!=null)
-		        	 				text = doc.createTextNode(v1.get(count).getSourceIp().getHostAddress());
-		        	 			break;
-		        	 	case udpPort: converter = v1.get(count).getUdpPort();
-		        	 			text = doc.createTextNode(converter.toString());
-		        	 			break;
-		        	 	case packetLength: converter = v1.get(count).getPacketLength();
-		        	 			text = doc.createTextNode(converter.toString());
-		        	 			break;
-		        	 	case ttl: converter = v1.get(count).getTtl();
-		        	 			text = doc.createTextNode(converter.toString());
-		        	 			break;
-		        	 	case packetRateDesired: converter = v1.get(count).getPacketRateDesired();
-		        	 			text = doc.createTextNode(converter.toString());
-		        	 			break;
-		        	 	case typ: text = doc.createTextNode(v1.get(count).getTyp().toString());
-		        	 			break;
-		        	 }
-		        	 mcdElement.appendChild(text);
-		        	 mcdTyp.appendChild(mcdElement);
-		        	 
-		         }
-	        	 
-	         }
+		// Erzeugt Root Element für die MultiCast Konfigurationen
+		Element multicasts = doc.createElement("Multicasts");
+		root.appendChild(multicasts);
+
+		// Für alle verschiedenen Konfigurationen
+		for (int count = 0; count < v1.size(); count++) {
+			// Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
+			// Füge dementsprechend ein Kind Element hinzu
+			MulticastData.Typ typ = v1.get(count).getTyp();
+			Element mcdTyp = doc.createElement(typ.toString());
+			multicasts.appendChild(mcdTyp);
+
+			// Für alle vorhandenen Einstellungen
+			for (mcdTag tag : mcdTag.values()) {
+				Element mcdElement = doc.createElement(tag.toString());
+				Text text = doc.createTextNode("");
+				Integer converter = new Integer(0);
+
+				switch (tag) {
+				case active:
+					Boolean b = new Boolean(v1.get(count).isActive());
+					text = doc.createTextNode(b.toString());
+					break;
+				case groupIp:
+					if (v1.get(count).getGroupIp() != null)
+						text = doc.createTextNode(v1.get(count).getGroupIp().getHostAddress());
+					break;
+				case sourceIp:
+					if (v1.get(count).getSourceIp() != null)
+						text = doc.createTextNode(v1.get(count).getSourceIp().getHostAddress());
+					break;
+				case udpPort:
+					converter = v1.get(count).getUdpPort();
+					text = doc.createTextNode(converter.toString());
+					break;
+				case packetLength:
+					converter = v1.get(count).getPacketLength();
+					text = doc.createTextNode(converter.toString());
+					break;
+				case ttl:
+					converter = v1.get(count).getTtl();
+					text = doc.createTextNode(converter.toString());
+					break;
+				case packetRateDesired:
+					converter = v1.get(count).getPacketRateDesired();
+					text = doc.createTextNode(converter.toString());
+					break;
+				case typ:
+					text = doc.createTextNode(v1.get(count).getTyp().toString());
+					break;
+				}
+				mcdElement.appendChild(text);
+				mcdTyp.appendChild(mcdElement);
+
+			}
+		}
 	}
 	
 	private void saveUserlevelData(Document doc, Element root, Vector<UserlevelData> v2)
-	{	 //********************************************************
+	{	 // ********************************************************
 		 // Schreibe die UserLevel Konfigurationsdaten in das XML
-		 //********************************************************  
+		 // ********************************************************
 		
-		//Erzeugt Root Element für die UserLevel Konfigurationsdaten
+		// Erzeugt Root Element für die UserLevel Konfigurationsdaten
         Element userLevelData = doc.createElement("UserlevelData");
         root.appendChild(userLevelData);
         

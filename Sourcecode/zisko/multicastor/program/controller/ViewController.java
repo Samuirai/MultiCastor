@@ -1409,13 +1409,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			tabpart.getPan_config().getTf_groupIPaddress().setEnabled(true);
 			tabpart.getPan_config().getTf_udp_port().setEnabled(true);
 			tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0],typ).getGroupIp().toString().substring(1));
-			//System.out.println("Index: "+NetworkAdapter.findAddressIndex(typ, getMCData(selectedRows[0],typ).getSourceIp().toString()));
-			//tabpart.getPan_config().getTf_sourceIPaddress().setText(getMCData(selectedRows[0],typ).getSourceIp().toString().substring(1));;
 			tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());
 
-//			tabpart.getPan_config().getCb_sourceIPaddress().removeItemAt(0);
-//			tabpart.getPan_config().getCb_sourceIPaddress().insertItemAt("", 0);
-//			tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);
 			tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
 				NetworkAdapter.findAddressIndex(getMCData(selectedRows[0],typ).getSourceIp().toString())+1
 			);
@@ -1448,13 +1443,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			FrameFileChooser fc_load = getFrame().getFc_load();
 			// TODO Fuer Layer2 anpassen
 			loadConfig(	fc_load.getSelectedFile(),
-						fc_load.isCbSenderL3Selected(),
-//						fc_load.isCbSenderL2Selected(),
-						false,
-						fc_load.isCbReceiverL3Selected(),
-//						fc_load.isCbReceiverL2Selected(),
-						false,
-						fc_load.isCbIncrementalSelected()
+				fc_load.isCbSenderL3Selected(),
+				//fc_load.isCbSenderL2Selected(),
+				false,
+				fc_load.isCbReceiverL3Selected(),
+				//fc_load.isCbReceiverL2Selected(),
+				false,
+				fc_load.isCbIncrementalSelected()
 			);
 
 			fc_load.getChooser().rescanCurrentDirectory();
