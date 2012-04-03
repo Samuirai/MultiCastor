@@ -555,7 +555,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				getPanConfig(typ).getTf_udp_packetlength().setText("");;
 			}
 			getPanConfig(typ).getTb_active().setSelected(false);
-			getPanConfig(typ).getTb_active().setText("inactive");
+			getPanConfig(typ).getTb_active().setText(lang.getProperty("button.inactive"));
 			getPanConfig(typ).getTb_active().setForeground(Color.red);
 			getPanConfig(typ).getTf_groupIPaddress().requestFocusInWindow();
 		}
@@ -734,16 +734,14 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.FALSE));
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = false;
-					// TODO @JT languagemanager (MH)
 					getPanConfig(typ).getTf_udp_packetlength().setEnabled(false);
-					getPanConfig(typ).getTf_udp_packetlength().setText("IP first");
+					getPanConfig(typ).getTf_udp_packetlength().setText(lang.getProperty("config.message.ipFirstShort"));
 				} else {
 					input[1][0] = false;
 				}
 				/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 				getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
-				// TODO @JT languagemanager (MH)
-				getPanConfig(typ).getCb_sourceIPaddress().addItem("Please choose IP first");
+				getPanConfig(typ).getCb_sourceIPaddress().addItem(lang.getProperty("config.message.ipFirst"));
 				
 			}
 		}
@@ -751,8 +749,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
-			// TODO @JT languagemanager (MH)
-			getPanConfig(typ).getCb_sourceIPaddress().addItem("Please choose IP first");
+			getPanConfig(typ).getCb_sourceIPaddress().addItem(lang.getProperty("config.message.ipFirst"));
 			
 			if (typ == Typ.L3_SENDER) {
 				getPanConfig(typ).getTf_udp_packetlength().setEnabled(false);
@@ -1408,7 +1405,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			multipleSelect(typ);
 		}
 		if(selectedRows.length == 1){
-			tabpart.getPan_config().getBt_enter().setText("Change");
+			tabpart.getPan_config().getBt_enter().setText(lang.getProperty("button.change"));
 			tabpart.getPan_config().getTf_groupIPaddress().setEnabled(true);
 			tabpart.getPan_config().getTf_udp_port().setEnabled(true);
 			tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0],typ).getGroupIp().toString().substring(1));
@@ -1433,7 +1430,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else if(selectedRows.length == 0){
 			clearInput(typ);
-			tabpart.getPan_config().getBt_enter().setText("Add");
+			tabpart.getPan_config().getBt_enter().setText(lang.getProperty("button.add"));
 			tabpart.getPan_config().getTf_groupIPaddress().setEnabled(true);
 			if(typ==Typ.L3_SENDER){
 				tabpart.getPan_config().getTf_sourceIPaddress().setEnabled(true);				
@@ -1539,7 +1536,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem mehrere Multicasts Selektiert wurden.
 	 */
 	private void multipleSelect(Typ typ) {
-		getPanConfig(typ).getBt_enter().setText("Change All");
+		getPanConfig(typ).getBt_enter().setText(lang.getProperty("button.changeAll"));
 		if(typ == Typ.L3_SENDER){
 			getPanConfig(typ).getTf_sourceIPaddress().removeItemListener(this);
 			getPanConfig(typ).getTf_packetrate().getDocument().removeDocumentListener(this);
@@ -1659,8 +1656,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem der Add Button gedr�ckt wurde
 	 */
 	private void pressBTenter(Typ typ) {
-		// TODO @JT Hier failts in anderen Sprachen (MH)
-		if(getPanConfig(typ).getBt_enter().getText().equals("Add")){
+		if(getPanConfig(typ).getBt_enter().getText().equals(lang.getProperty("button.add"))){
 			pressBTAdd(typ);
 		}
 		else{
@@ -1836,12 +1832,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 private void setTBactive(boolean b, Typ typ) {
 		if(b){
 			getPanConfig(typ).getTb_active().setSelected(true);
-			getPanConfig(typ).getTb_active().setText("Active");
+			getPanConfig(typ).getTb_active().setText(lang.getProperty("button.active"));
 			getPanConfig(typ).getTb_active().setForeground(new Color(0,175,0));
 		}
 		else{
 			getPanConfig(typ).getTb_active().setSelected(false);
-			getPanConfig(typ).getTb_active().setText("Inactive");
+			getPanConfig(typ).getTb_active().setText(lang.getProperty("button.inactive"));
 			getPanConfig(typ).getTb_active().setForeground(new Color(200,0,0));
 		}
 	}
@@ -1855,12 +1851,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(selectedLine.length==1){	
 			if(mc.getMC(selectedLine[0], typ).isActive()){
 				getPanConfig(typ).getTb_active().setSelected(true);
-				getPanConfig(typ).getTb_active().setText("active");
+				getPanConfig(typ).getTb_active().setText(lang.getProperty("button.active"));
 				getPanConfig(typ).getTb_active().setForeground(new Color(0,175,0));
 			}
 			else{
 				getPanConfig(typ).getTb_active().setSelected(false);
-				getPanConfig(typ).getTb_active().setText("inactive");
+				getPanConfig(typ).getTb_active().setText(lang.getProperty("button.inactive"));
 				getPanConfig(typ).getTb_active().setForeground(new Color(200,0,0));
 			}
 		}
