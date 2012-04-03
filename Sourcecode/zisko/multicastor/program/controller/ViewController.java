@@ -573,6 +573,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getTb_active().setText(lang.getProperty("button.inactive"));
 			getPanConfig(typ).getTb_active().setForeground(Color.red);
 			getPanConfig(typ).getTf_groupIPaddress().requestFocusInWindow();
+			
+			/* easiest method to have the NetworkAdapter and PacketLength field set their states correcly */
+			docEventTFgrp(typ);
 		}
 	}
 	/**
@@ -1612,6 +1615,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				showMessage(MessageTyp.INFO, "No changes were made.\n\"...\" keeps old values!");
 			}
 			else{
+				// TODO [MH] BUG: Multiple Select -> Netzwerk Interface auswaehlen
+				// das failt noch und muss hier geloest werden
+				// schauen, wie das gemacht wird, wenn nur eins selekted is
 				for(int i=selectedList.length-1; i >= 0  ; i--){
 					//System.out.println("selected: "+i+": "+selectedList[i]);
 					//System.out.println("getting: "+((selectedList.length-1)-i));
