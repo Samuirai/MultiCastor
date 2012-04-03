@@ -72,7 +72,7 @@ public class Main {
 						+ " MB "+lang.getProperty("error.memory.part3"), lang.getProperty("error.memory.title"), JOptionPane.WARNING_MESSAGE);
 			
 			System.exit(1);
-		}else if (args.length == 0) {
+		} else if (args.length == 0) {
 			gui = new ViewController();
 			controller = new MulticastController(gui, logger);
 			gui.initialize(controller);
@@ -85,7 +85,8 @@ public class Main {
 
 			logger.info(lang.getProperty("logger.info.startWithGui"));
 
-			controller.loadCompleteConfig();
+			controller.loadDefaultMulticastConfig();
+			// TODO [MH] Hier GUIConfig laden
 			
 			for (Handler h : logger.getHandlers()) {
 				h.close();
@@ -137,9 +138,9 @@ public class Main {
 			}
 		} else if (args[0].equals("-h")) {
 			// System.out.println("Parameter -h mitgegeben");
-			System.out
-					.println(lang.getProperty("console.helptext"));
+			System.out.println(lang.getProperty("console.helptext"));
 		} else if (args.length != 0) {
+			// TODO Was fuern checkfile ist denn gemeint? (MH)
 			File checkfile = new File(args[0]);
 			if (checkfile.exists()) {
 				gui = new ViewController();
@@ -153,7 +154,8 @@ public class Main {
 				logger.addHandler(consoleHandlerWithGUI);
 				logger.info(lang.getProperty("logger.info.startGuiFile"));
 
-				controller.loadConfigFile(args[0], true, true, true, true);
+				controller.loadMulticastConfig(args[0], true);
+				// TODO [MH] Hier GUIConfig laden 
 
 				for (Handler h : logger.getHandlers()) {
 					h.close();

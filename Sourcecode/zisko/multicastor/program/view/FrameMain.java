@@ -521,7 +521,6 @@ public class FrameMain extends JFrame {
 		return fc_load;
 	}
 
-	// TODO wird nie aufgerufen, macht man getter rein, die man nicht braucht? (MH)
 	public Dimension getGraphSize(){
 		return panel_rec_lay3.getGraphSize();
 	}

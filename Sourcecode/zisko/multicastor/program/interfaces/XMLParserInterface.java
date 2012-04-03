@@ -15,34 +15,27 @@ public interface XMLParserInterface
 {
 
 	/** Liest eine XML-Konfigurationsdatei ein.
-	 * @param pfad
-	 * Ort, an dem die Konfigurationsdatei liegt
-	 * @param v1
-	 * MultiCastData enthält Multicast Konfigurationseinstellungen
-	 * @param v2
-	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
-	 * @param v3
-	 * UserInputData enthält den momentanen Stand der GUI, inklusive geöffnetem Fenster und gerade eingetragenen Werten
-	 * @param v4
-	 * Die zuletzt geöffneten Konfigurationsdateien
+	 * @param pfad Ort, an dem die Konfigurationsdatei liegt
+	 * @param v1 Enthält nach dem Laden alle Multicast-Eintraege der XML-Datei
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws FileNotFoundException
 	 */
-	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
+	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
-	/** Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
-	 * @param pfad
-	 * Ort, an dem die Konfigurationsdatei liegt
-	 * @param v1
-	 * MultiCastData enthält Multicast Konfigurationseinstellungen
-	 * @param v2
-	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
-	 * @throws SAXException
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
+	// TODO [MH] check if tbr
+//	/** Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
+//	 * @param pfad
+//	 * Ort, an dem die Konfigurationsdatei liegt
+//	 * @param v1
+//	 * MultiCastData enthält Multicast Konfigurationseinstellungen
+//	 * @param v2
+//	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
+//	 * @throws SAXException
+//	 * @throws FileNotFoundException
+//	 * @throws IOException
+//	 */
+//	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
 	/**Liest die Default ULD Konfiguration und Standartwerte aus dem JAR-File
 	 * @param v1
