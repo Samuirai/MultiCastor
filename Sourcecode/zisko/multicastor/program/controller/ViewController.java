@@ -178,11 +178,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");
 		}
 		
-		// v1.5 Wird aufgerufen, wenn Language gewechselt werden soll
-		else if(e.getSource()==f.getM_language()){
-			JOptionPane.showMessageDialog(f, "Die �nderung der Spracheinstellung wird wirksam, wenn sie das Programm neu starten.");			
-		}
-		
 		else if (e.getActionCommand().startsWith("change_lang_to")){
 			LanguageManager.setCurrentLanguage(e.getActionCommand().replaceFirst("change_lang_to_", ""));
 			f.reloadLanguage();
