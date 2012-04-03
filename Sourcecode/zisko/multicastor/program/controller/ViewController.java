@@ -40,7 +40,6 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 
-import zisko.multicastor.program.view.FrameFileChooser;
 import zisko.multicastor.program.view.FrameMain;
 import zisko.multicastor.program.view.MiscBorder;
 import zisko.multicastor.program.view.MiscFont;
@@ -176,7 +175,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			f.getTabpane().openTab(e.getActionCommand());
 		}
 		
-		//V1.5: Help TODO 
+		//TODO Help file öffnen!
 		else if(e.getSource()==f.getMi_help()){
 			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");
 		}
@@ -188,9 +187,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_saveconfig()){
-			// TODO @JT Schauen ob der alte Savebutton noch gebraucht wird (MH)
-			//System.out.println("Saving!");
-//			f.getFc_save().toggle();
+			//TODO @FF Hier muss das speichern des neuen User Config Files veranlasst werden.
 		}
 		
 		else if(e.getSource()==f.getMi_saveAllMc()){
@@ -198,7 +195,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			if (mc.getMCs(Typ.L2_RECEIVER).size()+mc.getMCs(Typ.L3_RECEIVER).size()+mc.getMCs(Typ.L2_SENDER).size()+mc.getMCs(Typ.L3_SENDER).size()<1){
 				JOptionPane.showMessageDialog(f, lang.getProperty("message.noMcCreated"));
 			}
-			//TODO JT Neues Feature!
+			else{
+				saveFileEvent(false);
+			}
 		}
 		
 		else if(e.getSource()==f.getMi_saveSelectedMc()){
@@ -212,7 +211,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			{
 				JOptionPane.showMessageDialog(f, lang.getProperty("message.noMcSelected"));
 			}
-			//TODO JT Neues Feature!
+			else{
+				saveFileEvent(true);
+			}
 		}
 		
 		else if(e.getSource()==f.getMi_loadconfig()){
@@ -280,14 +281,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTNewMC(Typ.L3_RECEIVER);
 		}
 		
-		// TODO @JT 1. Hier wegen dem Speichern schauen (MH)
-//		else if(e.getSource()==getFrame().getFc_save().getChooser()){
-//			saveFileEvent(e);
-//		}
-		// TODO [MH] Hier wegen dem Laden schauen
-//		else if(e.getSource()==getFrame().getFc_load().getChooser()){
-//			loadFileEvent(e);
-//		}
 		else if(e.getActionCommand().equals("hide")){
 			hideColumnClicked();
 			getTable(getSelectedTab()).getColumnModel().removeColumn(getTable(getSelectedTab()).getColumnModel().getColumn(PopUpMenu.getSelectedColumn()));
@@ -1766,8 +1759,43 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche aufgerufen wird wenn versucht wird eine Datei zu speichern im Datei speichern Dialog.
 	 * @param e ActionEvent welches vom Datei speichern Dialog erzeugt wird
 	 */
-	private void saveFileEvent(ActionEvent e) {
-		//TODO @JT 2. Hier wegen dem Speichern schauen (MH)
+	private void saveFileEvent(boolean partiell) {
+		//Create the Save Dialog
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFont(MiscFont.getFont());
+		//show the save dialog
+        int ret = chooser.showSaveDialog(f);
+        //save the file
+        if (ret == JFileChooser.APPROVE_OPTION) {
+        	if (!partiell){
+        		Vector<MulticastData> v = new Vector<MulticastData>();
+        		v.addAll(mc.getMCs(Typ.L2_RECEIVER));
+        		v.addAll(mc.getMCs(Typ.L3_RECEIVER));
+        		v.addAll(mc.getMCs(Typ.L2_SENDER));
+        		v.addAll(mc.getMCs(Typ.L3_SENDER));
+        		mc.saveMulticastConfig(chooser.getSelectedFile().getPath(), v);
+        	}
+        	else{
+        		Vector<MulticastData> v = new Vector<MulticastData>();
+        		for (int row : f.getPanel_rec_lay2().getTable().getSelectedRows()){
+        			v.add(mc.getMC(row, Typ.L2_RECEIVER));
+        		}
+        		for (int row : f.getPanel_rec_lay3().getTable().getSelectedRows()){
+        			v.add(mc.getMC(row, Typ.L3_RECEIVER));
+        		}
+        		for (int row : f.getPanel_sen_lay2().getTable().getSelectedRows()){
+        			v.add(mc.getMC(row, Typ.L2_SENDER));
+        		}
+        		for (int row : f.getPanel_sen_lay3().getTable().getSelectedRows()){
+        			v.add(mc.getMC(row, Typ.L3_SENDER));
+        		}
+        		mc.saveMulticastConfig(chooser.getSelectedFile().getPath(), v);
+        	}
+        }		
+		
+//      TODO @FF Für dich als Codebsp. hier gelassen, falls das noch gebraucht wird (JT)
 //		if(e.getActionCommand().equals("ApproveSelection")){
 //			FrameFileChooser fc_save = getFrame().getFc_save();
 //			//System.out.println("selected File: "+fc_save.getSelectedFile());
@@ -1783,7 +1811,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //			getFrame().getFc_save().toggle();
 //		}
 	}
-	 /**
+	 
+	/**
 	  * Funktion welche das Aussehen des Start Stop und Delete Buttons anpasst je nach dem welche Multicasts ausgewï¿½hlt wurden.
 	  * @param typ Programmteil in welchem die Buttons angepasst werden sollen.
 	  */

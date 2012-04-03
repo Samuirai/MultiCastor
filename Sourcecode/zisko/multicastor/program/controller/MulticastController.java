@@ -399,7 +399,7 @@ public class MulticastController{
 	}
 	
 
-
+//TODO @FF für dich als Bsp. drin gelassen. Wird nirgends aufgerufen. Wenn nicht mehr benötoigt bitte einfach löschen.
 	/**
 	 * Speichert eine Konfigurationsdatei an den angegebenen Pfad. Hierbei werden nur die
 	 * Multicasts von Typen mit uebergebenem True gespeichert.
@@ -407,17 +407,18 @@ public class MulticastController{
 	 * @param l3_sender Wenn <code>true</code> werden Multicasts vom Typ L3_SENDER gespeichert.
 	 * @param l3_receiver Wenn <code>true</code> werden Multicasts vom Typ L3_RECEIVER gespeichert.
 	 */
-	public void saveConfig(String s, boolean l3_sender, boolean l3_receiver) {
-		// Sammelt alle zu speichernden Multicasts in einem Vektor
-		Vector<MulticastData> v = new Vector<MulticastData>();
-		if(l3_sender){
-			v.addAll(mc_sender_l3);
-		}
-		if(l3_receiver){
-			v.addAll(mc_receiver_l3);
-		}
-		saveConfig(s, false, v);
-	}
+//	public void saveConfig(String s, boolean l3_sender, boolean l3_receiver) {
+//		// Sammelt alle zu speichernden Multicasts in einem Vektor
+//		Vector<MulticastData> v = new Vector<MulticastData>();
+//		if(l3_sender){
+//			v.addAll(mc_sender_l3);
+//		}
+//		if(l3_receiver){
+//			v.addAll(mc_receiver_l3);
+//		}
+//		//!!!!!!!!Die Methode gibts nicht mehr!!!!!!!
+//		//saveConfig(s, false, v);
+//	}
 	
 	/**
 	 * Speichert eine Konfigurationsdatei.
@@ -425,20 +426,20 @@ public class MulticastController{
 	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v Alle zu speichernden Multicasts.
 	 */
-	private void saveConfig(String path, boolean complete, Vector<MulticastData> v){
+	public void saveMulticastConfig(String path, Vector<MulticastData> v){
 		final String p = "MultiCastor.xml";	
 
 		try{	// Uebergibt den Vektor mit allen Multicasts an den XMLParser
-			if(complete){
-				xml_parser.saveConfig(p, v, userlevelData, userInputData, lastConfigs);
-			//	logger.log(Level.INFO, "Saved default Configfile.");
+			if(path==null&&path.length()==0){
+				xml_parser.saveMulticastConfig(p, v);
+				//logger.log(Level.INFO, "Saved Multicastconfiguration at default location.");
 			} else {
-				xml_parser.saveConfig(path, v, userlevelData);
+				xml_parser.saveMulticastConfig(path, v);
 				addLastConfigs(path);
-				logger.log(Level.INFO, "Saved Configfile.");
+				logger.log(Level.INFO, "Saved Multicastconfiguration.");
 			}		
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "Could not save default Configurationfile.");
+			logger.log(Level.WARNING, "Could not save Multicast Configuration.");
 		}
 	}
 	
@@ -447,10 +448,13 @@ public class MulticastController{
 	 */
 	private void saveCompleteConfig(){
 		Vector<MulticastData> v = new Vector<MulticastData>();
-		v.addAll(mc_sender_l3);
-		v.addAll(mc_receiver_l3);
+		v.addAll(getMCs(Typ.L2_RECEIVER));
+		v.addAll(getMCs(Typ.L3_RECEIVER));
+		v.addAll(getMCs(Typ.L2_SENDER));
+		v.addAll(getMCs(Typ.L3_SENDER));
+		saveMulticastConfig("MultiCastor.xml", v);
 		
-		saveConfig("",true,v);
+		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
 	}
 	
 	/**
@@ -775,5 +779,9 @@ public class MulticastController{
 	 */
 	public void setPrintTableTime(int printTableTime) {
 		this.printTableIntervall = printTableTime;
+	}
+
+	public XMLParserInterface getXml_parser() {
+		return xml_parser;
 	}
 }

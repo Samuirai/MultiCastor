@@ -636,8 +636,6 @@ public class FrameMain extends JFrame {
 		aboutPanelState=i;
 	}
 	
-	//TODO HIER WEITER MACHEN MIT LANG FILE!
-	
 	public void setAboutPanelVisible(boolean visible){
 		if(visible){
 			aboutPanelState=1;

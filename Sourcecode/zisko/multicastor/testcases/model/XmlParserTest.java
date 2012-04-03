@@ -100,7 +100,7 @@ public class XmlParserTest extends TestCase
 		
 		try
 		{
-			parser.saveConfig("C:\\Users\\gerz\\Documents\\DHBW\\4. Semester\\swe\\configtest\\uldTest.xml", null, v2);
+//			parser.saveConfig("C:\\Users\\gerz\\Documents\\DHBW\\4. Semester\\swe\\configtest\\uldTest.xml", null, v2);
 //			parser.loadConfig("C:\\Users\\gerz\\Documents\\DHBW\\4. Semester\\swe\\configtest\\uldTest.xml", null, v2);
 		}
 		catch(Exception e)

@@ -50,28 +50,23 @@ public interface XMLParserInterface
 	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
-	 * @param v1
+	 * @param v
 	 * Vektor aus Multicast Konfigurationseinstellungen
-	 * @param v2
-	 * Vektor aus GUI Konfigurationseinstellungen
-	 * @param v3
-	 * Vektor aus UserInputData Objekten, enthalten den momentanen Stand der GUI.
-	 * @param v4
-	 * Vektor aus Pfaden zu zuletzt benutzten Konfigurationsdateien
 	 * @throws IOException
 	 */
-	public void saveConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws IOException;
+	public void saveMulticastConfig(String path, Vector<MulticastData> v) throws IOException;
 
-	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
-	 *  Für Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
-	 * @param pfad
-	 * Der Ort, an dem die Datei gespeichert werden soll
-	 * @param v1
-	 * Vektor aus Multicast Konfigurationseinstellungen
-	 * @param v2
-	 * Vektor aus GUI Konfigurationseinstellungen
-	 * @throws IOException
-	 */
-	public void saveConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2) throws IOException;
+	//TODO [JT] Check if tbr 
+//	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
+//	 *  Für Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
+//	 * @param pfad
+//	 * Der Ort, an dem die Datei gespeichert werden soll
+//	 * @param v1
+//	 * Vektor aus Multicast Konfigurationseinstellungen
+//	 * @param v2
+//	 * Vektor aus GUI Konfigurationseinstellungen
+//	 * @throws IOException
+//	 */
+//	public void saveConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2) throws IOException;
 
 }
