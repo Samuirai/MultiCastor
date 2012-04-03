@@ -108,12 +108,10 @@ public class FrameMain extends JFrame {
 	private JMenuItem mi_setTitle;
 	
 	private ImageIcon img_close;
-	private FrameFileChooser fc_save;
 	public Vector<String> getLastConfigs() {
 		return lastConfigs;
 	}
 	private int aboutPanelState = 0; // 0 = invisible, 1 = visible, closeButton unhovered, 2 = visible close button hovered
-	private FrameFileChooser fc_load;
 	private Userlevel level = Userlevel.EXPERT;
 	private Vector<String> lastConfigs=new Vector<String>();
 	private Separator mi_separator;
@@ -509,18 +507,8 @@ public class FrameMain extends JFrame {
 		ImageIcon icon = new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/icon.png"));
 		
 		setIconImage(icon.getImage());
-		fc_save = new FrameFileChooser(ctrl, true);
-		fc_load = new FrameFileChooser(ctrl, false);
 	}
 	
-	public FrameFileChooser getFc_save() {
-		return fc_save;
-	}
-
-	public FrameFileChooser getFc_load() {
-		return fc_load;
-	}
-
 	public Dimension getGraphSize(){
 		return panel_rec_lay3.getGraphSize();
 	}

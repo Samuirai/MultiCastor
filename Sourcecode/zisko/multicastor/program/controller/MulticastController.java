@@ -42,10 +42,12 @@ public class MulticastController{
 	/* v1.5 Ein Vector fuer Layer3 Receiver und Sender */
 	private Vector<MulticastData> mc_sender_l3;
 	private Vector<MulticastData> mc_receiver_l3;
+	// TODO Layer-2
 	
 	/* v1.5 Eine neue Map fuer Layer3 Receiver und Sender */
 	private Map<MulticastData,MulticastThreadSuper> mcMap_receiver_l3;
 	private Map<MulticastData,MulticastThreadSuper> mcMap_sender_l3;
+	// TODO Layer-2
 	
 	/** Diese Map bildet MulticastData-Objekte auf Threads ab, um von einem Multicast direkt mit dem entsprechenden Thread kommunizieren zu koennen. Dies wird vor allem beim Beenden der Multicasts genutzt. */
 	private Map<MulticastData, Thread> threads;

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
@@ -36,11 +37,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 
 import zisko.multicastor.program.view.FrameFileChooser;
 import zisko.multicastor.program.view.FrameMain;
 import zisko.multicastor.program.view.MiscBorder;
+import zisko.multicastor.program.view.MiscFont;
 import zisko.multicastor.program.view.MiscTableModel;
 import zisko.multicastor.program.view.PanelMulticastConfig;
 import zisko.multicastor.program.view.PanelMulticastControl;
@@ -185,8 +188,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_saveconfig()){
+			// TODO @JT Schauen ob der alte Savebutton noch gebraucht wird (MH)
 			//System.out.println("Saving!");
-			f.getFc_save().toggle();
+//			f.getFc_save().toggle();
 		}
 		
 		else if(e.getSource()==f.getMi_saveAllMc()){
@@ -198,17 +202,18 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_loadconfig()){
+			// TODO [MH] Schauen ob der alte Loadbutton noch gebraucht wird
 			//System.out.println("Loading!");
-			f.getFc_load().toggle();
-			setColumnSettings(getUserInputData(getSelectedTab()), getSelectedTab());
+//			f.getFc_load().toggle();
+//			setColumnSettings(getUserInputData(getSelectedTab()), getSelectedTab());
 		}
 		
 		else if(e.getSource()==f.getMi_loadMc()){
-			//TODO MH Neues Feature!
+			loadFileEvent(false);
 		}
 		
 		else if(e.getSource()==f.getMi_loadAdditionalMc()){
-			//TODO JT Neues Feature!
+			loadFileEvent(true);
 		}
 		
 		else if(e.getSource()==f.getMi_snake()){
@@ -261,13 +266,14 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTNewMC(Typ.L3_RECEIVER);
 		}
 		
-
-		else if(e.getSource()==getFrame().getFc_save().getChooser()){
-			saveFileEvent(e);
-		}
-		else if(e.getSource()==getFrame().getFc_load().getChooser()){
-			loadFileEvent(e);
-		}
+		// TODO @JT 1. Hier wegen dem Speichern schauen (MH)
+//		else if(e.getSource()==getFrame().getFc_save().getChooser()){
+//			saveFileEvent(e);
+//		}
+		// TODO [MH] Hier wegen dem Laden schauen
+//		else if(e.getSource()==getFrame().getFc_load().getChooser()){
+//			loadFileEvent(e);
+//		}
 		else if(e.getActionCommand().equals("hide")){
 			hideColumnClicked();
 			getTable(getSelectedTab()).getColumnModel().removeColumn(getTable(getSelectedTab()).getColumnModel().getColumn(PopUpMenu.getSelectedColumn()));
@@ -1442,20 +1448,17 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche ausgeloest wird, wenn der User versucht eine Konfigurationsdatei mit dem "Datei Laden"
 	 * Dialog zu laden.
 	 */
-	private void loadFileEvent(ActionEvent e) {
-		// TODO [MH] hier ansetzen fuer normalen FileChooser
-		// hier auch das incrementell ansetzen
-		if(e.getActionCommand().equals("ApproveSelection")){
-			FrameFileChooser fc_load = getFrame().getFc_load();
-
-			loadConfig(fc_load.getSelectedFile(), false);
-
-			fc_load.getChooser().rescanCurrentDirectory();
-			fc_load.toggle();
-		}
-		else if(e.getActionCommand().equals("CancelSelection")){
-			getFrame().getFc_load().toggle();
-		}
+	private void loadFileEvent(boolean incremental) {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFont(MiscFont.getFont());
+		
+        int ret = chooser.showOpenDialog(f);
+        
+        if (ret == JFileChooser.APPROVE_OPTION) {
+        	loadConfig(chooser.getSelectedFile().toString(), incremental);
+        }
 	}
 	
 	private void loadConfig(String path, boolean incremental) {
@@ -1465,7 +1468,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			deleteAllMulticasts(Typ.L3_RECEIVER);
 			deleteAllMulticasts(Typ.L2_RECEIVER);
 		}
-		mc.loadMulticastConfig(path, false);
+		mc.loadMulticastConfig(path, true);
 	}
 	@Override
 	/**
@@ -1750,20 +1753,21 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param e ActionEvent welches vom Datei speichern Dialog erzeugt wird
 	 */
 	private void saveFileEvent(ActionEvent e) {
-		if(e.getActionCommand().equals("ApproveSelection")){
-			FrameFileChooser fc_save = getFrame().getFc_save();
-			//System.out.println("selected File: "+fc_save.getSelectedFile());
-			//TODO [MH] speichern noch an lay3 anpassen
-			mc.saveConfig(	fc_save.getSelectedFile(), 
-							fc_save.isCbSenderL3Selected(), 
-							fc_save.isCbReceiverL3Selected());
-			f.updateLastConfigs(fc_save.getSelectedFile());
-			fc_save.getChooser().rescanCurrentDirectory();
-			fc_save.toggle();
-		}
-		else if(e.getActionCommand().equals("CancelSelection")){
-			getFrame().getFc_save().toggle();
-		}
+		//TODO @JT 2. Hier wegen dem Speichern schauen (MH)
+//		if(e.getActionCommand().equals("ApproveSelection")){
+//			FrameFileChooser fc_save = getFrame().getFc_save();
+//			//System.out.println("selected File: "+fc_save.getSelectedFile());
+//			
+//			mc.saveConfig(	fc_save.getSelectedFile(), 
+//							fc_save.isCbSenderL3Selected(), 
+//							fc_save.isCbReceiverL3Selected());
+//			f.updateLastConfigs(fc_save.getSelectedFile());
+//			fc_save.getChooser().rescanCurrentDirectory();
+//			fc_save.toggle();
+//		}
+//		else if(e.getActionCommand().equals("CancelSelection")){
+//			getFrame().getFc_save().toggle();
+//		}
 	}
 	 /**
 	  * Funktion welche das Aussehen des Start Stop und Delete Buttons anpasst je nach dem welche Multicasts ausgew�hlt wurden.
