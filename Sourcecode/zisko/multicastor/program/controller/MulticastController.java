@@ -706,7 +706,7 @@ public class MulticastController{
 	/**
 	 * Gibt den Vektor mit MulticastData-Objekten in dem alle Objekte des Typs gespeichert sind.
 	 * @param m Der Typ wird dem uebergebenen MulticastData-Objekt entnommen.
-	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der Typ <code>UNDEFIENED</code> wird <code>null</code> zurueckgegeben.
+	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der Typ <code>UNDEFINED</code> wird <code>null</code> zurueckgegeben.
 	 */
 	private Vector<MulticastData> getMCVector(MulticastData m){
 		return getMCVector(m.getTyp());
@@ -715,7 +715,7 @@ public class MulticastController{
 	/**
 	 * Gibt den Vektor mit MulticastData-Objekten in dem alle Objekte des Typs gespeichert sind.
 	 * @param m Gibt den Typ der MulticastData-Objekte an.
-	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der Typ <code>UNDEFIENED</code> wird <code>null</code> zurueckgegeben.
+	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der Typ <code>UNDEFINED</code> wird <code>null</code> zurueckgegeben.
 	 */
 	private Vector<MulticastData> getMCVector(MulticastData.Typ multicastDataTyp){
 		Vector<MulticastData> vector = null;
