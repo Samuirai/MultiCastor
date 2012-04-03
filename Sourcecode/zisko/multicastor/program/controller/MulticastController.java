@@ -339,6 +339,7 @@ public class MulticastController{
 	 * @param typ Chooses tab like L3_RECEIVER, L3_SENDER, L2_RECEIVER, L2_SENDER
 	 * @param userlevel Chooses userlevel like beginner,expert,custom
 	 */
+	//TODO @CW User Level sollte raus.
 	public UserlevelData getUserLevel(MulticastData.Typ typ, UserlevelData.Userlevel userlevel) {	
 	//	System.out.println("Requested ULD: " + typ + " " + userlevel);
 		for(UserlevelData uld : userlevelData){
@@ -374,6 +375,7 @@ public class MulticastController{
 	 * @param typ MC Typ
 	 * @return Vektor mit ULDs drin.
 	 */
+	// TODO @CW User Laevel sollte raus
 	public MulticastData getUserlevelBeginnerDefaultValues(Typ typ){
 		if(defaultValuesUserlevelData.isEmpty()){
 			defaultUserlevelDataLaden();

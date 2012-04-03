@@ -134,4 +134,6 @@ toolTip.specifyPacketLength	=Spezifizieren sie die Paketlänge
 toolTip.selectNetInterface	=Wählen sie ein Netzwerkinterface für Multicast
 toolTip.selectMacAddress	=Wählen sie eine Multicast Mac Adresse
 
-message.setNewTitle		 =Bitte geben sie einen neuen Titel ein
+message.setNewTitle			=Bitte geben sie einen neuen Titel ein
+message.noMcCreated			=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden könnten.
+message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewählt. Sie können beliebige Tabellenzeilen wählen. Mehrfachauswahl ist mit gedrückter Strg-Taste möglich.

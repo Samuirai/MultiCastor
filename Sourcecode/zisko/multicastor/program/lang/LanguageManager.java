@@ -159,7 +159,9 @@ public class LanguageManager extends Properties{
 		"toolTip.specifyPacketLength",
 		"toolTip.selectNetInterface",
 		"toolTip.selectMacAddress",
-		"message.setNewTitle"
+		"message.setNewTitle",
+		"message.noMcCreated",
+		"message.noMcSelected"
 	};
 	
 	/**

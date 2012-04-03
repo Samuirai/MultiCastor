@@ -194,10 +194,24 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_saveAllMc()){
+			//check if there are any Multicasts to save
+			if (mc.getMCs(Typ.L2_RECEIVER).size()+mc.getMCs(Typ.L3_RECEIVER).size()+mc.getMCs(Typ.L2_SENDER).size()+mc.getMCs(Typ.L3_SENDER).size()<1){
+				JOptionPane.showMessageDialog(f, lang.getProperty("message.noMcCreated"));
+			}
 			//TODO JT Neues Feature!
 		}
 		
 		else if(e.getSource()==f.getMi_saveSelectedMc()){
+			//check if there are any Multicasts to save
+			if (
+					f.getPanel_rec_lay2().getTable().getSelectedRowCount()+
+					f.getPanel_rec_lay3().getTable().getSelectedRowCount()+
+					f.getPanel_sen_lay2().getTable().getSelectedRowCount()+
+					f.getPanel_sen_lay3().getTable().getSelectedRowCount()<1
+				)
+			{
+				JOptionPane.showMessageDialog(f, lang.getProperty("message.noMcSelected"));
+			}
 			//TODO JT Neues Feature!
 		}
 		
