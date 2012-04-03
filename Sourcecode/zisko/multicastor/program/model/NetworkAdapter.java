@@ -82,18 +82,18 @@ public abstract class NetworkAdapter {
 	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zur�ckgegeben, ansonsten -1
 	 */
 	public static int findAddressIndex(String address){
+		// TODO [MH] Linux Check
 		int ret = -1;
 		if(getAddressType(address) == IPType.IPv4){
 			for(int i = 0; i < ipv4Interfaces.size() ; i++){
 				//System.out.println("comparing index "+i+": \""+ipv4Interfaces.get(i).toString()+"\" against \""+address+"\"");
-				if(ipv4Interfaces.get(i).toString().equals(address)){
-					//System.out.println("found!");
+				if(ipv4Interfaces.get(i).toString().substring(1).equals(address)){
 					ret = i;
 				}
 			}
-		} else if(getAddressType(address) == IPType.IPv6){
-			for(int i = 0; i < ipv6Interfaces.size() ; i++){
-				if(ipv6Interfaces.get(i).toString().startsWith(address)){
+		} else if(getAddressType(address) == IPType.IPv6) {
+			for(int i = 0; i < ipv6Interfaces.size() ; i++) {
+				if(ipv6Interfaces.get(i).toString().substring(1).startsWith(address)){
 					ret = i;
 				}
 			}
@@ -102,9 +102,9 @@ public abstract class NetworkAdapter {
 	}
 	
 	public static IPType getAddressType(String address) {
-		if (InputValidator.checkMC_IPv4(address) != null) {
+		if (InputValidator.checkMC_IPv4(address) != null || InputValidator.checkIPv4(address) != null) {
 			return IPType.IPv4;
-		} else if (InputValidator.checkMC_IPv6(address) != null) {
+		} else if (InputValidator.checkMC_IPv6(address) != null || InputValidator.checkIPv6(address) != null) {
 			return IPType.IPv6;
 		}
 		return null;

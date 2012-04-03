@@ -500,57 +500,52 @@ public class MulticastController{
 	 * @param useDefaultXML Wenn hier true gesetzt ist, wird der Standardpfad genommen und MCD + UID + ULD geladen.
 	 */
 	public void loadMulticastConfig(String path, boolean useDefaultXML){
-		// TODO [MH] ternaerer Operator nutzen
 		final String defaultXML = "MultiCastor.xml";
 
 		/* Nach dem Laden stehen hier alle MulticastData Objecte drin */
 		Vector<MulticastData> multicasts = new Vector<MulticastData>();
 		String message = new String();
 		boolean skip = false;
-		if(useDefaultXML){
-			try {
-				 xml_parser.loadMultiCastConfig(defaultXML, multicasts);
-				 logger.log(Level.INFO, "Default Configurationfile loaded.");
-			} catch (Exception e) {
-				if(e instanceof FileNotFoundException){
+		try {
+			 xml_parser.loadMultiCastConfig(useDefaultXML ? defaultXML : path, multicasts);
+			 logger.log(Level.INFO, "Default Configurationfile loaded.");
+		} catch (Exception e) {
+			if(e instanceof FileNotFoundException) {
+				if (useDefaultXML) {
 					message = "Default configurationfile was not found. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
-				} else if (e instanceof SAXException) {
+				} else {
+					message = "Configurationfile not found.";
+				}
+			} else if (e instanceof SAXException) {
+				if (useDefaultXML) {
 					message = "Default configurationfile could not be parsed correctly. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
-				} else if (e instanceof IOException) {
+				} else {
+					message = "Configurationfile could not be parsed.";
+				}
+			} else if (e instanceof IOException) {
+				if (useDefaultXML) {
 					message = "Default configurationfile could not be loaded. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
-				} else if (e instanceof WrongConfigurationException) {
-					message = ((WrongConfigurationException)e).getErrorMessage();
-				} else if (e instanceof IllegalArgumentException){
+				} else {
+					message = "Configurationfile could not be loaded.";
+				}
+			} else if (e instanceof WrongConfigurationException) {
+				message = ((WrongConfigurationException)e).getErrorMessage();
+			} else if (e instanceof IllegalArgumentException){
+				if (useDefaultXML) {
 					message = "Error in default configurationfile.";
 				} else {
-					message = "Unexpected error of type: "+ e.getClass();
-				}
-				skip = true;
-				logger.log(Level.WARNING, message);
-			}
-		} else {
-			try {
-				 xml_parser.loadMultiCastConfig(path, multicasts);
-				 logger.log(Level.INFO, "Configurationfile loaded: "+path);
-			} catch (Exception e) {
-				if(e instanceof FileNotFoundException){
-					message = "Configurationfile not found.";	
-				} else if (e instanceof SAXException) {
-					message = "Configurationfile could not be parsed.";
-				} else if (e instanceof IOException) {
-					message = "Configurationfile could not be loaded.";
-				} else if (e instanceof WrongConfigurationException) {
-					message = ((WrongConfigurationException)e).getErrorMessage();
-				} else if (e instanceof IllegalArgumentException){
 					message = "Error in configurationfile.";
-				} else {
-					message = "Unexpected error of type: "+ e.getClass();
 				}
-				skip = true;
-				message = message + " Used path: " + path;
-				logger.log(Level.WARNING, message);
+			} else {
+				message = "Unexpected error of type: " + e.getClass();
 			}
-		}	    
+			skip = true;
+			if (!useDefaultXML) {
+				message += " Used path: " + path;
+			}
+			logger.log(Level.WARNING, message);
+		}
+			
 	    if(!skip) {
 	    	// Fuege Multicast hinzu
 	    	for(MulticastData m : multicasts){
@@ -571,7 +566,7 @@ public class MulticastController{
 //	 	    }
 	    }
 	    // TODO [MH] GUIConfigLoad woanders hin
-//	    view_controller.loadAutoSave();
+	    view_controller.loadAutoSave();
 	}
 	
 	/**
