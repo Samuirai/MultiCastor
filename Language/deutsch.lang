@@ -87,7 +87,7 @@ warning.memory.maxMemory  =Maximal verfügbarer Speicher
 
 logger.info.startWithGui=MultiCastor gestartet mit GUI
 logger.info.startNoGui	=MultiCastor gestartet ohne GUI
-logger.into.startGuiFile=MultiCastor gestartet mit GUI und Datei
+logger.info.startGuiFile=MultiCastor gestartet mit GUI und Datei
 
 error.config.notSpecified=Konfigurationsdatei nicht angegeben.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
  geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\

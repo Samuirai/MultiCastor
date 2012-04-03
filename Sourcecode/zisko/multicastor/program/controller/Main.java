@@ -151,7 +151,7 @@ public class Main {
 				consoleHandlerWithGUI = new MulticastLogHandler(gui);
 				consoleHandlerWithGUI.setLevel(Level.FINEST);
 				logger.addHandler(consoleHandlerWithGUI);
-				logger.info(lang.getProperty("logger.into.startGuiFile"));
+				logger.info(lang.getProperty("logger.info.startGuiFile"));
 
 				controller.loadConfigFile(args[0], true, true, true, true);
 

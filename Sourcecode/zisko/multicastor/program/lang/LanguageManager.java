@@ -137,7 +137,7 @@ public class LanguageManager extends Properties{
 		"warning.memory.maxMemory",
 		"logger.info.startWithGui",
 		"logger.info.startNoGui",
-		"logger.into.startGuiFile",
+		"logger.info.startGuiFile",
 		"error.config.notSpecified",
 		"error.config.wrongFormat",
 		"error.invalidParameter",
