@@ -109,7 +109,7 @@ public class MiscTableModel extends AbstractTableModel {
 			switch(columnIndex){
 				case 0: ret = "STATE"; break; 
 				case 1:	ret = "ID"; break; 		
-				case 2:	ret = "GRP IP"; break;
+				case 2:	ret = (typ == Typ.L2_SENDER)?"GRP MAC":"GRP IP"; break;
 				case 3:	ret = "D RATE"; break;
 				case 4: ret = "M RATE"; break;
 				case 5: ret = "Mbit/s"; break;
