@@ -3,6 +3,7 @@ package zisko.multicastor.program.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,11 +50,11 @@ public class Main {
 		MulticastLogHandler consoleHandler;
 
 		// Erstellen und Einrichten vom Logger
-		Logger logger = Logger
-				.getLogger("zisko.multicastor.program.controller.main");
+		Logger logger = Logger.getLogger("zisko.multicastor.program.controller.main");
 		logger.setUseParentHandlers(false);
 		logger.setLevel(Level.FINEST);
-
+		
+		//TODO @FH Hier passt die kommentierung nicht mehr. [JT]
 		// Hauptprogrammteil - Parameter aus der Kommandozeile auswerten
 		// V1.5 [FH]
 		if (Main.REAL_MAX_HEAP < Main.MIN_MAX_HEAP) {
@@ -70,7 +71,7 @@ public class Main {
 				JOptionPane.showMessageDialog(new JFrame(), lang.getProperty("error.memory.part1")+" " + Main.REAL_MAX_HEAP/(1024*1024)
 						+ " MB. "+lang.getProperty("error.memory.part2")+" " + Main.MIN_MAX_HEAP/(1024*1024)
 						+ " MB "+lang.getProperty("error.memory.part3"), lang.getProperty("error.memory.title"), JOptionPane.WARNING_MESSAGE);
-			
+			logSystemInformation(logger);
 			System.exit(1);
 		} else if (args.length == 0) {
 			gui = new ViewController();
@@ -81,8 +82,7 @@ public class Main {
 			consoleHandlerWithGUI = new MulticastLogHandler(gui);
 			consoleHandlerWithGUI.setLevel(Level.FINEST);
 			logger.addHandler(consoleHandlerWithGUI);
-			
-
+			logSystemInformation(logger);
 			logger.info(lang.getProperty("logger.info.startWithGui"));
 
 			controller.loadDefaultMulticastConfig();
@@ -108,6 +108,7 @@ public class Main {
 					consoleHandler = new MulticastLogHandler();
 					consoleHandler.setLevel(Level.FINEST);
 					logger.addHandler(consoleHandler);
+					logSystemInformation(logger);
 					logger.info(lang.getProperty("logger.info.startNoGui"));
 
 					controller.loadConfigWithoutGUI(pfad);
@@ -152,6 +153,7 @@ public class Main {
 				consoleHandlerWithGUI = new MulticastLogHandler(gui);
 				consoleHandlerWithGUI.setLevel(Level.FINEST);
 				logger.addHandler(consoleHandlerWithGUI);
+				logSystemInformation(logger);
 				logger.info(lang.getProperty("logger.info.startGuiFile"));
 
 				controller.loadMulticastConfig(args[0], true);
@@ -165,5 +167,22 @@ public class Main {
 				System.out.println(lang.getProperty("error.invalidParameter"));
 			}
 		}
+	}
+	
+	/**
+	 * Method will log some basic information about the system
+	 * @param logger the current logger
+	 */
+	private static void logSystemInformation(Logger logger){
+		//Systeminformationen loggen
+		try {
+			logger.info("Hostname: "+java.net.InetAddress.getLocalHost().getHostName());
+			logger.info("Hostadress: "+java.net.InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e1) {
+			logger.info("Unable to get hostname and hostadress");
+		}
+		logger.info("Username: "+System.getProperty("user.name")+"; User location: "+System.getProperty("user.region")+" - "+System.getProperty("user.timezone"));
+		logger.info("Java version: "+System.getProperty("java.version")+"; Java vendor: "+System.getProperty("java.vendor"));
+		logger.info("File encoding: "+System.getProperty("file.encoding"));
 	}
 }
