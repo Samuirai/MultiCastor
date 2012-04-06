@@ -56,7 +56,7 @@ public interface XMLParserInterface
 	 */
 	public void saveMulticastConfig(String path, Vector<MulticastData> v) throws IOException;
 
-	//TODO [JT] Check if tbr 
+	//TODO @FF Falls von dir nicht benötigt bitte löschen (JT) 
 //	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
 //	 *  Für Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
 //	 * @param pfad
