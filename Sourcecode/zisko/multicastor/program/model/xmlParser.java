@@ -10,6 +10,7 @@ import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -525,6 +526,8 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		Element system = doc.createElement("System");
 		multiCastor.appendChild(system);
 		Element el;
+		system.appendChild(el=doc.createElement("Time"));
+        el.setTextContent(new Date().toString());
 		try{
 			system.appendChild(el=doc.createElement("Hostname"));
 			el.setTextContent(InetAddress.getLocalHost().getHostName());
