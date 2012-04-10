@@ -37,6 +37,8 @@ public class MulticastData {
 	private long packetCount = -1;
 	/** Packet source program */
 	private Source packetSource = Source.UNDEFINED;
+	private byte[] mmrpGroupMac;
+	private byte[] mmrpSourceMac;
 	// haette ich gerne noch Ende
 	// Avg Werte
 	private long jitterAvg = -1;
@@ -281,7 +283,10 @@ public class MulticastData {
 	}
 	
 	public String identify(){
-		return this.typ + "_" + this.getSenderID() + "_" + groupIp.toString();
+		if(typ == Typ.L2_SENDER || typ == Typ.L2_RECEIVER)
+			return this.typ + "_" + this.getSenderID() + "_" + getMmrpGroupMacAsString();
+		else
+			return this.typ + "_" + this.getSenderID() + "_" + getGroupIp();
 	}	
 	
 	public long getPacketRateAvg() {
@@ -353,5 +358,55 @@ public class MulticastData {
 	}
 	public int getReceivedPackets() {
 		return (int)packetCount;
+	}
+	public byte[] getMmrpGroupMac() {
+		return mmrpGroupMac;
+	}
+	public String getMmrpGroupMacAsString(){
+		String s = "";
+		for(int i = 0; i < mmrpGroupMac.length; i++){
+
+			String tmp = Integer.toHexString(mmrpGroupMac[i]);
+
+			//Falls negativer Wert wird fffffXX zurückgegeben deswegen nur XX nehmen
+			if(tmp.length() > 2)
+				tmp = tmp.substring(tmp.length()-2,tmp.length());
+			
+
+			if(tmp.length() == 1)
+				tmp = "0"+tmp;
+
+			s+=tmp;
+			if(i != (mmrpGroupMac.length-1))
+				s+= ":";
+		}
+		return s;
+	}
+	public String getMmrpSourceMacAsString(){
+		String s = "";
+		for(int i = 0; i < mmrpSourceMac.length; i++){
+			String tmp = Integer.toHexString((int)mmrpSourceMac[i]);
+			
+			//Falls negativer Wert wird fffffXX zurückgegeben deswegen nur XX nehmen
+			if(tmp.length() > 2)
+				tmp = tmp.substring(tmp.length()-2,tmp.length());
+			
+			if(tmp.length() == 1)
+				tmp = "0"+tmp;
+
+			s+=tmp;
+			if(i != (mmrpSourceMac.length-1))
+				s+= ":";
+		}
+		return s;
+	}
+	public void setMmrpGroupMac(byte[] mmrpGroupMac) {
+		this.mmrpGroupMac = mmrpGroupMac;
+	}
+	public byte[] getMmrpSourceMac() {
+		return mmrpSourceMac;
+	}
+	public void setMmrpSourceMac(byte[] mmrpSourceMac) {
+		this.mmrpSourceMac = mmrpSourceMac;
 	}
 }

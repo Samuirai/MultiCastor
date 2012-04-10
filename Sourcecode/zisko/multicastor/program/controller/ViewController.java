@@ -23,6 +23,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
@@ -40,6 +41,8 @@ import javax.swing.event.TableColumnModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 
+import com.sun.corba.se.spi.orbutil.fsm.Input;
+
 import zisko.multicastor.program.view.FrameMain;
 import zisko.multicastor.program.view.MiscBorder;
 import zisko.multicastor.program.view.MiscFont;
@@ -49,6 +52,7 @@ import zisko.multicastor.program.view.PanelMulticastControl;
 import zisko.multicastor.program.view.PanelStatusBar;
 import zisko.multicastor.program.view.PanelTabbed;
 import zisko.multicastor.program.view.PopUpMenu;
+import zisko.multicastor.program.view.WideComboBox;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 import zisko.multicastor.program.view.ReceiverGraph.valueType;
@@ -175,7 +179,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			f.getTabpane().openTab(e.getActionCommand());
 		}
 		
-		//TODO Help file öffnen!
+		//TODO Help file ï¿½ffnen!
 		else if(e.getSource()==f.getMi_help()){
 			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");
 		}
@@ -259,12 +263,20 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTenter(Typ.L3_SENDER);
 		} else if(e.getSource() == getPanConfig(Typ.L3_RECEIVER).getBt_enter()){
 			pressBTenter(Typ.L3_RECEIVER);
+		} else if(e.getSource() == getPanConfig(Typ.L2_SENDER).getBt_enter()){
+			pressBTenter(Typ.L2_SENDER);
+		} else if(e.getSource() == getPanConfig(Typ.L2_RECEIVER).getBt_enter()){
+			pressBTenter(Typ.L2_RECEIVER);
 		} 
 		/* Active/Inactive Button im Config Panel */
 		else if(e.getSource()==getPanConfig(Typ.L3_SENDER).getTb_active()){
 			toggleBTactive(Typ.L3_SENDER);
 		} else if(e.getSource()==getPanConfig(Typ.L3_RECEIVER).getTb_active()){
 			toggleBTactive(Typ.L3_RECEIVER);
+		}else if(e.getSource()==getPanConfig(Typ.L2_SENDER).getTb_active()){
+			toggleBTactive(Typ.L2_SENDER);
+		} else if(e.getSource()==getPanConfig(Typ.L2_RECEIVER).getTb_active()){
+			toggleBTactive(Typ.L2_RECEIVER);
 		}
 		/* Delete Button im Control Panel */
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getDelete()){
@@ -273,12 +285,24 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getDelete()){
 			pressBTDelete(Typ.L3_RECEIVER);
 		}
+		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getDelete()){
+			pressBTDelete(Typ.L2_RECEIVER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getDelete()){
+			pressBTDelete(Typ.L2_SENDER);
+		}
 		/* New Button im Control Panel*/
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getNewmulticast()){
 			pressBTNewMC(Typ.L3_SENDER);
 		}
 		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getNewmulticast()){
 			pressBTNewMC(Typ.L3_RECEIVER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getNewmulticast()){
+			pressBTNewMC(Typ.L2_SENDER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getNewmulticast()){
+			pressBTNewMC(Typ.L2_RECEIVER);
 		}
 		
 		else if(e.getActionCommand().equals("hide")){
@@ -408,7 +432,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		NetworkAdapter.IPType iptype;
 		
 		iptype = NetworkAdapter.getAddressType(getPanConfig(typ).getTf_groupIPaddress().getText());
-				
+
 		switch(typ) {
 			case L3_SENDER:
 				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
@@ -460,6 +484,72 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					mcd.setSourceIp(getPanConfig(typ).getSelectedAddress(typ, iptype));	
 				}
 				break;
+			case L2_SENDER:
+				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
+					if(InputValidator.checkMulticastGroup(getPanConfig(typ).getTf_groupIPaddress().getText())){
+						String inputGroupText = getPanConfig(typ).getTf_groupIPaddress().getText();
+						byte[] b = new byte[6];
+						for(int fromIndex = -1, arrayIndex=0, begin=0; arrayIndex < 6; arrayIndex++){
+							begin = fromIndex;
+							
+							if(arrayIndex < 5)
+								fromIndex = inputGroupText.indexOf(':', fromIndex+1);
+							else
+								fromIndex = inputGroupText.length();
+
+							String tmp = (String)inputGroupText.subSequence(begin+1, fromIndex);
+							if(!tmp.equals("")){
+								b[arrayIndex] = new Byte((byte)Integer.parseInt(tmp, 16));
+							}else{
+								b[arrayIndex] = new Byte("0");
+							}
+						}
+						mcd.setMmrpGroupMac(b);
+					};
+				}
+				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+					mcd.setMmrpSourceMac(getPanConfig(typ).getSelectedAddress(typ));	
+				}
+				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
+					mcd.setPacketLength(InputValidator.checkMMRPPacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
+					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+						mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
+					}
+				}
+				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
+					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
+					if(getSelectedUserLevel() == Userlevel.BEGINNER){
+						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
+					}
+				}
+				break;
+			case L2_RECEIVER:
+				if(!getPanConfig(typ).getTf_groupIPaddress().getText().equals("...")) {
+					if(InputValidator.checkMulticastGroup(getPanConfig(typ).getTf_groupIPaddress().getText())){
+						String inputGroupText = getPanConfig(typ).getTf_groupIPaddress().getText();
+						byte[] b = new byte[6];
+						for(int fromIndex = -1, arrayIndex=0, begin=0; arrayIndex < 6; arrayIndex++){
+							begin = fromIndex;
+							
+							if(arrayIndex < 5)
+								fromIndex = inputGroupText.indexOf(':', fromIndex+1);
+							else
+								fromIndex = inputGroupText.length();
+
+							String tmp = (String)inputGroupText.subSequence(begin+1, fromIndex);
+							if(!tmp.equals("")){
+								b[arrayIndex] = new Byte((byte)Integer.parseInt(tmp, 16));
+							}else{
+								b[arrayIndex] = new Byte("0");
+							}
+						}
+						mcd.setMmrpGroupMac(b);
+					};
+				}
+				if(!(getPanConfig(typ).getCb_sourceIPaddress().getSelectedIndex()==0)){
+					mcd.setMmrpSourceMac(getPanConfig(typ).getSelectedAddress(typ));	
+				}
+				break;
 			default:
 				System.out.println("changeMCData(Multicastdata mcd) - ERROR");
 		}
@@ -490,6 +580,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				} else {
 					input[1][1]=true;
 				}
+			}else if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER){
+				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L2SOURCE, BorderType.TRUE));
+				if(typ==Typ.L2_SENDER){
+					input[2][1]=true;
+				} else {
+					input[3][1]=true;
+				}
 			}
 		} else if(getSelectedRows(typ).length > 1 && configpart.getCb_sourceIPaddress().getItemAt(0).equals("...")){
 			if(typ==Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
@@ -499,13 +596,25 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				} else {
 					input[1][1]=true;
 				}
+			}else if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER){
+				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L2SOURCE, BorderType.TRUE));
+				if(typ==Typ.L2_SENDER){
+					input[2][1]=true;
+				} else {
+					input[3][1]=true;
+				}
 			}
 		} else {
 			switch(typ){
-				case L3_SENDER: input[0][1] = false;  break;
-				case L3_RECEIVER: input[1][1] = false;  break;
+				case L3_SENDER: input[0][1] = false; break;
+				case L3_RECEIVER: input[1][1] = false; break;
+				case L2_SENDER: input[2][1] = false; break;
+				case L2_RECEIVER: input[3][1] = false; break;
 			}
-			configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.NEUTRAL));
+			if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
+				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.NEUTRAL));
+			else if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+				configpart.getPan_sourceIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L2SOURCE, BorderType.NEUTRAL));
 		}
 		checkInput(typ);
 	}
@@ -551,13 +660,37 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					getPanConfig(typ).getBt_enter().setEnabled(false);
 				}
 				break;
-		}
+			case L2_SENDER:
+				if( input[2][0] &&
+					input[2][1] &&
+					input[2][4] &&
+					input[2][5]){
+							getPanConfig(typ).getBt_enter().setEnabled(true);
+						} else if(getSelectedRows(getSelectedTab()).length <=1){
+							getPanConfig(typ).getBt_enter().setEnabled(false);
+						} else {
+							getPanConfig(typ).getBt_enter().setEnabled(false);
+						}
+				break;
+			case L2_RECEIVER:
+				if(input[3][0] &&
+				   input[3][1]){
+					getPanConfig(typ).getBt_enter().setEnabled(true);
+				} else if(getSelectedRows(getSelectedTab()).length <=1){
+					getPanConfig(typ).getBt_enter().setEnabled(false);
+				} else {
+					getPanConfig(typ).getBt_enter().setEnabled(false);
+				}
+				break;
+			}
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn die Eingaben der Textfelder des Konfigurations Panels zurï¿½ckgesetzt werden sollen.
 	 * @param typ Programmteil in welchem die Textfelder zurï¿½ckgesetzt werden sollen.
 	 */
 	private void clearInput(Typ typ){
+		//TODO Remove
+		System.out.println("CLEARINPUT");
 		if(initFinished){
 			getPanConfig(typ).getTf_groupIPaddress().setText("");
 			getPanConfig(typ).getTf_udp_port().setText("");
@@ -691,6 +824,25 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.deleteMC(mcd);
 		updateTable(mcd.getTyp(), UpdateTyp.DELETE);
 	}
+
+	/**
+	 * Funktion, welche die ComboBox fÃ¼r Layer3(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
+	 * @param typ Programmteil in welchem die Box geupdated werden soll.
+	 */
+	public void insertNetworkAdapters(Typ typ){
+		WideComboBox cbSrc = getPanConfig(typ).getCb_sourceIPaddress();
+		
+		/* Als erstes die CB leeren */
+		cbSrc.removeAllItems();
+		cbSrc.addItem("");
+		
+		Vector<byte[]> temp = NetworkAdapter.getMacAdapters();
+		
+		if (temp != null)
+			for(int i = 0 ; i < temp.size(); i++)
+					cbSrc.addItem(NetworkAdapter.getNameToMacAdress(temp.get(i)));
+		
+	}
 	
 	/**
 	 * Funktion, welche die ComboBox mit den richtigen Netzwerkadaptern fuellt.
@@ -698,9 +850,11 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param isIPv4 true bei IPv4 und false bei IPv6
 	 */
 	private void insertNetworkAdapters(Typ typ, boolean isIPv4) {
+		WideComboBox cbSrc = getPanConfig(typ).getCb_sourceIPaddress();
+		
 		/* Als erstes die CB leeren */
-		getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
-		getPanConfig(typ).getCb_sourceIPaddress().addItem("");
+		cbSrc.removeAllItems();
+		cbSrc.addItem("");
 		
 		Vector<InetAddress> temp = null;
 		if (isIPv4) {
@@ -712,7 +866,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if (temp != null) {
 			for(int i = 0 ; i < temp.size(); i++){
 				try {
-					getPanConfig(typ).getCb_sourceIPaddress().addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
+					cbSrc.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 				} catch (SocketException e) {
 					e.printStackTrace();
 				}
@@ -727,9 +881,27 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private void docEventTFgrp(Typ typ){
 		// TODO [MH] umschreiben zu NetworkAdapter.getAdressType
 		boolean isIPv4 = InputValidator.checkMC_IPv4(getPanConfig(typ).getTf_groupIPaddress().getText()) != null;
-		boolean isIPv6 = InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()) != null; 
+		boolean isIPv6 = InputValidator.checkMC_IPv6(getPanConfig(typ).getTf_groupIPaddress().getText()) != null;
+		boolean mac = InputValidator.checkMulticastGroup(getPanConfig(typ).getTf_groupIPaddress().getText());
 		
-		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
+		if (typ == Typ.L2_SENDER || typ == Typ.L2_RECEIVER){
+			if(getPanConfig(typ).getCb_sourceIPaddress().getItemCount() <= 1)
+				insertNetworkAdapters(typ);
+			
+			if(mac){
+				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L2GROUP, BorderType.TRUE));
+				if(typ == Typ.L2_SENDER)
+					input[2][0] = true;
+				else
+					input[3][0] = true;
+			}else{
+				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L2GROUP, BorderType.FALSE));
+				if(typ == Typ.L2_SENDER)
+					input[2][0] = false;
+				else
+					input[3][0] = false;			
+			}
+		}else if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			if(
 				isIPv4 || isIPv6 ||
 				(getSelectedRows(typ).length > 1 && getPanConfig(typ).getTf_groupIPaddress().getText().equals("..."))
@@ -751,6 +923,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				}
 			} else {
 				getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.FALSE));
+				//insertNetworkAdapters(typ); 
 				if (typ == Typ.L3_SENDER) {
 					input[0][0] = false;
 					getPanConfig(typ).getTf_udp_packetlength().setEnabled(false);
@@ -764,7 +937,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				
 			}
 		}
-		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("")){		
+		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("") && typ != Typ.L2_SENDER && typ != typ.L2_RECEIVER){		
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
@@ -782,8 +955,27 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem das Packet Length Feld geï¿½ndert wurde.
 	 */
 	private void docEventTFlength(Typ typ){
-		if (typ == Typ.L3_SENDER) {
-			if (NetworkAdapter.getAddressType(getPanConfig(typ).getTf_groupIPaddress().getText()) == IPType.IPv4) {
+		IPType ipTyp = NetworkAdapter.getAddressType(getPanConfig(typ).getTf_groupIPaddress().getText());
+		if (typ == Typ.L3_SENDER && ipTyp != null) {
+			if((ipTyp == IPType.IPv4 && InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()) > 0) ||
+				(ipTyp == IPType.IPv6 && InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()) > 0)){
+				getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
+				input[0][5]=true;
+			} else {
+				getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
+				input[0][5]=false;
+			}
+		}else if(typ == Typ.L2_SENDER){
+			if(InputValidator.checkMMRPPacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()) > 0){
+				getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
+				input[2][5]=true;
+			}else{
+				getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.FALSE));
+				input[2][5]=false;
+			}
+				
+		}
+			/*if (NetworkAdapter.getAddressType(getPanConfig(typ).getTf_groupIPaddress().getText()) == IPType.IPv4) {
 				if((InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()) > 0)) {
 					getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.TRUE));
 					input[0][5]=true;
@@ -800,8 +992,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 						input[0][5]=false;
 					} 
 					
-			}
-		}
+			}*/
+		
 		if(getPanConfig(typ).getTf_udp_packetlength().getText().equalsIgnoreCase("")){					
 			getPanConfig(typ).getPan_packetlength().setBorder(MiscBorder.getBorder(BorderTitle.LENGTH, BorderType.NEUTRAL));					
 		}
@@ -850,12 +1042,16 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getPan_packetrate().setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.TRUE));
 			if(typ == Typ.L3_SENDER){
 				input[0][4]=true;
+			}else if(typ == Typ.L2_SENDER){
+				input[2][4]=true;
 			}
 		}
 		else{
 			getPanConfig(typ).getPan_packetrate().setBorder(MiscBorder.getBorder(BorderTitle.RATE, BorderType.FALSE));
 			if(typ == Typ.L3_SENDER){
 				input[0][4]=false;
+			}else if(typ == Typ.L2_SENDER){
+				input[2][4]=false;
 			}
 		}
 		if(getPanConfig(typ).getTf_packetrate().getText().equalsIgnoreCase("")){					
@@ -1004,6 +1200,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public int[] getSelectedRows(Typ typ){
 		int[] ret=null;
 		ret = getTable(typ).getSelectedRows();
+		//System.out.println("ret: " + Arrays.toString(ret));
 		return ret;
 	}
 	/**
@@ -1165,6 +1362,14 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			docEventTFrate(Typ.L3_SENDER);
 		} else if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().getDocument()) {
 			docEventTFlength(Typ.L3_SENDER);
+		} else if (source.getDocument() == getPanConfig(Typ.L2_RECEIVER).getTf_groupIPaddress().getDocument()) {
+			docEventTFgrp(Typ.L2_RECEIVER);
+		} else if (source.getDocument() == getPanConfig(Typ.L2_SENDER).getTf_groupIPaddress().getDocument()) {
+			docEventTFgrp(Typ.L2_SENDER);
+		} else if(source.getDocument() == getPanConfig(Typ.L2_SENDER).getTf_udp_packetlength().getDocument()) {
+			docEventTFlength(Typ.L2_SENDER);
+		} else if(source.getDocument() == getPanConfig(Typ.L2_SENDER).getTf_packetrate().getDocument()) {
+			docEventTFrate(Typ.L2_SENDER);
 		}
 		autoSave();
 	}
@@ -1181,7 +1386,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				changeNetworkInterface(Typ.L3_SENDER);
 			} else if(arg0.getSource() == getPanConfig(Typ.L3_RECEIVER).getTf_sourceIPaddress()){
 				changeNetworkInterface(Typ.L3_RECEIVER);
+			} else if(arg0.getSource() == getPanConfig(Typ.L2_SENDER).getTf_sourceIPaddress()){
+				changeNetworkInterface(Typ.L2_SENDER);
+			}else if(arg0.getSource() == getPanConfig(Typ.L2_RECEIVER).getTf_sourceIPaddress()){
+				changeNetworkInterface(Typ.L2_RECEIVER);
 			}
+			
 			/* Auswahl des Lost Packages Graphen im Receiver */
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getLostPktsRB()){
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
@@ -1418,7 +1628,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		switch(typ){
 			case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
 			case L3_RECEIVER: tabpart=f.getPanel_rec_lay3(); break;
+			case L2_SENDER: tabpart = f.getPanel_sen_lay2(); break;
+			case L2_RECEIVER: tabpart = f.getPanel_rec_lay2(); break;
 		}
+		
 		int[] selectedRows = tabpart.getTable().getSelectedRows();
 		tabpart.getPan_status().getLb_multicasts_selected().setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
 		if(selectedRows.length > 1){
@@ -1427,23 +1640,34 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(selectedRows.length == 1){
 			tabpart.getPan_config().getBt_enter().setText(lang.getProperty("button.change"));
 			tabpart.getPan_config().getTf_groupIPaddress().setEnabled(true);
-			tabpart.getPan_config().getTf_udp_port().setEnabled(true);
-			tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0],typ).getGroupIp().toString().substring(1));
-			tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());
-
-			IPType iptype = NetworkAdapter.getAddressType(tabpart.getPan_config().getTf_groupIPaddress().getText());
-			if (iptype == IPType.IPv4) {
-				insertNetworkAdapters(typ, true);
-			} else if (iptype == IPType.IPv6) {
-				insertNetworkAdapters(typ, false);
+			if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER){
+				tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0],typ).getGroupIp().toString().substring(1));
+				tabpart.getPan_config().getTf_udp_port().setText(""+getMCData(selectedRows[0],typ).getUdpPort());
+				tabpart.getPan_config().getTf_udp_port().setEnabled(true);
+				
+				IPType iptype = NetworkAdapter.getAddressType(tabpart.getPan_config().getTf_groupIPaddress().getText());
+				if (iptype == IPType.IPv4) {
+					insertNetworkAdapters(typ, true);
+				} else if (iptype == IPType.IPv6) {
+					insertNetworkAdapters(typ, false);
+				}
+				tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
+						NetworkAdapter.findAddressIndex(getMCData(selectedRows[0],typ).getSourceIp().toString().substring(1))+1
+					);
+			}else{
+				tabpart.getPan_config().getTf_groupIPaddress().setText(getMCData(selectedRows[0], typ).getMmrpGroupMacAsString());
+				insertNetworkAdapters(typ);
+				tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
+						NetworkAdapter.findAddressIndexMMRP(Arrays.toString(getMCData(selectedRows[0],typ).getMmrpSourceMac()))
+					);			
 			}
-			tabpart.getPan_config().getTf_sourceIPaddress().setSelectedIndex(
-				NetworkAdapter.findAddressIndex(getMCData(selectedRows[0],typ).getSourceIp().toString().substring(1))+1
-			);
-			
+
+			if(typ == Typ.L2_SENDER){
+				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());
+				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());
+			}
 			if(typ == Typ.L3_SENDER){
 				tabpart.getPan_config().getTf_ttl().setText(""+getMCData(selectedRows[0],typ).getTtl());;
-				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());;
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());;
 			}
 			setTBactive(selectedRows, typ);
@@ -1807,7 +2031,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
         	}
         }		
 		
-//      TODO @FF Für dich als Codebsp. hier gelassen, falls das noch gebraucht wird (JT)
+//      TODO @FF Fï¿½r dich als Codebsp. hier gelassen, falls das noch gebraucht wird (JT)
 //		if(e.getActionCommand().equals("ApproveSelection")){
 //			FrameFileChooser fc_save = getFrame().getFc_save();
 //			//System.out.println("selected File: "+fc_save.getSelectedFile());
@@ -1989,7 +2213,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else{
 			graphData = new MulticastData[getSelectedRows(typ).length];
+			//System.out.println("GraphData: " + graphData.length);
 			for(int i = 0; i < getSelectedRows(typ).length ; i++){
+				//System.out.println(i);
 				graphData[i]=mc.getMC(getSelectedRows(typ)[i], typ);
 			}
 			getPanTabbed(typ).getPan_recGraph().updateGraph(graphData, showupdate);
@@ -2042,6 +2268,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		if(e.getSource()==getTable(Typ.L3_RECEIVER).getSelectionModel()){
 			listSelectionEventFired(Typ.L3_RECEIVER);
+		}
+		if(e.getSource()==getTable(Typ.L2_SENDER).getSelectionModel()){
+			listSelectionEventFired(Typ.L2_SENDER);
+		}
+		if(e.getSource()==getTable(Typ.L2_RECEIVER).getSelectionModel()){
+			listSelectionEventFired(Typ.L2_RECEIVER);
 		}
 		autoSave();
 	}

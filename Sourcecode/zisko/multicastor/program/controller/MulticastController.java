@@ -19,6 +19,8 @@ import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.interfaces.XMLParserInterface;
+import zisko.multicastor.program.model.MulticastMmrpReceiver;
+import zisko.multicastor.program.model.MulticastMmrpSender;
 import zisko.multicastor.program.model.MulticastReceiver;
 import zisko.multicastor.program.model.MulticastSender;
 import zisko.multicastor.program.model.RegularLoggingTask;
@@ -186,12 +188,27 @@ public class MulticastController{
 		// Erzeugt den passenden MulticastThreadSuper
 		MulticastThreadSuper t = null; 
 		
-		if(m.getTyp() == MulticastData.Typ.L3_SENDER) {
-			t = new MulticastSender(m, logger);
-			//V1.5 [FH] Added MulticastController to stop it in case of network error
-			((MulticastSender) t).setMCtrl(this);
-		} else if (m.getTyp() == MulticastData.Typ.L3_RECEIVER){
-			t = new MulticastReceiver(m, logger);
+		switch (m.getTyp()) {
+			case L3_SENDER:
+				t = new MulticastSender(m, logger);
+				//V1.5 [FH] Added MulticastController to stop it in case of network error
+				((MulticastSender) t).setMCtrl(this);
+				break;
+			
+			case L3_RECEIVER:
+				t = new MulticastReceiver(m, logger);
+				break;
+			
+			case L2_SENDER:
+				t = new MulticastMmrpSender(m, logger);
+				break;
+			
+			case L2_RECEIVER:
+				t = new MulticastMmrpReceiver(m, logger);
+				break;
+
+			default:
+				break;
 		}
 		
 		// Fuegt Multicasts zu der entsprechenden Map und Vector hinzu
@@ -263,17 +280,26 @@ public class MulticastController{
 					}
 				}
 				
-				// Thread ID nur bei Sendern setzen. 
-				//   Beim Receiver wird der Wert aus dem Datenpaket ausgelesen.
-				if(m.getTyp() == MulticastData.Typ.L3_SENDER){
-					m.setThreadID(threadCounter);
-					threadCounter++;
-				} else { // Receiver haben den GroupJoin ausgelagert.
-					if(((MulticastReceiver) getMCMap(m).get(m)).joinGroup()){
+				switch (m.getTyp()) {
+					case L3_SENDER:
+						// Thread ID nur bei Sendern setzen. 
+						//   Beim Receiver wird der Wert aus dem Datenpaket ausgelesen.
+						m.setThreadID(threadCounter);
+						threadCounter++;
+						break;
+					case L3_RECEIVER:
 						// Fehlermeldung und Log werden im Receiver selber ausgegeben.
-						return;
-					}
+						if(((MulticastReceiver) getMCMap(m).get(m)).joinGroup())
+							return;
+						break;
+					/*case L2_SENDER:
+						break;
+					case L2_RECEIVER:
+						break;*/
+					default:
+						break;
 				}
+				
 				// Multicast auf aktiv setzen, einen neuen Thread erzeugen und starten.
 				getMCMap(m).get(m).setActive(true);
 				Thread t = new Thread(getMCMap(m).get(m));
@@ -405,7 +431,7 @@ public class MulticastController{
 	}
 	
 
-//TODO @FF für dich als Bsp. drin gelassen. Wird nirgends aufgerufen. Wenn nicht mehr benötoigt bitte einfach löschen.
+//TODO @FF fï¿½r dich als Bsp. drin gelassen. Wird nirgends aufgerufen. Wenn nicht mehr benï¿½toigt bitte einfach lï¿½schen.
 	/**
 	 * Speichert eine Konfigurationsdatei an den angegebenen Pfad. Hierbei werden nur die
 	 * Multicasts von Typen mit uebergebenem True gespeichert.
@@ -460,7 +486,7 @@ public class MulticastController{
 		v.addAll(getMCs(Typ.L3_SENDER));
 		saveMulticastConfig("MultiCastor.xml", v);
 		
-		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
+		//TODO @FF Hier muss auch das schreiben fï¿½r die neue GUI-Config ausgelï¿½st werden.
 	}
 	
 	/**
@@ -692,7 +718,9 @@ public class MulticastController{
 			//System.out.println("Index: " + index + getMCVector(multicastDataTyp).toString());
 			return (MulticastData) getMCVector(multicastDataTyp).get(index);
 		}catch(IndexOutOfBoundsException e){
-			logger.log(Level.SEVERE, "IndexOutOfBoundsException in MulticastController - getMC");
+			//logger.log(Level.SEVERE, "IndexOutOfBoundsException in MulticastController - getMC");
+			//System.out.println(index);
+			e.printStackTrace();
 			return null;
 		}
 	}
