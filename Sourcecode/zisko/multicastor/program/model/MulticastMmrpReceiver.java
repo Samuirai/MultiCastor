@@ -110,7 +110,6 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 
 		try {
 			receiver.registerPath();
-			
 		} catch (IOException e) {
 			proclaim(3, "Could not register receiver path");
 		}
@@ -125,8 +124,15 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		packetAnalyzer.resetValues();
 		packetAnalyzer.update();
 		packetAnalyzer.updateMin();
+		
 		// Thread ist beendet
 		setStillRunning(false);
+		
+		try {
+			receiver.deregisterPath();
+		} catch (IOException e) {
+			proclaim(3, "Could not deregister receiver path");
+		}
 	}
 
 }
