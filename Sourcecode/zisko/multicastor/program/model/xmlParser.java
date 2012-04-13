@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -535,11 +538,36 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	{
 		//Erzeuge ein neues XML Dokument
 		Document doc = createDocument();
-	         
+		
         //Erzeuge das Root Element des XML Dokumentes, "MultiCastor".
         Element multiCastor = doc.createElement("MultiCastor");
         doc.appendChild(multiCastor);
-	        
+	    
+        //TODO @FF diese User System Informationen bitte auch in die GUI Config schreiben lassen [JT]
+		// Erzeugt Root Element für die User System Informationen
+		Element system = doc.createElement("System");
+		multiCastor.appendChild(system);
+		Element el;
+		system.appendChild(el=doc.createElement("Time"));
+        el.setTextContent(new Date().toString());
+		try{
+			system.appendChild(el=doc.createElement("Hostname"));
+			el.setTextContent(InetAddress.getLocalHost().getHostName());
+			system.appendChild(el=doc.createElement("Hostaddress"));
+			el.setTextContent(InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			//already loged at the program start. Just create empty tags
+			system.appendChild(el=doc.createElement("Hostname"));
+			system.appendChild(el=doc.createElement("Hostaddress"));
+		}
+		system.appendChild(el=doc.createElement("Username"));
+        el.setTextContent(System.getProperty("user.name"));
+        system.appendChild(el=doc.createElement("Javaversion"));
+        el.setTextContent(System.getProperty("java.version"));
+        system.appendChild(el=doc.createElement("Javavendor"));
+        el.setTextContent(System.getProperty("java.vendor"));
+        
+		//Speichert die Multicast Daten
 	    saveMulticastData(doc, multiCastor, v);
    
 	    //##### XML Ausgabe #####
