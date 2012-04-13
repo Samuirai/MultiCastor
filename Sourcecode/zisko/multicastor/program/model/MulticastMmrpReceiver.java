@@ -50,6 +50,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		} catch (IOException e) {
 			proclaim(3, "Could not create Receiver");
 		}
+		
 		// resets MulticastData Object to avoid default value -1
 		//mcData.resetValues();
 	}
@@ -118,6 +119,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			//RECEIVING HERE
 			packetAnalyzer.setTimeout(false);
 			//packetAnalyzer.analyzePacket(datagram.getData());
+			System.out.println("hierwhile");
 		}
 		
 		// Resetted gemessene Werte (SenderID bleibt erhalten, wegen des Wiedererkennungswertes)
@@ -130,6 +132,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		
 		try {
 			receiver.deregisterPath();
+			System.out.println("ich deregistriere");
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
 		}
