@@ -200,7 +200,7 @@ public class MulticastController{
 				break;
 			
 			case L2_SENDER:
-				t = new MulticastMmrpSender(m, logger);
+				t = new MulticastMmrpSender(m, logger, this);
 				break;
 			
 			case L2_RECEIVER:
@@ -270,6 +270,7 @@ public class MulticastController{
 	public void startMC(MulticastData m) {
 	//	writeConfig();
 	//	System.out.println("writeConfig");
+
 		synchronized(m){ // ohne sychronized ist das Programm in einen Deadlock gelaufen
 			if(!threads.containsKey(m)){ // prueft ob der Multicast schon laeuft.
 				long time = System.currentTimeMillis()+2000; // versucht, 2 Sekunden lang auf den noch laufenden Thread zu warten.
@@ -462,7 +463,8 @@ public class MulticastController{
 		final String p = "MultiCastor.xml";	
 
 		try{	// Uebergibt den Vektor mit allen Multicasts an den XMLParser
-			if(path==null&&path.length()==0){
+			// FH Changed && to ||, think this is right ;)
+			if(path==null || path.length()==0){
 				xml_parser.saveMulticastConfig(p, v);
 				//logger.log(Level.INFO, "Saved Multicastconfiguration at default location.");
 			} else {

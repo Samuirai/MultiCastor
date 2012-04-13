@@ -2,6 +2,8 @@ package zisko.multicastor.program.data;
 
 import java.net.InetAddress;
 
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+
 /**
  * Diese Bean-Klasse h�llt Informationen �ber einen Multicast.
  * Objekte von dieser Klasse werden daf�r benutzt Multicast-
@@ -364,23 +366,48 @@ public class MulticastData {
 	}
 	public String getMmrpGroupMacAsString(){
 		String s = "";
-		for(int i = 0; i < mmrpGroupMac.length; i++){
+		if(mmrpGroupMac != null)
+			for(int i = 0; i < mmrpGroupMac.length; i++){
 
-			String tmp = Integer.toHexString(mmrpGroupMac[i]);
+				String tmp = Integer.toHexString(mmrpGroupMac[i]);
 
-			//Falls negativer Wert wird fffffXX zurückgegeben deswegen nur XX nehmen
-			if(tmp.length() > 2)
-				tmp = tmp.substring(tmp.length()-2,tmp.length());
+				//Falls negativer Wert wird fffffXX zurückgegeben deswegen nur XX nehmen
+				if(tmp.length() > 2)
+					tmp = tmp.substring(tmp.length()-2,tmp.length());
 			
 
-			if(tmp.length() == 1)
-				tmp = "0"+tmp;
+				if(tmp.length() == 1)
+					tmp = "0"+tmp;
 
-			s+=tmp;
-			if(i != (mmrpGroupMac.length-1))
-				s+= ":";
-		}
+				s+=tmp;
+				if(i != (mmrpGroupMac.length-1))
+					s+= ":";
+			}
 		return s;
+	}
+	
+	public byte[] getMMRPFromString(String s) throws Exception{
+		byte[] b = new byte[6];
+		String substring;
+		HexBinaryAdapter h = new HexBinaryAdapter();
+		
+		for(int begin = 0, end, counter = 0; counter < 6 ; counter++ ){
+			end = s.indexOf(":", begin);
+			
+			if(end != -1)
+				substring = (String)s.subSequence(begin, end);
+			else
+				substring = (String)s.subSequence(begin, s.length());
+			
+			//Shouldn't happen ;)
+			if(substring.length() == 1)
+				substring = "0" + substring;
+			
+		
+			b[counter] = h.unmarshal(substring)[0];
+			begin = end+1;
+		}
+		return b;
 	}
 	public String getMmrpSourceMacAsString(){
 		String s = "";
