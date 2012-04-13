@@ -7,7 +7,6 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -278,7 +277,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 					do{
 						try{
 							mcSocket.send(new DatagramPacket(myPacketBuilder.getPacket(),
-															 mcData.getPacketLength(),
+														 mcData.getPacketLength(),
 															 mcGroupIp,
 															 udpPort)
 									      );
@@ -324,35 +323,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 					}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
 				}
 				break;
-			/*case PEAK:	//Misst wie lange er sendt um die Paketrate zu erhalten
-						//und sleept den Rest der Sekunde
-						long endTime	= 0,
-							 timeLeft	= 0;
-						while(isSending){
-							//Sleep wenn noch etwas von der letzten Sekunde �brig
-							timeLeft = endTime-System.nanoTime();
-							if(timeLeft>0)	try{
-												Thread.sleep(timeLeft/1000000, (int) (timeLeft%1000000));
-											}catch(InterruptedException e){
-												proclaim(1, "Sleep after sending with method PEAK failed: " + e.getMessage());
-											}
-							endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
-							do{
-								try{
-									mcSocket.send(new DatagramPacket(myPacketBuilder.getPacket(),
-																	 mcData.getPacketLength(),
-																	 mcGroupIp,
-																	 udpPort)
-											      );
-									if(totalPacketCount<65535)	totalPacketCount++;
-									else						totalPacketCount = 0;
-									resetablePcktCnt++;
-								}catch(IOException e1){
-									proclaim(1, "While sending: " + e1.getMessage());
-								}
-							}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
-						}
-						break;*/
+
 			case SLEEP_MULTIPLE:	//mit Thread.sleep zwischen jedem Senden
 			default:
 						while(isSending){

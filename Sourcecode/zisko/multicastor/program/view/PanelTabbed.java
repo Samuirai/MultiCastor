@@ -119,10 +119,11 @@ public class PanelTabbed extends JPanel {
 //		pan_graph.setVisible(false);
 //		tab_console.remove(0);
 	}
+	
 	/**
 	 * Initialisiert die Tabelle
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehï¿½rt
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();

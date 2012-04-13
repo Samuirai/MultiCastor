@@ -33,9 +33,11 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
+import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
+import zisko.multicastor.program.data.GUIData.TabState;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -50,7 +52,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	
 	private enum mcdTag{
 		active, groupIp, sourceIp, udpPort, packetLength, ttl,
-		packetRateDesired, typ,
+		packetRateDesired, typ, sourceMac, groupMac
 	}
 	private enum uldTag{
 		startButton, stopButton, newButton, selectAllButton,
@@ -80,6 +82,16 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		
 		if (v != null) {
 			loadMulticastData(doc, v);
+		}
+	}
+	
+	@Override
+	public void loadGUIConfig(String path, GUIData data) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException {
+		// load GUI Config [FF]
+		Document doc = parseDocument(path);
+		
+		if (data != null) {
+			loadGUIData(doc, data);
 		}
 	}
 	
@@ -116,6 +128,39 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 //		loadConfig(pfad, v1, v2, null, null);
 //	}
 	
+	private void loadGUIData(Document doc, GUIData data) {
+		//********************************************************
+	    // Lese die GUI Konfigurationsdaten aus dem XML
+	    //********************************************************
+		NodeList tabs = doc.getElementsByTagName("Tabs");
+		if(tabs.getLength()==1) {
+			NodeList tabList = tabs.item(0).getChildNodes();
+			for(int i=0; i<tabList.getLength(); i++) {   
+	    		//Evaluiere nur L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
+	    		if(tabList.item(i).getNodeName().equals("#text")) {
+	    			continue;
+	    		}
+	  
+	    		if(tabList.item(i).getNodeName().equals("L2_SENDER"))
+		  		  data.setL2_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("L2_RECEIVER"))
+		  		  data.setL2_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("L3_SENDER"))
+		  		  data.setL3_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("L3_RECEIVER"))
+		  		  data.setL3_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+			}
+		}
+		NodeList windowTitle = doc.getElementsByTagName("WindowName");
+		if(windowTitle.getLength()==1) {
+			data.setWindowName(windowTitle.item(0).getTextContent());
+		}
+		NodeList language = doc.getElementsByTagName("Language");
+		if(language.getLength()==1) {
+			data.setLanguage(language.item(0).getTextContent());
+		}
+	}
+
 	private void loadMulticastData(Document doc, Vector<MulticastData> v) throws WrongConfigurationException {    
 	    //********************************************************
 	    // Lese die MultiCast Konfigurationsdaten aus dem XML
@@ -127,7 +172,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    //Der Tag "Multicasts" ist nur 1 Mal vorhanden,
 	    //wenn das XML korrekt ist
 	    if(multicasts.getLength()==1) {
-	    	//Lösche bisherige Einstellungen
+	    	//Lï¿½sche bisherige Einstellungen
 		    v.clear();
 	    	//Erstelle neues MulticastData Objekt
 	    	MulticastData mcd;
@@ -135,7 +180,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    	//Diese sind L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER oder UNDEFINED
 	    	NodeList mcList = multicasts.item(0).getChildNodes();
 	    	
-	    	//Zähle alle Multicast Tags
+	    	//Zï¿½hle alle Multicast Tags
 	    	int mcNummer = 0;
 	    	
 	    	//Iteration L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
@@ -156,7 +201,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		    	
 	    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 	    		NodeList configList=mcList.item(i).getChildNodes();
-	    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+	    		//Iteration ï¿½ber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 	    		for(int j=0; j<configList.getLength(); j++) {
 		    		configNode=configList.item(j);
 
@@ -233,7 +278,9 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		    						if(InputValidator.checkPort(val)>0)
 		    							mcd.setUdpPort(Integer.parseInt(val)); 
 		    						else{
-		    							throwWrongContentException(stag, val, mcNummer);
+		    							if(mcList.item(i).getNodeName()=="L3_SENDER" || mcList.item(i).getNodeName()=="L3_RECEIVER")
+		    								throwWrongContentException(stag, val, mcNummer);
+		    							else	mcd.setUdpPort(0);
 			    					}
 		    						break;
 			    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
@@ -285,6 +332,26 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    				} else if (mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 			    					throwEmptyContentException(stag, val, mcNummer);
 		    					}
+			    			case sourceMac:
+			    				if(!val.isEmpty()){
+			    					try {
+										mcd.setMmrpSourceMac(mcd.getMMRPFromString(val));
+									} catch (Exception e) {
+										System.out.println(e);
+										//If we can't parse it.... we just dont load it
+										//Feel free to write an logoutput if you want to
+									}
+			    				}
+			    			case groupMac:
+			    				if(!val.isEmpty()){
+			    					try {
+										mcd.setMmrpGroupMac(mcd.getMMRPFromString(val));
+									} catch (Exception e) {
+										System.out.println(e);
+										//If we can't parse it.... we just dont load it
+										//Feel free to write an logoutput if you want to
+									}
+			    				}
 			    		} // end of switch
 			    	} //end of if
 	    		}//end of for
@@ -306,7 +373,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		
 			    if(list.getLength()==1)
 			    {
-			    	//Lösche bisherige Einstellungen
+			    	//Lï¿½sche bisherige Einstellungen
 				    v2.clear();
 				    
 			    	//Erstelle neues Userlevedata Objekt
@@ -330,7 +397,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    	
 			    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 			    		NodeList configList=uldList.item(i).getChildNodes();
-			    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+			    		//Iteration ï¿½ber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 			    		for(int j=0; j<configList.getLength(); j++)
 			    		{
 			    			
@@ -404,7 +471,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    }
 			 }		 
 	
-	//TODO @[CW] Hier müsste Userlevel noch raus!
+	//TODO @[CW] Hier mï¿½sste Userlevel noch raus!
 	private void loadUserInputData(Document doc, Vector<UserInputData> v3) throws SAXException, FileNotFoundException, IOException
 	{
 		
@@ -415,7 +482,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    //wenn das XML korrekt ist
 	    if(userinputdata.getLength()==1)
 	    {
-	    	//Lösche bisherige Einstellungen
+	    	//Lï¿½sche bisherige Einstellungen
 		    v3.clear();
 		    
 	    	//Erstelle neues MulticastData Objekt
@@ -441,7 +508,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 	    		NodeList configList=uidList.item(i).getChildNodes();
 	    		
-	    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+	    		//Iteration ï¿½ber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 	    		for(int j=0; j<configList.getLength(); j++)
 	    		{
 		    		configNode=configList.item(j);
@@ -452,7 +519,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    		String val = configValue.getTextContent();
 			    		String stag = configValue.getTagName();
 			    		uidTag tag = uidTag.valueOf(stag);
-				    			//Füge den Inhalt des Elementes dem uid-Objekt hinzu
+				    			//Fï¿½ge den Inhalt des Elementes dem uid-Objekt hinzu
 				    			switch(tag)
 				    			{
 				    				case selectedTab: uid.setSelectedTab(val); break;
@@ -472,7 +539,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    }//end of if
 				   
 			    }//end of for
-	    		 //Füge das uid-Objekt dem Vektor v3 hinzu
+	    		 //Fï¿½ge das uid-Objekt dem Vektor v3 hinzu
 			     v3.add(uid);
 		    }
 		}
@@ -483,7 +550,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			NodeList list = doc.getElementsByTagName("PathData");
 			 if(list.getLength()==1)
 			    {
-			    	//Lösche bisherige Einstellungen
+			    	//Lï¿½sche bisherige Einstellungen
 				    v3.clear();
 				    
 				    //Variablen
@@ -495,7 +562,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		
 			    		for(int i=0; i<configList.getLength(); i++)
 			    		{
-			    			 //Evaluiere nur gültige Nodes
+			    			 //Evaluiere nur gï¿½ltige Nodes
 				    		if(configList.item(i).getNodeName()=="#text"){
 				    			continue;
 				    		}
@@ -509,6 +576,80 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    		}
 			    		}
 			    }
+	}
+	
+	@Override
+	public void saveGUIConfig(String pfad, GUIData data) throws IOException {
+		// [FF] saveGuiConfig
+		System.out.println(data);
+		Element el;
+		
+		//Erzeuge ein neues XML Dokument
+		Document doc = createDocument();
+		Element guiConfig = doc.createElement("MultiCastor");
+        doc.appendChild(guiConfig);
+        
+        
+		// Erzeugt Root Element für die User System Informationen
+		Element system = doc.createElement("System");
+		guiConfig.appendChild(system);
+		system.appendChild(el=doc.createElement("Time"));
+		  el.setTextContent(new Date().toString());
+		try{
+			system.appendChild(el=doc.createElement("Hostname"));
+			el.setTextContent(InetAddress.getLocalHost().getHostName());
+			system.appendChild(el=doc.createElement("Hostaddress"));
+			el.setTextContent(InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			//already loged at the program start. Just create empty tags
+			system.appendChild(el=doc.createElement("Hostname"));
+			system.appendChild(el=doc.createElement("Hostaddress"));
+		}
+		system.appendChild(el=doc.createElement("Username"));
+		  el.setTextContent(System.getProperty("user.name"));
+		system.appendChild(el=doc.createElement("Javaversion"));
+		  el.setTextContent(System.getProperty("java.version"));
+		system.appendChild(el=doc.createElement("Javavendor"));
+		  el.setTextContent(System.getProperty("java.vendor"));
+		  
+		  
+		  
+		// Erzeugt Root Element für die User System Informationen
+		Element tabs = doc.createElement("Tabs");
+		guiConfig.appendChild(tabs);
+		
+		tabs.appendChild(el=doc.createElement("L2_SENDER"));
+		  el.setTextContent(data.getL2_RECEIVER().toString());
+		tabs.appendChild(el=doc.createElement("L2_RECEIVER"));
+		  el.setTextContent(data.getL2_SENDER().toString());
+		tabs.appendChild(el=doc.createElement("L3_SENDER"));
+		  el.setTextContent(data.getL3_SENDER().toString());
+		tabs.appendChild(el=doc.createElement("L3_RECEIVER"));
+		  el.setTextContent(data.getL3_RECEIVER().toString());
+		  
+		Element language = doc.createElement("Language");
+		  language.setTextContent(data.getLanguage());  
+		  guiConfig.appendChild(language);
+		Element windowName = doc.createElement("WindowName");
+		  windowName.setTextContent(data.getWindowName());
+		  guiConfig.appendChild(windowName);
+
+		//Erzeuge einen Transformer
+	    Transformer transformer = setupTransformer();
+
+	    //Erstelle einen String aus dem XML Baum
+	    String xmlString = XMLtoString(doc, transformer);
+	         
+	    //print xml to console
+	    //System.out.println("Here's the xml:\n\n" + xmlString);
+	         
+	    File xmlfile= new File(pfad);
+	    BufferedWriter writer = null;
+	    writer = new BufferedWriter(new FileWriter(xmlfile));
+	    String prolog="<?xml version=\"1.0\"?>\n";
+	    writer.write(prolog+xmlString);
+	    writer.close();
+	 	
 	}
 	
 	@Override
@@ -573,19 +714,19 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		// Schreibe die MultiCast Konfigurationsdaten in das XML
 		// ********************************************************
 
-		// Erzeugt Root Element für die MultiCast Konfigurationen
+		// Erzeugt Root Element fï¿½r die MultiCast Konfigurationen
 		Element multicasts = doc.createElement("Multicasts");
 		root.appendChild(multicasts);
 
-		// Für alle verschiedenen Konfigurationen
+		// Fï¿½r alle verschiedenen Konfigurationen
 		for (int count = 0; count < v1.size(); count++) {
 			// Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-			// Füge dementsprechend ein Kind Element hinzu
+			// Fï¿½ge dementsprechend ein Kind Element hinzu
 			MulticastData.Typ typ = v1.get(count).getTyp();
 			Element mcdTyp = doc.createElement(typ.toString());
 			multicasts.appendChild(mcdTyp);
 
-			// Für alle vorhandenen Einstellungen
+			// Fï¿½r alle vorhandenen Einstellungen
 			for (mcdTag tag : mcdTag.values()) {
 				Element mcdElement = doc.createElement(tag.toString());
 				Text text = doc.createTextNode("");
@@ -623,6 +764,13 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				case typ:
 					text = doc.createTextNode(v1.get(count).getTyp().toString());
 					break;
+				//[FH] V2: Added Support for L3
+				case groupMac:
+					text = doc.createTextNode(v1.get(count).getMmrpGroupMacAsString());
+					break;
+					
+				case sourceMac:
+					text = doc.createTextNode(v1.get(count).getMmrpSourceMacAsString());
 				}
 				mcdElement.appendChild(text);
 				mcdTyp.appendChild(mcdElement);
@@ -637,23 +785,23 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 //		 // Schreibe die UserLevel Konfigurationsdaten in das XML
 //		 // ********************************************************
 //		
-//		// Erzeugt Root Element für die UserLevel Konfigurationsdaten
+//		// Erzeugt Root Element fï¿½r die UserLevel Konfigurationsdaten
 //        Element userLevelData = doc.createElement("UserlevelData");
 //        root.appendChild(userLevelData);
 //        
-//       //Für alle verschiedenen Konfigurationen
+//       //Fï¿½r alle verschiedenen Konfigurationen
 //	         for(int count=0; count<v2.size(); count++)
 //	         {
 //	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-//	        	 //Füge dementsprechend ein Kind Element hinzu
+//	        	 //Fï¿½ge dementsprechend ein Kind Element hinzu
 //	        	 MulticastData.Typ typ = v2.get(count).getTyp();
 //	        	 Element uldTyp = doc.createElement(typ.toString());
 //	        	 userLevelData.appendChild(uldTyp);
 //  
-//		         //Für alle vorhandenen Einstellungen
+//		         //Fï¿½r alle vorhandenen Einstellungen
 //	        	 for(uldTag tag: uldTag.values())
 //		         {
-//		        	 //Benötigte Variablen
+//		        	 //Benï¿½tigte Variablen
 //		        	 Element uldElement = doc.createElement(tag.toString());
 //		        	 Text text = doc.createTextNode("");
 //		             Boolean b = false;
@@ -708,7 +856,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 //		        	 
 //		        	 if(!text.equals("")) //Wenn Tag-Inhalt vorhanden
 //		        	 {
-//		        		//Füge Tag + Inhalt ins XML ein
+//		        		//Fï¿½ge Tag + Inhalt ins XML ein
 //		        		 uldElement.appendChild(text);
 //			        	 uldTyp.appendChild(uldElement);
 //		        		 
@@ -722,22 +870,22 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	
 	private void saveUserInputData(Document doc, Element root, Vector<UserInputData> v3) throws IOException
 	{
-		 //Erzeugt Root Element für die MultiCast Konfigurationen
+		 //Erzeugt Root Element fï¿½r die MultiCast Konfigurationen
         Element userinputdata = doc.createElement("UserInputData");
         root.appendChild(userinputdata);
         
-       //Für alle verschiedenen Konfigurationen
+       //Fï¿½r alle verschiedenen Konfigurationen
 	         for(int count=0; count<v3.size();count++)
 	         {
 	        	 UserInputData uid = v3.get(count);
 	        	 
 	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-	        	 //Füge dementsprechend ein Kind Element hinzu
+	        	 //Fï¿½ge dementsprechend ein Kind Element hinzu
 	        	 String typ = uid.getSelectedTab();
 	        	 Element uidTyp = doc.createElement(typ);
 	        	 userinputdata.appendChild(uidTyp);
 	        	 
-		         //Für alle vorhandenen Einstellungen
+		         //Fï¿½r alle vorhandenen Einstellungen
 	        	 for(uidTag tag : uidTag.values())
 		         {
 		        	 Element uidElement = doc.createElement(tag.toString());
@@ -781,7 +929,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		 * </PathData>
 		 */
 		
-		//Fügt das oberste Element, "PathData", hinzu.
+		//Fï¿½gt das oberste Element, "PathData", hinzu.
 		Element pfade = doc.createElement("PathData");
         root.appendChild(pfade);      
         
@@ -789,7 +937,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         int size = v3.size();
         Element pfad; 
         
-        //Fügt die 3 zuletzt benutzten Konfigurationsdateien dem XML hinzu.
+        //Fï¿½gt die 3 zuletzt benutzten Konfigurationsdateien dem XML hinzu.
         for(int count=0;count<v3.size();count++)
         {
         	if(size>=count)
@@ -923,5 +1071,9 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		ex.setErrorMessage("Error in configuration file: Value \""+value+"\" of "+tag+" in Multicast "+(multicast+1)+" is empty.");
 		throw ex;
 	}
+
+	
+
+	
 	
 }

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.net.InetAddress;
+import java.util.Vector;
 
 import javax.swing.*;
 
@@ -105,7 +106,9 @@ public class PanelMulticastConfig extends JPanel {
 				);
 			}
 		} else if (typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER) {
-			tf_groupIPaddress.setToolTipText(lang.getProperty("toolTip.selectMacAddress")+" (80:00:00:00:00:00 - ff:ff:ff:ff:ff:fe)");
+			tf_groupIPaddress.setToolTipText(lang.getProperty("toolTip.selectMacAddress")+ "<br />"+
+					"(any adress with a 1 at last number in first Byte." +
+					"Example: 01:00:00:00:00:00)");
 			cb_sourceIPaddress.setToolTipText(lang.getProperty("toolTip.selectNetInterface"));
 			
 			if(typ == Typ.L2_SENDER) {
@@ -118,10 +121,12 @@ public class PanelMulticastConfig extends JPanel {
 	public void reloadLanguage(){
 		PanelTabbed tabpart = null;
 		
-		//TODO @SK/FH Hier muss noch L2 dazu??? -> Ändert bei Sprachwechsel Buttonbeschriftung abhängig davon welcher Tab gerade ausgewählt ist.
+		//TODO @SK/FH Hier muss noch L2 dazu??? -> ï¿½ndert bei Sprachwechsel Buttonbeschriftung abhï¿½ngig davon welcher Tab gerade ausgewï¿½hlt ist.
 		switch(ctrl.getSelectedTab()){
 			case L3_SENDER: tabpart=ctrl.getFrame().getPanel_sen_lay3(); break;
 			case L3_RECEIVER: tabpart=ctrl.getFrame().getPanel_rec_lay3(); break;
+			case L2_SENDER: tabpart = ctrl.getFrame().getPanel_sen_lay2(); break;
+			case L2_RECEIVER: tabpart=ctrl.getFrame().getPanel_rec_lay2(); break;
 		}
 		
 		if (tabpart!=null && tabpart.getTable().getSelectedRowCount()==1){
@@ -165,11 +170,16 @@ public class PanelMulticastConfig extends JPanel {
 			cb_sourceIPaddress.addItem(lang.getProperty("config.message.ipFirst"));
 		} else {
 			cb_sourceIPaddress.addItem("");
+			Vector<String> names = NetworkAdapter.getMacAdapterNames();
+			for(String s : names)
+				cb_sourceIPaddress.addItem(s);
+			
 		}
 		cb_sourceIPaddress.setBounds(5,15,205,20);
 		cb_sourceIPaddress.setFont(MiscFont.getFont(0,12));
 		cb_sourceIPaddress.setBorder(null);
 		cb_sourceIPaddress.addItemListener(ctrl);
+		//ctrl.insertNetworkAdapters(typ);
 		
 		pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
 		add(pan_sourceIPaddress);
@@ -233,8 +243,8 @@ public class PanelMulticastConfig extends JPanel {
 			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L3SOURCE, BorderType.NEUTRAL));
 		} else if (typ == Typ.L2_SENDER || typ == Typ.L2_RECEIVER){
-			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2Group, BorderType.NEUTRAL));
-			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2Source, BorderType.NEUTRAL));
+			pan_groupIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2GROUP, BorderType.NEUTRAL));
+			pan_sourceIPaddress.setBorder(MiscBorder.getBorder(BorderTitle.L2SOURCE, BorderType.NEUTRAL));
 		}
 
 		tf_udp_port = new JTextField();		
@@ -348,6 +358,10 @@ public class PanelMulticastConfig extends JPanel {
 		return null;
 	}
 
+	public byte[] getSelectedAddress(Typ typ){
+		return NetworkAdapter.getMacToMMRP(cb_sourceIPaddress.getSelectedIndex()-1);
+	}
+	
 	public InetAddress getSelectedAddress(Typ typ, IPType iptype){
 		// V1.5 [FH] Added L3 with IPv4 Stuff
 		/* [MH] Changed to iptype */
@@ -356,10 +370,9 @@ public class PanelMulticastConfig extends JPanel {
 				return InputValidator.checkIPv4(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
 			else
 				return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
-		// TODO MMRP Eingabepruefung erstellen
-		// This is wrong, we need to fix this for MMRP when we do L2 Panels
+		// [FH] Should not happen... if type is L2 we need to call getSelectedAddress(Typ typ)
 		else
-			return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
+			return null;
 				
 		
 	}

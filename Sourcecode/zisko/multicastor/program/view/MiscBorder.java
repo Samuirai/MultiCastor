@@ -32,7 +32,7 @@ public class MiscBorder extends TitledBorder {
 	 *
 	 */
 	public enum BorderTitle{
-		L3GROUP, L3SOURCE, PORT, RATE, LENGTH, TTL, L2Group, L2Source
+		L3GROUP, L3SOURCE, PORT, RATE, LENGTH, TTL, L2GROUP, L2SOURCE
 	}
 	
 	private static Vector<TitledBorder> b_neutral = new Vector<TitledBorder>();
@@ -77,8 +77,8 @@ public class MiscBorder extends TitledBorder {
 			lang.getProperty("miscBorder.packetRate"),
 			lang.getProperty("miscBorder.packetLength"),
 			lang.getProperty("miscBorder.timeToLive"),
-			lang.getProperty("miscBorder.ipGroupAddress"),
-			lang.getProperty("miscBorder.ipNetworkInterface"),
+/*			lang.getProperty("miscBorder.ipGroupAddress"),
+			lang.getProperty("miscBorder.ipNetworkInterface"),*/
 			lang.getProperty("miscBorder.MacGroupAddress"),
 			lang.getProperty("miscBorder.NetworkInterface")
 		};
@@ -119,8 +119,8 @@ public class MiscBorder extends TitledBorder {
 					case RATE: 			return b_neutral.get(3);
 					case LENGTH: 		return b_neutral.get(4);
 					case TTL: 			return b_neutral.get(5);
-					case L2Group: 		return b_neutral.get(6);
-					case L2Source: 		return b_neutral.get(7);
+					case L2GROUP: 		return b_neutral.get(6);
+					case L2SOURCE: 		return b_neutral.get(7);
 				}
 				break;
 			case TRUE:
@@ -131,8 +131,8 @@ public class MiscBorder extends TitledBorder {
 					case RATE: 			return b_true.get(3);
 					case LENGTH: 		return b_true.get(4);
 					case TTL: 			return b_true.get(5);
-					case L2Group: 		return b_true.get(6);
-					case L2Source: 		return b_true.get(7);
+					case L2GROUP: 		return b_true.get(6);
+					case L2SOURCE: 		return b_true.get(7);
 				}
 			break;
 			case FALSE:
@@ -143,8 +143,8 @@ public class MiscBorder extends TitledBorder {
 					case RATE: 			return b_false.get(3);
 					case LENGTH: 		return b_false.get(4);
 					case TTL: 			return b_false.get(5);
-					case L2Group: 		return b_false.get(6);
-					case L2Source: 		return b_false.get(7);
+					case L2GROUP: 		return b_false.get(6);
+					case L2SOURCE: 		return b_false.get(7);
 			}
 		}
 		return null;

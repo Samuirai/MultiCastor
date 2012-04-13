@@ -8,6 +8,7 @@ import zisko.multicastor.program.data.MulticastData;
  * @author Bastian Wagener
  */
 public abstract class MulticastThreadSuper implements Runnable {
+
 	protected MulticastData mcData;
 	private Boolean stillRunning = false;
 	
