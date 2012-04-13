@@ -82,6 +82,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 	}	
 
 	public void setActive(boolean active) {
+		System.out.println("Set Active: " + active);
 		isSending = active;
 		mcData.setActive(false);
 		if(active) {
@@ -148,30 +149,29 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 							}
 			endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
 			do{
+				System.out.println("hier");
 				try{
 					sender.sendDataPacket(myPacketBuilder.getPacket());
-					
 					if(totalPacketCount<65535)	totalPacketCount++;
 					else						totalPacketCount = 0;
 					resetablePcktCnt++;
 					
-					if(ioExceptionCnt != 0){
+/*					if(ioExceptionCnt != 0){
 						mcData.setSenders(senderState.SINGLE);
 						proclaim(2, "Sender is working again");
 						JOptionPane.showMessageDialog(new JFrame(), "Sender is working again");
 						ioExceptionCnt = 0;
-					}
+					}*/
 					
 				//Hier die richtige Sendenexception Einfügen 
 				//Sonst IOException
 				}catch(Exception e1){
-					Object[] options = { "Stop Sender", "Reattemp to connect"};
+/*					Object[] options = { "Stop Sender", "Reattemp to connect"};
 
 					 mcData.setSenders(senderState.NETWORK_ERROR);
 					 
 					if(ioExceptionCnt == 0)
-						proclaim(1, "Problem with sending via '"+mcData.identify()+
-								"'. Trying to reconnect...");
+						proclaim(1, "Problem with sending. Trying to reconnect...");
 
 					if(ioExceptionCnt == 10)
 						 if( JOptionPane.showOptionDialog(null, "Sender is still not working correctly.\n"+
@@ -184,7 +184,9 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 						 }else
 							 ioExceptionCnt = 0;
 					
-					ioExceptionCnt ++;
+					ioExceptionCnt ++;*/
+					e1.printStackTrace();
+					System.exit(1);
 				}
 			}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
 		}

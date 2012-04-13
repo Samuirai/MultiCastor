@@ -299,9 +299,11 @@ public class MulticastController{
 						if(((MulticastReceiver) getMCMap(m).get(m)).joinGroup())
 							return;
 						break;
-					/*case L2_SENDER:
+					case L2_SENDER:
+						m.setThreadID(threadCounter);
+						threadCounter++;
 						break;
-					case L2_RECEIVER:
+					/*case L2_RECEIVER:
 						break;*/
 					default:
 						break;
