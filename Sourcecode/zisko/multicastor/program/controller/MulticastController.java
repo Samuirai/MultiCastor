@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import org.xml.sax.SAXException;
 
+import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserInputData;
@@ -428,6 +429,16 @@ public class MulticastController{
 	
 	/**
 	 * Speichert eine Konfigurationsdatei.
+	 * @param path Pfad zur GUI Konfigurationsdatei.
+	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
+	 * @param v Alle zu speichernden GUI Configs.
+	 */
+	private void saveGUIConfig(String path, GUIData data) {
+		final String p = "GUIConfig.xml";	
+	}
+	
+	/**
+	 * Speichert eine Konfigurationsdatei.
 	 * @param path Pfad zur Konfigurationsdatei.
 	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v Alle zu speichernden Multicasts.
@@ -459,9 +470,12 @@ public class MulticastController{
 		v.addAll(getMCs(Typ.L2_SENDER));
 		v.addAll(getMCs(Typ.L3_SENDER));
 		saveMulticastConfig("MultiCastor.xml", v);
-		
+		saveGUIConfig("GUIConfig.xml", v); // [FF] added gui config method
 		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
 	}
+	
+	
+
 	
 	/**
 	 * Laedt die ULD-Objekte aus dem JAR-file.
