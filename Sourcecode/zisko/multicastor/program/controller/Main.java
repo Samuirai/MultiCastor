@@ -31,7 +31,7 @@ public class Main {
 	
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die
-	 * Parameter ein, die dem Programm übegeben wurden und startet den
+	 * Parameter ein, die dem Programm ï¿½begeben wurden und startet den
 	 * entsprechenden Programmteil.
 	 * 
 	 * @param args
@@ -86,6 +86,7 @@ public class Main {
 			logger.info(lang.getProperty("logger.info.startWithGui"));
 
 			controller.loadDefaultMulticastConfig();
+			controller.loadGUIConfig("",true);
 			// TODO [MH] Hier GUIConfig laden
 			
 			for (Handler h : logger.getHandlers()) {
@@ -157,7 +158,7 @@ public class Main {
 				logger.info(lang.getProperty("logger.info.startGuiFile"));
 
 				controller.loadMulticastConfig(args[0], true);
-				// TODO [MH] Hier GUIConfig laden 
+				controller.loadGUIConfig("",true);
 
 				for (Handler h : logger.getHandlers()) {
 					h.close();

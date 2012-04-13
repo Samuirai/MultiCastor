@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
+import java.util.logging.Level;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -58,6 +59,7 @@ import zisko.multicastor.program.view.MiscBorder.BorderType;
 import zisko.multicastor.program.view.ReceiverGraph.valueType;
 import zisko.multicastor.program.view.SnakeGimmick;
 import zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION;
+import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.MulticastData.Typ;
@@ -151,6 +153,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	private UserInputData inputData_R2;
 	
 	private LanguageManager lang;
+	private GUIData guidata;
 	
 	public boolean isInitFinished() {
 		return initFinished;
@@ -2518,6 +2521,79 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Listener welcher darauf reagiert wenn das Fenster ge�ffnet wird
 	 */
 	public void windowOpened(WindowEvent e) {
+		
+	}
+
+	public void setGUIConfig(GUIData data) {
+		
+		this.guidata = data;
+		LanguageManager.setCurrentLanguage(data.getLanguage());
+		this.f.reloadLanguage();
+		this.f.repaint();
+		
+		this.f.setBaseTitle(data.getWindowName());
+		this.f.updateTitle();
+		
+		String title = "";
+		
+		// close all invisible taps
+		
+		this.f.getTabpane().closeTab(title);
+		
+		if(data.getL2_RECEIVER() == GUIData.TabState.invisible) {
+			title = " "+lang.getProperty("tab.l2r")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().remove(i);
+		}
+		if(data.getL3_RECEIVER() == GUIData.TabState.invisible) {
+			title = " "+lang.getProperty("tab.l3r")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().remove(i);
+		}
+		if(data.getL2_SENDER() == GUIData.TabState.invisible) {
+			title = " "+lang.getProperty("tab.l2s")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().remove(i);
+		}
+		if(data.getL3_SENDER() == GUIData.TabState.invisible) {
+			title = " "+lang.getProperty("tab.l3s")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().remove(i);
+		}
+		
+		// select the selected tab
+		
+		if(data.getL2_RECEIVER() == GUIData.TabState.selected) {
+			title = " "+lang.getProperty("tab.l2r")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getL3_RECEIVER() == GUIData.TabState.selected) {
+			title = " "+lang.getProperty("tab.l3r")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getL2_SENDER() == GUIData.TabState.selected) {
+			title = " "+lang.getProperty("tab.l2s")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getL3_SENDER() == GUIData.TabState.selected) {
+			title = " "+lang.getProperty("tab.l3s")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		
+		
+		
 		
 	}
 }

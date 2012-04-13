@@ -33,9 +33,11 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
+import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
+import zisko.multicastor.program.data.GUIData.TabState;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -83,6 +85,16 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
+	@Override
+	public void loadGUIConfig(String path, GUIData data) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException {
+		// load GUI Config [FF]
+		Document doc = parseDocument(path);
+		
+		if (data != null) {
+			loadGUIData(doc, data);
+		}
+	}
+	
 //	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
 //	{
 //		Document doc = parseDocument(pfad);
@@ -116,6 +128,39 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 //		loadConfig(pfad, v1, v2, null, null);
 //	}
 	
+	private void loadGUIData(Document doc, GUIData data) {
+		//********************************************************
+	    // Lese die GUI Konfigurationsdaten aus dem XML
+	    //********************************************************
+		NodeList tabs = doc.getElementsByTagName("Tabs");
+		if(tabs.getLength()==1) {
+			NodeList tabList = tabs.item(0).getChildNodes();
+			for(int i=0; i<tabList.getLength(); i++) {   
+	    		//Evaluiere nur L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
+	    		if(tabList.item(i).getNodeName().equals("#text")) {
+	    			continue;
+	    		}
+	  
+	    		if(tabList.item(i).getNodeName().equals("L2_SENDER"))
+		  		  data.setL2_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("L2_RECEIVER"))
+		  		  data.setL2_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("L3_SENDER"))
+		  		  data.setL3_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("L3_RECEIVER"))
+		  		  data.setL3_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+			}
+		}
+		NodeList windowTitle = doc.getElementsByTagName("WindowName");
+		if(windowTitle.getLength()==1) {
+			data.setWindowName(windowTitle.item(0).getTextContent());
+		}
+		NodeList language = doc.getElementsByTagName("Language");
+		if(language.getLength()==1) {
+			data.setLanguage(language.item(0).getTextContent());
+		}
+	}
+
 	private void loadMulticastData(Document doc, Vector<MulticastData> v) throws WrongConfigurationException {    
 	    //********************************************************
 	    // Lese die MultiCast Konfigurationsdaten aus dem XML
@@ -531,6 +576,80 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    		}
 			    		}
 			    }
+	}
+	
+	@Override
+	public void saveGUIConfig(String pfad, GUIData data) throws IOException {
+		// [FF] saveGuiConfig
+		System.out.println(data);
+		Element el;
+		
+		//Erzeuge ein neues XML Dokument
+		Document doc = createDocument();
+		Element guiConfig = doc.createElement("MultiCastor");
+        doc.appendChild(guiConfig);
+        
+        
+		// Erzeugt Root Element für die User System Informationen
+		Element system = doc.createElement("System");
+		guiConfig.appendChild(system);
+		system.appendChild(el=doc.createElement("Time"));
+		  el.setTextContent(new Date().toString());
+		try{
+			system.appendChild(el=doc.createElement("Hostname"));
+			el.setTextContent(InetAddress.getLocalHost().getHostName());
+			system.appendChild(el=doc.createElement("Hostaddress"));
+			el.setTextContent(InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			//already loged at the program start. Just create empty tags
+			system.appendChild(el=doc.createElement("Hostname"));
+			system.appendChild(el=doc.createElement("Hostaddress"));
+		}
+		system.appendChild(el=doc.createElement("Username"));
+		  el.setTextContent(System.getProperty("user.name"));
+		system.appendChild(el=doc.createElement("Javaversion"));
+		  el.setTextContent(System.getProperty("java.version"));
+		system.appendChild(el=doc.createElement("Javavendor"));
+		  el.setTextContent(System.getProperty("java.vendor"));
+		  
+		  
+		  
+		// Erzeugt Root Element für die User System Informationen
+		Element tabs = doc.createElement("Tabs");
+		guiConfig.appendChild(tabs);
+		
+		tabs.appendChild(el=doc.createElement("L2_SENDER"));
+		  el.setTextContent(data.getL2_RECEIVER().toString());
+		tabs.appendChild(el=doc.createElement("L2_RECEIVER"));
+		  el.setTextContent(data.getL2_SENDER().toString());
+		tabs.appendChild(el=doc.createElement("L3_SENDER"));
+		  el.setTextContent(data.getL3_SENDER().toString());
+		tabs.appendChild(el=doc.createElement("L3_RECEIVER"));
+		  el.setTextContent(data.getL3_RECEIVER().toString());
+		  
+		Element language = doc.createElement("Language");
+		  language.setTextContent(data.getLanguage());  
+		  guiConfig.appendChild(language);
+		Element windowName = doc.createElement("WindowName");
+		  windowName.setTextContent(data.getWindowName());
+		  guiConfig.appendChild(windowName);
+
+		//Erzeuge einen Transformer
+	    Transformer transformer = setupTransformer();
+
+	    //Erstelle einen String aus dem XML Baum
+	    String xmlString = XMLtoString(doc, transformer);
+	         
+	    //print xml to console
+	    //System.out.println("Here's the xml:\n\n" + xmlString);
+	         
+	    File xmlfile= new File(pfad);
+	    BufferedWriter writer = null;
+	    writer = new BufferedWriter(new FileWriter(xmlfile));
+	    String prolog="<?xml version=\"1.0\"?>\n";
+	    writer.write(prolog+xmlString);
+	    writer.close();
+	 	
 	}
 	
 	@Override
@@ -952,5 +1071,9 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		ex.setErrorMessage("Error in configuration file: Value \""+value+"\" of "+tag+" in Multicast "+(multicast+1)+" is empty.");
 		throw ex;
 	}
+
+	
+
+	
 	
 }

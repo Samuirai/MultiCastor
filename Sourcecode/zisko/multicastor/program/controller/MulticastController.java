@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import org.xml.sax.SAXException;
 
+import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserInputData;
@@ -19,6 +20,7 @@ import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.interfaces.XMLParserInterface;
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.MulticastMmrpReceiver;
 import zisko.multicastor.program.model.MulticastMmrpSender;
 import zisko.multicastor.program.model.MulticastReceiver;
@@ -52,6 +54,9 @@ public class MulticastController{
 	private Map<MulticastData,MulticastThreadSuper> mcMap_sender_l3;
 	private Map<MulticastData,MulticastThreadSuper> mcMap_receiver_l2;
 	private Map<MulticastData,MulticastThreadSuper> mcMap_sender_l2;
+	
+	/** LanguageManager **/
+	private LanguageManager lang;
 	
 	/** Diese Map bildet MulticastData-Objekte auf Threads ab, um von einem Multicast direkt mit dem entsprechenden Thread kommunizieren zu koennen. Dies wird vor allem beim Beenden der Multicasts genutzt. */
 	private Map<MulticastData, Thread> threads;
@@ -111,6 +116,7 @@ public class MulticastController{
 	 */
 	public MulticastController(ViewController viewController, Logger logger, int pPrintTableIntervall){
 		super();
+		lang=LanguageManager.getInstance();
 		this.printTableIntervall = pPrintTableIntervall;
 		// MC_Data
 		/* v1.5 */
@@ -457,6 +463,29 @@ public class MulticastController{
 	
 	/**
 	 * Speichert eine Konfigurationsdatei.
+	 * @param path Pfad zur GUI Konfigurationsdatei.
+	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
+	 * @param v Alle zu speichernden GUI Configs.
+	 */
+	private void saveGUIConfig(String path, GUIData data) {
+		final String p = "GUIConfig.xml";	
+		try{	// Uebergibt den Vektor mit allen Multicasts an den XMLParser
+			// FH Changed && to ||, think this is right ;)
+			if(path==null || path.length()==0){
+				xml_parser.saveGUIConfig(p, data);
+				//logger.log(Level.INFO, "Saved Multicastconfiguration at default location.");
+			} else {
+				xml_parser.saveGUIConfig(path, data);
+				addLastConfigs(path);
+				logger.log(Level.INFO, "Saved GUI Configuration.");
+			}		
+		} catch (Exception e) {
+			logger.log(Level.WARNING, "Could not save GUI Configuration.");
+		}
+	}
+	
+	/**
+	 * Speichert eine Konfigurationsdatei.
 	 * @param path Pfad zur Konfigurationsdatei.
 	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v Alle zu speichernden Multicasts.
@@ -490,8 +519,47 @@ public class MulticastController{
 		v.addAll(getMCs(Typ.L3_SENDER));
 		saveMulticastConfig("MultiCastor.xml", v);
 		
-		//TODO @FF Hier muss auch das schreiben fï¿½r die neue GUI-Config ausgelï¿½st werden.
+		// TODO: saveGUIConfig auslagern [FF]
+		GUIData data = new GUIData();
+		// set everythign to invisible
+		data.setL2_SENDER(GUIData.TabState.invisible);
+		data.setL3_SENDER(GUIData.TabState.invisible);
+		data.setL2_RECEIVER(GUIData.TabState.invisible);
+		data.setL3_RECEIVER(GUIData.TabState.invisible);
+		
+		// set the new state if they are visible
+		for(int i=0; i<view_controller.getFrame().getTabpane().getTabCount(); ++i) {
+			String title = view_controller.getFrame().getTabpane().getTitleAt(i);
+			if(title.equals(" "+lang.getProperty("tab.l2s")+" "))
+				data.setL2_SENDER(GUIData.TabState.visible);
+			if(title.equals(" "+lang.getProperty("tab.l3s")+" "))
+				data.setL3_SENDER(GUIData.TabState.visible);
+			if(title.equals(" "+lang.getProperty("tab.l2r")+" "))
+				data.setL2_RECEIVER(GUIData.TabState.visible);
+			if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
+				data.setL3_RECEIVER(GUIData.TabState.visible);
+		}
+		
+		// get the selected tab
+		String title = view_controller.getFrame().getTabpane().getTitleAt(view_controller.getFrame().getTabpane().getSelectedIndex());
+
+		if(title.equals(" "+lang.getProperty("tab.l2s")+" "))
+			data.setL2_SENDER(GUIData.TabState.selected);
+		if(title.equals(" "+lang.getProperty("tab.l3s")+" "))
+			data.setL3_SENDER(GUIData.TabState.selected);
+		if(title.equals(" "+lang.getProperty("tab.l2r")+" "))
+			data.setL2_RECEIVER(GUIData.TabState.selected);
+		if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
+			data.setL3_RECEIVER(GUIData.TabState.selected);
+		
+		data.setLanguage(LanguageManager.getCurrentLanguage());
+		data.setWindowName(view_controller.getFrame().getBaseTitle());
+		
+		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
+		
+		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
 	}
+	
 	
 	/**
 	 * Laedt die ULD-Objekte aus dem JAR-file.
@@ -530,6 +598,60 @@ public class MulticastController{
 		loadMulticastConfig("", true);
 	}
 	
+	/**
+	 * Laedt die GUI Konfigurationsdatei 
+	 * @param path Pfad zur Konfigurationsdatei, die geladen werden soll.
+	 * @param useDefaultXML Wenn hier true gesetzt ist, wird der Standardpfad genommen und MCD + UID + ULD geladen.
+	 */
+	public void loadGUIConfig(String path, boolean useDefaultXML) {
+		final String defaultXML = "GUIConfig.xml";
+		String message = new String();
+		GUIData data = new GUIData();
+		boolean skip = false;
+		try {
+			 xml_parser.loadGUIConfig(useDefaultXML ? defaultXML : path, data);
+			 logger.log(Level.INFO, "Default GUI Configurationfile loaded.");
+		} catch (Exception e) {
+			if(e instanceof FileNotFoundException) {
+				if (useDefaultXML) {
+					message = "Default GUI configurationfile was not found. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+				} else {
+					message = "GUI Configurationfile not found.";
+				}
+			} else if (e instanceof SAXException) {
+				if (useDefaultXML) {
+					message = "Default GUI configurationfile could not be parsed correctly. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+				} else {
+					message = "GUI Configurationfile could not be parsed.";
+				}
+			} else if (e instanceof IOException) {
+				if (useDefaultXML) {
+					message = "Default GUI configurationfile could not be loaded. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+				} else {
+					message = "GUI Configurationfile could not be loaded.";
+				}
+			} else if (e instanceof WrongConfigurationException) {
+				message = ((WrongConfigurationException)e).getErrorMessage();
+			} else if (e instanceof IllegalArgumentException){
+				if (useDefaultXML) {
+					message = "Error in default GUI configurationfile.";
+				} else {
+					message = "Error in GUI configurationfile.";
+				}
+			} else {
+				message = "Unexpected error of type: " + e.getClass();
+			}
+			skip = true;
+			if (!useDefaultXML) {
+				message += " Used path: " + path;
+			}
+			logger.log(Level.WARNING, message);
+		}
+		view_controller.setGUIConfig(data);
+	}
+	
+
+
 	/**
 	 * Laedt eine Konfigurationsdatei und fuegt markierte Multicasts hinzu.
 	 * @param path Pfad zur Konfigurationsdatei, die geladen werden soll.
@@ -805,4 +927,6 @@ public class MulticastController{
 	public XMLParserInterface getXml_parser() {
 		return xml_parser;
 	}
+
+	
 }
