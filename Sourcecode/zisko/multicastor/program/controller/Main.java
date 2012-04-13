@@ -31,7 +31,7 @@ public class Main {
 	
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die
-	 * Parameter ein, die dem Programm übegeben wurden und startet den
+	 * Parameter ein, die dem Programm ï¿½begeben wurden und startet den
 	 * entsprechenden Programmteil.
 	 * 
 	 * @param args

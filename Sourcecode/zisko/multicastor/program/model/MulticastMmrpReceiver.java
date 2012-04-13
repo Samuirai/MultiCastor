@@ -115,9 +115,14 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		while(active){
-			//RECEIVING HERE
+			System.out.println("Before waiting");
+			receiver.waitForDataPacket();
+			System.out.println("After waiting");
 			packetAnalyzer.setTimeout(false);
-			//packetAnalyzer.analyzePacket(datagram.getData());
+			System.out.println("Before analyzer");
+			System.out.println("Packet: " + receiver.getDataPacket());
+			//packetAnalyzer.analyzePacket(receiver.getDataPacket());
+			System.out.println("After analyzer");
 		}
 		
 		// Resetted gemessene Werte (SenderID bleibt erhalten, wegen des Wiedererkennungswertes)

@@ -57,7 +57,7 @@ public class PcapHandler {
 		return null;
 	}
 
-	private static boolean compareMACs(byte[] a, byte[] b) {
+	public static boolean compareMACs(byte[] a, byte[] b) {
 		boolean sameMAC = true;
 
 		for (int j = 0; j < 6; j++) {
