@@ -381,6 +381,7 @@ public class MulticastController{
 	 * @param userlevel Chooses userlevel like beginner,expert,custom
 	 */
 	//TODO @CW User Level sollte raus.
+	/*
 	public UserlevelData getUserLevel(MulticastData.Typ typ, UserlevelData.Userlevel userlevel) {	
 	//	System.out.println("Requested ULD: " + typ + " " + userlevel);
 		for(UserlevelData uld : userlevelData){
@@ -400,7 +401,7 @@ public class MulticastController{
 		}
 		logger.log(Level.SEVERE, "Could not find requested UserlevelData in MulticastController");
 		return null;
-	}
+	}*/
 	
 	/**
 	 * Hilfsfunktion feur mich, die eine Konfigurationsdatei erzeugt.
@@ -416,6 +417,7 @@ public class MulticastController{
 	 * @param typ MC Typ
 	 * @return Vektor mit ULDs drin.
 	 */
+	/*
 	// TODO @CW User Laevel sollte raus
 	public MulticastData getUserlevelBeginnerDefaultValues(Typ typ){
 		if(defaultValuesUserlevelData.isEmpty()){
@@ -428,7 +430,7 @@ public class MulticastController{
 		}
 		logger.log(Level.SEVERE, "Konnte default-Werte fuer Typ " + typ + " in der default-Konfigurationsdatei nicht finden.");
 		return null;
-	}
+	}*/
 	
 	/**
 	 * Saves not checked data from View necessary to reconstruct the exact state from View.
@@ -557,7 +559,7 @@ public class MulticastController{
 		
 		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
 		
-		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
+		//TODO @FF Hier muss auch das schreiben fï¿½r die neue GUI-Config ausgelï¿½st werden.
 	}
 	
 	
