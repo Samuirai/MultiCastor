@@ -139,7 +139,6 @@ public class ReceiverGraph extends PanelGraph{
 	 * @param mcData
 	 */
 	public void updateGraph(MulticastData[] mcDataArray, boolean repaint){
-		System.out.println("update Receiver Graph");
 		int newValue=0;
 		if(mcDataArray.length!=0){
 			switch(curValueType){

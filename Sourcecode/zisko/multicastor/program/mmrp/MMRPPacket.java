@@ -1,5 +1,7 @@
 package zisko.multicastor.program.mmrp;
 
+import java.util.Arrays;
+
 public class MMRPPacket {
 	private static final byte[] type = {(byte) 0x88,(byte) 0xf6};
 	private static final byte[] destination = {(byte)0x01,(byte)0x80,(byte)0xc2,(byte)0x00,(byte)0x00,(byte)0x20};
@@ -42,6 +44,7 @@ public class MMRPPacket {
 	}
 	
 	private static byte[] buildMMRPPacket(byte[] source, byte[] firstValue, int event, boolean leaveAll){
+		System.out.println(Arrays.toString(source));
 		byte[] mmrpPacket = new byte[30];
 		
 		for(int i = 0; i < 6; i++){

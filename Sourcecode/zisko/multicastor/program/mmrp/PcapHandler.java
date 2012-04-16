@@ -47,6 +47,8 @@ public class PcapHandler {
 
 			for (int i = 0; i < alldevs.size(); i++) {
 					alldevsAdress.add(alldevs.get(i).getHardwareAddress());
+/*					System.out.println(alldevs.get(i).getName());
+					System.out.println(Arrays.toString(alldevs.get(i).getHardwareAddress()));*/
 			}
 		} 
 		
