@@ -137,7 +137,7 @@ public class PacketAnalyzer {
 		//********************************************
 		// Paketanalyse - geklaut von Janniks TestCase
 		//********************************************
-				
+
 		byte[] snippet 		= new byte[29];
 		byte[] intSnippet	= new byte[4];
 		byte[] shortSnippet = new byte[2];
@@ -180,7 +180,7 @@ public class PacketAnalyzer {
 		
 		// PacketLoss
 		System.arraycopy(mcPacket, 31, intSnippet, 0, 4);
-		int packetcount =  ByteTools.byteToInt(intSnippet);
+		int packetcount = ByteTools.byteToInt(intSnippet);
 		
 	//	System.out.println("packetcount: " + packetcount + "\t\tinternerPC: " + internerPacketCount);
 		if(packetcount != internerPacketCount){
@@ -221,6 +221,7 @@ public class PacketAnalyzer {
 		
 		// total packets received
 		packetCount++;
+		//System.out.println("Empfangene Packete: " + packetcount);
 	}
 	
 	/**

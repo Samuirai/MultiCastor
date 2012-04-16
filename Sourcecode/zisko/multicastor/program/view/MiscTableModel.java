@@ -219,10 +219,12 @@ public class MiscTableModel extends AbstractTableModel {
 			switch(columnIndex){
 				case 0:	
 					if((Boolean)aValue){
+						System.out.println("start MC " + aValue);
 						ctrl.startMC(rowIndex, typ);
 						ctrl.setTBactive(ctrl.getSelectedRows(typ), typ);
 					}
 					else{
+						System.out.println("stop MC " + aValue);
 						ctrl.stopMC(rowIndex, typ);
 						ctrl.setTBactive(ctrl.getSelectedRows(typ), typ);
 					}break;

@@ -12,10 +12,11 @@ import javax.swing.JOptionPane;
 import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.senderState;
+import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.mmrp.*;
 
-public class MulticastMmrpSender extends MulticastThreadSuper{
+public class MulticastMmrpSender extends MulticastThreadSuper implements MulticastSenderInterface{
 
 	/** Wenn auf wahr, lauscht dieser Sender auf ankommende Pakete. */
 	private boolean isSending = false;
@@ -82,9 +83,8 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 	}	
 
 	public void setActive(boolean active) {
-		System.out.println("Set Active: " + active);
 		isSending = active;
-		mcData.setActive(false);
+		mcData.setActive(active);
 		if(active) {
 			//Setzen der ThreadID, da diese evtl.
 			//im Controller noch einmal ge�ndert wird
@@ -149,9 +149,9 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 							}
 			endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
 			do{
-				System.out.println("hier");
 				try{
 					sender.sendDataPacket(myPacketBuilder.getPacket());
+					//System.out.println("Sending packet " + totalPacketCount );
 					if(totalPacketCount<65535)	totalPacketCount++;
 					else						totalPacketCount = 0;
 					resetablePcktCnt++;
@@ -192,6 +192,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 		}
 		try {
 			sender.deregisterPath();
+			System.out.println("I deregistered");
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister Path");
 		}

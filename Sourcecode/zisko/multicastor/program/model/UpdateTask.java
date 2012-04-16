@@ -16,6 +16,8 @@ public class UpdateTask extends TimerTask {
 	private Logger logger;
 	private Map<MulticastData, MulticastThreadSuper> mc_sender_l3;
 	private Map<MulticastData, MulticastThreadSuper> mc_receiver_l3;
+	private Map<MulticastData, MulticastThreadSuper> mc_sender_l2;
+	private Map<MulticastData, MulticastThreadSuper> mc_receiver_l2;
 	private LanguageManager lang=LanguageManager.getInstance();
 	
 	//V1.5 [FH] edded that memory warning is only appearing once
@@ -24,11 +26,15 @@ public class UpdateTask extends TimerTask {
 	public UpdateTask(Logger logger,
 			Map<MulticastData, MulticastThreadSuper> mcSenderL3,
 			Map<MulticastData, MulticastThreadSuper> mcReceiverL3,
+			Map<MulticastData, MulticastThreadSuper> mcSenderL2,
+			Map<MulticastData, MulticastThreadSuper> mcReceiverL2,
 			ViewController viewController) {
 		super();
 		this.logger = logger;
 		mc_sender_l3 = mcSenderL3;
 		mc_receiver_l3 = mcReceiverL3;
+		mc_sender_l2 = mcSenderL2;
+		mc_receiver_l2 = mcReceiverL2;
 		this.viewController = viewController;
 	}
 
@@ -40,7 +46,7 @@ public class UpdateTask extends TimerTask {
 		boolean memoryWarnedForLog = false; 
 		Runtime rt= Runtime.getRuntime();
 		
-		// V1.5 [FH] Prüfung des Memories. Ob noch mehr als 10% frei sind
+		// V1.5 [FH] Prï¿½fung des Memories. Ob noch mehr als 10% frei sind
 		if (!memoryWarned && rt.freeMemory()+ (rt.maxMemory()-rt.totalMemory()) 
 				< rt.maxMemory()*0.1) {
 			logger.warning(lang.getProperty("warning.memory.title") +
@@ -51,13 +57,19 @@ public class UpdateTask extends TimerTask {
 			this.memoryWarned = true;
 		}
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 4; i++) {
 			switch (i) {
 			case 0:
 				v = mc_sender_l3;
 				break;
 			case 1:
 				v = mc_receiver_l3;
+				break;
+			case 2:
+				v = mc_sender_l2;
+				break;
+			case 3:
+				v = mc_receiver_l2;
 				break;
 			}
 			for (Entry<MulticastData, MulticastThreadSuper> m : v.entrySet()) {

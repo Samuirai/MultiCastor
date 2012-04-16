@@ -12,14 +12,14 @@ import zisko.multicastor.program.data.MulticastData;
 /**
  * 
  * @author jannik
- * Diese Klasse ist ein "Wrapper" für die PanelGraph-Klasse.
- * Sie lässt den user zwischen 3 Graphen "wechseln":
+ * Diese Klasse ist ein "Wrapper" fï¿½r die PanelGraph-Klasse.
+ * Sie lï¿½sst den user zwischen 3 Graphen "wechseln":
  * <br>- Jitter
  * <br>- Lost Packets
  * <br>- Measured Packet Rate
- * <br>Intern wird nur ein Graph verändert.
+ * <br>Intern wird nur ein Graph verï¿½ndert.
  * Anders als die PanelGraph-Klasse, erwartet diese Klasse beim Update ein Array aus MulticastData-Objekten,
- * aus denen sie den jeweils benötigten Wert extrahiert.
+ * aus denen sie den jeweils benï¿½tigten Wert extrahiert.
  */
 @SuppressWarnings("serial")
 public class ReceiverGraph extends PanelGraph{
@@ -50,7 +50,7 @@ public class ReceiverGraph extends PanelGraph{
 	
 	/**
 	 * Konstruktor. Erwartet einen {@link viewController} als Parameter, der die
-	 * Radiobuttons überwacht.
+	 * Radiobuttons ï¿½berwacht.
 	 * @param ctrl der {@link viewController} der ReceiverGraph-Instanz
 	 */
 	public ReceiverGraph(ViewController ctrl){
@@ -100,7 +100,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 	
 	/**
-	 * Getter für den "Jitter"-Radiobutton
+	 * Getter fï¿½r den "Jitter"-Radiobutton
 	 * @return "Jitter"-Radiobutton-Instanz
 	 */
 	public JRadioButton getJitterRB() {
@@ -108,7 +108,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 
 	/**
-	 * Getter für den "Lost Packets"-Radiobutton
+	 * Getter fï¿½r den "Lost Packets"-Radiobutton
 	 * @return "Lost Packets"-Radiobutton-Instanz
 	 */
 	public JRadioButton getLostPktsRB() {
@@ -116,7 +116,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 
 	/**
-	 * Getter für den "Measured Packet Rate"-Radiobutton
+	 * Getter fï¿½r den "Measured Packet Rate"-Radiobutton
 	 * @return "Measured Packet Rate"-Radiobutton-Instanz
 	 */
 	public JRadioButton getMeasPktRtRB() {
@@ -124,7 +124,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 
 	/**
-	 * Wird aufgerufen, wenn ein andere Radiobutton ausgewählt wird
+	 * Wird aufgerufen, wenn ein andere Radiobutton ausgewï¿½hlt wird
 	 * @param newValueType der neue {@link valueType}
 	 */
 	public void selectionChanged(valueType newValueType){
@@ -133,12 +133,13 @@ public class ReceiverGraph extends PanelGraph{
 	}
 	
 	/**
-	 * Diese Methode updated den Graph, indem sie je nach ausgewähltem
+	 * Diese Methode updated den Graph, indem sie je nach ausgewï¿½hltem
 	 * Radiobutton die entsprechenden Daten aus den {@link MulticastData}-Objekt extrahiert.
 	 * Danach wird intern die updateGraph(int)-Methode aufgerufen.
 	 * @param mcData
 	 */
 	public void updateGraph(MulticastData[] mcDataArray, boolean repaint){
+		System.out.println("update Receiver Graph");
 		int newValue=0;
 		if(mcDataArray.length!=0){
 			switch(curValueType){

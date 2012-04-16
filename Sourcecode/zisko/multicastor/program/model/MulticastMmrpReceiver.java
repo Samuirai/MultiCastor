@@ -3,6 +3,7 @@ package zisko.multicastor.program.model;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
@@ -116,14 +117,10 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		while(active){
-			System.out.println("Before waiting");
-			receiver.waitForDataPacket();
-			System.out.println("After waiting");
 			packetAnalyzer.setTimeout(false);
-			System.out.println("Before analyzer");
-			System.out.println("Packet: " + receiver.getDataPacket());
-			//packetAnalyzer.analyzePacket(receiver.getDataPacket());
-			System.out.println("After analyzer");
+			receiver.waitForDataPacketAndGetIt(buf);
+			packetAnalyzer.analyzePacket(buf);
+			initializeBuf();
 		}
 		
 		// Resetted gemessene Werte (SenderID bleibt erhalten, wegen des Wiedererkennungswertes)

@@ -15,43 +15,38 @@ import zisko.multicastor.program.mmrp.PacketHandler;
 public class ThreadReceiveDataPacket implements Runnable {
 	private byte[] streamMACAddress;
 	private Pcap pcap = null;
-	private byte[] dataPacket ;
-	
+	private byte[] dataPacket;
+	private boolean found;
+	private boolean interrupted = false;
 	public ThreadReceiveDataPacket(byte[] deviceMACAddress,byte[] streamMACAddress) throws IOException {
 		this.streamMACAddress = streamMACAddress;
 		this.pcap = PcapHandler.getPcapInstance(deviceMACAddress);
 	}
 	
 	public synchronized void waitForDataPacket(){
-		while(!Thread.interrupted()){
+		this.found = false;
+		while(!interrupted && !found){
 			PcapPacketHandler<String> pcapPacketHandler = new PcapPacketHandler<String>() {
-
-
 				public void nextPacket(PcapPacket packet, String arg1) {
 					byte [] destination = new byte [6];
 					
 					for(int i = 0; i < 6; i++){
 						destination[i] = packet.getByte(i);
 					}
+
+					int length = (int)packet.getByte(13);
 					
 					if(PcapHandler.compareMACs(destination, streamMACAddress)){
-						/*for(int i = 0; i < packet.getTotalSize(); i++)
-							System.out.println(packet.getByte(i));
-						
-						System.out.println("Found data packet");
-						dataPacket = packet.getByteArray(0, packet.getTotalSize()-1);
-						packet.getBy*/
-		                final JPacket.State packetState = packet.getState();
-		                for (int index = 0; index < packetState.getHeaderCount(); index++) {
-		                    int start = packetState.getHeaderOffsetByIndex(index);
-		                    int length = packetState.getHeaderLengthByIndex(index);
-		                    dataPacket = packet.getByteArray(start, length);
-		                }
-		 
+						byte[] buffer = new byte[packet.getTotalSize()];
+
+						for(int i = 0; i < length+14; i++)
+								buffer[i] = packet.getByte(i);
+
+						dataPacket = buffer;
+						found = true;
 					}
 				}
 			};
-			
 			pcap.loop(1, pcapPacketHandler, "");
 		}
 	}

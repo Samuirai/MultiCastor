@@ -163,7 +163,7 @@ public class MulticastController{
 		
 	//	AllesLaden(); // sollte von Thomas gemacht werden
 		
-		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, view_controller);
+		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, mcMap_sender_l2, mcMap_receiver_l2, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000,1000);
 		
@@ -557,7 +557,7 @@ public class MulticastController{
 		
 		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
 		
-		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
+		//TODO @FF Hier muss auch das schreiben fï¿½r die neue GUI-Config ausgelï¿½st werden.
 	}
 	
 	
@@ -775,14 +775,19 @@ public class MulticastController{
 	 * @return Sum of all sent packets. Returns 0 if typ is invalid.
 	 */
 	public int getPPSSender(MulticastData.Typ typ) {
-		int count = 0;
+		int count = 0, tmpCount = 0;
 		
-		if(typ.equals(MulticastData.Typ.L3_SENDER)){
+		if(typ == Typ.L3_SENDER){
 			for(MulticastData ms: mc_sender_l3){
 				count += ((MulticastSenderInterface) mcMap_sender_l3.get(ms)).getMultiCastData().getPacketRateMeasured();
 			}
+		}else if( typ == Typ.L2_SENDER){
+			for(MulticastData ms: mc_sender_l2){
+				tmpCount = ((MulticastSenderInterface) mcMap_sender_l2.get(ms)).getMultiCastData().getPacketRateMeasured(); 
+				if(tmpCount == -1) tmpCount = 0;
+				count += tmpCount;
+			}
 		}	
-		// TODO Layer2
 		return count;
 	}
 	
@@ -792,10 +797,12 @@ public class MulticastController{
 	public void destroy(){
 		saveCompleteConfig();
 		Map<MulticastData, MulticastThreadSuper> v = null;
-		for(int i=0; i<2; i++){
+		for(int i=0; i<4; i++){
 			switch(i){
 				case 0: v = mcMap_sender_l3; break;
 				case 1: v = mcMap_receiver_l3; break;
+				case 2: v = mcMap_sender_l2; break;
+				case 3: v = mcMap_receiver_l2; break;
 			}
 			for(Entry<MulticastData, MulticastThreadSuper> m : v.entrySet()){
 				m.getValue().setActive(false);
