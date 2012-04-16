@@ -9,6 +9,8 @@ import org.jnetpcap.packet.PcapPacketHandler;
 
 
 
+
+
 public class ThreadKeepPathAlive implements Runnable {
 	private byte[] deviceMACAddress;
 	private byte[] streamMACAddress;
@@ -39,25 +41,31 @@ public class ThreadKeepPathAlive implements Runnable {
 							stream[i] = packet.getByte(19+i);
 						}
 
-						if(PcapHandler.compareMACs(stream, streamMACAddress) && !PcapHandler.compareMACs(source, deviceMACAddress)){
+						if(PcapHandler.compareMACs(stream, streamMACAddress) ){
 							int cast = (int)packet.getByte(25) & 0xff;
 							cast = cast /36;
 							
 							try{
-							switch (cast) {
-								case 3:
-									PacketHandler.sendPacket(deviceMACAddress,MMRPPacket.getJoinIn(deviceMACAddress, streamMACAddress));
-									break;
-								case 4:
-									PacketHandler.sendPacket(deviceMACAddress,MMRPPacket.getJoinIn(deviceMACAddress, streamMACAddress));
-									break;
-								case 5:
+								if(packet.getByte(17) == (byte) 0x20){
 									PacketHandler.sendPacket(deviceMACAddress,MMRPPacket.getJoinEmpty(deviceMACAddress, streamMACAddress));
-									break;
-								default:
-									break;
 								}
-								} catch (IOException e) {
+								else {
+									switch (cast) {
+									case 3:
+										PacketHandler.sendPacket(deviceMACAddress,MMRPPacket.getJoinIn(deviceMACAddress, streamMACAddress));
+										break;
+									case 4:
+										PacketHandler.sendPacket(deviceMACAddress,MMRPPacket.getJoinIn(deviceMACAddress, streamMACAddress));
+										break;
+									case 5:
+										PacketHandler.sendPacket(deviceMACAddress,MMRPPacket.getJoinEmpty(deviceMACAddress, streamMACAddress));
+										break;
+									default:
+										break;
+									}
+								}
+								
+							} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 							}
