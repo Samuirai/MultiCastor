@@ -451,27 +451,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
 					if (iptype == IPType.IPv4) {
 						mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-						if(getSelectedUserLevel() == Userlevel.BEGINNER){
-							mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
-						}
 					} else if (iptype == IPType.IPv6) {
 						mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-						if(getSelectedUserLevel() == Userlevel.BEGINNER){
-							mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
-						}
 					}
 				}
 				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
 					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setTtl(InputValidator.checkTimeToLive("32"));
-					}
 				}
 				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
 					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-					}
 				}
 				break;
 			case L3_RECEIVER:
@@ -515,15 +503,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				}
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
 					mcd.setPacketLength(InputValidator.checkMMRPPacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
-					}
 				}
 				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
 					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-					}
 				}
 				break;
 			case L2_RECEIVER:
@@ -627,14 +609,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem die Eingaben gepr�ft werden sollen.
 	 */
 	private void checkInput(Typ typ){
-		if(getSelectedUserLevel()==Userlevel.BEGINNER){
-			input[0][3] = true;
-			input[0][4] = true;
-			input[0][5] = true;
-			input[2][3] = true;
-			input[2][4] = true;
-			input[2][5] = true;
-		}
+
 		switch(typ){
 			case L3_SENDER:
 				if(	
@@ -2319,11 +2294,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			inputData_R3.setSelectedRowsArray(getSelectedRows(Typ.L3_RECEIVER));
 			inputData_R2.setSelectedRowsArray(getSelectedRows(Typ.L2_RECEIVER));
 			inputData_S3.setNetworkInterface(getPanConfig(Typ.L3_SENDER).getSelectedSourceIndex());
-			inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());
-			inputData_S3.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_S2.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_R3.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_R2.setSelectedUserlevel(f.getSelectedUserlevel());			
+			inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());			
 			inputData_S3.setGroupadress(getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getText());
 			inputData_S2.setGroupadress(getPanConfig(Typ.L2_SENDER).getTf_groupIPaddress().getText());	
 			inputData_R3.setGroupadress(getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().getText());
@@ -2461,19 +2432,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getTf_udp_packetlength().setText(data.getPacketlength());
 		}
 	}
-	public Userlevel getSelectedUserLevel(){
-		Userlevel ret = Userlevel.UNDEFINED;
-		if(f.getRb_beginner().isSelected()){
-			ret = Userlevel.BEGINNER;
-		}
-		else if(f.getRb_expert().isSelected()){
-			ret = Userlevel.EXPERT;
-		}
-		else if(f.getRb_custom().isSelected()){
-			ret = Userlevel.CUSTOM;
-		}
-		return ret;
-	}
+
 	@Override
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster Object aktiviert wird

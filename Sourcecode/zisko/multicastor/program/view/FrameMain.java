@@ -69,19 +69,14 @@ public class FrameMain extends JFrame {
 	private boolean paneDel = false;
 	private String subTitle;
 	/*
-	 * Weitere Standard GUI Komponenten welche benötigt werden 
+	 * Weitere Standard GUI Komponenten welche benï¿½tigt werden 
 	 */
 	private JMenuBar mb_menubar;
 	private JMenu m_menu;
 	private JMenu m_options;
-	private JMenu m_scale;
 	private JMenu m_info;
 	private JMenu m_view;
-	private ButtonGroup bg_scale;
 	private ButtonGroup bg_userLevel;
-	private JRadioButtonMenuItem rb_beginner;
-	private JRadioButtonMenuItem rb_expert;
-	private JRadioButtonMenuItem rb_custom;
 	private JRadioButtonMenuItem[] mi_languages;
 	private JMenuItem mi_saveconfig;
 	private JMenuItem mi_saveSelectedMc;
@@ -167,7 +162,7 @@ public class FrameMain extends JFrame {
 	
 	/**
 	 * Funktion welche die Menubar initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benï¿½tigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl,boolean firstInit) {
 		
@@ -239,34 +234,16 @@ public class FrameMain extends JFrame {
 			mi_exit.setFont(MiscFont.getFont(0,14));
 			mi_exit.addActionListener(ctrl);
 			
-			bg_scale = new ButtonGroup();
-			
 			mi_about = new JMenuItem(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/info.png")));
 			mi_about.setFont(MiscFont.getFont(0,14));
 			mi_about.setActionCommand("open_about");
 			mi_about.addActionListener(ctrl);
-			
-			rb_beginner = new JRadioButtonMenuItem();
-			rb_beginner.setFont(MiscFont.getFont(0,14));
-			rb_beginner.addItemListener(ctrl);
-			
-			rb_expert = new JRadioButtonMenuItem("",true);
-			rb_expert.setFont(MiscFont.getFont(0,14));
-			rb_expert.addItemListener(ctrl);
-			
-			rb_custom = new JRadioButtonMenuItem();
-			rb_custom.setFont(MiscFont.getFont(0,14));
-			rb_custom.addItemListener(ctrl);
 			
 			m_menu = new JMenu();
 			m_menu.setFont(MiscFont.getFont(0,16));
 			
 			m_options = new JMenu();
 			m_options.setFont(MiscFont.getFont(0,16));
-			
-			m_scale = new JMenu();
-			m_scale.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/users.png")));
-			m_scale.setFont(MiscFont.getFont(0,14));
 			
 			m_view = new JMenu();
 			m_view.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/view.png")));
@@ -313,10 +290,7 @@ public class FrameMain extends JFrame {
 				mi_languages[i].addActionListener(ctrl);
 				bg_userLevel.add(mi_languages[i]);
 			}
-			
-			bg_scale.add(rb_expert);
-			bg_scale.add(rb_beginner);
-			bg_scale.add(rb_custom);
+		
 			m_view.add(mi_open_l2r);
 			m_view.add(mi_open_l2s);
 			m_view.add(mi_open_l3s);
@@ -325,9 +299,6 @@ public class FrameMain extends JFrame {
 			m_info.add(mi_snake);
 			m_info.add(mi_about);
 			m_info.add(mi_help);
-			m_scale.add(rb_expert);
-			m_scale.add(rb_beginner);
-			m_options.add(m_scale);
 			m_options.add(m_view);
 			m_options.add(m_language);
 			m_options.add(mi_setTitle);
@@ -361,12 +332,8 @@ public class FrameMain extends JFrame {
 		mi_help.setText(lang.getProperty("mi.help"));
 		mi_exit.setText(lang.getProperty("mi.exit"));
 		mi_about.setText(lang.getProperty("mi.about"));
-		rb_beginner.setText(lang.getProperty("mi.beginner"));
-		rb_expert.setText(lang.getProperty("mi.expert"));
-		rb_custom.setText(lang.getProperty("mi.custom"));
 		m_menu.setText(lang.getProperty("mi.menu"));
 		m_options.setText(lang.getProperty("mi.options"));
-		m_scale.setText(lang.getProperty("mi.userLevel"));
 		m_view.setText(lang.getProperty("mi.views"));
 		mi_open_l2r.setText(lang.getProperty("mi.layer2Receiver"));
 		mi_open_l2s.setText(lang.getProperty("mi.layer2Sender"));
@@ -431,7 +398,7 @@ public class FrameMain extends JFrame {
 			
 			// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
 			int i=0;
-			// V1.5: Referenz auf sich selbst, wird übergeben, um Titel zu refreshen
+			// V1.5: Referenz auf sich selbst, wird ï¿½bergeben, um Titel zu refreshen
 			tabpane = new DraggableTabbedPane(this);
 			tabpane.addMouseListener(ctrl);
 			
@@ -447,7 +414,7 @@ public class FrameMain extends JFrame {
 			tabpane.addTab(" "+lang.getProperty("tab.l3s")+" ", panel_sen_lay3);
 			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
 			
-			// V1.5: + Panel zum öffnen neuer Tabs
+			// V1.5: + Panel zum ï¿½ffnen neuer Tabs
 			tabpane.addTab( " + ", panel_plus);
 		}
 		else {
@@ -577,24 +544,8 @@ public class FrameMain extends JFrame {
 		return m_options;
 	}
 
-	public JMenu getM_scale() {
-		return m_scale;
-	}
-
 	public JMenu getM_info() {
 		return m_info;
-	}
-
-	public ButtonGroup getBg_scale() {
-		return bg_scale;
-	}
-
-	public JRadioButtonMenuItem getRb_beginner() {
-		return rb_beginner;
-	}
-
-	public JRadioButtonMenuItem getRb_expert() {
-		return rb_expert;
 	}
 
 	public JMenuItem getMi_saveconfig() {
@@ -648,27 +599,6 @@ public class FrameMain extends JFrame {
 	}
 	public boolean isAutoSaveEnabled(){
 		return mi_autoSave.isSelected();
-	}
-	/**
-	 * Hilfsfunktion welche das aktuell durch die Radiobuttons selektierte Userlevel ausliest
-	 * @return das aktuell ausgewï¿½hlte Userlevel
-	 */
-	public Userlevel getSelectedUserlevel(){
-		Userlevel ret = Userlevel.UNDEFINED;
-		if(rb_beginner.isSelected()){
-			ret = Userlevel.BEGINNER;
-		}
-		else if(rb_expert.isSelected()){
-			ret = Userlevel.EXPERT;
-		}
-		else if(rb_custom.isSelected()){
-			ret = Userlevel.CUSTOM;
-		}
-		return ret;
-	}
-
-	public JRadioButtonMenuItem getRb_custom() {
-		return rb_custom;
 	}
 
 	public JCheckBoxMenuItem getMi_autoSave() {
