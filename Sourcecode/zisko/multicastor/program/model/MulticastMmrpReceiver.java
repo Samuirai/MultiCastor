@@ -20,7 +20,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
 	/** Maximale Paketlaenge */
-	private final int length = 65575;
+	private final int length = 256;
 	/** Byte Array in dem das Paket gespeichert wird. */
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */
@@ -45,7 +45,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		this.logger = logger;
-		packetAnalyzer = new PacketAnalyzer(mcData, logger);
+		packetAnalyzer = new PacketAnalyzer(mcData, logger, length);
 		try {
 			receiver = new MMRPReceiver(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
@@ -117,8 +117,8 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		while(active){
-			packetAnalyzer.setTimeout(false);
 			receiver.waitForDataPacketAndGetIt(buf);
+			//packetAnalyzer.setTimeout(false);
 			packetAnalyzer.analyzePacket(buf);
 			initializeBuf();
 		}
@@ -133,7 +133,6 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		
 		try {
 			receiver.deregisterPath();
-			System.out.println("ich deregistriere");
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
 		}

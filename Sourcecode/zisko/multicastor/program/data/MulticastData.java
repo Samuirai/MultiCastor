@@ -49,7 +49,7 @@ public class MulticastData {
 	private long trafficAvg = -1;
 	
 	//V1.5 [FH] added packetLost
-	private int packetLostCount = -1;
+	private int packetLostCount = 0;
 	
 	//********************************************
 	// Eigene Datentypen

@@ -156,43 +156,13 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 					else						totalPacketCount = 0;
 					resetablePcktCnt++;
 					
-/*					if(ioExceptionCnt != 0){
-						mcData.setSenders(senderState.SINGLE);
-						proclaim(2, "Sender is working again");
-						JOptionPane.showMessageDialog(new JFrame(), "Sender is working again");
-						ioExceptionCnt = 0;
-					}*/
-					
-				//Hier die richtige Sendenexception Einfügen 
-				//Sonst IOException
 				}catch(Exception e1){
-/*					Object[] options = { "Stop Sender", "Reattemp to connect"};
-
-					 mcData.setSenders(senderState.NETWORK_ERROR);
-					 
-					if(ioExceptionCnt == 0)
-						proclaim(1, "Problem with sending. Trying to reconnect...");
-
-					if(ioExceptionCnt == 10)
-						 if( JOptionPane.showOptionDialog(null, "Sender is still not working correctly.\n"+
-									"Because sending via " +mcData.identify()+ " is not reachable " , "Sending warning",
-									JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-									null, options, options[0]) == 0){
-							 isSending = false;
-							 this.setActive(false);
-							 mCtrl.stopMC(mcData);
-						 }else
-							 ioExceptionCnt = 0;
-					
-					ioExceptionCnt ++;*/
-					e1.printStackTrace();
-					System.exit(1);
+					proclaim(2, "Problem with sending");
 				}
 			}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
 		}
 		try {
 			sender.deregisterPath();
-			System.out.println("I deregistered");
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister Path");
 		}

@@ -35,7 +35,7 @@ public class PacketAnalyzerTest extends TestCase {
 				fail();
 			}
 			Logger logger = Logger.getLogger("zisko.multicastor.testcases.model");
-			packetAnalyzer = new PacketAnalyzer(mcData, logger);
+			packetAnalyzer = new PacketAnalyzer(mcData, logger, 65575);
 			
 			assertNotNull(packetAnalyzer);
 			

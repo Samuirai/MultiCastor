@@ -1,5 +1,6 @@
 package zisko.multicastor.program.model;
 
+import java.util.Arrays;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +45,7 @@ public class PacketAnalyzer {
 	private byte[] checksum = new byte[2];
 	private byte[] snippetForChecksum = new byte[42];
 	/** Maximale Paketlaenge */
-	private final int length = 65575;
+	private int length = 65575;
 	// data is written only once each second to mcData
 	/** Zwischenspeicher fuer die Paketlaenge. */
 	private int packetLength = 0;
@@ -95,7 +96,7 @@ public class PacketAnalyzer {
 	 * Port zur Initialisierung genommen. Ermittelte Werte werden in dieses Objekt geschrieben.
 	 * @param logger Der Logger wird genutzt um Informationsmeldungen oder Fehlermeldungen auszugeben.
 	 */
-	public PacketAnalyzer(MulticastData multicastData, Logger logger){
+	public PacketAnalyzer(MulticastData multicastData, Logger logger, int pLength){
 		if (multicastData==null){
 			System.out.println("B�ser Fehler!!! multicastData ist null im PacketAnalyzer.");
 		}
@@ -104,6 +105,7 @@ public class PacketAnalyzer {
 			System.out.println("B�ser Fehler!!! Message Queue ist null im PacketAnalyzer.");
 		}
 		this.logger = logger;
+		this.length = pLength;
 		missingPackets = new Vector<Integer>();
 	}
 	
@@ -124,6 +126,7 @@ public class PacketAnalyzer {
 	 * @param mcPacket Zu anlysierendes Paket.
 	 */
 	public void analyzePacket(byte[] mcPacket){
+		//System.out.println(Arrays.toString(mcPacket));
 		if(mcPacket.length!=length){
 			logger.log(Level.SEVERE, "Invalid Packet Receivied in analysePacket()");
 			return;
@@ -144,19 +147,23 @@ public class PacketAnalyzer {
 		byte[] longSnippet	= new byte[8];
 		
 		// Perform value-reset
-		System.arraycopy(mcPacket, 38, intSnippet, 0, 4);
-		boolean reset = ByteTools.byteToBoolean(intSnippet);
-		if(reset == true){
+		//System.arraycopy(mcPacket, 38, intSnippet, 0, 4);
+		//boolean reset = ByteTools.byteToBoolean(intSnippet);
+		//System.out.println(reset);
+		/*if(reset == true){
 			mcData.resetValues();
 			this.resetValues();
-		}
+		}*/
 		
  		// HostID
 		System.arraycopy(mcPacket, 0, snippet, 0, 29);
 			//Ende des Strings suchen
 		int eof = 0;
 		for(;eof<29&&snippet[eof]!=0;eof++);
+		//System.out.println("EOF : " + eof);
 		hostID = new String(snippet).substring(0, eof);
+
+		//System.out.println(Arrays.toString(snippet));
 		// Hirschmann Tool Erkennung. Wenn auch nicht mit Checksumme, sondern ueber den Text
 		if(hostID.equals("Hirschmann IP Test-Multicast")){
 			if(check){
@@ -175,7 +182,7 @@ public class PacketAnalyzer {
 		if(!senderID.equals(hostID + threadID)){
 			senderID = hostID + threadID;
 			senderChanges++;
-		//	System.out.println("oldSenderID: " + senderID + " newSenderID: " + hostID + threadID);
+			//System.out.println("oldSenderID: " + senderID + " newSenderID: " + hostID + threadID);
 		}
 		
 		// PacketLoss
@@ -237,7 +244,7 @@ public class PacketAnalyzer {
 	public void analyzePacketOnce(byte[] mcPacket){
 		// Die Bufferlaenge fuer Pakete ist im MulticastReceiver 
 		// 	festgelegt und darf davon nicht abweichen
-		if(mcPacket.length!=65575){
+		if(mcPacket.length!=this.length){
 			logger.log(Level.SEVERE, "Invalid Packet Receivied in analysePacketOnce()");
 			return;
 		}
@@ -245,7 +252,7 @@ public class PacketAnalyzer {
 		byte[] shortSnippet = new byte[2];
 		
 		// figure out packet length and save it to mcData
-		for(int i=65574; i>0;i--){
+		for(int i=length-1; i>0;i--){
 			if(mcPacket[i]!=1){
 				packetLength = i+1;
 				i=0;

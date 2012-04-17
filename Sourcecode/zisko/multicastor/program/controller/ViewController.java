@@ -692,8 +692,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem die Textfelder zur�ckgesetzt werden sollen.
 	 */
 	private void clearInput(Typ typ){
-		//TODO Remove
-		System.out.println("CLEARINPUT");
 		if(initFinished){
 			getPanConfig(typ).getTf_groupIPaddress().setText("");
 			getPanConfig(typ).getTf_udp_port().setText("");
@@ -1046,7 +1044,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			if(typ == Typ.L3_SENDER){
 				input[0][4]=true;
 			}else if(typ == Typ.L2_SENDER){
-				input[2][4]=true;
+				if(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()) > 0)
+					input[2][4]=true;
 			}
 		}
 		else{

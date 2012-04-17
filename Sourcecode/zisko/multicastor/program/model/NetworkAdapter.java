@@ -47,21 +47,17 @@ public abstract class NetworkAdapter {
 			e.printStackTrace();
 		}
 		while(adapters.hasMoreElements()){
+			
 			current = adapters.nextElement();
-//			if(current.getDisplayName().contains("Microsoft") || current.getDisplayName().contains("Loop")){
-//				continue;
-//			}
 			Enumeration<InetAddress> addresses = current.getInetAddresses();
+
 			while(addresses.hasMoreElements()){
+				
 				InetAddress currentaddress = addresses.nextElement();
-				//System.out.println("checking: "+currentaddress.toString().substring(1));
-				//if(InputValidator.checkIPv4(currentaddress.toString().substring(1))!=null){
 				if(InputValidator.checkIPv4(currentaddress.getHostAddress())!=null){
 					ipv4Interfaces.add(currentaddress);
 				}
-				//System.out.println("checking: "+currentaddress.toString().substring(1).split("%")[0]);
-				//if(InputValidator.checkIPv6(currentaddress.toString().substring(1).split("%")[0])!=null){
-				//if(InputValidator.checkIPv6(currentaddress.toString().substring(1))!=null){
+
 				if(InputValidator.checkIPv6(currentaddress.getHostAddress().split("%")[0])!=null){
 					ipv6Interfaces.add(currentaddress);
 				}
@@ -77,8 +73,8 @@ public abstract class NetworkAdapter {
 		}
 		
 		//New Code
-		ArrayList<PcapIf>alldevs = new ArrayList<PcapIf>(); 		// Will be filled with
-		Vector<byte[]>tmpMacAdress = new Vector<byte[]>(); 	// NICs
+		ArrayList<PcapIf>alldevs = new ArrayList<PcapIf>();
+		Vector<byte[]>tmpMacAdress = new Vector<byte[]>(); 
 		Vector<String>tmpNameList = new Vector<String>();
 		int macCounter = 0;
 
@@ -148,7 +144,6 @@ public abstract class NetworkAdapter {
 		int ret = -1;
 		if(getAddressType(address) == IPType.IPv4){
 			for(int i = 0; i < ipv4Interfaces.size() ; i++){
-				//System.out.println("comparing index "+i+": \""+ipv4Interfaces.get(i).toString()+"\" against \""+address+"\"");
 				if(ipv4Interfaces.get(i).toString().substring(1).equals(address)){
 					ret = i;
 				}

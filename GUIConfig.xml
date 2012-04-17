@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <MultiCastor>
     <System>
-        <Time>Mon Apr 16 18:53:52 CEST 2012</Time>
+        <Time>Tue Apr 17 02:15:04 CEST 2012</Time>
         <Hostname>FilipHaase-PC</Hostname>
-        <Hostaddress>192.168.1.101</Hostaddress>
+        <Hostaddress>169.254.142.84</Hostaddress>
         <Username>FilipHaase</Username>
         <Javaversion>1.6.0_29</Javaversion>
         <Javavendor>Sun Microsystems Inc.</Javavendor>

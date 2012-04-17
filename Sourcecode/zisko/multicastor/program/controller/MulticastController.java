@@ -183,9 +183,6 @@ public class MulticastController{
 	// ****************************************************
 	// Multicast-Steuerung
 	// ****************************************************
-	
-
-
 	/**
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden Thread und startet diesen falls notwendig.
 	 * @param m MulticastData-Objekt das hinzugef�gt werden soll.
@@ -274,8 +271,6 @@ public class MulticastController{
 	 * @param m MulticastData-Objekt des zu startenden Multicasts.
 	 */
 	public void startMC(MulticastData m) {
-	//	writeConfig();
-	//	System.out.println("writeConfig");
 
 		synchronized(m){ // ohne sychronized ist das Programm in einen Deadlock gelaufen
 			if(!threads.containsKey(m)){ // prueft ob der Multicast schon laeuft.

@@ -44,7 +44,6 @@ public class MMRPPacket {
 	}
 	
 	private static byte[] buildMMRPPacket(byte[] source, byte[] firstValue, int event, boolean leaveAll){
-		System.out.println(Arrays.toString(source));
 		byte[] mmrpPacket = new byte[30];
 		
 		for(int i = 0; i < 6; i++){
