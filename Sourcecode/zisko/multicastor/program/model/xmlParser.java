@@ -38,6 +38,7 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.data.GUIData.TabState;
+import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -590,7 +591,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         doc.appendChild(guiConfig);
         
         
-		// Erzeugt Root Element für die User System Informationen
+		// Erzeugt Root Element fï¿½r die User System Informationen
 		Element system = doc.createElement("System");
 		guiConfig.appendChild(system);
 		system.appendChild(el=doc.createElement("Time"));
@@ -614,7 +615,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  
 		  
 		  
-		// Erzeugt Root Element für die User System Informationen
+		// Erzeugt Root Element fï¿½r die User System Informationen
 		Element tabs = doc.createElement("Tabs");
 		guiConfig.appendChild(tabs);
 		
@@ -663,7 +664,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         doc.appendChild(multiCastor);
 	    
         //TODO @FF diese User System Informationen bitte auch in die GUI Config schreiben lassen [JT]
-		// Erzeugt Root Element für die User System Informationen
+		// Erzeugt Root Element fï¿½r die User System Informationen
 		Element system = doc.createElement("System");
 		multiCastor.appendChild(system);
 		Element el;
@@ -766,11 +767,13 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 					break;
 				//[FH] V2: Added Support for L3
 				case groupMac:
-					text = doc.createTextNode(v1.get(count).getMmrpGroupMacAsString());
+					if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+						text = doc.createTextNode(v1.get(count).getMmrpGroupMacAsString());
 					break;
 					
 				case sourceMac:
-					text = doc.createTextNode(v1.get(count).getMmrpSourceMacAsString());
+					if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+						text = doc.createTextNode(v1.get(count).getMmrpSourceMacAsString());
 				}
 				mcdElement.appendChild(text);
 				mcdTyp.appendChild(mcdElement);
