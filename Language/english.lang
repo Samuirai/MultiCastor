@@ -1,10 +1,10 @@
 mi.autoSave			=AutoSave
 mi.changeWindowTitle=Change Window-Title
 mi.language			=Language
-mi.saveConfiguration=Save configuration
+mi.saveConfiguration=save GUI configuration
 mi.saveAllMc		=save all multicasts
 mi.saveSelectedMc	=save selected multicasts
-mi.loadConfiguration=Load Configuration
+mi.loadConfiguration=load GUI Configuration
 mi.loadMc			=load multicasts
 mi.loadAdditionalMc	=load additional multicasts
 mi.errorFileNotFound=error file not found

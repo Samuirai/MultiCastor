@@ -164,7 +164,7 @@ public class DraggableTabbedPane extends JTabbedPane {
   
   public void openTab(String command){
 		Map<String, Integer> openTabs = new HashMap<String, Integer>();
-		
+		// System.out.println("open tab: [["+command+"]]");
 		int openTabsCount = getTabCount();
 		
 		for(int i =0; i < openTabsCount; i++)

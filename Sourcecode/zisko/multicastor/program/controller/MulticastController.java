@@ -467,7 +467,7 @@ public class MulticastController{
 	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v Alle zu speichernden GUI Configs.
 	 */
-	private void saveGUIConfig(String path, GUIData data) {
+	public void saveGUIConfig(String path, GUIData data) {
 		final String p = "GUIConfig.xml";	
 		try{	// Uebergibt den Vektor mit allen Multicasts an den XMLParser
 			// FH Changed && to ||, think this is right ;)
@@ -505,23 +505,14 @@ public class MulticastController{
 			}		
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "Could not save Multicast Configuration.");
+			e.printStackTrace();
 		}
 	}
 	
 	/**
 	 * Speichert die Standardkonfigurationsdatei.
 	 */
-	private void saveCompleteConfig(){
-		Vector<MulticastData> v = new Vector<MulticastData>();
-		v.addAll(getMCs(Typ.L2_RECEIVER));
-		v.addAll(getMCs(Typ.L3_RECEIVER));
-		v.addAll(getMCs(Typ.L2_SENDER));
-		v.addAll(getMCs(Typ.L3_SENDER));
-		saveMulticastConfig("MultiCastor.xml", v);
-		
-		// TODO: saveGUIConfig auslagern [FF]
-		GUIData data = new GUIData();
-		// set everythign to invisible
+	public void updateGUIData(GUIData data) {
 		data.setL2_SENDER(GUIData.TabState.invisible);
 		data.setL3_SENDER(GUIData.TabState.invisible);
 		data.setL2_RECEIVER(GUIData.TabState.invisible);
@@ -554,10 +545,25 @@ public class MulticastController{
 		
 		data.setLanguage(LanguageManager.getCurrentLanguage());
 		data.setWindowName(view_controller.getFrame().getBaseTitle());
+	}
+	
+	/**
+	 * Speichert die Standardkonfigurationsdatei.
+	 */
+	private void saveCompleteConfig(){
+		Vector<MulticastData> v = new Vector<MulticastData>();
+		v.addAll(getMCs(Typ.L2_RECEIVER));
+		v.addAll(getMCs(Typ.L3_RECEIVER));
+		v.addAll(getMCs(Typ.L2_SENDER));
+		v.addAll(getMCs(Typ.L3_SENDER));
+		saveMulticastConfig("MultiCastor.xml", v);
+		
+		GUIData data = new GUIData();
+		// set everythign to invisible
+		updateGUIData(data);
 		
 		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
 		
-		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
 	}
 	
 	
@@ -666,7 +672,7 @@ public class MulticastController{
 		boolean skip = false;
 		try {
 			 xml_parser.loadMultiCastConfig(useDefaultXML ? defaultXML : path, multicasts);
-			 logger.log(Level.INFO, "Default Configurationfile loaded.");
+			 logger.log(Level.INFO, "Configurationfile loaded.");
 		} catch (Exception e) {
 			if(e instanceof FileNotFoundException) {
 				if (useDefaultXML) {

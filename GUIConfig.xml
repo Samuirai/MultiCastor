@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <MultiCastor>
     <System>
-        <Time>Fri Apr 13 16:02:09 CEST 2012</Time>
-        <Hostname>anon-146-48.vpn.ipredator.se</Hostname>
+        <Time>Sat Apr 21 01:54:26 CEST 2012</Time>
+        <Hostname>Fabians-MacBook-Air.local</Hostname>
         <Hostaddress>192.168.1.106</Hostaddress>
         <Username>samuirai</Username>
         <Javaversion>1.6.0_29</Javaversion>
         <Javavendor>Apple Inc.</Javavendor>
     </System>
     <Tabs>
-        <L2_SENDER>invisible</L2_SENDER>
+        <L2_SENDER>visible</L2_SENDER>
         <L2_RECEIVER>visible</L2_RECEIVER>
-        <L3_SENDER>selected</L3_SENDER>
-        <L3_RECEIVER>invisible</L3_RECEIVER>
+        <L3_SENDER>visible</L3_SENDER>
+        <L3_RECEIVER>selected</L3_RECEIVER>
     </Tabs>
     <Language>deutsch</Language>
-    <WindowName>MCastor</WindowName>
+    <WindowName>MCastor GUI Config 2</WindowName>
 </MultiCastor>

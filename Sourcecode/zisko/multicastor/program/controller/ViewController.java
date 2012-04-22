@@ -194,7 +194,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_saveconfig()){
-			//TODO @FF Hier muss das speichern des neuen User Config Files veranlasst werden.
+			saveGUIFileEvent();
 		}
 		
 		else if(e.getSource()==f.getMi_saveAllMc()){
@@ -224,8 +224,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_loadconfig()){
-			// TODO [MH] Schauen ob der alte Loadbutton noch gebraucht wird
-			//System.out.println("Loading!");
+			loadGUIFileEvent();
 //			f.getFc_load().toggle();
 //			setColumnSettings(getUserInputData(getSelectedTab()), getSelectedTab());
 		}
@@ -1687,6 +1686,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			setTBactive(selectedRows, typ);
 		}
 	}
+	
+	/**
+	 * Funktion welche ausgeloest wird, wenn der User versucht ein GUI Konfigurationsdatei mit dem "Konfiguration Laden"
+	 * Dialog zu laden.
+	 */
+	private void loadGUIFileEvent() {
+		// TODO Auto-generated method stub
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFont(MiscFont.getFont());
+		int ret = chooser.showOpenDialog(f);
+		if (ret == JFileChooser.APPROVE_OPTION) {
+			mc.loadGUIConfig(chooser.getSelectedFile().toString(), false);
+		}
+	}
+	
 	/**
 	 * Funktion welche ausgeloest wird, wenn der User versucht eine Konfigurationsdatei mit dem "Datei Laden"
 	 * Dialog zu laden.
@@ -2032,7 +2048,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
         		}
         		mc.saveMulticastConfig(chooser.getSelectedFile().getPath(), v);
         	}
+        }
+	}
+        
+    private void saveGUIFileEvent() {
+		//Create the Save Dialog
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFont(MiscFont.getFont());
+		//show the save dialog
+        int ret = chooser.showSaveDialog(f);
+        //save the file
+        if (ret == JFileChooser.APPROVE_OPTION) {
+        	mc.updateGUIData(guidata);
+    		mc.saveGUIConfig(chooser.getSelectedFile().getPath(), guidata);
         }		
+    }
 		
 //      TODO @FF F�r dich als Codebsp. hier gelassen, falls das noch gebraucht wird (JT)
 //		if(e.getActionCommand().equals("ApproveSelection")){
@@ -2049,7 +2081,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		else if(e.getActionCommand().equals("CancelSelection")){
 //			getFrame().getFc_save().toggle();
 //		}
-	}
+	//}
 	 
 	/**
 	  * Funktion welche das Aussehen des Start Stop und Delete Buttons anpasst je nach dem welche Multicasts ausgew�hlt wurden.
@@ -2531,6 +2563,11 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		this.f.reloadLanguage();
 		this.f.repaint();
 		
+		for (int i=0;i<LanguageManager.languages.length;i++){
+			if (this.f.getMi_languages()[i].getText().equals(data.getLanguage())) this.f.getMi_languages()[i].setSelected(true);
+			else this.f.getMi_languages()[i].setSelected(false);
+		}
+		
 		this.f.setBaseTitle(data.getWindowName());
 		this.f.updateTitle();
 		
@@ -2540,29 +2577,58 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		this.f.getTabpane().closeTab(title);
 		
+		//pane.closeTab(pane.getTitleAt(i));
+		//pane.remove(i);
+		//pane.lookIfWeCan();
+		
 		if(data.getL2_RECEIVER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l2r")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
 		}
 		if(data.getL3_RECEIVER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l3r")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
 		}
 		if(data.getL2_SENDER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l2s")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
 		}
 		if(data.getL3_SENDER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l3s")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
+		}
+		
+		
+		if(data.getL2_RECEIVER() == GUIData.TabState.visible || data.getL2_RECEIVER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer2_r");
+		}
+		System.out.println(data.getL3_RECEIVER().toString());
+		if(data.getL3_RECEIVER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer3_r");
+		}
+		System.out.println(data.getL2_SENDER().toString());
+		if(data.getL2_SENDER() == GUIData.TabState.visible || data.getL2_SENDER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer2_s");
+		}
+		System.out.println(data.getL3_SENDER().toString());
+		if(data.getL3_SENDER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer3_s");
 		}
 		
 		// select the selected tab
@@ -2592,8 +2658,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					this.f.getTabpane().setSelectedIndex(i);
 		}
 		
-		
-		
+		this.f.getTabpane().lookIfWeCan();
 		
 	}
 }

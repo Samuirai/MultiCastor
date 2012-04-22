@@ -411,6 +411,7 @@ public class MulticastData {
 	}
 	public String getMmrpSourceMacAsString(){
 		String s = "";
+		System.out.println("length: "+mmrpSourceMac.length);
 		for(int i = 0; i < mmrpSourceMac.length; i++){
 			String tmp = Integer.toHexString((int)mmrpSourceMac[i]);
 			

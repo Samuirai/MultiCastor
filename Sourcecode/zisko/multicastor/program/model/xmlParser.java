@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 
 import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
+import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.data.GUIData.TabState;
@@ -766,11 +767,13 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 					break;
 				//[FH] V2: Added Support for L3
 				case groupMac:
-					text = doc.createTextNode(v1.get(count).getMmrpGroupMacAsString());
+					if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+						text = doc.createTextNode(v1.get(count).getMmrpGroupMacAsString());
 					break;
 					
 				case sourceMac:
-					text = doc.createTextNode(v1.get(count).getMmrpSourceMacAsString());
+					if(typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER)
+						text = doc.createTextNode(v1.get(count).getMmrpSourceMacAsString());
 				}
 				mcdElement.appendChild(text);
 				mcdTyp.appendChild(mcdElement);

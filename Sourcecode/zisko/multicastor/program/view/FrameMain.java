@@ -338,6 +338,7 @@ public class FrameMain extends JFrame {
 			m_menu.add(mi_loadconfig);
 			m_menu.add(mi_loadMc);
 			m_menu.add(mi_loadAdditionalMc);
+			m_menu.add(mi_exit); // [FF] WHHHHO... hab ein vergessenes Menu Ding gefunden
 			mb_menubar.add(m_menu);
 			mb_menubar.add(m_options);
 			mb_menubar.add(m_info);
@@ -799,5 +800,8 @@ public class FrameMain extends JFrame {
 	}
 	public JMenuItem getMi_loadMc() {
 		return mi_loadMc;
+	}
+	public JRadioButtonMenuItem[] getMi_languages() {
+		return mi_languages;
 	}
 }
