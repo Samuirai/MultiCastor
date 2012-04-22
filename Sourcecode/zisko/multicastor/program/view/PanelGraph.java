@@ -65,10 +65,10 @@ public class PanelGraph extends JPanel {
   
   /**
    * Einziger Konstruktor der Klasse
-   * @param maxY der höchst mögliche Y-Wert (int)
+   * @param maxY der hï¿½chst mï¿½gliche Y-Wert (int)
    * @param labelOfX Beschriftung der X-Achse (String)
    * @param labelOfY Beschriftung der Y-Achse (String)
-   * @param staticScale Bestimmt ob der höchstmögliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)
+   * @param staticScale Bestimmt ob der hï¿½chstmï¿½gliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)
    */
   public PanelGraph(int maxY, String labelOfX, String labelOfY, boolean staticScale){
     lang=LanguageManager.getInstance();
@@ -86,7 +86,7 @@ public class PanelGraph extends JPanel {
   }
   
   /**
-   * Gibt die aktuelle und damit bevorzugte Größe des Panels zurück
+   * Gibt die aktuelle und damit bevorzugte Grï¿½ï¿½e des Panels zurï¿½ck
    * @return eine Dimension
    */
   public Dimension getPreferredSize(){

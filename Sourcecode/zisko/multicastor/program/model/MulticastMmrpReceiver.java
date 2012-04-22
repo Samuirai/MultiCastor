@@ -3,6 +3,7 @@ package zisko.multicastor.program.model;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
 	/** Maximale Paketlaenge */
-	private final int length = 65575;
+	private final int length = 256;
 	/** Byte Array in dem das Paket gespeichert wird. */
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */
@@ -44,7 +45,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		this.logger = logger;
-		packetAnalyzer = new PacketAnalyzer(mcData, logger);
+		packetAnalyzer = new PacketAnalyzer(mcData, logger, length);
 		try {
 			receiver = new MMRPReceiver(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
@@ -116,14 +117,10 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		while(active){
-			System.out.println("Before waiting");
-			receiver.waitForDataPacket();
-			System.out.println("After waiting");
-			packetAnalyzer.setTimeout(false);
-			System.out.println("Before analyzer");
-			System.out.println("Packet: " + receiver.getDataPacket());
-			//packetAnalyzer.analyzePacket(receiver.getDataPacket());
-			System.out.println("After analyzer");
+			receiver.waitForDataPacketAndGetIt(buf);
+			//packetAnalyzer.setTimeout(false);
+			packetAnalyzer.analyzePacket(buf);
+			initializeBuf();
 		}
 		
 		// Resetted gemessene Werte (SenderID bleibt erhalten, wegen des Wiedererkennungswertes)
@@ -136,7 +133,6 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		
 		try {
 			receiver.deregisterPath();
-			System.out.println("ich deregistriere");
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
 		}

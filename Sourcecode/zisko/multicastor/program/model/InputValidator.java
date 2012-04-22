@@ -264,7 +264,7 @@ public class InputValidator {
 		}catch(NumberFormatException e){
 			return -2;
 		}
-		if (plen>=52&& plen<=65527)
+		if (plen>=52&& plen<=127)
 			return plen;
 		else 
 			return -1;		
@@ -304,6 +304,26 @@ public class InputValidator {
 			return -2;
 		}
 		if (pr>=1 && pr<= 65535)
+			return pr;
+		else 
+			return -1;		
+	}
+	
+	/**
+	 * Pr�ft die Validit�t der PaketRate
+	 * @param pRate Der zu pr�fende Wert als {@link java.lang.String}
+	 * @return PacketRate als int bei valider PacketRate, -1 wenn string keine valide PacketRate ist, -2 wenn keine Zahl
+	 */
+	public static int checkPacketRateMMRP(String pRate){
+		
+		//1-65536
+		int pr;
+		try{
+			pr = Integer.parseInt(pRate);
+		}catch(NumberFormatException e){
+			return -2;
+		}
+		if (pr>=10 && pr<= 65535)
 			return pr;
 		else 
 			return -1;		

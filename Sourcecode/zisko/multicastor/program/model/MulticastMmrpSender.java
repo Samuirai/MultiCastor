@@ -12,10 +12,11 @@ import javax.swing.JOptionPane;
 import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.senderState;
+import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.mmrp.*;
 
-public class MulticastMmrpSender extends MulticastThreadSuper{
+public class MulticastMmrpSender extends MulticastThreadSuper implements MulticastSenderInterface{
 
 	/** Wenn auf wahr, lauscht dieser Sender auf ankommende Pakete. */
 	private boolean isSending = false;
@@ -82,9 +83,8 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 	}	
 
 	public void setActive(boolean active) {
-		System.out.println("Set Active: " + active);
 		isSending = active;
-		mcData.setActive(false);
+		mcData.setActive(active);
 		if(active) {
 			//Setzen der ThreadID, da diese evtl.
 			//im Controller noch einmal ge�ndert wird
@@ -149,44 +149,15 @@ public class MulticastMmrpSender extends MulticastThreadSuper{
 							}
 			endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
 			do{
-				System.out.println("hier");
 				try{
 					sender.sendDataPacket(myPacketBuilder.getPacket());
+					//System.out.println("Sending packet " + totalPacketCount );
 					if(totalPacketCount<65535)	totalPacketCount++;
 					else						totalPacketCount = 0;
 					resetablePcktCnt++;
 					
-/*					if(ioExceptionCnt != 0){
-						mcData.setSenders(senderState.SINGLE);
-						proclaim(2, "Sender is working again");
-						JOptionPane.showMessageDialog(new JFrame(), "Sender is working again");
-						ioExceptionCnt = 0;
-					}*/
-					
-				//Hier die richtige Sendenexception Einfügen 
-				//Sonst IOException
 				}catch(Exception e1){
-/*					Object[] options = { "Stop Sender", "Reattemp to connect"};
-
-					 mcData.setSenders(senderState.NETWORK_ERROR);
-					 
-					if(ioExceptionCnt == 0)
-						proclaim(1, "Problem with sending. Trying to reconnect...");
-
-					if(ioExceptionCnt == 10)
-						 if( JOptionPane.showOptionDialog(null, "Sender is still not working correctly.\n"+
-									"Because sending via " +mcData.identify()+ " is not reachable " , "Sending warning",
-									JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-									null, options, options[0]) == 0){
-							 isSending = false;
-							 this.setActive(false);
-							 mCtrl.stopMC(mcData);
-						 }else
-							 ioExceptionCnt = 0;
-					
-					ioExceptionCnt ++;*/
-					e1.printStackTrace();
-					System.exit(1);
+					proclaim(2, "Problem with sending");
 				}
 			}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
 		}

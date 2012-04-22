@@ -691,8 +691,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem die Textfelder zur�ckgesetzt werden sollen.
 	 */
 	private void clearInput(Typ typ){
-		//TODO Remove
-		System.out.println("CLEARINPUT");
 		if(initFinished){
 			getPanConfig(typ).getTf_groupIPaddress().setText("");
 			getPanConfig(typ).getTf_udp_port().setText("");
@@ -1045,7 +1043,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			if(typ == Typ.L3_SENDER){
 				input[0][4]=true;
 			}else if(typ == Typ.L2_SENDER){
-				input[2][4]=true;
+				if(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()) > 0)
+					input[2][4]=true;
 			}
 		}
 		else{
@@ -2187,6 +2186,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.startMC(mc.getMC(row, typ));
 		setBTStartStopDelete(typ);
 	}
+	
 	@Override
 	/**
 	 * Funktion welche aufgerufen wird wenn das Frame in der Gr��e ge�ndert oder verschoben wird.
@@ -2248,7 +2248,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else{
 			graphData = new MulticastData[getSelectedRows(typ).length];
-			//System.out.println("GraphData: " + graphData.length);
+			//System.out.println("GraphData: " + grphData.length);
 			for(int i = 0; i < getSelectedRows(typ).length ; i++){
 				//System.out.println(i);
 				graphData[i]=mc.getMC(getSelectedRows(typ)[i], typ);
@@ -2328,7 +2328,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				case L2_SENDER: tabpart=f.getPanel_sen_lay2(); break;
 				case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
 				case L2_RECEIVER: tabpart=f.getPanel_rec_lay2(); break;
-				case L3_RECEIVER: tabpart=f.getPanel_rec_lay3();
+				case L3_RECEIVER: tabpart=f.getPanel_rec_lay3(); break;
 			}
 			int[] selectedRows = tabpart.getTable().getSelectedRows();
 			getPanStatus(typ).getLb_multicasts_selected().setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
