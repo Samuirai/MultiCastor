@@ -70,12 +70,8 @@ public class LanguageManager extends Properties{
 		"mi.help",
 		"mi.exit",
 		"mi.about",
-		"mi.beginner",
-		"mi.expert",
-		"mi.custom",
 		"mi.menu",
 		"mi.options",
-		"mi.userLevel",
 		"mi.views",
 		"mi.layer2Receiver",
 		"mi.layer2Sender",
@@ -161,7 +157,9 @@ public class LanguageManager extends Properties{
 		"toolTip.selectMacAddress",
 		"message.setNewTitle",
 		"message.noMcCreated",
-		"message.noMcSelected"
+		"message.noMcSelected",
+		"about.license",
+		"about.labelDev"
 	};
 	
 	/**
@@ -181,17 +179,18 @@ public class LanguageManager extends Properties{
 	 * @param currentLang
 	 */
 	private LanguageManager(String currentLang){
-		currentLanguage=(new File(currentLang)).getName().replaceAll(".lang", "");
+		File languageFile = new File(currentLang); // [FF] neded to output absolut path. better for debugging and nice error messages
+		currentLanguage=languageFile.getName().replaceAll(".lang", "");
 		try {
 			loadLanguage(currentLang);
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Can not find the language file at\n"+currentLang+"\nCan not start Multicastor.");
+			JOptionPane.showMessageDialog(null, "Can not find the language file at\n"+languageFile.getAbsolutePath()+"\nCan not start Multicastor.");
 			System.exit(1);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Can not read the language file at\n"+currentLang+"\nCan not start Multicastor.");
+			JOptionPane.showMessageDialog(null, "Can not read the language file at\n"+languageFile.getAbsolutePath()+"\nCan not start Multicastor.");
 			System.exit(1);
 		} catch (InvalidLanguageFileException e) {
-			JOptionPane.showMessageDialog(null, "The language file at\n"+currentLang+"\nis invalid. Can not start Multicastor.\n Missing value "+e.getErrorKey()+" at index "+e.getErrorIndex()+".");
+			JOptionPane.showMessageDialog(null, "The language file at\n"+languageFile.getAbsolutePath()+"\nis invalid. Can not start Multicastor.\n Missing value "+e.getErrorKey()+" at index "+e.getErrorIndex()+".");
 			System.exit(1);
 		}
 	}

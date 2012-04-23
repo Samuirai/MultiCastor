@@ -3,6 +3,7 @@ package zisko.multicastor.program.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.UnknownHostException;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -40,7 +41,7 @@ public class Main {
 	 */
 
 	public static void main(String[] args) {
-
+		
 		Main.REAL_MAX_HEAP = Runtime.getRuntime().maxMemory();
 		
 		// Initialisierung
