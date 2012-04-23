@@ -801,7 +801,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	}
 
 	/**
-	 * Funktion, welche die ComboBox für Layer3(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
+	 * Funktion, welche die ComboBox für Layer2(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
 	 * @param typ Programmteil in welchem die Box geupdated werden soll.
 	 */
 	public void insertNetworkAdapters(Typ typ){
@@ -1473,6 +1473,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());
 			}
 			if(typ == Typ.L3_SENDER){
+				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());
 				tabpart.getPan_config().getTf_ttl().setText(""+getMCData(selectedRows[0],typ).getTtl());;
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());;
 			}
