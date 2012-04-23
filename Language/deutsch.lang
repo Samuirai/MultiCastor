@@ -1,66 +1,66 @@
 mi.autoSave			=Automatisch speichern
-mi.changeWindowTitle=Fenstertitel ändern
+mi.changeWindowTitle=Fenstertitel Ã¤ndern
 mi.language			=Sprache
 mi.saveConfiguration=Konfiguration speichern
 mi.saveAllMc		=Alle Multicastdaten speichern
-mi.saveSelectedMc	=Ausgewählte Multicastdaten speichern
+mi.saveSelectedMc	=AusgewÃ¤hlte Multicastdaten speichern
 mi.loadConfiguration=Konfiguration laden
 mi.loadMc			=Multicastdaten laden
-mi.loadAdditionalMc	=zusätzliche Multicastdaten laden
+mi.loadAdditionalMc	=zusÃ¤tzliche Multicastdaten laden
 mi.errorFileNotFound=Fehler: Datei nicht gefunden
 mi.snake			=Snake (Schlangenspiel)
 mi.help				=Hilfe
 mi.exit				=Beenden
-mi.about			=Über
-mi.beginner			=Anfänger
+mi.about			=â€¹ber
+mi.beginner			=AnfÃ¤nger
 mi.expert			=Experte
 mi.custom			=Benutzerdefiniert
-mi.menu				=Menü
+mi.menu				=MenÃ¼
 mi.options			=Optionen
 mi.userLevel		=Benutzer Level
 mi.views			=Ansichten
-mi.layer2Receiver	=Schicht 2 Empfänger
+mi.layer2Receiver	=Schicht 2 EmpfÃ¤nger
 mi.layer2Sender		=Schicht 2 Sender
-mi.layer3Receiver	=Schicht 3 Empfänger
+mi.layer3Receiver	=Schicht 3 EmpfÃ¤nger
 mi.layer3Sender		=Schicht 3 Sender
 mi.info				=Info
 tab.l2s				=S2 Sender
 tab.l3s				=S3 Sender
-tab.l2r				=S2 Empfänger
-tab.l3r				=S3 Empfänger
+tab.l2r				=S2 EmpfÃ¤nger
+tab.l3r				=S3 EmpfÃ¤nger
 tab.graph			=Diagramm
 tab.console			=Konsole	
-plus.l2rDescription		=Öffnet die Schicht 2 Empfänger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
-plus.l2sDescription		=Öffnet die Schicht 2 Sender Registerkarte (mit MMRP). Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
-plus.l3rDescription		=Öffnet die Schicht 3 Empfänger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
-plus.l3sDescription		=Öffnet die Schicht 3 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
-plus.aboutDescription	=Öffnet die Über Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
-miscBorder.mcOverwiew	=MultiCast Übersicht
+plus.l2rDescription		=Ã·ffnet die Schicht 2 EmpfÃ¤nger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geÃ¶ffnet. Wenn sie geÃ¶ffnet ist, wird sie fokussiert.
+plus.l2sDescription		=Ã·ffnet die Schicht 2 Sender Registerkarte (mit MMRP). Wenn die Registerkarte geschlossen ist, wird sie geÃ¶ffnet. Wenn sie geÃ¶ffnet ist, wird sie fokussiert.
+plus.l3rDescription		=Ã·ffnet die Schicht 3 EmpfÃ¤nger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geÃ¶ffnet. Wenn sie geÃ¶ffnet ist, wird sie fokussiert.
+plus.l3sDescription		=Ã·ffnet die Schicht 3 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geÃ¶ffnet. Wenn sie geÃ¶ffnet ist, wird sie fokussiert.
+plus.aboutDescription	=Ã·ffnet die â€¹ber Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geÃ¶ffnet. Wenn sie geÃ¶ffnet ist, wird sie fokussiert.
+miscBorder.mcOverwiew	=MultiCast â€¹bersicht
 miscBorder.mcControl=MultiCast Steuerung
 miscBorder.mcConfig	=MultiCast Konfiguration
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.udpPort				=UDP Port
 miscBorder.packetRate			=Paketrate
-miscBorder.packetLength			=Paketlänge
+miscBorder.packetLength			=PaketlÃ¤nge
 miscBorder.timeToLive			=Lebenszeit
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.MacGroupAddress		=Mac Gruppenadresse
 miscBorder.NetworkInterface		=Netzwerk Interface
-config.message.ipFirst			=Bitte erst die IP wählen
+config.message.ipFirst			=Bitte erst die IP wÃ¤hlen
 config.message.ipFirstShort		=IP zuerst
 button.start		=Start
 button.stop			=Stop
-button.delete		=Löschen
-button.deSelectAll	=Alle An-/Abwählen
+button.delete		=LÃ¶schen
+button.deSelectAll	=Alle An-/AbwÃ¤hlen
 button.new			=Neu
 button.active		=Aktiv
 button.inactive		=Inaktiv
-button.add			=Hinzufügen
-button.change		=ändern
-button.changeAll	=alle ändern
-status.mcSelected	=Ausgewählte MultiCasts
+button.add			=HinzufÃ¼gen
+button.change		=Ã¤ndern
+button.changeAll	=alle Ã¤ndern
+status.mcSelected	=AusgewÃ¤hlte MultiCasts
 status.mcTotal		=Anzahl MultiCasts
 status.traffic		=Datentransfer
 status.in			=EIN
@@ -76,64 +76,67 @@ graph.current		=Aktuell
 
 # Will create a message like: Not enough memory. You have XXX MB. You need minimum XXX MB to start MultiCastor.
 # MC will show this message if there are not enough free memory in heap.
-error.memory.part1	=Nicht genug Speicher. Sie verfügen über 
-error.memory.part2	=Sie benötigen mindestens
+error.memory.part1	=Nicht genug Speicher. Sie verfÃ¼gen Ã¼ber 
+error.memory.part2	=Sie benÃ¶tigen mindestens
 error.memory.part3	=um MultiCastor zu starten.
 error.memory.title	=MultiCastor: Speicherfehler
 
 # MC will show this message if there are less them 10% free memory in heap.
 warning.memory.title=Ihr Arbeitsspeicher ist fast voll.(<10% verbleibend)\n\
  Bitte versuchen sie ihre Dateien zu speichern und \
- versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schließen.\n\n
+ versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schlieï¬‚en.\n\n
 warning.memory.freeMemory =Freier Speicher
 warning.memory.allocMemory=Aktuell reservierter Speicher
-warning.memory.maxMemory  =Maximal verfügbarer Speicher
+warning.memory.maxMemory  =Maximal verfÃ¼gbarer Speicher
 
 logger.info.startWithGui=MultiCastor gestartet mit GUI
 logger.info.startNoGui	=MultiCastor gestartet ohne GUI
 logger.info.startGuiFile=MultiCastor gestartet mit GUI und Datei
 
 error.config.notSpecified=Konfigurationsdatei nicht angegeben.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
- Der Pfad zur Konfigurationsdatei wir benötigt,\n\
+ geben sie 'java -jar multiCastor.jar -h' fÃ¼r mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benÃ¶tigt,\n\
  um MultiCastor ohne GUI zu starten.
 
-error.config.wrongFormat =Die Konfigurationsdatei hat das falsche Format oder ist beschädigt. Bitte nutzen sie eine gültige Konfigurationsdatei.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
- Der Pfad zur Konfigurationsdatei wir benötigt,\n\
+error.config.wrongFormat =Die Konfigurationsdatei hat das falsche Format oder ist beschÃ¤digt. Bitte nutzen sie eine gÃ¼ltige Konfigurationsdatei.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' fÃ¼r mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benÃ¶tigt,\n\
  um MultiCastor ohne GUI zu starten.
  
-error.invalidParameter	 =Kein gültiger Parameter.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.
+error.invalidParameter	 =Kein gÃ¼ltiger Parameter.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' fÃ¼r mehr Informationen ein.
 
-error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte prüfen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.
+error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte prÃ¼fen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.
 
 console.helptext		 =Nutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
- Der Pfad zur Konfigurationsdatei wir benötigt,\n\
+ geben sie 'java -jar multiCastor.jar -h' fÃ¼r mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benÃ¶tigt,\n\
  um MultiCastor ohne GUI zu starten.\n\n\
- Für mehr Informationen zu gültigen Konfigurationsdateien\n\
+ FÃ¼r mehr Informationen zu gÃ¼ltigen Konfigurationsdateien\n\
  lesen sie bitte das Benutzerhandbuch.\n\n\
  Optionen:\n\
  \t\t-h\tZeigt diese Hilfenachricht an\n\
  \t\t-g\tStartet MultiCastor ohne\n\
- \t\t\teine grafische Benutzeroberfläche
+ \t\t\teine grafische BenutzeroberflÃ¤che
 
 info.longUpdateTime		 =Die Aktualisierungszeit ist sehr lange
-warning.longUpdateTime	 =Die Aktualisierung des GUI dauert sehr lange. Konsultieren sie das Benutzerhandbuch für mehr Informationen.
+warning.longUpdateTime	 =Die Aktualisierung des GUI dauert sehr lange. Konsultieren sie das Benutzerhandbuch fÃ¼r mehr Informationen.
 
-warning.invalidNetAdapter=Ungültiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.
+warning.invalidNetAdapter=UngÃ¼ltiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.
 
-toolTip.closeThisTab	 	=schließe diese Registerkarte
-toolTip.mcAddressRange		=Wählen sie eine Multicast IP Adresse (IPV4 oder IPV6)
-toolTip.ipFirst				=Geben sie erst eine IP Adresse an und wählen sie dann das Netzwerkinterace
+toolTip.closeThisTab	 	=schlieï¬‚e diese Registerkarte
+toolTip.mcAddressRange		=WÃ¤hlen sie eine Multicast IP Adresse (IPV4 oder IPV6)
+toolTip.ipFirst				=Geben sie erst eine IP Adresse an und wÃ¤hlen sie dann das Netzwerkinterace
 toolTip.specifyUDPPort		=Geben sie den UDP Port an
 toolTip.specifyTTL			=Geben sie die Lebenszeit an
 toolTip.specifyPacketRate	=Spezifizieren sie die Paketrate
-toolTip.specifyPacketLength	=Spezifizieren sie die Paketlänge
-toolTip.selectNetInterface	=Wählen sie ein Netzwerkinterface für Multicast
-toolTip.selectMacAddress	=Wählen sie eine Multicast Mac Adresse
+toolTip.specifyPacketLength	=Spezifizieren sie die PaketlÃ¤nge
+toolTip.selectNetInterface	=WÃ¤hlen sie ein Netzwerkinterface fÃ¼r Multicast
+toolTip.selectMacAddress	=WÃ¤hlen sie eine Multicast Mac Adresse
 
 message.setNewTitle			=Bitte geben sie einen neuen Titel ein
-message.noMcCreated			=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden könnten.
-message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewählt. Sie können beliebige Tabellenzeilen wählen. Mehrfachauswahl ist mit gedrückter Strg-Taste möglich.
+message.noMcCreated			=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden kÃ¶nnten.
+message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewÃ¤hlt. Sie kÃ¶nnen beliebige Tabellenzeilen wÃ¤hlen. Mehrfachauswahl ist mit gedrÃ¼ckter Strg-Taste mÃ¶glich.
+
+about.license  = Lizensiert unter GPLv3.
+about.labelDev = Entwickler:

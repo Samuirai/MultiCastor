@@ -44,12 +44,14 @@ public class PcapHandler {
 				// errbuf.toString());
 				throw new IOException();
 			}
-
 			for (int i = 0; i < alldevs.size(); i++) {
 					alldevsAdress.add(alldevs.get(i).getHardwareAddress());
+/*					System.out.println(alldevs.get(i).getName());
+					System.out.println(Arrays.toString(alldevs.get(i).getHardwareAddress()));*/
 			}
 		} 
 		
+	
 		for(byte[] address : alldevsAdress)
 			if(address != null && compareMACs(deviceMACAddress, address))
 				return alldevs.get(alldevsAdress.indexOf(address));
@@ -68,5 +70,19 @@ public class PcapHandler {
 		}
 
 		return sameMAC;
+	}
+	
+	public static String byteMACToString(byte [] mac){
+		if (mac == null)
+	        return null;
+
+	    StringBuilder sb = new StringBuilder(18);
+	    for (byte b : mac) {
+	        if (sb.length() > 0)
+	            sb.append(':');
+	        sb.append(String.format("%02x", b));
+	    }
+	    return sb.toString();
+
 	}
 }

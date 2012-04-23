@@ -1,17 +1,16 @@
 package zisko.multicastor.program.model;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Vector;
+import org.jnetpcap.Pcap;
+import org.jnetpcap.PcapIf;
 
-import sun.nio.cs.ext.MacHebrew;
-
-import zisko.multicastor.program.controller.ViewController.MessageTyp;
-import zisko.multicastor.program.data.MulticastData;
-import zisko.multicastor.program.data.MulticastData.Typ;
 /**
  * Abstrakte Hilfsklasse welche die Netzwerkadapter des Systems ausliest und nach IPv4 und IPv6 sortiert.
  * @author Daniel Becker
@@ -48,33 +47,59 @@ public abstract class NetworkAdapter {
 			e.printStackTrace();
 		}
 		while(adapters.hasMoreElements()){
+			
 			current = adapters.nextElement();
-//			if(current.getDisplayName().contains("Microsoft") || current.getDisplayName().contains("Loop")){
-//				continue;
-//			}
 			Enumeration<InetAddress> addresses = current.getInetAddresses();
+
 			while(addresses.hasMoreElements()){
+				
 				InetAddress currentaddress = addresses.nextElement();
-				//System.out.println("checking: "+currentaddress.toString().substring(1));
-				//if(InputValidator.checkIPv4(currentaddress.toString().substring(1))!=null){
 				if(InputValidator.checkIPv4(currentaddress.getHostAddress())!=null){
 					ipv4Interfaces.add(currentaddress);
 				}
-				//System.out.println("checking: "+currentaddress.toString().substring(1).split("%")[0]);
-				//if(InputValidator.checkIPv6(currentaddress.toString().substring(1).split("%")[0])!=null){
-				//if(InputValidator.checkIPv6(currentaddress.toString().substring(1))!=null){
+
 				if(InputValidator.checkIPv6(currentaddress.getHostAddress().split("%")[0])!=null){
 					ipv6Interfaces.add(currentaddress);
 				}
 			}
 			try {
-				if(current.getHardwareAddress() != null){
+				if(current.getHardwareAddress() != null && current.getHardwareAddress().length == 6){
 					macInterfaces.add(current.getHardwareAddress());
 					macInterfacesName.add(current.getDisplayName());
 				}
 			} catch (SocketException e) {
 
 			}
+		}
+		
+		//New Code
+		ArrayList<PcapIf>alldevs = new ArrayList<PcapIf>();
+		Vector<byte[]>tmpMacAdress = new Vector<byte[]>(); 
+		Vector<String>tmpNameList = new Vector<String>();
+		int macCounter = 0;
+
+		StringBuilder errbuf = new StringBuilder(); // For any error msgs
+
+		int r = Pcap.findAllDevs(alldevs, errbuf);
+		if (!(r == Pcap.NOT_OK) && !(alldevs.isEmpty())) {
+			for(PcapIf p : alldevs){
+				try {
+					if(p.getHardwareAddress() != null){
+						String name = NetworkAdapter.getNameToMacAdress(p.getHardwareAddress());
+						tmpMacAdress.add(p.getHardwareAddress());
+						if(name == null){
+							//looks cryptic under windows
+							name = "Device " + macCounter + "(" + p.getName() + ")";
+							macCounter ++;
+						}
+						tmpNameList.add(name);
+					}
+				} catch (IOException e) {
+
+				}
+			}
+			macInterfaces = tmpMacAdress;
+			macInterfacesName = tmpNameList;
 		}
 	}
 	/**
@@ -101,7 +126,11 @@ public abstract class NetworkAdapter {
 	}
 	
 	public static String getNameToMacAdress(byte[] mac){
-		return macInterfacesName.get(macInterfaces.indexOf(mac));
+		for(int i = 0; i < macInterfaces.size(); i++){
+			if(Arrays.equals(macInterfaces.get(i), mac))
+				return macInterfacesName.get(i);
+		}
+		return null;
 	}
 	
 	/**
@@ -115,7 +144,6 @@ public abstract class NetworkAdapter {
 		int ret = -1;
 		if(getAddressType(address) == IPType.IPv4){
 			for(int i = 0; i < ipv4Interfaces.size() ; i++){
-				//System.out.println("comparing index "+i+": \""+ipv4Interfaces.get(i).toString()+"\" against \""+address+"\"");
 				if(ipv4Interfaces.get(i).toString().substring(1).equals(address)){
 					ret = i;
 				}

@@ -163,7 +163,7 @@ public class MulticastController{
 		
 	//	AllesLaden(); // sollte von Thomas gemacht werden
 		
-		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, view_controller);
+		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, mcMap_sender_l2, mcMap_receiver_l2, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000,1000);
 		
@@ -183,9 +183,6 @@ public class MulticastController{
 	// ****************************************************
 	// Multicast-Steuerung
 	// ****************************************************
-	
-
-
 	/**
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden Thread und startet diesen falls notwendig.
 	 * @param m MulticastData-Objekt das hinzugefï¿½gt werden soll.
@@ -274,8 +271,6 @@ public class MulticastController{
 	 * @param m MulticastData-Objekt des zu startenden Multicasts.
 	 */
 	public void startMC(MulticastData m) {
-	//	writeConfig();
-	//	System.out.println("writeConfig");
 
 		synchronized(m){ // ohne sychronized ist das Programm in einen Deadlock gelaufen
 			if(!threads.containsKey(m)){ // prueft ob der Multicast schon laeuft.
@@ -374,61 +369,6 @@ public class MulticastController{
 	public Vector<String> getLastConfigs() {
 		return lastConfigs;
 	}
-
-	/**
-	 * Gibt ULD zu den entsprechenden Parametern zurueck.
-	 * @param typ Chooses tab like L3_RECEIVER, L3_SENDER, L2_RECEIVER, L2_SENDER
-	 * @param userlevel Chooses userlevel like beginner,expert,custom
-	 */
-	//TODO @CW User Level sollte raus.
-	public UserlevelData getUserLevel(MulticastData.Typ typ, UserlevelData.Userlevel userlevel) {	
-	//	System.out.println("Requested ULD: " + typ + " " + userlevel);
-		for(UserlevelData uld : userlevelData){
-			if((uld.getTyp().equals(typ))&&(uld.getUserlevel().equals(userlevel))){
-	//			System.out.println("Gefunden in der datei");
-				return uld;
-			}		
-		}
-		if(userlevelDataDefault.isEmpty()){
-			defaultUserlevelDataLaden();
-		}
-		for(UserlevelData uld : userlevelDataDefault){
-			if((uld.getTyp().equals(typ))&&(uld.getUserlevel().equals(userlevel))){
-			//	userlevelData.add(uld);
-				return uld;
-			}	
-		}
-		logger.log(Level.SEVERE, "Could not find requested UserlevelData in MulticastController");
-		return null;
-	}
-	
-	/**
-	 * Hilfsfunktion feur mich, die eine Konfigurationsdatei erzeugt.
-	 */
-/*	private void writeConfig(){
-		defaultUserlevelDataLaden();
-		userlevelData = userlevelDataDefault;
-		saveCompleteConfig();
-	}*/
-	
-	/**
-	 * Gibt die Standardwerte fuer ausgeblende Felder fuer den ULD Beginner zurueck.
-	 * @param typ MC Typ
-	 * @return Vektor mit ULDs drin.
-	 */
-	// TODO @CW User Laevel sollte raus
-	public MulticastData getUserlevelBeginnerDefaultValues(Typ typ){
-		if(defaultValuesUserlevelData.isEmpty()){
-			defaultUserlevelDataLaden();
-		}
-		for(MulticastData m:defaultValuesUserlevelData){
-			if(m.getTyp().equals(typ)){
-				return m;
-			}
-		}
-		logger.log(Level.SEVERE, "Konnte default-Werte fuer Typ " + typ + " in der default-Konfigurationsdatei nicht finden.");
-		return null;
-	}
 	
 	/**
 	 * Saves not checked data from View necessary to reconstruct the exact state from View.
@@ -467,7 +407,7 @@ public class MulticastController{
 	 * @param complete Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v Alle zu speichernden GUI Configs.
 	 */
-	private void saveGUIConfig(String path, GUIData data) {
+	public void saveGUIConfig(String path, GUIData data) {
 		final String p = "GUIConfig.xml";	
 		try{	// Uebergibt den Vektor mit allen Multicasts an den XMLParser
 			// FH Changed && to ||, think this is right ;)
@@ -505,23 +445,14 @@ public class MulticastController{
 			}		
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "Could not save Multicast Configuration.");
+			e.printStackTrace();
 		}
 	}
 	
 	/**
 	 * Speichert die Standardkonfigurationsdatei.
 	 */
-	private void saveCompleteConfig(){
-		Vector<MulticastData> v = new Vector<MulticastData>();
-		v.addAll(getMCs(Typ.L2_RECEIVER));
-		v.addAll(getMCs(Typ.L3_RECEIVER));
-		v.addAll(getMCs(Typ.L2_SENDER));
-		v.addAll(getMCs(Typ.L3_SENDER));
-		saveMulticastConfig("MultiCastor.xml", v);
-		
-		// TODO: saveGUIConfig auslagern [FF]
-		GUIData data = new GUIData();
-		// set everythign to invisible
+	public void updateGUIData(GUIData data) {
 		data.setL2_SENDER(GUIData.TabState.invisible);
 		data.setL3_SENDER(GUIData.TabState.invisible);
 		data.setL2_RECEIVER(GUIData.TabState.invisible);
@@ -554,10 +485,25 @@ public class MulticastController{
 		
 		data.setLanguage(LanguageManager.getCurrentLanguage());
 		data.setWindowName(view_controller.getFrame().getBaseTitle());
+	}
+	
+	/**
+	 * Speichert die Standardkonfigurationsdatei.
+	 */
+	private void saveCompleteConfig(){
+		Vector<MulticastData> v = new Vector<MulticastData>();
+		v.addAll(getMCs(Typ.L2_RECEIVER));
+		v.addAll(getMCs(Typ.L3_RECEIVER));
+		v.addAll(getMCs(Typ.L2_SENDER));
+		v.addAll(getMCs(Typ.L3_SENDER));
+		saveMulticastConfig("MultiCastor.xml", v);
+		
+		GUIData data = new GUIData();
+		// set everythign to invisible
+		updateGUIData(data);
 		
 		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
-		
-		//TODO @FF Hier muss auch das schreiben für die neue GUI-Config ausgelöst werden.
+
 	}
 	
 	
@@ -666,7 +612,7 @@ public class MulticastController{
 		boolean skip = false;
 		try {
 			 xml_parser.loadMultiCastConfig(useDefaultXML ? defaultXML : path, multicasts);
-			 logger.log(Level.INFO, "Default Configurationfile loaded.");
+			 logger.log(Level.INFO, "Configurationfile loaded.");
 		} catch (Exception e) {
 			if(e instanceof FileNotFoundException) {
 				if (useDefaultXML) {
@@ -775,14 +721,19 @@ public class MulticastController{
 	 * @return Sum of all sent packets. Returns 0 if typ is invalid.
 	 */
 	public int getPPSSender(MulticastData.Typ typ) {
-		int count = 0;
+		int count = 0, tmpCount = 0;
 		
-		if(typ.equals(MulticastData.Typ.L3_SENDER)){
+		if(typ == Typ.L3_SENDER){
 			for(MulticastData ms: mc_sender_l3){
 				count += ((MulticastSenderInterface) mcMap_sender_l3.get(ms)).getMultiCastData().getPacketRateMeasured();
 			}
+		}else if( typ == Typ.L2_SENDER){
+			for(MulticastData ms: mc_sender_l2){
+				tmpCount = ((MulticastSenderInterface) mcMap_sender_l2.get(ms)).getMultiCastData().getPacketRateMeasured(); 
+				if(tmpCount == -1) tmpCount = 0;
+				count += tmpCount;
+			}
 		}	
-		// TODO Layer2
 		return count;
 	}
 	
@@ -792,10 +743,12 @@ public class MulticastController{
 	public void destroy(){
 		saveCompleteConfig();
 		Map<MulticastData, MulticastThreadSuper> v = null;
-		for(int i=0; i<2; i++){
+		for(int i=0; i<4; i++){
 			switch(i){
 				case 0: v = mcMap_sender_l3; break;
 				case 1: v = mcMap_receiver_l3; break;
+				case 2: v = mcMap_sender_l2; break;
+				case 3: v = mcMap_receiver_l2; break;
 			}
 			for(Entry<MulticastData, MulticastThreadSuper> m : v.entrySet()){
 				m.getValue().setActive(false);

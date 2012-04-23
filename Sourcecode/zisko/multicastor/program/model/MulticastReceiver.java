@@ -61,7 +61,7 @@ public class MulticastReceiver extends MulticastThreadSuper {
 				return;
 			}
 		}	
-		packetAnalyzer = new PacketAnalyzer(mcData, logger);
+		packetAnalyzer = new PacketAnalyzer(mcData, logger, length);
 		// resets MulticastData Object to avoid default value -1
 		mcData.resetValues();
 	}
