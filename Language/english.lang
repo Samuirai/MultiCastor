@@ -133,3 +133,6 @@ toolTip.selectMacAddress	=Select a multicast MAC Address
 message.setNewTitle			=Please enter a new title
 message.noMcCreated			=There is no Multicast data available for saving. Please create any Multicasts first.
 message.noMcSelected		=There is no Multicast data selected right now. You can select any row in the tables. You can select multiple rows by holding the Ctrl-Key.
+
+about.license  = Licensed under GPLv3.
+about.labelDev = Developers:

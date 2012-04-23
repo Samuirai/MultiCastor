@@ -137,3 +137,6 @@ toolTip.selectMacAddress	=Wählen sie eine Multicast Mac Adresse
 message.setNewTitle			=Bitte geben sie einen neuen Titel ein
 message.noMcCreated			=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden könnten.
 message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewählt. Sie können beliebige Tabellenzeilen wählen. Mehrfachauswahl ist mit gedrückter Strg-Taste möglich.
+
+about.license  = Lizensiert unter GPLv3.
+about.labelDev = Entwickler:

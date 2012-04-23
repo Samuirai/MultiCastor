@@ -157,7 +157,9 @@ public class LanguageManager extends Properties{
 		"toolTip.selectMacAddress",
 		"message.setNewTitle",
 		"message.noMcCreated",
-		"message.noMcSelected"
+		"message.noMcSelected",
+		"about.license",
+		"about.labelDev"
 	};
 	
 	/**
