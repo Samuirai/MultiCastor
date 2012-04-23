@@ -49,7 +49,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		try {
 			receiver = new MMRPReceiver(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
-			proclaim(3, "Could not create Receiver");
+			
+			proclaim(3, "Could not create Receiver. The interface '" + mcData.getMmrpSourceMacAsString() + "' seems to have "
+			+ "no MMRP functionality");
 		}
 		
 		// resets MulticastData Object to avoid default value -1

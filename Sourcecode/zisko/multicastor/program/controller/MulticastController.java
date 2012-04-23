@@ -794,7 +794,6 @@ public class MulticastController{
 	 */
 	public MulticastData getMC(int index,MulticastData.Typ multicastDataTyp){
 		try{
-			//System.out.println("Index: " + index + getMCVector(multicastDataTyp).toString());
 			return (MulticastData) getMCVector(multicastDataTyp).get(index);
 		}catch(IndexOutOfBoundsException e){
 			//logger.log(Level.SEVERE, "IndexOutOfBoundsException in MulticastController - getMC");
