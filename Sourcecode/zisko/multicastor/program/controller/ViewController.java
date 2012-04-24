@@ -869,7 +869,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				try {
 					cbSrc.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 				} catch (SocketException e) {
-					e.printStackTrace();
+					//In this case the interface disappeared while running MCastor,
+					// So we commented this out and do nothing
+					// Feel free to do anything here :D
+					//e.printStackTrace();
 				}
 			}
 		}
