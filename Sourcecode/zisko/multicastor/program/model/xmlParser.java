@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 
 import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
+import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.data.GUIData.TabState;
@@ -472,7 +473,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    }
 			 }		 
 	
-	//TODO @[CW] Hier m�sste Userlevel noch raus!
 	private void loadUserInputData(Document doc, Vector<UserInputData> v3) throws SAXException, FileNotFoundException, IOException
 	{
 		
@@ -524,7 +524,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    			switch(tag)
 				    			{
 				    				case selectedTab: uid.setSelectedTab(val); break;
-				    				case selectedUserlevel: uid.setSelectedUserlevel(val); break;
 				    				case groupadress: uid.setGroupadress(val); break;
 				    				case networkInterface: uid.setNetworkInterface(val); break;
 				    				case port: uid.setPort(val); break;
@@ -782,95 +781,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
-	//Todo @CW UserLevel fliegt raus (JT)
-//	private void saveUserlevelData(Document doc, Element root, Vector<UserlevelData> v2)
-//	{	 // ********************************************************
-//		 // Schreibe die UserLevel Konfigurationsdaten in das XML
-//		 // ********************************************************
-//		
-//		// Erzeugt Root Element f�r die UserLevel Konfigurationsdaten
-//        Element userLevelData = doc.createElement("UserlevelData");
-//        root.appendChild(userLevelData);
-//        
-//       //F�r alle verschiedenen Konfigurationen
-//	         for(int count=0; count<v2.size(); count++)
-//	         {
-//	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-//	        	 //F�ge dementsprechend ein Kind Element hinzu
-//	        	 MulticastData.Typ typ = v2.get(count).getTyp();
-//	        	 Element uldTyp = doc.createElement(typ.toString());
-//	        	 userLevelData.appendChild(uldTyp);
-//  
-//		         //F�r alle vorhandenen Einstellungen
-//	        	 for(uldTag tag: uldTag.values())
-//		         {
-//		        	 //Ben�tigte Variablen
-//		        	 Element uldElement = doc.createElement(tag.toString());
-//		        	 Text text = doc.createTextNode("");
-//		             Boolean b = false;
-//	
-//		        	 switch(tag)
-//		        	 {
-//		        	 	case startButton: b = v2.get(count).isStartButton(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case stopButton: b = v2.get(count).isStopButton(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case newButton: b = v2.get(count).isNewButton(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case selectAllButton: b = v2.get(count).isSelectAllButton(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case deselectAllButton: b = v2.get(count).isDeselectAllButton(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case deleteButton: b = v2.get(count).isDeleteButton(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case statusBar: b=v2.get(count).isStatusBar();text = doc.createTextNode(b.toString()); break;
-//		        	 	case controlPanel: b=v2.get(count).isControlPanel();text = doc.createTextNode(b.toString()); break;
-//		        	 	case configPanel: b=v2.get(count).isConfigPanel();text = doc.createTextNode(b.toString()); break;
-//		        	 	case groupIpField: b = v2.get(count).isGroupIpField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case sourceIpField: b = v2.get(count).isSourceIpField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case portField: b = v2.get(count).isPortField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case packetLengthField:b = v2.get(count).isPacketLengthField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case ttlField:b = v2.get(count).isTtlField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case packetRateField:b = v2.get(count).isPacketRateField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case activeField:b = v2.get(count).isActiveField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case enterField:b = v2.get(count).isEnterField(); text = doc.createTextNode(b.toString()); break;
-//		        	 	case saveConfigDialog: v2.get(count).isSaveConfigDialog();text = doc.createTextNode(b.toString()); break;
-//		        	 	case loadConfigDialog: v2.get(count).isLoadConfigDialog();text = doc.createTextNode(b.toString()); break;
-//		        	 	case userLevelRadioGrp: v2.get(count).isUserLevelRadioGrp();text = doc.createTextNode(b.toString()); break;
-//		        	 	case autoSaveCheckbox: v2.get(count).isAutoSaveCheckbox();text = doc.createTextNode(b.toString()); break;
-//		        	 	case snakeGame: v2.get(count).isSnakeGame();text = doc.createTextNode(b.toString()); break;
-//		        	 	case popupsEnabled: v2.get(count).isPopupsEnabled();text = doc.createTextNode(b.toString()); break;
-//		        	 	case startStopCheckBox: v2.get(count).isStartStopCheckBox();text = doc.createTextNode(b.toString()); break;
-//		        		case graph:b = v2.get(count).isGraph(); text = doc.createTextNode(b.toString()); break;
-//		        		case graphTyp: UserlevelData.Graph graph = v2.get(count).getGraphTyp();
-//		        				 switch(graph)
-//		        				 {
-//		        				 	case UNDEFINED: text = doc.createTextNode("UNDEFINED"); break;
-//		        				 	case JITTER: text = doc.createTextNode("JITTER"); break;
-//		        				 	case LOST_PACKETS: text = doc.createTextNode("LOST_PACKETS"); break;
-//		        				 	case MEASURED_PACKET_RATE: text = doc.createTextNode("MEASURED_PACKET_RATE"); break;
-//		        				 }
-//		        				 break;
-//		        		case console:b = v2.get(count).isConsole();text = doc.createTextNode(b.toString());  break;
-//		        		case userlevel: UserlevelData.Userlevel userlevel = v2.get(count).getUserlevel();
-//		        				switch(userlevel)
-//		        				{
-//		        					case UNDEFINED: text = doc.createTextNode("UNDEFINED"); break;
-//		        					case BEGINNER: text = doc.createTextNode("BEGINNER"); break;
-//		        					case EXPERT: text = doc.createTextNode("EXPERT"); break;
-//		        					case CUSTOM: text = doc.createTextNode("CUSTOM"); break;
-//		        				}
-//		        				break;
-//		        	 }	 
-//		        	 
-//		        	 if(!text.equals("")) //Wenn Tag-Inhalt vorhanden
-//		        	 {
-//		        		//F�ge Tag + Inhalt ins XML ein
-//		        		 uldElement.appendChild(text);
-//			        	 uldTyp.appendChild(uldElement);
-//		        		 
-//		        	 }
-//		        	 
-//		         }
-//	         }
-//	}
-	/* Speichert momentanen Status des GUI inklusive Inhalt aller Eingabefelder in einer XML-Datei ab.
-	 */
-	
+	/* Speichert momentanen Status des GUI inklusive Inhalt aller Eingabefelder in einer XML-Datei ab. */
 	private void saveUserInputData(Document doc, Element root, Vector<UserInputData> v3) throws IOException
 	{
 		 //Erzeugt Root Element f�r die MultiCast Konfigurationen

@@ -194,7 +194,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_saveconfig()){
-			//TODO @FF Hier muss das speichern des neuen User Config Files veranlasst werden.
+			saveGUIFileEvent();
 		}
 		
 		else if(e.getSource()==f.getMi_saveAllMc()){
@@ -224,8 +224,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 		else if(e.getSource()==f.getMi_loadconfig()){
-			// TODO [MH] Schauen ob der alte Loadbutton noch gebraucht wird
-			//System.out.println("Loading!");
+			loadGUIFileEvent();
 //			f.getFc_load().toggle();
 //			setColumnSettings(getUserInputData(getSelectedTab()), getSelectedTab());
 		}
@@ -306,6 +305,24 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getNewmulticast()){
 			pressBTNewMC(Typ.L2_RECEIVER);
+		}
+		/* (De)SelectAll Button im Control Panel*/
+		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L3_SENDER, true);
+		}
+		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L3_RECEIVER, true);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L2_SENDER, true);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L2_RECEIVER, true);
+		}
+		//XXX
+		/* Start/Stop Button im Control Panel*/
+		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
+			pressBTStartStop(Typ.L3_SENDER);
 		}
 		
 		else if(e.getActionCommand().equals("hide")){
@@ -451,27 +468,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
 					if (iptype == IPType.IPv4) {
 						mcd.setPacketLength(InputValidator.checkIPv4PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-						if(getSelectedUserLevel() == Userlevel.BEGINNER){
-							mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
-						}
 					} else if (iptype == IPType.IPv6) {
 						mcd.setPacketLength(InputValidator.checkIPv6PacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-						if(getSelectedUserLevel() == Userlevel.BEGINNER){
-							mcd.setPacketLength(InputValidator.checkIPv6PacketLength("2048"));
-						}
 					}
 				}
 				if(!getPanConfig(typ).getTf_ttl().getText().equals("...")){
 					mcd.setTtl(InputValidator.checkTimeToLive(getPanConfig(typ).getTf_ttl().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setTtl(InputValidator.checkTimeToLive("32"));
-					}
 				}
 				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
 					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-					}
 				}
 				break;
 			case L3_RECEIVER:
@@ -515,15 +520,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				}
 				if(!getPanConfig(typ).getTf_udp_packetlength().getText().equals("...")){
 					mcd.setPacketLength(InputValidator.checkMMRPPacketLength(getPanConfig(typ).getTf_udp_packetlength().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketLength(InputValidator.checkIPv4PacketLength("2048"));
-					}
 				}
 				if(!getPanConfig(typ).getTf_packetrate().getText().equals("...")){
 					mcd.setPacketRateDesired(InputValidator.checkPacketRate(getPanConfig(typ).getTf_packetrate().getText()));
-					if(getSelectedUserLevel() == Userlevel.BEGINNER){
-						mcd.setPacketRateDesired(InputValidator.checkPacketRate("50"));
-					}
 				}
 				break;
 			case L2_RECEIVER:
@@ -627,14 +626,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ Programmteil in welchem die Eingaben gepr�ft werden sollen.
 	 */
 	private void checkInput(Typ typ){
-		if(getSelectedUserLevel()==Userlevel.BEGINNER){
-			input[0][3] = true;
-			input[0][4] = true;
-			input[0][5] = true;
-			input[2][3] = true;
-			input[2][4] = true;
-			input[2][5] = true;
-		}
+
 		switch(typ){
 			case L3_SENDER:
 				if(	
@@ -814,7 +806,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ
 	 */
 	public void deleteAllMulticasts(Typ typ){
-		pressBTSelectAll(typ);
+		pressBTSelectAll(typ, false);
 		pressBTDelete(typ);
 	}
 	/**
@@ -827,7 +819,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	}
 
 	/**
-	 * Funktion, welche die ComboBox für Layer3(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
+	 * Funktion, welche die ComboBox für Layer2(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
 	 * @param typ Programmteil in welchem die Box geupdated werden soll.
 	 */
 	public void insertNetworkAdapters(Typ typ){
@@ -941,7 +933,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				
 			}
 		}
-		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("") && typ != Typ.L2_SENDER && typ != typ.L2_RECEIVER){		
+		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("") && typ != Typ.L2_SENDER && typ != Typ.L2_RECEIVER){		
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
@@ -1412,19 +1404,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 			// TODO Layer2 Receiver Buttons einbauen
 			
-			// TODO UserLevel soll geloescht werden (MH)
-//			else if(arg0.getSource() == f.getRb_beginner()){
-//				changeUserLevel(Userlevel.BEGINNER);
-//				//System.out.println("userlevel beginner");
-//			}
-//			else if(arg0.getSource() == f.getRb_expert()){
-//				changeUserLevel(Userlevel.EXPERT);
-//				//System.out.println("userlevel expert");
-//			}
-//			else if(arg0.getSource() == f.getRb_custom()){
-//				changeUserLevel(Userlevel.CUSTOM);
-//				//System.out.println("userlevel custom");
-//			}
 		} else {
 			if(arg0.getSource() == f.getMi_autoSave()){
 				if(arg0.getStateChange() == ItemEvent.DESELECTED)
@@ -1436,164 +1415,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		autoSave();
 	}
-	/**
-	 * Funktion welche aufgerufen wird wenn der User ueber das Menu UserLevel das Benutzerlevel einstellt.
-	 * @param level Nutzerlevel welches eingestellt wurde in der Menubar.
-	 */
-	private void selectUserLevel(Userlevel level){
-		// TODO UserLevel soll geloescht werden (MH)
-//		switch(level){
-//		case BEGINNER: f.getRb_beginner().setSelected(true); break;
-//		case EXPERT: f.getRb_expert().setSelected(true);; break;
-//		case CUSTOM: f.getRb_custom().setSelected(true);; break;
-//		default: f.getRb_expert().setSelected(true);; break;
-//		}
-	}
-	private void changeUserLevel(Userlevel level) {
-		// TODO UserLevel soll geloescht werden (MH)
-//		//load userlevel data
-//		UserlevelData levelDataSv4 = mc.getUserLevel(Typ.SENDER_V4, level);
-//		UserlevelData levelDataSv6 = mc.getUserLevel(Typ.SENDER_V6, level);
-//		UserlevelData levelDataRv4 = mc.getUserLevel(Typ.RECEIVER_V4, level);
-//		UserlevelData levelDataRv6 = mc.getUserLevel(Typ.RECEIVER_V6, level);
-//		if(levelDataSv4 != null && levelDataSv6 !=null && levelDataRv4 != null && levelDataRv6!=null){
-//			//configure visibility settings for panels
-//			getPanTabbed(Typ.SENDER_V4).setPanels(	levelDataSv4.isConfigPanel(), 
-//													levelDataSv4.isControlPanel(), 
-//													levelDataSv4.isStatusBar(), 
-//													levelDataSv4.isConsole(),
-//													levelDataSv4.isGraph());
-//			getPanTabbed(Typ.SENDER_V6).setPanels(	levelDataSv6.isConfigPanel(), 
-//													levelDataSv6.isControlPanel(), 
-//													levelDataSv6.isStatusBar(), 
-//													levelDataSv6.isConsole(),
-//													levelDataSv6.isGraph());
-//			getPanTabbed(Typ.RECEIVER_V4).setPanels(levelDataRv4.isConfigPanel(), 
-//													levelDataRv4.isControlPanel(), 
-//													levelDataRv4.isStatusBar(), 
-//													levelDataRv4.isConsole(),
-//													levelDataRv4.isGraph());
-//			getPanTabbed(Typ.RECEIVER_V4).setPanels(levelDataRv6.isConfigPanel(), 
-//													levelDataRv6.isControlPanel(), 
-//													levelDataRv6.isStatusBar(), 
-//													levelDataRv6.isConsole(),
-//													levelDataRv6.isGraph());
-//			//configure visibility settings for control panel
-//			//configure visibility settings for start button
-//			/*getPanControl(Typ.SENDER_V4).getStart().setVisible(levelDataSv4.isStartButton());
-//			getPanControl(Typ.SENDER_V6).getStart().setVisible(levelDataSv6.isStartButton());
-//			getPanControl(Typ.RECEIVER_V4).getStart().setVisible(levelDataRv4.isStartButton());
-//			getPanControl(Typ.RECEIVER_V6).getStart().setVisible(levelDataRv6.isStartButton());
-//			//configure visibility settings for stop button
-//			getPanControl(Typ.SENDER_V4).getStop().setVisible(levelDataSv4.isStopButton());
-//			getPanControl(Typ.SENDER_V6).getStop().setVisible(levelDataSv6.isStopButton());
-//			getPanControl(Typ.RECEIVER_V4).getStop().setVisible(levelDataRv4.isStopButton());
-//			getPanControl(Typ.RECEIVER_V6).getStop().setVisible(levelDataRv6.isStopButton());
-//			//configure visibility settings for select all button
-//			getPanControl(Typ.SENDER_V4).getSelect_all().setVisible(levelDataSv4.isSelectAllButton());
-//			getPanControl(Typ.SENDER_V6).getSelect_all().setVisible(levelDataSv6.isSelectAllButton());
-//			getPanControl(Typ.RECEIVER_V4).getSelect_all().setVisible(levelDataRv4.isSelectAllButton());
-//			getPanControl(Typ.RECEIVER_V6).getSelect_all().setVisible(levelDataRv6.isSelectAllButton());
-//			//configure visibility settings for deselect all button
-//			getPanControl(Typ.SENDER_V4).getDeselect_all().setVisible(levelDataSv4.isDeselectAllButton());
-//			getPanControl(Typ.SENDER_V6).getDeselect_all().setVisible(levelDataSv6.isDeselectAllButton());
-//			getPanControl(Typ.RECEIVER_V4).getDeselect_all().setVisible(levelDataRv4.isDeselectAllButton());
-//			getPanControl(Typ.RECEIVER_V6).getDeselect_all().setVisible(levelDataRv6.isDeselectAllButton());
-//			//configure visibility settings for new multicast button*/
-//			getPanControl(Typ.SENDER_V4).getNewmulticast().setVisible(levelDataSv4.isNewButton());
-//			getPanControl(Typ.SENDER_V6).getNewmulticast().setVisible(levelDataSv6.isNewButton());
-//			getPanControl(Typ.RECEIVER_V4).getNewmulticast().setVisible(levelDataRv4.isNewButton());
-//			getPanControl(Typ.RECEIVER_V6).getNewmulticast().setVisible(levelDataRv6.isNewButton());
-//			//configure visibility settings for delete button
-//			getPanControl(Typ.SENDER_V4).getDelete().setVisible(levelDataSv4.isDeleteButton());
-//			getPanControl(Typ.SENDER_V6).getDelete().setVisible(levelDataSv6.isDeleteButton());
-//			getPanControl(Typ.RECEIVER_V4).getDelete().setVisible(levelDataRv4.isDeleteButton());
-//			getPanControl(Typ.RECEIVER_V6).getDelete().setVisible(levelDataRv6.isDeleteButton());
-//			//configure visibility settings for config panel
-//			//configure visibility settings for group ip address field
-//			getPanConfig(Typ.SENDER_V4).getPan_groupIPaddress().setVisible(levelDataSv4.isGroupIpField());
-//			getPanConfig(Typ.SENDER_V6).getPan_groupIPaddress().setVisible(levelDataSv6.isGroupIpField());
-//			getPanConfig(Typ.RECEIVER_V4).getPan_groupIPaddress().setVisible(levelDataRv4.isGroupIpField());
-//			getPanConfig(Typ.RECEIVER_V6).getPan_groupIPaddress().setVisible(levelDataRv6.isGroupIpField());
-//			//configure visibility settings for source ip address field
-//			getPanConfig(Typ.SENDER_V4).getPan_sourceIPaddress().setVisible(levelDataSv4.isSourceIpField());
-//			getPanConfig(Typ.SENDER_V6).getPan_sourceIPaddress().setVisible(levelDataSv6.isSourceIpField());
-//			//configure visibility settings for port field
-//			getPanConfig(Typ.SENDER_V4).getPan_udp_port().setVisible(levelDataSv4.isPortField());
-//			getPanConfig(Typ.SENDER_V6).getPan_udp_port().setVisible(levelDataSv6.isPortField());
-//			getPanConfig(Typ.RECEIVER_V4).getPan_udp_port().setVisible(levelDataRv4.isPortField());
-//			getPanConfig(Typ.RECEIVER_V6).getPan_udp_port().setVisible(levelDataRv6.isPortField());
-//			//configure visibility settings for TTL field
-//			getPanConfig(Typ.SENDER_V4).getPan_ttl().setVisible(levelDataSv4.isTtlField());
-//			getPanConfig(Typ.SENDER_V6).getPan_ttl().setVisible(levelDataSv6.isTtlField());
-//			//configure visibility settings for packetlength field
-//			getPanConfig(Typ.SENDER_V4).getPan_packetlength().setVisible(levelDataSv4.isPacketLengthField());
-//			getPanConfig(Typ.SENDER_V6).getPan_packetlength().setVisible(levelDataSv6.isPacketLengthField());
-//			//configure visibility settings for packetrate field
-//			getPanConfig(Typ.SENDER_V4).getPan_packetrate().setVisible(levelDataSv4.isPacketRateField());
-//			getPanConfig(Typ.SENDER_V6).getPan_packetrate().setVisible(levelDataSv6.isPacketRateField());
-//			//configure visibility settings for active button
-//			getPanConfig(Typ.SENDER_V4).getTb_active().setVisible(levelDataSv4.isActiveField());
-//			getPanConfig(Typ.SENDER_V6).getTb_active().setVisible(levelDataSv6.isActiveField());
-//			getPanConfig(Typ.RECEIVER_V4).getTb_active().setVisible(levelDataRv4.isActiveField());
-//			getPanConfig(Typ.RECEIVER_V6).getTb_active().setVisible(levelDataRv6.isActiveField());
-//			//configure visibility settings for enter button
-//			getPanConfig(Typ.SENDER_V4).getBt_enter().setVisible(levelDataSv4.isEnterField());
-//			getPanConfig(Typ.SENDER_V6).getBt_enter().setVisible(levelDataSv4.isEnterField());
-//			getPanConfig(Typ.RECEIVER_V4).getBt_enter().setVisible(levelDataSv4.isEnterField());
-//			getPanConfig(Typ.RECEIVER_V6).getBt_enter().setVisible(levelDataSv4.isEnterField());
-//			//configure visibility settings for menu items
-//			//configure visibility settings for load dialog
-//			f.getMi_loadconfig().setVisible(levelDataSv4.isLoadConfigDialog());
-//			f.getMi_loadconfig().setVisible(levelDataSv6.isLoadConfigDialog());
-//			f.getMi_loadconfig().setVisible(levelDataRv4.isLoadConfigDialog());
-//			f.getMi_loadconfig().setVisible(levelDataRv6.isLoadConfigDialog());
-//			//configure visibility settings for save dialog
-//			f.getMi_saveconfig().setVisible(levelDataSv4.isSaveConfigDialog());
-//			f.getMi_saveconfig().setVisible(levelDataSv6.isSaveConfigDialog());
-//			f.getMi_saveconfig().setVisible(levelDataRv4.isSaveConfigDialog());
-//			f.getMi_saveconfig().setVisible(levelDataRv6.isSaveConfigDialog());
-//			//configure visibility settings for userlevel dialog
-//			f.getM_scale().setVisible(levelDataSv4.isUserLevelRadioGrp());
-//			f.getM_scale().setVisible(levelDataSv6.isUserLevelRadioGrp());
-//			f.getM_scale().setVisible(levelDataRv4.isUserLevelRadioGrp());
-//			f.getM_scale().setVisible(levelDataRv6.isUserLevelRadioGrp());
-//			//configure visibility settings for autosave dialog
-//			f.getMi_autoSave().setVisible(levelDataSv4.isAutoSaveCheckbox());
-//			f.getMi_autoSave().setVisible(levelDataSv6.isAutoSaveCheckbox());
-//			f.getMi_autoSave().setVisible(levelDataRv4.isAutoSaveCheckbox());
-//			f.getMi_autoSave().setVisible(levelDataRv6.isAutoSaveCheckbox());
-//			//configure visibility settings for snake dialog
-//			f.getMi_snake().setVisible(levelDataSv4.isSnakeGame());
-//			f.getMi_snake().setVisible(levelDataSv6.isSnakeGame());
-//			f.getMi_snake().setVisible(levelDataRv4.isSnakeGame());
-//			f.getMi_snake().setVisible(levelDataRv6.isSnakeGame());
-//			//configure access rights in multicast table
-//			//configure state checkbox access in column 0 in jtable
-//			getTableModel(Typ.SENDER_V4).setStateCheckboxEnabled(levelDataSv4.isStartStopCheckBox());
-//			getTableModel(Typ.SENDER_V6).setStateCheckboxEnabled(levelDataSv6.isStartStopCheckBox());
-//			getTableModel(Typ.RECEIVER_V4).setStateCheckboxEnabled(levelDataRv4.isStartStopCheckBox());
-//			getTableModel(Typ.RECEIVER_V6).setStateCheckboxEnabled(levelDataRv6.isStartStopCheckBox());
-//			//configure popup menu for jtable columns
-//			getPanTabbed(Typ.SENDER_V4).setPopupsAllowed(levelDataSv4.isPopupsEnabled());
-//			getPanTabbed(Typ.SENDER_V6).setPopupsAllowed(levelDataSv6.isPopupsEnabled());
-//			getPanTabbed(Typ.RECEIVER_V4).setPopupsAllowed(levelDataRv4.isPopupsEnabled());
-//			getPanTabbed(Typ.RECEIVER_V6).setPopupsAllowed(levelDataRv6.isPopupsEnabled());
-//			f.setLevel(level);
-//		}
-//		else{
-//			resetRBGroupTo(f.getLevel());
-//		}
-	}
-	private void resetRBGroupTo(Userlevel level) {
-		// TODO UserLevel soll geloescht werden (MH)
-//		//System.out.println("userlevel "+level);
-//		switch(level){
-//			case BEGINNER: f.getRb_beginner().setSelected(true); break;
-//			case EXPERT: f.getRb_expert().setSelected(true); break;
-//			case CUSTOM: f.getRb_custom().setSelected(true); break;
-//		}
-	}
+
 	/**
 	 * Funktion welche Aufgerufen wird wenn eine Taste der Tastatur gedrueckt wird.
 	 */
@@ -1672,6 +1494,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());
 			}
 			if(typ == Typ.L3_SENDER){
+				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());
 				tabpart.getPan_config().getTf_ttl().setText(""+getMCData(selectedRows[0],typ).getTtl());;
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());;
 			}
@@ -1689,6 +1512,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			setTBactive(selectedRows, typ);
 		}
 	}
+	
+	/**
+	 * Funktion welche ausgeloest wird, wenn der User versucht ein GUI Konfigurationsdatei mit dem "Konfiguration Laden"
+	 * Dialog zu laden.
+	 */
+	private void loadGUIFileEvent() {
+		// TODO Auto-generated method stub
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFont(MiscFont.getFont());
+		int ret = chooser.showOpenDialog(f);
+		if (ret == JFileChooser.APPROVE_OPTION) {
+			mc.loadGUIConfig(chooser.getSelectedFile().toString(), false);
+		}
+	}
+	
 	/**
 	 * Funktion welche ausgeloest wird, wenn der User versucht eine Konfigurationsdatei mit dem "Datei Laden"
 	 * Dialog zu laden.
@@ -1871,21 +1711,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		setBTStartStopDelete(typ);
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn der Deselect All Button gedr�ckt wird.
-	 * @param typ Programmteil in welchem der Deselect All Button gedr�ckt wurde
-	 */
-	private void pressBTDeselectAll(Typ typ) {
-		getTable(typ).clearSelection();
-		setBTStartStopDelete(typ);
-		if(typ == Typ.L3_SENDER){
-			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
-			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
-			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
-		}
-		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+" ");
-		
-	}
-	/**
 	 * Funktion welche aufgerufen wird wenn der Add Button gedr�ckt wird.
 	 * Diese Funktion unterscheided ob eine �nderung an einem Multicast stattfinden soll,
 	 * oder ein Neuer angelegt werden soll.
@@ -1912,40 +1737,62 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	/**
 	 * Funktion welche aufgerufen wird wenn der Select All Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Select All Button gedr�ckt wurde
+	 * @param deselectPossible Bestimmt, ob, wenn alle Zeilen selektiert sind, alle deselektiert werden sollen
 	 */
-	private void pressBTSelectAll(Typ typ) {
-		getTable(typ).selectAll();
-		if(getSelectedRows(typ).length > 1){
-			multipleSelect(typ);
+	private void pressBTSelectAll(Typ typ, boolean deselectPossible) {
+		/* If all rows are already selected, deselect all which is the same functionality like pressing new */
+		if (getSelectedRows(typ).length == getTable(typ).getRowCount() && deselectPossible) {
+			pressBTNewMC(typ);
+		} else {
+			getTable(typ).selectAll();
+			if(getSelectedRows(typ).length > 1){
+				multipleSelect(typ);
+			}
 		}
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der Start Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Start Button gedr�ckt wurde
 	 */
-	private void pressBTStart(Typ typ){
+	private void pressBTStartStop(Typ typ){
 		int[] selectedLine = getSelectedRows(typ);
-		for(int i = 0 ; i < selectedLine.length ; i++){
-			if(!getMCData(selectedLine[i], typ).isActive()){
-				startMC(selectedLine[i], typ);
+		boolean oneActive = false;
+		
+		if (selectedLine.length == 1) {
+			if(!getMCData(selectedLine[0], typ).isActive()){
+				startMC(selectedLine[0], typ);
 				updateTable(typ, UpdateTyp.UPDATE);
+			} else {
+				if(getMCData(selectedLine[0], typ).isActive()){
+					stopMC(selectedLine[0], typ);
+					updateTable(typ, UpdateTyp.UPDATE);	
+				}
 			}
-		}
-		setBTStartStopDelete(typ);
-	}
-	/**
-	 * Funktion welche aufgerufen wird wenn der Stop Button gedr�ckt wird.
-	 * @param typ Programmteil in welchem der Stop Button gedr�ckt wurde
-	 */
-	private void pressBTStop(Typ typ){
-		int[] selectedLine = getSelectedRows(typ);
-		for(int i = 0 ; i < selectedLine.length ; i++){
-			if(getMCData(selectedLine[i], typ).isActive()){
-				stopMC(selectedLine[i], typ);
-				updateTable(typ, UpdateTyp.UPDATE);	
+		} else if (selectedLine.length > 1) {
+			for(int i = 0; i < selectedLine.length; i++){
+				if(getMCData(selectedLine[i], typ).isActive()) {
+					oneActive = true;
+				}
 			}
-		}
+			/* if at least one is active, deactivate all otherwise activate all */
+			if (oneActive) {
+				for(int i = 0 ; i < selectedLine.length ; i++){
+					if(getMCData(selectedLine[i], typ).isActive()){
+						stopMC(selectedLine[i], typ);
+						updateTable(typ, UpdateTyp.UPDATE);	
+					}
+				}
+			} else {
+				for(int i = 0 ; i < selectedLine.length ; i++){
+					if(!getMCData(selectedLine[i], typ).isActive()){
+						startMC(selectedLine[i], typ);
+						updateTable(typ, UpdateTyp.UPDATE);
+					}
+				}
+			}
+		} 
 		setBTStartStopDelete(typ);
+		
 	}
 	/**
 	 * Funktion welche es dem Multicast Controller und somit den restlichen Programmteilen erm�glicht
@@ -1953,14 +1800,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param s Nachricht welche in der Konsole der GUI ausgegeben werden soll
 	 */
 	public void printConsole(String s){
-//		getFrame().getPanelPart(Typ.SENDER_V4).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().getText().length());
-//		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().getText().length());
-//		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().getText().length());
-
 		getFrame().getPanelPart(Typ.L3_SENDER).getTa_console().append(s+"\n");
 		getFrame().getPanelPart(Typ.L3_RECEIVER).getTa_console().append(s+"\n");
 		getFrame().getPanelPart(Typ.L2_SENDER).getTa_console().append(s+"\n");
@@ -2034,7 +1873,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
         		}
         		mc.saveMulticastConfig(chooser.getSelectedFile().getPath(), v);
         	}
+        }
+	}
+        
+    private void saveGUIFileEvent() {
+		//Create the Save Dialog
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setFont(MiscFont.getFont());
+		//show the save dialog
+        int ret = chooser.showSaveDialog(f);
+        //save the file
+        if (ret == JFileChooser.APPROVE_OPTION) {
+        	mc.updateGUIData(guidata);
+    		mc.saveGUIConfig(chooser.getSelectedFile().getPath(), guidata);
         }		
+    }
 		
 //      TODO @FF F�r dich als Codebsp. hier gelassen, falls das noch gebraucht wird (JT)
 //		if(e.getActionCommand().equals("ApproveSelection")){
@@ -2051,7 +1906,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 //		else if(e.getActionCommand().equals("CancelSelection")){
 //			getFrame().getFc_save().toggle();
 //		}
-	}
+	//}
 	 
 	/**
 	  * Funktion welche das Aussehen des Start Stop und Delete Buttons anpasst je nach dem welche Multicasts ausgew�hlt wurden.
@@ -2059,42 +1914,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	  */
 	 private void setBTStartStopDelete(Typ typ) {
 		int[] selectedLine=getSelectedRows(typ);
-		if(selectedLine.length == 1){
+		if (selectedLine.length == 1) {
 			getPanControl(typ).getDelete().setEnabled(true);
-			if(getMCData(selectedLine[0],typ).isActive()){
-				//getPanControl(typ).getStart().setEnabled(false);
-				//getPanControl(typ).getStop().setEnabled(true);
-			}
-			else{
-				//getPanControl(typ).getStart().setEnabled(true);
-				//getPanControl(typ).getStop().setEnabled(false);
-			}
-		}
-		else if(selectedLine.length == 0){
-			//getPanControl(typ).getStart().setEnabled(false);
-			//getPanControl(typ).getStop().setEnabled(false);
+			getPanControl(typ).getStartStop().setEnabled(true);
+		} else if (selectedLine.length == 0) {
+			getPanControl(typ).getStartStop().setEnabled(false);
 			getPanControl(typ).getDelete().setEnabled(false);
-		}
-		else{
+		} else {
 			getPanControl(typ).getDelete().setEnabled(true);
-			for(int i = 1 ; i < selectedLine.length ; i++){
-				if(getMCData(selectedLine[i-1], typ).isActive() && getMCData(selectedLine[i], typ).isActive()){
-					//getPanControl(typ).getStart().setEnabled(false);
-				}
-				else{
-					//getPanControl(typ).getStart().setEnabled(true);
-					break;
-				}
-			}
-			for(int i = 1 ; i < selectedLine.length ; i++){
-				if((!getMCData(selectedLine[i-1], typ).isActive()) && (!getMCData(selectedLine[i], typ).isActive())){
-					//getPanControl(typ).getStop().setEnabled(false);	
-				}
-				else{
-					//getPanControl(typ).getStop().setEnabled(true);
-					break;
-				}
-			}
+			getPanControl(typ).getStartStop().setEnabled(true);
 		}
 	}
 	 /**
@@ -2322,11 +2150,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			inputData_R3.setSelectedRowsArray(getSelectedRows(Typ.L3_RECEIVER));
 			inputData_R2.setSelectedRowsArray(getSelectedRows(Typ.L2_RECEIVER));
 			inputData_S3.setNetworkInterface(getPanConfig(Typ.L3_SENDER).getSelectedSourceIndex());
-			inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());
-			inputData_S3.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_S2.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_R3.setSelectedUserlevel(f.getSelectedUserlevel());
-			inputData_R2.setSelectedUserlevel(f.getSelectedUserlevel());			
+			inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());			
 			inputData_S3.setGroupadress(getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getText());
 			inputData_S2.setGroupadress(getPanConfig(Typ.L2_SENDER).getTf_groupIPaddress().getText());	
 			inputData_R3.setGroupadress(getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().getText());
@@ -2443,7 +2267,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			default:  f.getTabpane().setSelectedIndex(0);
 		}
 		f.setAutoSave((data.isAutoSaveEnabled()));
-		selectUserLevel(data.getUserLevel());
 		//System.out.println("setgroupIP: "+data.getGroupadress());
 		getPanConfig(typ).getTf_groupIPaddress().setText(data.getGroupadress());
 		//System.out.println("setport: "+data.getPort());
@@ -2464,19 +2287,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getTf_udp_packetlength().setText(data.getPacketlength());
 		}
 	}
-	public Userlevel getSelectedUserLevel(){
-		Userlevel ret = Userlevel.UNDEFINED;
-		if(f.getRb_beginner().isSelected()){
-			ret = Userlevel.BEGINNER;
-		}
-		else if(f.getRb_expert().isSelected()){
-			ret = Userlevel.EXPERT;
-		}
-		else if(f.getRb_custom().isSelected()){
-			ret = Userlevel.CUSTOM;
-		}
-		return ret;
-	}
+
 	@Override
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster Object aktiviert wird
@@ -2534,6 +2345,11 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		this.f.reloadLanguage();
 		this.f.repaint();
 		
+		for (int i=0;i<LanguageManager.languages.length;i++){
+			if (this.f.getMi_languages()[i].getText().equals(data.getLanguage())) this.f.getMi_languages()[i].setSelected(true);
+			else this.f.getMi_languages()[i].setSelected(false);
+		}
+		
 		this.f.setBaseTitle(data.getWindowName());
 		this.f.updateTitle();
 		
@@ -2543,29 +2359,58 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		this.f.getTabpane().closeTab(title);
 		
+		//pane.closeTab(pane.getTitleAt(i));
+		//pane.remove(i);
+		//pane.lookIfWeCan();
+		
 		if(data.getL2_RECEIVER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l2r")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
 		}
 		if(data.getL3_RECEIVER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l3r")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
 		}
 		if(data.getL2_SENDER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l2s")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
 		}
 		if(data.getL3_SENDER() == GUIData.TabState.invisible) {
 			title = " "+lang.getProperty("tab.l3s")+" ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
-				if(this.f.getTabpane().getTitleAt(i).equals(title))
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
 					this.f.getTabpane().remove(i);
+				}
+		}
+		
+		
+		if(data.getL2_RECEIVER() == GUIData.TabState.visible || data.getL2_RECEIVER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer2_r");
+		}
+		System.out.println(data.getL3_RECEIVER().toString());
+		if(data.getL3_RECEIVER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer3_r");
+		}
+		System.out.println(data.getL2_SENDER().toString());
+		if(data.getL2_SENDER() == GUIData.TabState.visible || data.getL2_SENDER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer2_s");
+		}
+		System.out.println(data.getL3_SENDER().toString());
+		if(data.getL3_SENDER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_layer3_s");
 		}
 		
 		// select the selected tab
@@ -2595,8 +2440,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					this.f.getTabpane().setSelectedIndex(i);
 		}
 		
-		
-		
+		this.f.getTabpane().lookIfWeCan();
 		
 	}
 }
