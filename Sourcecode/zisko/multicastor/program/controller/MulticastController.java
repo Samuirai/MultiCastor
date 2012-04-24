@@ -798,7 +798,7 @@ public class MulticastController{
 		}catch(IndexOutOfBoundsException e){
 			//logger.log(Level.SEVERE, "IndexOutOfBoundsException in MulticastController - getMC");
 			//System.out.println(index);
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 	}

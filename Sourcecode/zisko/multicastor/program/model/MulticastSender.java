@@ -171,7 +171,6 @@ public class MulticastSender extends MulticastThreadSuper implements
 	 * @param active
 	 *            boolean
 	 */
-	@Override
 	public void setActive(boolean active) {
 		if (active) {
 			// Setzen der ThreadID, da diese evtl.
@@ -213,7 +212,6 @@ public class MulticastSender extends MulticastThreadSuper implements
 	 * Art und Weise gesendet wird. Im Tool wird in dieser Version
 	 * ausschlie�lich PEAK verwendet.
 	 */
-	@Override
 	public void run() {
 		// Paketz�hler auf 0 setzen
 		totalPacketCount = 0;
@@ -336,7 +334,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 
 							mcData.setSenders(senderState.NETWORK_ERROR);
 
-							if (ioExceptionCnt == 0)
+							if (ioExceptionCnt == 1)
 								proclaim(1, "Problem with sending via IP '"
 										+ sourceIp
 										+ "'. Trying to reconnect...");
@@ -355,11 +353,11 @@ public class MulticastSender extends MulticastThreadSuper implements
 									this.setActive(false);
 									mCtrl.stopMC(mcData);
 								} else
-									ioExceptionCnt = 0;
+									ioExceptionCnt = 1;
 
 							ioExceptionCnt++;
-						}
-					}
+						} 
+					}catch (IllegalArgumentException e){}
 
 				} while (((totalPacketCount % packetRateDes) != 0) && isSending);
 			}

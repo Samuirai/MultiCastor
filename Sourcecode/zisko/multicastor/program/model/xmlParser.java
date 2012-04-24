@@ -239,7 +239,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   					else{
 				   						throwWrongContentException(stag,val,mcNummer);
 			    					}
-		    					} else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+		    					} else if(mcList.item(i).getNodeName()=="L3_SENDER" || mcList.item(i).getNodeName()=="L3_RECEIVER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 		    						throwEmptyContentException(stag, val, mcNummer);
 		    					}
 			    			case sourceIp: 
@@ -249,7 +249,9 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   						if(InputValidator.checkAdapters(adr)==true) {
 				   							mcd.setSourceIp(adr);
 				   						}
-				   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				   						else{
+				   							// [FH] Commented out because we have it for everything now :)
+				   							//if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 				   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
 				   							adr = ( Inet4Address ) InputValidator.checkIPv4("127.0.0.1");
 				   							mcd.setSourceIp(adr);
@@ -262,7 +264,8 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   						if(InputValidator.checkAdapters(adr)==true){
 				   							mcd.setSourceIp(adr);
 				   						}
-				   						else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+			   							// [FH] Commented out because we have it for everything now :)
+				   						else{// if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 				   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
 				   							adr = ( Inet6Address ) InputValidator.checkIPv6("::1");
 				   							mcd.setSourceIp(adr);
@@ -272,7 +275,8 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   					else{
 				   						throwWrongContentException(stag, val, mcNummer);
 			    					}
-			    				}else if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+	   							// [FH] Commented out because we have it for everything now :)
+			    				}else{// if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
 			    					throwEmptyContentException(stag, val, mcNummer);
 			    				}
 			    			case udpPort: 

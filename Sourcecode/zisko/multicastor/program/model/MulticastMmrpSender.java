@@ -3,6 +3,7 @@ package zisko.multicastor.program.model;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,9 +17,25 @@ import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.mmrp.*;
 
+/**
+ * Die MultiCastMmrpSender-Klasse kümmert sich um das tatsächliche Senden der
+ * Multicast-Objekte über das Netzwerk per MMRP Protokoll.
+ * Sie extended{@link MulticastThreadSuper}, ist also ein Runnable. 
+ * 
+ * Ein MultiCastMmrpSender hat eine Grundkonfiguration, 
+ * die nicht mehr abgeändert werden kann, wie zum
+ * Beispiel die gesetzten MACs. Soll diese Grundkonfiguration geändert werden,
+ * muss eine neue Instanz de Klasse gebildet werden. Das Erleichtert die
+ * nachträgliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
+ * ist.
+ * 
+ * @author Filip Haase
+ * @author Christopher Westphal
+ * 
+ */
 public class MulticastMmrpSender extends MulticastThreadSuper implements MulticastSenderInterface{
 
-	/** Wenn auf wahr, lauscht dieser Sender auf ankommende Pakete. */
+	/** Wenn auf wahr, sendet dieser Sender. */
 	private boolean isSending = false;
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
@@ -32,6 +49,23 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 	private MulticastController mCtrl;
 	private MMRPSender sender;
 
+	/**
+	 * Einziger Konstruktor der Klasse (Sieht man vom Konstruktor der
+	 * Superklasse ab). Im Konstruktor wird die hostID gesetzt (entspricht dem
+	 * hostnamen des Geräts), der {@link MMRPSender} initialisiert
+	 * und das Datenpaket mit dem {@link PacketBuilder} erstellt.
+	 * 
+	 * @param mcBean
+	 *            Das {@link MulticastData}-Object, dass alle f�r den Betrieb
+	 *            n�tigen Daten enth�lt.
+	 * @param logger
+	 *            Eine {@link Queue}, �ber den der Sender seine Ausgaben an
+	 *            den Controller weitergibt.
+	 *          
+	 * @param MultiCtrl
+	 * 			  Eine Referenz auf den entsprechenden{@link MulticastController}
+	 * 			  damit MulticastStröme ggf. richtig gestoppt werden kann
+	 */
 	public MulticastMmrpSender(MulticastData multicastData, Logger logger, MulticastController multiCtrl) {
 		super(multicastData);
 		
@@ -58,14 +92,11 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			this.sender					= new MMRPSender(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
 			proclaim(3, "Could not Create MMRP Sender");
-		}
-		
-		// resets MulticastData Object to avoid default value -1
-		//mcData.resetValues();		
+		}	
 	}
 	
 	/**
-	 * Methode �ber die die Kommunikation zum MultiCastController realisiert wird.
+	 * Methode über die die Kommunikation zum MultiCastController realisiert wird.
 	 * @param level unterscheidet zwischen Fehlern und Status-Meldungen
 	 * @param mssg Die zu sendende Nachricht (String)
 	 */
@@ -82,6 +113,16 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		logger.log(l,mssg);
 	}	
 
+	/**
+	 * Wird der Methode true übergeben, startet der Multicast 
+	 * zu senden. 
+	 * 
+	 * Wird der Methode false übergeben, stoppt 
+	 * sie das senden der Multicasts.
+	 * 
+	 * @param active
+	 *            boolean
+	 */
 	public void setActive(boolean active) {
 		isSending = active;
 		mcData.setActive(active);
@@ -119,12 +160,20 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		cumulatedResetablePcktCnt = 0;
 	}
 
+	/**
+	 * hier geschieht das eigentliche Senden. Beim Starten des Threads wird
+	 * probiert, denn Mmrp Pfad zu registrieren. Gelingt dies nicht, wird ein
+	 * Fehler ausgegeben und das Senden wird garnicht erst gestartet. Gelingt
+	 * das registrieren, wird so lange gesendet, bis setActive(false) aufgerufen
+	 * wird.
+	 */
 	public void run() {
 		
 		try {
 			sender.registerPath();
 		} catch (IOException e2) {
 			proclaim(3, "Could not register path for MMRP Sender");
+			isSending = false;
 		}
 		
 		//Paketzähler auf 0 setzen
