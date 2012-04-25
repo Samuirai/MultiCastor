@@ -39,6 +39,15 @@ public class ButtonTabComponent extends JPanel{
 	private final DraggableTabbedPane pane;
 	private LanguageManager lang=LanguageManager.getInstance();
 	
+	/**
+	 * Der Konstruktor speichert die übergeben Pane, und erzeugt direkt das neue
+	 * Label mit Bild und Text
+	 * 
+	 * Außerdem wird ein TabButton zum schließen hinzugefügt.
+	 * 
+	 * @param pPane Die TabPane zu der diese Komponente gehört
+	 * @param path Der Pfad zum Icon welches zum Tab geladen werden soll
+	 */
 	public ButtonTabComponent(final DraggableTabbedPane pPane, String path){
 		// Set the Layout(that Label is left and Button right)
 		super(new FlowLayout(FlowLayout.LEFT,0,0));
@@ -71,6 +80,13 @@ public class ButtonTabComponent extends JPanel{
 		setBorder(BorderFactory.createEmptyBorder(2,0,0,0));
 	}
 	
+	/**
+	 * Die private Klasse TabButton.
+	 * Sie ist dafür verantwortlich einen Button zum schließen der Tabs zu erzeugen
+	 * und enthält auch den ActionListener, der die Tabs dann wirklich schließt.
+	 * 
+	 * @author Filip Haase
+	 */
 	private class TabButton extends JButton implements ActionListener {
         public TabButton() {
             int size = 17;
@@ -92,25 +108,31 @@ public class ButtonTabComponent extends JPanel{
             addActionListener(this);
         }
  
+        /**
+         *  actionPerformed, kümmert sich darum den Tab zu schließen
+         *  wenn der Button geschlossen wird
+         *  
+         *  @param ActionEvent e, wird nicht benutzt
+         */
         public void actionPerformed(ActionEvent e) {
             int i = pane.indexOfTabComponent(ButtonTabComponent.this);
             if (i != -1) {
-            	/*int n = JOptionPane.showConfirmDialog(null, "In diesem tab befinden sich aktive Sender/Reciever. \n" +
-            			"Beim schleißen werden diese deaktiviert. Möchten Sie fortfahren? ");
-            	if(n == JOptionPane.YES_OPTION){*/
-            		//Hier noch Pausieren lassen
-            		pane.closeTab(pane.getTitleAt(i));
-            		pane.remove(i);
-            		pane.lookIfWeCan();
-            	//}
+            	pane.closeTab(pane.getTitleAt(i));
+            	pane.remove(i);
             }
         }
  
-        //we don't want to update UI for this button
+        /**
+         * we don't want to update UI for this button
+         */
         public void updateUI() {
         }
  
-        //paint the cross
+        /**
+         * paint the cross
+         * 
+         * @param g Standart für painComponent Methoden von AWT
+         */
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
@@ -131,6 +153,13 @@ public class ButtonTabComponent extends JPanel{
     }
  
     private final static MouseListener buttonMouseListener = new MouseAdapter() {
+    	/**
+    	 * Funktion welche dafür sorgt den Rahmen
+    	 * für den "Hover-Effekt" zu zeichnen
+    	 * 
+    	 * @param e, das MouseEvent über welches
+    	 * der entsprechende Button ausgewählt werden kann
+    	 */
         public void mouseEntered(MouseEvent e) {
             Component component = e.getComponent();
             if (component instanceof AbstractButton) {
@@ -138,7 +167,14 @@ public class ButtonTabComponent extends JPanel{
                 button.setBorderPainted(true);
             }
         }
- 
+
+    	/**
+    	 * Funktion welche dafür sorgt den Rahmen
+    	 * für den "Hover-Effekt" wieder zu entfernen
+    	 * 
+    	 * @param e, das MouseEvent über welches
+    	 * der entsprechende Button ausgewählt werden kann
+    	 */
         public void mouseExited(MouseEvent e) {
             Component component = e.getComponent();
             if (component instanceof AbstractButton) {
