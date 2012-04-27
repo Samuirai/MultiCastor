@@ -75,40 +75,45 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 										ContainerListener, TableColumnModelListener, WindowListener{
 	/**
 	 * Enum welches angibt um was f�r eine Art von GUI Benachrichtigung es sich handelt.
-	 * @author Daniel Becker
-	 *
 	 */
 	public enum MessageTyp {
 		INFO, WARNING, ERROR
 	}
+	
 	/**
 	 * Enum welches angibt um was f�r eine Art von GUI Update es sich handelt.
-	 * @author Daniel Becker
-	 *
 	 */
 	public enum UpdateTyp {
 		UPDATE, INSERT, DELETE
 	}
 	
+	/**
+	 * Snake is very funny stuff in this program.
+	 */
 	private SnakeGimmick.SNAKE_DIRECTION snakeDir = SNAKE_DIRECTION.E;
+	
 	/**
 	 * Referenz zum MulticastController, wichtigste Schnittstelle der Klasse.
 	 */
 	private MulticastController mc;
+	
 	/**
 	 * Referenz zum Frame in welchem das MultiCastor Tool angezeigt wird.
 	 */
 	private FrameMain f;
+	
 	/**
 	 * 2-Dimensionales Boolean Feld welches angibt in welchem Feld des jeweiligen Konfiguration Panels
 	 * eine richtige oder falsche eingabe get�tigt wurde.
 	 */
 	private boolean[][] input = new boolean[4][6];
+	
 	/**
-	 * Hilfsvariable welche ben�tigt wird um die gemeinsamen Revceiver Graph Daten 
+	 * Hilfsvariable welche benoetigt wird um die gemeinsamen Revceiver Graph Daten 
 	 * (JITTER, LOST PACKETS, MEASURED PACKET RATE) von mehreren Mutlicasts zu berechnen.
 	 */
 	private MulticastData[] graphData;
+	
 	/**
 	 * Hilfsvariable welche angibt wann die Initialisierung der GUI abgeschlossen ist.
 	 */
@@ -121,22 +126,36 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Datenobjekt welches den Input des Layer3 Senders enthaelt.
 	 */
 	private UserInputData inputData_S3;
+	
 	/**
 	 * Datenobjekt welches den Input des Layer3 Receivers enthaelt.
 	 */
 	private UserInputData inputData_R3;
+	
 	/**
 	 * Datenobjekt welches den Input des Layer2 Senders enthaelt.
 	 */
 	private UserInputData inputData_S2;
+	
 	/**
 	 * Datenobjekt welches den Input des Layer2 Receivers enthaelt.
 	 */
 	private UserInputData inputData_R2;
 	
+	/**
+	 * LanguageManager provides the access to language files
+	 */
 	private LanguageManager lang;
+	
+	/**
+	 * stores the setting of the GUI like tab position and selection
+	 */
 	private GUIData guidata;
 	
+	/**
+	 * Provides information about the initialization status.
+	 * @return status of initialization. true if the initialization is fished.
+	 */
 	public boolean isInitFinished() {
 		return initFinished;
 	}
@@ -147,6 +166,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public ViewController(){
 		lang=LanguageManager.getInstance();
 	}
+	
 	/**
 	 * Implementierung des ActionListeners, betrifft die meisten GUI Komponenten.
 	 * Diese Funktion wird aufgerufen wenn eine Interaktion mit einer GUI Komponente stattfindet, welche
@@ -156,10 +176,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void actionPerformed(ActionEvent e) {
 
-		//V1.5: Wenn Draggable Tabbed Pane entfernt wurde
-		if(f.isPaneDel())
-			f.openPane();
-		//V1.5: Wenn "Views" ausgewählt werden
+		//Wenn Draggable Tabbed Pane entfernt wurde
+		if(f.isPaneDel()) f.openPane();
+		//Wenn "Views" ausgewaehlt werden
 		if(e.getActionCommand().startsWith("open_layer") || e.getActionCommand().equals("open_about")){
 			f.getTabpane().openTab(e.getActionCommand());
 		}
@@ -233,8 +252,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		else if(e.getSource()==f.getMi_loadconfig()){
 			loadGUIFileEvent();
-//			f.getFc_load().toggle();
-//			setColumnSettings(getUserInputData(getSelectedTab()), getSelectedTab());
 		}
 		
 		else if(e.getSource()==f.getMi_loadMc()){
@@ -265,9 +282,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 		
-		/* v1.5 Neue Actionlistener fuer Layer3 */
-		
-		/* Add Button im Config Panel */
+		//Add Button im Config Panel
 		else if(e.getSource() == getPanConfig(Typ.L3_SENDER).getBt_enter()){
 			pressBTenter(Typ.L3_SENDER);
 		} else if(e.getSource() == getPanConfig(Typ.L3_RECEIVER).getBt_enter()){
@@ -276,8 +291,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTenter(Typ.L2_SENDER);
 		} else if(e.getSource() == getPanConfig(Typ.L2_RECEIVER).getBt_enter()){
 			pressBTenter(Typ.L2_RECEIVER);
-		} 
-		/* Active/Inactive Button im Config Panel */
+		}
+		
+		//Active/Inactive Button im Config Panel
 		else if(e.getSource()==getPanConfig(Typ.L3_SENDER).getTb_active()){
 			toggleBTactive(Typ.L3_SENDER);
 		} else if(e.getSource()==getPanConfig(Typ.L3_RECEIVER).getTb_active()){
@@ -287,7 +303,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		} else if(e.getSource()==getPanConfig(Typ.L2_RECEIVER).getTb_active()){
 			toggleBTactive(Typ.L2_RECEIVER);
 		}
-		/* Delete Button im Control Panel */
+		
+		//Delete Button im Control Panel
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getDelete()){
 			pressBTDelete(Typ.L3_SENDER);
 		}
@@ -300,7 +317,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getDelete()){
 			pressBTDelete(Typ.L2_SENDER);
 		}
-		/* New Button im Control Panel*/
+		
+		//New Button im Control Panel
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getNewmulticast()){
 			pressBTNewMC(Typ.L3_SENDER);
 		}
@@ -313,7 +331,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getNewmulticast()){
 			pressBTNewMC(Typ.L2_RECEIVER);
 		}
-		/* (De)SelectAll Button im Control Panel*/
+		
+		//(De)SelectAll Button im Control Panel
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getSelectDeselect_all()){
 			pressBTSelectAll(Typ.L3_SENDER, true);
 		}
@@ -327,7 +346,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTSelectAll(Typ.L2_RECEIVER, true);
 		}
 
-		/* Start/Stop Button im Control Panel*/
+		//Start/Stop Button im Control Panel
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
 			pressBTStartStop(Typ.L3_SENDER);
 		}
@@ -337,7 +356,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getStartStop()){
 			pressBTStartStop(Typ.L2_SENDER);
 		}
-		/* Start/Stop Button im Control Panel*/
+		//Start/Stop Button im Control Panel
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
 			pressBTStartStop(Typ.L3_SENDER);
 		}
@@ -423,6 +442,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		store.setColumnVisibility(visibility);
 		setColumnSettings(store, getSelectedTab());
 	}
+	
 	/**
 	  * Added einen Container und einen Keylistener zu dem
 	  * Component c. Hat die Komponente Kinder, mache das
@@ -443,6 +463,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
               }
          }
     }
+	 
 	 /**
 	  * Funktion welche ein neues Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.
 	  * @param mcd neu erstelltes Multicast DatenObjekt welches verarbeitet werden soll.
@@ -451,14 +472,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.addMC(mcd);
 		updateTable(mcd.getTyp(), UpdateTyp.INSERT);
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn sich die Parameter eines Textfelds ge�ndert haben.
 	 */
-	public void changedUpdate(DocumentEvent arg0) {
-
-		
-	}
+	@Override
+	public void changedUpdate(DocumentEvent arg0) { }
+	
 	/**
 	 * Funktion welche ein ge�ndertes Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.
 	 * @param mcd Das ge�nderter MulticastData Object.
@@ -590,6 +610,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mcd.setTyp(typ);
 		return mcd;
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der User das Netzwerk Interface in einem Sender �ndert.
 	 * @param typ Programmteil in welchem das Netzwerkinterface ge�ndert wurde.
@@ -644,10 +665,11 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		checkInput(typ);
 	}
+	
 	/**
-	 * Funktion welche aufgerufen wird wenn sich der Inhalt eines Textfelds im Konfigurations Panel �ndert.
-	 * Pr�ft ob alle eingaben korrekt sind.
-	 * @param typ Programmteil in welchem die Eingaben gepr�ft werden sollen.
+	 * Funktion welche aufgerufen wird wenn sich der Inhalt eines Textfelds im Konfigurations Panel aendert.
+	 * Prueft ob alle eingaben korrekt sind.
+	 * @param typ Programmteil in welchem die Eingaben geprueft werden sollen.
 	 */
 	private void checkInput(Typ typ){
 
@@ -703,6 +725,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				break;
 			}
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn die Eingaben der Textfelder des Konfigurations Panels zur�ckgesetzt werden sollen.
 	 * @param typ Programmteil in welchem die Textfelder zur�ckgesetzt werden sollen.
@@ -728,6 +751,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			docEventTFgrp(typ);
 		}
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn das Programm beendet wird. 
 	 * Sorgt f�r ein sauberes Beenden des Programms. (nicht immer m�glich)
@@ -740,24 +764,27 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		//System.out.println("Closing program...");
 		System.exit(0);
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Spalte zur Tabelle hinzugef�gt wird.
 	 */
+	@Override
 	public void columnAdded(TableColumnModelEvent arg0) {
 		
 	}
-	@Override	
+		
 	/**
 	 * Funktion welche aufgerufen wird wenn sich der Aussenabstand der Tabellenspalte �ndert.
 	 */
+	@Override
 	public void columnMarginChanged(ChangeEvent arg0) {
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Spalte in der Tabelle verschoben wird.
 	 */
+	@Override
 	public void columnMoved(TableColumnModelEvent arg0) {
 		if(arg0.getFromIndex() != arg0.getToIndex()){
 			//System.out.println("column moved from "+arg0.getFromIndex()+" "+arg0.getToIndex());
@@ -765,66 +792,75 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			autoSave();
 		}
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Spalte aus der Tabelle entfernt wird.
 	 */
+	@Override
 	public void columnRemoved(TableColumnModelEvent arg0) {
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Andere Spalte in der Tabelle selektiert wird.
 	 */
+	@Override
 	public void columnSelectionChanged(ListSelectionEvent arg0) {
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener zum ViewPort hinzugef�gt wird.
 	 */
+	@Override
 	public void componentAdded(ContainerEvent e) {
 		addKeyAndContainerListenerToAll(e.getChild());
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener unsichtbar gemacht wird.
 	 */
+	@Override
 	public void componentHidden(ComponentEvent e) {
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener verschoben wird.
 	 */
+	@Override
 	public void componentMoved(ComponentEvent e) {
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener von dem ViewPane entfernt wird.
 	 */
+	@Override
 	public void componentRemoved(ContainerEvent e) {
 		removeKeyAndContainerListenerToAll(e.getChild());
 		
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener in der Gr��e ver�ndert wird.
 	 */
+	@Override
 	public void componentResized(ComponentEvent e) {
 		if(e.getSource()==getFrame()){
 			frameResizeEvent();
 		}
 	}
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn eine Komponente mit dem ComponentListener sichtbar gemacht wird.
 	 */
+	@Override
 	public void componentShown(ComponentEvent e) {
 		
 	}
+	
 	/**
 	 * Hilfsfunktion welche alle Multicasts aus dem jeweiligen Programmteil l�scht
 	 * @param typ
@@ -833,6 +869,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		pressBTSelectAll(typ, false);
 		pressBTDelete(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn ein bestimmter Multicast gel�scht werden soll.
 	 * @param mcd MulticastData Objekt des Multicasts welcher gel�scht werden soll.
@@ -969,6 +1006,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		checkInput(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Input des Packet Length Felds ge�ndert wurde.
 	 * @param typ Programmteil in welchem das Packet Length Feld ge�ndert wurde.
@@ -1000,6 +1038,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		checkInput(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Input des Port Felds ge�ndert wurde.
 	 * @param typ Programmteil in welchem das Port Feld ge�ndert wurde.
@@ -1031,6 +1070,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}		
 		checkInput(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Input des Packet Rate Felds ge�ndert wurde.
 	 * @param typ Programmteil in welchem das Packet Rate Feld ge�ndert wurde.
@@ -1061,6 +1101,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		checkInput(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Input des TTL Felds ge�ndert wurde.
 	 * @param typ Programmteil in welchem das TTL Feld ge�ndert wurde.
@@ -1086,6 +1127,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		checkInput(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn die Fenstergroesse geaendert wurde. 
 	 * Passt die Komponenten der GUI auf die neue Groesse an.
@@ -1110,13 +1152,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 	}
+	
 	/**
-	 * Hilfsfunktion welche das Frame zur�ckgibt in welchem das MultiCastor Tool gezeichnet wird.
+	 * Hilfsfunktion welche das Frame zurueckgibt in welchem das MultiCastor Tool gezeichnet wird.
 	 * @return FrameMain Objekt welches angefordert wurde.
 	 */
 	public FrameMain getFrame() {
 		return f;
 	}
+	
 	/**
 	 * Hilfsfunktion welche die aktuelle Anzahl an Multicasts vom MulticastController anfordert.
 	 * @param typ Programmteil in welchem die Multicasts gez�hlt werden sollen.
@@ -1125,17 +1169,19 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	public int getMCCount(Typ typ){
 		return mc.getMCs(typ).size();
 	}
+	
 	/**
 	 * Hilfsfunktion welche Multicast Daten vom MulticastController anfordert.
 	 * @param i Index des angeforderten Multicasts (Index in der Tabelle).
-	 * @param typ Programmteil in zu welchem der Multicast geh�rt.
-	 * @return MulticastData Objekt welches vom MulticastController zur�ckgegeben wird.
+	 * @param typ Programmteil in zu welchem der Multicast gehoert.
+	 * @return MulticastData Objekt welches vom MulticastController zuruegegeben wird.
 	 */
 	public MulticastData getMCData(int i, MulticastData.Typ typ){
 		return mc.getMC(i, typ);
 	}
+	
 	/**
-	 * Hilfsfunktion welche das Configuration Panel eines bestimmten Programmteils zur�ckgibt.
+	 * Hilfsfunktion welche das Configuration Panel eines bestimmten Programmteils zurueckgibt.
 	 * @param typ Programmteil in welchem sich das Configuration Panel befindet.
 	 * @return PnaleMulticastConfig, welches angefordert wurde.
 	 */
@@ -1149,8 +1195,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		return configpart;
 	}
+	
 	/**
-	 * Hilfsfunktion welche das Control Panel eines bestimmten Programmteils zur�ckgibt.
+	 * Hilfsfunktion welche das Control Panel eines bestimmten Programmteils zurueckgibt.
 	 * @param typ Programmteil in welchem sich das Control Panel befindet.
 	 * @return PanelMulticastControl, welches angefordert wurde.
 	 */
@@ -1164,8 +1211,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		return controlpart;
 	}
+	
 	/**
-	 * Hilfsfunktion welche die Statusbar des jeweiligen Programmteils zur�ck gibt.
+	 * Hilfsfunktion welche die Statusbar des jeweiligen Programmteils zurueck gibt.
 	 * @param typ Programmteil in welchem sich die Statusbar befindet.
 	 * @return PanelStatusbar welche angefordert wurde.
 	 */
@@ -1179,8 +1227,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		return statusbarpart;
 	}
+	
 	/**
-	 * Hilfsfunktion welche einen bestimten Programmteil zur�ck gibt.
+	 * Hilfsfunktion welche einen bestimten Programmteil zurueck gibt.
 	 * @param typ Programmteil welcher angeforder wird.
 	 * @return JPanel mit dem angeforderten Programmteil.
 	 */
@@ -1194,8 +1243,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		return ret;
 	}
+	
 	/**
-	 * Hilfsfunktion welche ein Integer Array mit den Selektierten Zeilen einer Tabele zur�ckgibt.
+	 * Hilfsfunktion welche ein Integer Array mit den Selektierten Zeilen einer Tabele zurueckgibt.
 	 * @param typ Programmteil in welchem sich die Tabelle befindet.
 	 * @return Integer Array mit selektierten Zeilen. (leer wenn keine Zeile selektiert ist).
 	 */
@@ -1205,6 +1255,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		//System.out.println("ret: " + Arrays.toString(ret));
 		return ret;
 	}
+	
 	/**
 	 * Hilfsfunktion welche den Programmteil zurueckgibt welcher im Moment per Tab selektiert ist.
 	 * @return Programmteil welcher im Vordergrund ist.
@@ -1220,15 +1271,17 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 
 		return typ;
 	}
+	
 	/**
-	 * Hilfsfunktion welche die Richtung im SnakeProgramm zur�ckgibt.
+	 * Hilfsfunktion welche die Richtung im SnakeProgramm zurueckgibt.
 	 * @return Richtung in welche die "Snake" laufen soll
 	 */
 	public SNAKE_DIRECTION getSnakeDir(){
 		return snakeDir;
 	}
+	
 	/**
-	 * Hilfsfunktion welche die Tabelle des jeweiligen Programmteil zur�ckgibt.
+	 * Hilfsfunktion welche die Tabelle des jeweiligen Programmteil zurueckgibt.
 	 * @param typ Programmteil aus welchem die Tabelle angeforder wird.
 	 * @return Die JTable welche angefordert wurde.
 	 */
@@ -1242,17 +1295,19 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		return tablepart;
 	}
+	
 	/**
-	 * Hilfsfunktion welches das Model der jeweiligen Tabelle zur�ckgibt.
+	 * Hilfsfunktion welches das Model der jeweiligen Tabelle zurueckgibt.
 	 * @param typ Programmteil von welchem das Tabellenmodel angeforder wird.
 	 * @return das Tabellenmodel des spezifizierten Programmteils.
 	 */
 	public MiscTableModel getTableModel(Typ typ){
 		return ((MiscTableModel) getTable(typ).getModel());
 	}
+	
 	/**
 	 * Hilfsfunktion zum Berechnen des insgesamten Traffics welcher vom Multicast Tool empfangen wird (IPv4 & IPv6).
-	 * @return Gibt den Insgesamten Traffic des IPv4SENDER und IPv6SENDER als String zur�ck (Mbit/s) im Format "##0.000"
+	 * @return Gibt den Insgesamten Traffic des IPv4SENDER und IPv6SENDER als String zurueck (Mbit/s) im Format "##0.000"
 	 */
 	public String getTotalTrafficDown(){
 		DecimalFormat ret = new DecimalFormat("##0.000");
@@ -1263,6 +1318,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 	}
 		return ret.format(sum);
 	 }
+	
 	/**
 	 * Hilfsfunktion zum Berechnen des insgesamten Traffics welcher vom Multicast Tool verschickt wird (IPv4 & IPv6).
 	 */
@@ -1275,12 +1331,14 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 	}
 		return ret.format(sum);
 	}
+	
 	/**
-	 * Funktion welche aufgerufen wird wenn Hide im PopupMenu des Tabellenkopfs gedr�ckt wurde
+	 * Funktion welche aufgerufen wird wenn Hide im PopupMenu des Tabellenkopfs gedrueckt wurde
 	 */
 	private void hideColumnClicked() {
 		getUserInputData(getSelectedTab()).hideColumn(PopUpMenu.getSelectedColumn());
 	}
+	
 	/**
 	 * Funktion welche die GUI startet und initialisiert
 	 * @param p_mc Referenz zum MultiCast Controller, die wichtigste Schnittstelle der GUI.
@@ -1303,10 +1361,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 	}
 	
-	@Override
 	/**
 	 * Funktion welche aufgerufen wird wenn Inhalt in ein Feld des Configuration Panel eingetrgen wird.
 	 */
+	@Override
 	public void insertUpdate(DocumentEvent source) {
 		if(source.getDocument() == getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getDocument()) {
 			docEventTFgrp(Typ.L3_SENDER);
@@ -1333,12 +1391,13 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		autoSave();
 	}
-	@SuppressWarnings({ "static-access" })
-	@Override
+
 	/**
 	 * Funktion welche aufgerufen wird wenn eine GUI Komponente mit dem ItemListener selektiert oder deselektiert wird.
-	 * Dieser Listener wird f�r RadioButtons und Checkboxen verwendet.
+	 * Dieser Listener wird fuer RadioButtons und Checkboxen verwendet.
 	 */
+	@SuppressWarnings({ "static-access" })
+	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		if(arg0.getStateChange() == arg0.SELECTED){
 			/* Auswahl eines Netzwerkinterfaces */
@@ -1404,20 +1463,19 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		  	default:
 		  	}
 	}
-	@Override
+	
 	/**
 	 * Funktion welche Aufgerufen wird wenn eine Taste der Tastatur losgelassen wird.
 	 */
-	public void keyReleased(KeyEvent arg0) {
-		
-	}
 	@Override
+	public void keyReleased(KeyEvent arg0) {}
+	
 	/**
 	 * Funktion welche Aufgerufen wird sobald die Tastatur einen Input bei gedr�ckter Taste an das System weitergibt.
 	 */
-	public void keyTyped(KeyEvent arg0) {
-
-	}
+	@Override
+	public void keyTyped(KeyEvent arg0) {}
+	
 	/**
 	 * Funktion welche ausgel�st wird wenn der User eine oder mehrere Zeilen in der Tabelle selektiert.
 	 * @param typ Programmteil in welchem der User die Zeilen selektiert hat.
@@ -1526,10 +1584,11 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		mc.loadMulticastConfig(path, false);
 	}
-	@Override
+	
 	/**
 	 * MouseEvent welches ausgel�st wird wenn eine Maustaste gedr�ckt und wieder losgelassen wird.
 	 */
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		//is rightclick?
 		if(e.getButton() == MouseEvent.BUTTON3){
@@ -1544,36 +1603,41 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		autoSave();
 	}
-	@Override
+	
 	/**
 	 * MouseEvent welches auf das Betreten einer Komponente der Maus reagiert.
 	 */
+	@Override
 	public void mouseEntered(MouseEvent e) {
 		
 	}
 
-	@Override
+	
 	/**
 	 * MouseEvent welches auf das Verlassen einer Komponente der Maus reagiert.
 	 */
+	@Override
 	public void mouseExited(MouseEvent e) {
 		
 	}
-	@Override
+	
 	/**
 	 * MouseEvent welches auf Dr�cken einer Maustaste reagiert.
 	 */
+	@Override
 	public void mousePressed(MouseEvent e) {
 
 		
 	}
-	@Override
+	
 	/**
 	 * MouseEvent welches auf Loslassen einer Maustaste reagiert.
 	 */
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn mehr als ein Multicast in der Tabelle selektiert wurde.
 	 * Passt die GUI entsprechend an.
@@ -1641,6 +1705,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		getPanConfig(typ).getBt_enter().setEnabled(true);
 		setBTStartStopDelete(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Add Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Add Button gedr�ckt wurde
@@ -1650,6 +1715,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		this.addMC(changeMCData(new MulticastData(), typ, iptype));
 		clearInput(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Change Button gedr�ckt wird. Bei selektierten Multicast(s).
 	 * @param typ Programmteil in welchem der Change Button gedr�ckt wurde
@@ -1711,6 +1777,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			setBTStartStopDelete(getSelectedTab());
 		}
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Delete Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Delete Button gedr�ckt wurde
@@ -1723,6 +1790,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		setBTStartStopDelete(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Add Button gedr�ckt wird.
 	 * Diese Funktion unterscheided ob eine �nderung an einem Multicast stattfinden soll,
@@ -1737,6 +1805,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTChange(typ);
 		}
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der New Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der New Button gedr�ckt wurde
@@ -1747,6 +1816,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		setBTStartStopDelete(typ);
 		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+"");
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Select All Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Select All Button gedr�ckt wurde
@@ -1763,6 +1833,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Start Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Start Button gedr�ckt wurde
@@ -1807,6 +1878,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		setBTStartStopDelete(typ);
 		
 	}
+	
 	/**
 	 * Funktion welche es dem Multicast Controller und somit den restlichen Programmteilen erm�glicht
 	 * Ausgaben in der Konsole des GUI zu t�tigen. 
@@ -1841,13 +1913,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
                }
           }
      }
-	@Override
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn ein Zeichen aus einem Textfeld gel�scht wird.
 	 */
+	@Override
 	public void removeUpdate(DocumentEvent e) {
 		insertUpdate(e);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn versucht wird eine Datei zu speichern im Datei speichern Dialog.
 	 * @param e ActionEvent welches vom Datei speichern Dialog erzeugt wird
@@ -1888,7 +1962,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
         	}
         }
 	}
-        
+    
+	/**
+	 * Method is called for saving a GUI Config file
+	 */
     private void saveGUIFileEvent() {
 		//Create the Save Dialog
 		JFileChooser chooser = new JFileChooser();
@@ -1921,6 +1998,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanControl(typ).getStartStop().setEnabled(true);
 		}
 	}
+	 
 	 /**
 	  * Funktion welche das aussehen des ActiveButtons anpasst (Togglefunktion)
 	  * @param b Array welches die Selektierten Reihen in einem Programmteil angibt
@@ -1938,6 +2016,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanConfig(typ).getTb_active().setForeground(new Color(200,0,0));
 		}
 	}
+	 
 	 /**
 	  * Funktion welche das aussehen des ActiveButtons anpasst je nach dem welcher Multicast selektiert ist in der Tabelle
 	  * @param selectedLine Array welches die Selektierten Reihen in einem Programmteil angibt
@@ -1958,6 +2037,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			}
 		}
 	}
+	 
 	/**
 	 * Funktion welche erm�glich Nachrichten in der GUI anzuzeigen. Gibt anderen Programmteilen �ber den
 	 * MulticastController die M�glichkeit Informations, Warnungs und Errormeldungen auf dem GUI auszugeben.
@@ -1971,6 +2051,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			case ERROR: JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE); break;
 		}
 	}
+	
 	/**
 	 * Bildet die Schnittstelle zum Multicast Controller zum starten von einem Bestimmten Multicast.
 	 * Sorgt f�r die ensprechenden Updates in der GUI nach dem Versuch den Multicast zu stoppen.
@@ -1982,15 +2063,16 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		setBTStartStopDelete(typ);
 	}
 	
-	@Override
 	/**
 	 * Funktion welche aufgerufen wird wenn das Frame in der Gr��e ge�ndert oder verschoben wird.
 	 */
+	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		if(arg0.getSource() == getFrame().getTabpane()){
 			frameResizeEvent();
 		}	
 	}
+	
 	/**
 	 * Bildet die Schnittstelle zum Multicast Controller zum stoppen von einem Bestimmten Multicast.
 	 * Sorgt f�r die ensprechenden Updates in der GUI nach dem Versuch den Multicast zu stoppen.
@@ -2001,6 +2083,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.stopMC(mc.getMC(row, typ));
 		setBTStartStopDelete(typ);
 	}
+	
 	/**
 	 * Funktion welche aufgerufen wird wenn der Active Button im ControlPanel gedr�ckt wird.
 	 * @param typ Bestimmt den Programmteil in welchem der Active Button gedr�ckt wurde
@@ -2013,6 +2096,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			setTBactive(false, typ);
 		}
 	}
+	
 	/**
 	 * Funktion welche sich um das Update des Graphen k�mmert.
 	 * @param typ bestimmt welcher Graph in welchem Programmteil geupdatet werden soll
@@ -2048,6 +2132,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			
 		}
 	}
+	
 	/**
 	 * Funktion welche unterscheidet welche Art von Update in der Multicast Tabelle erfolgt ist.
 	 * Hierbei kann zwischen Einf�gen, L�schen und Updaten einer Zeile unterschieden werden.
@@ -2074,6 +2159,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 							break;
 		}
 	}
+	
 	/**
 	 * Funktion die einen bestimmten Programmteil updatet.
 	 * @param typ Programmteil der geupdatet werden soll
@@ -2083,11 +2169,12 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			updateTable(typ, UpdateTyp.UPDATE);
 		}
 	}
-	@Override
+	
 	/**
 	 * Implementierung des ListSelectionListeners, sorgt f�r korrektes Verhalten der GUI
 	 * beim Selektieren und Deselektieren von einer oder mehreren Zeilen in der Tabelle.
 	 */
+	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if(e.getSource()==getTable(Typ.L3_SENDER).getSelectionModel()){
 			listSelectionEventFired(Typ.L3_SENDER);
@@ -2103,6 +2190,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		autoSave();
 	}
+	
 	/**
 	 * Diese Funktion bildet die eigentliche Schnittstelle zum MulticastController und ermoeglicht
 	 * die GUI zu einem bestimmen Zeitpunkt zu updaten.
@@ -2125,6 +2213,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			getPanStatus(typ).getLb_multicasts_selected().setText(selectedRows.length+" "+lang.getProperty("status.mcSelected")+" ");
 		}
 	}
+	
 	/**
 	 * Diese Funktion liest die akutellen Benutzereingaben in der GUI aus und speichert sie
 	 * in den 4 UserInputData Objekten und gibt sie weiter zum speichern in der permanenten
@@ -2176,6 +2265,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		mc.autoSave(packet);
 			
 	}
+	
 	/**
 	 * Hilfsfunktion zur Bestimmung des UserInputData Objekts anhand des Typs.
 	 * @param typ Programmteil fuer welchen das UserInputData Objekt angefordert wird
@@ -2191,6 +2281,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		return ret;
 	}
+	
 	/**
 	 *	liest die UserInputData f�r einen bestimmten Programmteil, 
 	 *	ordnet die Tabellenspalten entsprechend an und setzt die Sichtbarkeit der Tabellenspalten.
@@ -2214,6 +2305,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		getUserInputData(typ).setColumnOrder(saved_order);
 		getUserInputData(typ).setColumnVisibility(saved_visibility);
 	}
+	
 	/**
 	 * Funktion welche die aktuellen Nutzereingaben im Programm speichert.
 	 */
@@ -2224,6 +2316,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		
 	}
+	
 	/**
 	 * Funktion welche bei Programmstart die Automatische 
 	 */
@@ -2243,6 +2336,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		initFinished=true;
 	}
+	
 	/**
 	 * Hilfsfunktion zum teilweise laden der Autosave Date, unterschieden nach Programmteil
 	 * welche sie betreffen
@@ -2271,56 +2365,54 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 	}
 
-	@Override
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster Object aktiviert wird
 	 */
-	public void windowActivated(WindowEvent e) {
-		
-	}
 	@Override
+	public void windowActivated(WindowEvent e) { }
+	
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster geschlossen wird
 	 */
-	public void windowClosed(WindowEvent e) {
-		
-	}
 	@Override
+	public void windowClosed(WindowEvent e) { }
+	
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster ge�ffnet wird
 	 */
+	@Override
 	public void windowClosing(WindowEvent e) {
 		closeProgram();
 	}
-	@Override
+	
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster Object deaktiviert wird
 	 */
-	public void windowDeactivated(WindowEvent e) {
-		
-	}
 	@Override
+	public void windowDeactivated(WindowEvent e) { }
+	
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster de-minimiert wurde
 	 */
-	public void windowDeiconified(WindowEvent e) {
-		
-	}
 	@Override
+	public void windowDeiconified(WindowEvent e) { }
+	
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster minimiert wurde
 	 */
-	public void windowIconified(WindowEvent e) {
-		
-	}
 	@Override
+	public void windowIconified(WindowEvent e) { }
+	
 	/**
 	 * Listener welcher darauf reagiert wenn das Fenster ge�ffnet wird
 	 */
-	public void windowOpened(WindowEvent e) {
-		
-	}
+	@Override
+	public void windowOpened(WindowEvent e) { }
 
+	/**
+	 * Method is used to aply GUI setting from an GUI Config file
+	 * @param data File content als GUIData object
+	 */
 	public void setGUIConfig(GUIData data) {
 		
 		this.guidata = data;
