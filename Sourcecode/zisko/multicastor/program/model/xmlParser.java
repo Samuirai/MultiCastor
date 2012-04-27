@@ -518,7 +518,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         Element multiCastor = doc.createElement("MultiCastor");
         doc.appendChild(multiCastor);
 	    
-        //TODO @FF diese User System Informationen bitte auch in die GUI Config schreiben lassen [JT]
 		// Erzeugt Root Element f�r die User System Informationen
 		Element system = doc.createElement("System");
 		multiCastor.appendChild(system);

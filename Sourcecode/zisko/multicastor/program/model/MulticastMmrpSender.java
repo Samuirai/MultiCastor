@@ -11,6 +11,7 @@ import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.mmrp.*;
 
 /**
@@ -31,6 +32,8 @@ import zisko.multicastor.program.mmrp.*;
  */
 public class MulticastMmrpSender extends MulticastThreadSuper implements MulticastSenderInterface{
 
+	private LanguageManager lang = LanguageManager.getInstance();
+	
 	/** Wenn auf wahr, sendet dieser Sender. */
 	private boolean isSending = false;
 	/** Wird fuer die Fehlerausgabe verwendet. */
@@ -66,18 +69,18 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		super(multicastData);
 		
 		if(logger==null){
-			System.out.println("FATAL ERROR - cannot create MulticastReceiver without Logger");
+			System.out.println(lang.getProperty("error.mr.logger"));
 			return;
 		}
 		if(multicastData==null){
-			logger.log(Level.WARNING, "Error while creating MulticastReceiver. MulticastData cannot be empty.");
+			logger.log(Level.WARNING, lang.getProperty("error.mr.mcdata"));
 			return;
 		}
 		
 		try {
 			multicastData.setHostID(InetAddress.getLocalHost().getHostName());
 		} catch (UnknownHostException e) {
-			proclaim(1, "Unable to get Host-Name. Error is: " + e.getMessage());
+			proclaim(1, lang.getProperty("message.getHostname") + " " + e.getMessage());
 		}
 		
 		this.logger = logger;
@@ -87,7 +90,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		try {
 			this.sender					= new MMRPSender(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
-			proclaim(3, "Could not Create MMRP Sender");
+			proclaim(3, lang.getProperty("message.mmrpSender"));
 			throw new IOException();
 		}	
 	}
@@ -127,10 +130,11 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			//Setzen der ThreadID, da diese evtl.
 			//im Controller noch einmal ge�ndert wird
 			myPacketBuilder.alterThreadID(mcData.getThreadID());
+			myPacketBuilder.alterRandomID(mcData.getRandomID());
 			setStillRunning(true);
-			proclaim(2, "MultiCast-Sender activated");
+			proclaim(2, lang.getProperty("message.mcSenderActivated"));
 		}else{
-			proclaim(2, "MultiCast-Sender deaktivated" );
+			proclaim(2, lang.getProperty("message.mcSenderDeactivated"));
 		}
 	}
 
@@ -184,7 +188,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 				if(timeLeft>0)	try{
 									Thread.sleep(timeLeft/1000000, (int) (timeLeft%1000000));
 								}catch(InterruptedException e){
-									proclaim(1, "Sleep after sending with method PEAK failed: " + e.getMessage());
+									proclaim(1, lang.getProperty("message.sleapPeak") + " " + e.getMessage());
 								}
 				endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
 				do{
@@ -196,7 +200,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 						resetablePcktCnt++;
 						
 					}catch(Exception e1){
-						proclaim(2, "Problem with sending");
+						proclaim(2, lang.getProperty("message.problemSending"));
 					}
 				}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
 			}
@@ -205,7 +209,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			} catch (IOException e) {
 				proclaim(3, "Could not deregister Path");
 			}
-			proclaim(2, totalPacketCount + " packets send in total");
+			proclaim(2, totalPacketCount + " " + lang.getProperty("message.packetsSendTotal"));
 			
 			//Counter reseten
 			totalPacketCount = 0;
@@ -214,12 +218,14 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			update();
 			updateMin();
 			setStillRunning(false);
+			
 		} catch (IOException e2) {
-			proclaim(3, "Could not register path for MMRP Sender, stopping it againg");
+			proclaim(3, lang.getProperty("message.registerMmrpSender"));
 			isSending = false;
 			this.setActive(false);
 			mCtrl.stopMC(mcData);
 		}
+		
 	}
 
 }
