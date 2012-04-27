@@ -29,9 +29,9 @@ BOOL IsWow64()
 int main( void )
 {
     if(IsWow64())
-        _tprintf(TEXT("The process is running under WOW64.\n"));
+        system("java -Djava.library.path=lib/windows/64 -jar MultiCastor.jar");
     else
-        _tprintf(TEXT("The process is not running under WOW64.\n"));
+        system("java -Djava.library.path=lib/linux/32 -jar MultiCastor.jar");
 
     return 0;
 }
