@@ -16,6 +16,7 @@ import zisko.multicastor.program.lang.LanguageManager;
  */
 
 public class MulticastLogHandler extends ConsoleHandler	{
+	
 	private ViewController viewController;
 	private LanguageManager lang=LanguageManager.getInstance();
 	
