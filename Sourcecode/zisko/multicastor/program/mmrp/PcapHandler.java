@@ -45,8 +45,6 @@ public class PcapHandler {
 				r = 0;
 			}
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
-				// System.err.printf("Can't read list of devices, error is %s",
-				// errbuf.toString());
 				System.out.println("Error Stuff");
 				throw new IOException();
 			}

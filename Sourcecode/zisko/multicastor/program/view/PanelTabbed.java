@@ -116,8 +116,6 @@ public class PanelTabbed extends JPanel {
 		}
 		tab_console.addTab(lang.getProperty("tab.graph"), pan_graph);
 		tab_console.addTab(lang.getProperty("tab.console"), console_scrollpane);
-//		pan_graph.setVisible(false);
-//		tab_console.remove(0);
 	}
 	
 	/**

@@ -62,7 +62,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 	 * 			  Eine Referenz auf den entsprechenden{@link MulticastController}
 	 * 			  damit MulticastStröme ggf. richtig gestoppt werden kann
 	 */
-	public MulticastMmrpSender(MulticastData multicastData, Logger logger, MulticastController multiCtrl) {
+	public MulticastMmrpSender(MulticastData multicastData, Logger logger, MulticastController multiCtrl) throws IOException{
 		super(multicastData);
 		
 		if(logger==null){
@@ -88,6 +88,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			this.sender					= new MMRPSender(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
 			proclaim(3, "Could not Create MMRP Sender");
+			throw new IOException();
 		}	
 	}
 	

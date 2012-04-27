@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Queue;
@@ -230,7 +229,6 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 
 		// V1.5 [FH] Added for network-fails
 		int ioExceptionCnt = 0, lastIOExceptionCnt = 10;
-		long lastIoExceptionTime;
 
 		// Der Multicastgruppe beitreten
 		try {

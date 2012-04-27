@@ -87,39 +87,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
-//	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
-//	{
-//		Document doc = parseDocument(pfad);
-//			    
-//		/*
-//		 * Ab hier die Daten aus dem XML 
-//		 * ausgelesen und in Vektor Objekte gespeichert.
-//		 * Die Daten werden in folgender Reihe ausgelesen
-//		 * 1. MultiCastData (<mc> im XML ) in den Vektor v1
-//		 * 2. UserLevelData (<ud> im XML ) in den Vektor v2
-//		 * 3. Pfade  ( <Paths> im XML ) in den Vektor v3
-//		 */
-//		
-//		if(v1 != null){
-//			loadMulticastData(doc, v1);
-//		}
-//		if(v2 != null){
-//			loadUserlevelData(doc, v2);
-//		}
-//		if(v3 != null){
-//			loadUserInputData(doc,v3);
-//		}
-//		if(v3 != null){
-//			loadPathData(doc, v4);
-//		}
-//		
-//	}
-//	
-//	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
-//	{
-//		loadConfig(pfad, v1, v2, null, null);
-//	}
-	
 	private void loadGUIData(Document doc, GUIData data) {
 		//********************************************************
 	    // Lese die GUI Konfigurationsdaten aus dem XML
@@ -183,13 +150,9 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    	for(int i=0; i<mcList.getLength(); i++) {   
 	    		//Evaluiere nur L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
 	    		if(mcList.item(i).getNodeName().equals("#text")) {
-	    			//System.out.println("raus:"+mcList.item(i).getNodeName());
 	    			continue;
 	    		}
 	    		mcNummer++;
-	    		
-	    		//System.out.println("NODENAME:"+mcList.item(i).getNodeName());
-	    		//System.out.println("NR"+(mcNummer));
 	    		
 	    		mcd = new MulticastData();
 	    		Node configNode;
@@ -797,7 +760,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	@Override
 	public void loadDefaultULD(Vector<MulticastData> v1) throws IOException,
 			SAXException, WrongConfigurationException {
-		// TODO Auto-generated method stub
 		
 	}
 
