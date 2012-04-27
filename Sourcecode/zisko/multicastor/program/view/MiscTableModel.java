@@ -52,12 +52,12 @@ public class MiscTableModel extends AbstractTableModel {
 				case 0: ret = Boolean.class; break;
 				case 1: ret = String.class; break;
 				case 2: ret = String.class; break;
-				case 3: ret = Integer.class; break;
+				case 3: ret = String.class; break;
 				case 4: ret = Integer.class; break;
-				case 5: ret = String.class; break;
-				case 6: ret = Integer.class; break;
-				case 7: ret = String.class; break;
-				case 8: ret = Long.class; break;
+				case 5: ret = Integer.class; break;
+				case 6: ret = String.class; break;
+				case 7: ret = Long.class; break;
+				case 8: ret = Integer.class; break;
 				case 9: ret = Integer.class; break;
 				case 10: ret = Integer.class; break;
 				default: ret = null; break;
@@ -69,14 +69,14 @@ public class MiscTableModel extends AbstractTableModel {
 				case 0: ret = Boolean.class; break;
 				case 1: ret = String.class; break;
 				case 2: ret = String.class; break;
-				case 3: ret = Integer.class; break;
+				case 3: ret = String.class; break;
 				case 4: ret = Integer.class; break;
-				case 5: ret = String.class; break;
-				case 6: ret = Integer.class; break;
+				case 5: ret = Integer.class; break;
+				case 6: ret = String.class; break;
 				case 7: ret = Integer.class; break;
 				case 8: ret = Integer.class; break;
 				case 9: ret = Integer.class; break;
-				case 10: ret = String.class; break;
+				case 10: ret = Integer.class; break;
 				default: ret = null;
 			}  	
 		}
@@ -89,13 +89,13 @@ public class MiscTableModel extends AbstractTableModel {
 	public int getColumnCount() {
 		int ret = 0;
 		// V1.5: L2 und L3 hinzugefuegt
-		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
-			ret = 11;
+		switch(typ){
+			case L2_SENDER: ret = 9; break;
+			case L2_RECEIVER: ret = 10; break;
+			case L3_RECEIVER:
+			case L3_SENDER: ret = 11; break;
 		}
-		// V1.5: L2 und L3 hinzugefuegt
-		else if(typ == Typ.L2_RECEIVER || typ == Typ.L3_RECEIVER){
-			ret = 11;
-		}
+
 		return ret;
 	}
 	@Override
@@ -110,14 +110,14 @@ public class MiscTableModel extends AbstractTableModel {
 				case 0: ret = "STATE"; break; 
 				case 1:	ret = "ID"; break; 		
 				case 2:	ret = (typ == Typ.L2_SENDER)?"GRP MAC":"GRP IP"; break;
-				case 3:	ret = "D RATE"; break;
-				case 4: ret = "M RATE"; break;
-				case 5: ret = "Mbit/s"; break;
-				case 6:	ret = "PORT"; break;
-				case 7: ret = "SRC IP"; break;			
-				case 8:	ret = "#SENT"; break;
+				case 3:	ret = (typ == Typ.L2_SENDER)?"SRC MAC":"SRC IP"; break;
+				case 4:	ret = "D RATE"; break;
+				case 5: ret = "M RATE"; break;
+				case 6: ret = "Mbit/s"; break;
+				case 7:	ret = "#SENT"; break;
+				case 8: ret = "LENGTH"; break;
 				case 9:	ret = "TTL"; break;
-				case 10: ret = "LENGTH"; break;
+				case 10: ret = "PORT"; break;
 				default: ret = "error!"; break;
 			}
 		}
@@ -126,18 +126,18 @@ public class MiscTableModel extends AbstractTableModel {
 			switch(columnIndex){
 				case 0: ret = "STATE"; break;
 				case 1:	ret = "ID"; break; 		
-				case 2:	ret = "GRP IP"; break;
-				case 3:	ret = "D RATE"; break;
-				case 4:	ret = "M RATE"; break;
-				case 5: ret = "Mbit/s"; break;
-				case 6:	ret = "PORT"; break;			
+				case 2:	ret = (typ == Typ.L2_RECEIVER)?"GRP MAC":"GRP IP"; break;
+				case 3: ret = (typ == Typ.L2_RECEIVER)?"SRC MAC":"SRC IP"; break;
+				case 4:	ret = "D RATE"; break;
+				case 5:	ret = "M RATE"; break;
+				case 6: ret = "Mbit/s"; break;
 				case 7:	ret = "LOSS/S"; break;
 				//Changed this 2 Values to Lost and Received
 				//case 8:	ret = "AVG INT"; break;
 				//case 9:	ret = "#INT"; break;
 				case 8:	ret = "LOST"; break;
 				case 9:	ret = "RCVD"; break;				
-				case 10: ret = "SRC"; break;
+				case 10:	ret = "PORT"; break;	
 				default: ret = "error!"; break;
 			}
 		}
@@ -164,14 +164,14 @@ public class MiscTableModel extends AbstractTableModel {
 				case 0: ret=new Boolean(data.isActive()); break; 
 				case 1: ret=data.getSenderID(); break;
 				case 2: ret=(typ == Typ.L2_SENDER)?data.getMmrpGroupMacAsString():data.getGroupIp().toString().substring(1); break;
-				case 3: ret=new Integer(data.getPacketRateDesired()); break;
-				case 4: ret=new Integer(data.getPacketRateMeasured()); break;
-				case 5: ret=new DecimalFormat("##0.000").format((data.getTraffic()/1024.0/1024.0*8.0)); break;
-				case 6: ret=new Integer(data.getUdpPort()); break;
-				case 7: ret=(typ == Typ.L2_SENDER)?data.getMmrpSourceMacAsString():data.getSourceIp().toString().substring(1); break;
-				case 8: ret=new Long(data.getPacketCount());break;
+				case 3: ret=(typ == Typ.L2_SENDER)?data.getMmrpSourceMacAsString():data.getSourceIp().toString().substring(1); break;
+				case 4: ret=new Integer(data.getPacketRateDesired()); break;
+				case 5: ret=new Integer(data.getPacketRateMeasured()); break;
+				case 6: ret=new DecimalFormat("##0.000").format((data.getTraffic()/1024.0/1024.0*8.0)); break;
+				case 7: ret=new Long(data.getPacketCount());break;
+				case 8: ret=new Integer(data.getPacketLength()); break;
 				case 9: ret=new Integer(data.getTtl()); break;
-				case 10: ret=new Integer(data.getPacketLength()); break;
+				case 10: ret=new Integer(data.getUdpPort()); break;
 				default: System.out.println("TABLEMODEL GETVALUE ERROR");
 			}
 		}
@@ -181,16 +181,15 @@ public class MiscTableModel extends AbstractTableModel {
 				case 0: ret=new Boolean(data.isActive()); break; 
 				case 1: ret=data.getSenderID(); break;
 				case 2: ret=(typ == Typ.L2_RECEIVER)?data.getMmrpGroupMacAsString():data.getGroupIp().toString().substring(1); break;
-				case 3: ret=new Integer(data.getPacketRateDesired()); break;
-				case 4: ret=new Integer(data.getPacketRateMeasured()); break;
-				case 5: ret=new DecimalFormat("##0.000").format((data.getTraffic()/1024.0/1024.0*8.0)); break;
-				case 6: ret=new Integer(data.getUdpPort()); break;
+				case 3: ret =(typ == Typ.L2_RECEIVER)?data.getMmrpSourceMacAsString():data.getSourceIp().toString().substring(1); break;
+				case 4: ret=new Integer(data.getPacketRateDesired()); break;
+				case 5: ret=new Integer(data.getPacketRateMeasured()); break;
+				case 6: ret=new DecimalFormat("##0.000").format((data.getTraffic()/1024.0/1024.0*8.0)); break;
 				case 7: ret=new Integer(data.getPacketLossPerSecond()); break;
 				case 8: ret=new Integer(data.getLostPackets()); break;
 				case 9: ret=new Integer(data.getReceivedPackets()); break;
-				//case 10: ret = data.getPacketSource().toString(); break;
+				case 10: ret=new Integer(data.getUdpPort()); break;
 				//V1.5 [FH] Changed to network interface
-				case 10: ret =(typ == Typ.L2_RECEIVER)?data.getMmrpSourceMacAsString():data.getSourceIp().toString().substring(1); break;
 				default: System.out.println("TABLEMODEL GETVALUE ERROR");
 			}
 		}
