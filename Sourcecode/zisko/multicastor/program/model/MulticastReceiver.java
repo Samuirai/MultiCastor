@@ -38,11 +38,11 @@ public class MulticastReceiver extends MulticastThreadSuper {
 	public MulticastReceiver(MulticastData m, Logger logger){
 		super(m);
 		if(logger==null){
-			System.out.println("FATAL ERROR - cannot create MulticastReceiver without Logger");
+			System.out.println(lang.getProperty("error.mr.logger"));
 			return;
 		}
 		if(m==null){
-			logger.log(Level.WARNING, "Error while creating MulticastReceiver. MulticastData cannot be empty.");
+			logger.log(Level.WARNING, lang.getProperty("error.mr.mcdata"));
 			return;
 		}
 		
@@ -54,7 +54,7 @@ public class MulticastReceiver extends MulticastThreadSuper {
 			// Der Empfaenger nutzt alle verfuegbaren Netzwerkschnittstellen
 			multicastSocket.setInterface(mcData.getSourceIp());
 		}catch(IOException e){
-			logger.log(Level.WARNING, "'" + e.getMessage() + "' Versuche default Port 4711 zu setzen...");
+			logger.log(Level.WARNING, "'" + e.getMessage() + "' " + lang.getProperty("message.defaultPort4711"));
 			try{
 				int udpPort = 4711;
 				mcData.setUdpPort(udpPort);
@@ -96,12 +96,12 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		//********************************************
 		try {
 			multicastSocket.joinGroup(mcData.getGroupIp());
-			logger.log(Level.INFO, mcData.identify() + ": Started Receiver with MC Object.");
+			logger.log(Level.INFO, mcData.identify() + ": " + lang.getProperty("message.receiverMcObj"));
 		} catch (IOException e1) {
 			// Setzt Aktivwerte wieder auf false und gibt eine Fehlermeldung aus
 			mcData.setActive(false);
 			active = false;
-			logger.log(Level.WARNING, mcData.identify() + ":Could not start Receiver." + e1.getMessage());
+			logger.log(Level.WARNING, mcData.identify() + ": " + lang.getProperty("message.receiverStartFail") + " " + e1.getMessage());
 			return true;
 		}
 		return false;
@@ -116,9 +116,9 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		//********************************************
 		try {
 			multicastSocket.leaveGroup(mcData.getGroupIp());
-			logger.log(Level.INFO, mcData.identify() + ": Left Multicastgroup of MC Object.");
+			logger.log(Level.INFO, mcData.identify() + ": " + lang.getProperty("message.mcgroupMcobj"));
 		} catch (IOException e) {
-			logger.log(Level.WARNING, mcData.identify() + ": Could not leave MC group of MC Object.");
+			logger.log(Level.WARNING, mcData.identify() + ": " + lang.getProperty("message.mcgroupLeaveFail"));
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class MulticastReceiver extends MulticastThreadSuper {
 					// bei Timeout erfaehrt es der PacketAnalyzer wegen Interrupts
 					packetAnalyzer.setTimeout(true);
 				} else {
-					logger.log(Level.WARNING, "Error while receiving packets: " + e.getMessage());
+					logger.log(Level.WARNING, lang.getProperty("message.packetReceiver") + " " + e.getMessage());
 				}
 			}
 		}

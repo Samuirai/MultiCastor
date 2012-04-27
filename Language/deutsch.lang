@@ -113,6 +113,9 @@ error.network.settingUDP	=Fehler beim setzen des UDP-Port:
 error.network.noDefaultPort	=FATALER FEHLER: STANDART-PORT KANN NICHT ZUGEWIESEN WERDEN
 error.network.sourceIP		=Fehler beim setzen der Quell-IP
 
+error.mr.logger 	=FATALER FEHLER - Kann Multicast-Empfänger nicht ohne 'Logger' erstellen
+error.mr.mcdata		=Fehler beim Anlegen des Multicast-Empfängers. 'MulticastData' darf nicht leer sein.
+
 console.helptext		=Nutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
  geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
  Der Pfad zur Konfigurationsdatei wir benötigt,\n\
@@ -154,6 +157,36 @@ message.settingTTLErr		=Fehler beim setzen von TTL auf
 message.resetPackets		=Beim senden der reset Pakete:
 message.senderStoped		=Sender wurde angehalten
 message.whileSending		=Beim senden:
+message.sleepPeak 			=Schlafen nach Ende des Sendens mit PEAK-Methode fehlgeschlagen:
+message.senderWorkingAgain  =Sender arbeitet wieder
+message.problemIp			=Problem beim Senden via IP
+message.tryReconnect		=Versuche neu zu verbinden ... 
+message.senderFail			=Sender funktioniert noch nicht ordnungsgemäß.
+message.senderViaIp			=Da das Senden über die IP nicht erreichbar ist
+message.sendingWarning		=Sende Warnung
+message.whileSending		=Während Senden von:
+message.whileSendingSleepFail =Während Senden von (Schlafen fehlgeschlagen):
+message.packetsSendTotal 	=Packete insgesamt gesendet
+message.defaultPort4711		=Versuche default Port 4711 zu setzen ...
+message.receiverMcObj		=Empfänger mit MC-Objekt gestartet.
+message.receiverStartFail 	=Konnte Empfänger nicht starten.
+message.mcgroupMcobj		=MC-Gruppe des MC-Objekts verlassen.
+essage.mcgroupLeaveFail		=Konnte MC-Gruppe des MC-Objekts nicht verlassen.
+message.packetReceiver		=Fehler beim Empfangen von Paketen:
+message.getHostname			=Hostname kann nicht gefunden werden. Fehler ist:
+message.mmrpSender			=Konnte MMRP-Sender nicht erstellen
+message.mcSenderActivated	=MultiCast-Sender aktiviert
+message.mcSenderDeactivated	=MultiCast-Sender deaktiviert
+message.problemSending		=Problem beim Senden
+message.registerMmrpSender	=Konnte Pfad für MMRP-Sender nicht registrieren. Stop.
+message.receiverInterfaceFail =Kann Empfänger nicht erstellen. Die Schnittstelle scheint nicht MMRP-fähig zu sein.
+message.jnetpcapNotInstalled =jnetpcap wahrscheinlich nicht installiert
+message.registerReceiverPath =Konnte Empfängerpfad nicht registrieren
+message.deregisterReceiverPath =Konnte Empfängerpfad nicht deregistrieren
+message.unsatisfiedLinkError =[Warnung] UnsatisfiedLinkError. Ist jnetpcap installiert?
+message.loadDeviceFail		=[Warnung] Geräte können nicht geladen werden, möglicherweise treten deshalb Probleme in Layer 2 auf. Haben Sie das Programm als Root / Admin gestartet?
 
 about.license  = Lizensiert unter GPLv3.
 about.labelDev = Entwickler:
+
+general.device = Gerät

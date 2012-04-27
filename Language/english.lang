@@ -77,6 +77,9 @@ error.memory.part2	=You need minimum
 error.memory.part3	=to start MultiCastor.
 error.memory.title	=MultiCastor: MemoryError
 
+error.mr.logger 	=FATAL ERROR - cannot create MulticastReceiver without Logger
+error.mr.mcdata		=Error while creating MulticastReceiver. MulticastData cannot be empty.
+
 # MC will show this message if there are less them 10% free memory in heap.
 warning.memory.title=Your memory is about to expire.(<10% remaining)\n\
  Please be careful, save your files and \
@@ -150,6 +153,36 @@ message.settingTTLErr		=error while setting TTL to
 message.resetPackets		=While sending reset Packets:
 message.senderStoped		=Sender was stopped
 message.whileSending		=While sending:
+message.sleepPeak 			=Sleep after sending with method PEAK failed:
+message.senderWorkingAgain  =Sender is working again
+message.problemIp			=Problem with sending via IP 
+message.tryReconnect		=Trying to reconnect ...
+message.senderFail			=Sender is still not working correctly.
+message.senderViaIp			=Because sending via IP is not reachable
+message.sendingWarning		=Sending Warning
+message.whileSending		=While sending:
+message.whileSendingSleepFail =While sending (sleep fails):
+message.packetsSendTotal 	=packets send in total
+message.defaultPort4711		=Trying to set default port 4711 ...
+message.receiverMcObj		=Started Receiver with MC Object.
+message.receiverStartFail 	=Could not start receiver.
+message.mcgroupMcobj		=Left Multicastgroup of MC Object.
+message.mcgroupLeaveFail	=Could not leave MC group of MC Object.
+message.packetReceiver		=Error while receiving packets:
+message.getHostname			=Unable to get Host-Name. Error is:
+message.mmrpSender			=Could not create MMRP sender
+message.mcSenderActivated	=multicast sender activated
+message.mcSenderDeactivated	=multicast sender deactivated
+message.problemSending		=Problem with sending
+message.registerMmrpSender	=Could not register path for MMRP Sender, stopping it again.
+message.receiverInterfaceFail =Could not create Receiver. The interface seems to have no MMRP functionality.
+message.jnetpcapNotInstalled =jnetpcap probably not installed
+message.registerReceiverPath =Could not register receiver path
+message.deregisterReceiverPath =Could not deregister receiver path
+message.unsatisfiedLinkError =[Warning] UnsatisfiedLinkError. Is jnetpcap installed?
+message.loadDeviceFail		=[Warning] Not able to load devices, there will possibly be problems with using Layer 2. Did you start as root / admin?
 
 about.license  = Licensed under GPLv3.
 about.labelDev = Developers:
+
+general.device = Device

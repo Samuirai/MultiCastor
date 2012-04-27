@@ -11,6 +11,8 @@ import java.util.Vector;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
 
+import zisko.multicastor.program.lang.LanguageManager;
+
 /**
  * Abstrakte Hilfsklasse welche die Netzwerkadapter des Systems ausliest und nach IPv4 und IPv6 sortiert.
  * @author Daniel Becker
@@ -39,6 +41,9 @@ public abstract class NetworkAdapter {
 	 * Static Block welcher zu Beginn des Programms die Netzwerk Adapter ausliest und auf die beiden Vectoren aufteilt.
 	 */
 	static{
+		
+		LanguageManager lang = LanguageManager.getInstance();
+		
 		Enumeration<NetworkInterface> adapters = null;
 		NetworkInterface current=null;
 		try {
@@ -83,7 +88,7 @@ public abstract class NetworkAdapter {
 		try {
 			r = Pcap.findAllDevs(alldevs, errbuf);
 		} catch (UnsatisfiedLinkError e) {
-			System.out.println("[Warning] UnsatisfiedLinkError. Is jnetpcap installed?");
+			System.out.println(lang.getProperty("message.unsatisfiedLinkError"));
 			r = 0;
 		}
 		if (!(r == Pcap.NOT_OK) && !(alldevs.isEmpty())) {
@@ -95,7 +100,7 @@ public abstract class NetworkAdapter {
 						if(name == null){
 							// p.getName() looks cryptic under windows
 							// Therefore also Use the Dev 0,1,2,...
-							name = "Device " + macCounter + "(" + p.getName() + ")";
+							name = lang.getProperty("message.device") + " " + macCounter + "(" + p.getName() + ")";
 							macCounter ++;
 						}
 						tmpNameList.add(name);
@@ -107,7 +112,7 @@ public abstract class NetworkAdapter {
 			macInterfaces = tmpMacAdress;
 			macInterfacesName = tmpNameList;
 		}else{
-			System.out.println("[Warning] Not able to load devices, there will possibly be problems with using Layer2. Did you start as root/Admin?");
+			System.out.println(lang.getProperty("message.loadDeviceFail"));
 		}
 	}
 	/**
