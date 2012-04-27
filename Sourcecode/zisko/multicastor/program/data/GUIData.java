@@ -48,6 +48,31 @@ public class GUIData {
 	}
 
 
+	public TabState getPLUS() {
+		return PLUS;
+	}
+
+
+	/**
+	 * It's not allowed to set the Plus Tab invisible
+	 * @param pLUS
+	 */
+	public void setPLUS(TabState pLUS) {
+		if(pLUS!= TabState.invisible)
+			PLUS = pLUS;
+	}
+
+
+	public TabState getABOUT() {
+		return ABOUT;
+	}
+
+
+	public void setABOUT(TabState aBOUT) {
+		ABOUT = aBOUT;
+	}
+
+
 	public void setL2_RECEIVER(TabState l2_RECEIVER) {
 		L2_RECEIVER = l2_RECEIVER;
 	}
@@ -76,6 +101,8 @@ public class GUIData {
 	private TabState L3_RECEIVER = TabState.visible;
 	private TabState L2_SENDER = TabState.visible;
 	private TabState L2_RECEIVER = TabState.visible;
+	private TabState PLUS = TabState.visible;
+	private TabState ABOUT = TabState.invisible;
 	private String windowName = "MCastor 2.0";
 	private String Language = "english";
 	
@@ -102,6 +129,8 @@ public class GUIData {
 		this.L3_RECEIVER = TabState.visible;
 		this.L2_SENDER = TabState.visible;
 		this.L2_RECEIVER = TabState.visible;
+		this.PLUS = TabState.visible;
+		this.ABOUT = TabState.invisible;
 		this.windowName = "MCastor 2.0";
 		this.Language = "english";
 	}
@@ -117,13 +146,24 @@ public class GUIData {
 				"L3_RECEIVER: "+this.L3_RECEIVER.toString()+"\n"+
 				"L2_SENDER: "+this.L2_SENDER.toString()+"\n"+
 				"L2_RECEIVER: "+this.L2_RECEIVER.toString()+"\n"+
+				"PLUS: "+this.L2_RECEIVER.toString()+"\n"+
+				"ABOUT: "+this.L2_RECEIVER.toString()+"\n"+
 				"WindowName: "+this.windowName+"\n"+
 				"Language: "+this.Language+"\n";
 		return message;
 	}
 	
 	public String toStringConsole(){
-		return "Gui DATA toSTring"; // TODO: toStringConsole() machen
+		String message = "";
+		message += "L3_SENDER: "+this.L3_SENDER.toString()+"\n"+
+				"L3_RECEIVER: "+this.L3_RECEIVER.toString()+"\n"+
+				"L2_SENDER: "+this.L2_SENDER.toString()+"\n"+
+				"L2_RECEIVER: "+this.L2_RECEIVER.toString()+"\n"+
+				"PLUS: "+this.L2_RECEIVER.toString()+"\n"+
+				"ABOUT: "+this.L2_RECEIVER.toString()+"\n"+
+				"WindowName: "+this.windowName+"\n"+
+				"Language: "+this.Language+"\n";
+		return message;
 	}
 	
 	

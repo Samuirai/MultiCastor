@@ -18,8 +18,9 @@ public class PcapHandler {
 		int timeout = 10 * 1000; // 10 seconds in millis
 		StringBuilder errbuf = new StringBuilder();
 
-		if (device == null)
+		if (device == null){
 			throw new IOException();
+		}
 
 		Pcap pcap = Pcap.openLive(device.getName(), snaplen, flags, timeout,
 				errbuf);
@@ -37,21 +38,24 @@ public class PcapHandler {
 			// NICs
 
 			StringBuilder errbuf = new StringBuilder(); // For any error msgs
-
-			int r = Pcap.findAllDevs(alldevs, errbuf);
+			int r = 0;
+			try {
+				r = Pcap.findAllDevs(alldevs, errbuf);
+			} catch (NoClassDefFoundError e) {
+				System.out.println("[Warning] NoClassDefFoundError. jnetpcap probably not installed.");
+				r = 0;
+			}
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
 				// System.err.printf("Can't read list of devices, error is %s",
 				// errbuf.toString());
+				System.out.println("Error Stuff");
 				throw new IOException();
 			}
 			for (int i = 0; i < alldevs.size(); i++) {
 					alldevsAdress.add(alldevs.get(i).getHardwareAddress());
-/*					System.out.println(alldevs.get(i).getName());
-					System.out.println(Arrays.toString(alldevs.get(i).getHardwareAddress()));*/
 			}
 		} 
 		
-	
 		for(byte[] address : alldevsAdress)
 			if(address != null && compareMACs(deviceMACAddress, address))
 				return alldevs.get(alldevsAdress.indexOf(address));

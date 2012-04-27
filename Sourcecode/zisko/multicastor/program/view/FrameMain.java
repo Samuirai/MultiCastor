@@ -394,26 +394,26 @@ public class FrameMain extends JFrame {
 			panel_sen_lay2 = new PanelTabbed(ctrl,Typ.L2_SENDER);
 			panel_rec_lay3 = new PanelTabbed(ctrl,Typ.L3_RECEIVER);
 			panel_sen_lay3 = new PanelTabbed(ctrl,Typ.L3_SENDER);
-			panel_plus = new PanelPlus(this);
+			panel_plus = new PanelPlus(this, ctrl);
 			panel_about = new PanelAbout();
 			
 			// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
 			int i=0;
 			// V1.5: Referenz auf sich selbst, wird �bergeben, um Titel zu refreshen
-			tabpane = new DraggableTabbedPane(this);
+			tabpane = new DraggableTabbedPane(this, ctrl);
 			tabpane.addMouseListener(ctrl);
 			
 			tabpane.addTab(" "+lang.getProperty("tab.l2r")+" ", panel_rec_lay2);
-			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png", ctrl));
 			
 			tabpane.addTab(" "+lang.getProperty("tab.l2s")+" ", panel_sen_lay2);
-			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png", ctrl));
 			
 			tabpane.addTab(" "+lang.getProperty("tab.l3r")+" ", panel_rec_lay3);
-			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png", ctrl));
 			
 			tabpane.addTab(" "+lang.getProperty("tab.l3s")+" ", panel_sen_lay3);
-			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png", ctrl));
 			
 			// V1.5: + Panel zum �ffnen neuer Tabs
 			tabpane.addTab( " + ", panel_plus);
@@ -448,6 +448,7 @@ public class FrameMain extends JFrame {
 			panel_sen_lay2.reloadLanguage();
 			panel_rec_lay3.reloadLanguage();
 			panel_sen_lay3.reloadLanguage();
+			panel_about.reloadLanguage();
 		}
 	}
 
@@ -658,13 +659,14 @@ public class FrameMain extends JFrame {
 	 * @author Jonas Traub
 	 */
 	public void updateTitle() {
+		
 		if(!paneDel)
 			setTitle(baseTitle + (baseTitle.isEmpty() ? "" : ": ") + tabpane.getTitleAt(tabpane.getSelectedIndex()).trim());
 		else
 			setTitle(baseTitle + (baseTitle.isEmpty() ? "" : ": ") + subTitle.trim());
+		
 	}
 	
-	//TODO testen & vlt. wieder entfernen
 	public void removePane(){
 		
 		remove(tabpane);
@@ -687,33 +689,37 @@ public class FrameMain extends JFrame {
 	}
 
 	public void openPane() {
+		
 		if(subTitle.equals(" "+lang.getProperty("tab.l2s")+" ")){
 			remove(panel_sen_lay2);
 			tabpane.insertTab(" L2 Sender ", null, panel_sen_lay2, null, 0);
-			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png"));
+			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4sender.png", ctrl));
 
 		}else if(subTitle.equals(" "+lang.getProperty("tab.l3s")+" ")){
 			remove(panel_sen_lay3);
 			tabpane.insertTab(" "+lang.getProperty("tab.l3s")+" ", null, panel_sen_lay3, null, 0);
-			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png"));
+			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png", ctrl));
 			
 		}else if(subTitle.equals(" "+lang.getProperty("tab.l2r")+" ")){
 			remove(panel_rec_lay2);
 			tabpane.insertTab(" "+lang.getProperty("tab.l2r")+" ", null, panel_rec_lay2, null, 0);
-			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv4receiver.png", ctrl));
 		
 		}else if(subTitle.equals(" "+lang.getProperty("tab.l3r")+" ")){
 			remove(panel_rec_lay3);
 			tabpane.insertTab(" "+lang.getProperty("tab.l3r")+" ", null, panel_rec_lay3, null, 0);
-			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png"));
+			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6receiver.png", ctrl));
 		}else if(subTitle.equals(" "+lang.getProperty("mi.about")+" ")){
 			remove(panel_about);
 			tabpane.insertTab(" "+lang.getProperty("mi.about")+" ", null, panel_about, null, 0);
-			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/about.png"));
+			tabpane.setTabComponentAt(0, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/about.png", ctrl));
 		}
 			
 		add(tabpane);
 		paneDel = false;
+		
+		System.out.println("Test");
+		
 	}
 
 	public boolean isPaneDel() {

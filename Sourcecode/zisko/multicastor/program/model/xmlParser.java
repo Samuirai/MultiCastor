@@ -151,6 +151,10 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  		  data.setL3_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 		  		if(tabList.item(i).getNodeName().equals("L3_RECEIVER"))
 		  		  data.setL3_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("ABOUT"))
+			  	  data.setABOUT(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("PLUS"))
+			  	  data.setPLUS(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 			}
 		}
 		NodeList windowTitle = doc.getElementsByTagName("WindowName");
@@ -249,9 +253,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   						if(InputValidator.checkAdapters(adr)==true) {
 				   							mcd.setSourceIp(adr);
 				   						}
-				   						else{
-				   							// [FH] Commented out because we have it for everything now :)
-				   							//if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+			    					else if(mcList.item(i).getNodeName()=="L3_SENDER" || mcList.item(i).getNodeName()=="L3_RECEIVER"){
 				   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
 				   							adr = ( Inet4Address ) InputValidator.checkIPv4("127.0.0.1");
 				   							mcd.setSourceIp(adr);
@@ -264,8 +266,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   						if(InputValidator.checkAdapters(adr)==true){
 				   							mcd.setSourceIp(adr);
 				   						}
-			   							// [FH] Commented out because we have it for everything now :)
-				   						else{// if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+				   						else if(mcList.item(i).getNodeName()=="L3_SENDER" || mcList.item(i).getNodeName()=="L3_RECEIVER"){
 				   							logger.log(Level.WARNING, lang.getProperty("warning.invalidNetAdapter"));
 				   							adr = ( Inet6Address ) InputValidator.checkIPv6("::1");
 				   							mcd.setSourceIp(adr);
@@ -275,8 +276,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				   					else{
 				   						throwWrongContentException(stag, val, mcNummer);
 			    					}
-	   							// [FH] Commented out because we have it for everything now :)
-			    				}else{// if(mcList.item(i).getNodeName()=="L3_SENDER"){ // [FF] SENDER_V4 || SENDER_V6 -> L3_SENDER
+			    				}else if(mcList.item(i).getNodeName()=="L3_SENDER" || mcList.item(i).getNodeName()=="L3_RECEIVER"){
 			    					throwEmptyContentException(stag, val, mcNummer);
 			    				}
 			    			case udpPort: 
@@ -630,6 +630,10 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  el.setTextContent(data.getL3_SENDER().toString());
 		tabs.appendChild(el=doc.createElement("L3_RECEIVER"));
 		  el.setTextContent(data.getL3_RECEIVER().toString());
+		tabs.appendChild(el=doc.createElement("ABOUT"));
+		  el.setTextContent(data.getABOUT().toString());
+		tabs.appendChild(el=doc.createElement("PLUS"));
+		  el.setTextContent(data.getPLUS().toString());
 		  
 		Element language = doc.createElement("Language");
 		  language.setTextContent(data.getLanguage());  

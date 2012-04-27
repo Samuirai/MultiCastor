@@ -39,7 +39,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
 	/** Maximale Paketlaenge */
-	private final int length = 256;
+	private final int length = 1500;
 	/** Byte Array in dem das Paket gespeichert wird. */
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */
@@ -178,6 +178,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		} catch (IOException e) {
 			proclaim(3, "Could not register receiver path");
 			this.setActive(false);
+		} catch (NullPointerException e) {
+			proclaim(1, "jnetpcap probably not installed");
+			this.setActive(false);
 		}
 		
 		while(active){
@@ -199,6 +202,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			receiver.deregisterPath();
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
+		} catch (NullPointerException e) {
+			proclaim(1, "jnetpcap probably not installed");
+			this.setActive(false);
 		}
 	}
 

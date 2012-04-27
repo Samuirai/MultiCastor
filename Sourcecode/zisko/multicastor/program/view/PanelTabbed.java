@@ -168,40 +168,59 @@ public class PanelTabbed extends JPanel {
 		colmodel.getColumn(0).setMinWidth(45);
 		colmodel.getColumn(1).setMinWidth(100);
 		colmodel.getColumn(2).setMinWidth(100);
-		colmodel.getColumn(3).setMinWidth(60);
+		colmodel.getColumn(3).setMinWidth(100);
 		colmodel.getColumn(4).setMinWidth(60);
 		colmodel.getColumn(5).setMinWidth(60);
 		colmodel.getColumn(0).setPreferredWidth(45);
 		colmodel.getColumn(1).setPreferredWidth(100);
 		colmodel.getColumn(2).setPreferredWidth(100);
-		colmodel.getColumn(3).setPreferredWidth(60);
+		colmodel.getColumn(3).setPreferredWidth(100);
 		colmodel.getColumn(4).setPreferredWidth(60);
 		colmodel.getColumn(5).setPreferredWidth(60);
 		
 		// V1.5: L2 und L3 Sender hinzugefuegt
-		if(typ == Typ.L2_SENDER || typ == Typ.L3_SENDER){
+		if(typ == Typ.L3_SENDER){
 			colmodel.getColumn(6).setMinWidth(50);
-			colmodel.getColumn(7).setMinWidth(100);
+			colmodel.getColumn(7).setMinWidth(60);
 			colmodel.getColumn(8).setMinWidth(60);
+			colmodel.getColumn(6).setPreferredWidth(50);
+			colmodel.getColumn(7).setPreferredWidth(60);
+			colmodel.getColumn(8).setPreferredWidth(60);
 			colmodel.getColumn(9).setMinWidth(30);
 			colmodel.getColumn(10).setMinWidth(60);
-			colmodel.getColumn(6).setPreferredWidth(50);
-			colmodel.getColumn(7).setPreferredWidth(100);
-			colmodel.getColumn(8).setPreferredWidth(60);
 			colmodel.getColumn(9).setPreferredWidth(30);
 			colmodel.getColumn(10).setPreferredWidth(60);
-		}
-		else{
+		}else if(typ == Typ.L2_SENDER){
+			colmodel.getColumn(4).setMinWidth(70);
+			colmodel.getColumn(5).setMinWidth(70);
+			colmodel.getColumn(6).setMinWidth(80);
+			colmodel.getColumn(7).setMinWidth(80);
+			colmodel.getColumn(8).setMinWidth(80);
+			colmodel.getColumn(4).setPreferredWidth(70);
+			colmodel.getColumn(5).setPreferredWidth(80);
+			colmodel.getColumn(6).setPreferredWidth(80);
+			colmodel.getColumn(7).setPreferredWidth(80);
+			colmodel.getColumn(8).setPreferredWidth(80);			
+		}else if(typ == Typ.L3_RECEIVER){
 			colmodel.getColumn(6).setMinWidth(50);
 			colmodel.getColumn(7).setMinWidth(60);
 			colmodel.getColumn(8).setMinWidth(60);
 			colmodel.getColumn(9).setMinWidth(45);
-			colmodel.getColumn(10).setMinWidth(85);
 			colmodel.getColumn(6).setPreferredWidth(50);
 			colmodel.getColumn(7).setPreferredWidth(60);
 			colmodel.getColumn(8).setPreferredWidth(60);
 			colmodel.getColumn(9).setPreferredWidth(45);
 			colmodel.getColumn(10).setPreferredWidth(85);
+			colmodel.getColumn(10).setMinWidth(85);
+		}else if(typ == Typ.L2_RECEIVER){
+			colmodel.getColumn(6).setMinWidth(65);
+			colmodel.getColumn(7).setMinWidth(65);
+			colmodel.getColumn(8).setMinWidth(65);
+			colmodel.getColumn(9).setMinWidth(65);
+			colmodel.getColumn(6).setPreferredWidth(65);
+			colmodel.getColumn(7).setPreferredWidth(65);
+			colmodel.getColumn(8).setPreferredWidth(65);
+			colmodel.getColumn(9).setPreferredWidth(65);
 		}
 	}
 	public MiscTableModel getModel() {

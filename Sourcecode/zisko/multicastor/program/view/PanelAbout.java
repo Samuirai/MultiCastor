@@ -42,7 +42,7 @@ public class PanelAbout extends javax.swing.JPanel{
     	
 		labelDev.setText(lang.getProperty("about.labelDev"));
 		labelLicense.setText(lang.getProperty("about.license"));
-	
+    	
     }
     
     /* Komponenten definieren und anzeigen. */

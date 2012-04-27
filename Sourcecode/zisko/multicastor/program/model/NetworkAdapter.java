@@ -79,8 +79,13 @@ public abstract class NetworkAdapter {
 		int macCounter = 0;
 
 		StringBuilder errbuf = new StringBuilder(); // For any error msgs
-
-		int r = Pcap.findAllDevs(alldevs, errbuf);
+		int r;
+		try {
+			r = Pcap.findAllDevs(alldevs, errbuf);
+		} catch (UnsatisfiedLinkError e) {
+			System.out.println("[Warning] UnsatisfiedLinkError. Is jnetpcap installed?");
+			r = 0;
+		}
 		if (!(r == Pcap.NOT_OK) && !(alldevs.isEmpty())) {
 			for(PcapIf p : alldevs){
 				try {
@@ -88,7 +93,8 @@ public abstract class NetworkAdapter {
 						String name = NetworkAdapter.getNameToMacAdress(p.getHardwareAddress());
 						tmpMacAdress.add(p.getHardwareAddress());
 						if(name == null){
-							//looks cryptic under windows
+							// p.getName() looks cryptic under windows
+							// Therefore also Use the Dev 0,1,2,...
 							name = "Device " + macCounter + "(" + p.getName() + ")";
 							macCounter ++;
 						}
@@ -100,6 +106,8 @@ public abstract class NetworkAdapter {
 			}
 			macInterfaces = tmpMacAdress;
 			macInterfacesName = tmpNameList;
+		}else{
+			System.out.println("[Warning] Not able to load devices, there will possibly be problems with using Layer2. Did you start as root/Admin?");
 		}
 	}
 	/**
