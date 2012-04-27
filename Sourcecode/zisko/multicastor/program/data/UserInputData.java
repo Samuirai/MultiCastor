@@ -5,7 +5,7 @@ import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
 
 public class UserInputData {
-	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> läuft über columnOrderString
+	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> lï¿½uft ï¿½ber columnOrderString
 	private ArrayList<Integer> columnVisibility; // siehe columnVisiblityString
 	private String selectedTab = Typ.L3_SENDER.toString();
 	private String selectedUserlevel = Userlevel.EXPERT.toString();
@@ -172,7 +172,7 @@ public class UserInputData {
 		}
 		return ret;
 	}
-	public ArrayList getSavedColumnVisibility(){
+	public ArrayList<Integer> getSavedColumnVisibility(){
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		String s = columnVisibilityString.substring(1, columnVisibilityString.length()-1);
 //		System.out.println("after substring: "+s);

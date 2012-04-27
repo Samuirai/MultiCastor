@@ -1,9 +1,7 @@
 package zisko.multicastor.program.interfaces;
 
-import zisko.multicastor.program.data.MulticastData;
-
 // timestamp wird geupdated sobald ein paket mit getPacket() angefordert wird. PacketCount wird
-// auch automatisch erhöht (oder soll der übergeben werden?)
+// auch automatisch erhï¿½ht (oder soll der ï¿½bergeben werden?)
 
 public interface PacketBuilderInterface {
 	public byte[] getPacket();
