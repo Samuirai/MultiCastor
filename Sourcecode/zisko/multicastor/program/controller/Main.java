@@ -18,25 +18,35 @@ import zisko.multicastor.program.model.MulticastLogHandler;
 import zisko.multicastor.program.model.WrongConfigurationException;
 
 /**
- * Main-Methode.
- * 
- * @author Thomas L�der
+ * Main Class of MultiCastor.
+ * here all the stuff begins.
  */
-
 public class Main {
 
+	/**
+	 * Minimum of available heap needed to start MultiCastor.
+	 * Will be proofed at program start.
+	 */
 	public static final long MIN_MAX_HEAP = 32 * 1024 * 1024;
+	
+	/**
+	 * Maximum of available heap in the current environment
+	 */
 	public static long REAL_MAX_HEAP;
+	
+	/**
+	 * LanguageManager instance provides access to language files
+	 */
 	private static LanguageManager lang=LanguageManager.getInstance();
 	
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die
-	 * Parameter ein, die dem Programm �begeben wurden und startet den
+	 * Parameter ein, die dem Programm uebergeben wurden und startet den
 	 * entsprechenden Programmteil.
 	 * 
 	 * @param args
-	 *            Ein Feld aus Strings, das die Parameter enth�lt, die dem
-	 *            Programm in der Kommandozeile �bergeben wurden.
+	 *            Ein Feld aus Strings, das die Parameter enthaelt, die dem
+	 *            Programm in der Kommandozeile uebergeben wurden.
 	 */
 	public static void main(String[] args) {
 		
@@ -143,7 +153,7 @@ public class Main {
 				controller = new MulticastController(gui, logger);
 				gui.initialize(controller);
 
-				// Handler f�r formatierte Ausgabe in der Konsole- und
+				// Handler fuer formatierte Ausgabe in der Konsole- und
 				// GUI-Konsole
 				consoleHandlerWithGUI = new MulticastLogHandler(gui);
 				consoleHandlerWithGUI.setLevel(Level.FINEST);

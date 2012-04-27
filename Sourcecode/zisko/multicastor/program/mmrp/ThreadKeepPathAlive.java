@@ -80,7 +80,6 @@ public class ThreadKeepPathAlive implements Runnable {
 		}
 	}
 
-	@Override
 	public void run() {
 		this.waitForEmpty();
 	}

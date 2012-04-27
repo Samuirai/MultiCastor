@@ -262,4 +262,37 @@ public class DraggableTabbedPane extends JTabbedPane {
 		  	frame.getMi_open_about().setSelected(false);
   }
 
+  public int getIndex(String command){
+		Map<String, Integer> openTabs = new HashMap<String, Integer>();
+		int openTabsCount = getTabCount();
+		Integer index = -1;
+		
+		for(int i =0; i < openTabsCount; i++)
+			openTabs.put(getTitleAt(i),i);
+		
+		if(command.equals("open_layer3_r"))
+			index = openTabs.get(" "+lang.getProperty("tab.l3r")+" ");
+		else if(command.equals("open_layer3_s"))
+			index = openTabs.get(" "+lang.getProperty("tab.l3s")+" ");
+		else if(command.equals("open_layer2_r"))
+			index = openTabs.get(" "+lang.getProperty("tab.l2r")+" ");
+		else if(command.equals("open_layer2_s"))
+			index = openTabs.get(" "+lang.getProperty("tab.l2s")+" ");
+		else if(command.equals("open_about"))
+			index = openTabs.get(" "+lang.getProperty("mi.about")+" ");
+			
+		return (index == null)?(-1):index;
+  }
+  
+  public void openOrCloseTab(String command) {
+		int index = getIndex(command.substring(2));
+		
+		if(index != -1){
+			this.closeTab(this.getTitleAt(index));
+			this.remove(index);
+		}else{
+			openTab(command.substring(2));
+		}
+  }
+
 }
