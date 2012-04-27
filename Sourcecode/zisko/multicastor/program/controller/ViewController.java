@@ -1389,21 +1389,31 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				changeNetworkInterface(Typ.L2_RECEIVER);
 			}
 			
-			/* Auswahl des Lost Packages Graphen im Receiver */
+			/* Auswahl des Lost Packages Graphen im Receiver L3*/
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getLostPktsRB()){
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
 			}
-			/* Auswahl des Jitter Graphen im Receiver */
+			/* Auswahl des Jitter Graphen im Receiver L3*/
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getJitterRB()){
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.JITTER);
 			}
-			/* Auswahl des Measured Packages Graphen im Receiver */
+			/* Auswahl des Measured Packages Graphen im Receiver L3*/
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getMeasPktRtRB()){
-				System.out.println("RECEIVER_V4 - MeasPktRtRB");
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.MEASPKT);
 			}
-			// TODO Layer2 Receiver Buttons einbauen
-			
+
+			/* Auswahl des Lost Packages Graphen im Receiver L2*/
+			else if(arg0.getSource() == getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().getLostPktsRB()){
+				getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
+			}
+			/* Auswahl des Jitter Graphen im Receiver L2*/
+			else if(arg0.getSource() == getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().getJitterRB()){
+				getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().selectionChanged(valueType.JITTER);
+			}
+			/* Auswahl des Measured Packages Graphen im Receiver L2*/
+			else if(arg0.getSource() == getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().getMeasPktRtRB()){
+				getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().selectionChanged(valueType.MEASPKT);
+			}
 		} else {
 			if(arg0.getSource() == f.getMi_autoSave()){
 				if(arg0.getStateChange() == ItemEvent.DESELECTED)
