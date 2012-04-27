@@ -196,7 +196,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					try {
 						desktop.open(helpfile);
 					} catch (IOException e1) {
-						// TODO [JT] Hier noch die Übersetzung rein
 						JOptionPane.showMessageDialog(f, lang.getProperty("message.canNotOpenHelpPart1")
 								+"\n"+helpfile.getAbsolutePath()+"\n"+lang.getProperty("message.canNotOpenHelpPart2"));
 					}
