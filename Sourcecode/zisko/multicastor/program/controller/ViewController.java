@@ -163,7 +163,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(e.getActionCommand().startsWith("open_layer") || e.getActionCommand().equals("open_about")){
 			f.getTabpane().openTab(e.getActionCommand());
 		}
-		
+		if(e.getActionCommand().startsWith("m_open_layer") || e.getActionCommand().equals("m_open_about")){
+			f.getTabpane().openOrCloseTab(e.getActionCommand());
+		}		
 		//TODO Help file �ffnen!
 		else if(e.getSource()==f.getMi_help()){
 			//Create File from help file path of current language file
