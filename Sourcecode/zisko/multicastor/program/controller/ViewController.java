@@ -1493,7 +1493,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Dialog zu laden.
 	 */
 	private void loadGUIFileEvent() {
-		// TODO Auto-generated method stub
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
