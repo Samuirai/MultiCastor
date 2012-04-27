@@ -145,24 +145,14 @@ public class PacketAnalyzer {
 		byte[] shortSnippet = new byte[2];
 		byte[] longSnippet	= new byte[8];
 		
-		// Perform value-reset
-		//System.arraycopy(mcPacket, 38, intSnippet, 0, 4);
-		//boolean reset = ByteTools.byteToBoolean(intSnippet);
-		//System.out.println(reset);
-		/*if(reset == true){
-			mcData.resetValues();
-			this.resetValues();
-		}*/
-		
  		// HostID
 		System.arraycopy(mcPacket, 0, snippet, 0, 29);
 			//Ende des Strings suchen
 		int eof = 0;
 		for(;eof<29&&snippet[eof]!=0;eof++);
-		//System.out.println("EOF : " + eof);
+
 		hostID = new String(snippet).substring(0, eof);
 
-		//System.out.println(Arrays.toString(snippet));
 		// Hirschmann Tool Erkennung. Wenn auch nicht mit Checksumme, sondern ueber den Text
 		if(hostID.equals("Hirschmann IP Test-Multicast")){
 			if(check){
@@ -177,18 +167,15 @@ public class PacketAnalyzer {
 		threadID = ByteTools.shortByteToInt(shortSnippet);
 		
 		// tracks how much the senderID changes
-		//senderID = hostID + threadID;
 		if(!senderID.equals(hostID + threadID)){
 			senderID = hostID + threadID;
 			senderChanges++;
-			//System.out.println("oldSenderID: " + senderID + " newSenderID: " + hostID + threadID);
 		}
 		
 		// PacketLoss
 		System.arraycopy(mcPacket, 31, intSnippet, 0, 4);
 		int packetcount = ByteTools.byteToInt(intSnippet);
 		
-	//	System.out.println("packetcount: " + packetcount + "\t\tinternerPC: " + internerPacketCount);
 		if(packetcount != internerPacketCount){
 			if(missingPackets.contains(packetcount)){	// werden hier die Pointer oder die Werte verglichen???
 				missingPackets.remove((Object)packetcount);
@@ -215,8 +202,7 @@ public class PacketAnalyzer {
 		System.arraycopy(mcPacket, 44, longSnippet, 0, 8);
 		timeStampSe = ByteTools.byteToLong(longSnippet);
 		timeStampRe = System.nanoTime();
-		//System.out.println("timeStamp: " + timeStamp);
-	//	jitterMessung(timeStamp);
+
 		if(dTimeStamp1 != 0){
 			dTimeStamp2 = dTimeStamp1;
 			dTimeStamp1 = timeStampRe - timeStampSe;
@@ -227,7 +213,7 @@ public class PacketAnalyzer {
 		
 		// total packets received
 		packetCount++;
-		//System.out.println("Empfangene Packete: " + packetcount);
+
 	}
 	
 	/**
@@ -318,11 +304,8 @@ public class PacketAnalyzer {
 			if(mcData.getMaxInterruptionTime()<interruptiontime){
 				mcData.setMaxInterruptionTime(interruptiontime);
 			}
-		//	System.out.println(interruptiontime);
 		}
-	/*	System.out.println("Anzahl:\t" + mcData.getNumberOfInterruptions());
-		System.out.println("AvgTime:\t" + mcData.getAverageInterruptionTime());
-		System.out.println("Time:\t" + mcData.getInterruptiontime()); */
+
 		lastActivated--;
 		//********************************************
 		// Writes all the data, which do not need any calculation
@@ -382,7 +365,6 @@ public class PacketAnalyzer {
 		mcData.addLostPackets(missingPackets.size());
 		plpsAvgHelper += missingPackets.size();
 		missingPackets.removeAllElements();	
-		//log("update - Ende");`
 		
 		updateMinHelper++;
 	}
@@ -412,10 +394,8 @@ public class PacketAnalyzer {
 			trafficAvgHelper = 0;
 			
 			updateMinHelper = 0;
-		} else {
-			//System.out.println("updateMinHelper = 0");
-			// hier wird einfach nichts getan, das ist absicht.
 		}
+		
 	}
 	
 	/**

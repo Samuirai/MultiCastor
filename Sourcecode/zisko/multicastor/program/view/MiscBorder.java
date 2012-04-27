@@ -77,8 +77,6 @@ public class MiscBorder extends TitledBorder {
 			lang.getProperty("miscBorder.packetRate"),
 			lang.getProperty("miscBorder.packetLength"),
 			lang.getProperty("miscBorder.timeToLive"),
-/*			lang.getProperty("miscBorder.ipGroupAddress"),
-			lang.getProperty("miscBorder.ipNetworkInterface"),*/
 			lang.getProperty("miscBorder.MacGroupAddress"),
 			lang.getProperty("miscBorder.NetworkInterface")
 		};

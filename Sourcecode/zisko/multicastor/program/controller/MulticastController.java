@@ -514,17 +514,6 @@ public class MulticastController{
 		return userInputData;
 	}
 	
-	// TODO [MH] tbr
-//	/**
-//	 * Laedt die Konfigurationsdatei am angegebenen Pfad. Fehlermeldungen werden ausgegeben.
-//	 * Diese Funktion sollte 
-//	 * @param s String to Configuration file
-//	 */
-//	public void loadConfigFile(String s, boolean l3_sender, boolean l2_sender, boolean l3_receiver, boolean l2_receiver){
-//		loadConfig(s, false, l3_sender, l2_sender, l3_receiver, l2_receiver);
-//	}
-
-	
 	public void loadDefaultMulticastConfig() {
 		loadMulticastConfig("", true);
 	}
@@ -649,11 +638,6 @@ public class MulticastController{
 	    		}
 	    	}
 	    	
-	    	// TODO [MH] tbr
-//	 	    if(userlevelData.size() < 4){
-//	 	    	// log("Error in loadConfigFile - ConfigFile did not contain 12 userLevelData objects (this is ignored for test purposes)");
-//	 	    	logger.log(Level.INFO,"In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.");
-//	 	    }
 	    }
 	    // TODO [MH] GUIConfigLoad woanders hin
 	    view_controller.loadAutoSave();
@@ -741,18 +725,6 @@ public class MulticastController{
 			}
 			v.clear();
 		}	
-		//	System.out.println("destroy 1");
-			
-			// Er sollte definitiv noch auf die laufenden Threads warten..... das fehlt hier jetzt noch
-			// join() hat leider kein Ende gefunden.
-		/*	for(Map.Entry<MulticastData, Thread> m: threads.entrySet()){
-				try {
-					m.getValue().join();
-				} catch (InterruptedException e) {
-					logger.log(Level.INFO, "Thread got interrupted while dying");
-				//	e.printStackTrace();
-				}
-			} */
 		
 		mc_receiver_l3.removeAllElements();
 		mc_sender_l3.removeAllElements();

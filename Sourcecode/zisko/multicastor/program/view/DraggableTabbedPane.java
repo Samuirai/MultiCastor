@@ -261,19 +261,5 @@ public class DraggableTabbedPane extends JTabbedPane {
 	  }else if(command.equals(" "+lang.getProperty("mi.about")+" "))
 		  	frame.getMi_open_about().setSelected(false);
   }
-  
-  /**
-   *  Schaut ob wir die TabPane vlt. entfernen können
-   *  Wenn der TabCount = 2 ist, also außer dem "Plus-Tab" nur ein 
-   *  wirklicher Tab geöffnet ist, machen wir dies direkt
-   */
-  public void lookIfWeCan(){
-	  // Die Zeit hat leider nicht gereicht diesen Code voll zu testen
-	  // deswegen wurde diese Funktionalität wieder entfernt
-	  // Bleibt aber im Code also feel free wieder einzubauen ;)
-	  /*if(getTabCount() == 2){
-		  frame.removePane();
-	  }*/
-  }
 
 }

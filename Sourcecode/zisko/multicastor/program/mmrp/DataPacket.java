@@ -13,8 +13,6 @@ public class DataPacket {
 		// FH Did Length in Byte 12 & 13
 		packet[12] = (byte) (data.length/255);
 		packet[13] = (byte) (data.length%255); 
-/*		System.out.println((int) (packet[12] & 0xFF));
-		System.out.println((int) (packet[13] & 0xFF));*/
 		
 		for(int i = 0; i < data.length; i++){
 			packet[14 + i] = data[i];
