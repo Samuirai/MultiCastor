@@ -38,7 +38,6 @@ public class Main {
 	 *            Ein Feld aus Strings, das die Parameter enth�lt, die dem
 	 *            Programm in der Kommandozeile �bergeben wurden.
 	 */
-
 	public static void main(String[] args) {
 		
 		Main.REAL_MAX_HEAP = Runtime.getRuntime().maxMemory();
