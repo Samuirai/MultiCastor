@@ -318,10 +318,27 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getSelectDeselect_all()){
 			pressBTSelectAll(Typ.L2_RECEIVER, true);
 		}
+<<<<<<< HEAD:Sourcecode/zisko/multicastor/program/controller/ViewController.java
 
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
 			pressBTStartStop(Typ.L3_SENDER);
 		}
+=======
+		//XXX
+//		/* Start/Stop Button im Control Panel*/
+//		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
+//			pressBTStartStop(Typ.L3_SENDER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getStartStop()){
+//			pressBTStartStop(Typ.L3_RECEIVER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getStartStop()){
+//			pressBTStartStop(Typ.L2_SENDER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getStartStop()){
+//			pressBTStartStop(Typ.L2_RECEIVER);
+//		}
+>>>>>>> cd60bab6fb2e5c3fb951932c91661d5ab5a0712d:Sourcecode/zisko/multicastor/program/controller/ViewController.java
 		
 		else if(e.getActionCommand().equals("hide")){
 			hideColumnClicked();
@@ -1254,7 +1271,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		double sum = 0.0;
 		
 		for(int i = 0; i < getTable(Typ.L3_RECEIVER).getModel().getRowCount(); i++){
-			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 5)).replace(",", "."));
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 6)).replace(",", "."));
 	 	}
 		return ret.format(sum);
 	 }
@@ -1266,7 +1283,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		double sum = 0.0;
 		
 		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
-			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 6)).replace(",", "."));
 	 	}
 		return ret.format(sum);
 	}
@@ -2395,6 +2412,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					this.f.getTabpane().remove(i);
 				}
 		}
+		if(data.getABOUT() == GUIData.TabState.invisible) {
+			title = " "+lang.getProperty("mi.about")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
+					this.f.getTabpane().remove(i);
+				}
+		}
+		/* REMOVE PLUS is not possible
+		if(data.getPLUS() == GUIData.TabState.invisible) {
+			title = " + ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
+					this.f.getTabpane().remove(i);
+				}
+		}*/
 		
 		
 		if(data.getL2_RECEIVER() == GUIData.TabState.visible || data.getL2_RECEIVER() == GUIData.TabState.selected) {
@@ -2412,6 +2446,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(data.getL3_SENDER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_layer3_s");
 		}
+		if(data.getABOUT() == GUIData.TabState.visible || data.getABOUT() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_about");
+		}
+		
 		
 		// select the selected tab
 		
@@ -2435,6 +2473,18 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		if(data.getL3_SENDER() == GUIData.TabState.selected) {
 			title = " "+lang.getProperty("tab.l3s")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getABOUT() == GUIData.TabState.selected) {
+			title = " "+lang.getProperty("mi.about")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getPLUS() == GUIData.TabState.selected) {
+			title = " + ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
 				if(this.f.getTabpane().getTitleAt(i).equals(title))
 					this.f.getTabpane().setSelectedIndex(i);
