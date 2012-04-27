@@ -3,6 +3,7 @@ package zisko.multicastor.program.controller;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +19,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -184,7 +189,49 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		
 		//TODO Help file �ffnen!
 		else if(e.getSource()==f.getMi_help()){
-			JOptionPane.showMessageDialog(f, "Leider ist dies noch nicht implementiert");
+			//Create File from help file path of current language file
+			File helpfile=new File("Language/help."+LanguageManager.getCurrentLanguage()+".pdf");
+			if (!helpfile.exists()){
+				//If there is no help file for current language use english file
+				helpfile=new File("Language/help.english.pdf");
+			}
+			//Check if Desktop is supportet in current environment
+			if (Desktop.isDesktopSupported()){
+				//Get desktop instance
+				Desktop desktop=Desktop.getDesktop();
+				//Check if the Browser is Available
+				/* This is an alternative way to show a pdf file using the browser
+				if (desktop.isSupported(Desktop.Action.BROWSE)){
+					try {
+						//Show Help File with Browser
+						URI uri=new URI(helpfile.getAbsolutePath());
+						desktop.browse(uri);
+					} catch (IOException e1) {
+						System.out.println("I/O Error in View Controller");
+					} catch (URISyntaxException e1) {
+						System.out.println("URI Syntax Exception in ViewController");
+					}
+				}
+				*/
+				//Check if Open with standard Program is supported
+				if (desktop.isSupported(Desktop.Action.OPEN)){
+					//Show Help File with standart PDF-Reader
+					try {
+						desktop.open(helpfile);
+					} catch (IOException e1) {
+						// TODO [JT] Hier noch die Übersetzung rein
+						JOptionPane.showMessageDialog(f, lang.getProperty("message.canNotOpenHelpPart1")
+								+"\n"+helpfile.getAbsolutePath()+"\n"+lang.getProperty("message.canNotOpenHelpPart2"));
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(f, lang.getProperty("message.canNotOpenHelpPart1")
+							+"\n"+helpfile.getAbsolutePath()+"\n"+lang.getProperty("message.canNotOpenHelpPart2"));
+				}
+			} else {
+				JOptionPane.showMessageDialog(f, lang.getProperty("message.canNotOpenHelpPart1")
+						+"\n"+helpfile.getAbsolutePath()+"\n"+lang.getProperty("message.canNotOpenHelpPart2"));
+			}
 		}
 		
 		else if (e.getActionCommand().startsWith("change_lang_to")){
