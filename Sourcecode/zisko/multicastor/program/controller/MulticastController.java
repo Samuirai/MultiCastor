@@ -159,11 +159,6 @@ public class MulticastController {
 		// other
 		threads = new HashMap<MulticastData, Thread>();
 		view_controller = viewController;
-		// load standard config file
-		// File f = new
-		// File("src"+File.separator+"zisko"+File.separator+"multicastor"+File.separator+"resources"+File.separator+"fonts",font_type);
-		// // geklaut von daniel
-		// loadConfigFile("config");
 
 		// Der Logger darf eigentlich nicht null sein. Dies wird zu Fehlern im
 		// Programm fuehren.
@@ -171,7 +166,7 @@ public class MulticastController {
 			this.logger = logger;
 		} else {
 			System.out
-					.println("Fehler im MulticastController: Logger-Objekt ist null");
+					.println(lang.getProperty("error.mc.logger"));
 		}
 
 		// **************************************************************
@@ -179,23 +174,12 @@ public class MulticastController {
 		// **************************************************************
 		xml_parser = new xmlParser(logger);
 		lastConfigs = new Vector<String>();
-		// so lange wie noch keine geladen werden können:
-	/*	lastConfigs.add("/home/wagener/test1.cfg");
-		lastConfigs.add("/home/wagener/test2.cfg");
-		lastConfigs.add("/home/wagener/test3.cfg");
-		lastConfigs.add("/home/wagener/test4.cfg");
-	*/	
 		userInputData = new Vector<UserInputData>();
-		
-	//	AllesLaden(); // sollte von Thomas gemacht werden
 		
 		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, mcMap_sender_l2, mcMap_receiver_l2, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000, 1000);
 
-		// messageQueue = new LinkedList<String>();
-		// messageCheck = new MessageCheck(messageQueue, view_controller,
-		// this.logger);
 		if (view_controller != null) {
 			RunSnakeRun n = new RunSnakeRun(view_controller);
 			timer2 = new Timer();
@@ -253,7 +237,7 @@ public class MulticastController {
 			getMCMap(m).put(m, t);
 
 			// Loggt das hinzufuegen des Multicasts
-			logger.log(Level.INFO, "Multicast added: " + m.identify());
+			logger.log(Level.INFO, lang.getProperty("message.mcAdded") + " :" + m.identify());
 			// Startet den Multicast, falls notwendig
 			if (m.isActive()) {
 				startMC(m);
@@ -295,7 +279,7 @@ public class MulticastController {
 		// Entfernen des Datenobjektes
 		getMCVector(m).remove(m);
 		// Log des Loeschens
-		logger.log(Level.INFO, "Multicast deleted: " + m.toStringConsole());
+		logger.log(Level.INFO, lang.getProperty("message.mcDeleted") + " :" + m.toStringConsole());
 	}
 
 	/**
@@ -305,7 +289,6 @@ public class MulticastController {
 	 *            Vector mit zu entfernenden Multicasts.
 	 */
 	public void deleteMC(Vector<MulticastData> m) {
-		// log("deleteMC mit Vector *****");
 		for (MulticastData mc : m) {
 			deleteMC(mc);
 		}
@@ -338,8 +321,8 @@ public class MulticastController {
 																// wenigen
 																// Faellen noch
 																// vor.
-						logger.log(Level.SEVERE, "Could not start Multicast: "
-								+ m + " Advised a Change on that Multicast.");
+						logger.log(Level.SEVERE, lang.getProperty("message.mcAdvisePart1")
+								+ m + lang.getProperty("message.mcAdvisePart2"));
 						return;
 					}
 				}
@@ -382,8 +365,7 @@ public class MulticastController {
 				t.start();
 				threads.put(m, t);
 			} else {
-				logger.log(Level.INFO,
-						"Tried to start an already running Multicast.");
+				logger.log(Level.INFO, lang.getProperty("message.mcStartRunning"));
 			}
 		}
 	}
@@ -424,7 +406,7 @@ public class MulticastController {
 			 */
 			threads.remove(m);
 		} else {
-			logger.log(Level.INFO, "Tried to stop a not running Multicast.");
+			logger.log(Level.INFO, lang.getProperty("message.mcStopNotRunning"));
 		}
 	}
 
@@ -487,10 +469,10 @@ public class MulticastController {
 			} else {
 				xml_parser.saveGUIConfig(path, data);
 				addLastConfigs(path);
-				logger.log(Level.INFO, "Saved GUI Configuration.");
+				logger.log(Level.INFO, lang.getProperty("message.savedGUI"));
 			}
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "Could not save GUI Configuration.");
+			logger.log(Level.WARNING, lang.getProperty("message.savedGUINot"));
 		}
 	}
 
@@ -516,12 +498,12 @@ public class MulticastController {
 			} else {
 				xml_parser.saveMulticastConfig(path, v);
 				addLastConfigs(path);
-				logger.log(Level.INFO, "Saved Multicastconfiguration.");
+				logger.log(Level.INFO, lang.getProperty("message.savedMCConfig"));
 			}
 		} catch (Exception e) {
 			logger
 					.log(Level.WARNING,
-							"Could not save Multicast Configuration.");
+							lang.getProperty("message.savedMCConfigNot"));
 			e.printStackTrace();
 		}
 	}
@@ -629,40 +611,40 @@ public class MulticastController {
 
 		try {
 			xml_parser.loadGUIConfig(useDefaultXML ? defaultXML : path, data);
-			logger.log(Level.INFO, "Default GUI Configurationfile loaded.");
+			logger.log(Level.INFO, lang.getProperty("message.gui.Loaded"));
 		} catch (Exception e) {
 			if (e instanceof FileNotFoundException) {
 				if (useDefaultXML) {
-					message = "Default GUI configurationfile was not found. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+					message = lang.getProperty("message.gui.NotFoundWithout");
 				} else {
-					message = "GUI Configurationfile not found.";
+					message = lang.getProperty("message.gui.NotFound");
 				}
 			} else if (e instanceof SAXException) {
 				if (useDefaultXML) {
-					message = "Default GUI configurationfile could not be parsed correctly. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+					message = lang.getProperty("message.gui.NotParsedWithout");
 				} else {
-					message = "GUI Configurationfile could not be parsed.";
+					message = lang.getProperty("message.gui.NotParsed");
 				}
 			} else if (e instanceof IOException) {
 				if (useDefaultXML) {
-					message = "Default GUI configurationfile could not be loaded. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+					message = lang.getProperty("message.gui.NotLoadedWithout");
 				} else {
-					message = "GUI Configurationfile could not be loaded.";
+					message = lang.getProperty("message.gui.NotLoaded");
 				}
 			} else if (e instanceof WrongConfigurationException) {
 				message = ((WrongConfigurationException) e).getErrorMessage();
 			} else if (e instanceof IllegalArgumentException) {
 				if (useDefaultXML) {
-					message = "Error in default GUI configurationfile.";
+					message = lang.getProperty("message.gui.ErrorDefault");
 				} else {
-					message = "Error in GUI configurationfile.";
+					message = lang.getProperty("message.gui.Error");
 				}
 			} else {
-				message = "Unexpected error of type: " + e.getClass();
+				message = lang.getProperty("message.gui.unexcpectedError") + e.getClass();
 			}
 
 			if (!useDefaultXML) {
-				message += " Used path: " + path;
+				message += lang.getProperty("message.gui.usedPath") + path;
 			}
 			logger.log(Level.WARNING, message);
 		}
@@ -688,40 +670,40 @@ public class MulticastController {
 		try {
 			xml_parser.loadMultiCastConfig(useDefaultXML ? defaultXML : path,
 					multicasts);
-			logger.log(Level.INFO, "Configurationfile loaded.");
+			logger.log(Level.INFO, lang.getProperty("message.mcc.Loaded"));
 		} catch (Exception e) {
 			if (e instanceof FileNotFoundException) {
 				if (useDefaultXML) {
-					message = "Default configurationfile was not found. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+					message = lang.getProperty("message.mcc.NotFoundWithout");
 				} else {
-					message = "Configurationfile not found.";
+					message = lang.getProperty("message.mcc.NotFound");
 				}
 			} else if (e instanceof SAXException) {
 				if (useDefaultXML) {
-					message = "Default configurationfile could not be parsed correctly. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+					message = lang.getProperty("message.mcc.NotParsedWithout");
 				} else {
-					message = "Configurationfile could not be parsed.";
+					message = lang.getProperty("message.mcc.NotParsed");
 				}
 			} else if (e instanceof IOException) {
 				if (useDefaultXML) {
-					message = "Default configurationfile could not be loaded. MultiCastor starts without preconfigured Multicasts and with default GUI configuration.";
+					message = lang.getProperty("message.mcc.NotLoadedWithout");
 				} else {
-					message = "Configurationfile could not be loaded.";
+					message = lang.getProperty("message.mcc.NotLoaded");
 				}
 			} else if (e instanceof WrongConfigurationException) {
 				message = ((WrongConfigurationException) e).getErrorMessage();
 			} else if (e instanceof IllegalArgumentException) {
 				if (useDefaultXML) {
-					message = "Error in default configurationfile.";
+					message = lang.getProperty("message.mcc.ErrorDefault");
 				} else {
-					message = "Error in configurationfile.";
+					message = lang.getProperty("message.mcc.Error");
 				}
 			} else {
-				message = "Unexpected error of type: " + e.getClass();
+				message = lang.getProperty("message.mcc.unexcpectedError")+ e.getClass();
 			}
 			skip = true;
 			if (!useDefaultXML) {
-				message += " Used path: " + path;
+				message += lang.getProperty("message.mcc.usedPath") + path;
 			}
 			logger.log(Level.WARNING, message);
 		}
@@ -756,14 +738,8 @@ public class MulticastController {
 		xml_parser.loadMultiCastConfig(path, v);
 		if (v != null) {
 			for (MulticastData m : v) {
-				// System.out.println("Found Multicast: " + m);
 				addMC(m); // hier vllt. nur adden wenn man auch starten will, da
 							// das leider nicht mehr geht
-				/*
-				 * if(m.isActive()){ // Startet auf aktiv gesetzte Multicasts
-				 * aus der Konfigurationsdatei //
-				 * System.out.println("Started Multicast: " + m); startMC(m); }
-				 */
 			}
 		}
 	}
@@ -874,10 +850,6 @@ public class MulticastController {
 		try {
 			return (MulticastData) getMCVector(multicastDataTyp).get(index);
 		} catch (IndexOutOfBoundsException e) {
-			// logger.log(Level.SEVERE,
-			// "IndexOutOfBoundsException in MulticastController - getMC");
-			// System.out.println(index);
-			// e.printStackTrace();
 			return null;
 		}
 	}
@@ -937,8 +909,7 @@ public class MulticastController {
 
 		default:
 			logger
-					.log(Level.SEVERE,
-							"Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");
+					.log(Level.SEVERE,lang.getProperty("message.mc.undefined"));
 			return null;
 		}
 		return vector;
@@ -973,8 +944,7 @@ public class MulticastController {
 
 		default:
 			logger
-					.log(Level.SEVERE,
-							"Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.");
+					.log(Level.SEVERE, lang.getProperty("message.mc.undefined"));
 			return null;
 		}
 		return map;
