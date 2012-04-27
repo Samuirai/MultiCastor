@@ -178,6 +178,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		} catch (IOException e) {
 			proclaim(3, "Could not register receiver path");
 			this.setActive(false);
+		} catch (NullPointerException e) {
+			proclaim(1, "jnetpcap probably not installed");
+			this.setActive(false);
 		}
 		
 		while(active){
@@ -199,6 +202,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			receiver.deregisterPath();
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
+		} catch (NullPointerException e) {
+			proclaim(1, "jnetpcap probably not installed");
+			this.setActive(false);
 		}
 	}
 

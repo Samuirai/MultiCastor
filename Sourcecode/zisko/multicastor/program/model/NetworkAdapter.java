@@ -79,8 +79,13 @@ public abstract class NetworkAdapter {
 		int macCounter = 0;
 
 		StringBuilder errbuf = new StringBuilder(); // For any error msgs
-
-		int r = Pcap.findAllDevs(alldevs, errbuf);
+		int r;
+		try {
+			r = Pcap.findAllDevs(alldevs, errbuf);
+		} catch (UnsatisfiedLinkError e) {
+			System.out.println("[Warning] UnsatisfiedLinkError. Is jnetpcap installed?");
+			r = 0;
+		}
 		if (!(r == Pcap.NOT_OK) && !(alldevs.isEmpty())) {
 			for(PcapIf p : alldevs){
 				try {

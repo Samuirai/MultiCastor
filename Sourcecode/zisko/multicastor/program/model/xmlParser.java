@@ -151,6 +151,10 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  		  data.setL3_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 		  		if(tabList.item(i).getNodeName().equals("L3_RECEIVER"))
 		  		  data.setL3_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("ABOUT"))
+			  	  data.setABOUT(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("PLUS"))
+			  	  data.setPLUS(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 			}
 		}
 		NodeList windowTitle = doc.getElementsByTagName("WindowName");
@@ -626,6 +630,10 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  el.setTextContent(data.getL3_SENDER().toString());
 		tabs.appendChild(el=doc.createElement("L3_RECEIVER"));
 		  el.setTextContent(data.getL3_RECEIVER().toString());
+		tabs.appendChild(el=doc.createElement("ABOUT"));
+		  el.setTextContent(data.getABOUT().toString());
+		tabs.appendChild(el=doc.createElement("PLUS"));
+		  el.setTextContent(data.getPLUS().toString());
 		  
 		Element language = doc.createElement("Language");
 		  language.setTextContent(data.getLanguage());  

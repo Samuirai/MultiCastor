@@ -2414,6 +2414,23 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					this.f.getTabpane().remove(i);
 				}
 		}
+		if(data.getABOUT() == GUIData.TabState.invisible) {
+			title = " "+lang.getProperty("mi.about")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
+					this.f.getTabpane().remove(i);
+				}
+		}
+		/* REMOVE PLUS is not possible
+		if(data.getPLUS() == GUIData.TabState.invisible) {
+			title = " + ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title)) {
+					this.f.getTabpane().closeTab(this.f.getTabpane().getTitleAt(i));
+					this.f.getTabpane().remove(i);
+				}
+		}*/
 		
 		
 		if(data.getL2_RECEIVER() == GUIData.TabState.visible || data.getL2_RECEIVER() == GUIData.TabState.selected) {
@@ -2431,6 +2448,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(data.getL3_SENDER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_layer3_s");
 		}
+		if(data.getABOUT() == GUIData.TabState.visible || data.getABOUT() == GUIData.TabState.selected) {
+			this.f.getTabpane().openTab("open_about");
+		}
+		
 		
 		// select the selected tab
 		
@@ -2454,6 +2475,18 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		}
 		if(data.getL3_SENDER() == GUIData.TabState.selected) {
 			title = " "+lang.getProperty("tab.l3s")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getABOUT() == GUIData.TabState.selected) {
+			title = " "+lang.getProperty("mi.about")+" ";
+			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
+				if(this.f.getTabpane().getTitleAt(i).equals(title))
+					this.f.getTabpane().setSelectedIndex(i);
+		}
+		if(data.getPLUS() == GUIData.TabState.selected) {
+			title = " + ";
 			for(int i=0; i<this.f.getTabpane().getTabCount(); ++i) 
 				if(this.f.getTabpane().getTitleAt(i).equals(title))
 					this.f.getTabpane().setSelectedIndex(i);
