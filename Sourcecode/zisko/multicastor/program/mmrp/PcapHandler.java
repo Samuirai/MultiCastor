@@ -16,6 +16,7 @@ public class PcapHandler {
 		int flags = Pcap.MODE_PROMISCUOUS; // capture all packets
 		int timeout = 10 * 1000; // 10 seconds in millis
 		StringBuilder errbuf = new StringBuilder();
+		
 		if (device == null){
 			throw new IOException();
 		}

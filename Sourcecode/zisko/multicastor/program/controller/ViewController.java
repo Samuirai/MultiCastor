@@ -177,6 +177,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				//Get desktop instance
 				Desktop desktop=Desktop.getDesktop();
 				//Check if the Browser is Available
+				
 				/* This is an alternative way to show a pdf file using the browser
 				if (desktop.isSupported(Desktop.Action.BROWSE)){
 					try {
@@ -188,8 +189,8 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 					} catch (URISyntaxException e1) {
 						System.out.println("URI Syntax Exception in ViewController");
 					}
-				}
-				*/
+				}*/
+				
 				//Check if Open with standard Program is supported
 				if (desktop.isSupported(Desktop.Action.OPEN)){
 					//Show Help File with standart PDF-Reader

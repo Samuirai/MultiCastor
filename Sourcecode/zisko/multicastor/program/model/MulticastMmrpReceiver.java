@@ -122,6 +122,10 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			// Verhindert eine "recentlyChanged"-Markierung direkt nach dem Starten
 			packetAnalyzer.setLastActivated(6);
 		}
+		
+		if(active){
+			receiver.stopLoop();
+		}
 		active = b;
 		mcData.setActive(b);
 		packetAnalyzer.resetValues();		
@@ -200,7 +204,8 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		
 		try {
 			receiver.deregisterPath();
-			receiver.stopLoop();
+			
+			
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
 		} catch (NullPointerException e) {
