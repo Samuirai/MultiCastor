@@ -320,10 +320,19 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			pressBTSelectAll(Typ.L2_RECEIVER, true);
 		}
 		//XXX
-		/* Start/Stop Button im Control Panel*/
-		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
-			pressBTStartStop(Typ.L3_SENDER);
-		}
+//		/* Start/Stop Button im Control Panel*/
+//		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
+//			pressBTStartStop(Typ.L3_SENDER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getStartStop()){
+//			pressBTStartStop(Typ.L3_RECEIVER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getStartStop()){
+//			pressBTStartStop(Typ.L2_SENDER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getStartStop()){
+//			pressBTStartStop(Typ.L2_RECEIVER);
+//		}
 		
 		else if(e.getActionCommand().equals("hide")){
 			hideColumnClicked();
@@ -1266,7 +1275,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		double sum = 0.0;
 		
 		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
-			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 6)).replace(",", "."));
 	 	}
 		return ret.format(sum);
 	}
