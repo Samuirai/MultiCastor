@@ -34,9 +34,6 @@ import zisko.multicastor.program.model.xmlParser;
 /**
  * Der MulticastController verwaltet Multicasts und abstrahiert das Speichern
  * und Laden von Konfigurationsdateien von der View.
- * 
- * @author Bastian Wagener
- * 
  */
 public class MulticastController {
 
@@ -44,19 +41,19 @@ public class MulticastController {
 	// Felder fuer MultiCast Controller
 	// ****************************************************
 
-	/* v1.5 Ein Vector fuer Layer3 Receiver und Sender */
+	/* Ein Vector fuer Layer3 Receiver und Sender */
 	private Vector<MulticastData> mc_sender_l3;
 	private Vector<MulticastData> mc_receiver_l3;
 	private Vector<MulticastData> mc_sender_l2;
 	private Vector<MulticastData> mc_receiver_l2;
 
-	/* v1.5 Eine neue Map fuer Layer3 Receiver und Sender */
+	/* Eine neue Map fuer Layer3 Receiver und Sender */
 	private Map<MulticastData, MulticastThreadSuper> mcMap_receiver_l3;
 	private Map<MulticastData, MulticastThreadSuper> mcMap_sender_l3;
 	private Map<MulticastData, MulticastThreadSuper> mcMap_receiver_l2;
 	private Map<MulticastData, MulticastThreadSuper> mcMap_sender_l2;
 
-	/** LanguageManager **/
+	/** LanguageManager provides access to language files **/
 	private LanguageManager lang;
 
 	/**
@@ -102,7 +99,6 @@ public class MulticastController {
 
 	private int printTableIntervall;
 
-	// Config
 	/** Informationen zum wiederherstellen des letzten GUI Status */
 	private Vector<UserInputData> userInputData;
 	/** Haelt die Pfade als String auf die zuletzt geladenen Konfigurationsdateien. Dieser Vektor sollte vier Eintraenge enthalten.*/
@@ -144,20 +140,19 @@ public class MulticastController {
 		lang = LanguageManager.getInstance();
 		this.printTableIntervall = pPrintTableIntervall;
 		// MC_Data
-		/* v1.5 */
 		mc_sender_l3 = new Vector<MulticastData>();
 		mc_receiver_l3 = new Vector<MulticastData>();
 		mc_sender_l2 = new Vector<MulticastData>();
 		mc_receiver_l2 = new Vector<MulticastData>();
 
 		// Thread-Maps
-		/* v1.5 */
 		mcMap_receiver_l3 = new HashMap<MulticastData, MulticastThreadSuper>();
 		mcMap_sender_l3 = new HashMap<MulticastData, MulticastThreadSuper>();
 		mcMap_receiver_l2 = new HashMap<MulticastData, MulticastThreadSuper>();
 		mcMap_sender_l2 = new HashMap<MulticastData, MulticastThreadSuper>();
 		// other
 		threads = new HashMap<MulticastData, Thread>();
+		
 		view_controller = viewController;
 
 		// Der Logger darf eigentlich nicht null sein. Dies wird zu Fehlern im
@@ -200,8 +195,7 @@ public class MulticastController {
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden
 	 * Thread und startet diesen falls notwendig.
 	 * 
-	 * @param m
-	 *            MulticastData-Objekt das hinzugef�gt werden soll.
+	 * @param m MulticastData-Objekt das hinzugefuegt werden soll.
 	 */
 	public void addMC(MulticastData m) {
 		try {
@@ -251,8 +245,7 @@ public class MulticastController {
 	 * Multicasts aendern. Zum Beispeil die GroupIP. Hier wird der vorhandene
 	 * Multicast geloescht und anschlie�end der Multicast neu erzeugt.
 	 * 
-	 * @param m
-	 *            Refernez auf das Datenobjekt, welches veraendert wurde.
+	 * @param m Refernez auf das Datenobjekt, welches veraendert wurde.
 	 */
 	public void changeMC(MulticastData m) {
 		// Loescht den Multicast und fuegt ihn neu hinzu. Dadurch werden
@@ -269,8 +262,7 @@ public class MulticastController {
 	 * Stoppt den zugehoerigen Thread und loescht alle Referenzen auf diesen,
 	 * sowie das MulticastData-Objekt.
 	 * 
-	 * @param m
-	 *            Data object to delete.
+	 * @param m Data object to delete.
 	 */
 	public void deleteMC(MulticastData m) {
 		// Stoppen und Entfernen des Threads
@@ -285,8 +277,7 @@ public class MulticastController {
 	/**
 	 * Entfernt alle Multicasts im Vektor.
 	 * 
-	 * @param m
-	 *            Vector mit zu entfernenden Multicasts.
+	 * @param m Vector mit zu entfernenden Multicasts.
 	 */
 	public void deleteMC(Vector<MulticastData> m) {
 		for (MulticastData mc : m) {
@@ -298,21 +289,15 @@ public class MulticastController {
 	 * Startet den Multicast und gibt eine Fehlermeldung aus, wenn dies nicht
 	 * moeglich ist.
 	 * 
-	 * @param m
-	 *            MulticastData-Objekt des zu startenden Multicasts.
+	 * @param m MulticastData-Objekt des zu startenden Multicasts.
 	 */
 	public void startMC(MulticastData m) {
 
 		synchronized (m) { // ohne sychronized ist das Programm in einen
 							// Deadlock gelaufen
-			if (!threads.containsKey(m)) { // prueft ob der Multicast schon
-											// laeuft.
-				long time = System.currentTimeMillis() + 2000; // versucht, 2
-																// Sekunden lang
-																// auf den noch
-																// laufenden
-																// Thread zu
-																// warten.
+			if (!threads.containsKey(m)) { // prueft ob der Multicast schon laeuft.
+				// versucht, 2 Sekunden lang auf den noch laufenden Thread zu warten.
+				long time = System.currentTimeMillis() + 2000;
 				while ((getMCMap(m).get(m)).isStillRunning()) {
 					if (time < System.currentTimeMillis()) { // verhindert
 																// haengen
@@ -329,25 +314,20 @@ public class MulticastController {
 
 				switch (m.getTyp()) {
 				case L3_SENDER:
-					// Thread ID nur bei Sendern setzen.
-					// Beim Receiver wird der Wert aus dem Datenpaket
-					// ausgelesen.
+					// Thread ID nur bei Sendern setzen. Beim Receiver wird der Wert aus dem Datenpaket ausgelesen.
 					m.setThreadID(threadCounter);
-					// Random Number zur Unterscheidung von verschiedenen 
-					// Instanzen generieren
+					// Random Number zur Unterscheidung von verschiedenen Instanzen generieren
 					m.setRandomID(Integer.toHexString(new Random().nextInt()));
 					threadCounter++;
 					break;
 				case L3_RECEIVER:
-					// Fehlermeldung und Log werden im Receiver selber
-					// ausgegeben.
+					// Fehlermeldung und Log werden im Receiver selber ausgegeben.
 					if (((MulticastReceiver) getMCMap(m).get(m)).joinGroup())
 						return;
 					break;
 				case L2_SENDER:
 					m.setThreadID(threadCounter);
-					// Random Number zur Unterscheidung von verschiedenen 
-					// Instanzen generieren
+					// Random Number zur Unterscheidung von verschiedenen Instanzen generieren
 					m.setRandomID(Integer.toHexString(new Random().nextInt()));
 					threadCounter++;
 					break;
@@ -358,8 +338,7 @@ public class MulticastController {
 					break;
 				}
 
-				// Multicast auf aktiv setzen, einen neuen Thread erzeugen und
-				// starten.
+				// Multicast auf aktiv setzen, einen neuen Thread erzeugen und starten.
 				getMCMap(m).get(m).setActive(true);
 				Thread t = new Thread(getMCMap(m).get(m));
 				t.start();
@@ -373,8 +352,7 @@ public class MulticastController {
 	/**
 	 * Startet alle Multicasts aus dem uebergebenen Vektor.
 	 * 
-	 * @param m
-	 *            Vektor mit MulticastData-Objekten.
+	 * @param m Vektor mit MulticastData-Objekten.
 	 */
 	public void startMC(Vector<MulticastData> m) {
 		for (MulticastData ms : m) {
@@ -389,8 +367,7 @@ public class MulticastController {
 	 * auftrit. Fehler oder auch das erfolgreiche Stoppen werden an die
 	 * MesseageQueue angehaengt.
 	 * 
-	 * @param m
-	 *            MulticastData-Objekt
+	 * @param m MulticastData-Objekt
 	 */
 	public void stopMC(MulticastData m) {
 		if (threads.containsKey(m)) {
@@ -574,7 +551,7 @@ public class MulticastController {
 		// set everythign to invisible
 		updateGUIData(data);
 
-		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
+		saveGUIConfig("GUIConfig.xml", data);
 
 	}
 		
@@ -584,9 +561,7 @@ public class MulticastController {
 	 * @return Vector of UserInputData objects. This Vector contains between one
 	 *         and four objects. One for each tab in View at most.
 	 */
-	Vector<UserInputData> loadAutoSave() { // noch bei Daniel nachhoeren ob es
-											// ok ist, wenn da ein leerer Vector
-											// zur�ck kommt!!!!!!!!!
+	Vector<UserInputData> loadAutoSave() {
 		return userInputData;
 	}
 	
@@ -747,8 +722,7 @@ public class MulticastController {
 	/**
 	 * Fuegt zum lastConfigs-Vektor einen Pfad hinzu
 	 * 
-	 * @param path
-	 *            Pfad zur Konfigurationsdatei
+	 * @param path Pfad zur Konfigurationsdatei
 	 */
 	private void addLastConfigs(String path) {
 		if (lastConfigs.size() < 3) {
@@ -767,8 +741,7 @@ public class MulticastController {
 	 * 
 	 * Adds up the measuredPacketRate from MulticastSenders
 	 * 
-	 * @param typ
-	 *            Specifies whether L2_SENDER or L3_SENDER is returned.
+	 * @param typ Specifies whether L2_SENDER or L3_SENDER is returned.
 	 * @return Sum of all sent packets. Returns 0 if typ is invalid.
 	 */
 	public int getPPSSender(MulticastData.Typ typ) {
@@ -776,13 +749,11 @@ public class MulticastController {
 
 		if (typ == Typ.L3_SENDER) {
 			for (MulticastData ms : mc_sender_l3) {
-				count += ((MulticastSenderInterface) mcMap_sender_l3.get(ms))
-						.getMultiCastData().getPacketRateMeasured();
+				count += ((MulticastSenderInterface) mcMap_sender_l3.get(ms)).getMultiCastData().getPacketRateMeasured();
 			}
 		} else if (typ == Typ.L2_SENDER) {
 			for (MulticastData ms : mc_sender_l2) {
-				tmpCount = ((MulticastSenderInterface) mcMap_sender_l2.get(ms))
-						.getMultiCastData().getPacketRateMeasured();
+				tmpCount = ((MulticastSenderInterface) mcMap_sender_l2.get(ms)).getMultiCastData().getPacketRateMeasured();
 				if (tmpCount == -1)
 					tmpCount = 0;
 				count += tmpCount;
@@ -838,8 +809,7 @@ public class MulticastController {
 	/**
 	 * Gibt das MulticastData-Objekt an der Stelle im Vektor zurueck.
 	 * 
-	 * @param index
-	 *            Index des MulticastData-Objekts
+	 * @param index Index des MulticastData-Objekts
 	 * @param multicastDataTyp
 	 *            Der MulticastDatentyp um den entsprechenden Vektor zu
 	 *            bestimmt.
@@ -858,8 +828,7 @@ public class MulticastController {
 	 * Gibt den Vektor mit MulticastData-Objekten in dem alle Objekte des Typs
 	 * gespeichert sind.
 	 * 
-	 * @param m
-	 *            Gibt den Typ der MulticastData-Objekte an.
+	 * @param m Gibt den Typ der MulticastData-Objekte an.
 	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der
 	 *         Typ <code>UNDEFIENED</code> wird <code>null</code>
 	 *         zurueckgegeben.
@@ -872,8 +841,7 @@ public class MulticastController {
 	 * Gibt den Vektor mit MulticastData-Objekten in dem alle Objekte des Typs
 	 * gespeichert sind.
 	 * 
-	 * @param m
-	 *            Der Typ wird dem uebergebenen MulticastData-Objekt entnommen.
+	 * @param m Der Typ wird dem uebergebenen MulticastData-Objekt entnommen.
 	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der
 	 *         Typ <code>UNDEFINED</code> wird <code>null</code> zurueckgegeben.
 	 */
@@ -885,8 +853,7 @@ public class MulticastController {
 	 * Gibt den Vektor mit MulticastData-Objekten in dem alle Objekte des Typs
 	 * gespeichert sind.
 	 * 
-	 * @param m
-	 *            Gibt den Typ der MulticastData-Objekte an.
+	 * @param m Gibt den Typ der MulticastData-Objekte an.
 	 * @return Vektor mit MulticastData-Objekten des angegebenen Typs. Ist der
 	 *         Typ <code>UNDEFINED</code> wird <code>null</code> zurueckgegeben.
 	 */
@@ -919,8 +886,7 @@ public class MulticastController {
 	 * Gibt die Map mit gespeicherten MulticastData-Objekten von dem
 	 * entsprechenden Typ zurueck.
 	 * 
-	 * @param multicastDataTyp
-	 *            Typ der MulticastData-Objekte in der Map.
+	 * @param multicastDataTyp Typ der MulticastData-Objekte in der Map.
 	 * @return Gibt die entsprechende Map zurueck. Ist der Typ
 	 *         <code>UNDEFIENED</code> wird <code>null</code> zurueckgegeben.
 	 */
@@ -954,8 +920,7 @@ public class MulticastController {
 	 * Gibt die Map mit gespeicherten MulticastData-Objekten von dem
 	 * entsprechenden Typ zurueck.
 	 * 
-	 * @param m
-	 *            Wird genutzt um den Typ zu bestimmen.
+	 * @param m Wird genutzt um den Typ zu bestimmen.
 	 * @return Gibt die entsprechende Map zurueck. Ist der Typ
 	 *         <code>UNDEFIENED</code> wird <code>null</code> zurueckgegeben.
 	 */
@@ -966,13 +931,16 @@ public class MulticastController {
 	/**
 	 * setzt das Zeitintervall f�r die Ausgabe der Tabelle auf der Konsole
 	 * 
-	 * @param printTableTime
-	 *            Zeitintervall in milliseconds
+	 * @param printTableTime Zeitintervall in milliseconds
 	 */
 	public void setPrintTableTime(int printTableTime) {
 		this.printTableIntervall = printTableTime;
 	}
 
+	/**
+	 * Getter of XmlParser
+	 * @return the Xml Parser
+	 */
 	public XMLParserInterface getXml_parser() {
 		return xml_parser;
 	}
