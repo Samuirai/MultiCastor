@@ -29,9 +29,9 @@ BOOL IsWow64()
 int main( void )
 {
     if(IsWow64())
-        system("javaw -Djava.library.path=lib/windows/64 -jar MultiCastor.jar");
+        system("start javaw -Djava.library.path=lib/windows/64 -jar MultiCastor.jar");
     else
-        system("javaw -Djava.library.path=lib/windows/32 -jar MultiCastor.jar");
+        system("start javaw -Djava.library.path=lib/windows/32 -jar MultiCastor.jar");
 
     return 0;
 }
