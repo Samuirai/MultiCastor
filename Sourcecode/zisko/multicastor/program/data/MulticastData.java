@@ -47,6 +47,7 @@ public class MulticastData {
 	private long trafficAvg = -1;
 	
 	private int packetLostCount = 0;
+	private String randomID = "0";
 	
 	//********************************************
 	// Eigene Datentypen
@@ -323,11 +324,11 @@ public class MulticastData {
 		this.packetCount = packetCount;
 	}
 	/**
-	 * Returns a unique SenderID consisting of the hostID and the threadID
+	 * Returns a unique SenderID consisting of the hostID, the threadID and a random number to differentiate between multiple instances
 	 * @return
 	 */
 	public String getSenderID(){
-		return hostID + threadID;
+		return hostID + threadID + ((randomID != null) ? "-" + randomID : "");
 	}
 	public Source getPacketSource() {
 		return packetSource;
@@ -430,5 +431,12 @@ public class MulticastData {
 	}
 	public void setMmrpSourceMac(byte[] mmrpSourceMac) {
 		this.mmrpSourceMac = mmrpSourceMac;
+	}
+	public void setRandomID(String randomID) {
+		this.randomID = randomID;
+		
+	}
+	public String getRandomID() {
+		return randomID;
 	}
 }
