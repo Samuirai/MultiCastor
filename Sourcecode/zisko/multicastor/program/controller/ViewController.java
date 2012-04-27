@@ -1263,7 +1263,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		double sum = 0.0;
 		
 		for(int i = 0; i < getTable(Typ.L3_RECEIVER).getModel().getRowCount(); i++){
-			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 5)).replace(",", "."));
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_RECEIVER).getModel().getValueAt(i, 6)).replace(",", "."));
 	 	}
 		return ret.format(sum);
 	 }
