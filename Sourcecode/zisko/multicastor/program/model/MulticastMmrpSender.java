@@ -171,59 +171,60 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		
 		try {
 			sender.registerPath();
+			//Paketzähler auf 0 setzen
+			totalPacketCount			= 0;
+			resetablePcktCnt			= 0;
+			cumulatedResetablePcktCnt	= 0;
+			
+			int ioExceptionCnt = 0;
+			
+			//Misst wie lange er sendt um die Paketrate zu erhalten
+			//und sleept den Rest der Sekunde
+			long endTime	= 0,
+				 timeLeft	= 0;
+			
+			while(isSending){
+				//Sleep wenn noch etwas von der letzten Sekunde �brig
+				timeLeft = endTime-System.nanoTime();
+				if(timeLeft>0)	try{
+									Thread.sleep(timeLeft/1000000, (int) (timeLeft%1000000));
+								}catch(InterruptedException e){
+									proclaim(1, "Sleep after sending with method PEAK failed: " + e.getMessage());
+								}
+				endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
+				do{
+					try{
+						sender.sendDataPacket(myPacketBuilder.getPacket());
+						//System.out.println("Sending packet " + totalPacketCount );
+						if(totalPacketCount<65535)	totalPacketCount++;
+						else						totalPacketCount = 0;
+						resetablePcktCnt++;
+						
+					}catch(Exception e1){
+						proclaim(2, "Problem with sending");
+					}
+				}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
+			}
+			try {
+				sender.deregisterPath();
+			} catch (IOException e) {
+				proclaim(3, "Could not deregister Path");
+			}
+			proclaim(2, totalPacketCount + " packets send in total");
+			
+			//Counter reseten
+			totalPacketCount = 0;
+			resetablePcktCnt = 0;
+			cumulatedResetablePcktCnt = 0;
+			update();
+			updateMin();
+			setStillRunning(false);
 		} catch (IOException e2) {
-			proclaim(3, "Could not register path for MMRP Sender");
+			proclaim(3, "Could not register path for MMRP Sender, stopping it againg");
 			isSending = false;
+			this.setActive(false);
+			mCtrl.stopMC(mcData);
 		}
-		
-		//Paketzähler auf 0 setzen
-		totalPacketCount			= 0;
-		resetablePcktCnt			= 0;
-		cumulatedResetablePcktCnt	= 0;
-		
-		int ioExceptionCnt = 0;
-		
-		//Misst wie lange er sendt um die Paketrate zu erhalten
-		//und sleept den Rest der Sekunde
-		long endTime	= 0,
-			 timeLeft	= 0;
-		
-		while(isSending){
-			//Sleep wenn noch etwas von der letzten Sekunde �brig
-			timeLeft = endTime-System.nanoTime();
-			if(timeLeft>0)	try{
-								Thread.sleep(timeLeft/1000000, (int) (timeLeft%1000000));
-							}catch(InterruptedException e){
-								proclaim(1, "Sleep after sending with method PEAK failed: " + e.getMessage());
-							}
-			endTime	  = System.nanoTime() + 1000000000;	//Plus 1s (in ns)
-			do{
-				try{
-					sender.sendDataPacket(myPacketBuilder.getPacket());
-					//System.out.println("Sending packet " + totalPacketCount );
-					if(totalPacketCount<65535)	totalPacketCount++;
-					else						totalPacketCount = 0;
-					resetablePcktCnt++;
-					
-				}catch(Exception e1){
-					proclaim(2, "Problem with sending");
-				}
-			}while( ((totalPacketCount%packetRateDes)!=0) && isSending);
-		}
-		try {
-			sender.deregisterPath();
-		} catch (IOException e) {
-			proclaim(3, "Could not deregister Path");
-		}
-		proclaim(2, totalPacketCount + " packets send in total");
-		
-		//Counter reseten
-		totalPacketCount = 0;
-		resetablePcktCnt = 0;
-		cumulatedResetablePcktCnt = 0;
-		update();
-		updateMin();
-		setStillRunning(false);
 	}
 
 }

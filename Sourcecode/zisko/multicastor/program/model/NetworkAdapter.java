@@ -88,7 +88,8 @@ public abstract class NetworkAdapter {
 						String name = NetworkAdapter.getNameToMacAdress(p.getHardwareAddress());
 						tmpMacAdress.add(p.getHardwareAddress());
 						if(name == null){
-							//looks cryptic under windows
+							// p.getName() looks cryptic under windows
+							// Therefore also Use the Dev 0,1,2,...
 							name = "Device " + macCounter + "(" + p.getName() + ")";
 							macCounter ++;
 						}
@@ -100,6 +101,8 @@ public abstract class NetworkAdapter {
 			}
 			macInterfaces = tmpMacAdress;
 			macInterfacesName = tmpNameList;
+		}else{
+			System.out.println("[Warning] Not able to load devices, there will possibly be problems with using Layer2");
 		}
 	}
 	/**

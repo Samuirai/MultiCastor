@@ -18,8 +18,10 @@ public class PcapHandler {
 		int timeout = 10 * 1000; // 10 seconds in millis
 		StringBuilder errbuf = new StringBuilder();
 
-		if (device == null)
+		if (device == null){
+			System.out.println("Konnte kein Device finden -.-");
 			throw new IOException();
+		}
 
 		Pcap pcap = Pcap.openLive(device.getName(), snaplen, flags, timeout,
 				errbuf);
@@ -32,6 +34,7 @@ public class PcapHandler {
 
 	private static PcapIf getDevice(byte[] deviceMACAddress) throws IOException {
 		if (alldevs == null) {
+			System.out.println("Lege an");
 			alldevs = new ArrayList<PcapIf>(); // Will be filled with
 			alldevsAdress = new ArrayList<byte[]>();
 			// NICs
@@ -42,16 +45,17 @@ public class PcapHandler {
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
 				// System.err.printf("Can't read list of devices, error is %s",
 				// errbuf.toString());
+				System.out.println("Error Stuff");
 				throw new IOException();
 			}
 			for (int i = 0; i < alldevs.size(); i++) {
 					alldevsAdress.add(alldevs.get(i).getHardwareAddress());
-/*					System.out.println(alldevs.get(i).getName());
-					System.out.println(Arrays.toString(alldevs.get(i).getHardwareAddress()));*/
+					System.out.println(alldevs.get(i).getName());
+					System.out.println(Arrays.toString(alldevs.get(i).getHardwareAddress()));
 			}
 		} 
 		
-	
+		System.out.println("Mac: " + Arrays.toString(deviceMACAddress));
 		for(byte[] address : alldevsAdress)
 			if(address != null && compareMACs(deviceMACAddress, address))
 				return alldevs.get(alldevsAdress.indexOf(address));
