@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicButtonUI;
 
+import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -38,6 +39,7 @@ public class ButtonTabComponent extends JPanel{
 
 	private final DraggableTabbedPane pane;
 	private LanguageManager lang=LanguageManager.getInstance();
+	private ViewController vCtrl;
 	
 	/**
 	 * Der Konstruktor speichert die übergeben Pane, und erzeugt direkt das neue
@@ -48,12 +50,16 @@ public class ButtonTabComponent extends JPanel{
 	 * @param pPane Die TabPane zu der diese Komponente gehört
 	 * @param path Der Pfad zum Icon welches zum Tab geladen werden soll
 	 */
-	public ButtonTabComponent(final DraggableTabbedPane pPane, String path){
+	public ButtonTabComponent(final DraggableTabbedPane pPane, String path, ViewController pVCtrl){
+		
 		// Set the Layout(that Label is left and Button right)
 		super(new FlowLayout(FlowLayout.LEFT,0,0));
+		
 		// Set the Pane(remember it's final, we need to do this here)
 		this.pane = pPane;
 		setOpaque(false);
+		
+		this.vCtrl = pVCtrl; 
 		
 		//Handle Errors
 		if(pane == null)
@@ -115,11 +121,14 @@ public class ButtonTabComponent extends JPanel{
          *  @param ActionEvent e, wird nicht benutzt
          */
         public void actionPerformed(ActionEvent e) {
+        	
             int i = pane.indexOfTabComponent(ButtonTabComponent.this);
             if (i != -1) {
             	pane.closeTab(pane.getTitleAt(i));
             	pane.remove(i);
+            	vCtrl.autoSave();
             }
+            
         }
  
         /**

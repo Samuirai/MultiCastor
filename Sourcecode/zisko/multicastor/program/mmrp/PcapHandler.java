@@ -38,8 +38,13 @@ public class PcapHandler {
 			// NICs
 
 			StringBuilder errbuf = new StringBuilder(); // For any error msgs
-
-			int r = Pcap.findAllDevs(alldevs, errbuf);
+			int r = 0;
+			try {
+				r = Pcap.findAllDevs(alldevs, errbuf);
+			} catch (NoClassDefFoundError e) {
+				System.out.println("[Warning] NoClassDefFoundError. jnetpcap probably not installed.");
+				r = 0;
+			}
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
 				// System.err.printf("Can't read list of devices, error is %s",
 				// errbuf.toString());

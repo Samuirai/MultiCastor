@@ -457,6 +457,8 @@ public class MulticastController{
 		data.setL3_SENDER(GUIData.TabState.invisible);
 		data.setL2_RECEIVER(GUIData.TabState.invisible);
 		data.setL3_RECEIVER(GUIData.TabState.invisible);
+		data.setABOUT(GUIData.TabState.invisible);
+		data.setPLUS(GUIData.TabState.visible);
 		
 		// set the new state if they are visible
 		for(int i=0; i<view_controller.getFrame().getTabpane().getTabCount(); ++i) {
@@ -469,6 +471,10 @@ public class MulticastController{
 				data.setL2_RECEIVER(GUIData.TabState.visible);
 			if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
 				data.setL3_RECEIVER(GUIData.TabState.visible);
+			if(title.equals(" "+lang.getProperty("mi.about")+" "))
+				data.setABOUT(GUIData.TabState.visible);
+			if(title.equals(" + "))
+				data.setPLUS(GUIData.TabState.visible);
 		}
 		
 		// get the selected tab
@@ -482,6 +488,10 @@ public class MulticastController{
 			data.setL2_RECEIVER(GUIData.TabState.selected);
 		if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
 			data.setL3_RECEIVER(GUIData.TabState.selected);
+		if(title.equals(" "+lang.getProperty("mi.about")+" "))
+			data.setABOUT(GUIData.TabState.selected);
+		if(title.equals(" + "))
+			data.setPLUS(GUIData.TabState.selected);
 		
 		data.setLanguage(LanguageManager.getCurrentLanguage());
 		data.setWindowName(view_controller.getFrame().getBaseTitle());
