@@ -143,7 +143,6 @@ public abstract class NetworkAdapter {
 	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zur�ckgegeben, ansonsten -1
 	 */
 	public static int findAddressIndex(String address){
-		// TODO [MH] Linux Check
 		int ret = -1;
 		if(getAddressType(address) == IPType.IPv4){
 			for(int i = 0; i < ipv4Interfaces.size() ; i++){

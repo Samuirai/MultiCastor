@@ -365,11 +365,13 @@ public class PanelMulticastConfig extends JPanel {
 	public InetAddress getSelectedAddress(Typ typ, IPType iptype){
 		// V1.5 [FH] Added L3 with IPv4 Stuff
 		/* [MH] Changed to iptype */
-		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
+		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			if(iptype == IPType.IPv4)
 				return InputValidator.checkIPv4(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
-			else
+			else {
 				return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
+			}
+		}
 		// [FH] Should not happen... if type is L2 we need to call getSelectedAddress(Typ typ)
 		else
 			return null;

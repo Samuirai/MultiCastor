@@ -78,8 +78,6 @@ public class InputValidator {
 		boolean bool;
 		Inet6Address add;
 		
-
-		
 		if(!adresse.matches("\\A(?:" +
 							"(?:" +
 							"(?:[A-Fa-f0-9]{1,4}:){6}" +

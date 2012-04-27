@@ -24,20 +24,6 @@ public interface XMLParserInterface
 	 */
 	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
-	// TODO [MH] check if tbr
-//	/** Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
-//	 * @param pfad
-//	 * Ort, an dem die Konfigurationsdatei liegt
-//	 * @param v1
-//	 * MultiCastData enthält Multicast Konfigurationseinstellungen
-//	 * @param v2
-//	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
-//	 * @throws SAXException
-//	 * @throws FileNotFoundException
-//	 * @throws IOException
-//	 */
-//	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
-	
 	/**Liest die Default ULD Konfiguration und Standartwerte aus dem JAR-File
 	 * @param v1
 	 * Vektor aus Multicast Konfigurationseinstellungen
