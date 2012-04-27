@@ -25,8 +25,20 @@ import zisko.multicastor.program.model.WrongConfigurationException;
 
 public class Main {
 
+	/**
+	 * Minimum of available heap needed to start MultiCastor.
+	 * Will be proofed at program start.
+	 */
 	public static final long MIN_MAX_HEAP = 32 * 1024 * 1024;
+	
+	/**
+	 * Maximum of available heap in the current environment
+	 */
 	public static long REAL_MAX_HEAP;
+	
+	/**
+	 * LanguageManager instance provides access to language files
+	 */
 	private static LanguageManager lang=LanguageManager.getInstance();
 	
 	/**
