@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapBpfProgram;
+import org.jnetpcap.PcapClosedException;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 
@@ -22,7 +23,6 @@ public class MMRPReceiver extends MMRPEntity{
 			found = true;
 		}
 	};
-
 	
 	public MMRPReceiver(byte[] deviceMACAddress, byte[] streamMACAddress) throws IOException {
 		super(deviceMACAddress, streamMACAddress);
@@ -35,7 +35,7 @@ public class MMRPReceiver extends MMRPEntity{
 	public byte[] waitForDataPacketAndGetIt(byte[] buffer){
 		found = false;
 		foundPacket = buffer;
-		while(!Thread.interrupted() && !found){
+		while(!found){
 			pcap.loop(1, pcapPacketHandler, "");
 		}
 		return foundPacket;

@@ -79,8 +79,8 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		}
 		active = b;
 		mcData.setActive(b);
-	// Values will be resetted when Receiver actually stops. Just before calling update functions in PacketAnalyzer
-	//	packetAnalyzer.resetValues();
+		//Values will be resetted when Receiver actually stops. Just before calling update functions in PacketAnalyzer
+		packetAnalyzer.resetValues();
 	}
 	
 	/**

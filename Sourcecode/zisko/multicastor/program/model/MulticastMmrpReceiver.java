@@ -59,7 +59,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	 *            Eine {@link Queue}, �ber den der Receiver seine Ausgaben an
 	 *            den Controller weitergibt.
 	 */
-	public MulticastMmrpReceiver(MulticastData multicastData, Logger logger) {
+	public MulticastMmrpReceiver(MulticastData multicastData, Logger logger) throws IOException{
 		super(multicastData);
 		if(logger==null){
 			System.out.println("FATAL ERROR - cannot create MulticastReceiver without Logger");
@@ -81,9 +81,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		try {
 			receiver = new MMRPReceiver(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
-			
 			proclaim(3, "Could not create Receiver. The interface '" + mcData.getMmrpSourceMacAsString() + "' seems to have "
 			+ "no MMRP functionality");
+			throw new IOException();
 		}
 		
 		// resets MulticastData Object to avoid default value -1
@@ -126,7 +126,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		active = b;
 		mcData.setActive(b);
-
+		packetAnalyzer.resetValues();		
 	}
 
 	/**
@@ -190,6 +190,8 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			initializeBuf();
 		}
 		
+		System.out.println("After while loop");
+		
 		// Resetted gemessene Werte (SenderID bleibt erhalten, wegen des Wiedererkennungswertes)
 		packetAnalyzer.resetValues();
 		packetAnalyzer.update();
@@ -204,7 +206,6 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			proclaim(3, "Could not deregister receiver path");
 		} catch (NullPointerException e) {
 			proclaim(1, "jnetpcap probably not installed");
-			this.setActive(false);
 		}
 	}
 
