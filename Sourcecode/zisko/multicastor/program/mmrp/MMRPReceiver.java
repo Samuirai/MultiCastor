@@ -12,7 +12,7 @@ import org.jnetpcap.packet.PcapPacketHandler;
 public class MMRPReceiver extends MMRPEntity {
 
 	private boolean found;
-	private boolean stop;
+	private boolean stop = false;
 	private byte[] foundPacket;
 	private Pcap pcap = null;
 
@@ -23,7 +23,6 @@ public class MMRPReceiver extends MMRPEntity {
 			System.arraycopy(packet.getByteArray(14, length), 0, foundPacket,
 					0, length);
 			found = true;
-			System.out.println("Packet");
 		}
 	};
 
@@ -34,7 +33,6 @@ public class MMRPReceiver extends MMRPEntity {
 		try {
 			PacketHandler.sendPacket(this.deviceMACAddress,DataPacket.getDataPacket(this.deviceMACAddress,this.streamMACAddress,data));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -50,16 +48,14 @@ public class MMRPReceiver extends MMRPEntity {
 		this.pcap.setFilter(programm);
 	}
 
-	public byte[] waitForDataPacketAndGetIt(byte[] buffer) {
+	public boolean waitForDataPacketAndGetIt(byte[] buffer) {
 		found = false;
 		foundPacket = buffer;
 		
 		while (!found) {
-			System.out.println("looooooop");
 			pcap.loop(1, pcapPacketHandler,"");
-			System.out.println("FOUND: " + found);
 		}
 		
-		return foundPacket;
+		return !stop;
 	}
 }

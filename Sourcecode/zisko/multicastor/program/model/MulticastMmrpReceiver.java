@@ -117,16 +117,18 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	 *            boolean
 	 */
 	public void setActive(boolean b) {
+		if(active){
+			active = b;
+			receiver.stopLoop();
+		}
+		
 		if(b){
 			setStillRunning(true);
 			// Verhindert eine "recentlyChanged"-Markierung direkt nach dem Starten
 			packetAnalyzer.setLastActivated(6);
+			active = b;
 		}
 		
-		if(active){
-			receiver.stopLoop();
-		}
-		active = b;
 		mcData.setActive(b);
 		packetAnalyzer.resetValues();		
 	}
@@ -172,6 +174,8 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	 */
 	public void run() {
 		
+		boolean isStopped;
+		
 		// Initialisiert den Buffer mit Einsen
 		initializeBuf();
 
@@ -186,10 +190,12 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		
 		while(active){
-			receiver.waitForDataPacketAndGetIt(buf);
+			isStopped = receiver.waitForDataPacketAndGetIt(buf);
 			//packetAnalyzer.setTimeout(false);
-			packetAnalyzer.analyzePacket(buf);
-			initializeBuf();
+			if(isStopped){
+				packetAnalyzer.analyzePacket(buf);
+				initializeBuf();
+			}
 		}
 		
 		// Resetted gemessene Werte (SenderID bleibt erhalten, wegen des Wiedererkennungswertes)
