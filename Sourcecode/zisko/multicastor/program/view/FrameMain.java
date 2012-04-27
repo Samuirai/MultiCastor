@@ -448,6 +448,7 @@ public class FrameMain extends JFrame {
 			panel_sen_lay2.reloadLanguage();
 			panel_rec_lay3.reloadLanguage();
 			panel_sen_lay3.reloadLanguage();
+			panel_about.reloadLanguage();
 		}
 	}
 
