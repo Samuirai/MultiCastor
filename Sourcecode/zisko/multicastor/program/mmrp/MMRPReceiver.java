@@ -21,8 +21,10 @@ public class MMRPReceiver extends MMRPEntity{
 			found = true;
 		}
 	};
-
 	
+	public void stopLoop(){
+		this.pcap.breakloop();
+	}
 	public MMRPReceiver(byte[] deviceMACAddress, byte[] streamMACAddress) throws IOException {
 		super(deviceMACAddress, streamMACAddress);
 		this.pcap = PcapHandler.getPcapInstance(deviceMACAddress);
@@ -34,9 +36,11 @@ public class MMRPReceiver extends MMRPEntity{
 	public byte[] waitForDataPacketAndGetIt(byte[] buffer){
 		found = false;
 		foundPacket = buffer;
-		while(!Thread.interrupted() && !found){
+		
+		while(!found){
 			pcap.loop(1, pcapPacketHandler, "");
 		}
+		
 		return foundPacket;
 	}
 }

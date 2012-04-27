@@ -198,6 +198,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		
 		try {
 			receiver.deregisterPath();
+			receiver.stopLoop();
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
 		} catch (NullPointerException e) {
