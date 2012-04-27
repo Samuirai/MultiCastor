@@ -31,7 +31,7 @@ int main( void )
     if(IsWow64())
         system("java -Djava.library.path=lib/windows/64 -jar MultiCastor.jar");
     else
-        system("java -Djava.library.path=lib/linux/32 -jar MultiCastor.jar");
+        system("java -Djava.library.path=lib/windows/32 -jar MultiCastor.jar");
 
     return 0;
 }
