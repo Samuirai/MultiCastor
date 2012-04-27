@@ -8,6 +8,7 @@ import java.util.logging.Level;
 
 import java.util.logging.Logger;
 
+import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.mmrp.*;
 
 import zisko.multicastor.program.data.MulticastData;
@@ -31,6 +32,8 @@ import zisko.multicastor.program.interfaces.MulticastThreadSuper;
  * 
  */
 public class MulticastMmrpReceiver extends MulticastThreadSuper {
+	
+	private LanguageManager lang = LanguageManager.getInstance();
 	
 	/** Wenn auf wahr, lauscht dieser Receiver auf ankommende Pakete. */
 	private boolean active = false;
@@ -57,21 +60,21 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	 *            Eine {@link Queue}, �ber den der Receiver seine Ausgaben an
 	 *            den Controller weitergibt.
 	 */
-	public MulticastMmrpReceiver(MulticastData multicastData, Logger logger) {
+	public MulticastMmrpReceiver(MulticastData multicastData, Logger logger) throws IOException{
 		super(multicastData);
 		if(logger==null){
-			System.out.println("FATAL ERROR - cannot create MulticastReceiver without Logger");
+			System.out.println(lang.getProperty("error.mr.logger"));
 			return;
 		}
 		if(multicastData==null){
-			logger.log(Level.WARNING, "Error while creating MulticastReceiver. MulticastData cannot be empty.");
+			logger.log(Level.WARNING, lang.getProperty("error.mr.mcdata"));
 			return;
 		}
 		
 		try {
 			multicastData.setHostID(InetAddress.getLocalHost().getHostName());
 		} catch (UnknownHostException e) {
-			proclaim(1, "Unable to get Host-Name. Error is: " + e.getMessage());
+			proclaim(1, lang.getProperty("message.getHostname") + " " + e.getMessage());
 		}
 		
 		this.logger = logger;
@@ -79,13 +82,10 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		try {
 			receiver = new MMRPReceiver(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
-			
-			proclaim(3, "Could not create Receiver. The interface '" + mcData.getMmrpSourceMacAsString() + "' seems to have "
-			+ "no MMRP functionality");
+			proclaim(3, lang.getProperty("message.receiverInterfaceFail") + " (" + mcData.getMmrpSourceMacAsString() + ")");
+			throw new IOException();
 		}
-		
-		// resets MulticastData Object to avoid default value -1
-		//mcData.resetValues();
+
 	}
 	
 	/**
@@ -124,7 +124,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		}
 		active = b;
 		mcData.setActive(b);
-
+		packetAnalyzer.resetValues();		
 	}
 
 	/**
@@ -174,10 +174,10 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		try {
 			receiver.registerPath();
 		} catch (IOException e) {
-			proclaim(3, "Could not register receiver path");
+			proclaim(3, lang.getProperty("message.registerReceiverPath"));
 			this.setActive(false);
 		} catch (NullPointerException e) {
-			proclaim(1, "jnetpcap probably not installed");
+			proclaim(1, lang.getProperty("message.jnetpcapNotInstalled"));
 			this.setActive(false);
 		}
 		
@@ -199,10 +199,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		try {
 			receiver.deregisterPath();
 		} catch (IOException e) {
-			proclaim(3, "Could not deregister receiver path");
+			proclaim(3, lang.getProperty("message.deregisterReceiverPath"));
 		} catch (NullPointerException e) {
-			proclaim(1, "jnetpcap probably not installed");
-			this.setActive(false);
+			proclaim(1, lang.getProperty("message.jnetpcapNotInstalled"));
 		}
 	}
 

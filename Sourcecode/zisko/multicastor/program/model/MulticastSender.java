@@ -18,6 +18,8 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.senderState;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
+import zisko.multicastor.program.lang.LanguageManager;
+
 
 /**
  * Die MultiCastSender-Klasse k�mmert sich um das tats�chliche Senden der
@@ -32,8 +34,9 @@ import zisko.multicastor.program.interfaces.MulticastThreadSuper;
  * @author jannik
  * 
  */
-public class MulticastSender extends MulticastThreadSuper implements
-		MulticastSenderInterface {
+public class MulticastSender extends MulticastThreadSuper implements MulticastSenderInterface {
+	
+	private LanguageManager lang = LanguageManager.getInstance();
 	private PacketBuilder myPacketBuilder;
 
 	/**
@@ -102,7 +105,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 		try {
 			mcData.setHostID(InetAddress.getLocalHost().getHostName());
 		} catch (UnknownHostException e) {
-			proclaim(1, "Unable to get Host-Name. Error is: " + e.getMessage());
+			proclaim(1, lang.getProperty("error.network.noHostName")+ "\n" + e.getMessage());
 		}
 
 		// �brige Variablen initialisieren
@@ -120,15 +123,15 @@ public class MulticastSender extends MulticastThreadSuper implements
 			mcSocket = new MulticastSocket(udpPort);
 		} catch (IOException e) {
 			proclaim(1, "'" + e.getMessage()
-					+ "': Try to set default Port 4711...");
+					+ "': "+lang.getProperty("message.message.useDefaultPort"));
 
 			try {
 				udpPort = 4711; // Default-Port
 				mcData.setUdpPort(udpPort);
 				mcSocket = new MulticastSocket(udpPort);
 			} catch (IOException e2) {
-				proclaim(1, "While Setting UDP-Port: " + e.getMessage());
-				proclaim(-1, "FATAL ERROR: DEFAULT-PORT IS NOT ASSIGNABLE");
+				proclaim(1, lang.getProperty("error.network.settingUDP") + " " + e.getMessage());
+				proclaim(-1, lang.getProperty("error.network.noDefaultPort"));
 				return;
 			}
 		}
@@ -139,7 +142,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 		} catch (IOException e) {
 			proclaim(
 					1,
-					"While setting the Source IP " + sourceIp + ": "
+					lang.getProperty("error.network.sourceIP")+" " + sourceIp + ": "
 							+ e.getMessage());
 		}
 
@@ -179,11 +182,11 @@ public class MulticastSender extends MulticastThreadSuper implements
 			isSending = true;
 			mcData.setActive(true);
 			setStillRunning(true);
-			proclaim(2, "MultiCast-Sender activated");
+			proclaim(2, lang.getProperty("message.mcActivated"));
 		} else {
 			isSending = false;
 			mcData.setActive(false);
-			proclaim(2, "MultiCast-Sender deaktivated");
+			proclaim(2, lang.getProperty("message.mcDeactivated"));
 		}
 	}
 
@@ -230,12 +233,12 @@ public class MulticastSender extends MulticastThreadSuper implements
 		// Der Multicastgruppe beitreten
 		try {
 			mcSocket.joinGroup(mcGroupIp);
-			proclaim(2, "Joined Multicast-group " + mcData.getGroupIp()
-					+ " as sender using method " + usedMethod + ".");
+			proclaim(2, lang.getProperty("message.joinMcPart1")+" " + mcData.getGroupIp()
+					+ " "+lang.getProperty("message.joinMcPart1")+" " + usedMethod + ".");
 		} catch (IOException e) {
 			proclaim(
 					1,
-					"Was not able to join multicast-group "
+					lang.getProperty("message.unableToJoin")+" "
 							+ mcData.getGroupIp() + ": " + e.getMessage());
 			// �berspringen der Sende-Whileschleife
 			this.endIt();
@@ -245,7 +248,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 		try {
 			mcSocket.setTimeToLive(ttl);
 		} catch (IOException e) {
-			proclaim(1, "error setting TTL to " + ttl);
+			proclaim(1, lang.getProperty("message.settingTTLErr")+" " + ttl);
 		}
 
 		// Multicasts zum resetten des Receivers Senden
@@ -257,8 +260,8 @@ public class MulticastSender extends MulticastThreadSuper implements
 						mcData.getPacketLength(), mcGroupIp, udpPort));
 			}
 		} catch (IOException e) {
-			proclaim(1, "While sending reset Packets: " + e.getMessage()
-					+ "\nSender was stopped");
+			proclaim(1, lang.getProperty("message.resetPackets")+" " + e.getMessage()
+					+ "\n"+lang.getProperty("message.senderStoped"));
 			this.endIt();
 		}
 		myPacketBuilder.setReset(false);
@@ -284,7 +287,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 					resetablePcktCnt++;
 
 				} catch (IOException e1) {
-					proclaim(1, "While sending: " + e1.getMessage());
+					proclaim(1, lang.getProperty("message.whileSending") + e1.getMessage());
 				}
 			}
 			break;
@@ -301,9 +304,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 						Thread.sleep(timeLeft / 1000000,
 								(int) (timeLeft % 1000000));
 					} catch (InterruptedException e) {
-						proclaim(1,
-								"Sleep after sending with method PEAK failed: "
-										+ e.getMessage());
+						proclaim(1, lang.getProperty("message.sleepPeak") + e.getMessage());
 					}
 				endTime = System.nanoTime() + 1000000000; // Plus 1s (in ns)
 				if (lastIOExceptionCnt <= 10)
@@ -323,9 +324,8 @@ public class MulticastSender extends MulticastThreadSuper implements
 						// V1.5 [FH] added for networkfail foo
 						if (ioExceptionCnt != 0) {
 							mcData.setSenders(senderState.SINGLE);
-							proclaim(2, "Sender is working again");
-							JOptionPane.showMessageDialog(new JFrame(),
-									"Sender is working again");
+							proclaim(2, lang.getProperty("message.senderWorkingAgain"));
+							JOptionPane.showMessageDialog(new JFrame(), lang.getProperty("message.senderWorkingAgain"));
 							ioExceptionCnt = 0;
 						}
 						lastIOExceptionCnt = 0;						
@@ -339,17 +339,16 @@ public class MulticastSender extends MulticastThreadSuper implements
 							mcData.setSenders(senderState.NETWORK_ERROR);
 
 							if (ioExceptionCnt == 1)
-								proclaim(1, "Problem with sending via IP '"
-										+ sourceIp
-										+ "'. Trying to reconnect...");
+								proclaim(1, lang.getProperty("message.problemIp")
+										+ "'" + sourceIp + "'. "
+										+ lang.getProperty("message.tryReconnect"));
 
 							if (ioExceptionCnt == 10)
 								if (JOptionPane.showOptionDialog(null,
-										"Sender is still not working correctly.\n"
-												+ "Because sending via IP "
-												+ sourceIp
-												+ " is not reachable ",
-										"Sending warning",
+										lang.getProperty("message.senderFail")
+												+ " " + lang.getProperty("message.senderViaIp")
+												+ " (" + sourceIp + ").",
+										lang.getProperty("message.sendingWarning"),
 										JOptionPane.DEFAULT_OPTION,
 										JOptionPane.WARNING_MESSAGE, null,
 										options, options[0]) == 0) {
@@ -379,10 +378,9 @@ public class MulticastSender extends MulticastThreadSuper implements
 					resetablePcktCnt++;
 					Thread.sleep(pausePeriodMs, pausePeriodNs);
 				} catch (IOException e1) {
-					proclaim(1, "While sending: " + e1.getMessage());
+					proclaim(1, lang.getProperty("message.whileSending") + " " + e1.getMessage());
 				} catch (InterruptedException e2) {
-					proclaim(1,
-							"While sending: (sleep fails): " + e2.getMessage());
+					proclaim(1, lang.getProperty("message.whileSendingSleepFail") + " " + e2.getMessage());
 				}
 			}
 		}
@@ -394,7 +392,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 		} catch (IOException e) {
 			proclaim(1, e.getMessage());
 		}
-		proclaim(2, totalPacketCount + " packets send in total");
+		proclaim(2, totalPacketCount + " " + lang.getProperty("message.packetsSendTotal"));
 		// Counter reseten
 		totalPacketCount = 0;
 		resetablePcktCnt = 0;

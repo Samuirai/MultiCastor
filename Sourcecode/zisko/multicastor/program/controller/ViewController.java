@@ -1439,7 +1439,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private void listSelectionEventFired(Typ typ) {
 		PanelTabbed tabpart = null;
-		//TODO @SK/FH Muss hier noch L2 rein????
 		switch(typ){
 			case L3_SENDER: tabpart=f.getPanel_sen_lay3(); break;
 			case L3_RECEIVER: tabpart=f.getPanel_rec_lay3(); break;

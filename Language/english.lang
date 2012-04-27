@@ -77,6 +77,9 @@ error.memory.part2	=You need minimum
 error.memory.part3	=to start MultiCastor.
 error.memory.title	=MultiCastor: MemoryError
 
+error.mr.logger 	=FATAL ERROR - cannot create MulticastReceiver without Logger
+error.mr.mcdata		=Error while creating MulticastReceiver. MulticastData cannot be empty.
+
 # MC will show this message if there are less them 10% free memory in heap.
 warning.memory.title=Your memory is about to expire.(<10% remaining)\n\
  Please be careful, save your files and \
@@ -104,7 +107,12 @@ error.invalidParameter	 =Not a valid parameter.\n\nUsage:\tjava -jar multiCastor
 
 error.logfile.canNotWrite=Log file could not be written to disk. Please check if you have writing permission in the MultiCastor directory.
 
-console.helptext		 =Usage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+error.network.noHostName	=Unable to get Host-Name. Error is:
+error.network.settingUDP	=Error while Setting UDP-Port:
+error.network.noDefaultPort	=FATAL ERROR: DEFAULT-PORT IS NOT ASSIGNABLE
+error.network.sourceIP		=Error while setting the Source IP
+
+console.helptext		=Usage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
  type 'java -jar multiCastor.jar -h' for more information\n\n\
  To start the tool without a graphical user interface,\n\
  the configuration-file-path is required.\n\n\
@@ -122,19 +130,59 @@ warning.invalidNetAdapter=Invalid Network Adapter. Network Interface has been se
 
 toolTip.closeThisTab		=close this tab
 toolTip.mcAddressRange		=Select a Multicast IP Address, either IPv4 or IPv6
-toolTip.ipFirst				=Specify the IP address first, then select an interface
+toolTip.ipFirst			=Specify the IP address first, then select an interface
 toolTip.specifyUDPPort		=Specify an UDP port
-toolTip.specifyTTL			=Specify the time to live
+toolTip.specifyTTL		=Specify the time to live
 toolTip.specifyPacketRate	=Specify the packetrate
 toolTip.specifyPacketLength	=Specify the packetlength
 toolTip.selectNetInterface	=Select a network interface for multicast
 toolTip.selectMacAddress	=Select a multicast MAC Address
 
-message.setNewTitle			=Please enter a new title
-message.noMcCreated			=There is no Multicast data available for saving. Please create any Multicasts first.
+message.setNewTitle		=Please enter a new title
+message.noMcCreated		=There is no Multicast data available for saving. Please create any Multicasts first.
 message.noMcSelected		=There is no Multicast data selected right now. You can select any row in the tables. You can select multiple rows by holding the Ctrl-Key.
 message.canNotOpenHelpPart1	=MultiCastor was unable to open the help file. You will find the help file at
-message.canNotOpenHelpPart2 =You will need a pdf reader for open this file.
+message.canNotOpenHelpPart2 	=You will need a pdf reader for open this file.
+message.useDefaultPort		=Try to set default Port 4711...
+message.mcActivated		=MultiCast-Sender activated
+message.mcDeaktivated		=MultiCast-Sender deactivated
+message.joinMcPart1		=Joined Multicast-group
+message.joinMcPart2		=as sender using method
+message.unableToJoin		=Was not able to join multicast-group
+message.settingTTLErr		=error while setting TTL to
+message.resetPackets		=While sending reset Packets:
+message.senderStoped		=Sender was stopped
+message.whileSending		=While sending:
+message.sleepPeak 			=Sleep after sending with method PEAK failed:
+message.senderWorkingAgain  =Sender is working again
+message.problemIp			=Problem with sending via IP 
+message.tryReconnect		=Trying to reconnect ...
+message.senderFail			=Sender is still not working correctly.
+message.senderViaIp			=Because sending via IP is not reachable
+message.sendingWarning		=Sending Warning
+message.whileSending		=While sending:
+message.whileSendingSleepFail =While sending (sleep fails):
+message.packetsSendTotal 	=packets send in total
+message.defaultPort4711		=Trying to set default port 4711 ...
+message.receiverMcObj		=Started Receiver with MC Object.
+message.receiverStartFail 	=Could not start receiver.
+message.mcgroupMcobj		=Left Multicastgroup of MC Object.
+message.mcgroupLeaveFail	=Could not leave MC group of MC Object.
+message.packetReceiver		=Error while receiving packets:
+message.getHostname			=Unable to get Host-Name. Error is:
+message.mmrpSender			=Could not create MMRP sender
+message.mcSenderActivated	=multicast sender activated
+message.mcSenderDeactivated	=multicast sender deactivated
+message.problemSending		=Problem with sending
+message.registerMmrpSender	=Could not register path for MMRP Sender, stopping it again.
+message.receiverInterfaceFail =Could not create Receiver. The interface seems to have no MMRP functionality.
+message.jnetpcapNotInstalled =jnetpcap probably not installed
+message.registerReceiverPath =Could not register receiver path
+message.deregisterReceiverPath =Could not deregister receiver path
+message.unsatisfiedLinkError =[Warning] UnsatisfiedLinkError. Is jnetpcap installed?
+message.loadDeviceFail		=[Warning] Not able to load devices, there will possibly be problems with using Layer 2. Did you start as root / admin?
 
 about.license  = Licensed under GPLv3.
 about.labelDev = Developers:
+
+general.device = Device
