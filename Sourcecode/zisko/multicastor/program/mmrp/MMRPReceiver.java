@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapBpfProgram;
+import org.jnetpcap.PcapClosedException;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 
@@ -36,7 +37,7 @@ public class MMRPReceiver extends MMRPEntity{
 	public byte[] waitForDataPacketAndGetIt(byte[] buffer){
 		found = false;
 		foundPacket = buffer;
-		
+
 		while(!found){
 			pcap.loop(1, pcapPacketHandler, "");
 		}

@@ -84,7 +84,6 @@ public class Main {
 
 			controller.loadDefaultMulticastConfig();
 			controller.loadGUIConfig("",true);
-			// TODO [MH] Hier GUIConfig laden
 			
 			for (Handler h : logger.getHandlers()) {
 				h.close();

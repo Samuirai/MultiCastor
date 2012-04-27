@@ -2,12 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="Sourcecode"/>
 	<classpathentry kind="lib" path="Executable/MultiCastor.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/jnetpcap-1.3.b4.win64/jnetpcap.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="MultiCastor/lib/jnetpcap-1.3.b4.win64"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="lib/jnetpcap-1.3.0-1.win32/jnetpcap-1.3.0/jnetpcap.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
