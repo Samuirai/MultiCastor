@@ -6,9 +6,9 @@ import java.util.Vector;
 
 /**
  * Hilfsklasse welche die standard Java JComboBox anpasst so dass das Dropdown Menu breiter sein kann
- * als der Button welcher es ausl�st (Bei der standard JComboBox ist das nicht der Fall)
+ * als der Button welcher es ausl�st (Bei der standard JComboBox ist das nicht der Fall).
+ * 
  * @author Daniel Becker
- *
  */
 @SuppressWarnings("serial")
 public class WideComboBox extends JComboBox{ 

@@ -7,7 +7,7 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle k�mmert.
+ * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
  * @author Daniel Becker
  *
  */

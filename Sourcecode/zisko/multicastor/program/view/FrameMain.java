@@ -31,7 +31,6 @@ public class FrameMain extends JFrame {
 	private DraggableTabbedPane tabpane;
 
 	/**
-	 
 	 *  Das Layer 2 Receiver Panel
 	 *  neu in V1.5
 	 */
@@ -112,11 +111,15 @@ public class FrameMain extends JFrame {
 	 */
 	private String baseTitle;
 	
+	/**
+	 * Wird durch den Konstruktur später mit der Instanz des ViewControllers beschrieben.
+	 */
 	ViewController ctrl;
 	
 	/**
-	 * Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller
+	 * Konstruktor, der das Hauptfenster des Multicastor-Tools erstellt, konfiguriert und anzeigt.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller
 	 */
 	public FrameMain(ViewController ctrl) {
 		this.ctrl=ctrl;
@@ -128,7 +131,6 @@ public class FrameMain extends JFrame {
 		this.addKeyListener(ctrl);
 		this.addWindowListener(ctrl);
 		
-		// V1.5: Standartwert fuer Basistitel setzen
 		baseTitle = "MultiCastor";
 		updateTitle();
 		tabpane.addChangeListener(new ChangeListener() {
@@ -140,13 +142,25 @@ public class FrameMain extends JFrame {
 		});
 		
 	}
+	/**
+	 * Holt den ersten Teil des Fenstertitels.
+	 * @return Fenstertitel (Teil 1)
+	 */
 	public String getBaseTitle() {
 		return baseTitle;
 	}
+	/**
+	 * Setzt den Fenstertitel (erster Teil des Titels).
+	 * 
+	 * @param baseTitle Gewünschter Fenstertitel
+	 */
 	public void setBaseTitle(String baseTitle) {
 		this.baseTitle = baseTitle;
 	}
 	
+	/**
+	 * Methode, die aufgerufen wird, wenn eine andere Sprache ausgewählt wird.
+	 */
 	public void reloadLanguage(){
 		initMenuBar(ctrl,false);
 		initPanels(ctrl, false);
@@ -156,9 +170,11 @@ public class FrameMain extends JFrame {
 	
 	/**
 	 * Funktion welche die Menubar initialisiert.
+	 * 
 	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param Gibt an, ob die Menü-Bar zum ersten mal initialisiert wird oder nicht.
 	 */
-	private void initMenuBar(ViewController ctrl,boolean firstInit) {
+	private void initMenuBar(ViewController ctrl, boolean firstInit) {
 		
 		if (firstInit){
 			mi_autoSave = new JCheckBoxMenuItem();
@@ -337,6 +353,7 @@ public class FrameMain extends JFrame {
 		m_info.setText(lang.getProperty("mi.info"));
 		
 	}
+	
 	public JMenuItem getM_language() {
 		return m_language;
 	}
@@ -370,6 +387,7 @@ public class FrameMain extends JFrame {
 	public void setMi_setTitle(JMenuItem miSetTitle) {
 		mi_setTitle = miSetTitle;
 	}
+	
 	/**
 	 * Hilfsfunktion zum Abfrage des Snake Menu Items
 	 * @return Das Snake Menu Item
@@ -379,10 +397,13 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche die Panels initialisiert.
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param Gibt an, ob die Menü-Bar zum ersten mal initialisiert wird oder nicht.
 	 */
 	private void initPanels(ViewController ctrl, boolean firstInit) {
-		if (firstInit){
+		
+		if (firstInit) {
 			//v1.5: Added new Tabs: L2 Receiver, L2 Sender, L3 Receiver, L3 Sender
 			panel_rec_lay2 = new PanelTabbed(ctrl,Typ.L2_RECEIVER);
 			panel_sen_lay2 = new PanelTabbed(ctrl,Typ.L2_SENDER);
@@ -409,10 +430,10 @@ public class FrameMain extends JFrame {
 			tabpane.addTab(" "+lang.getProperty("tab.l3s")+" ", panel_sen_lay3);
 			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png", ctrl));
 			
-			// V1.5: + Panel zum �ffnen neuer Tabs
+			// V1.5: + Panel zum Öffnen neuer Tabs
 			tabpane.addTab( " + ", panel_plus);
-		}
-		else {
+			
+		} else {
 			for (int i=0;i<tabpane.getTabCount();i++){
 				if(tabpane.getComponentAt(i)==panel_rec_lay2) tabpane.setTitleAt(i, " "+lang.getProperty("tab.l2r")+" ");
 				else if(tabpane.getComponentAt(i)==panel_sen_lay2) tabpane.setTitleAt(i, " "+lang.getProperty("tab.l2s")+" ");
@@ -447,8 +468,9 @@ public class FrameMain extends JFrame {
 	}
 
 	/**
-	 * Funktion welche das Frame initialisiert
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
+	 * Funktion welche das Frame initialisiert.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
 	 */
 	private void initWindow(ViewController ctrl) {
 	    try {
@@ -479,6 +501,13 @@ public class FrameMain extends JFrame {
 	public DraggableTabbedPane getTabpane() {
 		return tabpane;
 	}
+	
+	/**
+	 * Gibt das Panel zum zugehörigen internen Namen des Tab-Panels zurück.
+	 * 
+	 * @param typ Interner Name des Tab-Panels.
+	 * @return Ein Panel, welches jeweils den kompletten Programmteil beinhaltet.
+	 */
 	public PanelTabbed getPanelPart(Typ typ){
 		PanelTabbed ret = null;
 		switch(typ){
@@ -583,6 +612,11 @@ public class FrameMain extends JFrame {
 		aboutPanelState=i;
 	}
 	
+	/**
+	 * Setzt das About-Panel auf sichtbar / unsichtbar.
+	 * 
+	 * @param visible Angabe true / false für sichtbar / unsichtbar.
+	 */
 	public void setAboutPanelVisible(boolean visible){
 		if(visible){
 			aboutPanelState=1;
@@ -593,10 +627,10 @@ public class FrameMain extends JFrame {
 			tabpane.remove(4);
 		}
 	}
+	
 	public boolean isAutoSaveEnabled(){
 		return mi_autoSave.isSelected();
 	}
-
 	public JCheckBoxMenuItem getMi_autoSave() {
 		return mi_autoSave;
 	}
@@ -606,7 +640,15 @@ public class FrameMain extends JFrame {
 	public Userlevel getLevel() {
 		return level;
 	}
+	
+	/**
+	 * Setzt die zuletzt gespeicherten Configs.
+	 * 
+	 * @param l Config-Daten als String-Vektor.
+	 * @param live Angabe, ob die Config-Daten in Echtzeit aktualisiert werden sollen.
+	 */
 	public void setLastConfigs(Vector<String> l, boolean live) {
+		
 		lastConfigs = l;
 		if(lastConfigs != null && lastConfigs.size()>0){
 			if(lastConfigs.size() > 0){
@@ -629,6 +671,11 @@ public class FrameMain extends JFrame {
 			}
 		}
 	}
+	
+	/**
+	 * Aktualisiert die letzten Config-Daten.
+	 * @param s Config-Daten.
+	 */
 	public void updateLastConfigs(String s){
 		if(lastConfigs.size() > 2){
 			lastConfigs.remove(0);
@@ -636,6 +683,12 @@ public class FrameMain extends JFrame {
 		lastConfigs.add(s);
 		setLastConfigs(lastConfigs, true);
 	}
+	
+	/**
+	 * Setzt den Menüpunkt "Automatisches Speichern" auf an / aus.
+	 * 
+	 * @param b True / False für an / aus.
+	 */
 	public void setAutoSave(boolean b){
 		if(b){
 			//mi_autoSave.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/check.png")));
@@ -649,6 +702,7 @@ public class FrameMain extends JFrame {
 	
 	/**
 	 * V1.5: Methode zum updaten des Fenster-Titels
+	 * 
 	 * @author Matthis Hauschild
 	 * @author Jonas Traub
 	 */
@@ -660,7 +714,7 @@ public class FrameMain extends JFrame {
 			setTitle(baseTitle + (baseTitle.isEmpty() ? "" : ": ") + subTitle.trim());
 		
 	}
-	
+
 	public void removePane(){
 		
 		remove(tabpane);
@@ -682,6 +736,9 @@ public class FrameMain extends JFrame {
 
 	}
 
+	/**
+	 * Öffnet einen gewünschten Tab.
+	 */
 	public void openPane() {
 		
 		if(subTitle.equals(" "+lang.getProperty("tab.l2s")+" ")){
@@ -712,13 +769,17 @@ public class FrameMain extends JFrame {
 		add(tabpane);
 		paneDel = false;
 		
-		System.out.println("Test");
-		
 	}
 
+	/**
+	 * Prüft, ob Panel gelöscht wurde oder nicht.
+	 * 
+	 * @return Status des Panels.
+	 */
 	public boolean isPaneDel() {
 		return paneDel;
 	}
+	
 	public JMenuItem getMi_saveSelectedMc() {
 		return mi_saveSelectedMc;
 	}
@@ -734,4 +795,5 @@ public class FrameMain extends JFrame {
 	public JRadioButtonMenuItem[] getMi_languages() {
 		return mi_languages;
 	}
+	
 }

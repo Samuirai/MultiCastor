@@ -24,6 +24,12 @@ public class WrappingCellRenderer implements TableCellRenderer {
 	private TableCellRenderer wrappedCellRenderer;
 	private ViewController ctrl;
 
+	/**
+	 * Konstruktur.
+	 * 
+	 * @param cellRenderer Erwartet den entsprechenden Zellen-Renderer.
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 */
 	public WrappingCellRenderer(TableCellRenderer cellRenderer,
 			ViewController ctrl) {
 		super();
@@ -31,6 +37,18 @@ public class WrappingCellRenderer implements TableCellRenderer {
 		this.ctrl = ctrl;
 	}
 
+	/**
+	 * Ermittelt die Komponente des Tabellen-Zellen-Renderers.
+	 * 
+	 * @param table Tabelle.
+	 * @param value Wert der Zelle.
+	 * @param isSelected Ob derzeit ausgewählt ja / nein.
+	 * @param hasFocus Ob derzeit fokussiert ja / nein.
+	 * @param row Zeile.
+	 * @param colum Spalte.
+	 * 
+	 * @return Komponente.
+	 */
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
 		Component rendererComponent = wrappedCellRenderer

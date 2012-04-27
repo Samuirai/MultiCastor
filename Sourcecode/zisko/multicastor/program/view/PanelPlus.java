@@ -13,6 +13,14 @@ import javax.swing.JPanel;
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 
+/**
+ * Klasse, die den Inhalt des "+"-Panels definiert. Im "+" Panel erscheint
+ * eine Übersicht, welche die Möglichkeit bietet, alle verfügbaren Panels zu öffnen.
+ * 
+ * @author Filip Haase
+ *
+ */
+
 @SuppressWarnings("serial")
 public class PanelPlus extends JPanel{
 	
@@ -33,6 +41,13 @@ public class PanelPlus extends JPanel{
 	@SuppressWarnings("unused")
 	private FrameMain frame;
 	
+	/**
+	 * Konstruktor initialisiert die grafischen Komponenten und 
+	 * setzt Referenzen zum Frame und ViewController.
+	 * 
+	 * @param pFrame Frame-Main-Instanz.
+	 * @param pVCtrl Instanz des ViewControllers.
+	 */
 	public PanelPlus(FrameMain pFrame, ViewController pVCtrl){
 		this.vCtrl = pVCtrl;
 		this.frame = pFrame;
@@ -40,10 +55,16 @@ public class PanelPlus extends JPanel{
 		initComponents(true);
 	}
 	
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
 	public void reloadLanguage() {
 		initComponents(false);
 	}
 	
+	/**
+	 * Diese Methode initialisiert die grafischen Komponenten.
+	 * 
+	 * @param firstInit Gibt an, ob die Komponenten zum ersten Mal initialisiert werden oder nicht.
+	 */
     private void initComponents(boolean firstInit) {
     	if (firstInit){
     		GridBagLayout gridBayLayout = new GridBagLayout();

@@ -7,10 +7,11 @@ import javax.swing.*;
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 /**
- * Das Kontrollpanel f�r Multicasts. 
- * Mit diesem Panel k�nnen Multicasts gestartet, gestoppt und gel�scht werden.
+ * Das Kontrollpanel für Multicasts. 
+ * Mit diesem Panel können Multicasts gestartet, gestoppt und gelöscht werden.
+ * 
  * @author Daniel Becker
- *
+ * @author Christopher Westphal
  */
 @SuppressWarnings("serial")
 public class PanelMulticastControl extends JPanel {
@@ -24,8 +25,9 @@ public class PanelMulticastControl extends JPanel {
 	private MiscBorder mainBorder;
 
 	/**
-	 * Konstruktor f�r das Kontrollpanel welcher alle zugeh�rigen GUI Komponenten initialisiert.
-	 * @param ctrl Ben�tigete Referenz zum GUI Controller
+	 * Konstruktor für das Kontrollpanel welcher alle zugehörigen GUI Komponenten initialisiert.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
 	 */
 	public PanelMulticastControl(ViewController ctrl){
 		this.ctrl=ctrl;
@@ -36,6 +38,7 @@ public class PanelMulticastControl extends JPanel {
 		initButtons(ctrl,true);
 	}
 	
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
 	public void reloadLanguage(){
 		mainBorder.setTitle(lang.getProperty("miscBorder.mcControl"));
 		initButtons(ctrl,false);
@@ -43,7 +46,9 @@ public class PanelMulticastControl extends JPanel {
 	
 	/**
 	 * Hilfsfunktion welche die Buttons des Kontrollpanels initialisiert
-	 * @param ctrl Ben�tigete Referenz zum GUI Controller
+	 * 
+	 * @param ctrl Benötigete Referenz zum GUI Controller.
+	 * @param firstInit Gibt an, ob die Buttons zum ersten Mal initialisiert werden oder nicht.
 	 */
 	private void initButtons(ViewController ctrl,boolean firstInit) {
 		

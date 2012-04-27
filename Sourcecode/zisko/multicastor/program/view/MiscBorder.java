@@ -10,7 +10,7 @@ import javax.swing.border.TitledBorder;
 
 import zisko.multicastor.program.lang.LanguageManager;
 /**
- * Hilfsklasse zum verwalten der R�nder f�r Textfelder.
+ * Hilfsklasse zum verwalten der Ränder für Textfelder.
  * @author Daniel Becker 
  *
  */

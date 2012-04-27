@@ -21,7 +21,7 @@ import zisko.multicastor.program.lang.LanguageManager;
  * Die Klasse DraggableTabbedPane erbt von JTabbedPane und lässt zusätzlich zu JTabbed Pane
  * ein grafish ansprechendes verschieben von Tabs per Drag&Drop zu.
  * 
- * @version 1.5
+ * @version 2.0
  * @author Filip Haase
  * @author Jonas Traub
  * @author Matthis Hauschild
@@ -164,6 +164,8 @@ public class DraggableTabbedPane extends JTabbedPane {
   /**
    * Diese Methode dient dazu das Bild des Tabs zu zeichnen der derzeit gedraggt wird.
    * Sie wird in der mouseDragged (s.O.) Methode verwendet
+   * 
+   * @param g Graphics-Objekt
    */
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -262,7 +264,12 @@ public class DraggableTabbedPane extends JTabbedPane {
 		  	frame.getMi_open_about().setSelected(false);
   }
 
-  public int getIndex(String command){
+  /** 
+   * Ermittel den Index eines Tabs.
+   * 
+   *  @param command Der interne Name des Tabs
+   */
+  public int getIndex(String command) {
 		Map<String, Integer> openTabs = new HashMap<String, Integer>();
 		int openTabsCount = getTabCount();
 		Integer index = -1;
@@ -284,6 +291,12 @@ public class DraggableTabbedPane extends JTabbedPane {
 		return (index == null)?(-1):index;
   }
   
+  /**
+   * Öffnet (oder schließt) ein bestimmtes Tab, je nachdem in welchem Zustand sich das Tab 
+   * davor befunden hat.
+   * 
+   * @param command Der interne Name des Tabs
+   */
   public void openOrCloseTab(String command) {
 		int index = getIndex(command.substring(2));
 		
