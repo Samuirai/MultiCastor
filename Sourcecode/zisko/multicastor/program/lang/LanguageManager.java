@@ -213,12 +213,18 @@ public class LanguageManager extends Properties{
 	 * @throws FileNotFoundException If there is no file at the given path
 	 * @throws IOException If the file at the given path is not readable
 	 * @throws InvalidLanguageFileException If there are not all needed keys entered in the file at the given path
+	 * Remember: If there is an one file with all keys loaded before
+	 * it wont cause an exception if the now loaded file does not contain all keys!
+	 * Unavailable Keys wont be resetet to the new Language if they are not available
 	 */
 	private void loadLanguage(String currentLangFile) throws FileNotFoundException, IOException, InvalidLanguageFileException{
 		FileInputStream fis=new FileInputStream(currentLangFile);
 		load(fis);
 		fis.close();
 		//Check the Language File
+		//Remember: If there is an one file with all keys loaded before
+		//it wont cause an exception if the now loaded file does not contain all keys!
+		//Unavailable Keys wont be resetet to the new Language if they are not available
 		for (int i=0;i<keys.length;i++){
 			if(!containsKey(keys[i])){
 				throw new InvalidLanguageFileException(i,keys[i],keys); 
@@ -235,7 +241,7 @@ public class LanguageManager extends Properties{
 	public static void setCurrentLanguage(String currentLanguage) {
 		if (instance==null){
 			new LanguageManager("Language/"+currentLanguage+".lang");
-			//Not needed: current Language is already set by the constructor
+			//Following Line not needed: current Language is already set by the constructor
 			//LanguageManager.currentLanguage=currentLanguage;
 		}
 		else{
