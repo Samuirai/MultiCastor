@@ -25,8 +25,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
-import java.util.logging.Level;
-
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -41,9 +39,6 @@ import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
-
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-
 import zisko.multicastor.program.view.FrameMain;
 import zisko.multicastor.program.view.MiscBorder;
 import zisko.multicastor.program.view.MiscFont;
@@ -63,7 +58,6 @@ import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.MulticastData.Typ;
-import zisko.multicastor.program.data.UserlevelData.Userlevel;
 import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.InputValidator;
 import zisko.multicastor.program.model.NetworkAdapter;
@@ -89,9 +83,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @author Daniel Becker
 	 *
 	 */
-	public enum UpdateTyp{
+	public enum UpdateTyp {
 		UPDATE, INSERT, DELETE
 	}
+	
 	private SnakeGimmick.SNAKE_DIRECTION snakeDir = SNAKE_DIRECTION.E;
 	/**
 	 * Referenz zum MulticastController, wichtigste Schnittstelle der Klasse.
@@ -318,27 +313,21 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getSelectDeselect_all()){
 			pressBTSelectAll(Typ.L2_RECEIVER, true);
 		}
-<<<<<<< HEAD:Sourcecode/zisko/multicastor/program/controller/ViewController.java
 
+		/* Start/Stop Button im Control Panel*/
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
 			pressBTStartStop(Typ.L3_SENDER);
 		}
-=======
-		//XXX
-//		/* Start/Stop Button im Control Panel*/
-//		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
-//			pressBTStartStop(Typ.L3_SENDER);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getStartStop()){
-//			pressBTStartStop(Typ.L3_RECEIVER);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getStartStop()){
-//			pressBTStartStop(Typ.L2_SENDER);
-//		}
-//		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getStartStop()){
-//			pressBTStartStop(Typ.L2_RECEIVER);
-//		}
->>>>>>> cd60bab6fb2e5c3fb951932c91661d5ab5a0712d:Sourcecode/zisko/multicastor/program/controller/ViewController.java
+		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getStartStop()){
+			pressBTStartStop(Typ.L3_RECEIVER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getStartStop()){
+			pressBTStartStop(Typ.L2_SENDER);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getStartStop()){
+			pressBTStartStop(Typ.L2_RECEIVER);
+		}
+
 		
 		else if(e.getActionCommand().equals("hide")){
 			hideColumnClicked();
@@ -2149,8 +2138,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Konfigurationsdatei.
 	 */
 	public void submitInputData(){
-
-		System.out.println("Input Data Submitted");
 		
 		inputData_S3.setSelectedTab(getSelectedTab());
 		inputData_S2.setSelectedTab(getSelectedTab());
@@ -2239,9 +2226,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Funktion welche die aktuellen Nutzereingaben im Programm speichert.
 	 */
 	public void autoSave() {
-		
-		System.out.println("---autoSave()--- aufgerufen");
-		System.out.println("AutoSave ausgewählt: " + f.isAutoSaveEnabled());
 		
 		if(initFinished && f.isAutoSaveEnabled()) {
 			submitInputData();
