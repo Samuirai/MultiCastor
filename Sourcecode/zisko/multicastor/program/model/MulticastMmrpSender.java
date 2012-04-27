@@ -194,7 +194,6 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 				do{
 					try{
 						sender.sendDataPacket(myPacketBuilder.getPacket());
-						//System.out.println("Sending packet " + totalPacketCount );
 						if(totalPacketCount<65535)	totalPacketCount++;
 						else						totalPacketCount = 0;
 						resetablePcktCnt++;

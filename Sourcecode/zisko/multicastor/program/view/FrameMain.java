@@ -249,27 +249,27 @@ public class FrameMain extends JFrame {
 			
 			mi_open_l2r = new JCheckBoxMenuItem();
 			mi_open_l2r.setFont(MiscFont.getFont(0, 14));
-			mi_open_l2r.setActionCommand("open_layer2_r");
+			mi_open_l2r.setActionCommand("m_open_layer2_r");
 			mi_open_l2r.addActionListener(ctrl);
 			
 			mi_open_l2s = new JCheckBoxMenuItem();
 			mi_open_l2s.setFont(MiscFont.getFont(0, 14));
-			mi_open_l2s.setActionCommand("open_layer2_s");
+			mi_open_l2s.setActionCommand("m_open_layer2_s");
 			mi_open_l2s.addActionListener(ctrl);
 			
 			mi_open_l3r = new JCheckBoxMenuItem();
 			mi_open_l3r.setFont(MiscFont.getFont(0, 14));
-			mi_open_l3r.setActionCommand("open_layer3_r");
+			mi_open_l3r.setActionCommand("m_open_layer3_r");
 			mi_open_l3r.addActionListener(ctrl);
 			
 			mi_open_l3s = new JCheckBoxMenuItem();
 			mi_open_l3s.setFont(MiscFont.getFont(0, 14));
-			mi_open_l3s.setActionCommand("open_layer3_s");
+			mi_open_l3s.setActionCommand("m_open_layer3_s");
 			mi_open_l3s.addActionListener(ctrl);
 			
 			mi_open_about = new JCheckBoxMenuItem(lang.getProperty("mi.about"));
 			mi_open_about.setFont(MiscFont.getFont(0, 14));
-			mi_open_about.setActionCommand("open_about");
+			mi_open_about.setActionCommand("m_open_about");
 			mi_open_about.addActionListener(ctrl);
 			
 			m_info = new JMenu();
