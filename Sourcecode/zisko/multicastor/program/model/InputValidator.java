@@ -256,15 +256,14 @@ public class InputValidator {
 	 * @return PacketLength als int f�r eine valide Packetlength, -1 wenn String keine valide PacketLength, -2 wenn keine Zahl
 	 */
 	public static int checkMMRPPacketLength(String pacLen){
-		//TODO FH Richtige Länge setzen bisher von IPv6 übernommen
-		// 52 - 65527
+		// 52 - 1500
 		int plen;
 		try{
 			plen = Integer.parseInt(pacLen);
 		}catch(NumberFormatException e){
 			return -2;
 		}
-		if (plen>=52&& plen<=65527)
+		if (plen>=52&& plen<=1500)
 			return plen;
 		else 
 			return -1;		
