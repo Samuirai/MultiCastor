@@ -20,10 +20,10 @@ int main (){
   	pclose(fp);
 	
   	switch(bitVersion){
-		case 32: system("sudo java -Djava.library.path=/home/sk69/Downloads/32 -jar MMRP2.jar");
+		case 32: system("sudo java -Djava.library.path=lib/linux/32 -jar MultiCastor.jar");
 			 break;
 		
-		case 64:system("sudo java -Djava.library.path=/home/sk69/Downloads/32 -jar MMRP2.jar");
+		case 64:system("sudo java -Djava.library.path=lib/linux/64 -jar MultiCastor.jar");
 			break;
 	
 		default:printf("Could not start MultiCastor.");

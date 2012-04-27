@@ -2,6 +2,7 @@ package zisko.multicastor.program.model;
 
 import zisko.multicastor.program.data.MulticastData;
 
+
 /**
  * Eine Klasse zum Erstellen des Byte-Arrays, das per Multicast versendet wird.
  *
@@ -9,6 +10,7 @@ import zisko.multicastor.program.data.MulticastData;
 public class PacketBuilder implements zisko.multicastor.program.interfaces.PacketBuilderInterface{
 	
 	private String hostID   ="undefined";
+	private String randomID = null;
 	private boolean reset   = false;
 	
 	private int senderID    = 0,
@@ -30,6 +32,7 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 	public PacketBuilder(MulticastData mcBean){
 		//Zu übertragene Werte setzen
 		hostID      = mcBean.getHostID();
+		randomID	= mcBean.getRandomID();
 		reset       = false;
 		senderID    = mcBean.getThreadID();
 		txPktCnt    = 0;
@@ -51,12 +54,14 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 			hIDlength	= 0;
 		
 		//Wenn die Host-ID zu lang ist, wird sie abgeschnitten
-		if(hostID.length()<=29) hIDlength = hostID.length();
-		else					hIDlength = 29;
+		if(hostID.length()<=25) hIDlength = hostID.length();
+		else					hIDlength = 25;
 		//Setzen der Host-ID
 		System.arraycopy(hostID.getBytes(), 0, buf, pos, hIDlength);
 		//Rest der hostID mit Nullen auffüllen
-		for(pos = hIDlength;pos<29;pos++)	buf[pos] = 0;					//pos: 29
+		for(pos = hIDlength;pos<25;pos++)	buf[pos] = 0;					//pos: 25
+		System.arraycopy(ByteTools.convertToByte(Integer.parseInt(randomID, 16)), 0, buf, pos, 4);  //pos: 29
+		pos += 4;
 		System.arraycopy(ByteTools.convertToShortByte(senderID), 0, buf, pos, 2);
 		pos += 2;															//pos: 31
 		System.arraycopy(ByteTools.convertToByte(txPktCnt), 0, buf, pos, 4);
@@ -78,6 +83,15 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 		// Wenn ptkLength kleiner als die erforderte Mindestlänge ist, wird pktLength
 		// praktisch ignoriert
 		for(;pos<pktLength;pos++) buf[pos] = (byte) 0;
+	}
+	
+	/**
+	 * Methode, mit der nachträglich die RandomID geändert werden kann
+	 * @param randomID die neue randomID
+	 */
+	public void alterRandomID(String randomID){
+		int l = randomID.length();
+		System.arraycopy(ByteTools.convertToByte(Integer.parseInt(randomID.substring(l-1), 16) + Integer.parseInt(randomID.substring(0,l-1), 16) * 16), 0, buf, 25, 4);
 	}
 	
 	/**

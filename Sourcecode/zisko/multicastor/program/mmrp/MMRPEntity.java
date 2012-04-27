@@ -6,7 +6,6 @@ import java.io.IOException;
  * A sender and a receiver have to be available to register and deregister MMRP Paths. 
  * So this class contains the logic how to do these operations and the sender and receiver will inherit of this class.
  *  
- * @author Sebastian Koralewski
  *
  */
 public class MMRPEntity {
@@ -45,6 +44,7 @@ public class MMRPEntity {
 	 */
 	
 	public void deregisterPath() throws IOException{
+		// Send a leave message 
 		PacketHandler.sendPacket(this.deviceMACAddress,MMRPPacket.getLeave(this.deviceMACAddress, this.streamMACAddress));
 		this.keepPathAlive.interrupt();
 	}

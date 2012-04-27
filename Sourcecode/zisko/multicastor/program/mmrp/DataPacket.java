@@ -2,7 +2,6 @@ package zisko.multicastor.program.mmrp;
 
 /**
  * Build a packet with source, destination, data length and the data which should be send as information. 
- * @author Sebastian Koralewski
  */
 
 public class DataPacket {

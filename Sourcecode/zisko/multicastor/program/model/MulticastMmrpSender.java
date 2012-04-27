@@ -134,6 +134,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			//Setzen der ThreadID, da diese evtl.
 			//im Controller noch einmal ge�ndert wird
 			myPacketBuilder.alterThreadID(mcData.getThreadID());
+			myPacketBuilder.alterRandomID(mcData.getRandomID());
 			setStillRunning(true);
 			proclaim(2, lang.getProperty("message.mcSenderActivated"));
 		}else{
@@ -197,7 +198,6 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 				do{
 					try{
 						sender.sendDataPacket(myPacketBuilder.getPacket());
-						//System.out.println("Sending packet " + totalPacketCount );
 						if(totalPacketCount<65535)	totalPacketCount++;
 						else						totalPacketCount = 0;
 						resetablePcktCnt++;

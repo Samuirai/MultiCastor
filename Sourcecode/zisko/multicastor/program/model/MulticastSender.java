@@ -181,6 +181,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 			// Setzen der ThreadID, da diese evtl.
 			// im Controller noch einmal ge�ndert wird
 			myPacketBuilder.alterThreadID(mcData.getThreadID());
+			myPacketBuilder.alterRandomID(mcData.getRandomID());
 			isSending = true;
 			mcData.setActive(true);
 			setStillRunning(true);
