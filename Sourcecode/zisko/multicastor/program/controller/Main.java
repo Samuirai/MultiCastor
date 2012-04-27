@@ -149,7 +149,6 @@ public class Main {
 			// System.out.println("Parameter -h mitgegeben");
 			System.out.println(lang.getProperty("console.helptext"));
 		} else if (args.length != 0) {
-			// TODO Was fuern checkfile ist denn gemeint? (MH)
 			File checkfile = new File(args[0]);
 			if (checkfile.exists()) {
 				gui = new ViewController();

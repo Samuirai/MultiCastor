@@ -345,7 +345,6 @@ public class PanelMulticastConfig extends JPanel {
 		bt_enter = btEnter;
 	}
 	public String getSourceIP(int i, IPType iptype){
-		// TODO Hier muessen die Networkadapter fuer MMRP referenziert werden.
 		if (iptype == IPType.IPv4) {
 			return NetworkAdapter.getipv4Adapters().get(i).toString().substring(1);
 		} else if (iptype == IPType.IPv6) {
