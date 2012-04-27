@@ -5,12 +5,12 @@ import zisko.multicastor.program.data.MulticastData;
 public interface MulticastSenderInterface{
 	/**
 	 * im constructor bekommst du nen MultiCastData objekt
-	 * zus�tzlich gibts einen Loggerhaendler
+	 * zusaetzlich gibts einen Loggerhaendler
 	 */
 	
 	/**
 	 * An und Abmeldung wegen Multicast wird hier stattfinden
-	 * Man bedenke die Zeitverz�gerung beim aktivieren.
+	 * Man bedenke die Zeitverzoegerung beim aktivieren.
 	 */
 	public void setActive(boolean b);
 	
