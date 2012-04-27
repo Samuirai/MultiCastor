@@ -7,8 +7,10 @@ import java.util.logging.Logger;
 import zisko.multicastor.program.controller.ViewController;
 
 public class MessageCheck extends TimerTask{
+	
 	private Queue<String> messageQueue;
 	private String message;
+	@SuppressWarnings("unused")
 	private ViewController viewController;
 	private Logger logger;
 	
@@ -24,7 +26,6 @@ public class MessageCheck extends TimerTask{
 		message = messageQueue.poll();
 		while(message != null){
 			if(message.substring(0, 8).equals("[Fehler]")){
-			//	viewController.showMessage(ViewController.MessageTyp.ERROR, message.substring(8));
 				logger.log(Level.WARNING, message.substring(8));
 			} else {
 				logger.log(Level.INFO, message.substring(8));

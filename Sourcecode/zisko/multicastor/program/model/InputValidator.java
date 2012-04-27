@@ -5,8 +5,6 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import zisko.multicastor.program.data.MulticastData.Typ;
-
 /**
  * 
  * Stellt Methoden zur Validierung von Eingabewerten zu Verf�gung
@@ -77,8 +75,6 @@ public class InputValidator {
 		
 		boolean bool;
 		Inet6Address add;
-		
-
 		
 		if(!adresse.matches("\\A(?:" +
 							"(?:" +

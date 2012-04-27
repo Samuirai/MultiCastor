@@ -3,7 +3,6 @@ package zisko.multicastor.program.model;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.logging.Level;
 
@@ -11,7 +10,6 @@ import java.util.logging.Logger;
 
 import zisko.multicastor.program.mmrp.*;
 
-import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 

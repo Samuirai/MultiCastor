@@ -2,7 +2,6 @@ package zisko.multicastor.program.mmrp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.jnetpcap.Pcap;
@@ -46,8 +45,6 @@ public class PcapHandler {
 				r = 0;
 			}
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
-				// System.err.printf("Can't read list of devices, error is %s",
-				// errbuf.toString());
 				System.out.println("Error Stuff");
 				throw new IOException();
 			}

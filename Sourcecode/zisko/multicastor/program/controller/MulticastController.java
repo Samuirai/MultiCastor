@@ -16,7 +16,6 @@ import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserInputData;
-import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.interfaces.XMLParserInterface;
@@ -105,24 +104,8 @@ public class MulticastController {
 	// Config
 	/** Informationen zum wiederherstellen des letzten GUI Status */
 	private Vector<UserInputData> userInputData;
-	/**
-	 * In diesem Vektor werden UserLevelData-Objekte gespeichert. Daher sollte
-	 * er bis zu 12 Objekte enthalten. Eines fuer jeden moeglichen GUI-Status.
-	 */
-	private Vector<UserlevelData> userlevelData;
-	/**
-	 * In diesem Vektor werden die default UserLevelData-Objekte gespeichert.
-	 * Daher sollte er jederzeit 12 Objekte enthalten. Eines fuer jeden
-	 * moeglichen GUI-Status.
-	 */
-	private Vector<UserlevelData> userlevelDataDefault;
-	/**
-	 * Haelt die Pfade als String auf die zuletzt geladenen
-	 * Konfigurationsdateien. Dieser Vektor sollte vier Eintraenge enthalten.
-	 */
+	/** Haelt die Pfade als String auf die zuletzt geladenen Konfigurationsdateien. Dieser Vektor sollte vier Eintraenge enthalten.*/
 	private Vector<String> lastConfigs;
-	/** Speicher die Standardwerte fuer Userlevel: Beginner */
-	private Vector<MulticastData> defaultValuesUserlevelData;
 
 	/**
 	 * Erzeugt einen MulticastController.
@@ -196,21 +179,16 @@ public class MulticastController {
 		xml_parser = new xmlParser(logger);
 		lastConfigs = new Vector<String>();
 		// so lange wie noch keine geladen werden können:
-		/*
-		 * lastConfigs.add("/home/wagener/test1.cfg");
-		 * lastConfigs.add("/home/wagener/test2.cfg");
-		 * lastConfigs.add("/home/wagener/test3.cfg");
-		 * lastConfigs.add("/home/wagener/test4.cfg");
-		 */
-		userlevelData = new Vector<UserlevelData>();
-		userlevelDataDefault = new Vector<UserlevelData>();
+	/*	lastConfigs.add("/home/wagener/test1.cfg");
+		lastConfigs.add("/home/wagener/test2.cfg");
+		lastConfigs.add("/home/wagener/test3.cfg");
+		lastConfigs.add("/home/wagener/test4.cfg");
+	*/	
 		userInputData = new Vector<UserInputData>();
-		defaultValuesUserlevelData = new Vector<MulticastData>();
-
-		// AllesLaden(); // sollte von Thomas gemacht werden
-
-		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3,
-				mcMap_sender_l2, mcMap_receiver_l2, view_controller);
+		
+	//	AllesLaden(); // sollte von Thomas gemacht werden
+		
+		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, mcMap_sender_l2, mcMap_receiver_l2, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000, 1000);
 
@@ -639,24 +617,7 @@ public class MulticastController {
 		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
 
 	}
-
-	/**
-	 * Laedt die ULD-Objekte aus dem JAR-file.
-	 */
-	private void defaultUserlevelDataLaden() {
-		try {
-			xml_parser.loadDefaultULD(defaultValuesUserlevelData,
-					userlevelDataDefault);
-		} catch (Exception e) { // darf nicht passieren
-			logger.log(Level.SEVERE,
-					"Default UserlevelData could not be loaded.");
-			// System.out.println(((WrongConfigurationException)
-			// e).getErrorMessage());
-			// e.printStackTrace();
-			// System.out.println(e.getClass());
-		}
-	}
-
+		
 	/**
 	 * Loads data from autoSave() method.
 	 * 
@@ -668,19 +629,7 @@ public class MulticastController {
 											// zur�ck kommt!!!!!!!!!
 		return userInputData;
 	}
-
-	// TODO [MH] tbr
-	// /**
-	// * Laedt die Konfigurationsdatei am angegebenen Pfad. Fehlermeldungen
-	// werden ausgegeben.
-	// * Diese Funktion sollte
-	// * @param s String to Configuration file
-	// */
-	// public void loadConfigFile(String s, boolean l3_sender, boolean
-	// l2_sender, boolean l3_receiver, boolean l2_receiver){
-	// loadConfig(s, false, l3_sender, l2_sender, l3_receiver, l2_receiver);
-	// }
-
+	
 	public void loadDefaultMulticastConfig() {
 		loadMulticastConfig("", true);
 	}
@@ -695,10 +644,11 @@ public class MulticastController {
 	 *            MCD + UID + ULD geladen.
 	 */
 	public void loadGUIConfig(String path, boolean useDefaultXML) {
+		
 		final String defaultXML = "GUIConfig.xml";
 		String message = new String();
 		GUIData data = new GUIData();
-		boolean skip = false;
+
 		try {
 			xml_parser.loadGUIConfig(useDefaultXML ? defaultXML : path, data);
 			logger.log(Level.INFO, "Default GUI Configurationfile loaded.");
@@ -732,7 +682,7 @@ public class MulticastController {
 			} else {
 				message = "Unexpected error of type: " + e.getClass();
 			}
-			skip = true;
+
 			if (!useDefaultXML) {
 				message += " Used path: " + path;
 			}
@@ -797,47 +747,33 @@ public class MulticastController {
 			}
 			logger.log(Level.WARNING, message);
 		}
-
-		if (!skip) {
-			// Fuege Multicast hinzu
-			for (MulticastData m : multicasts) {
-				if (m.getTyp().equals(Typ.L3_RECEIVER)
-						|| m.getTyp().equals(Typ.L2_RECEIVER)
-						|| m.getTyp().equals(Typ.L3_SENDER)
-						|| m.getTyp().equals(Typ.L2_SENDER)) {
-					view_controller.addMC(m);
-				}
-			}
-
-			// TODO [MH] tbr
-			// if(userlevelData.size() < 4){
-			// //
-			// log("Error in loadConfigFile - ConfigFile did not contain 12 userLevelData objects (this is ignored for test purposes)");
-			// logger.log(Level.INFO,"In the Configfile were less than 4 UserlevelData objects. Default ULD will be used.");
-			// }
-		}
-		// TODO [MH] GUIConfigLoad woanders hin
-		view_controller.loadAutoSave();
+			
+	    if(!skip) {
+	    	// Fuege Multicast hinzu
+	    	for(MulticastData m : multicasts){
+	    		if (
+	    			m.getTyp().equals(Typ.L3_RECEIVER) ||
+		 	    	m.getTyp().equals(Typ.L2_RECEIVER) ||
+		 	    	m.getTyp().equals(Typ.L3_SENDER) ||
+		 	    	m.getTyp().equals(Typ.L2_SENDER)
+		 	    ){
+	    			view_controller.addMC(m);
+	    		}
+	    	}
+	    }
+	    view_controller.loadAutoSave();
 	}
-
+	
 	/**
-	 * Laedt die angegebene Konfigurationsdatei. Fehlermeldungen werden
-	 * geworfen. Diese Funktion sollte nur aus der Main aufgerufen werden.
-	 * Fehlermeldungen werden geworfen um versehentlichen Nutzen in der GUI zu
-	 * verhindern.
-	 * 
-	 * @param path
-	 *            Pfad zur Konfigurationsdatei
-	 * @throws FileNotFoundException
-	 *             Die Datei wurde nicht gefunden.
-	 * @throws SAXException
-	 *             Beim Parsen der Datei ist ein Fehler aufgetreten.
-	 * @throws IOException
-	 *             Ein anderer Inputfehler ist aufgetreten.
-	 * @throws WrongConfigurationException
+	 * Laedt die angegebene Konfigurationsdatei. Fehlermeldungen werden geworfen. Diese Funktion sollte nur aus der Main
+	 * aufgerufen werden. Fehlermeldungen werden geworfen um versehentlichen Nutzen in der GUI zu verhindern.
+	 * @param path Pfad zur Konfigurationsdatei
+	 * @throws FileNotFoundException Die Datei wurde nicht gefunden.
+	 * @throws SAXException Beim Parsen der Datei ist ein Fehler aufgetreten.
+	 * @throws IOException Ein anderer Inputfehler ist aufgetreten.
+	 * @throws WrongConfigurationException 
 	 */
-	public void loadConfigWithoutGUI(String path) throws FileNotFoundException,
-			SAXException, IOException, WrongConfigurationException {
+	public void loadConfigWithoutGUI(String path) throws FileNotFoundException, SAXException, IOException, WrongConfigurationException{
 		Vector<MulticastData> v = new Vector<MulticastData>();
 		xml_parser.loadMultiCastConfig(path, v);
 		if (v != null) {
@@ -926,19 +862,8 @@ public class MulticastController {
 				m.getValue().setActive(false);
 			}
 			v.clear();
-		}
-		// System.out.println("destroy 1");
-
-		// Er sollte definitiv noch auf die laufenden Threads warten..... das
-		// fehlt hier jetzt noch
-		// join() hat leider kein Ende gefunden.
-		/*
-		 * for(Map.Entry<MulticastData, Thread> m: threads.entrySet()){ try {
-		 * m.getValue().join(); } catch (InterruptedException e) {
-		 * logger.log(Level.INFO, "Thread got interrupted while dying"); //
-		 * e.printStackTrace(); } }
-		 */
-
+		}	
+		
 		mc_receiver_l3.removeAllElements();
 		mc_sender_l3.removeAllElements();
 		mc_receiver_l2.removeAllElements();
@@ -949,9 +874,9 @@ public class MulticastController {
 		mcMap_receiver_l2.clear();
 		mcMap_sender_l2.clear();
 
-		userlevelData.removeAllElements();
 	}
-
+	
+	
 	// ****************************************************
 	// Ein Hilfsfunktionen vor allem fuer mich, teils auch fuer Daniel
 	// ****************************************************

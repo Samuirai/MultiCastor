@@ -249,18 +249,15 @@ public class PanelMulticastConfig extends JPanel {
 		tf_udp_port = new JTextField();		
 		tf_groupIPaddress = new JTextField();
 		pan_udp_port.add(tf_udp_port,BorderLayout.CENTER);
-		//cb_sourceIPaddress.setPreferredSize(new Dimension(500,20));
 		tf_groupIPaddress.setBounds(5,15,205,20);		
 		tf_udp_port.setBounds(5,15,95,20);
 		tf_groupIPaddress.setFont(MiscFont.getFont(0,14));
 		tf_udp_port.setFont(MiscFont.getFont(0,14));
 		tf_udp_port.setHorizontalAlignment(JTextField.CENTER);
 		tf_groupIPaddress.setHorizontalAlignment(JTextField.CENTER);
-//		cb_sourceIPaddress.setHorizontalAlignment(JTextField.CENTER);
 		tf_groupIPaddress.setBorder(null);
 		tf_udp_port.setBorder(null);
 		tf_groupIPaddress.getDocument().addDocumentListener(ctrl);
-//		cb_sourceIPaddress.getDocument().addDocumentListener(ctrl);
 		tf_udp_port.getDocument().addDocumentListener(ctrl);
 		pan_groupIPaddress.add(tf_groupIPaddress,BorderLayout.CENTER);
 				
@@ -364,11 +361,13 @@ public class PanelMulticastConfig extends JPanel {
 	public InetAddress getSelectedAddress(Typ typ, IPType iptype){
 		// V1.5 [FH] Added L3 with IPv4 Stuff
 		/* [MH] Changed to iptype */
-		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
+		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			if(iptype == IPType.IPv4)
 				return InputValidator.checkIPv4(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
-			else
+			else {
 				return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
+			}
+		}
 		// [FH] Should not happen... if type is L2 we need to call getSelectedAddress(Typ typ)
 		else
 			return null;

@@ -16,12 +16,12 @@ public class MulticastData {
 	//********************************************
 	// Daten, die gehalten werden
 	//********************************************
-	private InetAddress groupIp = null;  // InetAddress.getByName()
-	private InetAddress sourceIp = null; // siehe dr�ber
+	private InetAddress groupIp = null;
+	private InetAddress sourceIp = null; 
 	private int udpPort = -1;
 	private int packetLength = -1;
 	private int ttl = -1;
-	private int packetRateDesired = -1; // wird versendet von jannik
+	private int packetRateDesired = -1;
 	private int packetRateMeasured = -1;
 	private Typ typ = Typ.UNDEFINED;
 	private int threadID = -1;
@@ -41,21 +41,17 @@ public class MulticastData {
 	private Source packetSource = Source.UNDEFINED;
 	private byte[] mmrpGroupMac;
 	private byte[] mmrpSourceMac;
-	// haette ich gerne noch Ende
-	// Avg Werte
 	private long jitterAvg = -1;
 	private long packetRateAvg = -1;
 	private long packetLossPerSecondAvg = -1;
 	private long trafficAvg = -1;
 	
-	//V1.5 [FH] added packetLost
 	private int packetLostCount = 0;
 	
 	//********************************************
 	// Eigene Datentypen
 	//********************************************	
 	public enum Typ {
-		// 1.5 Added L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER
 		UNDEFINED, CONFIG, L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER
 	}
 	
@@ -123,7 +119,6 @@ public class MulticastData {
 		maxInterruptionTime = d;
 		packetRateAvg = d;
 		packetRateMeasured = d;
-	//	hostID = "";	// muss man mal noch �berlegen ob man das zur�cksetzten m�chte
 		numberOfInterruptions = d;
 		averageInterruptionTime = d;
 		packetLossPerSecondAvg = d;

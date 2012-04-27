@@ -7,12 +7,8 @@ import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
-import zisko.multicastor.program.data.MulticastData.senderState;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.mmrp.*;
@@ -176,8 +172,6 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			totalPacketCount			= 0;
 			resetablePcktCnt			= 0;
 			cumulatedResetablePcktCnt	= 0;
-			
-			int ioExceptionCnt = 0;
 			
 			//Misst wie lange er sendt um die Paketrate zu erhalten
 			//und sleept den Rest der Sekunde
