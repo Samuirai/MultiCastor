@@ -1,7 +1,5 @@
 package zisko.multicastor.program.data;
 
-import java.net.InetAddress;
-
 /**
  * Diese Bean-Klasse h�llt Informationen �ber die GUI Config.
  * 

@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,10 +30,12 @@ public class PanelPlus extends JPanel{
 	
 	private LanguageManager lang;
 	
+	@SuppressWarnings("unused")
 	private FrameMain frame;
+	
 	public PanelPlus(FrameMain pFrame, ViewController pVCtrl){
 		this.vCtrl = pVCtrl;
-		frame = pFrame;
+		this.frame = pFrame;
 		lang=LanguageManager.getInstance();
 		initComponents(true);
 	}

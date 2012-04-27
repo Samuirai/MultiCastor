@@ -2,7 +2,6 @@ package zisko.multicastor.program.mmrp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.jnetpcap.Pcap;

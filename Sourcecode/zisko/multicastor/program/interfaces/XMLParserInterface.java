@@ -7,8 +7,6 @@ import org.xml.sax.SAXException;
 
 import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
-import zisko.multicastor.program.data.UserInputData;
-import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.model.WrongConfigurationException;
 
 
@@ -17,7 +15,7 @@ public interface XMLParserInterface
 
 	/** Liest eine XML-Konfigurationsdatei ein.
 	 * @param pfad Ort, an dem die Konfigurationsdatei liegt
-	 * @param v1 Enthält nach dem Laden alle Multicast-Eintraege der XML-Datei
+	 * @param v1 Enthï¿½lt nach dem Laden alle Multicast-Eintraege der XML-Datei
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws FileNotFoundException
@@ -25,13 +23,13 @@ public interface XMLParserInterface
 	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
 	// TODO [MH] check if tbr
-//	/** Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
+//	/** Auslesen einer XML-Konfigurationsdatei fï¿½r den User und aus der Kommandozeile
 //	 * @param pfad
 //	 * Ort, an dem die Konfigurationsdatei liegt
 //	 * @param v1
-//	 * MultiCastData enthält Multicast Konfigurationseinstellungen
+//	 * MultiCastData enthï¿½lt Multicast Konfigurationseinstellungen
 //	 * @param v2
-//	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
+//	 * UserLevelData enthï¿½lt persï¿½nliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
 //	 * @throws SAXException
 //	 * @throws FileNotFoundException
 //	 * @throws IOException
@@ -46,9 +44,9 @@ public interface XMLParserInterface
 	 * @throws IOException
 	 * @throws SAXException
 	 */
-	public void loadDefaultULD(Vector<MulticastData> v1, Vector<UserlevelData> v2) throws IOException, SAXException, WrongConfigurationException;
+	public void loadDefaultULD(Vector<MulticastData> v1) throws IOException, SAXException, WrongConfigurationException;
 	
-	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
+	/** Speichert die getï¿½tigten Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
 	 * @param v
@@ -58,7 +56,7 @@ public interface XMLParserInterface
 	public void saveMulticastConfig(String path, Vector<MulticastData> v) throws IOException;
 
 	
-	/** Speichert die getätigten GUI Konfigurationen in einer XML-Datei ab.
+	/** Speichert die getï¿½tigten GUI Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
 	 * @param data
@@ -67,7 +65,7 @@ public interface XMLParserInterface
 	 */
 	public void saveGUIConfig(String p, GUIData data) throws IOException; // [FF] GUI Config Zeug
 
-	/** lŠdt die GUI Konfigurationen aus einer XML-Datei.
+	/** lï¿½dt die GUI Konfigurationen aus einer XML-Datei.
 	 * @param pfad
 	 * Der Ort, an dem die Datei liegt 
 	 * @param data

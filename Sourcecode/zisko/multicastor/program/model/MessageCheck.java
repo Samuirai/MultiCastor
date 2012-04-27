@@ -7,8 +7,10 @@ import java.util.logging.Logger;
 import zisko.multicastor.program.controller.ViewController;
 
 public class MessageCheck extends TimerTask{
+	
 	private Queue<String> messageQueue;
 	private String message;
+	@SuppressWarnings("unused")
 	private ViewController viewController;
 	private Logger logger;
 	
