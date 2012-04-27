@@ -1,4 +1,4 @@
-mi.autoSave			=Automatisch speichern
+﻿mi.autoSave			=Automatisch speichern
 mi.changeWindowTitle=Fenstertitel ändern
 mi.language			=Sprache
 mi.saveConfiguration=Konfiguration speichern
@@ -108,7 +108,12 @@ error.invalidParameter	 =Kein gültiger Parameter.\n\nUsage:\tjava -jar multiCas
 
 error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte prüfen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.
 
-console.helptext		 =Nutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+error.network.noHostName	=Hostname kann nicht ermittelt werden. Fehlermeldung:
+error.network.settingUDP	=Fehler beim setzen des UDP-Port:
+error.network.noDefaultPort	=FATALER FEHLER: STANDART-PORT KANN NICHT ZUGEWIESEN WERDEN
+error.network.sourceIP		=Fehler beim setzen der Quell-IP
+
+console.helptext		=Nutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
  geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
  Der Pfad zur Konfigurationsdatei wir benötigt,\n\
  um MultiCastor ohne GUI zu starten.\n\n\
@@ -126,19 +131,29 @@ warning.invalidNetAdapter=Ungültiger Netzwerkadapter. Netzwerkadapter wurde auf
 
 toolTip.closeThisTab	 	=schlieﬂe diese Registerkarte
 toolTip.mcAddressRange		=Wählen sie eine Multicast IP Adresse (IPV4 oder IPV6)
-toolTip.ipFirst				=Geben sie erst eine IP Adresse an und wählen sie dann das Netzwerkinterace
+toolTip.ipFirst			=Geben sie erst eine IP Adresse an und wählen sie dann das Netzwerkinterace
 toolTip.specifyUDPPort		=Geben sie den UDP Port an
-toolTip.specifyTTL			=Geben sie die Lebenszeit an
+toolTip.specifyTTL		=Geben sie die Lebenszeit an
 toolTip.specifyPacketRate	=Spezifizieren sie die Paketrate
 toolTip.specifyPacketLength	=Spezifizieren sie die Paketlänge
 toolTip.selectNetInterface	=Wählen sie ein Netzwerkinterface für Multicast
 toolTip.selectMacAddress	=Wählen sie eine Multicast Mac Adresse
 
-message.setNewTitle			=Bitte geben sie einen neuen Titel ein
-message.noMcCreated			=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden könnten.
+message.setNewTitle		=Bitte geben sie einen neuen Titel ein
+message.noMcCreated		=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden könnten.
 message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewählt. Sie können beliebige Tabellenzeilen wählen. Mehrfachauswahl ist mit gedrückter Strg-Taste möglich.
 message.canNotOpenHelpPart1	=Die Hilfedatei konnte nicht geöffnet werden. Sie finden die Datei unter dem Pfad
-message.canNotOpenHelpPart2 =Sie benötigen eine PDF Reader um die Hilfedatei anzuzeigen.
+message.canNotOpenHelpPart2 	=Sie benötigen eine PDF Reader um die Hilfedatei anzuzeigen.
+message.useDefaultPort		=Versuche Standartport 4711 zu setzen...
+message.mcActivated		=MultiCast-Sender aktiviert
+message.mcDeaktivated		=MultiCast-Sender deaktiviert
+message.joinMcPart1		=Bei Multicast Gruppe angemeldet
+message.joinMcPart2		=als Sender. Nutze Methode
+message.unableToJoin		=Anmeldung bei Multicast-Gruppe fehlgeschlagen
+message.settingTTLErr		=Fehler beim setzen von TTL auf
+message.resetPackets		=Beim senden der reset Pakete:
+message.senderStoped		=Sender wurde angehalten
+message.whileSending		=Beim senden:
 
 about.license  = Lizensiert unter GPLv3.
 about.labelDev = Entwickler:
