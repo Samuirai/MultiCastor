@@ -12,10 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 
 @SuppressWarnings("serial")
-public class PanelPlus extends JPanel implements ActionListener{
+public class PanelPlus extends JPanel{
 	
 	private JButton l2s;
 	private JButton l2r;
@@ -23,6 +24,7 @@ public class PanelPlus extends JPanel implements ActionListener{
 	private JButton l3r;
 	private JButton about;
 	private JLabel l2sText;
+	private ViewController vCtrl;
 	JLabel l2rText;
 	JLabel l3sText;
 	JLabel l3rText;
@@ -31,18 +33,18 @@ public class PanelPlus extends JPanel implements ActionListener{
 	private LanguageManager lang;
 	
 	private FrameMain frame;
-	public PanelPlus(FrameMain pFrame){
+	public PanelPlus(FrameMain pFrame, ViewController pVCtrl){
+		this.vCtrl = pVCtrl;
 		frame = pFrame;
 		lang=LanguageManager.getInstance();
 		initComponents(true);
 	}
 	
-	public void reloadLanguage(){
+	public void reloadLanguage() {
 		initComponents(false);
 	}
 	
     private void initComponents(boolean firstInit) {
-    	    	
     	if (firstInit){
     		GridBagLayout gridBayLayout = new GridBagLayout();
             this.setLayout(gridBayLayout);
@@ -53,7 +55,7 @@ public class PanelPlus extends JPanel implements ActionListener{
         	l2s.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4sender.png")));
         	l2s.setFont(MiscFont.getFont(0,17));
         	l2s.setActionCommand("open_layer2_s");
-        	l2s.addActionListener(this);
+        	l2s.addActionListener(this.vCtrl);
         	add(l2s);
         	l2sText = new JLabel();
         	gridBayLayout.setConstraints(l2sText, new GridBagConstraints (1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));
@@ -64,7 +66,7 @@ public class PanelPlus extends JPanel implements ActionListener{
         	l2r.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv4receiver.png")));
         	l2r.setFont(MiscFont.getFont(0,17));
         	l2r.setActionCommand("open_layer2_r");
-        	l2r.addActionListener(this);
+        	l2r.addActionListener(this.vCtrl);
         	add(l2r);
         	l2rText = new JLabel();
         	gridBayLayout.setConstraints(l2rText, new GridBagConstraints (1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
@@ -75,7 +77,7 @@ public class PanelPlus extends JPanel implements ActionListener{
         	l3s.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6sender.png")));
         	l3s.setFont(MiscFont.getFont(0,17));
         	l3s.setActionCommand("open_layer3_s");
-        	l3s.addActionListener(this);
+        	l3s.addActionListener(this.vCtrl);
         	add(l3s);
         	l3sText = new JLabel();
         	gridBayLayout.setConstraints(l3sText, new GridBagConstraints (1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
@@ -86,7 +88,7 @@ public class PanelPlus extends JPanel implements ActionListener{
         	l3r.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/ipv6receiver.png")));
         	l3r.setFont(MiscFont.getFont(0,17));
         	l3r.setActionCommand("open_layer3_r");
-        	l3r.addActionListener(this);
+        	l3r.addActionListener(this.vCtrl);
         	add(l3r);
         	l3rText = new JLabel();
         	gridBayLayout.setConstraints(l3rText, new GridBagConstraints (1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
@@ -97,7 +99,7 @@ public class PanelPlus extends JPanel implements ActionListener{
         	about.setIcon(new ImageIcon(getClass().getResource("/zisko/multicastor/resources/images/about.png")));
         	about.setFont(MiscFont.getFont(0,17));
         	about.setActionCommand("open_about");
-        	about.addActionListener(this);
+        	about.addActionListener(this.vCtrl);
         	add(about);
         	aboutText = new JLabel();
         	gridBayLayout.setConstraints(aboutText, new GridBagConstraints (1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0 ));    	
@@ -121,8 +123,4 @@ public class PanelPlus extends JPanel implements ActionListener{
     		doLayout();
     	}
     }
-
-	public void actionPerformed(ActionEvent e) {
-		frame.getTabpane().openTab(e.getActionCommand());
-	}
 }

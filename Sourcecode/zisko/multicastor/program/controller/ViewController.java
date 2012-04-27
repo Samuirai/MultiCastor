@@ -249,7 +249,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			closeProgram();
 		}
 		
-		// V1.5: Wenn "Titel aendern" im Menue ausgewaehlt wurde, oeffne einen InputDialog
 		else if (e.getSource() == f.getMi_setTitle()) {
 			String temp = JOptionPane.showInputDialog(lang.getProperty("message.setNewTitle"), f.getBaseTitle());
 			if (temp != null) {
@@ -319,8 +318,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getSelectDeselect_all()){
 			pressBTSelectAll(Typ.L2_RECEIVER, true);
 		}
-		//XXX
-		/* Start/Stop Button im Control Panel*/
+
 		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
 			pressBTStartStop(Typ.L3_SENDER);
 		}
@@ -335,7 +333,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getActionCommand().equals("PopupCheckBox")){
 			popUpCheckBoxPressed();
 		}
+		
 		autoSave();
+		
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der User Reset View im Popup Menu des Tabellenkopf dr�ckt.
@@ -1900,23 +1900,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
     		mc.saveGUIConfig(chooser.getSelectedFile().getPath(), guidata);
         }		
     }
-		
-//      TODO @FF F�r dich als Codebsp. hier gelassen, falls das noch gebraucht wird (JT)
-//		if(e.getActionCommand().equals("ApproveSelection")){
-//			FrameFileChooser fc_save = getFrame().getFc_save();
-//			//System.out.println("selected File: "+fc_save.getSelectedFile());
-//			
-//			mc.saveConfig(	fc_save.getSelectedFile(), 
-//							fc_save.isCbSenderL3Selected(), 
-//							fc_save.isCbReceiverL3Selected());
-//			f.updateLastConfigs(fc_save.getSelectedFile());
-//			fc_save.getChooser().rescanCurrentDirectory();
-//			fc_save.toggle();
-//		}
-//		else if(e.getActionCommand().equals("CancelSelection")){
-//			getFrame().getFc_save().toggle();
-//		}
-	//}
 	 
 	/**
 	  * Funktion welche das Aussehen des Start Stop und Delete Buttons anpasst je nach dem welche Multicasts ausgew�hlt wurden.
@@ -2149,51 +2132,53 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Konfigurationsdatei.
 	 */
 	public void submitInputData(){
-		// TODO [MH] GUIConfigaenderungen hier
-		// Hier sind die gesamten GUI Einstellungen auszulesen zum Speichern
-			inputData_S3.setSelectedTab(getSelectedTab());
-			inputData_S2.setSelectedTab(getSelectedTab());
-			inputData_R3.setSelectedTab(getSelectedTab());
-			inputData_R2.setSelectedTab(getSelectedTab());
-			inputData_S3.setSelectedRowsArray(getSelectedRows(Typ.L3_SENDER));
-			inputData_S2.setSelectedRowsArray(getSelectedRows(Typ.L2_SENDER));
-			inputData_R3.setSelectedRowsArray(getSelectedRows(Typ.L3_RECEIVER));
-			inputData_R2.setSelectedRowsArray(getSelectedRows(Typ.L2_RECEIVER));
-			inputData_S3.setNetworkInterface(getPanConfig(Typ.L3_SENDER).getSelectedSourceIndex());
-			inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());			
-			inputData_S3.setGroupadress(getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getText());
-			inputData_S2.setGroupadress(getPanConfig(Typ.L2_SENDER).getTf_groupIPaddress().getText());	
-			inputData_R3.setGroupadress(getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().getText());
-			inputData_R2.setGroupadress(getPanConfig(Typ.L2_RECEIVER).getTf_groupIPaddress().getText());
-			inputData_S3.setPort(getPanConfig(Typ.L3_SENDER).getTf_udp_port().getText());
-			inputData_S2.setPort(getPanConfig(Typ.L2_SENDER).getTf_udp_port().getText());
-			inputData_R3.setPort(getPanConfig(Typ.L3_RECEIVER).getTf_udp_port().getText());
-			inputData_R2.setPort(getPanConfig(Typ.L2_RECEIVER).getTf_udp_port().getText());		
-			inputData_S3.setTtl(getPanConfig(Typ.L3_SENDER).getTf_ttl().getText());
-			inputData_S2.setTtl(getPanConfig(Typ.L2_SENDER).getTf_ttl().getText());			
-			inputData_S3.setPacketrate(getPanConfig(Typ.L3_SENDER).getTf_packetrate().getText());
-			inputData_S2.setPacketrate(getPanConfig(Typ.L2_SENDER).getTf_packetrate().getText());		
-			inputData_S3.setPacketlength(getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().getText());
-			inputData_S2.setPacketlength(getPanConfig(Typ.L2_SENDER).getTf_udp_packetlength().getText());		
-			inputData_S3.setActiveButton(getPanConfig(Typ.L3_SENDER).getTb_active().isSelected());
-			inputData_S2.setActiveButton(getPanConfig(Typ.L2_SENDER).getTb_active().isSelected());
-			inputData_R3.setActiveButton(getPanConfig(Typ.L3_RECEIVER).getTb_active().isSelected());
-			inputData_R2.setActiveButton(getPanConfig(Typ.L2_RECEIVER).getTb_active().isSelected());	
-			inputData_S3.setSelectedRows(getSelectedRows(Typ.L3_SENDER));
-			inputData_S2.setSelectedRows(getSelectedRows(Typ.L2_SENDER));
-			inputData_R3.setSelectedRows(getSelectedRows(Typ.L3_RECEIVER));
-			inputData_R2.setSelectedRows(getSelectedRows(Typ.L2_RECEIVER));
-			inputData_S3.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
-			inputData_S2.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
-			inputData_R3.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
-			inputData_R2.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+
+		System.out.println("Input Data Submitted");
+		
+		inputData_S3.setSelectedTab(getSelectedTab());
+		inputData_S2.setSelectedTab(getSelectedTab());
+		inputData_R3.setSelectedTab(getSelectedTab());
+		inputData_R2.setSelectedTab(getSelectedTab());
+		inputData_S3.setSelectedRowsArray(getSelectedRows(Typ.L3_SENDER));
+		inputData_S2.setSelectedRowsArray(getSelectedRows(Typ.L2_SENDER));
+		inputData_R3.setSelectedRowsArray(getSelectedRows(Typ.L3_RECEIVER));
+		inputData_R2.setSelectedRowsArray(getSelectedRows(Typ.L2_RECEIVER));
+		inputData_S3.setNetworkInterface(getPanConfig(Typ.L3_SENDER).getSelectedSourceIndex());
+		inputData_S2.setNetworkInterface(getPanConfig(Typ.L2_SENDER).getSelectedSourceIndex());			
+		inputData_S3.setGroupadress(getPanConfig(Typ.L3_SENDER).getTf_groupIPaddress().getText());
+		inputData_S2.setGroupadress(getPanConfig(Typ.L2_SENDER).getTf_groupIPaddress().getText());	
+		inputData_R3.setGroupadress(getPanConfig(Typ.L3_RECEIVER).getTf_groupIPaddress().getText());
+		inputData_R2.setGroupadress(getPanConfig(Typ.L2_RECEIVER).getTf_groupIPaddress().getText());
+		inputData_S3.setPort(getPanConfig(Typ.L3_SENDER).getTf_udp_port().getText());
+		inputData_S2.setPort(getPanConfig(Typ.L2_SENDER).getTf_udp_port().getText());
+		inputData_R3.setPort(getPanConfig(Typ.L3_RECEIVER).getTf_udp_port().getText());
+		inputData_R2.setPort(getPanConfig(Typ.L2_RECEIVER).getTf_udp_port().getText());		
+		inputData_S3.setTtl(getPanConfig(Typ.L3_SENDER).getTf_ttl().getText());
+		inputData_S2.setTtl(getPanConfig(Typ.L2_SENDER).getTf_ttl().getText());			
+		inputData_S3.setPacketrate(getPanConfig(Typ.L3_SENDER).getTf_packetrate().getText());
+		inputData_S2.setPacketrate(getPanConfig(Typ.L2_SENDER).getTf_packetrate().getText());		
+		inputData_S3.setPacketlength(getPanConfig(Typ.L3_SENDER).getTf_udp_packetlength().getText());
+		inputData_S2.setPacketlength(getPanConfig(Typ.L2_SENDER).getTf_udp_packetlength().getText());		
+		inputData_S3.setActiveButton(getPanConfig(Typ.L3_SENDER).getTb_active().isSelected());
+		inputData_S2.setActiveButton(getPanConfig(Typ.L2_SENDER).getTb_active().isSelected());
+		inputData_R3.setActiveButton(getPanConfig(Typ.L3_RECEIVER).getTb_active().isSelected());
+		inputData_R2.setActiveButton(getPanConfig(Typ.L2_RECEIVER).getTb_active().isSelected());	
+		inputData_S3.setSelectedRows(getSelectedRows(Typ.L3_SENDER));
+		inputData_S2.setSelectedRows(getSelectedRows(Typ.L2_SENDER));
+		inputData_R3.setSelectedRows(getSelectedRows(Typ.L3_RECEIVER));
+		inputData_R2.setSelectedRows(getSelectedRows(Typ.L2_RECEIVER));
+		inputData_S3.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+		inputData_S2.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+		inputData_R3.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
+		inputData_R2.setIsAutoSaveEnabled(""+f.getMi_autoSave().isSelected());
 			
-			Vector<UserInputData> packet = new Vector<UserInputData>();
-			packet.add(inputData_S3);
-			packet.add(inputData_R3);
-			packet.add(inputData_S2);
-			packet.add(inputData_R2);
-			mc.autoSave(packet);
+		Vector<UserInputData> packet = new Vector<UserInputData>();
+		packet.add(inputData_S3);
+		packet.add(inputData_R3);
+		packet.add(inputData_S2);
+		packet.add(inputData_R2);
+		mc.autoSave(packet);
+			
 	}
 	/**
 	 * Hilfsfunktion zur Bestimmung des UserInputData Objekts anhand des Typs.
@@ -2236,10 +2221,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	/**
 	 * Funktion welche die aktuellen Nutzereingaben im Programm speichert.
 	 */
-	public void autoSave(){
-		if(initFinished && f.isAutoSaveEnabled()){
+	public void autoSave() {
+		
+		System.out.println("---autoSave()--- aufgerufen");
+		System.out.println("AutoSave ausgewählt: " + f.isAutoSaveEnabled());
+		
+		if(initFinished && f.isAutoSaveEnabled()) {
 			submitInputData();
 		}
+		
 	}
 	/**
 	 * Funktion welche bei Programmstart die Automatische 
