@@ -81,6 +81,7 @@ public abstract class NetworkAdapter {
 		StringBuilder errbuf = new StringBuilder(); // For any error msgs
 
 		int r = Pcap.findAllDevs(alldevs, errbuf);
+		
 		if (!(r == Pcap.NOT_OK) && !(alldevs.isEmpty())) {
 			for(PcapIf p : alldevs){
 				try {
