@@ -176,20 +176,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			if (Desktop.isDesktopSupported()){
 				//Get desktop instance
 				Desktop desktop=Desktop.getDesktop();
-				//Check if the Browser is Available
-				/* This is an alternative way to show a pdf file using the browser
-				if (desktop.isSupported(Desktop.Action.BROWSE)){
-					try {
-						//Show Help File with Browser
-						URI uri=new URI(helpfile.getAbsolutePath());
-						desktop.browse(uri);
-					} catch (IOException e1) {
-						System.out.println("I/O Error in View Controller");
-					} catch (URISyntaxException e1) {
-						System.out.println("URI Syntax Exception in ViewController");
-					}
-				}
-				*/
 				//Check if Open with standard Program is supported
 				if (desktop.isSupported(Desktop.Action.OPEN)){
 					//Show Help File with standart PDF-Reader
