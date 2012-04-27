@@ -183,7 +183,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			f.getTabpane().openTab(e.getActionCommand());
 		}
 		
-		//TODO Help file �ffnen!
+		//TODO Help file oeffnen!
 		else if(e.getSource()==f.getMi_help()){
 			//Create File from help file path of current language file
 			File helpfile=new File("Language/help."+LanguageManager.getCurrentLanguage()+".pdf");
@@ -2286,10 +2286,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	}
 	
 	/**
-	 *	liest die UserInputData f�r einen bestimmten Programmteil, 
+	 *	liest die UserInputData fuer einen bestimmten Programmteil, 
 	 *	ordnet die Tabellenspalten entsprechend an und setzt die Sichtbarkeit der Tabellenspalten.
 	 * @param input UserInputData Objekt welches aus der permanenten Konfigurationsdatei gelesen wird
-	 * @param typ Bestimmt den Programmteil f�r welchen die Tabelle angepasst werden soll
+	 * @param typ Bestimmt den Programmteil fuer welchen die Tabelle angepasst werden soll
 	 */
 	public void setColumnSettings(UserInputData input, Typ typ) {
 		System.out.println("input: " + input);
@@ -2418,7 +2418,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	public void setGUIConfig(GUIData data) {
 		
-		this.guidata = data;
+		guidata = data;
 		LanguageManager.setCurrentLanguage(data.getLanguage());
 		this.f.reloadLanguage();
 		this.f.repaint();

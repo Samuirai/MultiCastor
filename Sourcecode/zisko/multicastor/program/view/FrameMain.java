@@ -16,12 +16,8 @@ import zisko.multicastor.program.lang.LanguageManager;
  * Hauptfenster des MultiCastor Tools
  * 
  * In Version 2 wurde CheckBox und RadioButton Farbgebungsfehler gefixt
- * Außerdem Drag&Drop Tabs durch DraggableTabbedPane eingeführt
+ * Ausserdem Drag&Drop Tabs durch DraggableTabbedPane eingeuehrt
  * @version 1.5
- * @author Daniel Becker
- * @author Filip Haase
- * @author Jonas Traub
- * @author Matthis Hauschild
  */
 @SuppressWarnings("serial")
 public class FrameMain extends JFrame {
@@ -56,7 +52,7 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelTabbed panel_sen_lay3;
 	/**
-	 * V1.5: Panel zum �ffnen neuer Tabs
+	 * V1.5: Panel zum oeffnen neuer Tabs
 	 */
 	private PanelPlus panel_plus;
 	/**
@@ -160,7 +156,7 @@ public class FrameMain extends JFrame {
 	
 	/**
 	 * Funktion welche die Menubar initialisiert.
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl,boolean firstInit) {
 		
