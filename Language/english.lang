@@ -104,7 +104,12 @@ error.invalidParameter	 =Not a valid parameter.\n\nUsage:\tjava -jar multiCastor
 
 error.logfile.canNotWrite=Log file could not be written to disk. Please check if you have writing permission in the MultiCastor directory.
 
-console.helptext		 =Usage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+error.network.noHostName	=Unable to get Host-Name. Error is:
+error.network.settingUDP	=Error while Setting UDP-Port:
+error.network.noDefaultPort	=FATAL ERROR: DEFAULT-PORT IS NOT ASSIGNABLE
+error.network.sourceIP		=Error while setting the Source IP
+
+console.helptext		=Usage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
  type 'java -jar multiCastor.jar -h' for more information\n\n\
  To start the tool without a graphical user interface,\n\
  the configuration-file-path is required.\n\n\
@@ -122,19 +127,29 @@ warning.invalidNetAdapter=Invalid Network Adapter. Network Interface has been se
 
 toolTip.closeThisTab		=close this tab
 toolTip.mcAddressRange		=Select a Multicast IP Address, either IPv4 or IPv6
-toolTip.ipFirst				=Specify the IP address first, then select an interface
+toolTip.ipFirst			=Specify the IP address first, then select an interface
 toolTip.specifyUDPPort		=Specify an UDP port
-toolTip.specifyTTL			=Specify the time to live
+toolTip.specifyTTL		=Specify the time to live
 toolTip.specifyPacketRate	=Specify the packetrate
 toolTip.specifyPacketLength	=Specify the packetlength
 toolTip.selectNetInterface	=Select a network interface for multicast
 toolTip.selectMacAddress	=Select a multicast MAC Address
 
-message.setNewTitle			=Please enter a new title
-message.noMcCreated			=There is no Multicast data available for saving. Please create any Multicasts first.
+message.setNewTitle		=Please enter a new title
+message.noMcCreated		=There is no Multicast data available for saving. Please create any Multicasts first.
 message.noMcSelected		=There is no Multicast data selected right now. You can select any row in the tables. You can select multiple rows by holding the Ctrl-Key.
 message.canNotOpenHelpPart1	=MultiCastor was unable to open the help file. You will find the help file at
-message.canNotOpenHelpPart2 =You will need a pdf reader for open this file.
+message.canNotOpenHelpPart2 	=You will need a pdf reader for open this file.
+message.useDefaultPort		=Try to set default Port 4711...
+message.mcActivated		=MultiCast-Sender activated
+message.mcDeaktivated		=MultiCast-Sender deactivated
+message.joinMcPart1		=Joined Multicast-group
+message.joinMcPart2		=as sender using method
+message.unableToJoin		=Was not able to join multicast-group
+message.settingTTLErr		=error while setting TTL to
+message.resetPackets		=While sending reset Packets:
+message.senderStoped		=Sender was stopped
+message.whileSending		=While sending:
 
 about.license  = Licensed under GPLv3.
 about.labelDev = Developers:
