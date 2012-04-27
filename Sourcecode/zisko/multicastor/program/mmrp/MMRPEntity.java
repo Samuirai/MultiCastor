@@ -45,6 +45,7 @@ public class MMRPEntity {
 	 */
 	
 	public void deregisterPath() throws IOException{
+		// Send a leave message 
 		PacketHandler.sendPacket(this.deviceMACAddress,MMRPPacket.getLeave(this.deviceMACAddress, this.streamMACAddress));
 		this.keepPathAlive.interrupt();
 	}
