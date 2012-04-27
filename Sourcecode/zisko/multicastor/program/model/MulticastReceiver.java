@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.MulticastSocket;
 import java.net.SocketTimeoutException;
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

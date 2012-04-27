@@ -3,7 +3,6 @@ package zisko.multicastor.program.model;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.logging.Level;
 
@@ -11,7 +10,6 @@ import java.util.logging.Logger;
 
 import zisko.multicastor.program.mmrp.*;
 
-import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 
@@ -178,6 +176,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		} catch (IOException e) {
 			proclaim(3, "Could not register receiver path");
 			this.setActive(false);
+		} catch (NullPointerException e) {
+			proclaim(1, "jnetpcap probably not installed");
+			this.setActive(false);
 		}
 		
 		while(active){
@@ -199,6 +200,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			receiver.deregisterPath();
 		} catch (IOException e) {
 			proclaim(3, "Could not deregister receiver path");
+		} catch (NullPointerException e) {
+			proclaim(1, "jnetpcap probably not installed");
+			this.setActive(false);
 		}
 	}
 

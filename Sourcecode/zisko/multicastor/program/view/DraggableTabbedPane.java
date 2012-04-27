@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.swing.JTabbedPane;
 
+import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -39,6 +40,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 	  private Rectangle bounds;
 	  private FrameMain frame;
 	  private LanguageManager lang;
+	  private ViewController vCtrl;
 
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
@@ -47,8 +49,11 @@ public class DraggableTabbedPane extends JTabbedPane {
    *  
    *  @param parentFrame Referenz auf GUI-Frame
    */
-  public DraggableTabbedPane(final FrameMain parentFrame) {
+  public DraggableTabbedPane(final FrameMain parentFrame, ViewController pVCtrl) {
+	  
     super();
+    
+    this.vCtrl = pVCtrl;
     
     lang=LanguageManager.getInstance();
     frame = parentFrame;
@@ -193,7 +198,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l3r")+" "));
 			else{
 				insertTab(" "+lang.getProperty("tab.l3r")+" ", null, frame.getPanel_rec_lay3(), null, openTabsCount-1);
-				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6receiver.png"));
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6receiver.png", vCtrl));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l3r().setSelected(true);
@@ -202,7 +207,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l3s")+" "));
 			else{
 				insertTab(" "+lang.getProperty("tab.l3s")+" ", null, frame.getPanel_sen_lay3(), null, openTabsCount-1);
-				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6sender.png"));
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv6sender.png", vCtrl));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l3s().setSelected(true);
@@ -211,7 +216,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l2s")+" "));
 			else{
 				insertTab(" "+lang.getProperty("tab.l2s")+" ", null, frame.getPanel_sen_lay2(), null, openTabsCount-1);
-				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4sender.png"));
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4sender.png", vCtrl));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l2s().setSelected(true);
@@ -220,7 +225,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l2r")+" "));
 			else{
 				insertTab(" "+lang.getProperty("tab.l2r")+" ", null, frame.getPanel_rec_lay2(), null, openTabsCount-1);
-				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4receiver.png"));
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/ipv4receiver.png", vCtrl));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_l2r().setSelected(true);
@@ -229,7 +234,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 				setSelectedIndex(openTabs.get(" "+lang.getProperty("mi.about")+" "));
 			else{
 				insertTab(" "+lang.getProperty("mi.about")+" ", null, frame.getPanel_about(), null, openTabsCount-1);
-				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/about.png"));
+				setTabComponentAt(openTabsCount-1, new ButtonTabComponent(this, "/zisko/multicastor/resources/images/about.png", vCtrl));
 				setSelectedIndex(openTabsCount-1);
 			}
 			frame.getMi_open_about().setSelected(true);
@@ -255,20 +260,6 @@ public class DraggableTabbedPane extends JTabbedPane {
 			frame.getMi_open_l2s().setSelected(false);
 	  }else if(command.equals(" "+lang.getProperty("mi.about")+" "))
 		  	frame.getMi_open_about().setSelected(false);
-  }
-  
-  /**
-   *  Schaut ob wir die TabPane vlt. entfernen können
-   *  Wenn der TabCount = 2 ist, also außer dem "Plus-Tab" nur ein 
-   *  wirklicher Tab geöffnet ist, machen wir dies direkt
-   */
-  public void lookIfWeCan(){
-	  // Die Zeit hat leider nicht gereicht diesen Code voll zu testen
-	  // deswegen wurde diese Funktionalität wieder entfernt
-	  // Bleibt aber im Code also feel free wieder einzubauen ;)
-	  /*if(getTabCount() == 2){
-		  frame.removePane();
-	  }*/
   }
 
 }

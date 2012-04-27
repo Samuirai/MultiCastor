@@ -158,6 +158,8 @@ public class LanguageManager extends Properties{
 		"message.setNewTitle",
 		"message.noMcCreated",
 		"message.noMcSelected",
+		"message.canNotOpenHelpPart1",
+		"message.canNotOpenHelpPart2",
 		"about.license",
 		"about.labelDev"
 	};

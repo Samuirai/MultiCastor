@@ -2,7 +2,6 @@ package zisko.multicastor.program.mmrp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.jnetpcap.Pcap;
@@ -38,11 +37,14 @@ public class PcapHandler {
 			// NICs
 
 			StringBuilder errbuf = new StringBuilder(); // For any error msgs
-
-			int r = Pcap.findAllDevs(alldevs, errbuf);
+			int r = 0;
+			try {
+				r = Pcap.findAllDevs(alldevs, errbuf);
+			} catch (NoClassDefFoundError e) {
+				System.out.println("[Warning] NoClassDefFoundError. jnetpcap probably not installed.");
+				r = 0;
+			}
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
-				// System.err.printf("Can't read list of devices, error is %s",
-				// errbuf.toString());
 				System.out.println("Error Stuff");
 				throw new IOException();
 			}

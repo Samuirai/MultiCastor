@@ -16,7 +16,6 @@ import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserInputData;
-import zisko.multicastor.program.data.UserlevelData;
 import zisko.multicastor.program.interfaces.MulticastSenderInterface;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.interfaces.XMLParserInterface;
@@ -84,14 +83,8 @@ public class MulticastController{
 	// Config
 	/** Informationen zum wiederherstellen des letzten GUI Status */
 	private Vector<UserInputData> userInputData;
-	/** In diesem Vektor werden UserLevelData-Objekte gespeichert. Daher sollte er bis zu 12 Objekte enthalten. Eines fuer jeden moeglichen GUI-Status. */
-	private Vector<UserlevelData> userlevelData;
-	/** In diesem Vektor werden die default UserLevelData-Objekte gespeichert. Daher sollte er jederzeit 12 Objekte enthalten. Eines fuer jeden moeglichen GUI-Status. */
-	private Vector<UserlevelData> userlevelDataDefault;
 	/** Haelt die Pfade als String auf die zuletzt geladenen Konfigurationsdateien. Dieser Vektor sollte vier Eintraenge enthalten.*/
 	private Vector<String> lastConfigs;
-	/** Speicher die Standardwerte fuer Userlevel: Beginner */
-	private Vector<MulticastData> defaultValuesUserlevelData;
 
 	/**
 	 * Erzeugt einen MulticastController.
@@ -156,10 +149,7 @@ public class MulticastController{
 		lastConfigs.add("/home/wagener/test3.cfg");
 		lastConfigs.add("/home/wagener/test4.cfg");
 	*/	
-		userlevelData = new Vector<UserlevelData>();
-		userlevelDataDefault = new Vector<UserlevelData>();
 		userInputData = new Vector<UserInputData>();
-		defaultValuesUserlevelData = new Vector<MulticastData>();
 		
 	//	AllesLaden(); // sollte von Thomas gemacht werden
 		
@@ -457,6 +447,8 @@ public class MulticastController{
 		data.setL3_SENDER(GUIData.TabState.invisible);
 		data.setL2_RECEIVER(GUIData.TabState.invisible);
 		data.setL3_RECEIVER(GUIData.TabState.invisible);
+		data.setABOUT(GUIData.TabState.invisible);
+		data.setPLUS(GUIData.TabState.visible);
 		
 		// set the new state if they are visible
 		for(int i=0; i<view_controller.getFrame().getTabpane().getTabCount(); ++i) {
@@ -469,6 +461,10 @@ public class MulticastController{
 				data.setL2_RECEIVER(GUIData.TabState.visible);
 			if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
 				data.setL3_RECEIVER(GUIData.TabState.visible);
+			if(title.equals(" "+lang.getProperty("mi.about")+" "))
+				data.setABOUT(GUIData.TabState.visible);
+			if(title.equals(" + "))
+				data.setPLUS(GUIData.TabState.visible);
 		}
 		
 		// get the selected tab
@@ -482,6 +478,10 @@ public class MulticastController{
 			data.setL2_RECEIVER(GUIData.TabState.selected);
 		if(title.equals(" "+lang.getProperty("tab.l3r")+" "))
 			data.setL3_RECEIVER(GUIData.TabState.selected);
+		if(title.equals(" "+lang.getProperty("mi.about")+" "))
+			data.setABOUT(GUIData.TabState.selected);
+		if(title.equals(" + "))
+			data.setPLUS(GUIData.TabState.selected);
 		
 		data.setLanguage(LanguageManager.getCurrentLanguage());
 		data.setWindowName(view_controller.getFrame().getBaseTitle());
@@ -505,21 +505,6 @@ public class MulticastController{
 		saveGUIConfig("GUIConfig.xml", data); // [FF] added gui config method
 
 	}
-	
-	
-	/**
-	 * Laedt die ULD-Objekte aus dem JAR-file.
-	 */
-	private void defaultUserlevelDataLaden(){
-		try {
-			xml_parser.loadDefaultULD(defaultValuesUserlevelData, userlevelDataDefault);
-		} catch (Exception e) { // darf nicht passieren
-			logger.log(Level.SEVERE, "Default UserlevelData could not be loaded.");		
-//			System.out.println(((WrongConfigurationException) e).getErrorMessage());
-//			e.printStackTrace();
-//			System.out.println(e.getClass());
-		}
-	}
 		
 	/**
 	 * Loads data from autoSave() method.
@@ -539,10 +524,11 @@ public class MulticastController{
 	 * @param useDefaultXML Wenn hier true gesetzt ist, wird der Standardpfad genommen und MCD + UID + ULD geladen.
 	 */
 	public void loadGUIConfig(String path, boolean useDefaultXML) {
+		
 		final String defaultXML = "GUIConfig.xml";
 		String message = new String();
 		GUIData data = new GUIData();
-		boolean skip = false;
+
 		try {
 			 xml_parser.loadGUIConfig(useDefaultXML ? defaultXML : path, data);
 			 logger.log(Level.INFO, "Default GUI Configurationfile loaded.");
@@ -576,7 +562,7 @@ public class MulticastController{
 			} else {
 				message = "Unexpected error of type: " + e.getClass();
 			}
-			skip = true;
+
 			if (!useDefaultXML) {
 				message += " Used path: " + path;
 			}
@@ -737,18 +723,6 @@ public class MulticastController{
 			}
 			v.clear();
 		}	
-		//	System.out.println("destroy 1");
-			
-			// Er sollte definitiv noch auf die laufenden Threads warten..... das fehlt hier jetzt noch
-			// join() hat leider kein Ende gefunden.
-		/*	for(Map.Entry<MulticastData, Thread> m: threads.entrySet()){
-				try {
-					m.getValue().join();
-				} catch (InterruptedException e) {
-					logger.log(Level.INFO, "Thread got interrupted while dying");
-				//	e.printStackTrace();
-				}
-			} */
 		
 		mc_receiver_l3.removeAllElements();
 		mc_sender_l3.removeAllElements();
@@ -759,8 +733,7 @@ public class MulticastController{
 		mcMap_sender_l3.clear();
 		mcMap_receiver_l2.clear();
 		mcMap_sender_l2.clear();
-		
-		userlevelData.removeAllElements();
+
 	}
 	
 	

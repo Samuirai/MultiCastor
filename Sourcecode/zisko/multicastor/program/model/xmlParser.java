@@ -36,10 +36,7 @@ import org.xml.sax.SAXException;
 import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
-import zisko.multicastor.program.data.UserInputData;
 import zisko.multicastor.program.data.UserlevelData;
-import zisko.multicastor.program.data.GUIData.TabState;
-import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -66,13 +63,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		popupsEnabled, startStopCheckBox, graph, 
 		graphTyp, console, typ, userlevel
 	}
-	private enum uidTag{
-		selectedTab, selectedUserlevel, groupadress,
-		networkInterface, port, ttl, packetrate, 
-		packetlength,activeButton, selectedRows,
-		columnOrderString, columnVisibilityString,
-		isAutoSaveEnabled
-	}
 	
 	public xmlParser(Logger logger){
 		this.logger = logger;
@@ -97,39 +87,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
-//	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
-//	{
-//		Document doc = parseDocument(pfad);
-//			    
-//		/*
-//		 * Ab hier die Daten aus dem XML 
-//		 * ausgelesen und in Vektor Objekte gespeichert.
-//		 * Die Daten werden in folgender Reihe ausgelesen
-//		 * 1. MultiCastData (<mc> im XML ) in den Vektor v1
-//		 * 2. UserLevelData (<ud> im XML ) in den Vektor v2
-//		 * 3. Pfade  ( <Paths> im XML ) in den Vektor v3
-//		 */
-//		
-//		if(v1 != null){
-//			loadMulticastData(doc, v1);
-//		}
-//		if(v2 != null){
-//			loadUserlevelData(doc, v2);
-//		}
-//		if(v3 != null){
-//			loadUserInputData(doc,v3);
-//		}
-//		if(v3 != null){
-//			loadPathData(doc, v4);
-//		}
-//		
-//	}
-//	
-//	public void loadConfig( String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2 ) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException
-//	{
-//		loadConfig(pfad, v1, v2, null, null);
-//	}
-	
 	private void loadGUIData(Document doc, GUIData data) {
 		//********************************************************
 	    // Lese die GUI Konfigurationsdaten aus dem XML
@@ -151,6 +108,10 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  		  data.setL3_SENDER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 		  		if(tabList.item(i).getNodeName().equals("L3_RECEIVER"))
 		  		  data.setL3_RECEIVER(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("ABOUT"))
+			  	  data.setABOUT(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
+		  		if(tabList.item(i).getNodeName().equals("PLUS"))
+			  	  data.setPLUS(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 			}
 		}
 		NodeList windowTitle = doc.getElementsByTagName("WindowName");
@@ -189,13 +150,9 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    	for(int i=0; i<mcList.getLength(); i++) {   
 	    		//Evaluiere nur L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
 	    		if(mcList.item(i).getNodeName().equals("#text")) {
-	    			//System.out.println("raus:"+mcList.item(i).getNodeName());
 	    			continue;
 	    		}
 	    		mcNummer++;
-	    		
-	    		//System.out.println("NODENAME:"+mcList.item(i).getNodeName());
-	    		//System.out.println("NR"+(mcNummer));
 	    		
 	    		mcd = new MulticastData();
 	    		Node configNode;
@@ -473,111 +430,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    }
 			 }		 
 	
-	private void loadUserInputData(Document doc, Vector<UserInputData> v3) throws SAXException, FileNotFoundException, IOException
-	{
-		
-		//Suche den Tag Multicasts
-	    NodeList userinputdata = doc.getElementsByTagName("UserInputData");
-	    
-	    //Der Tag "Multicasts" ist nur 1 Mal vorhanden,
-	    //wenn das XML korrekt ist
-	    if(userinputdata.getLength()==1)
-	    {
-	    	//L�sche bisherige Einstellungen
-		    v3.clear();
-		    
-	    	//Erstelle neues MulticastData Objekt
-	    	UserInputData uid;
-	    	
-	    	//Finde alle ChildNodes von Multicasts
-	    	//Diese sind SENDER_V4, RECEIVER_V4, SENDER_V6, RECEIVER_V6 oder UNDEFINED
-	    	NodeList uidList = userinputdata.item(0).getChildNodes();
-	    	
-	    	
-	    	//Iteration SENDER_V4/RECEIVER_V4,SENDER_V6,RECEIVER_V6 Tags
-	    	for(int i=0; i<uidList.getLength(); i++)
-	    	{   
-	    		//Evaluiere nur SENDER_V4/RECEIVER_V4,SENDER_V6,RECEIVER_V6 Tags
-	    		if(uidList.item(i).getNodeName()=="#text"){
-	    			continue;
-	    		}
-	    		
-	    		uid = new UserInputData();
-	    		Node configNode;
-		    	Element configValue;
-		    	
-	    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
-	    		NodeList configList=uidList.item(i).getChildNodes();
-	    		
-	    		//Iteration �ber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
-	    		for(int j=0; j<configList.getLength(); j++)
-	    		{
-		    		configNode=configList.item(j);
-
-		    		if(configNode.getNodeType()== Node.ELEMENT_NODE)
-			    	{
-			    		configValue = (Element)configNode;
-			    		String val = configValue.getTextContent();
-			    		String stag = configValue.getTagName();
-			    		uidTag tag = uidTag.valueOf(stag);
-				    			//F�ge den Inhalt des Elementes dem uid-Objekt hinzu
-				    			switch(tag)
-				    			{
-				    				case selectedTab: uid.setSelectedTab(val); break;
-				    				case groupadress: uid.setGroupadress(val); break;
-				    				case networkInterface: uid.setNetworkInterface(val); break;
-				    				case port: uid.setPort(val); break;
-				    				case ttl: uid.setTtl(val); break;
-				    				case packetrate: uid.setPacketrate(val); break;
-				    				case packetlength: uid.setPacketlength(val); break;
-				    				case activeButton: uid.setActiveButton(val); break;
-				    				case selectedRows: uid.setSelectedRows(val); break;
-				    				case columnOrderString: uid.setColumnOrderString(val); break;
-				    				case columnVisibilityString: uid.setColumnVisibilityString(val);
-				    				case isAutoSaveEnabled: uid.setIsAutoSaveEnabled(val); break;
-				    			}
-				    }//end of if
-				   
-			    }//end of for
-	    		 //F�ge das uid-Objekt dem Vektor v3 hinzu
-			     v3.add(uid);
-		    }
-		}
-	}
-	
-	private void loadPathData(Document doc, Vector<String> v3)
-	{
-			NodeList list = doc.getElementsByTagName("PathData");
-			 if(list.getLength()==1)
-			    {
-			    	//L�sche bisherige Einstellungen
-				    v3.clear();
-				    
-				    //Variablen
-				    Node configNode;
-				    Element configValue;
-			    	
-			    	//Lese die Werte der Konfigurationen aus
-				    NodeList configList = list.item(0).getChildNodes();
-		
-			    		for(int i=0; i<configList.getLength(); i++)
-			    		{
-			    			 //Evaluiere nur g�ltige Nodes
-				    		if(configList.item(i).getNodeName()=="#text"){
-				    			continue;
-				    		}
-				    		//System.out.println(configList.item(i).getNodeName());
-			    			configNode=configList.item(i);
-			    			if(configNode.getNodeType()== Node.ELEMENT_NODE)
-				    		{
-				    			configValue = (Element)configNode;
-				    			String val = configValue.getTextContent();
-				    			v3.add(val);
-				    		}
-			    		}
-			    }
-	}
-	
 	@Override
 	public void saveGUIConfig(String pfad, GUIData data) throws IOException {
 		// [FF] saveGuiConfig
@@ -626,6 +478,10 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  el.setTextContent(data.getL3_SENDER().toString());
 		tabs.appendChild(el=doc.createElement("L3_RECEIVER"));
 		  el.setTextContent(data.getL3_RECEIVER().toString());
+		tabs.appendChild(el=doc.createElement("ABOUT"));
+		  el.setTextContent(data.getABOUT().toString());
+		tabs.appendChild(el=doc.createElement("PLUS"));
+		  el.setTextContent(data.getPLUS().toString());
 		  
 		Element language = doc.createElement("Language");
 		  language.setTextContent(data.getLanguage());  
@@ -781,91 +637,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
-	/* Speichert momentanen Status des GUI inklusive Inhalt aller Eingabefelder in einer XML-Datei ab. */
-	private void saveUserInputData(Document doc, Element root, Vector<UserInputData> v3) throws IOException
-	{
-		 //Erzeugt Root Element f�r die MultiCast Konfigurationen
-        Element userinputdata = doc.createElement("UserInputData");
-        root.appendChild(userinputdata);
-        
-       //F�r alle verschiedenen Konfigurationen
-	         for(int count=0; count<v3.size();count++)
-	         {
-	        	 UserInputData uid = v3.get(count);
-	        	 
-	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-	        	 //F�ge dementsprechend ein Kind Element hinzu
-	        	 String typ = uid.getSelectedTab();
-	        	 Element uidTyp = doc.createElement(typ);
-	        	 userinputdata.appendChild(uidTyp);
-	        	 
-		         //F�r alle vorhandenen Einstellungen
-	        	 for(uidTag tag : uidTag.values())
-		         {
-		        	 Element uidElement = doc.createElement(tag.toString());
-		        	 Text text =doc.createTextNode("");
-		             
-		        		 switch(tag)
-		        		 {
-		        		 	case selectedTab: text = doc.createTextNode(uid.getSelectedTab()); break;
-		        		 	case selectedUserlevel: text = doc.createTextNode(uid.getSelectedUserlevel()); break;
-		        		 	case groupadress: text = doc.createTextNode(uid.getGroupadress()); break;
-		        		 	case networkInterface: text = doc.createTextNode(uid.getNetworkInterface()); break;
-		        		 	case port: text = doc.createTextNode(uid.getPort()); break;
-		        		 	case ttl: text = doc.createTextNode(uid.getTtl()); break;
-		        		 	case packetrate: text = doc.createTextNode(uid.getPacketrate()); break;
-		        		 	case packetlength: text = doc.createTextNode(uid.getPacketlength()); break;
-		        		 	case activeButton: text = doc.createTextNode(uid.getActiveButton()); break;
-		        		 	case selectedRows: text = doc.createTextNode(uid.getSelectedRows()); break;
-		        		 	case columnOrderString: text = doc.createTextNode(uid.getColumnOrderString()); break;
-		        		 	case columnVisibilityString: text = doc.createTextNode(uid.getColumnVisibilityString()); break;
-		        		 	case isAutoSaveEnabled: text=doc.createTextNode(uid.getIsAutoSaveEnabled()); break;
-		        		 }
-		        		 uidElement.appendChild(text);
-			        	 uidTyp.appendChild(uidElement);
-		        	 }
-			        
-			      }	
-	}
-	
-
-	private void savePathData(Document doc, Element root, Vector<String> v3)
-	{	//********************************************************
-		// Schreibe Speicherpfad Konfigurationsdaten in das XML
-	    //********************************************************  
-			
-		/*
-		 * Hier entsteht ein XML der Form
-		 * <PathData>
-		 * 	<RecentFile1></RecentFile1>
-		 * 	<RecentFile2></RecentFile2>
-		 * 	<RecentFile3></RecentFile3>
-		 * </PathData>
-		 */
-		
-		//F�gt das oberste Element, "PathData", hinzu.
-		Element pfade = doc.createElement("PathData");
-        root.appendChild(pfade);      
-        
-        Text pfadValue;  
-        int size = v3.size();
-        Element pfad; 
-        
-        //F�gt die 3 zuletzt benutzten Konfigurationsdateien dem XML hinzu.
-        for(int count=0;count<v3.size();count++)
-        {
-        	if(size>=count)
-        	{
-        		pfad = doc.createElement("RecentFile"+count);
-            	pfade.appendChild(pfad);
-            	pfadValue= doc.createTextNode(v3.get(count).toString());
-                pfad.appendChild(pfadValue);
-        	}
-        }
-	}
-	
-
-	
 	/** Liest die automatisch gespeicherte Datei ein
 	 * @param v1
 	 * @param v2
@@ -984,6 +755,12 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		WrongConfigurationException ex = new WrongConfigurationException();
 		ex.setErrorMessage("Error in configuration file: Value \""+value+"\" of "+tag+" in Multicast "+(multicast+1)+" is empty.");
 		throw ex;
+	}
+
+	@Override
+	public void loadDefaultULD(Vector<MulticastData> v1) throws IOException,
+			SAXException, WrongConfigurationException {
+		
 	}
 
 	

@@ -202,6 +202,12 @@ public class MulticastSender extends MulticastThreadSuper implements
 		usedMethod = _method;
 		setActive(active);
 	}
+	
+	public void endIt(){
+		isSending = false;
+		this.setActive(false);
+		mCtrl.stopMC(mcData);
+	}
 
 	/**
 	 * hier geschieht das eigentliche Senden. Beim Starten des Threads wird
@@ -232,8 +238,7 @@ public class MulticastSender extends MulticastThreadSuper implements
 					"Was not able to join multicast-group "
 							+ mcData.getGroupIp() + ": " + e.getMessage());
 			// �berspringen der Sende-Whileschleife
-			isSending = false;
-			mcData.setActive(false);
+			this.endIt();
 		}
 
 		// TTL setzen
@@ -247,15 +252,14 @@ public class MulticastSender extends MulticastThreadSuper implements
 		// zur Sicherheit ein paar mehr als eins...
 		myPacketBuilder.setReset(true);
 		try {
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 3; i++){
 				mcSocket.send(new DatagramPacket(myPacketBuilder.getPacket(),
 						mcData.getPacketLength(), mcGroupIp, udpPort));
+			}
 		} catch (IOException e) {
 			proclaim(1, "While sending reset Packets: " + e.getMessage()
 					+ "\nSender was stopped");
-			this.setActive(false);
-			mCtrl.stopMC(mcData);
-			return;
+			this.endIt();
 		}
 		myPacketBuilder.setReset(false);
 		resetablePcktCnt += 3;
@@ -323,8 +327,8 @@ public class MulticastSender extends MulticastThreadSuper implements
 							JOptionPane.showMessageDialog(new JFrame(),
 									"Sender is working again");
 							ioExceptionCnt = 0;
-							lastIOExceptionCnt = 0;
 						}
+						lastIOExceptionCnt = 0;						
 
 					} catch (IOException e1) {
 						if (lastIOExceptionCnt >= 10) {// V1.5 [FH] Made this
@@ -349,14 +353,12 @@ public class MulticastSender extends MulticastThreadSuper implements
 										JOptionPane.DEFAULT_OPTION,
 										JOptionPane.WARNING_MESSAGE, null,
 										options, options[0]) == 0) {
-									isSending = false;
-									this.setActive(false);
-									mCtrl.stopMC(mcData);
+									this.endIt();
 								} else
 									ioExceptionCnt = 1;
 
 							ioExceptionCnt++;
-						} 
+						}
 					}catch (IllegalArgumentException e){}
 
 				} while (((totalPacketCount % packetRateDes) != 0) && isSending);

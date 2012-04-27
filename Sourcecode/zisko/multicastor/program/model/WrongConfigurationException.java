@@ -7,6 +7,11 @@ package zisko.multicastor.program.model;
  */
 public class WrongConfigurationException extends Exception
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4106264200218128114L;
+	
 	private String errorMessage;
 
 	public void setErrorMessage(String errorMessage)

@@ -17,7 +17,7 @@ public abstract class MiscFont{
 	private static float font_size = 12;
 	private static int font_style = 1;
 	private static Font mc_font = null;
-	//private static URL path = MiscFont.class.getResource("/zisko/multicastor/resources/fonts/calibri.ttf");
+
 	/**
 	 * Statischer Codeblock zum laden der Schriftart
 	 */
@@ -46,18 +46,15 @@ public abstract class MiscFont{
 	/**
 	 * Statische Funktion zum Anfordern der Standardschriftart betimmter Formatierung.
 	 * @param style 0=normal, 1=bold, 2=italic, 3=bolditalic
-	 * @param size die gewählte Schriftgröße
+	 * @param size die gewï¿½hlte Schriftgrï¿½ï¿½e
 	 * @return die angeforderte Standardschrift.
 	 */
 	public static Font getFont(int style, float size){
 		font_size=size;
 		font_style=style;
-		//System.out.println(type);
 		return createFont();
 	}
 	private static Font createFont(){
-		//System.out.println("size: "+font_size);
-		//System.out.println("style: "+font_style);
 		mc_font=mc_font.deriveFont(font_size);
 		mc_font=mc_font.deriveFont(font_style);
 		return mc_font;

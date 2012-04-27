@@ -47,12 +47,10 @@ public class PanelStatusBar extends JPanel {
 		lb_trafficUP.setFont(MiscFont.getFont());
 		lb_trafficUP.setPreferredSize(new Dimension(150,20));
 		lb_trafficUP.setHorizontalAlignment(SwingConstants.LEFT);
-		//lb_trafficUP.setBorder(new LineBorder(Color.black));
 		lb_trafficDown = new JLabel(lang.getProperty("status.in")+": 0,000 Mbps");
 		lb_trafficDown.setFont(MiscFont.getFont());
 		lb_trafficDown.setPreferredSize(new Dimension(105,20));
 		lb_trafficDown.setHorizontalAlignment(SwingConstants.LEFT);
-		//lb_trafficDown.setBorder(new LineBorder(Color.black));
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(100, 20));
 		pan_east.add(lb_multicast_selected);

@@ -5,7 +5,7 @@ import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
 
 public class UserInputData {
-	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> läuft über columnOrderString
+	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> lï¿½uft ï¿½ber columnOrderString
 	private ArrayList<Integer> columnVisibility; // siehe columnVisiblityString
 	private String selectedTab = Typ.L3_SENDER.toString();
 	private String selectedUserlevel = Userlevel.EXPERT.toString();
@@ -127,13 +127,9 @@ public class UserInputData {
 		}
 		setColumnVisibilityString(columnVisibility.toString());
 		setColumnOrderString(columnOrder.toString());
-		//System.out.println(columnVisibility.toString());
-		//System.out.println(columnOrder.toString());
 	}
 	public void hideColumn(int i){
 		columnVisibility.remove(i);
-//		System.out.println("visibility: "+columnVisibility.toString());
-//		System.out.println(columnOrder.toString());
 	}
 	public void changeColumns(int from, int to){
 		Integer bufferTo = columnVisibility.get(to);
@@ -154,8 +150,6 @@ public class UserInputData {
 		columnVisibility.set(to, bufferFrom);
 		columnOrder.set(orderTo, bufferOrderFrom);
 		columnOrder.set(orderFrom, bufferOrderTo);
-//		System.out.println(columnVisibility.toString());
-//		System.out.println(columnOrder.toString());
 	}
 	public ArrayList<Integer> getColumnOrder(){
 		return columnOrder;
@@ -172,15 +166,13 @@ public class UserInputData {
 		}
 		return ret;
 	}
-	public ArrayList getSavedColumnVisibility(){
+	public ArrayList<Integer> getSavedColumnVisibility(){
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		String s = columnVisibilityString.substring(1, columnVisibilityString.length()-1);
-//		System.out.println("after substring: "+s);
 		String order[] = s.split(", ");
 		for(int i = 0 ; i < order.length ; i++){
 			ret.add(Integer.parseInt(order[i]));
 		}
-//		System.out.println("generated ArrayList: "+ret.toString());
 		return ret;
 	}
 	public void setColumnOrderString(String columnOrderString)
@@ -268,7 +260,6 @@ public class UserInputData {
 		return ret;
 	}
 	public boolean isActive(){
-		//System.out.println("isactive: "+activeButton);
 		boolean ret = false;
 		if(activeButton.equals("true")){
 			ret=true;
