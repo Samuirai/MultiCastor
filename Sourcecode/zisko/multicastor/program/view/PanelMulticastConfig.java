@@ -106,14 +106,14 @@ public class PanelMulticastConfig extends JPanel {
 				);
 			}
 		} else if (typ == Typ.L2_RECEIVER || typ == Typ.L2_SENDER) {
-			tf_groupIPaddress.setToolTipText(lang.getProperty("toolTip.selectMacAddress")+ "<br />"+
-					"(any adress with a 1 at last number in first Byte." +
-					"Example: 01:00:00:00:00:00)");
+			tf_groupIPaddress.setToolTipText("<html>"+lang.getProperty("toolTip.selectMacAddress")+ "<br />"+
+					"(any adress with a 1 at last bit in first Byte.<br />" +
+					"Example: 01:00:00:00:00:00)</html>");
 			cb_sourceIPaddress.setToolTipText(lang.getProperty("toolTip.selectNetInterface"));
 			
 			if(typ == Typ.L2_SENDER) {
 				tf_packetrate.setToolTipText(lang.getProperty("toolTip.specifyPacketRate")+" (1 - 65535)");
-				tf_udp_packetlength.setToolTipText(lang.getProperty("toolTip.specifyPacketLength")+" (64 - 1520 Byte)");
+				tf_udp_packetlength.setToolTipText(lang.getProperty("toolTip.specifyPacketLength")+" (52 - 1500 Byte)");
 			}
 		}
 	}
@@ -121,7 +121,6 @@ public class PanelMulticastConfig extends JPanel {
 	public void reloadLanguage(){
 		PanelTabbed tabpart = null;
 		
-		//TODO @SK/FH Hier muss noch L2 dazu??? -> �ndert bei Sprachwechsel Buttonbeschriftung abh�ngig davon welcher Tab gerade ausgew�hlt ist.
 		switch(ctrl.getSelectedTab()){
 			case L3_SENDER: tabpart=ctrl.getFrame().getPanel_sen_lay3(); break;
 			case L3_RECEIVER: tabpart=ctrl.getFrame().getPanel_rec_lay3(); break;
@@ -362,11 +361,13 @@ public class PanelMulticastConfig extends JPanel {
 	public InetAddress getSelectedAddress(Typ typ, IPType iptype){
 		// V1.5 [FH] Added L3 with IPv4 Stuff
 		/* [MH] Changed to iptype */
-		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
+		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			if(iptype == IPType.IPv4)
 				return InputValidator.checkIPv4(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
-			else
+			else {
 				return InputValidator.checkIPv6(getSourceIP(cb_sourceIPaddress.getSelectedIndex()-1, iptype));
+			}
+		}
 		// [FH] Should not happen... if type is L2 we need to call getSelectedAddress(Typ typ)
 		else
 			return null;

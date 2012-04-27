@@ -9,9 +9,13 @@ import java.util.logging.Logger;
 
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
+import zisko.multicastor.program.lang.LanguageManager;
 
 
 public class MulticastReceiver extends MulticastThreadSuper {
+	
+	private LanguageManager lang = LanguageManager.getInstance();
+	
 	/** Javasocket fuer Multicasts. */
 	private MulticastSocket multicastSocket;
 	/** Wenn auf wahr, lauscht dieser Receiver auf ankommende Pakete. */
@@ -78,8 +82,8 @@ public class MulticastReceiver extends MulticastThreadSuper {
 		}
 		active = b;
 		mcData.setActive(b);
-	// Values will be resetted when Receiver actually stops. Just before calling update functions in PacketAnalyzer
-	//	packetAnalyzer.resetValues();
+		//Values will be resetted when Receiver actually stops. Just before calling update functions in PacketAnalyzer
+		packetAnalyzer.resetValues();
 	}
 	
 	/**
