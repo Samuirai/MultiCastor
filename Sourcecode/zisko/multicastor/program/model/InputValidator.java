@@ -8,7 +8,6 @@ import java.net.UnknownHostException;
 /**
  * 
  * Stellt Methoden zur Validierung von Eingabewerten zu Verf�gung
- * @author Johannes Beutel
  *
  */
 public class InputValidator {

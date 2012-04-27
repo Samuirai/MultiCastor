@@ -12,18 +12,22 @@ import zisko.multicastor.program.lang.LanguageManager;
 
 /**
  * Selbstdefinierter Handler, der die zu loggenden Nachrichten formatiert und ausgibt.
- * @author Thomas LÔøΩder
  */
 
 public class MulticastLogHandler extends ConsoleHandler	{
-	
+	/** 
+	 * ViewController Referenz
+	 */
 	private ViewController viewController;
+	
+	/**
+	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 */
 	private LanguageManager lang=LanguageManager.getInstance();
 	
 	/**
 	 * Normaler Konstruktor. 
 	 */
-	
 	public MulticastLogHandler()	{
 		super();
 		}

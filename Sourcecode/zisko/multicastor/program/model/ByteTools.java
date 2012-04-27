@@ -2,7 +2,6 @@ package zisko.multicastor.program.model;
 
 /**
  * Diese Klasse stellt static Methoden zur Verfügung, um mit Byte-Arrays zu arbeiten
- * @author jannik
  */
 public class ByteTools {
 	/**

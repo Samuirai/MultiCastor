@@ -27,12 +27,12 @@ import zisko.multicastor.program.interfaces.MulticastThreadSuper;
  * nachtr√§gliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
  * ist.
  * 
- * @author Filip Haase
- * @author Christopher Westphal
- * 
  */
 public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	
+	/**
+	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 */
 	private LanguageManager lang = LanguageManager.getInstance();
 	
 	/** Wenn auf wahr, lauscht dieser Receiver auf ankommende Pakete. */
@@ -45,6 +45,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */
 	PacketAnalyzer packetAnalyzer;
+	
 	private MMRPReceiver receiver;
 
 	/**

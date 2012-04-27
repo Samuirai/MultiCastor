@@ -11,15 +11,17 @@ import java.util.Vector;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
 
+import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
  * Abstrakte Hilfsklasse welche die Netzwerkadapter des Systems ausliest und nach IPv4 und IPv6 sortiert.
- * @author Daniel Becker
- *
  */
 public abstract class NetworkAdapter {
 	
+	/** 
+	 * Network Type
+	 */
 	public enum IPType {
 		IPv4, IPv6, MAC
 	}

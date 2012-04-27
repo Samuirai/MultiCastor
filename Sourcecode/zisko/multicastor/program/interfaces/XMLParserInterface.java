@@ -22,16 +22,6 @@ public interface XMLParserInterface
 	 */
 	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
-	/**Liest die Default ULD Konfiguration und Standartwerte aus dem JAR-File
-	 * @param v1
-	 * Vektor aus Multicast Konfigurationseinstellungen
-	 * @param v2
-	 * Vektor aus GUI Konfigurationseinstellungen
-	 * @throws IOException
-	 * @throws SAXException
-	 */
-	public void loadDefaultULD(Vector<MulticastData> v1) throws IOException, SAXException, WrongConfigurationException;
-	
 	/** Speichert die get�tigten Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll

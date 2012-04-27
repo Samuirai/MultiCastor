@@ -4,7 +4,6 @@ import zisko.multicastor.program.data.MulticastData;
 
 /**
  * Eine Klasse zum Erstellen des Byte-Arrays, das per Multicast versendet wird.
- * @author jannik
  *
  */
 public class PacketBuilder implements zisko.multicastor.program.interfaces.PacketBuilderInterface{

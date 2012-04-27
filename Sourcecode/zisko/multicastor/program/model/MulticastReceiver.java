@@ -11,9 +11,16 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
-
+/**
+ * Ein MulticastReceiver entspricht genau einem MulticastData-Objekt vom Receiver Typ. Der MulticastReceiver ist
+ * fuer das Beitreten und Verlassen der MulticastGruppen zustaending. Er kann gestartet und gestoppt werden. Sie extended
+ * {@link MulticastThreadSuper}, ist also ein Runnable.
+ */
 public class MulticastReceiver extends MulticastThreadSuper {
 	
+	/**
+	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 */
 	private LanguageManager lang = LanguageManager.getInstance();
 	
 	/** Javasocket fuer Multicasts. */

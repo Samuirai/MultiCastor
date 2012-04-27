@@ -11,6 +11,9 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
+/**
+ * UpdateTask ist ein Timer, der die Oberfläche/Tabelle aktuallisiert
+ */
 public class UpdateTask extends TimerTask {
 	private ViewController viewController;
 	private Logger logger;
@@ -23,6 +26,15 @@ public class UpdateTask extends TimerTask {
 	//V1.5 [FH] edded that memory warning is only appearing once
 	private boolean memoryWarned = false;
 
+	/**
+	 * Konstruktor
+	 * @param logger Logger der zum loggen benutzt wird
+	 * @param mcSenderL3 Multicast Sender L3 Daten
+	 * @param mcReceiverL3 Multicast Empfänger L3 Daten
+	 * @param mcSenderL2 Multicast Sender L2 Daten
+	 * @param mcReceiverL2 Multicast Empfänger L2 Daten
+	 * @param viewController viewController für die Oberfläche
+	 */
 	public UpdateTask(Logger logger,
 			Map<MulticastData, MulticastThreadSuper> mcSenderL3,
 			Map<MulticastData, MulticastThreadSuper> mcReceiverL3,

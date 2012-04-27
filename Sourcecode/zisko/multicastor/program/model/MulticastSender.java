@@ -31,8 +31,6 @@ import zisko.multicastor.program.lang.LanguageManager;
  * n�chtr�gliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
  * ist.
  * 
- * @author jannik
- * 
  */
 public class MulticastSender extends MulticastThreadSuper implements MulticastSenderInterface {
 	
@@ -161,6 +159,10 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	}
 
 	// V1.5 [FH] Added MulticastController to stop it in case of network error
+	/**
+	 * Einen MulticastController setzten
+	 * @param MulticastController Instanz
+	 */
 	public void setMCtrl(MulticastController mc) {
 		this.mCtrl = mc;
 	}
@@ -206,6 +208,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 		setActive(active);
 	}
 	
+	/** Multicast Sender stoppen **/
 	public void endIt(){
 		isSending = false;
 		this.setActive(false);

@@ -5,6 +5,9 @@ import java.util.TimerTask;
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
+/**
+ * EasterEgg Snake
+ */
 public class RunSnakeRun extends TimerTask {
 	ViewController view;
 	

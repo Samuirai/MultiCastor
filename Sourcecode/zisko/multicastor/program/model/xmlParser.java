@@ -37,22 +37,30 @@ import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData;
+import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
- * @author Daniela Gerz
- *
+ * XML Parser Klasse die das Interface {@link XMLParserInterface} implementiert und die 
+ * Daten aus den XML Konfigurationsdateien in den Datenstrukturen speichert.
  */
 
 public class xmlParser implements zisko.multicastor.program.interfaces.XMLParserInterface
 {
 	private Logger logger;
+	
+	/**
+	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 */
 	private LanguageManager lang=LanguageManager.getInstance();
 	
+	/** XML Tag Namen für die Multicast Daten */
 	private enum mcdTag{
 		active, groupIp, sourceIp, udpPort, packetLength, ttl,
 		packetRateDesired, typ, sourceMac, groupMac
 	}
+	
+	/** XML Tag Namen */
 	private enum uldTag{
 		startButton, stopButton, newButton, selectAllButton,
 		deselectAllButton, deleteButton, statusBar, controlPanel, 
@@ -64,10 +72,18 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		graphTyp, console, typ, userlevel
 	}
 	
+	/** Konstruktor
+	 * @param logger Logger für die Ausgaben
+	 */
 	public xmlParser(Logger logger){
 		this.logger = logger;
 	}
 	
+	/**
+	 * Lädt die Multicast Data Config
+	 * @param path Pfad zur XML Datei
+	 * @param v MulticastData Vector
+	 */
 	@Override
 	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException {
 		Document doc = parseDocument(path);
@@ -77,6 +93,11 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
+	/**
+	 * Lädt die Multicast GUI Config
+	 * @param path Pfad zur XML Datei
+	 * @param data GUIData Objekt mit den GUI Daten
+	 */
 	@Override
 	public void loadGUIConfig(String path, GUIData data) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException {
 		// load GUI Config [FF]
@@ -87,6 +108,11 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 	
+	/**
+	 * Lädt wirklich die Multicast GUI Config und speichert die XML Datei Werte in GUIData
+	 * @param doc Document (Pfad) zur XML Datei
+	 * @param data GUIData Objekt mit den GUI Daten
+	 */
 	private void loadGUIData(Document doc, GUIData data) {
 		//********************************************************
 	    // Lese die GUI Konfigurationsdaten aus dem XML
@@ -124,6 +150,11 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		}
 	}
 
+	/**
+	 * Lädt wirklich die Multicast Daten und speichert die XML Daten in dem MultocastData Vector
+	 * @param doc Document (Pfad) zur XML Datei
+	 * @param v MulticastData Vector
+	 */
 	private void loadMulticastData(Document doc, Vector<MulticastData> v) throws WrongConfigurationException {    
 	    //********************************************************
 	    // Lese die MultiCast Konfigurationsdaten aus dem XML
@@ -318,122 +349,15 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    	}//end of for
 	    }//end of if
 	}	
-
-
-	private void loadUserlevelData(Document doc, Vector<UserlevelData> v2)
-	{
-			    //********************************************************
-			    // Lese die Userlevel Konfigurationsdaten aus dem XML
-			    //********************************************************
-			    
-		
-			    //Wenn Userlevel Konfigurationen vorhanden
-			    NodeList list = doc.getElementsByTagName("UserlevelData");
-		
-			    if(list.getLength()==1)
-			    {
-			    	//LÔøΩsche bisherige Einstellungen
-				    v2.clear();
-				    
-			    	//Erstelle neues Userlevedata Objekt
-			    	UserlevelData uld;
-				    	
-				    //Finde alle ChildNodes von UserlevelData
-				   	//Diese sind SENDER_V4, RECEIVER_V4, SENDER_V6, RECEIVER_V6 oder UNDEFINED
-				    NodeList uldList = list.item(0).getChildNodes();
-				    
-					//Iteration SENDER_V4/RECEIVER_V4,SENDER_V6,RECEIVER_V6 Tags
-			    	for(int i=0; i<uldList.getLength(); i++)
-			    	{   
-			    		//Evaluiere nur SENDER_V4/RECEIVER_V4,SENDER_V6,RECEIVER_V6 Tags
-			    		if(uldList.item(i).getNodeName()=="#text"){
-			    			continue;
-			    		}
-
-			    		uld = new UserlevelData();
-			    		Node configNode;
-				    	Element configValue;
-				    	
-			    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
-			    		NodeList configList=uldList.item(i).getChildNodes();
-			    		//Iteration ÔøΩber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
-			    		for(int j=0; j<configList.getLength(); j++)
-			    		{
-			    			
-			    			configNode=configList.item(j);
-
-				    		if(configNode.getNodeType()== Node.ELEMENT_NODE)
-					    	{
-					    		configValue = (Element)configNode;
-					    		String val = configValue.getTextContent();
-					    		String stag = configValue.getTagName();
-					    		uldTag tag = uldTag.valueOf(stag);
-				    			Boolean b;
-				    			
-				    			if(val.equals("true"))
-				    			{
-				    				b = true;
-				    			}
-				    			else
-				    			{
-				    				b = false;
-				    			}
-				    			
-				    			switch(tag)
-				    			{
-				    				case startButton: uld.setStartButton(b); break;
-				    				case stopButton: uld.setStopButton(b); break;
-				    				case newButton: uld.setNewButton(b); break;
-				    				case selectAllButton: uld.setSelectAllButton(b); break;
-				    				case deselectAllButton: uld.setDeselectAllButton(b); break;
-				    				case deleteButton: uld.setDeleteButton(b); break;
-				    				case statusBar: uld.setStatusBar(b); break;
-				    				case controlPanel: uld.setControlPanel(b); break;
-				    				case configPanel: uld.setConfigPanel(b); break;
-				    				case groupIpField: uld.setGroupIpField(b); break;
-				    				case sourceIpField: uld.setSourceIpField(b); break;
-				    				case portField: uld.setPortField(b); break;
-				    				case packetLengthField: uld.setPacketLengthField(b); break;
-				    				case ttlField: uld.setTtlField(b); break;
-				    				case packetRateField: uld.setPacketRateField(b); break;
-				    				case activeField: uld.setActiveField(b); break;
-				    				case enterField: uld.setEnterField(b); break;
-				    				case saveConfigDialog: uld.setSaveConfigDialog(b); break;
-				    				case loadConfigDialog: uld.setLoadConfigDialog(b); break;
-				    				case userLevelRadioGrp: uld.setUserLevelRadioGrp(b); break;
-				    				case autoSaveCheckbox: uld.setAutoSaveCheckbox(b); break;
-				    				case snakeGame: uld.setSnakeGame(b); break;
-				    				case popupsEnabled: uld.setPopupsEnabled(b); break;
-				    				case startStopCheckBox: uld.setStartStopCheckBox(b); break;
-				    				case graph: uld.setGraph(b); break;
-				    				case graphTyp: if(!val.isEmpty()) {
-				    						UserlevelData.Graph typ = UserlevelData.Graph.valueOf(val);
-				    						uld.setGraphTyp(typ);
-				    						}
-				    						break;
-				    				case console: uld.setConsole(b); break;
-				    				case typ: if(!val.isEmpty()) {
-				    						MulticastData.Typ typ = MulticastData.Typ.valueOf(val);
-				    						uld.setTyp(typ);
-			    							}
-				    						break;
-				    				case userlevel: if(!val.isEmpty()) {
-		    								UserlevelData.Userlevel userlevel = UserlevelData.Userlevel.valueOf(val);
-		    								uld.setUserlevel(userlevel);
-	    								}
-				    					break;
-				    			}//Switch Ende
-				    		}//End of if
-			    		}//End of inner for
-			    		v2.add(uld);
-			    	}//End of outer for
-			    }
-			 }		 
 	
+	/**
+	 * Speichert die Multicastor GUI Informationen in dem XML File
+	 * @param pfad Pfad zur XML Datei
+	 * @param data GUI Daten Objekt
+	 */
 	@Override
 	public void saveGUIConfig(String pfad, GUIData data) throws IOException {
-		// [FF] saveGuiConfig
-		System.out.println(data);
+		
 		Element el;
 		
 		//Erzeuge ein neues XML Dokument
@@ -508,6 +432,11 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	 	
 	}
 	
+	/**
+	 * speichert die Multicast Data Config aus dem MulticastData Vector in einer XML Datei
+	 * @param path Pfad zur XML Datei
+	 * @param data MulticastData Vector
+	 */
 	@Override
 	public void saveMulticastConfig(String pfad, Vector<MulticastData> v) throws IOException
 	{
@@ -564,6 +493,12 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	 	
 	}
 	
+	/**
+	 * speichert wirklich die Multicast Data Config aus dem MulticastData Vector in einer XML Datei
+	 * @param doc Document (Pfad) zur XML Datei
+	 * @param root XML root Element
+	 * @param data MulticastData Vector
+	 */
 	private void saveMulticastData(Document doc, Element root, Vector<MulticastData> v1)
 	{ 	// ********************************************************
 		// Schreibe die MultiCast Konfigurationsdaten in das XML
@@ -635,26 +570,11 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			}
 		}
 	}
-	
-	/** Liest die automatisch gespeicherte Datei ein
-	 * @param v1
-	 * @param v2
+
+	/**
+	 * Erstellt ein neues XML Dokument
+	 * @return
 	 */
-	
-	public void loadDefaultULD(Vector<MulticastData> v1, Vector<UserlevelData> v2) throws IOException, SAXException, WrongConfigurationException
-	{	
-		
-		Document doc = parseDocumentFromJAR("/zisko/multicastor/resources/configuration/userlevel.xml");
-		if(doc != null){	
-			loadMulticastData(doc, v1);
-			loadUserlevelData(doc, v2);	
-		}
-		else{
-			throw new SAXException();
-		}
-	}
-	
-	
 	private Document createDocument()
 	{	
 		//Erzeuge ein neues XML Dokument
@@ -670,6 +590,13 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		return doc;
 	}
 	
+	/**
+	 * parst die XML Datei
+	 * @param pfad zur XML Datei
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	private Document parseDocument(String pfad) throws SAXException, IOException
 	{	
 		//Erzeuge ein neues XML Dokument
@@ -689,28 +616,8 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		
 		return doc;
 	}
-	
-	private Document parseDocumentFromJAR(String pfad) throws SAXException, IOException
-	{
-		InputStream is = getClass( ).getResourceAsStream(pfad);
-		
-		//Erzeuge ein neues XML Dokument
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = null;
-		Document doc = null;
-		
-		try
-		{
-			documentBuilder = dbFactory.newDocumentBuilder();
-		    doc = documentBuilder.parse(is);
-		}catch( ParserConfigurationException e){
-			e.printStackTrace();
-		}
-		
-		return doc;
-		
-	}
 
+	/** Setup Transformer to create a template for the XML File, such as indent numbers and more */
 	private Transformer setupTransformer()
 	{
 
@@ -728,6 +635,12 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
          return transformer;
 	}
 
+	/** 
+	 * Erstellt einen XML String anhand von einem Transformer Template
+	 * @param doc Document (Pfad) zur XML Datei
+	 * @param transformer Transformer objekt (Template) für doe XML Datei
+	 * @return
+	 */
 	private String XMLtoString(Document doc, Transformer transformer)
 	{
 		StringWriter sWriter = new StringWriter();
@@ -745,25 +658,30 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         return xmlString;
 	}
 	
+	/** 
+	 * Custom Exceptions bei falschem Inhalt
+	 * @param tag
+	 * @param value
+	 * @param multicast
+	 * @throws WrongConfigurationException
+	 */
 	private void throwWrongContentException(String tag, String value, int multicast) throws WrongConfigurationException {
 		WrongConfigurationException ex = new WrongConfigurationException();
 		ex.setErrorMessage("Error in configuration file: Value \""+value+"\" of "+tag+" in Multicast "+(multicast+1)+" is wrong.");
 		throw ex;
 	}
+	
+	/**
+	 * Custom Exception für ein leeres Config File
+	 * @param tag
+	 * @param value
+	 * @param multicast
+	 * @throws WrongConfigurationException
+	 */
 	private void throwEmptyContentException(String tag, String value, int multicast) throws WrongConfigurationException {
 		WrongConfigurationException ex = new WrongConfigurationException();
 		ex.setErrorMessage("Error in configuration file: Value \""+value+"\" of "+tag+" in Multicast "+(multicast+1)+" is empty.");
 		throw ex;
 	}
-
-	@Override
-	public void loadDefaultULD(Vector<MulticastData> v1) throws IOException,
-			SAXException, WrongConfigurationException {
-		
-	}
-
-	
-
-	
 	
 }

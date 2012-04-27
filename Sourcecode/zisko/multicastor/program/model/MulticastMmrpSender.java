@@ -26,25 +26,29 @@ import zisko.multicastor.program.mmrp.*;
  * nachtr√§gliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
  * ist.
  * 
- * @author Filip Haase
- * @author Christopher Westphal
- * 
  */
 public class MulticastMmrpSender extends MulticastThreadSuper implements MulticastSenderInterface{
 
+	/**
+	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 */
 	private LanguageManager lang = LanguageManager.getInstance();
 	
 	/** Wenn auf wahr, sendet dieser Sender. */
 	private boolean isSending = false;
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
+	
+	/** baut das ByteArray für die Pakete*/
 	private PacketBuilder myPacketBuilder;
 	
+	/** Anzahl aller Pakete */
 	private int totalPacketCount			= 0;
 	private int resetablePcktCnt			= 0;
 	private int cumulatedResetablePcktCnt	= 0;
 	private int packetRateDes;
 
+	
 	private MulticastController mCtrl;
 	private MMRPSender sender;
 

@@ -191,9 +191,7 @@ public class MulticastController {
 		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, mcMap_sender_l2, mcMap_receiver_l2, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000, 1000);
-
-		// messageQueue = new LinkedList<String>();
-		// messageCheck = new MessageCheck(messageQueue, view_controller,
+		
 		// this.logger);
 		if (view_controller != null) {
 			RunSnakeRun n = new RunSnakeRun(view_controller);

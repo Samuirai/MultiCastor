@@ -2400,18 +2400,19 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(data.getL2_RECEIVER() == GUIData.TabState.visible || data.getL2_RECEIVER() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_layer2_r");
 		}
-		System.out.println(data.getL3_RECEIVER().toString());
+
 		if(data.getL3_RECEIVER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_layer3_r");
 		}
-		System.out.println(data.getL2_SENDER().toString());
+
 		if(data.getL2_SENDER() == GUIData.TabState.visible || data.getL2_SENDER() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_layer2_s");
 		}
-		System.out.println(data.getL3_SENDER().toString());
+
 		if(data.getL3_SENDER() == GUIData.TabState.visible || data.getL3_RECEIVER() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_layer3_s");
 		}
+		
 		if(data.getABOUT() == GUIData.TabState.visible || data.getABOUT() == GUIData.TabState.selected) {
 			this.f.getTabpane().openTab("open_about");
 		}

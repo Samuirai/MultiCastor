@@ -8,6 +8,10 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Source;
 import zisko.multicastor.program.data.MulticastData.senderState;
 
+
+/**
+ * PacketAnalyzer wertet die Pakete für den Empfänger aus. Er erstellt auch die Werte für die Tabelle.
+ */
 public class PacketAnalyzer {
 	/** Objekt in dem die ermittelten Werte gespeichert werden. */
 	private MulticastData mcData;
@@ -28,7 +32,6 @@ public class PacketAnalyzer {
 	/** Wird verwendet, um zu verhindern, dass gerade gestartete MulticastReceiver 
 	 * in den Status RecentlyChanged gehen. */
 	private int lastActivated = 0;
-	// Avg values
 	/** Wird zur Berechnung der minuetlichen Durschnittswerte verwendet. */
 	private int updateMinHelper = 0;
 	/** Wird zur Berechnung des durschnittlichen Jitterwertes pro Minute verwendet. */
@@ -409,6 +412,9 @@ public class PacketAnalyzer {
 		}
 	}
 	
+	/**
+	 * returnt den <code>complete</code> Wert.
+	 */
 	private Boolean getComplete(){
 		synchronized (complete) {
 			return complete;
