@@ -39,7 +39,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
 	/** Maximale Paketlaenge */
-	private final int length = 256;
+	private final int length = 65575;
 	/** Byte Array in dem das Paket gespeichert wird. */
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */

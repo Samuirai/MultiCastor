@@ -102,7 +102,7 @@ public abstract class NetworkAdapter {
 			macInterfaces = tmpMacAdress;
 			macInterfacesName = tmpNameList;
 		}else{
-			System.out.println("[Warning] Not able to load devices, there will possibly be problems with using Layer2");
+			System.out.println("[Warning] Not able to load devices, there will possibly be problems with using Layer2. Did you start as root/Admin?");
 		}
 	}
 	/**

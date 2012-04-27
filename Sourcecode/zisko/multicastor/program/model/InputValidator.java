@@ -264,7 +264,7 @@ public class InputValidator {
 		}catch(NumberFormatException e){
 			return -2;
 		}
-		if (plen>=52&& plen<=127)
+		if (plen>=52&& plen<=65527)
 			return plen;
 		else 
 			return -1;		

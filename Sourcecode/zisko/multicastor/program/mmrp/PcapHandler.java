@@ -19,7 +19,6 @@ public class PcapHandler {
 		StringBuilder errbuf = new StringBuilder();
 
 		if (device == null){
-			System.out.println("Konnte kein Device finden -.-");
 			throw new IOException();
 		}
 
@@ -34,7 +33,6 @@ public class PcapHandler {
 
 	private static PcapIf getDevice(byte[] deviceMACAddress) throws IOException {
 		if (alldevs == null) {
-			System.out.println("Lege an");
 			alldevs = new ArrayList<PcapIf>(); // Will be filled with
 			alldevsAdress = new ArrayList<byte[]>();
 			// NICs
@@ -50,12 +48,9 @@ public class PcapHandler {
 			}
 			for (int i = 0; i < alldevs.size(); i++) {
 					alldevsAdress.add(alldevs.get(i).getHardwareAddress());
-					System.out.println(alldevs.get(i).getName());
-					System.out.println(Arrays.toString(alldevs.get(i).getHardwareAddress()));
 			}
 		} 
 		
-		System.out.println("Mac: " + Arrays.toString(deviceMACAddress));
 		for(byte[] address : alldevsAdress)
 			if(address != null && compareMACs(deviceMACAddress, address))
 				return alldevs.get(alldevsAdress.indexOf(address));
