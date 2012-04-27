@@ -130,6 +130,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 			//Setzen der ThreadID, da diese evtl.
 			//im Controller noch einmal ge�ndert wird
 			myPacketBuilder.alterThreadID(mcData.getThreadID());
+			myPacketBuilder.alterRandomID(mcData.getRandomID());
 			setStillRunning(true);
 			proclaim(2, lang.getProperty("message.mcSenderActivated"));
 		}else{

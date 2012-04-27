@@ -1,5 +1,6 @@
 package zisko.multicastor.program.model;
 
+import java.util.Arrays;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,6 +53,8 @@ public class PacketAnalyzer {
 	private String hostID = "";
 	/** Zwischenspeicher fuer die threadID. */
 	private int threadID = 0;
+	/** Zwischenspeicher fuer die randomID */
+	private String randomID = "";
 	/** Zwischenspeicher fuer die desiredPacketRate. */
 	private int desiredPacketRate = 0;
 	/** Zwischenspeicher fuer TTL. */
@@ -140,18 +143,23 @@ public class PacketAnalyzer {
 		// Paketanalyse - geklaut von Janniks TestCase
 		//********************************************
 
-		byte[] snippet 		= new byte[29];
+		byte[] snippet 		= new byte[25];
+		byte[] randSnippet	= new byte[4];
 		byte[] intSnippet	= new byte[4];
 		byte[] shortSnippet = new byte[2];
 		byte[] longSnippet	= new byte[8];
 		
  		// HostID
-		System.arraycopy(mcPacket, 0, snippet, 0, 29);
+		System.arraycopy(mcPacket, 0, snippet, 0, 25);
 			//Ende des Strings suchen
 		int eof = 0;
-		for(;eof<29&&snippet[eof]!=0;eof++);
+		for(;eof<25&&snippet[eof]!=0;eof++);
 
 		hostID = new String(snippet).substring(0, eof);
+		
+		// Random Number
+		System.arraycopy(mcPacket, 25, randSnippet, 0, 4);
+		randomID = Integer.toHexString(ByteTools.byteToInt(randSnippet));
 
 		// Hirschmann Tool Erkennung. Wenn auch nicht mit Checksumme, sondern ueber den Text
 		if(hostID.equals("Hirschmann IP Test-Multicast")){
@@ -313,6 +321,7 @@ public class PacketAnalyzer {
 		mcData.setPacketLength(packetLength);
 		mcData.setHostID(hostID);
 		mcData.setThreadID(threadID);
+		mcData.setRandomID(randomID);
 		mcData.setPacketRateDesired(desiredPacketRate);
 		mcData.setTtl(ttl);
 		mcData.setPacketCount(packetCount);

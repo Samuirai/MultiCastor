@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Timer;
 import java.util.Vector;
 import java.util.Map.Entry;
@@ -349,6 +350,9 @@ public class MulticastController {
 					// Beim Receiver wird der Wert aus dem Datenpaket
 					// ausgelesen.
 					m.setThreadID(threadCounter);
+					// Random Number zur Unterscheidung von verschiedenen 
+					// Instanzen generieren
+					m.setRandomID(Integer.toHexString(new Random().nextInt()));
 					threadCounter++;
 					break;
 				case L3_RECEIVER:
@@ -359,6 +363,9 @@ public class MulticastController {
 					break;
 				case L2_SENDER:
 					m.setThreadID(threadCounter);
+					// Random Number zur Unterscheidung von verschiedenen 
+					// Instanzen generieren
+					m.setRandomID(Integer.toHexString(new Random().nextInt()));
 					threadCounter++;
 					break;
 				/*
