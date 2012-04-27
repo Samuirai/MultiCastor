@@ -370,26 +370,7 @@ public class MulticastController{
 	}
 	
 
-//TODO @FF f�r dich als Bsp. drin gelassen. Wird nirgends aufgerufen. Wenn nicht mehr ben�toigt bitte einfach l�schen.
-	/**
-	 * Speichert eine Konfigurationsdatei an den angegebenen Pfad. Hierbei werden nur die
-	 * Multicasts von Typen mit uebergebenem True gespeichert.
-	 * @param s Pfad zur Konfigurationsdatei
-	 * @param l3_sender Wenn <code>true</code> werden Multicasts vom Typ L3_SENDER gespeichert.
-	 * @param l3_receiver Wenn <code>true</code> werden Multicasts vom Typ L3_RECEIVER gespeichert.
-	 */
-//	public void saveConfig(String s, boolean l3_sender, boolean l3_receiver) {
-//		// Sammelt alle zu speichernden Multicasts in einem Vektor
-//		Vector<MulticastData> v = new Vector<MulticastData>();
-//		if(l3_sender){
-//			v.addAll(mc_sender_l3);
-//		}
-//		if(l3_receiver){
-//			v.addAll(mc_receiver_l3);
-//		}
-//		//!!!!!!!!Die Methode gibts nicht mehr!!!!!!!
-//		//saveConfig(s, false, v);
-//	}
+
 	
 	/**
 	 * Speichert eine Konfigurationsdatei.
