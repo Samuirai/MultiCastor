@@ -2,8 +2,6 @@ package zisko.multicastor.program.model;
 
 import zisko.multicastor.program.data.MulticastData;
 
-import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Eine Klasse zum Erstellen des Byte-Arrays, das per Multicast versendet wird.
