@@ -130,6 +130,14 @@ public class DraggableTabbedPane extends JTabbedPane {
     });
   }
 
+  /**
+   *  Fügt einen Tab an der Stelle die über die Position von e
+   *  gegen ist ein
+   *  
+   *  @param e
+   *  	Das MouseEvent, welches die Position des Mauszeigers beinhaltet, worüber der Tab
+   *  	selektiert werden kann
+   */
   private int insertIt(MouseEvent e){
       int tabNumber = getUI().tabForCoordinate(DraggableTabbedPane.this, e.getX(), 10);
 
@@ -162,6 +170,14 @@ public class DraggableTabbedPane extends JTabbedPane {
     }
   }
   
+  /**
+   *  openTab dient dazu einen Tab wieder zu öffnen
+   *  Um Welechen Tab es sich handelt wird über den command
+   *  erkannt, wenn der Tab bereits geöffnet ist wird er selektiert
+   *  
+   *  @param String command Der ActionCommand String über welchen erkannt wird
+   *  welcher Tab geöffnet werden soll
+   */
   public void openTab(String command){
 		Map<String, Integer> openTabs = new HashMap<String, Integer>();
 		// System.out.println("open tab: [["+command+"]]");
@@ -219,7 +235,15 @@ public class DraggableTabbedPane extends JTabbedPane {
 			frame.getMi_open_about().setSelected(true);
 		}  
   }
-  
+
+  /**
+   *  closeTab dient dazu einen Tab wieder zu schließen
+   *  Um Welchen Tab es sich handelt wird über den command
+   *  erkannt.
+   *  
+   *  @param String command Der ActionCommand String über welchen erkannt wird
+   *  welcher Tab geöffnet werden soll
+   */
   public void closeTab(String command){
 	  if(command.equals(" "+lang.getProperty("tab.l3r")+" ")){
 			frame.getMi_open_l3r().setSelected(false);
@@ -233,11 +257,18 @@ public class DraggableTabbedPane extends JTabbedPane {
 		  	frame.getMi_open_about().setSelected(false);
   }
   
-  //TODO testen & vlt. entfernen
+  /**
+   *  Schaut ob wir die TabPane vlt. entfernen können
+   *  Wenn der TabCount = 2 ist, also außer dem "Plus-Tab" nur ein 
+   *  wirklicher Tab geöffnet ist, machen wir dies direkt
+   */
   public void lookIfWeCan(){
-	  if(getTabCount() == 2){
+	  // Die Zeit hat leider nicht gereicht diesen Code voll zu testen
+	  // deswegen wurde diese Funktionalität wieder entfernt
+	  // Bleibt aber im Code also feel free wieder einzubauen ;)
+	  /*if(getTabCount() == 2){
 		  frame.removePane();
-	  }
+	  }*/
   }
 
 }

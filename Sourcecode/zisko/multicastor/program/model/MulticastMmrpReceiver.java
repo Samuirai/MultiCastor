@@ -4,15 +4,34 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
+import java.util.Queue;
 import java.util.logging.Level;
 
 import java.util.logging.Logger;
 
 import zisko.multicastor.program.mmrp.*;
 
+import zisko.multicastor.program.controller.MulticastController;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 
+
+/**
+ * Die MulticastMmrpReceiver-Klasse kümmert sich um das tatsächliche Empfangen der
+ * Multicast-Objekte über das Netzwerk per MMRP Protokoll.
+ * Sie extended{@link MulticastThreadSuper}, ist also ein Runnable. 
+ * 
+ * Ein MulticastMmrpReceiver hat eine Grundkonfiguration, 
+ * die nicht mehr abgeändert werden kann, wie zum
+ * Beispiel die gesetzten MACs. Soll diese Grundkonfiguration geändert werden,
+ * muss eine neue Instanz de Klasse gebildet werden. Das Erleichtert die
+ * nachträgliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
+ * ist.
+ * 
+ * @author Filip Haase
+ * @author Christopher Westphal
+ * 
+ */
 public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	
 	/** Wenn auf wahr, lauscht dieser Receiver auf ankommende Pakete. */
@@ -20,13 +39,26 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
 	/** Maximale Paketlaenge */
-	private final int length = 256;
+	private final int length = 1500;
 	/** Byte Array in dem das Paket gespeichert wird. */
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */
 	PacketAnalyzer packetAnalyzer;
 	private MMRPReceiver receiver;
 
+	/**
+	 * Einziger Konstruktor der Klasse (Sieht man vom Konstruktor der
+	 * Superklasse ab). Im Konstruktor wird die hostID gesetzt (entspricht dem
+	 * hostnamen des Geräts), der {@link MMRPReceiver} initialisiert
+	 * und das Datenpaket mit dem {@link PacketBuilder} erstellt.
+	 * 
+	 * @param mcBean
+	 *            Das {@link MulticastData}-Object, dass alle f�r den Betrieb
+	 *            n�tigen Daten enth�lt.
+	 * @param logger
+	 *            Eine {@link Queue}, �ber den der Receiver seine Ausgaben an
+	 *            den Controller weitergibt.
+	 */
 	public MulticastMmrpReceiver(MulticastData multicastData, Logger logger) {
 		super(multicastData);
 		if(logger==null){
@@ -49,7 +81,9 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		try {
 			receiver = new MMRPReceiver(mcData.getMmrpSourceMac(), mcData.getMmrpGroupMac());
 		} catch (IOException e) {
-			proclaim(3, "Could not create Receiver");
+			
+			proclaim(3, "Could not create Receiver. The interface '" + mcData.getMmrpSourceMacAsString() + "' seems to have "
+			+ "no MMRP functionality");
 		}
 		
 		// resets MulticastData Object to avoid default value -1
@@ -74,6 +108,16 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		logger.log(l,mssg);
 	}
 
+	/**
+	 * Wird der Methode true übergeben, startet der Multicast 
+	 * zu empfangen. 
+	 * 
+	 * Wird der Methode false übergeben, stoppt 
+	 * sie das empfangen der Multicasts.
+	 * 
+	 * @param active
+	 *            boolean
+	 */
 	public void setActive(boolean b) {
 		if(b){
 			setStillRunning(true);
@@ -85,6 +129,10 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 
 	}
 
+	/**
+	 * Aktualisiert das MultiCastData-Objekt
+	 * und resetet den internen Paket-Counter
+	 */
 	public void update() {
 		packetAnalyzer.update();
 		// damit die Paketlaenge beim naechsten Paket erneut bestimmt werden kann
@@ -92,6 +140,12 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 		initializeBuf();
 	}
 
+	/**
+	 * Aktualisiert das MultiCastData-Objekt.
+	 * Dieser Counter summiert die gemessene Paketrate,
+	 * die mit der update()-Funktion ins MultiCastData-Objekt geschrieben wird.
+	 * Diese Summe wird bei jedem Aufruf resetet.
+	 */
 	public void updateMin() {
 		packetAnalyzer.updateMin();
 	}
@@ -104,7 +158,16 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			buf[i] = 1;
 		}
 	}
-	
+
+	/**
+	 * Hier geschieht das eigentliche Empfangen. 
+	 * 
+	 * Beim Starten des Threads wird probiert, denn Mmrp Pfad zu registrieren. 
+	 * Gelingt dies nicht, wird ein Fehler ausgegeben und das 
+	 * Empfangen wird garnicht erst gestartet. Gelingt
+	 * das registrieren, wird so lange gewartet, bis setActive(false) aufgerufen
+	 * wird.
+	 */
 	public void run() {
 		
 		// Initialisiert den Buffer mit Einsen
@@ -114,6 +177,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 			receiver.registerPath();
 		} catch (IOException e) {
 			proclaim(3, "Could not register receiver path");
+			this.setActive(false);
 		}
 		
 		while(active){

@@ -16,7 +16,8 @@ public class MMRPReceiver extends MMRPEntity{
 	
 	PcapPacketHandler<String> pcapPacketHandler = new PcapPacketHandler<String>() {
 		public void nextPacket(PcapPacket packet, String arg1) {
-			int length = (int)packet.getByte(13);						
+			int length = (int)(packet.getByte(13) & 0xFF)
+					+ ((int)(packet.getByte(12) & 0xFF))*255;	
 			System.arraycopy(packet.getByteArray(14, length), 0, foundPacket, 0, length);
 			found = true;
 		}
@@ -36,7 +37,6 @@ public class MMRPReceiver extends MMRPEntity{
 		foundPacket = buffer;
 		while(!Thread.interrupted() && !found){
 			pcap.loop(1, pcapPacketHandler, "");
-			
 		}
 		return foundPacket;
 	}

@@ -306,6 +306,33 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getNewmulticast()){
 			pressBTNewMC(Typ.L2_RECEIVER);
 		}
+		/* (De)SelectAll Button im Control Panel*/
+		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L3_SENDER, true);
+		}
+		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L3_RECEIVER, true);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L2_SENDER, true);
+		}
+		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getSelectDeselect_all()){
+			pressBTSelectAll(Typ.L2_RECEIVER, true);
+		}
+		//XXX
+//		/* Start/Stop Button im Control Panel*/
+//		else if(e.getSource()==getPanControl(Typ.L3_SENDER).getStartStop()){
+//			pressBTStartStop(Typ.L3_SENDER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L3_RECEIVER).getStartStop()){
+//			pressBTStartStop(Typ.L3_RECEIVER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L2_SENDER).getStartStop()){
+//			pressBTStartStop(Typ.L2_SENDER);
+//		}
+//		else if(e.getSource()==getPanControl(Typ.L2_RECEIVER).getStartStop()){
+//			pressBTStartStop(Typ.L2_RECEIVER);
+//		}
 		
 		else if(e.getActionCommand().equals("hide")){
 			hideColumnClicked();
@@ -788,7 +815,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param typ
 	 */
 	public void deleteAllMulticasts(Typ typ){
-		pressBTSelectAll(typ);
+		pressBTSelectAll(typ, false);
 		pressBTDelete(typ);
 	}
 	/**
@@ -801,7 +828,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	}
 
 	/**
-	 * Funktion, welche die ComboBox für Layer3(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
+	 * Funktion, welche die ComboBox für Layer2(MMRP/MAC) mit den richtigen Netzwerkadaptern fuellt.
 	 * @param typ Programmteil in welchem die Box geupdated werden soll.
 	 */
 	public void insertNetworkAdapters(Typ typ){
@@ -843,7 +870,10 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				try {
 					cbSrc.addItem(NetworkInterface.getByInetAddress(temp.get(i)).getDisplayName());
 				} catch (SocketException e) {
-					e.printStackTrace();
+					//In this case the interface disappeared while running MCastor,
+					// So we commented this out and do nothing
+					// Feel free to do anything here :D
+					//e.printStackTrace();
 				}
 			}
 		}
@@ -912,7 +942,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				
 			}
 		}
-		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("") && typ != Typ.L2_SENDER && typ != typ.L2_RECEIVER){		
+		if(getPanConfig(typ).getTf_groupIPaddress().getText().equalsIgnoreCase("") && typ != Typ.L2_SENDER && typ != Typ.L2_RECEIVER){		
 			getPanConfig(typ).getPan_groupIPaddress().setBorder(MiscBorder.getBorder(BorderTitle.L3GROUP, BorderType.NEUTRAL));
 			/* Netzwerkadapterliste leeren, da jetzt wieder v4 oder v6 sein kann */
 			getPanConfig(typ).getCb_sourceIPaddress().removeAllItems();
@@ -1245,7 +1275,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		double sum = 0.0;
 		
 		for(int i = 0; i < getTable(Typ.L3_SENDER).getModel().getRowCount(); i++){
-			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 5)).replace(",", "."));
+			sum = sum + Double.parseDouble(((String) getTable(Typ.L3_SENDER).getModel().getValueAt(i, 6)).replace(",", "."));
 	 	}
 		return ret.format(sum);
 	}
@@ -1368,21 +1398,31 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				changeNetworkInterface(Typ.L2_RECEIVER);
 			}
 			
-			/* Auswahl des Lost Packages Graphen im Receiver */
+			/* Auswahl des Lost Packages Graphen im Receiver L3*/
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getLostPktsRB()){
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
 			}
-			/* Auswahl des Jitter Graphen im Receiver */
+			/* Auswahl des Jitter Graphen im Receiver L3*/
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getJitterRB()){
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.JITTER);
 			}
-			/* Auswahl des Measured Packages Graphen im Receiver */
+			/* Auswahl des Measured Packages Graphen im Receiver L3*/
 			else if(arg0.getSource() == getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().getMeasPktRtRB()){
-				System.out.println("RECEIVER_V4 - MeasPktRtRB");
 				getPanTabbed(Typ.L3_RECEIVER).getPan_recGraph().selectionChanged(valueType.MEASPKT);
 			}
-			// TODO Layer2 Receiver Buttons einbauen
-			
+
+			/* Auswahl des Lost Packages Graphen im Receiver L2*/
+			else if(arg0.getSource() == getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().getLostPktsRB()){
+				getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().selectionChanged(valueType.LOSTPKT);
+			}
+			/* Auswahl des Jitter Graphen im Receiver L2*/
+			else if(arg0.getSource() == getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().getJitterRB()){
+				getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().selectionChanged(valueType.JITTER);
+			}
+			/* Auswahl des Measured Packages Graphen im Receiver L2*/
+			else if(arg0.getSource() == getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().getMeasPktRtRB()){
+				getPanTabbed(Typ.L2_RECEIVER).getPan_recGraph().selectionChanged(valueType.MEASPKT);
+			}
 		} else {
 			if(arg0.getSource() == f.getMi_autoSave()){
 				if(arg0.getStateChange() == ItemEvent.DESELECTED)
@@ -1473,6 +1513,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());
 			}
 			if(typ == Typ.L3_SENDER){
+				tabpart.getPan_config().getTf_packetrate().setText(""+getMCData(selectedRows[0],typ).getPacketRateDesired());
 				tabpart.getPan_config().getTf_ttl().setText(""+getMCData(selectedRows[0],typ).getTtl());;
 				tabpart.getPan_config().getTf_udp_packetlength().setText(""+getMCData(selectedRows[0],typ).getPacketLength());;
 			}
@@ -1689,21 +1730,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		setBTStartStopDelete(typ);
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn der Deselect All Button gedr�ckt wird.
-	 * @param typ Programmteil in welchem der Deselect All Button gedr�ckt wurde
-	 */
-	private void pressBTDeselectAll(Typ typ) {
-		getTable(typ).clearSelection();
-		setBTStartStopDelete(typ);
-		if(typ == Typ.L3_SENDER){
-			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
-			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
-			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
-		}
-		getPanStatus(typ).getLb_multicasts_selected().setText("0 "+lang.getProperty("status.mcSelected")+" ");
-		
-	}
-	/**
 	 * Funktion welche aufgerufen wird wenn der Add Button gedr�ckt wird.
 	 * Diese Funktion unterscheided ob eine �nderung an einem Multicast stattfinden soll,
 	 * oder ein Neuer angelegt werden soll.
@@ -1730,40 +1756,62 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	/**
 	 * Funktion welche aufgerufen wird wenn der Select All Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Select All Button gedr�ckt wurde
+	 * @param deselectPossible Bestimmt, ob, wenn alle Zeilen selektiert sind, alle deselektiert werden sollen
 	 */
-	private void pressBTSelectAll(Typ typ) {
-		getTable(typ).selectAll();
-		if(getSelectedRows(typ).length > 1){
-			multipleSelect(typ);
+	private void pressBTSelectAll(Typ typ, boolean deselectPossible) {
+		/* If all rows are already selected, deselect all which is the same functionality like pressing new */
+		if (getSelectedRows(typ).length == getTable(typ).getRowCount() && deselectPossible) {
+			pressBTNewMC(typ);
+		} else {
+			getTable(typ).selectAll();
+			if(getSelectedRows(typ).length > 1){
+				multipleSelect(typ);
+			}
 		}
 	}
 	/**
 	 * Funktion welche aufgerufen wird wenn der Start Button gedr�ckt wird.
 	 * @param typ Programmteil in welchem der Start Button gedr�ckt wurde
 	 */
-	private void pressBTStart(Typ typ){
+	private void pressBTStartStop(Typ typ){
 		int[] selectedLine = getSelectedRows(typ);
-		for(int i = 0 ; i < selectedLine.length ; i++){
-			if(!getMCData(selectedLine[i], typ).isActive()){
-				startMC(selectedLine[i], typ);
+		boolean oneActive = false;
+		
+		if (selectedLine.length == 1) {
+			if(!getMCData(selectedLine[0], typ).isActive()){
+				startMC(selectedLine[0], typ);
 				updateTable(typ, UpdateTyp.UPDATE);
+			} else {
+				if(getMCData(selectedLine[0], typ).isActive()){
+					stopMC(selectedLine[0], typ);
+					updateTable(typ, UpdateTyp.UPDATE);	
+				}
 			}
-		}
-		setBTStartStopDelete(typ);
-	}
-	/**
-	 * Funktion welche aufgerufen wird wenn der Stop Button gedr�ckt wird.
-	 * @param typ Programmteil in welchem der Stop Button gedr�ckt wurde
-	 */
-	private void pressBTStop(Typ typ){
-		int[] selectedLine = getSelectedRows(typ);
-		for(int i = 0 ; i < selectedLine.length ; i++){
-			if(getMCData(selectedLine[i], typ).isActive()){
-				stopMC(selectedLine[i], typ);
-				updateTable(typ, UpdateTyp.UPDATE);	
+		} else if (selectedLine.length > 1) {
+			for(int i = 0; i < selectedLine.length; i++){
+				if(getMCData(selectedLine[i], typ).isActive()) {
+					oneActive = true;
+				}
 			}
-		}
+			/* if at least one is active, deactivate all otherwise activate all */
+			if (oneActive) {
+				for(int i = 0 ; i < selectedLine.length ; i++){
+					if(getMCData(selectedLine[i], typ).isActive()){
+						stopMC(selectedLine[i], typ);
+						updateTable(typ, UpdateTyp.UPDATE);	
+					}
+				}
+			} else {
+				for(int i = 0 ; i < selectedLine.length ; i++){
+					if(!getMCData(selectedLine[i], typ).isActive()){
+						startMC(selectedLine[i], typ);
+						updateTable(typ, UpdateTyp.UPDATE);
+					}
+				}
+			}
+		} 
 		setBTStartStopDelete(typ);
+		
 	}
 	/**
 	 * Funktion welche es dem Multicast Controller und somit den restlichen Programmteilen erm�glicht
@@ -1771,14 +1819,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @param s Nachricht welche in der Konsole der GUI ausgegeben werden soll
 	 */
 	public void printConsole(String s){
-//		getFrame().getPanelPart(Typ.SENDER_V4).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().append(s+"\n");
-//		getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.SENDER_V6).getTa_console().getText().length());
-//		getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V4).getTa_console().getText().length());
-//		getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().setCaretPosition(getFrame().getPanelPart(Typ.RECEIVER_V6).getTa_console().getText().length());
-
 		getFrame().getPanelPart(Typ.L3_SENDER).getTa_console().append(s+"\n");
 		getFrame().getPanelPart(Typ.L3_RECEIVER).getTa_console().append(s+"\n");
 		getFrame().getPanelPart(Typ.L2_SENDER).getTa_console().append(s+"\n");
@@ -1893,42 +1933,15 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	  */
 	 private void setBTStartStopDelete(Typ typ) {
 		int[] selectedLine=getSelectedRows(typ);
-		if(selectedLine.length == 1){
+		if (selectedLine.length == 1) {
 			getPanControl(typ).getDelete().setEnabled(true);
-			if(getMCData(selectedLine[0],typ).isActive()){
-				//getPanControl(typ).getStart().setEnabled(false);
-				//getPanControl(typ).getStop().setEnabled(true);
-			}
-			else{
-				//getPanControl(typ).getStart().setEnabled(true);
-				//getPanControl(typ).getStop().setEnabled(false);
-			}
-		}
-		else if(selectedLine.length == 0){
-			//getPanControl(typ).getStart().setEnabled(false);
-			//getPanControl(typ).getStop().setEnabled(false);
+			getPanControl(typ).getStartStop().setEnabled(true);
+		} else if (selectedLine.length == 0) {
+			getPanControl(typ).getStartStop().setEnabled(false);
 			getPanControl(typ).getDelete().setEnabled(false);
-		}
-		else{
+		} else {
 			getPanControl(typ).getDelete().setEnabled(true);
-			for(int i = 1 ; i < selectedLine.length ; i++){
-				if(getMCData(selectedLine[i-1], typ).isActive() && getMCData(selectedLine[i], typ).isActive()){
-					//getPanControl(typ).getStart().setEnabled(false);
-				}
-				else{
-					//getPanControl(typ).getStart().setEnabled(true);
-					break;
-				}
-			}
-			for(int i = 1 ; i < selectedLine.length ; i++){
-				if((!getMCData(selectedLine[i-1], typ).isActive()) && (!getMCData(selectedLine[i], typ).isActive())){
-					//getPanControl(typ).getStop().setEnabled(false);	
-				}
-				else{
-					//getPanControl(typ).getStop().setEnabled(true);
-					break;
-				}
-			}
+			getPanControl(typ).getStartStop().setEnabled(true);
 		}
 	}
 	 /**

@@ -3,7 +3,6 @@ package zisko.multicastor.program.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.UnknownHostException;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -55,9 +54,6 @@ public class Main {
 		logger.setUseParentHandlers(false);
 		logger.setLevel(Level.FINEST);
 		
-		//TODO @FH Hier passt die kommentierung nicht mehr. [JT]
-		// Hauptprogrammteil - Parameter aus der Kommandozeile auswerten
-		// V1.5 [FH]
 		if (Main.REAL_MAX_HEAP < Main.MIN_MAX_HEAP) {
 			
 			consoleHandler = new MulticastLogHandler();
