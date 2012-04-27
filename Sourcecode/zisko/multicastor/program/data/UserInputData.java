@@ -2,13 +2,11 @@ package zisko.multicastor.program.data;
 import java.util.ArrayList;
 
 import zisko.multicastor.program.data.MulticastData.Typ;
-import zisko.multicastor.program.data.UserlevelData.Userlevel;
 
 public class UserInputData {
 	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> l�uft �ber columnOrderString
 	private ArrayList<Integer> columnVisibility; // siehe columnVisiblityString
 	private String selectedTab = Typ.L3_SENDER.toString();
-	private String selectedUserlevel = Userlevel.EXPERT.toString();
 	private String groupadress = "";
 	private String isAutoSaveEnabled =""; //neu
 	private String networkInterface = "0";
@@ -17,39 +15,89 @@ public class UserInputData {
 	private String packetrate = "";
 	private String packetlength = "";
 	private String activeButton = "";
+	/* ATTENTION: the next three attributes cannot be deleted */
+	@SuppressWarnings("unused")
 	private String selectedRows = "";
+	@SuppressWarnings("unused")
 	private String columnOrderString="";
+	@SuppressWarnings("unused")
 	private String columnVisibilityString="";
+	
+	/**
+	 * creates the user input data object with default values. Restores the default table view before.
+	 */
 	public UserInputData(){
 		resetColumns();
 	}
+	
+	/**
+	 * returns the selected tab
+	 * @return the selected tab as String
+	 */
 	public String getSelectedTab() {
 		return selectedTab;
 	}
-	public String getSelectedUserlevel() {
-		return selectedUserlevel;
-	}
+	
+	/**
+	 * returns the multicast address
+	 * @return the multicast address as String
+	 */
 	public String getGroupadress() {
 		return groupadress;
 	}
+	
+	/**
+	 * returns the network interface
+	 * @return the network interface as String
+	 */
 	public String getNetworkInterface() {
 		return networkInterface;
 	}
+	
+	/**
+	 * returns the port
+	 * @return the port as String
+	 */
 	public String getPort() {
 		return port;
 	}
+	
+	/**
+	 * returns the time to live
+	 * @return the time to live as String
+	 */
 	public String getTtl() {
 		return ttl;
 	}
+	
+	/**
+	 * returns the packet rate
+	 * @return the packet rate as String
+	 */
 	public String getPacketrate() {
 		return packetrate;
 	}
+	
+	/**
+	 * returns the packet length
+	 * @return the packet length as String
+	 */
 	public String getPacketlength() {
 		return packetlength;
 	}
+	
+	/**
+	 * returns the state of the active button
+	 * @return the state of the active button as String
+	 */
 	public String getActiveButton() {
 		return activeButton;
 	}
+	
+	/**
+	 * sets the selected tab
+	 * @param typ type of tab (L2_SENDER, L2_RECEIVER, L3_SENDER, L3_RECEIVER, CONFIG)
+	 */
 	public void setSelectedTab(Typ typ) {
 		switch(typ){
 			case L3_SENDER: selectedTab = Typ.L3_SENDER.toString(); break;
@@ -60,51 +108,65 @@ public class UserInputData {
 			default: selectedTab = Typ.UNDEFINED.toString(); break;
 		}
 	}
-	public void setSelectedTab(String typ) {
-		this.selectedTab = typ;
-	}
-	public void setSelectedUserlevel(Userlevel level) {
-		switch(level){
-			case BEGINNER: selectedUserlevel = Userlevel.BEGINNER.toString(); break;
-			case EXPERT: selectedUserlevel = Userlevel.EXPERT.toString(); break;
-			case CUSTOM: selectedUserlevel = Userlevel.CUSTOM.toString(); break;
-			default: selectedUserlevel = Userlevel.UNDEFINED.toString(); break;
-		}
-	}
-	public void setSelectedUserlevel(String level) {
-		this.selectedUserlevel = level;
-	}
 	
+	/**
+	 * sets the multicast ip address
+	 * @param groupadress multicast ip address as String
+	 */
 	public void setGroupadress(String groupadress) {
 		this.groupadress = groupadress;
 	}
+	
+	/**
+	 * sets the network interface
+	 * @param selectedInterface the network interface to be set
+	 */
 	public void setNetworkInterface(int selectedInterface) {
 		this.networkInterface = ""+selectedInterface;
 	}
-	public void setNetworkInterface(String selectedInterface) {
-		this.networkInterface = selectedInterface;
-	}
+	
+	/**
+	 * sets the port
+	 * @param port the port to be set
+	 */
 	public void setPort(String port) {
 		this.port = port;
 	}
+	
+	/**
+	 * sets the time to live
+	 * @param ttl the time to live to be set
+	 */
 	public void setTtl(String ttl) {
 		this.ttl = ttl;
 	}
+	
+	/**
+	 * sets the packet rate
+	 * @param packetrate the packet rate to be set
+	 */
 	public void setPacketrate(String packetrate) {
 		this.packetrate = packetrate;
 	}
+	
+	/**
+	 * sets the packet length
+	 * @param packetlength the packet length to be set
+	 */
 	public void setPacketlength(String packetlength) {
 		this.packetlength = packetlength;
 	}
+	
+	/**
+	 * sets the state of the active button
+	 * @param activeButton the state of the active button
+	 */
 	public void setActiveButton(boolean activeButton) {
 		this.activeButton = ""+activeButton;
 	}
-	public void setActiveButton(String activeButton) {
-		this.activeButton = activeButton;
-	}
+	
 	public String toString(){
 		return 	"selectedTab: "+selectedTab+"\n"+
-				"selectedUserlevel: "+selectedUserlevel+"\n"+
 				"groupadress: "+groupadress+"\n"+
 				"networkInterface: "+networkInterface+"\n"+
 				"port: "+port+"\n"+
@@ -113,9 +175,18 @@ public class UserInputData {
 				"packetlength: "+packetlength+"\n"+
 				"activeButton: "+activeButton+"\n";
 	}
+	
+	/**
+	 * sets the selected rows
+	 * @param i int array of ids of rows to be selected
+	 */
 	public void setSelectedRows(int[] i){
 		selectedRows = i.toString();
 	}
+	
+	/**
+	 * resets the view of the table
+	 */
 	public void resetColumns(){
 		columnOrder = new ArrayList<Integer>();
 		columnVisibility = new ArrayList<Integer>();
@@ -128,9 +199,20 @@ public class UserInputData {
 		setColumnVisibilityString(columnVisibility.toString());
 		setColumnOrderString(columnOrder.toString());
 	}
+	
+	/**
+	 * hide colums i
+	 * @param i the column id to be hidden
+	 */
 	public void hideColumn(int i){
 		columnVisibility.remove(i);
 	}
+	
+	/**
+	 * lets you change the order of the colums
+	 * @param from id of first column
+	 * @param to id of target column
+	 */
 	public void changeColumns(int from, int to){
 		Integer bufferTo = columnVisibility.get(to);
 		Integer bufferFrom = columnVisibility.get(from);
@@ -151,12 +233,28 @@ public class UserInputData {
 		columnOrder.set(orderTo, bufferOrderFrom);
 		columnOrder.set(orderFrom, bufferOrderTo);
 	}
+	
+	/**
+	 * return the column order
+	 * @return the column order
+	 */
 	public ArrayList<Integer> getColumnOrder(){
 		return columnOrder;
 	}
+	
+	/**
+	 * returns the column visibility of all columns
+	 * @return the column visibility
+	 */
 	public ArrayList<Integer> getColumnVisbility(){
 		return columnVisibility;
 	}
+	
+	/**
+	 * returns the index of the original ordner
+	 * @param i the current index
+	 * @return the original index
+	 */
 	public int getOriginalIndex(int i){
 		int ret = -1;
 		for(int x = 0 ; x < 11 ; x++){
@@ -166,27 +264,20 @@ public class UserInputData {
 		}
 		return ret;
 	}
-	public ArrayList<Integer> getSavedColumnVisibility(){
-		ArrayList<Integer> ret = new ArrayList<Integer>();
-		String s = columnVisibilityString.substring(1, columnVisibilityString.length()-1);
-		String order[] = s.split(", ");
-		for(int i = 0 ; i < order.length ; i++){
-			ret.add(Integer.parseInt(order[i]));
-		}
-		return ret;
-	}
+	
+	/**
+	 * sets column order as String
+	 * @param columnOrderString column order string
+	 */
 	public void setColumnOrderString(String columnOrderString)
 	{
 		this.columnOrderString = columnOrderString;
 	}
-	public String getColumnOrderString()
-	{
-		return columnOrderString;
-	}
-	public void setSelectedRows(String selectedRows)
-	{
-		this.selectedRows = selectedRows;
-	}
+	
+	/**
+	 * selects the rows with the ids out of selectedRows
+	 * @param selectedRows int array with ids of rows to be selected
+	 */
 	public void setSelectedRowsArray(int[] selectedRows)
 	{
 		ArrayList<Integer> r = new ArrayList<Integer>();
@@ -195,38 +286,38 @@ public class UserInputData {
 		}
 		this.selectedRows = r.toString();
 	}
-	public int[] getSelectedRowsArray(){
-		int[] ret = null;
-		String[] s = selectedRows.substring(1, selectedRows.length()).split(", ");
-		ret = new int[s.length];
-		for(int i = 0 ; i < s.length ; i++){
-			ret[i] = Integer.parseInt(s[i]);
-		}
-		return ret;
-	}
-	public String getSelectedRows()
-	{
-		return selectedRows;
-	}
+	
+	/**
+	 * sets the columns visibility via string
+	 * @param columnVisibilityString string to controll column visibility
+	 */
 	public void setColumnVisibilityString(String columnVisibilityString)
 	{
 		this.columnVisibilityString = columnVisibilityString;
 	}
-	public String getColumnVisibilityString()
-	{
-		return columnVisibilityString;
-	}
-	public ArrayList<Integer> getColumnVisibility() {
-		return columnVisibility;
-	}
+	
+	/**
+	 * sets column visibility via array list
+	 * @param columnVisibility array list<integer> to controll column visibility
+	 */
 	public void setColumnVisibility(ArrayList<Integer> columnVisibility) {
 		this.columnVisibility = columnVisibility;
 		columnVisibilityString = this.columnVisibility.toString();
 	}
+	
+	/**
+	 * sets the column order via array list
+	 * @param columnOrder array list<integer> to controll column order
+	 */
 	public void setColumnOrder(ArrayList<Integer> columnOrder) {
 		this.columnOrder = columnOrder;
 		columnOrderString = this.columnOrder.toString();
 	}
+	
+	/**
+	 * returns typ of selected tab
+	 * @return type (L2/L3 Sender/Receiver)
+	 */
 	public Typ getTyp(){
 		Typ ret = Typ.UNDEFINED;
 		if(selectedTab.equals(Typ.L3_SENDER.toString())){
@@ -243,22 +334,11 @@ public class UserInputData {
 		}
 		return ret;
 	}
-	public Userlevel getUserLevel(){
-		Userlevel ret = Userlevel.UNDEFINED;
-		if(selectedUserlevel.equals(Userlevel.BEGINNER.toString())){
-			ret = Userlevel.BEGINNER;
-		}
-		else if(selectedUserlevel.equals(Userlevel.EXPERT.toString())){
-			ret = Userlevel.EXPERT;
-		}
-		else if(selectedUserlevel.equals(Userlevel.CUSTOM.toString())){
-			ret = Userlevel.CUSTOM;
-		}
-		else{
-			ret = Userlevel.EXPERT;
-		}
-		return ret;
-	}
+	
+	/**
+	 * returns state of active button
+	 * @return state of active button
+	 */
 	public boolean isActive(){
 		boolean ret = false;
 		if(activeButton.equals("true")){
@@ -266,6 +346,11 @@ public class UserInputData {
 		}
 		return ret;
 	}
+	
+	/**
+	 * returns whether auto save is enabled
+	 * @return returns whether auto save is enabled
+	 */
 	public boolean isAutoSaveEnabled(){
 		boolean ret = false;
 		if(isAutoSaveEnabled.equals("true")){
@@ -273,15 +358,21 @@ public class UserInputData {
 		}
 		return ret;
 	}
+	
+	/**
+	 * returns index of network adapter
+	 * @return index of network adapter
+	 */
 	public int getSourceAdressIndex(){
 		return Integer.parseInt(networkInterface);
 	}
+	
+	/**
+	 * sets the autosaveenabled function
+	 * @param isAutoSaveEnabled string to set it
+	 */
 	public void setIsAutoSaveEnabled(String isAutoSaveEnabled)
 	{
 		this.isAutoSaveEnabled = isAutoSaveEnabled;
-	}
-	public String getIsAutoSaveEnabled()
-	{
-		return isAutoSaveEnabled;
 	}
 }
