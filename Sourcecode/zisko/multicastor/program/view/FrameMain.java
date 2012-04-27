@@ -116,8 +116,6 @@ public class FrameMain extends JFrame {
 	 */
 	private String baseTitle;
 	
-	//TODO: maybe unused
-	// [MH] nutzt JT jetzt in reloadLanguage()
 	ViewController ctrl;
 	
 	/**
