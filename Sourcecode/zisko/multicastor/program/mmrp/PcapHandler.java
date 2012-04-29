@@ -7,14 +7,28 @@ import java.util.List;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
 
+/**
+ * Try to get the device by the MAC address which is given by the user
+ *
+ */
 public class PcapHandler {
 
+	private static List<PcapIf> alldevs;
+	private static List<byte[]> alldevsAdress;
+
+	/**
+	 * Return the pcap object of the network device
+	 * 
+	 * @param deviceMACAddress of the network device
+	 * @return The pcap object of the network device
+	 * @throws IOException
+	 */
 	public static Pcap getPcapInstance(byte[] deviceMACAddress)
 			throws IOException {
 		PcapIf device = getDevice(deviceMACAddress);
-		int snaplen = 64 * 1024; // Capture all packets, no trucation
-		int flags = Pcap.MODE_PROMISCUOUS; // capture all packets
-		int timeout = 10 * 1000; // 10 seconds in millis
+		int snaplen = 64 * 1024; 
+		int flags = Pcap.MODE_PROMISCUOUS; 
+		int timeout = 10 * 1000; 
 		StringBuilder errbuf = new StringBuilder();
 		
 		if (device == null){
@@ -27,9 +41,13 @@ public class PcapHandler {
 		return pcap;
 	}
 
-	private static List<PcapIf> alldevs;
-	private static List<byte[]> alldevsAdress;
-
+	/**
+	 * Return the network device
+	 * 
+	 * @param deviceMACAddress of the network device
+	 * @return the network device 
+	 * @throws IOException
+	 */
 	private static PcapIf getDevice(byte[] deviceMACAddress) throws IOException {
 		if (alldevs == null) {
 			alldevs = new ArrayList<PcapIf>(); // Will be filled with
@@ -60,6 +78,13 @@ public class PcapHandler {
 		return null;
 	}
 
+	/**
+	 * Compare two MAC addresses
+	 * 
+	 * @param a is a MAC address
+	 * @param b is a MAC address
+	 * @return true if the MAC addresses are the same. False if not.
+	 */
 	public static boolean compareMACs(byte[] a, byte[] b) {
 		boolean sameMAC = true;
 
@@ -73,6 +98,11 @@ public class PcapHandler {
 		return sameMAC;
 	}
 	
+	/**
+	 * Convert the MAC address which is an byte array to a string
+	 * @param mac which should be convert to a string
+	 * @return the converted string
+	 */
 	public static String byteMACToString(byte [] mac){
 		if (mac == null)
 	        return null;
