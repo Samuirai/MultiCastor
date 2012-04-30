@@ -11,7 +11,6 @@ import java.util.Vector;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
 
-import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**

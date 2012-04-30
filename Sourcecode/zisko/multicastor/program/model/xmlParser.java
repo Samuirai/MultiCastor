@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -36,8 +35,6 @@ import org.xml.sax.SAXException;
 import zisko.multicastor.program.data.GUIData;
 import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
-import zisko.multicastor.program.data.UserlevelData;
-import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
@@ -61,7 +58,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}
 	
 	/** XML Tag Namen */
-	private enum uldTag{
+	/*private enum uldTag{
 		startButton, stopButton, newButton, selectAllButton,
 		deselectAllButton, deleteButton, statusBar, controlPanel, 
 		configPanel, groupIpField, sourceIpField, portField,
@@ -70,7 +67,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		userLevelRadioGrp, autoSaveCheckbox, snakeGame, 
 		popupsEnabled, startStopCheckBox, graph, 
 		graphTyp, console, typ, userlevel
-	}
+	}*/
 	
 	/** Konstruktor
 	 * @param logger Logger für die Ausgaben
