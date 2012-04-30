@@ -183,7 +183,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 			f.getTabpane().openTab(e.getActionCommand());
 		}
 		
-		//TODO Help file oeffnen!
 		else if(e.getSource()==f.getMi_help()){
 			//Create File from help file path of current language file
 			File helpfile=new File("Language/help."+LanguageManager.getCurrentLanguage()+".pdf");
@@ -1550,7 +1549,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * Dialog zu laden.
 	 */
 	private void loadGUIFileEvent() {
-		// TODO Auto-generated method stub
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new FileNameExtensionFilter("XML Config Files", "xml"));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
