@@ -32,7 +32,7 @@ import zisko.multicastor.program.lang.LanguageManager;
  * in der Mitte der Titel und rechts ein Schließen Button.
  * 
  * @author Filip Haase
- * @version 1.5
+ * @version 2.0
  */
 @SuppressWarnings("serial")
 public class ButtonTabComponent extends JPanel{

@@ -11,6 +11,7 @@ import zisko.multicastor.program.lang.LanguageManager;
 
 /**
  * About-Panel. Enthält Informationen zu den Entwicklern und der Lizenz.
+ * 
  * @author Christopher Westphal
  */
 
@@ -38,6 +39,7 @@ public class PanelAbout extends javax.swing.JPanel{
     	initComponents();
     }
 
+    /** Methode, die beim Ändern der Sprache den Inhalt aktualisiert. */
     public void reloadLanguage() {
     	
 		labelDev.setText(lang.getProperty("about.labelDev"));
@@ -45,7 +47,7 @@ public class PanelAbout extends javax.swing.JPanel{
     	
     }
     
-    /* Komponenten definieren und anzeigen. */
+    /** Mit Hilfe dieser Methode werden die einzelnen GUI-Komponenten initialisiert. */
     private void initComponents() {
 
     	lang = LanguageManager.getInstance();

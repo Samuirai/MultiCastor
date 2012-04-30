@@ -1,8 +1,9 @@
 package zisko.multicastor.program.interfaces;
 
-// timestamp wird geupdated sobald ein paket mit getPacket() angefordert wird. PacketCount wird
-// auch automatisch erh�ht (oder soll der �bergeben werden?)
-
 public interface PacketBuilderInterface {
+	/**
+	 * returns packet as byte array
+	 * @return packet as byte array
+	 */
 	public byte[] getPacket();
 }

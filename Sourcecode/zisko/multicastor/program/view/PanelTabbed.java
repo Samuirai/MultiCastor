@@ -40,10 +40,11 @@ public class PanelTabbed extends JPanel {
 	private MiscBorder tablePanelBorder;
 
 	/**
-	 * Konstruktor f�r einen kompletten Programmteil in der GUI.
+	 * Konstruktor für einen kompletten Programmteil in der GUI.
 	 * Hierbei werden alle Komponenten fertig initialisiert.
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller
-	 * @param typ Gibt an um welchen Programmteil es sich handelt
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param typ Gibt an um welchen Programmteil es sich handelt.
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
 		lang=LanguageManager.getInstance();
@@ -86,17 +87,20 @@ public class PanelTabbed extends JPanel {
 	}
 	
 	/**
-	 * Initialisiert die Statusbar
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Statusbar geh�rt
+	 * Initialisiert die Statusbar.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehört.
 	 */
 	private void initStatusPanel(ViewController ctrl, Typ typ) {
 		pan_status = new PanelStatusBar();
 	}
+	
 	/**
-	 * Initialisiert den Graph und die Console der GUI
-	 * @param ctrl Benoetigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehoeren
+	 * Initialisiert den Graph und die Console der GUI.
+	 * 
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehoeren.
 	 */
 	private void initConsolePanel(ViewController ctrl, Typ typ) {
 		tab_console = new JTabbedPane();
@@ -119,9 +123,10 @@ public class PanelTabbed extends JPanel {
 	}
 	
 	/**
-	 * Initialisiert die Tabelle
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle geh�rt
+	 * Initialisiert die Tabelle.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört.
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();
@@ -148,10 +153,12 @@ public class PanelTabbed extends JPanel {
 		pan_table.add(tab_console,BorderLayout.SOUTH);
 		pan_table.add(table_scrollpane,BorderLayout.CENTER);
 	}
+	
 	/**
-	 * Resettet das Aussehen der Tabelle auf das Standard Aussehen
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle geh�rt
+	 * Resettet das Aussehen der Tabelle auf das Standard Aussehen.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört.
 	 */
 	public void setTableModel(ViewController ctrl, Typ typ) {
 		model = new MiscTableModel(ctrl,typ);
@@ -221,6 +228,7 @@ public class PanelTabbed extends JPanel {
 			colmodel.getColumn(9).setPreferredWidth(65);
 		}
 	}
+	
 	public MiscTableModel getModel() {
 		return model;
 	}
@@ -293,6 +301,16 @@ public class PanelTabbed extends JPanel {
 	public MiscTableModel getTableModel() {
 		return model;
 	}
+	
+	/**
+	 * Setzt die einzelnen Panels.
+	 * 
+	 * @param config Config anzeigen ja / nein.
+	 * @param control Control anzeigen ja / nein.
+	 * @param status Status anzeigen ja / nein.
+	 * @param console Konsole anzeigen ja / nein.
+	 * @param graph Graph anzeigen ja / nein.
+	 */
 	public void setPanels(boolean config, boolean control, boolean status, boolean console, boolean graph){
 		if(!config && !control){
 			pan_left.setVisible(false);
@@ -314,6 +332,7 @@ public class PanelTabbed extends JPanel {
 		}
 		pan_status.setVisible(status);
 	}
+	
 	public boolean isPopupsAllowed() {
 		return popupsAllowed;
 	}
@@ -323,4 +342,5 @@ public class PanelTabbed extends JPanel {
 	public ArrayList<TableColumn> getColumns() {
 		return columns;
 	}
+	
 }

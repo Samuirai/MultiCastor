@@ -137,6 +137,7 @@ public class ReceiverGraph extends PanelGraph{
 	 * Radiobutton die entsprechenden Daten aus den {@link MulticastData}-Objekt extrahiert.
 	 * Danach wird intern die updateGraph(int)-Methode aufgerufen.
 	 * @param mcData
+	 * @param Gibt an, ob der Graph neugezeichnet werden soll oder nicht.
 	 */
 	public void updateGraph(MulticastData[] mcDataArray, boolean repaint){
 		int newValue=0;
@@ -162,6 +163,7 @@ public class ReceiverGraph extends PanelGraph{
 		}
 	}
 	
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
 	public void reloadLanguage(){
 		setLblX(lang.getProperty("graph.time"));
 		setLblY(lang.getProperty("graph.y"));

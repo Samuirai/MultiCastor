@@ -17,13 +17,15 @@ import zisko.multicastor.program.model.NetworkAdapter.IPType;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 /**
- * Das KonfigurationPanel f�r Multicasts (links unten im Programm).
- * Dient zum Einstellen und Erstellen von Multicast Sendern und Receivern
+ * Das KonfigurationPanel für Multicasts (links unten im Programm).
+ * Dient zum Einstellen und Erstellen von Multicast Sendern und Receivern.
+ * 
  * @author Daniel Becker
- *
+ * @author Christopher Westphal
  */
 @SuppressWarnings("serial")
 public class PanelMulticastConfig extends JPanel {
+	
 	private JTextField tf_groupIPaddress;
 	private WideComboBox cb_sourceIPaddress;
 	private JTextField tf_udp_port;
@@ -47,10 +49,12 @@ public class PanelMulticastConfig extends JPanel {
 	public WideComboBox getCb_sourceIPaddress() {
 		return cb_sourceIPaddress;
 	}
+	
 	/**
-	 * Konstruktor welcher das komplette Configuration Panel initialisiert
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel geh�rt.
+	 * Konstruktor welcher das komplette Configuration Panel initialisiert.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
 		this.ctrl=ctrl;
@@ -64,9 +68,11 @@ public class PanelMulticastConfig extends JPanel {
 		setToolTips(typ);
 
 	}
+	
 	/**
-	 * Initialisiert die Standard Textfelder des KonfigurationsPanels
-	 * @param typ Gibt an zu welchem Programmteil das Panel geh�rt.
+	 * Initialisiert die Standard Textfelder des KonfigurationsPanels.
+	 * 
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
 	 */
 	private void createGUIstandard(Typ typ) {
 		add(bt_enter);
@@ -83,6 +89,11 @@ public class PanelMulticastConfig extends JPanel {
 		}
 	}
 	
+	/**
+	 * Setzt die Tool-Tips für die Eingabefelder.
+	 * 
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 */
 	private void setToolTips(Typ typ) {
 		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
 			tf_groupIPaddress.setToolTipText(
@@ -118,6 +129,7 @@ public class PanelMulticastConfig extends JPanel {
 		}
 	}
 	
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
 	public void reloadLanguage(){
 		PanelTabbed tabpart = null;
 		
@@ -145,9 +157,10 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	
 	/**
-	 * Funktion welche die spezifischen Textfelder f�r einen Programmteil erstellt.
-	 * @param ctrl Ben�tigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel geh�rt.
+	 * Funktion welche die spezifischen Textfelder für einen Programmteil erstellt.
+	 * 
+	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
 	 */
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		

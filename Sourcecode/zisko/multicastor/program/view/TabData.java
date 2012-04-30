@@ -2,7 +2,14 @@ package zisko.multicastor.program.view;
 
 import java.awt.Component;
 
+/**
+ * Klasse, die Daten über TabData bereithält.
+ * 
+ * @author Filip Haase
+ *
+ */
 public class TabData {
+	
 	String title;
 	Component component;
 	ButtonTabComponent btComponent;
