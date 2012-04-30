@@ -37,7 +37,7 @@ plus.l3sDescription		=÷ffnet die Schicht 3 Sender Registerkarte. Wenn die Regis
 plus.aboutDescription	=÷ffnet die ‹ber Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 miscBorder.mcOverwiew	=MultiCast ‹bersicht
 miscBorder.mcControl=MultiCast Steuerung
-miscBorder.mcConfig	=MultiCast Konfiguration
+miscBorder.mcConfig	= MultiCast Konfiguration
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.udpPort				=UDP Port
@@ -84,7 +84,7 @@ error.memory.title	=MultiCastor: Speicherfehler
 # MC will show this message if there are less them 10% free memory in heap.
 warning.memory.title=Ihr Arbeitsspeicher ist fast voll.(<10% verbleibend)\n\
  Bitte versuchen sie ihre Dateien zu speichern und \
- versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schlieﬂen.\n\n
+ versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schließen.\n\n
 warning.memory.freeMemory =Freier Speicher
 warning.memory.allocMemory=Aktuell reservierter Speicher
 warning.memory.maxMemory  =Maximal verfügbarer Speicher
@@ -209,6 +209,7 @@ message.gui.unexcpectedError	=Unerwarteter Error vom Typ:
 message.gui.usedPath		=  Benutzter Pfad: 
 message.mcc.Loaded		=Konfigurationsdatei wurde geladen.
 message.mcc.NotFoundWithout	=Default Konfigurationsdatei wurde nicht gefunden. MultiCastor startet ohne vorkonfigurierte Multicasts und mit default GUI Konfigurationsfile.
+message.mcc.NotFound = Konfigurationsdatei konnte nicht gefunden werden.
 message.mcc.NotParsedWithout	=Default Konfigurationsdatei konnte nicht korrekt geparsed werden. MultiCastor startet ohne vorkonfigurierte Multicasts und mit default GUI Konfigurationsfile.
 message.mcc.NotParsed		=Konfigurationsdatei konnte nicht geparsed werden.
 message.mcc.NotLoadedWithout	=Default Konfigurationsdatei konnte nicht geladen werden. MultiCastor startet ohne vorkonfigurierte Multicasts und mit default GUI Konfigurationsfile.
