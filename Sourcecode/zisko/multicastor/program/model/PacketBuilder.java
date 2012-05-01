@@ -60,7 +60,22 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 		System.arraycopy(hostID.getBytes(), 0, buf, pos, hIDlength);
 		//Rest der hostID mit Nullen auffuellen
 		for(pos = hIDlength;pos<25;pos++)	buf[pos] = 0;					//pos: 25
-		System.arraycopy(ByteTools.convertToByte(Integer.parseInt(randomID, 16)), 0, buf, pos, 4);  //pos: 29
+		
+		int tmp = randomID.length();
+		if (tmp > 7) {
+			System.arraycopy(
+				ByteTools.convertToByte(
+					Integer.parseInt(randomID.substring(tmp-1), 16) + 
+					Integer.parseInt(randomID.substring(0, tmp-1), 16) * 16
+				), 
+				0, buf, pos, 4
+			);  
+		} else {
+			System.arraycopy(
+				ByteTools.convertToByte(Integer.parseInt(randomID, 16)), 
+				0, buf, pos, 4
+			);
+		} //pos: 29
 		pos += 4;
 		System.arraycopy(ByteTools.convertToShortByte(senderID), 0, buf, pos, 2);
 		pos += 2;															//pos: 31
