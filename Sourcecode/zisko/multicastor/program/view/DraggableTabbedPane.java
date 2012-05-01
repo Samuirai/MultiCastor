@@ -18,13 +18,10 @@ import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
- * Die Klasse DraggableTabbedPane erbt von JTabbedPane und lässt zusätzlich zu JTabbed Pane
+ * Die Klasse DraggableTabbedPane erbt von JTabbedPane und laesst zusaetzlich zu JTabbed Pane
  * ein grafish ansprechendes verschieben von Tabs per Drag&Drop zu.
  * 
  * @version 2.0
- * @author Filip Haase
- * @author Jonas Traub
- * @author Matthis Hauschild
  *
  */
 @SuppressWarnings("serial")
@@ -44,7 +41,7 @@ public class DraggableTabbedPane extends JTabbedPane {
 
   /**
    *  Im Konstruktor wird ein neuen MouseMotionListener angelegt, welcher schaut ob
-   *  ich, wenn ich mit der Maus klicke(mouseDragged) über einem tab bin.
+   *  ich, wenn ich mit der Maus klicke(mouseDragged) ueber einem tab bin.
    *  Wenn Ja wird ein Bild des "gedragten" Tabs in den Buffer gezeichnet.
    *  
    *  @param parentFrame Referenz auf GUI-Frame
@@ -112,11 +109,11 @@ public class DraggableTabbedPane extends JTabbedPane {
     });
 
     /**
-     *  Beim Mauswieder loslassen wird nun (falls gedragged wird) alles Nötige zum Tab gespeichert
-     *  Dazu gehören die Componente, der Titel und das Icon.
-     *  Außerdem wird der SelectedIndex der TabbedPane(also der ausgewählte Tab)
+     *  Beim Mauswieder loslassen wird nun (falls gedragged wird) alles Noetige zum Tab gespeichert
+     *  Dazu gehoeren die Componente, der Titel und das Icon.
+     *  Aussueerdem wird der SelectedIndex der TabbedPane(also der ausgewaehlte Tab)
      *  auf den neuen Index gesetzt (damit der gedraggte Tab im Vordergrund ist,
-     *  wie man es von modernen Browsern ebenfalls gewöhnt ist)
+     *  wie man es von modernen Browsern ebenfalls gewoehnt ist)
      */
     addMouseListener(new MouseAdapter() {
       public void mouseReleased(MouseEvent e) {
@@ -136,11 +133,11 @@ public class DraggableTabbedPane extends JTabbedPane {
   }
 
   /**
-   *  Fügt einen Tab an der Stelle die über die Position von e
+   *  Fuegt einen Tab an der Stelle die ueber die Position von e
    *  gegen ist ein
    *  
    *  @param e
-   *  	Das MouseEvent, welches die Position des Mauszeigers beinhaltet, worüber der Tab
+   *  	Das MouseEvent, welches die Position des Mauszeigers beinhaltet, worueber der Tab
    *  	selektiert werden kann
    */
   private int insertIt(MouseEvent e){
@@ -178,12 +175,12 @@ public class DraggableTabbedPane extends JTabbedPane {
   }
   
   /**
-   *  openTab dient dazu einen Tab wieder zu öffnen
-   *  Um Welechen Tab es sich handelt wird über den command
-   *  erkannt, wenn der Tab bereits geöffnet ist wird er selektiert
+   *  openTab dient dazu einen Tab wieder zu oeffnen
+   *  Um Welechen Tab es sich handelt wird ueber den command
+   *  erkannt, wenn der Tab bereits geoeffnet ist wird er selektiert
    *  
-   *  @param String command Der ActionCommand String über welchen erkannt wird
-   *  welcher Tab geöffnet werden soll
+   *  @param String command Der ActionCommand String ueber welchen erkannt wird
+   *  welcher Tab geoeffnet werden soll
    */
   public void openTab(String command){
 		Map<String, Integer> openTabs = new HashMap<String, Integer>();
@@ -194,9 +191,9 @@ public class DraggableTabbedPane extends JTabbedPane {
 			openTabs.put(getTitleAt(i),i);
 		
 		if(command.equals("open_layer3_r")){
-			//Prüfen ob Tab bereits geöffnet ist
+			//Pruefen ob Tab bereits geoeffnet ist
 			if(openTabs.containsKey(" "+lang.getProperty("tab.l3r")+" "))
-				//Wenn ja holen wir uns die ID und focusieren(öffnen) ihn
+				//Wenn ja holen wir uns die ID und focusieren(oeffnen) ihn
 				setSelectedIndex(openTabs.get(" "+lang.getProperty("tab.l3r")+" "));
 			else{
 				insertTab(" "+lang.getProperty("tab.l3r")+" ", null, frame.getPanel_rec_lay3(), null, openTabsCount-1);
@@ -244,12 +241,12 @@ public class DraggableTabbedPane extends JTabbedPane {
   }
 
   /**
-   *  closeTab dient dazu einen Tab wieder zu schließen
-   *  Um Welchen Tab es sich handelt wird über den command
+   *  closeTab dient dazu einen Tab wieder zu schliessueen
+   *  Um Welchen Tab es sich handelt wird ueber den command
    *  erkannt.
    *  
-   *  @param String command Der ActionCommand String über welchen erkannt wird
-   *  welcher Tab geöffnet werden soll
+   *  @param String command Der ActionCommand String ueber welchen erkannt wird
+   *  welcher Tab geoeffnet werden soll
    */
   public void closeTab(String command){
 	  if(command.equals(" "+lang.getProperty("tab.l3r")+" ")){
@@ -292,7 +289,7 @@ public class DraggableTabbedPane extends JTabbedPane {
   }
   
   /**
-   * Öffnet (oder schließt) ein bestimmtes Tab, je nachdem in welchem Zustand sich das Tab 
+   * Aeffnet (oder schliessuet) ein bestimmtes Tab, je nachdem in welchem Zustand sich das Tab 
    * davor befunden hat.
    * 
    * @param command Der interne Name des Tabs

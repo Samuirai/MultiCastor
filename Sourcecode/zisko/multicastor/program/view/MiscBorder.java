@@ -10,16 +10,14 @@ import javax.swing.border.TitledBorder;
 
 import zisko.multicastor.program.lang.LanguageManager;
 /**
- * Hilfsklasse zum verwalten der Ränder für Textfelder.
- * @author Daniel Becker 
+ * Hilfsklasse zum verwalten der Raender fuer Textfelder.
  *
  */
 @SuppressWarnings("serial")
 public class MiscBorder extends TitledBorder {
 	/**
-	 * Enum welches bestimmt ob der Rahmen rot, gr�n oder neutral gezeichnet werden muss, 
+	 * Enum welches bestimmt ob der Rahmen rot, gruen oder neutral gezeichnet werden muss, 
 	 * je nach dem ob ein Korrekter Input vorliegt.
-	 * @author Daniel Becker
 	 *
 	 */
 	public enum BorderType{
@@ -28,7 +26,6 @@ public class MiscBorder extends TitledBorder {
 	
 	/**
 	 * Enum welches bestimmt um welchen Rahmen es sich handelt
-	 * @author Daniel Becker
 	 *
 	 */
 	public enum BorderTitle{

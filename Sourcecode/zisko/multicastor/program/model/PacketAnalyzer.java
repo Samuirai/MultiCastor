@@ -10,7 +10,7 @@ import zisko.multicastor.program.data.MulticastData.senderState;
 
 
 /**
- * PacketAnalyzer wertet die Pakete fŸr den EmpfŠnger aus. Er erstellt auch die Werte fŸr die Tabelle.
+ * PacketAnalyzer wertet die Pakete fuer den Empfaenger aus. Er erstellt auch die Werte fuer die Tabelle.
  */
 public class PacketAnalyzer {
 	/** Objekt in dem die ermittelten Werte gespeichert werden. */
@@ -75,7 +75,7 @@ public class PacketAnalyzer {
 	
 	/** Used to track how much the SenderID changes. */
 	private int senderChanges = 0;
-	/** Speichert wann die letzte ï¿½nderung war. */
+	/** Speichert wann die letzte uenderung war. */
 	private int recently_changed = 0;
 	
 	/** Wird genutzt, wenn fuer eine gewisse Zeit keine Pakete mehr empfangen wurden. */
@@ -91,7 +91,7 @@ public class PacketAnalyzer {
 	 * So kann die naechste erwartete Paketnummer berechnet werden. */
 	int internerPacketCount = 0;
 	/** Wird fuer PacketLostPerSecond genutzt. Hier werden fehlende Paketnummern 
-	 * eingetragen, auf die anschlieï¿½end geprueft wird. */
+	 * eingetragen, auf die anschlieueend geprueft wird. */
 	Vector<Integer> missingPackets;
 	
 	/**
@@ -102,11 +102,11 @@ public class PacketAnalyzer {
 	 */
 	public PacketAnalyzer(MulticastData multicastData, Logger logger, int pLength){
 		if (multicastData==null){
-			System.out.println("Bï¿½ser Fehler!!! multicastData ist null im PacketAnalyzer.");
+			System.out.println("Bueser Fehler!!! multicastData ist null im PacketAnalyzer.");
 		}
 		mcData = multicastData;
 		if(logger == null){
-			System.out.println("Bï¿½ser Fehler!!! Message Queue ist null im PacketAnalyzer.");
+			System.out.println("Bueser Fehler!!! Message Queue ist null im PacketAnalyzer.");
 		}
 		this.logger = logger;
 		this.length = pLength;
@@ -330,7 +330,7 @@ public class PacketAnalyzer {
 		mcData.setPacketSource(source);
 		
 		// uses analyzePacketOnce on next received packet, too
-			// sorgt dafÃ¼r, dass jegliche Ã„nderungen erst mit einer Sekunde VerzÃ¶gerungen 
+			// sorgt dafuer, dass jegliche Aenderungen erst mit einer Sekunde Verzoegerungen 
 			//  in der GUI erscheinen -> updatet aber auch einige Werte deshalb nur einmal pro Sekunde
 		setComplete(true);
 		

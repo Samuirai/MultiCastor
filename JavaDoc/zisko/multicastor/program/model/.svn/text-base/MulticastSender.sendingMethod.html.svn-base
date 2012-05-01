@@ -108,7 +108,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Variablen für die verschiedenen Sendemethoden
+Variablen fuer die verschiedenen Sendemethoden
 <P>
 
 <P>
@@ -135,7 +135,7 @@ Variablen für die verschiedenen Sendemethoden
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alle Pakete werden am Anfang der Sekunde gesendet,
- danach wird der Thread für den Rest der Sekunde in den
+ danach wird der Thread fuer den Rest der Sekunde in den
  sleep geschickt</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -144,7 +144,7 @@ Variablen für die verschiedenen Sendemethoden
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nach jedem Paket wird eine errechnete Zeitspanne
  der thread auf sleep gesetzt
- (lässt zur Zeit keine hohen Paketraten zu)</TD>
+ (laesst zur Zeit keine hohen Paketraten zu)</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -224,7 +224,7 @@ PEAK</H3>
 public static final <A HREF="../../../../zisko/multicastor/program/model/MulticastSender.sendingMethod.html" title="enum in zisko.multicastor.program.model">MulticastSender.sendingMethod</A> <B>PEAK</B></PRE>
 <DL>
 <DD>Alle Pakete werden am Anfang der Sekunde gesendet,
- danach wird der Thread für den Rest der Sekunde in den
+ danach wird der Thread fuer den Rest der Sekunde in den
  sleep geschickt
 <P>
 <DL>
@@ -239,7 +239,7 @@ public static final <A HREF="../../../../zisko/multicastor/program/model/Multica
 <DL>
 <DD>Nach jedem Paket wird eine errechnete Zeitspanne
  der thread auf sleep gesetzt
- (lässt zur Zeit keine hohen Paketraten zu)
+ (laesst zur Zeit keine hohen Paketraten zu)
 <P>
 <DL>
 </DL>

@@ -45,7 +45,7 @@ public class FrameMain extends JFrame {
 	 */
 	private PanelAbout panel_about;
 	/*
-	 * Weitere Standard GUI Komponenten welche benötigt werden 
+	 * Weitere Standard GUI Komponenten welche benoetigt werden 
 	 */
 	private JMenuBar mb_menubar;
 	private JMenu m_menu;
@@ -78,7 +78,7 @@ public class FrameMain extends JFrame {
 	private Separator mi_separator;
 	/**
 	 * Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 */
 	public FrameMain(ViewController ctrl) {
 		initWindow(ctrl);
@@ -95,7 +95,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche die Menubar initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	private void initMenuBar(ViewController ctrl) {
 		mi_autoSave = new JCheckBox("AutoSave");
@@ -179,7 +179,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche die Panels initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	private void initPanels(ViewController ctrl) {
 		panel_rec_ipv4 = new PanelTabbed(ctrl,Typ.RECEIVER_V4);
@@ -210,7 +210,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Funktion welche das Frame initialisiert
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	private void initWindow(ViewController ctrl) {
 	    try {
@@ -382,7 +382,7 @@ public class FrameMain extends JFrame {
 	}
 	/**
 	 * Hilfsfunktion welche das aktuell durch die Radiobuttons selektierte Userlevel ausliest
-	 * @return das aktuell ausgewählte Userlevel
+	 * @return das aktuell ausgewaehlte Userlevel
 	 */
 	public Userlevel getSelectedUserlevel(){
 		Userlevel ret = Userlevel.UNDEFINED;

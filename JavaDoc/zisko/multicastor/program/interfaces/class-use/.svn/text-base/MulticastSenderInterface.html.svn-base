@@ -116,8 +116,8 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastSe
 <TD><CODE><B><A HREF="../../../../../zisko/multicastor/program/model/MulticastSender.html" title="class in zisko.multicastor.program.model">MulticastSender</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Die MultiCastSender-Klasse kümmert sich um das tatsächliche Senden der Multicast-
- Objekte über das Netzwerk.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Die MultiCastSender-Klasse kuemmert sich um das tatsaechliche Senden der Multicast-
+ Objekte ueber das Netzwerk.</TD>
 </TR>
 </TABLE>
 &nbsp;

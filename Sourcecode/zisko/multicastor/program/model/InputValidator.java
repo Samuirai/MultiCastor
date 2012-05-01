@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 /**
  * 
- * Stellt Methoden zur Validierung von Eingabewerten zu Verf�gung
+ * Stellt Methoden zur Validierung von Eingabewerten zu Verfuegung
  *
  */
 public class InputValidator {
@@ -27,9 +27,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Checkt die Validit�t einer IPv4-Hostadresse. Ausgeschlossen sind Multicast-Addressen.
-	 * @param adresse Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return {@link java.net.InetAddress}-Objekt f�r valide Addressen, null wenn der String keine valide Adresse ist
+	 * Checkt die Validituet einer IPv4-Hostadresse. Ausgeschlossen sind Multicast-Addressen.
+	 * @param adresse Der zu pruefende Wert als {@link java.lang.String}
+	 * @return {@link java.net.InetAddress}-Objekt fuer valide Addressen, null wenn der String keine valide Adresse ist
 	 */
 	public static InetAddress checkIPv4(String adresse) {
 				Inet4Address adr;
@@ -53,8 +53,8 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft ob ein valider Netzwerkadapter (IPv4 oder IPv6) mit der angegebenen Adresse existiert.
-	 * @param address Das {@link java.net.InetAddress}-Objekt welches gepr�ft werden soll
+	 * Prueft ob ein valider Netzwerkadapter (IPv4 oder IPv6) mit der angegebenen Adresse existiert.
+	 * @param address Das {@link java.net.InetAddress}-Objekt welches geprueft werden soll
 	 * @return boolean Existiert ein Interface mit der gegebenen Adresse true, falls kein Interface mit der Adresse existiert false
 	 */
 	public static Boolean checkAdapters(InetAddress address)
@@ -66,9 +66,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Checkt die Validit�t einer IPv6-Hostadresse. Ausgeschlossen sind Multicast-Addressen.
-	 * @param adresse Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return {@link java.net.InetAddress}-Object f�r valide Addressen, null wenn der String keine valide IP-Addresse ist
+	 * Checkt die Validituet einer IPv6-Hostadresse. Ausgeschlossen sind Multicast-Addressen.
+	 * @param adresse Der zu pruefende Wert als {@link java.lang.String}
+	 * @return {@link java.net.InetAddress}-Object fuer valide Addressen, null wenn der String keine valide IP-Addresse ist
 	 */
 	public static InetAddress checkIPv6(String adresse){
 		
@@ -115,9 +115,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t einer IPv4-Multicast-Addresse.
-	 * @param adresse Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return {@link java.net.InetAddress}-Object f�r valide Addressen, null wenn der String keine valide Multicast-IP-Addresse ist
+	 * Prueft die Validituet einer IPv4-Multicast-Addresse.
+	 * @param adresse Der zu pruefende Wert als {@link java.lang.String}
+	 * @return {@link java.net.InetAddress}-Object fuer valide Addressen, null wenn der String keine valide Multicast-IP-Addresse ist
 	 */
 	public static InetAddress checkMC_IPv4(String adresse){
 		Inet4Address adr;
@@ -141,9 +141,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t einer IPv6-Multicast-Addresse.
-	 * @param adresse Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return {@link java.net.InetAddress}-Object f�r valide Addressen, null wenn der String keine valide Multicast-IP-Addresse ist
+	 * Prueft die Validituet einer IPv6-Multicast-Addresse.
+	 * @param adresse Der zu pruefende Wert als {@link java.lang.String}
+	 * @return {@link java.net.InetAddress}-Object fuer valide Addressen, null wenn der String keine valide Multicast-IP-Addresse ist
 	 */
 	public static InetAddress checkMC_IPv6(String adresse){
 		Inet6Address add;
@@ -188,9 +188,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t eines UDP-Port
-	 * @param port Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return Port als int f�r valide Ports, -1 wenn String kein Valider Port ist, -2 wenn keine Zahl
+	 * Prueft die Validituet eines UDP-Port
+	 * @param port Der zu pruefende Wert als {@link java.lang.String}
+	 * @return Port als int fuer valide Ports, -1 wenn String kein Valider Port ist, -2 wenn keine Zahl
 	 */
 	public static int checkPort(String port){
 		//1-65535
@@ -207,9 +207,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t der L�nge eines IPv4-Packet's
-	 * @param pacLen Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return PacketLength als int f�r eine valide Packetlength, -1 wenn String keine valide L�nge, -2 wenn keine Zahl 
+	 * Prueft die Validituet der Luenge eines IPv4-Packet's
+	 * @param pacLen Der zu pruefende Wert als {@link java.lang.String}
+	 * @return PacketLength als int fuer eine valide Packetlength, -1 wenn String keine valide Luenge, -2 wenn keine Zahl 
 	 */
 	public static int checkIPv4PacketLength(String pacLen){
 		
@@ -226,9 +226,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t der L�nge eines IPv6-Paket's
-	 * @param pacLen Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return PacketLength als int f�r eine valide Packetlength, -1 wenn String keine valide PacketLength, -2 wenn keine Zahl
+	 * Prueft die Validituet der Luenge eines IPv6-Paket's
+	 * @param pacLen Der zu pruefende Wert als {@link java.lang.String}
+	 * @return PacketLength als int fuer eine valide Packetlength, -1 wenn String keine valide PacketLength, -2 wenn keine Zahl
 	*/
 	public static int checkIPv6PacketLength(String pacLen){
 		
@@ -246,9 +246,9 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Prueft die Validät der Länge eines MMRP-Daten Packets
-	 * @param pacLen Der zu pr�fende Wert als {@link java.lang.String}
-	 * @return PacketLength als int f�r eine valide Packetlength, -1 wenn String keine valide PacketLength, -2 wenn keine Zahl
+	 * Prueft die Validaet der Laenge eines MMRP-Daten Packets
+	 * @param pacLen Der zu pruefende Wert als {@link java.lang.String}
+	 * @return PacketLength als int fuer eine valide Packetlength, -1 wenn String keine valide PacketLength, -2 wenn keine Zahl
 	 */
 	public static int checkMMRPPacketLength(String pacLen){
 		// 52 - 1500
@@ -265,8 +265,8 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t der Anzahl der Hops 
-	 * @param ttl Der zu pr�fende Wert als {@link java.lang.String}
+	 * Prueft die Validituet der Anzahl der Hops 
+	 * @param ttl Der zu pruefende Wert als {@link java.lang.String}
 	 * @return TimeToLive als int, -1 wenn String keine valide TimeToLive ist, -2 wenn keine Zahl
 	 */
 	public static int checkTimeToLive(String ttl){
@@ -284,8 +284,8 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t der PaketRate
-	 * @param pRate Der zu pr�fende Wert als {@link java.lang.String}
+	 * Prueft die Validituet der PaketRate
+	 * @param pRate Der zu pruefende Wert als {@link java.lang.String}
 	 * @return PacketRate als int bei valider PacketRate, -1 wenn string keine valide PacketRate ist, -2 wenn keine Zahl
 	 */
 	public static int checkPacketRate(String pRate){
@@ -304,8 +304,8 @@ public class InputValidator {
 	}
 	
 	/**
-	 * Pr�ft die Validit�t der PaketRate
-	 * @param pRate Der zu pr�fende Wert als {@link java.lang.String}
+	 * Prueft die Validituet der PaketRate
+	 * @param pRate Der zu pruefende Wert als {@link java.lang.String}
 	 * @return PacketRate als int bei valider PacketRate, -1 wenn string keine valide PacketRate ist, -2 wenn keine Zahl
 	 */
 	public static int checkPacketRateMMRP(String pRate){

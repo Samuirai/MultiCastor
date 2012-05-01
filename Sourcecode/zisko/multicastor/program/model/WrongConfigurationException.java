@@ -1,7 +1,7 @@
 package zisko.multicastor.program.model;
 
 /**
- * Custom Exception für eine falsche Konfiguration
+ * Custom Exception fuer eine falsche Konfiguration
  *
  */
 public class WrongConfigurationException extends Exception

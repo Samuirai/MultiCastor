@@ -1,7 +1,7 @@
 package zisko.multicastor.program.model;
 
 /**
- * Diese Klasse stellt static Methoden zur Verfügung, um mit Byte-Arrays zu arbeiten
+ * Diese Klasse stellt static Methoden zur Verfuegung, um mit Byte-Arrays zu arbeiten
  */
 public class ByteTools {
 	/**
@@ -56,13 +56,13 @@ public class ByteTools {
 	 * @return byte[4] Array
 	 */
 	public static byte[] convertToByte(boolean theBoolean){
-		if(theBoolean) return new byte[]{						//true: mit Einsen füllen
+		if(theBoolean) return new byte[]{						//true: mit Einsen fuellen
 							(byte) 255,
 							(byte) 255,
 							(byte) 255,
 							(byte) 255
 						};
-		else			return new byte[]{						//false: mit Nullen füllen
+		else			return new byte[]{						//false: mit Nullen fuellen
 							(byte) 0,
 							(byte) 0,
 							(byte) 0,
@@ -83,8 +83,8 @@ public class ByteTools {
 	}
 	
 	/**
-	 * Errechnet eine CRC-CCITT (CRC-16) Prüfsumme des übergebenen byte-Arrays.
-	 * Der Initialwert der Prüfsumme ist 0xFFFF (11111111 11111111).
+	 * Errechnet eine CRC-CCITT (CRC-16) Pruefsumme des uebergebenen byte-Arrays.
+	 * Der Initialwert der Pruefsumme ist 0xFFFF (11111111 11111111).
 	 * Verwendetes Grundpolynom: x^16 + x^12 + x^5 + 1
 	 * (Nach Wikipedia)
 	 * @param byteArray
@@ -96,10 +96,10 @@ public class ByteTools {
 			 crc	= 0xFFFF;
         byte mybyte;
 
-        //for-Schleife über alle bytes
+        //for-Schleife ueber alle bytes
         for (int i=0;i<byteArray.length;i++){
         	mybyte = byteArray[i];
-        	//for-Schleife über alle Bits des jeweiligen bytes
+        	//for-Schleife ueber alle Bits des jeweiligen bytes
             for (int j = 0; j < 8; j++) {
                 if(	((mybyte   >> (7-j) & 1) == 1)
                   ^ ((crc 	   >>   15  & 1) == 1))
@@ -144,8 +144,8 @@ public class ByteTools {
 	
 	/**
 	 * Wandelt in ein Int um.
-	 * Die Bitoperatoren würden ohne die Konvertierung der Bytes im
-	 * 32-bit Bereich arbeiten, das würde hier zum falschen Ergebnis führen.
+	 * Die Bitoperatoren wuerden ohne die Konvertierung der Bytes im
+	 * 32-bit Bereich arbeiten, das wuerde hier zum falschen Ergebnis fuehren.
 	 * @param theByte byte[8] Array, das in ein int umgewandelt werden soll
 	 * @return das resultierende int
 	 */

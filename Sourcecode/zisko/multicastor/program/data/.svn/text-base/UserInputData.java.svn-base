@@ -8,7 +8,7 @@ import zisko.multicastor.program.data.MulticastData.Typ;
 import zisko.multicastor.program.data.UserlevelData.Userlevel;
 
 public class UserInputData {
-	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> läuft über columnOrderString
+	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> laeuft ueber columnOrderString
 	private ArrayList<Integer> columnVisibility; // siehe columnVisiblityString
 	private String selectedTab = Typ.SENDER_V4.toString();
 	private String selectedUserlevel = Userlevel.EXPERT.toString();

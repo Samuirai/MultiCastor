@@ -90,7 +90,7 @@ Package zisko.multicastor.program.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/model/ByteTools.html" title="class in zisko.multicastor.program.model">ByteTools</A></B></TD>
-<TD>Diese Klasse stellt static Methoden zur Verfügung, um mit Byte-Arrays zu arbeiten</TD>
+<TD>Diese Klasse stellt static Methoden zur Verfuegung, um mit Byte-Arrays zu arbeiten</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/model/InputValidator.html" title="class in zisko.multicastor.program.model">InputValidator</A></B></TD>
@@ -110,8 +110,8 @@ Package zisko.multicastor.program.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/model/MulticastSender.html" title="class in zisko.multicastor.program.model">MulticastSender</A></B></TD>
-<TD>Die MultiCastSender-Klasse kümmert sich um das tatsächliche Senden der Multicast-
- Objekte über das Netzwerk.</TD>
+<TD>Die MultiCastSender-Klasse kuemmert sich um das tatsaechliche Senden der Multicast-
+ Objekte ueber das Netzwerk.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/model/NetworkAdapter.html" title="class in zisko.multicastor.program.model">NetworkAdapter</A></B></TD>
@@ -153,7 +153,7 @@ Package zisko.multicastor.program.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/model/MulticastSender.sendingMethod.html" title="enum in zisko.multicastor.program.model">MulticastSender.sendingMethod</A></B></TD>
-<TD>Variablen für die verschiedenen Sendemethoden</TD>
+<TD>Variablen fuer die verschiedenen Sendemethoden</TD>
 </TR>
 </TABLE>
 &nbsp;

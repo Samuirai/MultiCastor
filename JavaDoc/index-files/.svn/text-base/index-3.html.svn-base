@@ -93,13 +93,13 @@ Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicast
 <DD>Diese Methode muss aufgerufen werden, wenn sich Einstellungen des Multicasts aendern.
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#changeMC(zisko.multicastor.program.data.MulticastData)"><B>changeMC(MulticastData)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Funktion welche ein geändertes Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.
+<DD>Funktion welche ein geaendertes Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.
 <DT><A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#changeMC(zisko.multicastor.program.data.MulticastData)"><B>changeMC(MulticastData)</B></A> - 
 Method in interface zisko.multicastor.program.interfaces.<A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html" title="interface in zisko.multicastor.program.interfaces">MulticastControllerInterface</A>
-<DD>Lï¿½scht den vorhanden MultiCast und fï¿½gt einen neuen MultiCast mit entsprechenden Werten hinzu.
+<DD>Luescht den vorhanden MultiCast und fuegt einen neuen MultiCast mit entsprechenden Werten hinzu.
 <DT><A HREF="../zisko/multicastor/program/view/MiscTableModel.html#changeUpdate()"><B>changeUpdate()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/MiscTableModel.html" title="class in zisko.multicastor.program.view">MiscTableModel</A>
-<DD>Funktion welche aufgerufen wird wenn eine Multicast geändert wird.
+<DD>Funktion welche aufgerufen wird wenn eine Multicast geaendert wird.
 <DT><A HREF="../zisko/multicastor/program/model/InputValidator.html#checkIPv4(java.lang.String)"><B>checkIPv4(String)</B></A> - 
 Static method in class zisko.multicastor.program.model.<A HREF="../zisko/multicastor/program/model/InputValidator.html" title="class in zisko.multicastor.program.model">InputValidator</A>
 <DD>Checks for a valid IPv4-Host-Address.
@@ -183,13 +183,13 @@ Static method in class zisko.multicastor.program.model.<A HREF="../zisko/multica
 <DD>Wandelt in ein Byte-Array um.
 <DT><A HREF="../zisko/multicastor/program/model/ByteTools.html#crc16(byte[])"><B>crc16(byte[])</B></A> - 
 Static method in class zisko.multicastor.program.model.<A HREF="../zisko/multicastor/program/model/ByteTools.html" title="class in zisko.multicastor.program.model">ByteTools</A>
-<DD>Errechnet eine CRC-CCITT (CRC-16) Prüfsumme des übergebenen byte-Arrays.
+<DD>Errechnet eine CRC-CCITT (CRC-16) Pruefsumme des uebergebenen byte-Arrays.
 <DT><A HREF="../zisko/multicastor/program/view/PopUpMenu.html#createColumnCheckBoxes(zisko.multicastor.program.controller.ViewController)"><B>createColumnCheckBoxes(ViewController)</B></A> - 
 Static method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/PopUpMenu.html" title="class in zisko.multicastor.program.view">PopUpMenu</A>
-<DD>Erstellt die zum Table Header Popup gehörenden Checkboxen
+<DD>Erstellt die zum Table Header Popup gehoerenden Checkboxen
 <DT><A HREF="../zisko/multicastor/program/view/PopUpMenu.html#createTableHeaderPopup(javax.swing.JTable, zisko.multicastor.program.controller.ViewController, java.awt.event.MouseEvent)"><B>createTableHeaderPopup(JTable, ViewController, MouseEvent)</B></A> - 
 Static method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/PopUpMenu.html" title="class in zisko.multicastor.program.view">PopUpMenu</A>
-<DD>Statische Funktion welche das Popup für den Tabellenkopf erstellt und anzeigt.
+<DD>Statische Funktion welche das Popup fuer den Tabellenkopf erstellt und anzeigt.
 </DL>
 <HR>
 

@@ -10,9 +10,7 @@ import javax.swing.JLabel;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
- * About-Panel. Enthält Informationen zu den Entwicklern und der Lizenz.
- * 
- * @author Christopher Westphal
+ * About-Panel. Enthaelt Informationen zu den Entwicklern und der Lizenz.
  */
 
 @SuppressWarnings("serial")
@@ -32,14 +30,14 @@ public class PanelAbout extends javax.swing.JPanel{
     public static final String developer2 = "Matthis Hauschild";
     public static final String developer3 = "Sebastian Koralewski";
     public static final String developer4 = "Filip Haase";
-    public static final String developer5 = "Fabian Fäßler";
+    public static final String developer5 = "Fabian Faessueler";
     public static final String developer6 = "Christopher Westphal";
     
     public PanelAbout() {
     	initComponents();
     }
 
-    /** Methode, die beim Ändern der Sprache den Inhalt aktualisiert. */
+    /** Methode, die beim Aendern der Sprache den Inhalt aktualisiert. */
     public void reloadLanguage() {
     	
 		labelDev.setText(lang.getProperty("about.labelDev"));
@@ -69,7 +67,7 @@ public class PanelAbout extends javax.swing.JPanel{
         panel_about_outer.setPreferredSize(new java.awt.Dimension(965, 380));
         panel_about_outer.setRequestFocusEnabled(false);
         
-        /* Box-Layout in Y-Richtung definieren für Inhalt. */
+        /* Box-Layout in Y-Richtung definieren fuer Inhalt. */
         BoxLayout panel_aboutLayout = new BoxLayout(panel_about_inner, BoxLayout.Y_AXIS);
         panel_about_inner.setLayout(panel_aboutLayout);
         
@@ -86,7 +84,7 @@ public class PanelAbout extends javax.swing.JPanel{
         /* Platzhalter (20 Pixel hoch) */
         panel_about_inner.add(Box.createRigidArea(new Dimension(0, 20)));
         
-        /* Entwickler-Überschrift */
+        /* Entwickler-ss�berschrift */
         labelDev.setText(lang.getProperty("about.labelDev"));
         labelDev.setFont(new Font("Helvetica", Font.BOLD, 12));
         panel_about_inner.add(labelDev);  
@@ -102,7 +100,7 @@ public class PanelAbout extends javax.swing.JPanel{
         panel_about_inner.add(new JLabel(developer5));
         panel_about_inner.add(new JLabel(developer6));
         
-        /* Box-Layout in X-Richtung definieren, um den generierten Inhalte einzufügen. */
+        /* Box-Layout in X-Richtung definieren, um den generierten Inhalte einzufuegen. */
         BoxLayout panel_aboutLayoutOuter = new BoxLayout(panel_about_outer, BoxLayout.X_AXIS);
         panel_about_outer.setLayout(panel_aboutLayoutOuter);
         
@@ -110,10 +108,10 @@ public class PanelAbout extends javax.swing.JPanel{
         panel_about_outer.add(Box.createRigidArea(new Dimension(20, 0)));
         panel_about_outer.add(panel_about_inner);
 
-        /* Definiert das äußere Box-Layout als "Viewport" für den Scrollbereich. */
+        /* Definiert das aeussueere Box-Layout als "Viewport" fuer den Scrollbereich. */
         sp_about.setViewportView(panel_about_outer);
 
-        /* Definiert weitere Einstellungen für den Scrollbereich. */
+        /* Definiert weitere Einstellungen fuer den Scrollbereich. */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

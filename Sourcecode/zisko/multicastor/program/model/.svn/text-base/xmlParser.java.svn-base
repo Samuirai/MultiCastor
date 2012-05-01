@@ -114,7 +114,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    //wenn das XML korrekt ist
 			    if(multicasts.getLength()==1)
 			    {
-			    	//Lösche bisherige Einstellungen
+			    	//Loesche bisherige Einstellungen
 				    v1.clear();
 				    
 			    	//Erstelle neues MulticastData Objekt
@@ -124,7 +124,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    	//Diese sind SENDER_V4, RECEIVER_V4, SENDER_V6, RECEIVER_V6 oder UNDEFINED
 			    	NodeList mcList = multicasts.item(0).getChildNodes();
 			    	
-			    	//Zähle alle Multicast Tags
+			    	//Zaehle alle Multicast Tags
 			    	int mcNummer = 0;
 			    	
 			    	//Iteration SENDER_V4/RECEIVER_V4,SENDER_V6,RECEIVER_V6 Tags
@@ -146,7 +146,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    	
 			    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 			    		NodeList configList=mcList.item(i).getChildNodes();
-			    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+			    		//Iteration ueber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 			    		for(int j=0; j<configList.getLength(); j++)
 			    		{
 				    		configNode=configList.item(j);
@@ -297,7 +297,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		
 			    if(list.getLength()==1)
 			    {
-			    	//Lösche bisherige Einstellungen
+			    	//Loesche bisherige Einstellungen
 				    v2.clear();
 				    
 			    	//Erstelle neues Userlevedata Objekt
@@ -321,7 +321,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    	
 			    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 			    		NodeList configList=uldList.item(i).getChildNodes();
-			    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+			    		//Iteration ueber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 			    		for(int j=0; j<configList.getLength(); j++)
 			    		{
 			    			
@@ -405,7 +405,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    //wenn das XML korrekt ist
 	    if(userinputdata.getLength()==1)
 	    {
-	    	//Lösche bisherige Einstellungen
+	    	//Loesche bisherige Einstellungen
 		    v3.clear();
 		    
 	    	//Erstelle neues MulticastData Objekt
@@ -431,7 +431,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 	    		NodeList configList=uidList.item(i).getChildNodes();
 	    		
-	    		//Iteration über alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+	    		//Iteration ueber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 	    		for(int j=0; j<configList.getLength(); j++)
 	    		{
 		    		configNode=configList.item(j);
@@ -442,7 +442,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			    		String val = configValue.getTextContent();
 			    		String stag = configValue.getTagName();
 			    		uidTag tag = uidTag.valueOf(stag);
-				    			//Füge den Inhalt des Elementes dem uid-Objekt hinzu
+				    			//Fuege den Inhalt des Elementes dem uid-Objekt hinzu
 				    			switch(tag)
 				    			{
 				    				case selectedTab: uid.setSelectedTab(val); break;
@@ -462,7 +462,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 				    }//end of if
 				   
 			    }//end of for
-	    		 //Füge das uid-Objekt dem Vektor v3 hinzu
+	    		 //Fuege das uid-Objekt dem Vektor v3 hinzu
 			     v3.add(uid);
 		    }
 		}
@@ -473,7 +473,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			NodeList list = doc.getElementsByTagName("PathData");
 			 if(list.getLength()==1)
 			    {
-			    	//Lösche bisherige Einstellungen
+			    	//Loesche bisherige Einstellungen
 				    v3.clear();
 				    
 				    //Variablen
@@ -485,7 +485,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		
 			    		for(int i=0; i<configList.getLength(); i++)
 			    		{
-			    			 //Evaluiere nur gültige Nodes
+			    			 //Evaluiere nur gueltige Nodes
 				    		if(configList.item(i).getNodeName()=="#text"){
 				    			continue;
 				    		}
@@ -512,7 +512,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	        doc.appendChild(multiCastor);
 	        
 	        /*
-	         * Ab hier wird der XML Baum erstellt und Daten hinzugefügt.
+	         * Ab hier wird der XML Baum erstellt und Daten hinzugefuegt.
 	         * Die Erstellung erfolgt in folgender Reihenfolge:
 	         * 1. MultiCastData ( Daten aus Vektor v1 )
 	         * 2. UserLevelData ( Daten aus Vektor v2 )
@@ -562,20 +562,20 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    // Schreibe die MultiCast Konfigurationsdaten in das XML
 	    //********************************************************
 
-		 //Erzeugt Root Element für die MultiCast Konfigurationen
+		 //Erzeugt Root Element fuer die MultiCast Konfigurationen
          Element multicasts = doc.createElement("Multicasts");
          root.appendChild(multicasts);
          
-        //Für alle verschiedenen Konfigurationen
+        //Fuer alle verschiedenen Konfigurationen
 	         for(int count=0; count<v1.size();count++)
 	         {
 	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-	        	 //Füge dementsprechend ein Kind Element hinzu
+	        	 //Fuege dementsprechend ein Kind Element hinzu
 	        	 MulticastData.Typ typ = v1.get(count).getTyp();
 	        	 Element mcdTyp = doc.createElement(typ.toString());
 	        	 multicasts.appendChild(mcdTyp);
 	        	 
-		         //Für alle vorhandenen Einstellungen
+		         //Fuer alle vorhandenen Einstellungen
 	        	 for(mcdTag tag : mcdTag.values())
 		         {
 		        	 Element mcdElement = doc.createElement(tag.toString());
@@ -621,23 +621,23 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		 // Schreibe die UserLevel Konfigurationsdaten in das XML
 		 //********************************************************  
 		
-		//Erzeugt Root Element für die UserLevel Konfigurationsdaten
+		//Erzeugt Root Element fuer die UserLevel Konfigurationsdaten
         Element userLevelData = doc.createElement("UserlevelData");
         root.appendChild(userLevelData);
         
-       //Für alle verschiedenen Konfigurationen
+       //Fuer alle verschiedenen Konfigurationen
 	         for(int count=0; count<v2.size(); count++)
 	         {
 	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-	        	 //Füge dementsprechend ein Kind Element hinzu
+	        	 //Fuege dementsprechend ein Kind Element hinzu
 	        	 MulticastData.Typ typ = v2.get(count).getTyp();
 	        	 Element uldTyp = doc.createElement(typ.toString());
 	        	 userLevelData.appendChild(uldTyp);
   
-		         //Für alle vorhandenen Einstellungen
+		         //Fuer alle vorhandenen Einstellungen
 	        	 for(uldTag tag: uldTag.values())
 		         {
-		        	 //Benötigte Variablen
+		        	 //Benoetigte Variablen
 		        	 Element uldElement = doc.createElement(tag.toString());
 		        	 Text text = doc.createTextNode("");
 		             Boolean b = false;
@@ -692,7 +692,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		        	 
 		        	 if(!text.equals("")) //Wenn Tag-Inhalt vorhanden
 		        	 {
-		        		//Füge Tag + Inhalt ins XML ein
+		        		//Fuege Tag + Inhalt ins XML ein
 		        		 uldElement.appendChild(text);
 			        	 uldTyp.appendChild(uldElement);
 		        		 
@@ -706,22 +706,22 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	
 	private void saveUserInputData(Document doc, Element root, Vector<UserInputData> v3) throws IOException
 	{
-		 //Erzeugt Root Element für die MultiCast Konfigurationen
+		 //Erzeugt Root Element fuer die MultiCast Konfigurationen
         Element userinputdata = doc.createElement("UserInputData");
         root.appendChild(userinputdata);
         
-       //Für alle verschiedenen Konfigurationen
+       //Fuer alle verschiedenen Konfigurationen
 	         for(int count=0; count<v3.size();count++)
 	         {
 	        	 UserInputData uid = v3.get(count);
 	        	 
 	        	 //Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-	        	 //Füge dementsprechend ein Kind Element hinzu
+	        	 //Fuege dementsprechend ein Kind Element hinzu
 	        	 String typ = uid.getSelectedTab();
 	        	 Element uidTyp = doc.createElement(typ);
 	        	 userinputdata.appendChild(uidTyp);
 	        	 
-		         //Für alle vorhandenen Einstellungen
+		         //Fuer alle vorhandenen Einstellungen
 	        	 for(uidTag tag : uidTag.values())
 		         {
 		        	 Element uidElement = doc.createElement(tag.toString());
@@ -765,7 +765,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		 * </PathData>
 		 */
 		
-		//Fügt das oberste Element, "PathData", hinzu.
+		//Fuegt das oberste Element, "PathData", hinzu.
 		Element pfade = doc.createElement("PathData");
         root.appendChild(pfade);      
         
@@ -773,7 +773,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         int size = v3.size();
         Element pfad; 
         
-        //Fügt die 3 zuletzt benutzten Konfigurationsdateien dem XML hinzu.
+        //Fuegt die 3 zuletzt benutzten Konfigurationsdateien dem XML hinzu.
         for(int count=0;count<v3.size();count++)
         {
         	if(size>=count)

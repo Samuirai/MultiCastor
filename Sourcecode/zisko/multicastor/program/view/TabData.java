@@ -3,9 +3,7 @@ package zisko.multicastor.program.view;
 import java.awt.Component;
 
 /**
- * Klasse, die Daten über TabData bereithält.
- * 
- * @author Filip Haase
+ * Klasse, die Daten ueber TabData bereithaelt.
  *
  */
 public class TabData {

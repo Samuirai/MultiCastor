@@ -106,7 +106,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Hilfsklasse zum verwalten der Ränder für Textfelder.
+Hilfsklasse zum verwalten der Raender fuer Textfelder.
 <P>
 
 <P>
@@ -139,7 +139,7 @@ Hilfsklasse zum verwalten der Ränder für Textfelder.
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/MiscBorder.BorderType.html" title="enum in zisko.multicastor.program.view">MiscBorder.BorderType</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enum welches bestimmt ob der Rahmen rot, grün oder neutral gezeichnet werden muss, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enum welches bestimmt ob der Rahmen rot, gruen oder neutral gezeichnet werden muss, 
  je nach dem ob ein Korrekter Input vorliegt.</TD>
 </TR>
 </TABLE>

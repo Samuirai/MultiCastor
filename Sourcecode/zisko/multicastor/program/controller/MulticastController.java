@@ -132,7 +132,7 @@ public class MulticastController {
 	 *            Durchschnittswerte zu loggen. Wird null uebergeben wird dies
 	 *            in den Systemoutput geschrieben.
 	 * @param setzt
-	 *            die intervall zeit f�r den konsolen tabellen output
+	 *            die intervall zeit fuer den konsolen tabellen output
 	 */
 	public MulticastController(ViewController viewController, Logger logger,
 			int pPrintTableIntervall) {
@@ -242,7 +242,7 @@ public class MulticastController {
 	/**
 	 * Diese Methode muss aufgerufen werden, wenn sich Einstellungen des
 	 * Multicasts aendern. Zum Beispeil die GroupIP. Hier wird der vorhandene
-	 * Multicast geloescht und anschlie�end der Multicast neu erzeugt.
+	 * Multicast geloescht und anschlieueend der Multicast neu erzeugt.
 	 * 
 	 * @param m Refernez auf das Datenobjekt, welches veraendert wurde.
 	 */
@@ -928,7 +928,7 @@ public class MulticastController {
 	}
 
 	/**
-	 * setzt das Zeitintervall f�r die Ausgabe der Tabelle auf der Konsole
+	 * setzt das Zeitintervall fuer die Ausgabe der Tabelle auf der Konsole
 	 * 
 	 * @param printTableTime Zeitintervall in milliseconds
 	 */

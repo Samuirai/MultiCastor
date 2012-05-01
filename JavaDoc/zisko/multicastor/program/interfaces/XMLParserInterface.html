@@ -120,7 +120,7 @@ Interface XMLParserInterface</H2>
            java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auslesen einer XML-Konfigurationsdatei fuer den User und aus der Kommandozeile</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -151,7 +151,7 @@ Interface XMLParserInterface</H2>
            java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getätigten Konfigurationen in einer XML-Datei ab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getaetigten Konfigurationen in einer XML-Datei ab.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -163,7 +163,7 @@ Interface XMLParserInterface</H2>
            java.util.Vector&lt;java.lang.String&gt;&nbsp;v4)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getätigten Konfigurationen in einer XML-Datei ab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getaetigten Konfigurationen in einer XML-Datei ab.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -195,7 +195,7 @@ void <B>loadConfig</B>(java.lang.String&nbsp;pfad,
 <DD>Liest eine XML-Konfigurationsdatei ein.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthält Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen<DD><CODE>v3</CODE> - UserInputData enthält den momentanen Stand der GUI, inklusive geöffnetem Fenster und gerade eingetragenen Werten<DD><CODE>v4</CODE> - Die zuletzt geöffneten Konfigurationsdateien
+<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthaelt Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthaelt persoenliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen<DD><CODE>v3</CODE> - UserInputData enthaelt den momentanen Stand der GUI, inklusive geoeffnetem Fenster und gerade eingetragenen Werten<DD><CODE>v4</CODE> - Die zuletzt geoeffneten Konfigurationsdateien
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>org.xml.sax.SAXException</CODE>
@@ -216,10 +216,10 @@ void <B>loadConfig</B>(java.lang.String&nbsp;pfad,
                        java.io.IOException,
                        <A HREF="../../../../zisko/multicastor/program/model/WrongConfigurationException.html" title="class in zisko.multicastor.program.model">WrongConfigurationException</A></PRE>
 <DL>
-<DD>Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
+<DD>Auslesen einer XML-Konfigurationsdatei fuer den User und aus der Kommandozeile
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthält Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
+<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthaelt Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthaelt persoenliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
 <DT><B>Throws:</B>
 <DD><CODE>org.xml.sax.SAXException</CODE>
 <DD><CODE>java.io.FileNotFoundException</CODE>
@@ -260,7 +260,7 @@ void <B>saveConfig</B>(java.lang.String&nbsp;pfad,
                 java.util.Vector&lt;java.lang.String&gt;&nbsp;v4)
                 throws java.io.IOException</PRE>
 <DL>
-<DD>Speichert die getätigten Konfigurationen in einer XML-Datei ab.
+<DD>Speichert die getaetigten Konfigurationen in einer XML-Datei ab.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Der Ort, an dem die Datei gespeichert werden soll<DD><CODE>v1</CODE> - Vektor aus Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - Vektor aus GUI Konfigurationseinstellungen<DD><CODE>v3</CODE> - Vektor aus UserInputData Objekten, enthalten den momentanen Stand der GUI.<DD><CODE>v4</CODE> - Vektor aus Pfaden zu zuletzt benutzten Konfigurationsdateien
@@ -278,8 +278,8 @@ void <B>saveConfig</B>(java.lang.String&nbsp;pfad,
                 java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)
                 throws java.io.IOException</PRE>
 <DL>
-<DD>Speichert die getätigten Konfigurationen in einer XML-Datei ab.
-  Für Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
+<DD>Speichert die getaetigten Konfigurationen in einer XML-Datei ab.
+  Fuer Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Der Ort, an dem die Datei gespeichert werden soll<DD><CODE>v1</CODE> - Vektor aus Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - Vektor aus GUI Konfigurationseinstellungen

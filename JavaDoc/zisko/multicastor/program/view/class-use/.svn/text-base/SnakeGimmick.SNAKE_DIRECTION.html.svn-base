@@ -120,7 +120,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/view/SnakeGimmick.SNAK
 <TD><CODE><B>ViewController.</B><B><A HREF="../../../../../zisko/multicastor/program/controller/ViewController.html#getSnakeDir()">getSnakeDir</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hilfsfunktion welche die Richtung im SnakeProgramm zurückgibt.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hilfsfunktion welche die Richtung im SnakeProgramm zurueckgibt.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -170,7 +170,7 @@ the order they are declared.</TD>
 <TD><CODE><B>SnakeGimmick.</B><B><A HREF="../../../../../zisko/multicastor/program/view/SnakeGimmick.html#moveSnake(zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION)">moveSnake</A></B>(<A HREF="../../../../../zisko/multicastor/program/view/SnakeGimmick.SNAKE_DIRECTION.html" title="enum in zisko.multicastor.program.view">SnakeGimmick.SNAKE_DIRECTION</A>&nbsp;d)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setzt die Snake ein Feld weiter und prüft die Folgen (Apfel gefunden,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setzt die Snake ein Feld weiter und prueft die Folgen (Apfel gefunden,
  Crash)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -187,7 +187,7 @@ the order they are declared.</TD>
 <TD><CODE><B>PanelGraph.</B><B><A HREF="../../../../../zisko/multicastor/program/view/PanelGraph.html#moveSnakeAndUpdateView(zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION)">moveSnakeAndUpdateView</A></B>(<A HREF="../../../../../zisko/multicastor/program/view/SnakeGimmick.SNAKE_DIRECTION.html" title="enum in zisko.multicastor.program.view">SnakeGimmick.SNAKE_DIRECTION</A>&nbsp;d)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Macht dasselbe wie moveSnake, aber macht zusätzlich ein viewUpdate</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Macht dasselbe wie moveSnake, aber macht zusaetzlich ein viewUpdate</TD>
 </TR>
 </TABLE>
 &nbsp;

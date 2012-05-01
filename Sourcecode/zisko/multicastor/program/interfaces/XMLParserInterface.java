@@ -15,14 +15,14 @@ public interface XMLParserInterface
 
 	/** Liest eine XML-Konfigurationsdatei ein.
 	 * @param pfad Ort, an dem die Konfigurationsdatei liegt
-	 * @param v1 Enth�lt nach dem Laden alle Multicast-Eintraege der XML-Datei
+	 * @param v1 Enthuelt nach dem Laden alle Multicast-Eintraege der XML-Datei
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws FileNotFoundException
 	 */
 	public void loadMultiCastConfig(String path, Vector<MulticastData> v) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
-	/** Speichert die get�tigten Konfigurationen in einer XML-Datei ab.
+	/** Speichert die getuetigten Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
 	 * @param v
@@ -32,7 +32,7 @@ public interface XMLParserInterface
 	public void saveMulticastConfig(String path, Vector<MulticastData> v) throws IOException;
 
 	
-	/** Speichert die get�tigten GUI Konfigurationen in einer XML-Datei ab.
+	/** Speichert die getuetigten GUI Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
 	 * @param data
@@ -41,7 +41,7 @@ public interface XMLParserInterface
 	 */
 	public void saveGUIConfig(String p, GUIData data) throws IOException; // [FF] GUI Config Zeug
 
-	/** l�dt die GUI Konfigurationen aus einer XML-Datei.
+	/** luedt die GUI Konfigurationen aus einer XML-Datei.
 	 * @param pfad
 	 * Der Ort, an dem die Datei liegt 
 	 * @param data

@@ -19,7 +19,7 @@ import zisko.multicastor.program.lang.LanguageManager;
 public class MulticastReceiver extends MulticastThreadSuper {
 	
 	/**
-	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 * Language Manager ist wichtig fuer die multi Language Unterstuetzung 
 	 */
 	private LanguageManager lang = LanguageManager.getInstance();
 	

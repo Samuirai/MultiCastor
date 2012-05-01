@@ -25,15 +25,15 @@ public abstract class NetworkAdapter {
 		IPv4, IPv6, MAC
 	}
 	/**
-	 * Vector welcher alle vorgebenen IPv4 Netzwerkadressen im System h�lt.
+	 * Vector welcher alle vorgebenen IPv4 Netzwerkadressen im System huelt.
 	 */
 	public static Vector<InetAddress> ipv4Interfaces=new Vector<InetAddress>();
 	/**
-	 * Vector welcher alle vorgebenen IPv6 Netzwerkadressen im System h�lt.
+	 * Vector welcher alle vorgebenen IPv6 Netzwerkadressen im System huelt.
 	 */
 	public static Vector<InetAddress> ipv6Interfaces=new Vector<InetAddress>();
 	/**
-	 * Vector welcher alle vorgebenen MAP Netzwerkadressen im System h�lt.
+	 * Vector welcher alle vorgebenen MAP Netzwerkadressen im System huelt.
 	 */
 	public static Vector<byte[]> macInterfaces=new Vector<byte[]>();
 	public static Vector<String> macInterfacesName= new Vector<String>();
@@ -117,14 +117,14 @@ public abstract class NetworkAdapter {
 		}
 	}
 	/**
-	 * Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zur�ck gibt.
+	 * Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zurueck gibt.
 	 * @return Vector mit IPv4 Adressen
 	 */
 	public static Vector<InetAddress> getipv4Adapters(){
 		return ipv4Interfaces;
 	}
 	/**
-	 * Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zur�ck gibt.
+	 * Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zurueck gibt.
 	 * @return Vector mit IPv6 Adressen
 	 */
 	public static Vector<InetAddress> getipv6Adapters(){
@@ -132,7 +132,7 @@ public abstract class NetworkAdapter {
 	}
 	
 	/**
-	 * Funktion welche die Mac Netzwerkadressen im System als Vector zurück gibt.
+	 * Funktion welche die Mac Netzwerkadressen im System als Vector zurueck gibt.
 	 * @return Vector mit Mac Adressen
 	 */
 	public static Vector<byte[]> getMacAdapters(){
@@ -148,10 +148,10 @@ public abstract class NetworkAdapter {
 	}
 	
 	/**
-	 * �berpr�ft ob eine bestimmte IP Adresse im System vergeben ist.
+	 * ueberprueft ob eine bestimmte IP Adresse im System vergeben ist.
 	 * @param typ Unterscheidet ob es sich um IPv4 oder IPv6 Adresse handelt.
-	 * @param address Adresse welche �berpr�ft werden soll
-	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zur�ckgegeben, ansonsten -1
+	 * @param address Adresse welche ueberprueft werden soll
+	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zurueckgegeben, ansonsten -1
 	 */
 	public static int findAddressIndex(String address){
 		int ret = -1;

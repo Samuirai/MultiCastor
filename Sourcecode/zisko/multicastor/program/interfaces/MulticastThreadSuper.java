@@ -5,7 +5,6 @@ import zisko.multicastor.program.data.MulticastData;
 /**
  * Der MulticastThreadSuper stellt eine gemeinsame Superklasse fuer MulticastReceiver und
  * MulticastSender dar. 
- * @author Bastian Wagener
  */
 public abstract class MulticastThreadSuper implements Runnable {
 

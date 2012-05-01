@@ -84,7 +84,7 @@ public class Main {
 			controller = new MulticastController(gui, logger);
 			gui.initialize(controller);
 
-			// Handler f�r formatierte Ausgabe in der Konsole- und GUI-Konsole
+			// Handler fuer formatierte Ausgabe in der Konsole- und GUI-Konsole
 			consoleHandlerWithGUI = new MulticastLogHandler(gui);
 			consoleHandlerWithGUI.setLevel(Level.FINEST);
 			logger.addHandler(consoleHandlerWithGUI);
@@ -110,7 +110,7 @@ public class Main {
 				try {
 					controller = new MulticastController(null,logger,4000);
 					// System.out.println("Parsing");
-					// Handler f�r formatierte Ausgabe in der Konsole
+					// Handler fuer formatierte Ausgabe in der Konsole
 					consoleHandler = new MulticastLogHandler();
 					consoleHandler.setLevel(Level.FINEST);
 					logger.addHandler(consoleHandler);

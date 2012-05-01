@@ -129,7 +129,7 @@ public class MulticastController{
 		// **************************************************************
 		xml_parser = new xmlParser(logger);
 		lastConfigs = new Vector<String>();
-		// so lange wie noch keine geladen werden kÃ¶nnen:
+		// so lange wie noch keine geladen werden koennen:
 	/*	lastConfigs.add("/home/wagener/test1.cfg");
 		lastConfigs.add("/home/wagener/test2.cfg");
 		lastConfigs.add("/home/wagener/test3.cfg");
@@ -165,7 +165,7 @@ public class MulticastController{
 	
 	/**
 	 * Fuegt das uebergebene MulticastData-Objekt hinzu, erzeugt entsprechenden Thread und startet diesen falls notwendig.
-	 * @param m MulticastData-Objekt das hinzugefügt werden soll.
+	 * @param m MulticastData-Objekt das hinzugefuegt werden soll.
 	 */
 	public void addMC(MulticastData m) {
 		// Erzeugt den passenden MulticastThreadSuper
@@ -387,7 +387,7 @@ public class MulticastController{
 	 * Loads data from autoSave() method.
 	 * @return Vector of UserInputData objects. This Vector contains between one and four objects. One for each tab in View at most.
 	 */
-	Vector<UserInputData> loadAutoSave(){	// noch bei Daniel nachhoeren ob es ok ist, wenn da ein leerer Vector zurück kommt!!!!!!!!!
+	Vector<UserInputData> loadAutoSave(){	// noch bei Daniel nachhoeren ob es ok ist, wenn da ein leerer Vector zurueck kommt!!!!!!!!!
 		return userInputData;
 	}
 
@@ -523,7 +523,7 @@ public class MulticastController{
 			}
 		}	    
 	    if(!skip){
-	    	 // Füge Multicast hinzu
+	    	 // Fuege Multicast hinzu
 	    	 for(MulticastData m : multicasts){
 	    		 if 	( 	((m.getTyp().equals(Typ.RECEIVER_V4)&&Receiver_v4	))||
 		 	    			((m.getTyp().equals(Typ.RECEIVER_V6)&&Receiver_v6	))||

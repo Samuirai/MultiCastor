@@ -116,7 +116,7 @@ Interface MulticastReceiverInterface</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An und Abmeldung wegen Multicast wird hier stattfinden
- Man bedenke die Zeitverzögerung beim aktivieren.</TD>
+ Man bedenke die Zeitverzoegerung beim aktivieren.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -139,7 +139,7 @@ void <B>setActive</B>(boolean&nbsp;b)
                throws java.lang.Exception</PRE>
 <DL>
 <DD>An und Abmeldung wegen Multicast wird hier stattfinden
- Man bedenke die Zeitverzögerung beim aktivieren.
+ Man bedenke die Zeitverzoegerung beim aktivieren.
 <P>
 <DD><DL>
 

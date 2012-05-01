@@ -64,7 +64,7 @@ public class FrameMain extends JFrame {
 	private boolean paneDel = false;
 	private String subTitle;
 	/*
-	 * Weitere Standard GUI Komponenten welche ben�tigt werden 
+	 * Weitere Standard GUI Komponenten welche benuetigt werden 
 	 */
 	private JMenuBar mb_menubar;
 	private JMenu m_menu;
@@ -112,14 +112,14 @@ public class FrameMain extends JFrame {
 	private String baseTitle;
 	
 	/**
-	 * Wird durch den Konstruktur später mit der Instanz des ViewControllers beschrieben.
+	 * Wird durch den Konstruktur spaeter mit der Instanz des ViewControllers beschrieben.
 	 */
 	ViewController ctrl;
 	
 	/**
 	 * Konstruktor, der das Hauptfenster des Multicastor-Tools erstellt, konfiguriert und anzeigt.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 */
 	public FrameMain(ViewController ctrl) {
 		this.ctrl=ctrl;
@@ -152,14 +152,14 @@ public class FrameMain extends JFrame {
 	/**
 	 * Setzt den Fenstertitel (erster Teil des Titels).
 	 * 
-	 * @param baseTitle Gewünschter Fenstertitel
+	 * @param baseTitle Gewuenschter Fenstertitel
 	 */
 	public void setBaseTitle(String baseTitle) {
 		this.baseTitle = baseTitle;
 	}
 	
 	/**
-	 * Methode, die aufgerufen wird, wenn eine andere Sprache ausgewählt wird.
+	 * Methode, die aufgerufen wird, wenn eine andere Sprache ausgewaehlt wird.
 	 */
 	public void reloadLanguage(){
 		initMenuBar(ctrl,false);
@@ -172,7 +172,7 @@ public class FrameMain extends JFrame {
 	 * Funktion welche die Menubar initialisiert.
 	 * 
 	 * @param ctrl Benoetigte Referenz zum GUI Controller.
-	 * @param Gibt an, ob die Menü-Bar zum ersten mal initialisiert wird oder nicht.
+	 * @param Gibt an, ob die Menue-Bar zum ersten mal initialisiert wird oder nicht.
 	 */
 	private void initMenuBar(ViewController ctrl, boolean firstInit) {
 		
@@ -398,8 +398,8 @@ public class FrameMain extends JFrame {
 	/**
 	 * Funktion welche die Panels initialisiert.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param Gibt an, ob die Menü-Bar zum ersten mal initialisiert wird oder nicht.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param Gibt an, ob die Menue-Bar zum ersten mal initialisiert wird oder nicht.
 	 */
 	private void initPanels(ViewController ctrl, boolean firstInit) {
 		
@@ -414,7 +414,7 @@ public class FrameMain extends JFrame {
 			
 			// V1.5: Variable int i um automatisch die Indexnummer korrekt zu setzen
 			int i=0;
-			// V1.5: Referenz auf sich selbst, wird �bergeben, um Titel zu refreshen
+			// V1.5: Referenz auf sich selbst, wird uebergeben, um Titel zu refreshen
 			tabpane = new DraggableTabbedPane(this, ctrl);
 			tabpane.addMouseListener(ctrl);
 			
@@ -430,7 +430,7 @@ public class FrameMain extends JFrame {
 			tabpane.addTab(" "+lang.getProperty("tab.l3s")+" ", panel_sen_lay3);
 			tabpane.setTabComponentAt(i++, new ButtonTabComponent(tabpane, "/zisko/multicastor/resources/images/ipv6sender.png", ctrl));
 			
-			// V1.5: + Panel zum Öffnen neuer Tabs
+			// V1.5: + Panel zum Aeffnen neuer Tabs
 			tabpane.addTab( " + ", panel_plus);
 			
 		} else {
@@ -470,7 +470,7 @@ public class FrameMain extends JFrame {
 	/**
 	 * Funktion welche das Frame initialisiert.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	private void initWindow(ViewController ctrl) {
 	    try {
@@ -503,7 +503,7 @@ public class FrameMain extends JFrame {
 	}
 	
 	/**
-	 * Gibt das Panel zum zugehörigen internen Namen des Tab-Panels zurück.
+	 * Gibt das Panel zum zugehoerigen internen Namen des Tab-Panels zurueck.
 	 * 
 	 * @param typ Interner Name des Tab-Panels.
 	 * @return Ein Panel, welches jeweils den kompletten Programmteil beinhaltet.
@@ -615,7 +615,7 @@ public class FrameMain extends JFrame {
 	/**
 	 * Setzt das About-Panel auf sichtbar / unsichtbar.
 	 * 
-	 * @param visible Angabe true / false für sichtbar / unsichtbar.
+	 * @param visible Angabe true / false fuer sichtbar / unsichtbar.
 	 */
 	public void setAboutPanelVisible(boolean visible){
 		if(visible){
@@ -685,9 +685,9 @@ public class FrameMain extends JFrame {
 	}
 	
 	/**
-	 * Setzt den Menüpunkt "Automatisches Speichern" auf an / aus.
+	 * Setzt den Menuepunkt "Automatisches Speichern" auf an / aus.
 	 * 
-	 * @param b True / False für an / aus.
+	 * @param b True / False fuer an / aus.
 	 */
 	public void setAutoSave(boolean b){
 		if(b){
@@ -702,9 +702,6 @@ public class FrameMain extends JFrame {
 	
 	/**
 	 * V1.5: Methode zum updaten des Fenster-Titels
-	 * 
-	 * @author Matthis Hauschild
-	 * @author Jonas Traub
 	 */
 	public void updateTitle() {
 		
@@ -737,7 +734,7 @@ public class FrameMain extends JFrame {
 	}
 
 	/**
-	 * Öffnet einen gewünschten Tab.
+	 * Aeffnet einen gewuenschten Tab.
 	 */
 	public void openPane() {
 		
@@ -772,7 +769,7 @@ public class FrameMain extends JFrame {
 	}
 
 	/**
-	 * Prüft, ob Panel gelöscht wurde oder nicht.
+	 * Prueft, ob Panel geloescht wurde oder nicht.
 	 * 
 	 * @return Status des Panels.
 	 */

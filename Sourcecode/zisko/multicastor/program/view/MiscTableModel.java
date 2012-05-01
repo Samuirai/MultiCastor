@@ -7,9 +7,7 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
- * @author Daniel Becker
- *
+ * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kuemmert.
  */
 @SuppressWarnings("serial")
 public class MiscTableModel extends AbstractTableModel {
@@ -22,20 +20,20 @@ public class MiscTableModel extends AbstractTableModel {
 		this.ctrl=ctrl;
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugef�gt wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefuegt wird.
 	 */
 	public void insertUpdate(){
 		fireTableRowsInserted(0, ctrl.getMCCount(typ));
 		
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast gels�cht wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast gelsuecht wird.
 	 */
 	public void deleteUpdate(){
 		fireTableRowsDeleted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast ge�ndert wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast geuendert wird.
 	 */
 	public void changeUpdate(){
 		fireTableRowsUpdated(0, ctrl.getMCCount(typ));
@@ -84,7 +82,7 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Spalten zur�ck gibt.
+	 * Funktion welche die Anzahl an Spalten zurueck gibt.
 	 */
 	public int getColumnCount() {
 		int ret = 0;
@@ -145,14 +143,14 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Tabellenreihen zur�ck gibt.
+	 * Funktion welche die Anzahl an Tabellenreihen zurueck gibt.
 	 */
 	public int getRowCount() {
 		return ctrl.getMCCount(typ);
 	}
 	@Override
 	/**
-	 * Funktion welche die Daten f�r eine jeweilige Tabellenzelle anfordert
+	 * Funktion welche die Daten fuer eine jeweilige Tabellenzelle anfordert
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex){
 		MulticastData data = ctrl.getMCData(rowIndex, typ);

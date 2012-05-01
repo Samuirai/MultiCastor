@@ -8,8 +8,6 @@ import java.net.URL;
 
 /**
  * Abstrakte Hilfsklasse zum Laden von Schriftarten
- * @author Daniel Becker
- *
  */
 @SuppressWarnings("unused")
 public abstract class MiscFont{
@@ -46,7 +44,7 @@ public abstract class MiscFont{
 	/**
 	 * Statische Funktion zum Anfordern der Standardschriftart betimmter Formatierung.
 	 * @param style 0=normal, 1=bold, 2=italic, 3=bolditalic
-	 * @param size die gew�hlte Schriftgr��e
+	 * @param size die gewuehlte Schriftgrueuee
 	 * @return die angeforderte Standardschrift.
 	 */
 	public static Font getFont(int style, float size){

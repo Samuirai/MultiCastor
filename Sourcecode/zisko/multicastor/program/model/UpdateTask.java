@@ -12,7 +12,7 @@ import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 import zisko.multicastor.program.lang.LanguageManager;
 
 /**
- * UpdateTask ist ein Timer, der die Oberfläche/Tabelle aktuallisiert
+ * UpdateTask ist ein Timer, der die Oberflaeche/Tabelle aktuallisiert
  */
 public class UpdateTask extends TimerTask {
 	private ViewController viewController;
@@ -30,10 +30,10 @@ public class UpdateTask extends TimerTask {
 	 * Konstruktor
 	 * @param logger Logger der zum loggen benutzt wird
 	 * @param mcSenderL3 Multicast Sender L3 Daten
-	 * @param mcReceiverL3 Multicast Empfänger L3 Daten
+	 * @param mcReceiverL3 Multicast Empfaenger L3 Daten
 	 * @param mcSenderL2 Multicast Sender L2 Daten
-	 * @param mcReceiverL2 Multicast Empfänger L2 Daten
-	 * @param viewController viewController für die Oberfläche
+	 * @param mcReceiverL2 Multicast Empfaenger L2 Daten
+	 * @param viewController viewController fuer die Oberflaeche
 	 */
 	public UpdateTask(Logger logger,
 			Map<MulticastData, MulticastThreadSuper> mcSenderL3,
@@ -58,7 +58,7 @@ public class UpdateTask extends TimerTask {
 		boolean memoryWarnedForLog = false; 
 		Runtime rt= Runtime.getRuntime();
 		
-		// V1.5 [FH] PrÔøΩfung des Memories. Ob noch mehr als 10% frei sind
+		// V1.5 [FH] Pruefung des Memories. Ob noch mehr als 10% frei sind
 		if (!memoryWarned && rt.freeMemory()+ (rt.maxMemory()-rt.totalMemory()) 
 				< rt.maxMemory()*0.1) {
 			logger.warning(lang.getProperty("warning.memory.title") +

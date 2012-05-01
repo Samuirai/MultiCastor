@@ -118,7 +118,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>Updated den Graphen mit einem neuen Wert.
 <DT><A HREF="../zisko/multicastor/program/view/ReceiverGraph.html#updateGraph(zisko.multicastor.program.data.MulticastData[], boolean)"><B>updateGraph(MulticastData[], boolean)</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/ReceiverGraph.html" title="class in zisko.multicastor.program.view">ReceiverGraph</A>
-<DD>Diese Methode updated den Graph, indem sie je nach ausgewähltem
+<DD>Diese Methode updated den Graph, indem sie je nach ausgewaehltem
  Radiobutton die entsprechenden Daten aus den <A HREF="../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data"><CODE>MulticastData</CODE></A>-Objekt extrahiert.
 <DT><A HREF="../zisko/multicastor/program/interfaces/MulticastThreadSuper.html#updateMin()"><B>updateMin()</B></A> - 
 Method in class zisko.multicastor.program.interfaces.<A HREF="../zisko/multicastor/program/interfaces/MulticastThreadSuper.html" title="class in zisko.multicastor.program.interfaces">MulticastThreadSuper</A>
@@ -153,7 +153,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DT><A HREF="../zisko/multicastor/program/data/UserInputData.html" title="class in zisko.multicastor.program.data"><B>UserInputData</B></A> - Class in <A HREF="../zisko/multicastor/program/data/package-summary.html">zisko.multicastor.program.data</A><DD>&nbsp;<DT><A HREF="../zisko/multicastor/program/data/UserInputData.html#UserInputData()"><B>UserInputData()</B></A> - 
 Constructor for class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/UserInputData.html" title="class in zisko.multicastor.program.data">UserInputData</A>
 <DD>&nbsp;
-<DT><A HREF="../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data"><B>UserlevelData</B></A> - Class in <A HREF="../zisko/multicastor/program/data/package-summary.html">zisko.multicastor.program.data</A><DD>Diese Klasse enthält die Informationen was genau in dem User 
+<DT><A HREF="../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data"><B>UserlevelData</B></A> - Class in <A HREF="../zisko/multicastor/program/data/package-summary.html">zisko.multicastor.program.data</A><DD>Diese Klasse enthaelt die Informationen was genau in dem User 
  Interface angezeigt wird.<DT><A HREF="../zisko/multicastor/program/data/UserlevelData.html#UserlevelData()"><B>UserlevelData()</B></A> - 
 Constructor for class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>
 <DD>&nbsp;

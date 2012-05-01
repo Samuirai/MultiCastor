@@ -23,14 +23,14 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 				   bufForCRC16;
 	
 	/**
-	 * Einziger Konstruktor. Extrahiert alle benötigten Daten aus dem MultiCastData-Object
+	 * Einziger Konstruktor. Extrahiert alle benoetigten Daten aus dem MultiCastData-Object
 	 * und erstellt ein neues Paket. Dieses Paket wird beibehalten und nur noch minimal ab-
-	 * geändert, wenn mit getPacket() ein neues Paket angefordert wird. Das Erstellen von
-	 * mehreren Paketen mit derselben Instanz ist nicht möglich
-	 * @param mcBean Bean des Typs {@link MultiCastData}, enthält alle nötigen Daten zum Erstellen eines Pakets
+	 * geaendert, wenn mit getPacket() ein neues Paket angefordert wird. Das Erstellen von
+	 * mehreren Paketen mit derselben Instanz ist nicht moeglich
+	 * @param mcBean Bean des Typs {@link MultiCastData}, enthaelt alle noetigen Daten zum Erstellen eines Pakets
 	 */
 	public PacketBuilder(MulticastData mcBean){
-		//Zu übertragene Werte setzen
+		//Zu uebertragene Werte setzen
 		hostID      = mcBean.getHostID();
 		randomID	= mcBean.getRandomID();
 		reset       = false;
@@ -45,7 +45,7 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 	
 	/**
 	 * Setzt alle mit den Hilfsfunktionen zum Konvertieren ermittelten Byte-Arrays
-	 * zu einem Byte-Array zusammen und fügt eventuell Füllbits ein.
+	 * zu einem Byte-Array zusammen und fuegt eventuell Fuellbits ein.
 	 */
 	private void buildNewPacket(){
 		buf 			= new byte[pktLength];
@@ -58,7 +58,7 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 		else					hIDlength = 25;
 		//Setzen der Host-ID
 		System.arraycopy(hostID.getBytes(), 0, buf, pos, hIDlength);
-		//Rest der hostID mit Nullen auffüllen
+		//Rest der hostID mit Nullen auffuellen
 		for(pos = hIDlength;pos<25;pos++)	buf[pos] = 0;					//pos: 25
 		System.arraycopy(ByteTools.convertToByte(Integer.parseInt(randomID, 16)), 0, buf, pos, 4);  //pos: 29
 		pos += 4;
@@ -72,21 +72,21 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 		pos ++;																//pos: 38
 		System.arraycopy(ByteTools.convertToByte(reset), 0, buf, pos, 4);
 		pos += 4;															//pos: 42
-		//Checksumme über die ersten 42 Bytes
+		//Checksumme ueber die ersten 42 Bytes
 		System.arraycopy(buf, 0, bufForCRC16, 0, 42);
 		System.arraycopy(ByteTools.crc16(bufForCRC16), 0, buf, pos, 2);
 		pos += 2;															//pos: 44
 		System.arraycopy(ByteTools.convertToByte(System.nanoTime()), 0, buf, pos, 8);
 		pos += 8;															//pos: 52
 
-		// Bis zur gegebenen Menge mit Nullen auffüllen
-		// Wenn ptkLength kleiner als die erforderte Mindestlänge ist, wird pktLength
+		// Bis zur gegebenen Menge mit Nullen auffuellen
+		// Wenn ptkLength kleiner als die erforderte Mindestlaenge ist, wird pktLength
 		// praktisch ignoriert
 		for(;pos<pktLength;pos++) buf[pos] = (byte) 0;
 	}
 	
 	/**
-	 * Methode, mit der nachträglich die RandomID geändert werden kann
+	 * Methode, mit der nachtraeglich die RandomID geaendert werden kann
 	 * @param randomID die neue randomID
 	 */
 	public void alterRandomID(String randomID){
@@ -95,7 +95,7 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 	}
 	
 	/**
-	 * Methode, mit der nachträglich die ThreadID geändert werden kann
+	 * Methode, mit der nachtraeglich die ThreadID geaendert werden kann
 	 * @param threadID die neue ThreadID
 	 */
 	public void alterThreadID(int threadID){
@@ -112,16 +112,16 @@ public class PacketBuilder implements zisko.multicastor.program.interfaces.Packe
 	
 	/**
 	 * Methode,mit der ein neues Byte-Array mit den Nutzdaten angefordert wird.
-	 * Dabei wird jedes mal der Paketzähler erhöht und der Zeitstempel aktualisiert.
+	 * Dabei wird jedes mal der Paketzaehler erhoeht und der Zeitstempel aktualisiert.
 	 * @return Das aktualisierte Byte[]-Paket
 	 */
 	@Override
 	public byte[] getPacket() {
-		//Paketzähler erhöhen
+		//Paketzaehler erhoehen
 		txPktCnt++;
 		System.arraycopy(ByteTools.convertToByte(txPktCnt), 0, buf, 31, 4);
 		
-		//Checksumme über die ersten 42 Bytes
+		//Checksumme ueber die ersten 42 Bytes
 		System.arraycopy(buf, 0, bufForCRC16, 0, 42);
 		System.arraycopy(ByteTools.crc16(bufForCRC16), 0, buf, 42, 2);
 		

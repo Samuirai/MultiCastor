@@ -105,7 +105,7 @@ java.lang.Object
 </PRE>
 
 <P>
-Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
+Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kuemmert.
 <P>
 
 <P>
@@ -148,7 +148,7 @@ Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/MiscTableModel.html#changeUpdate()">changeUpdate</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn eine Multicast geändert wird.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn eine Multicast geaendert wird.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -156,7 +156,7 @@ Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/MiscTableModel.html#deleteUpdate()">deleteUpdate</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn eine Multicast gelsoecht wird.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -205,7 +205,7 @@ Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/MiscTableModel.html#insertUpdate()">insertUpdate</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn eine Multicast hinzugefügt wird.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn eine Multicast hinzugefuegt wird.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -297,7 +297,7 @@ insertUpdate</H3>
 <PRE>
 public void <B>insertUpdate</B>()</PRE>
 <DL>
-<DD>Funktion welche aufgerufen wird wenn eine Multicast hinzugefügt wird.
+<DD>Funktion welche aufgerufen wird wenn eine Multicast hinzugefuegt wird.
 <P>
 <DD><DL>
 </DL>
@@ -310,7 +310,7 @@ deleteUpdate</H3>
 <PRE>
 public void <B>deleteUpdate</B>()</PRE>
 <DL>
-<DD>Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.
+<DD>Funktion welche aufgerufen wird wenn eine Multicast gelsoecht wird.
 <P>
 <DD><DL>
 </DL>
@@ -323,7 +323,7 @@ changeUpdate</H3>
 <PRE>
 public void <B>changeUpdate</B>()</PRE>
 <DL>
-<DD>Funktion welche aufgerufen wird wenn eine Multicast geändert wird.
+<DD>Funktion welche aufgerufen wird wenn eine Multicast geaendert wird.
 <P>
 <DD><DL>
 </DL>

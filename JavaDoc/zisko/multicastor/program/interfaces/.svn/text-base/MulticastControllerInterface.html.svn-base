@@ -118,7 +118,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#addMC(zisko.multicastor.program.data.MulticastData)">addMC</A></B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F�gt einen MultiCast hinzu</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fuegt einen MultiCast hinzu</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -126,7 +126,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#changeMC(zisko.multicastor.program.data.MulticastData)">changeMC</A></B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L�scht den vorhanden MultiCast und f�gt einen neuen MultiCast mit entsprechenden Werten hinzu.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luescht den vorhanden MultiCast und fuegt einen neuen MultiCast mit entsprechenden Werten hinzu.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -134,7 +134,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#deleteMC(zisko.multicastor.program.data.MulticastData)">deleteMC</A></B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L�scht den verkn�pften MultiCast</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luescht den verknuepften MultiCast</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -142,7 +142,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#deleteMC(java.util.Vector)">deleteMC</A></B>(java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L�scht die verkn�pften MultiCasts</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luescht die verknuepften MultiCasts</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -158,7 +158,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#getPPSSender(zisko.multicastor.program.data.MulticastData.Typ)">getPPSSender</A></B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.Typ.html" title="enum in zisko.multicastor.program.data">MulticastData.Typ</A>&nbsp;typ)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gibt die globale real gesendete Paketrate zur�ck</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gibt die globale real gesendete Paketrate zurueck</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -167,7 +167,7 @@ Interface MulticastControllerInterface</H2>
              <A HREF="../../../../zisko/multicastor/program/data/UserlevelData.Userlevel.html" title="enum in zisko.multicastor.program.data">UserlevelData.Userlevel</A>&nbsp;userlevel)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diese Methode gibt ein UserLevelData Objekt zur�ck in dem gespeichert ist 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diese Methode gibt ein UserLevelData Objekt zurueck in dem gespeichert ist 
  welche GUI Elemente angezeigt werden.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -188,7 +188,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#startMC(zisko.multicastor.program.data.MulticastData)">startMC</A></B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet den verkn�pften MultiCast</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet den verknuepften MultiCast</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -196,7 +196,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#startMC(java.util.Vector)">startMC</A></B>(java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet die verkn�pften MultiCasts</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet die verknuepften MultiCasts</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -204,7 +204,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#stopMC(zisko.multicastor.program.data.MulticastData)">stopMC</A></B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt den verkn�pften MultiCast</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt den verknuepften MultiCast</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -212,7 +212,7 @@ Interface MulticastControllerInterface</H2>
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#stopMC(java.util.Vector)">stopMC</A></B>(java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt die verkn�pften MultiCasts</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt die verknuepften MultiCasts</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -265,13 +265,13 @@ getUserLevel</H3>
 <A HREF="../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A> <B>getUserLevel</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.Typ.html" title="enum in zisko.multicastor.program.data">MulticastData.Typ</A>&nbsp;typ,
                            <A HREF="../../../../zisko/multicastor/program/data/UserlevelData.Userlevel.html" title="enum in zisko.multicastor.program.data">UserlevelData.Userlevel</A>&nbsp;userlevel)</PRE>
 <DL>
-<DD>Diese Methode gibt ein UserLevelData Objekt zur�ck in dem gespeichert ist 
+<DD>Diese Methode gibt ein UserLevelData Objekt zurueck in dem gespeichert ist 
  welche GUI Elemente angezeigt werden.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>typ</CODE> - can be SENDER_V4,...<DD><CODE>userlevel</CODE> - can be expert,...
-<DT><B>Returns:</B><DD>UserLevelData Objekt entsprechend dem �bergebenen Parameter. Gibt <code>null</code> zur�ck,
- wenn zu den �bergebenen</DL>
+<DT><B>Returns:</B><DD>UserLevelData Objekt entsprechend dem uebergebenen Parameter. Gibt <code>null</code> zurueck,
+ wenn zu den uebergebenen</DL>
 </DD>
 </DL>
 <HR>
@@ -281,7 +281,7 @@ startMC</H3>
 <PRE>
 void <B>startMC</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</PRE>
 <DL>
-<DD>Startet den verkn�pften MultiCast
+<DD>Startet den verknuepften MultiCast
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>m</CODE> - Das MultiCastData Objekt, des zu startenden MultiCasts</DL>
@@ -294,7 +294,7 @@ startMC</H3>
 <PRE>
 void <B>startMC</B>(java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</PRE>
 <DL>
-<DD>Startet die verkn�pften MultiCasts
+<DD>Startet die verknuepften MultiCasts
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>m</CODE> - Ein Vektor mit den MultiCastData Objekten, der zu startenden MultiCasts</DL>
@@ -307,7 +307,7 @@ stopMC</H3>
 <PRE>
 void <B>stopMC</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</PRE>
 <DL>
-<DD>Stopt den verkn�pften MultiCast
+<DD>Stopt den verknuepften MultiCast
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>m</CODE> - Das MultiCastData Objekt, des zu stoppenden MultiCasts</DL>
@@ -320,7 +320,7 @@ stopMC</H3>
 <PRE>
 void <B>stopMC</B>(java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</PRE>
 <DL>
-<DD>Stopt die verkn�pften MultiCasts
+<DD>Stopt die verknuepften MultiCasts
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>m</CODE> - Ein Vektor mit den MultiCastData Objekten, der zu stoppenden MultiCasts</DL>
@@ -333,10 +333,10 @@ deleteMC</H3>
 <PRE>
 void <B>deleteMC</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</PRE>
 <DL>
-<DD>L�scht den verkn�pften MultiCast
+<DD>Luescht den verknuepften MultiCast
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>m</CODE> - Ein MultiCastData Objekt, des zu l�schenden MultiCasts.</DL>
+<DT><B>Parameters:</B><DD><CODE>m</CODE> - Ein MultiCastData Objekt, des zu lueschenden MultiCasts.</DL>
 </DD>
 </DL>
 <HR>
@@ -346,10 +346,10 @@ deleteMC</H3>
 <PRE>
 void <B>deleteMC</B>(java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</PRE>
 <DL>
-<DD>L�scht die verkn�pften MultiCasts
+<DD>Luescht die verknuepften MultiCasts
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>m</CODE> - Ein Vektor mit den MultiCastData Objekten der zu l�schenden MultiCasts.</DL>
+<DT><B>Parameters:</B><DD><CODE>m</CODE> - Ein Vektor mit den MultiCastData Objekten der zu lueschenden MultiCasts.</DL>
 </DD>
 </DL>
 <HR>
@@ -359,7 +359,7 @@ addMC</H3>
 <PRE>
 void <B>addMC</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</PRE>
 <DL>
-<DD>F�gt einen MultiCast hinzu
+<DD>Fuegt einen MultiCast hinzu
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>m</CODE> - MultiCastData Objekt mit den eingegebenen MultiCastDaten</DL>
@@ -372,7 +372,7 @@ changeMC</H3>
 <PRE>
 void <B>changeMC</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</PRE>
 <DL>
-<DD>L�scht den vorhanden MultiCast und f�gt einen neuen MultiCast mit entsprechenden Werten hinzu.
+<DD>Luescht den vorhanden MultiCast und fuegt einen neuen MultiCast mit entsprechenden Werten hinzu.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>m</CODE> - MultiCastData Objekt mit den eingegebenen MultiCastDaten</DL>
@@ -385,7 +385,7 @@ getPPSSender</H3>
 <PRE>
 int <B>getPPSSender</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.Typ.html" title="enum in zisko.multicastor.program.data">MulticastData.Typ</A>&nbsp;typ)</PRE>
 <DL>
-<DD>Gibt die globale real gesendete Paketrate zur�ck
+<DD>Gibt die globale real gesendete Paketrate zurueck
 <P>
 <DD><DL>
 

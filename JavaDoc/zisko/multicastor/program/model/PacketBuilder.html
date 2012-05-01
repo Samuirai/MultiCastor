@@ -146,7 +146,7 @@ Eine Klasse zum Erstellen des Byte-Arrays, das per Multicast versendet wird.
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/model/PacketBuilder.html#alterThreadID(int)">alterThreadID</A></B>(int&nbsp;threadID)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Methode, mit der nachträglich die ThreadID geändert werden kann</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Methode, mit der nachtraeglich die ThreadID geaendert werden kann</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -192,13 +192,13 @@ PacketBuilder</H3>
 <PRE>
 public <B>PacketBuilder</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;mcBean)</PRE>
 <DL>
-<DD>Einziger Konstruktor. Extrahiert alle benötigten Daten aus dem MultiCastData-Object
+<DD>Einziger Konstruktor. Extrahiert alle benoetigten Daten aus dem MultiCastData-Object
  und erstellt ein neues Paket. Dieses Paket wird beibehalten und nur noch minimal ab-
- geändert, wenn mit getPacket() ein neues Paket angefordert wird. Das Erstellen von
- mehreren Paketen mit derselben Instanz ist nicht möglich
+ geaendert, wenn mit getPacket() ein neues Paket angefordert wird. Das Erstellen von
+ mehreren Paketen mit derselben Instanz ist nicht moeglich
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>mcBean</CODE> - Bean des Typs <CODE>MultiCastData</CODE>, enthält alle nötigen Daten zum Erstellen eines Pakets</DL>
+<DT><B>Parameters:</B><DD><CODE>mcBean</CODE> - Bean des Typs <CODE>MultiCastData</CODE>, enthaelt alle noetigen Daten zum Erstellen eines Pakets</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -216,7 +216,7 @@ alterThreadID</H3>
 <PRE>
 public void <B>alterThreadID</B>(int&nbsp;threadID)</PRE>
 <DL>
-<DD>Methode, mit der nachträglich die ThreadID geändert werden kann
+<DD>Methode, mit der nachtraeglich die ThreadID geaendert werden kann
 <P>
 <DD><DL>
 </DL>
@@ -249,7 +249,7 @@ getPacket</H3>
 public byte[] <B>getPacket</B>()</PRE>
 <DL>
 <DD>Methode,mit der ein neues Byte-Array mit den Nutzdaten angefordert wird.
- Dabei wird jedes mal der Paketzähler erhöht und der Zeitstempel aktualisiert.
+ Dabei wird jedes mal der Paketzaehler erhoeht und der Zeitstempel aktualisiert.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../zisko/multicastor/program/interfaces/PacketBuilderInterface.html#getPacket()">getPacket</A></CODE> in interface <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/PacketBuilderInterface.html" title="interface in zisko.multicastor.program.interfaces">PacketBuilderInterface</A></CODE></DL>

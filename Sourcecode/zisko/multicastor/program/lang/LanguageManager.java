@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
  * This class supports the LanguageFile management of the MultiCastor
  * It is created as a singleton. That means that there can be only one object of this class
  * at runtime 
- * @author Jonas Traub
  * @see http://en.wikipedia.org/wiki/Singleton_pattern
  * @see http://de.wikipedia.org/wiki/Singleton_%28Entwurfsmuster%29 
  */

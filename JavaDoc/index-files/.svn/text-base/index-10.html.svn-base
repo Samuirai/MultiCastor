@@ -84,7 +84,7 @@ function windowTitle()
 <DL>
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#keyPressed(java.awt.event.KeyEvent)"><B>keyPressed(KeyEvent)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Funktion welche Aufgerufen wird wenn eine Taste der Tastatur gedrückt wird.
+<DD>Funktion welche Aufgerufen wird wenn eine Taste der Tastatur gedrueckt wird.
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#keyReleased(java.awt.event.KeyEvent)"><B>keyReleased(KeyEvent)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
 <DD>&nbsp;

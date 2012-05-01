@@ -10,7 +10,7 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 
 /**
- * RegularLoggingTask ist ein Timer, der in regelmäßigen Abständen die Sender und Empfänger auf der Konsole ausgibt.
+ * RegularLoggingTask ist ein Timer, der in regelmaessigen Abstaenden die Sender und Empfaenger auf der Konsole ausgibt.
  *
  */
 public class RegularLoggingTask extends TimerTask {
@@ -20,9 +20,9 @@ public class RegularLoggingTask extends TimerTask {
 	
 	/**
 	 * 
-	 * @param logger Logger der für die Ausgabe verwendet wird
+	 * @param logger Logger der fuer die Ausgabe verwendet wird
 	 * @param mcSenderL3 Multicast Sender Map mit den Sender Daten
-	 * @param mcReceiverL3 Multicast Empfänger Map mit den Empfänger Daten
+	 * @param mcReceiverL3 Multicast Empfaenger Map mit den Empfaenger Daten
 	 */
 	public RegularLoggingTask(Logger logger,
 			Map<MulticastData, MulticastThreadSuper> mcSenderL3,

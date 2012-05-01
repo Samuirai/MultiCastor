@@ -21,7 +21,7 @@ public class MulticastLogHandler extends ConsoleHandler	{
 	private ViewController viewController;
 	
 	/**
-	 * Language Manager ist wichtig fŸr die multi Language UnterstŸtzung 
+	 * Language Manager ist wichtig fuer die multi Language Unterstuetzung 
 	 */
 	private LanguageManager lang=LanguageManager.getInstance();
 	
@@ -33,7 +33,7 @@ public class MulticastLogHandler extends ConsoleHandler	{
 		}
 	
 	/**
-	 * ï¿½berladener Konstruktor. Hier mit ï¿½bergabe vom GUI-Controller.
+	 * ueberladener Konstruktor. Hier mit uebergabe vom GUI-Controller.
 	 * @param gui Die Referenz zum GUI-Controller
 	 */
 	

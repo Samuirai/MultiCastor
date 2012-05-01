@@ -20,10 +20,6 @@ import java.util.List;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
 
-/**
- * @author Mark Bednarczyk
- * @author Sly Technologies, Inc.
- */
 public class Maintest {
 	public static void main(String[] args) {
 		List<PcapIf> alldevs = new ArrayList<PcapIf>(); // Will be filled with

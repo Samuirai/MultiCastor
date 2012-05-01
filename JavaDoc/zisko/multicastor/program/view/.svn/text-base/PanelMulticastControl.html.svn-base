@@ -108,8 +108,8 @@ java.lang.Object
 </PRE>
 
 <P>
-Das Kontrollpanel für Multicasts. 
- Mit diesem Panel können Multicasts gestartet, gestoppt und gelöscht werden.
+Das Kontrollpanel fuer Multicasts. 
+ Mit diesem Panel koennen Multicasts gestartet, gestoppt und geloescht werden.
 <P>
 
 <P>
@@ -198,7 +198,7 @@ Das Kontrollpanel für Multicasts.
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/PanelMulticastControl.html#PanelMulticastControl(zisko.multicastor.program.controller.ViewController)">PanelMulticastControl</A></B>(<A HREF="../../../../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>&nbsp;ctrl)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Konstruktor für das Kontrollpanel welcher alle zugehörigen GUI Komponenten initialisiert.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Konstruktor fuer das Kontrollpanel welcher alle zugehoerigen GUI Komponenten initialisiert.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -362,10 +362,10 @@ PanelMulticastControl</H3>
 <PRE>
 public <B>PanelMulticastControl</B>(<A HREF="../../../../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>&nbsp;ctrl)</PRE>
 <DL>
-<DD>Konstruktor für das Kontrollpanel welcher alle zugehörigen GUI Komponenten initialisiert.
+<DD>Konstruktor fuer das Kontrollpanel welcher alle zugehoerigen GUI Komponenten initialisiert.
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - Benötigete Referenz zum GUI Controller</DL>
+<DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - Benoetigete Referenz zum GUI Controller</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

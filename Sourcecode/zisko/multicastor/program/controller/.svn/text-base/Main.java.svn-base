@@ -14,15 +14,15 @@ import zisko.multicastor.program.model.WrongConfigurationException;
 
 /**
  * Main-Methode.
- * @author Thomas Lüder
+ * @author Thomas Lueder
  */
 
 public class Main {
 
 	/**
 	 * Initialisiert den MulticastController sowie die GUI und liest die 
-	 * Parameter ein, die dem Programm übegeben wurden und startet den entsprechenden Programmteil.
-	 * @param args Ein Feld aus Strings, das die Parameter enthält, die dem Programm in der Kommandozeile übergeben wurden.
+	 * Parameter ein, die dem Programm uebegeben wurden und startet den entsprechenden Programmteil.
+	 * @param args Ein Feld aus Strings, das die Parameter enthaelt, die dem Programm in der Kommandozeile uebergeben wurden.
 	 */
 	
 	public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class Main {
 			controller = new MulticastController(gui,logger);
 			gui.initialize(controller);
 			
-			//Handler für formatierte Ausgabe in der Konsole- und GUI-Konsole
+			//Handler fuer formatierte Ausgabe in der Konsole- und GUI-Konsole
 			consoleHandlerWithGUI = new MulticastLogHandler(gui);
 			consoleHandlerWithGUI.setLevel(Level.FINEST);
 			logger.addHandler(consoleHandlerWithGUI);
@@ -71,7 +71,7 @@ public class Main {
 					try {
 						controller = new MulticastController(null,logger);
 						//System.out.println("Parsing");
-						//Handler für formatierte Ausgabe in der Konsole
+						//Handler fuer formatierte Ausgabe in der Konsole
 						consoleHandler = new MulticastLogHandler();
 						consoleHandler.setLevel(Level.FINEST);
 						logger.addHandler(consoleHandler);
@@ -130,7 +130,7 @@ public class Main {
 							controller = new MulticastController(gui,logger);
 							gui.initialize(controller);
 							
-							//Handler für formatierte Ausgabe in der Konsole- und GUI-Konsole
+							//Handler fuer formatierte Ausgabe in der Konsole- und GUI-Konsole
 							consoleHandlerWithGUI = new MulticastLogHandler(gui);
 							consoleHandlerWithGUI.setLevel(Level.FINEST);
 							logger.addHandler(consoleHandlerWithGUI);

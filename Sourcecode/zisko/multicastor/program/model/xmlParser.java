@@ -47,11 +47,11 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	private Logger logger;
 	
 	/**
-	 * Language Manager ist wichtig für die multi Language Unterstützung 
+	 * Language Manager ist wichtig fuer die multi Language Unterstuetzung 
 	 */
 	private LanguageManager lang=LanguageManager.getInstance();
 	
-	/** XML Tag Namen für die Multicast Daten */
+	/** XML Tag Namen fuer die Multicast Daten */
 	private enum mcdTag{
 		active, groupIp, sourceIp, udpPort, packetLength, ttl,
 		packetRateDesired, typ, sourceMac, groupMac
@@ -70,14 +70,14 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}*/
 	
 	/** Konstruktor
-	 * @param logger Logger für die Ausgaben
+	 * @param logger Logger fuer die Ausgaben
 	 */
 	public xmlParser(Logger logger){
 		this.logger = logger;
 	}
 	
 	/**
-	 * Lädt die Multicast Data Config
+	 * Laedt die Multicast Data Config
 	 * @param path Pfad zur XML Datei
 	 * @param v MulticastData Vector
 	 */
@@ -91,7 +91,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}
 	
 	/**
-	 * Lädt die Multicast GUI Config
+	 * Laedt die Multicast GUI Config
 	 * @param path Pfad zur XML Datei
 	 * @param data GUIData Objekt mit den GUI Daten
 	 */
@@ -106,7 +106,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}
 	
 	/**
-	 * Lädt wirklich die Multicast GUI Config und speichert die XML Datei Werte in GUIData
+	 * Laedt wirklich die Multicast GUI Config und speichert die XML Datei Werte in GUIData
 	 * @param doc Document (Pfad) zur XML Datei
 	 * @param data GUIData Objekt mit den GUI Daten
 	 */
@@ -148,7 +148,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}
 
 	/**
-	 * Lädt wirklich die Multicast Daten und speichert die XML Daten in dem MultocastData Vector
+	 * Laedt wirklich die Multicast Daten und speichert die XML Daten in dem MultocastData Vector
 	 * @param doc Document (Pfad) zur XML Datei
 	 * @param v MulticastData Vector
 	 */
@@ -163,7 +163,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    //Der Tag "Multicasts" ist nur 1 Mal vorhanden,
 	    //wenn das XML korrekt ist
 	    if(multicasts.getLength()==1) {
-	    	//LÔøΩsche bisherige Einstellungen
+	    	//Luesche bisherige Einstellungen
 		    v.clear();
 	    	//Erstelle neues MulticastData Objekt
 	    	MulticastData mcd;
@@ -171,7 +171,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	    	//Diese sind L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER oder UNDEFINED
 	    	NodeList mcList = multicasts.item(0).getChildNodes();
 	    	
-	    	//ZÔøΩhle alle Multicast Tags
+	    	//Zuehle alle Multicast Tags
 	    	int mcNummer = 0;
 	    	
 	    	//Iteration L3_SENDER, L3_RECEIVER, L2_SENDER, L2_RECEIVER Tags
@@ -188,7 +188,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		    	
 	    		//Finde alle ChildNodes des momentanen SENDER/RECEIVER Knoten
 	    		NodeList configList=mcList.item(i).getChildNodes();
-	    		//Iteration ÔøΩber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
+	    		//Iteration ueber alle Child Nodes des momentanen SENDER/RECEIVER Knoten
 	    		for(int j=0; j<configList.getLength(); j++) {
 		    		configNode=configList.item(j);
 
@@ -363,7 +363,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         doc.appendChild(guiConfig);
         
         
-		// Erzeugt Root Element fÔøΩr die User System Informationen
+		// Erzeugt Root Element fuer die User System Informationen
 		Element system = doc.createElement("System");
 		guiConfig.appendChild(system);
 		system.appendChild(el=doc.createElement("Time"));
@@ -387,7 +387,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  
 		  
 		  
-		// Erzeugt Root Element fÔøΩr die User System Informationen
+		// Erzeugt Root Element fuer die User System Informationen
 		Element tabs = doc.createElement("Tabs");
 		guiConfig.appendChild(tabs);
 		
@@ -444,7 +444,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
         Element multiCastor = doc.createElement("MultiCastor");
         doc.appendChild(multiCastor);
 	    
-		// Erzeugt Root Element fÔøΩr die User System Informationen
+		// Erzeugt Root Element fuer die User System Informationen
 		Element system = doc.createElement("System");
 		multiCastor.appendChild(system);
 		Element el;
@@ -501,19 +501,19 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		// Schreibe die MultiCast Konfigurationsdaten in das XML
 		// ********************************************************
 
-		// Erzeugt Root Element fÔøΩr die MultiCast Konfigurationen
+		// Erzeugt Root Element fuer die MultiCast Konfigurationen
 		Element multicasts = doc.createElement("Multicasts");
 		root.appendChild(multicasts);
 
-		// FÔøΩr alle verschiedenen Konfigurationen
+		// Fuer alle verschiedenen Konfigurationen
 		for (int count = 0; count < v1.size(); count++) {
 			// Ermittle den Typ ( (IPv4|IPv6)(Sender|Receiver) )
-			// FÔøΩge dementsprechend ein Kind Element hinzu
+			// Fuege dementsprechend ein Kind Element hinzu
 			MulticastData.Typ typ = v1.get(count).getTyp();
 			Element mcdTyp = doc.createElement(typ.toString());
 			multicasts.appendChild(mcdTyp);
 
-			// FÔøΩr alle vorhandenen Einstellungen
+			// Fuer alle vorhandenen Einstellungen
 			for (mcdTag tag : mcdTag.values()) {
 				Element mcdElement = doc.createElement(tag.toString());
 				Text text = doc.createTextNode("");
@@ -635,7 +635,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	/** 
 	 * Erstellt einen XML String anhand von einem Transformer Template
 	 * @param doc Document (Pfad) zur XML Datei
-	 * @param transformer Transformer objekt (Template) für doe XML Datei
+	 * @param transformer Transformer objekt (Template) fuer doe XML Datei
 	 * @return
 	 */
 	private String XMLtoString(Document doc, Transformer transformer)
@@ -669,7 +669,7 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	}
 	
 	/**
-	 * Custom Exception für ein leeres Config File
+	 * Custom Exception fuer ein leeres Config File
 	 * @param tag
 	 * @param value
 	 * @param multicast
