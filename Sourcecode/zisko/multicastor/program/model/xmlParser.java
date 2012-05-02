@@ -136,6 +136,46 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 			  	  data.setPLUS(GUIData.TabState.valueOf(tabList.item(i).getTextContent()));
 			}
 		}
+		
+		NodeList default_l2 = doc.getElementsByTagName("DEFAULT_L2");
+		if(default_l2.getLength()==1) {
+			NodeList tabList = default_l2.item(0).getChildNodes();
+			for(int i=0; i<tabList.getLength(); i++) {   
+	    		if(tabList.item(i).getNodeName().equals("#text")) {
+	    			continue;
+	    		}
+	  
+		  		if(tabList.item(i).getNodeName().equals("GroupMac"))
+			  	  data.Default_L2_GroupMac = tabList.item(i).getTextContent();
+		  		if(tabList.item(i).getNodeName().equals("PacketRateDesired"))
+			  	  data.Default_L2_PacketRateDesired = tabList.item(i).getTextContent();
+		  		if(tabList.item(i).getNodeName().equals("PacketLength"))
+		  		  data.Default_L2_PacketLength = tabList.item(i).getTextContent();
+			}
+		}
+		
+
+		NodeList default_l3 = doc.getElementsByTagName("DEFAULT_L3");
+		if(default_l3.getLength()==1) {
+			NodeList tabList = default_l3.item(0).getChildNodes();
+			for(int i=0; i<tabList.getLength(); i++) {   
+	    		if(tabList.item(i).getNodeName().equals("#text")) {
+	    			continue;
+	    		}
+	  
+		  		if(tabList.item(i).getNodeName().equals("GroupIp"))
+			  	  data.Default_L3_GroupIp = tabList.item(i).getTextContent();
+		  		if(tabList.item(i).getNodeName().equals("UdpPort"))
+			  	  data.Default_L3_UdpPort = tabList.item(i).getTextContent();
+		  		if(tabList.item(i).getNodeName().equals("Ttl"))
+			  	  data.Default_L3_Ttl = tabList.item(i).getTextContent();
+		  		if(tabList.item(i).getNodeName().equals("PacketRateDesired"))
+			  	  data.Default_L3_PacketRateDesired = tabList.item(i).getTextContent();
+		  		if(tabList.item(i).getNodeName().equals("PacketLength"))
+			  	  data.Default_L3_PacketLength = tabList.item(i).getTextContent();
+			}
+		}
+		
 		NodeList windowTitle = doc.getElementsByTagName("WindowName");
 		if(windowTitle.getLength()==1) {
 			data.setWindowName(windowTitle.item(0).getTextContent());
@@ -385,6 +425,31 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		  el.setTextContent(System.getProperty("java.vendor"));
 		  
 		  
+		// Erzeugt Root Element fuer die Default Werte
+		Element default_l3 = doc.createElement("DEFAULT_L3");
+		guiConfig.appendChild(default_l3);
+		
+		default_l3.appendChild(el=doc.createElement("GroupIp"));
+		  el.setTextContent(data.Default_L3_GroupIp);
+		default_l3.appendChild(el=doc.createElement("UdpPort"));
+		  el.setTextContent(data.Default_L3_UdpPort);
+		default_l3.appendChild(el=doc.createElement("Ttl"));
+		  el.setTextContent(data.Default_L3_Ttl);
+		default_l3.appendChild(el=doc.createElement("PacketRateDesired"));
+		  el.setTextContent(data.Default_L3_PacketRateDesired);
+		default_l3.appendChild(el=doc.createElement("PacketLength"));
+		  el.setTextContent(data.Default_L3_PacketLength);
+		  
+		// Erzeugt Root Element fuer die Default Werte
+		Element default_l2 = doc.createElement("DEFAULT_L2");
+		guiConfig.appendChild(default_l2);
+		
+		default_l2.appendChild(el=doc.createElement("GroupMac"));
+		  el.setTextContent(data.Default_L2_GroupMac);
+		default_l2.appendChild(el=doc.createElement("PacketRateDesired"));
+		  el.setTextContent(data.Default_L2_PacketRateDesired);
+		default_l2.appendChild(el=doc.createElement("PacketLength"));
+		  el.setTextContent(data.Default_L2_PacketLength);
 		  
 		// Erzeugt Root Element fuer die User System Informationen
 		Element tabs = doc.createElement("Tabs");
