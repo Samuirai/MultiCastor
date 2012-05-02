@@ -15,8 +15,12 @@ public class GUIData {
 	private String windowName = "MCastor 2.0";
 	private String Language = "english";
 
-	private MulticastData Default_L2;
-	private MulticastData Default_L3;
+	//[Daniel Becker]
+	//This are default values for the whole programm
+	//therefore we use them as public, because they
+	//do not need to be protected in any form
+	public MulticastData Default_L2;
+	public MulticastData Default_L3;
 	
 	//********************************************
 	// Eigene Datentypen

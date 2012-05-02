@@ -732,16 +732,30 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 */
 	private void clearInput(Typ typ){
 		if(initFinished){
-			getPanConfig(typ).getTf_groupIPaddress().setText("");
-			getPanConfig(typ).getTf_udp_port().setText("");
+			//Only for L3
+			if(typ == Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
+				getPanConfig(typ).getTf_groupIPaddress().setText(guidata.Default_L3.getGroupIp().toString());
+				getPanConfig(typ).getTf_udp_port().setText(((Integer)guidata.Default_L3.getUdpPort()).toString());
+
+				//Only L3 Sender
+				if(typ == Typ.L3_SENDER){	
+					getPanConfig(typ).getTf_ttl().setText(((Integer)guidata.Default_L3.getTtl()).toString());
+					getPanConfig(typ).getTf_packetrate().setText(((Integer)guidata.Default_L3.getPacketRateDesired()).toString());
+					getPanConfig(typ).getTf_udp_packetlength().setText(((Integer)guidata.Default_L3.getPacketLength()).toString());
+				}
+			}else{
+				getPanConfig(typ).getTf_groupIPaddress().setText(guidata.Default_L2.getMmrpGroupMacAsString());
+				
+				//Only L2 Sender
+				if(typ == Typ.L2_SENDER){
+					getPanConfig(typ).getTf_packetrate().setText(((Integer)guidata.Default_L2.getPacketRateDesired()).toString());
+					getPanConfig(typ).getTf_udp_packetlength().setText(((Integer)guidata.Default_L2.getPacketRateDesired()).toString());
+				}
+			}
 			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);
 			getPanConfig(typ).getCb_sourceIPaddress().insertItemAt("", 0);
 			getPanConfig(typ).getTf_sourceIPaddress().setSelectedIndex(0);
-			if(typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
-				getPanConfig(typ).getTf_ttl().setText("");
-				getPanConfig(typ).getTf_packetrate().setText("");;
-				getPanConfig(typ).getTf_udp_packetlength().setText("");;
-			}
+			
 			getPanConfig(typ).getTb_active().setSelected(false);
 			getPanConfig(typ).getTb_active().setText(lang.getProperty("button.inactive"));
 			getPanConfig(typ).getTb_active().setForeground(Color.red);
