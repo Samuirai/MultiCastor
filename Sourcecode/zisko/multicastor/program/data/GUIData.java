@@ -14,7 +14,9 @@ public class GUIData {
 	private TabState ABOUT = TabState.invisible;
 	private String windowName = "MCastor 2.0";
 	private String Language = "english";
-	
+
+	private MulticastData Default_L2;
+	private MulticastData Default_L3;
 	
 	//********************************************
 	// Eigene Datentypen

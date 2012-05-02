@@ -22,7 +22,7 @@
             <groupMac/>
         </L3_RECEIVER>
         <L3_SENDER>
-            <active>true</active>
+            <active>false</active>
             <groupIp>224.0.0.1</groupIp>
             <sourceIp>127.0.0.1</sourceIp>
             <udpPort>4771</udpPort>

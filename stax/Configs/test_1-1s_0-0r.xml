@@ -16,7 +16,7 @@
             <udpPort>4771</udpPort>
             <packetLength>124</packetLength>
             <ttl>1</ttl>
-            <packetRateDesired>1</packetRateDesired>
+            <packetRateDesired>1000</packetRateDesired>
             <typ>L3_SENDER</typ>
             <sourceMac/>
             <groupMac/>
