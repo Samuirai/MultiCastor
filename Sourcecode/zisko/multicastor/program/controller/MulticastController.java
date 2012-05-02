@@ -131,7 +131,7 @@ public class MulticastController {
 	 *            Programmereignisse und regelmaessig ermittelte
 	 *            Durchschnittswerte zu loggen. Wird null uebergeben wird dies
 	 *            in den Systemoutput geschrieben.
-	 * @param setzt
+	 * @param pPrintTableIntervall
 	 *            die intervall zeit fuer den konsolen tabellen output
 	 */
 	public MulticastController(ViewController viewController, Logger logger,
@@ -429,9 +429,7 @@ public class MulticastController {
 	 * 
 	 * @param path
 	 *            Pfad zur GUI Konfigurationsdatei.
-	 * @param complete
-	 *            Wenn true gesetzt, wird der Standardpfad genommen.
-	 * @param v
+	 * @param data
 	 *            Alle zu speichernden GUI Configs.
 	 */
 	public void saveGUIConfig(String path, GUIData data) {
@@ -457,8 +455,6 @@ public class MulticastController {
 	 * 
 	 * @param path
 	 *            Pfad zur Konfigurationsdatei.
-	 * @param complete
-	 *            Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v
 	 *            Alle zu speichernden Multicasts.
 	 */

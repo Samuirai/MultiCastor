@@ -92,7 +92,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	 * @param mcBean
 	 *            Das {@link MulticastData}-Object, dass alle fuer den Betrieb
 	 *            nuetigen Daten enthuelt.
-	 * @param _messages
+	 * @param _logger
 	 *            Eine {@link Queue}, ueber den der Sender seine Ausgaben an
 	 *            den Controller weitergibt.
 	 */
@@ -161,7 +161,7 @@ public class MulticastSender extends MulticastThreadSuper implements MulticastSe
 	// V1.5 [FH] Added MulticastController to stop it in case of network error
 	/**
 	 * Einen MulticastController setzten
-	 * @param MulticastController Instanz
+	 * @param mc Instanz
 	 */
 	public void setMCtrl(MulticastController mc) {
 		this.mCtrl = mc;

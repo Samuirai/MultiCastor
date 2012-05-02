@@ -41,7 +41,6 @@ import zisko.multicastor.program.lang.LanguageManager;
  * XML Parser Klasse die das Interface {@link XMLParserInterface} implementiert und die 
  * Daten aus den XML Konfigurationsdateien in den Datenstrukturen speichert.
  */
-
 public class xmlParser implements zisko.multicastor.program.interfaces.XMLParserInterface
 {
 	private Logger logger;
@@ -431,8 +430,8 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 	
 	/**
 	 * speichert die Multicast Data Config aus dem MulticastData Vector in einer XML Datei
-	 * @param path Pfad zur XML Datei
-	 * @param data MulticastData Vector
+	 * @param pfad Pfad zur XML Datei
+	 * @param v MulticastData Vector
 	 */
 	@Override
 	public void saveMulticastConfig(String pfad, Vector<MulticastData> v) throws IOException

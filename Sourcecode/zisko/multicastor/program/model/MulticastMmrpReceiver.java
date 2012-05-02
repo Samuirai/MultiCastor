@@ -54,7 +54,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	 * hostnamen des Geraets), der {@link MMRPReceiver} initialisiert
 	 * und das Datenpaket mit dem {@link PacketBuilder} erstellt.
 	 * 
-	 * @param mcBean
+	 * @param multicastData
 	 *            Das {@link MulticastData}-Object, dass alle fuer den Betrieb
 	 *            nuetigen Daten enthuelt.
 	 * @param logger
@@ -114,7 +114,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	 * Wird der Methode false uebergeben, stoppt 
 	 * sie das empfangen der Multicasts.
 	 * 
-	 * @param active
+	 * @param b
 	 *            boolean
 	 */
 	public void setActive(boolean b) {

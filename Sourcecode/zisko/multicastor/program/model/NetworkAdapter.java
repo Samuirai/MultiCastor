@@ -149,7 +149,6 @@ public abstract class NetworkAdapter {
 	
 	/**
 	 * ueberprueft ob eine bestimmte IP Adresse im System vergeben ist.
-	 * @param typ Unterscheidet ob es sich um IPv4 oder IPv6 Adresse handelt.
 	 * @param address Adresse welche ueberprueft werden soll
 	 * @return falls die Adresse vergeben ist wird der Index im jeweiligen Vector zurueckgegeben, ansonsten -1
 	 */

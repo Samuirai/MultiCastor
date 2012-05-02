@@ -48,9 +48,9 @@ public class ReceiverGraph extends PanelGraph{
 	Font					rbFont			= new Font("SansSerif", Font.PLAIN, 10);
 	
 	/**
-	 * Konstruktor. Erwartet einen {@link viewController} als Parameter, der die
+	 * Konstruktor. Erwartet einen {@link zisko.multicastor.program.controller.viewController} als Parameter, der die
 	 * Radiobuttons ueberwacht.
-	 * @param ctrl der {@link viewController} der ReceiverGraph-Instanz
+	 * @param ctrl der {@link controller.viewController} der ReceiverGraph-Instanz
 	 */
 	public ReceiverGraph(ViewController ctrl){
 		super(50, "", "", false);
@@ -133,10 +133,10 @@ public class ReceiverGraph extends PanelGraph{
 	
 	/**
 	 * Diese Methode updated den Graph, indem sie je nach ausgewuehltem
-	 * Radiobutton die entsprechenden Daten aus den {@link MulticastData}-Objekt extrahiert.
+	 * Radiobutton die entsprechenden Daten aus den {@link zisko.multicastor.program.data.MulticastData}-Objekt extrahiert.
 	 * Danach wird intern die updateGraph(int)-Methode aufgerufen.
-	 * @param mcData
-	 * @param Gibt an, ob der Graph neugezeichnet werden soll oder nicht.
+	 * @param mcDataArray
+	 * @param repaint Gibt an, ob der Graph neugezeichnet werden soll oder nicht.
 	 */
 	public void updateGraph(MulticastData[] mcDataArray, boolean repaint){
 		int newValue=0;

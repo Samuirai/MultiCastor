@@ -179,7 +179,7 @@ public class DraggableTabbedPane extends JTabbedPane {
    *  Um Welechen Tab es sich handelt wird ueber den command
    *  erkannt, wenn der Tab bereits geoeffnet ist wird er selektiert
    *  
-   *  @param String command Der ActionCommand String ueber welchen erkannt wird
+   *  @param command Der ActionCommand String ueber welchen erkannt wird
    *  welcher Tab geoeffnet werden soll
    */
   public void openTab(String command){
@@ -245,7 +245,7 @@ public class DraggableTabbedPane extends JTabbedPane {
    *  Um Welchen Tab es sich handelt wird ueber den command
    *  erkannt.
    *  
-   *  @param String command Der ActionCommand String ueber welchen erkannt wird
+   *  @param command Der ActionCommand String ueber welchen erkannt wird
    *  welcher Tab geoeffnet werden soll
    */
   public void closeTab(String command){

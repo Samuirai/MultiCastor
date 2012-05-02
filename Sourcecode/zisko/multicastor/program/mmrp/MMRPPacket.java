@@ -35,7 +35,6 @@ public class MMRPPacket {
 	 * return a joinIn
 	 * @param source is the MAC address of the device which will send the packet
 	 * @param firstValue is the MAC address of the multicast group
-	 * @return
 	 */
 	public static byte[] getJoinIn(byte[] source, byte[] firstValue){
 		return buildMMRPPacket(source, firstValue, MMRPPacket.joinIn, false);
@@ -45,7 +44,6 @@ public class MMRPPacket {
 	 * 
 	 * @param source is the MAC address of the device which will send the packet
 	 * @param firstValue is the MAC address of the multicast group
-	 * @return
 	 */
 	public static byte[] getIn(byte[] source, byte[] firstValue){
 		return buildMMRPPacket(source, firstValue, MMRPPacket.in, false);
@@ -55,7 +53,6 @@ public class MMRPPacket {
 	 * 
 	 * @param source is the MAC address of the device which will send the packet
 	 * @param firstValue is the MAC address of the multicast group
-	 * @return
 	 */
 	public static byte[] getJoinEmpty(byte[] source, byte[] firstValue){
 		return buildMMRPPacket(source, firstValue, MMRPPacket.joinEmpty, false);
@@ -65,7 +62,6 @@ public class MMRPPacket {
 	 * 
 	 * @param source is the MAC address of the device which will send the packet
 	 * @param firstValue is the MAC address of the multicast group
-	 * @return
 	 */
 	public static byte[] getEmpty(byte[] source, byte[] firstValue){
 		return buildMMRPPacket(source, firstValue, MMRPPacket.empty, false);
@@ -75,7 +71,6 @@ public class MMRPPacket {
 	 * 
 	 * @param source is the MAC address of the device which will send the packet
 	 * @param firstValue is the MAC address of the multicast group
-	 * @return
 	 */
 	public static byte[] getLeave(byte[] source, byte[] firstValue){
 		return buildMMRPPacket(source, firstValue, MMRPPacket.leave, false);
@@ -85,7 +80,6 @@ public class MMRPPacket {
 	 * 
 	 * @param source is the MAC address of the device which will send the packet
 	 * @param firstValue is the MAC address of the multicast group
-	 * @return
 	 */
 	public static byte[] getLeaveAll(byte[] source, byte[] firstValue){
 		return buildMMRPPacket(source, firstValue, MMRPPacket.leave, true);
@@ -97,7 +91,6 @@ public class MMRPPacket {
 	 * @param firstValue is the MAC address of the multicast group
 	 * @param event defines which MMRP event should be send
 	 * @param leaveAll defines if the message contains a leaveAll event
-	 * @return
 	 */
 	private static byte[] buildMMRPPacket(byte[] source, byte[] firstValue, int event, boolean leaveAll){
 		byte[] mmrpPacket = new byte[30];

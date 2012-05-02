@@ -2340,7 +2340,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	/**
 	 * Hilfsfunktion zum teilweise laden der Autosave Date, unterschieden nach Programmteil
 	 * welche sie betreffen
-	 * @param die zu ladenden UserInputData
+	 * @param data die zu ladenden UserInputData
 	 * @param typ der zu den UserInputData zugehuerige Programmtetil
 	 */
 	public void loadAutoSavePart(UserInputData data, Typ typ){

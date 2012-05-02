@@ -58,14 +58,14 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 	 * hostnamen des Geraets), der {@link MMRPSender} initialisiert
 	 * und das Datenpaket mit dem {@link PacketBuilder} erstellt.
 	 * 
-	 * @param mcBean
+	 * @param multicastData
 	 *            Das {@link MulticastData}-Object, dass alle fuer den Betrieb
 	 *            nuetigen Daten enthuelt.
 	 * @param logger
 	 *            Eine {@link Queue}, ueber den der Sender seine Ausgaben an
 	 *            den Controller weitergibt.
 	 *          
-	 * @param MultiCtrl
+	 * @param multiCtrl
 	 * 			  Eine Referenz auf den entsprechenden{@link MulticastController}
 	 * 			  damit MulticastStroeme ggf. richtig gestoppt werden kann
 	 */

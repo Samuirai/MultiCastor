@@ -43,7 +43,7 @@ public class WrappingCellRenderer implements TableCellRenderer {
 	 * @param isSelected Ob derzeit ausgewaehlt ja / nein.
 	 * @param hasFocus Ob derzeit fokussiert ja / nein.
 	 * @param row Zeile.
-	 * @param colum Spalte.
+	 * @param column Spalte.
 	 * 
 	 * @return Komponente.
 	 */
