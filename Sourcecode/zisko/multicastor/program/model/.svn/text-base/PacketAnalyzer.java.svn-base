@@ -97,11 +97,11 @@ public class PacketAnalyzer {
 	 */
 	public PacketAnalyzer(MulticastData multicastData, Logger logger){
 		if (multicastData==null){
-			System.out.println("Böser Fehler!!! multicastData ist null im PacketAnalyzer.");
+			System.out.println("Boeser Fehler!!! multicastData ist null im PacketAnalyzer.");
 		}
 		mcData = multicastData;
 		if(logger == null){
-			System.out.println("Böser Fehler!!! Message Queue ist null im PacketAnalyzer.");
+			System.out.println("Boeser Fehler!!! Message Queue ist null im PacketAnalyzer.");
 		}
 		this.logger = logger;
 		missingPackets = new Vector<Integer>();
@@ -329,7 +329,7 @@ public class PacketAnalyzer {
 		mcData.setPacketSource(source);
 		
 		// uses analyzePacketOnce on next received packet, too
-			// sorgt dafÃ¼r, dass jegliche Ã„nderungen erst mit einer Sekunde VerzÃ¶gerungen 
+			// sorgt dafuer, dass jegliche Aenderungen erst mit einer Sekunde Verzoegerungen 
 			//  in der GUI erscheinen -> updatet aber auch einige Werte deshalb nur einmal pro Sekunde
 		setComplete(true);
 		

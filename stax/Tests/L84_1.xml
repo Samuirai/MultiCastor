@@ -4,7 +4,7 @@
 <!--
     1. reset log
     2. starte MCastor2.0 mit 1 L3 Sender
-    3. überprüfe Log auf "Errors" oder "Warnings" und ob erwartete Werte richtig sind
+    3. ueberpruefe Log auf "Errors" oder "Warnings" und ob erwartete Werte richtig sind
 -->
 <stax>
     <function name="L84_1">

@@ -84,7 +84,7 @@ function windowTitle()
 <DL>
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#deleteAllMulticasts(zisko.multicastor.program.data.MulticastData.Typ)"><B>deleteAllMulticasts(MulticastData.Typ)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche alle Multicasts aus dem jeweiligen Programmteil löscht
+<DD>Hilfsfunktion welche alle Multicasts aus dem jeweiligen Programmteil loescht
 <DT><A HREF="../zisko/multicastor/program/controller/MulticastController.html#deleteMC(zisko.multicastor.program.data.MulticastData)"><B>deleteMC(MulticastData)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/MulticastController.html" title="class in zisko.multicastor.program.controller">MulticastController</A>
 <DD>Stoppt den zugehoerigen Thread und loescht alle Referenzen auf diesen, sowie das MulticastData-Objekt.
@@ -93,16 +93,16 @@ Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicast
 <DD>Entfernt alle Multicasts im Vektor.
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#deleteMC(zisko.multicastor.program.data.MulticastData)"><B>deleteMC(MulticastData)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Funktion welche aufgerufen wird wenn ein bestimmter Multicast gelöscht werden soll.
+<DD>Funktion welche aufgerufen wird wenn ein bestimmter Multicast geloescht werden soll.
 <DT><A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#deleteMC(zisko.multicastor.program.data.MulticastData)"><B>deleteMC(MulticastData)</B></A> - 
 Method in interface zisko.multicastor.program.interfaces.<A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html" title="interface in zisko.multicastor.program.interfaces">MulticastControllerInterface</A>
-<DD>Lï¿½scht den verknï¿½pften MultiCast
+<DD>Luescht den verknuepften MultiCast
 <DT><A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#deleteMC(java.util.Vector)"><B>deleteMC(Vector&lt;MulticastData&gt;)</B></A> - 
 Method in interface zisko.multicastor.program.interfaces.<A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html" title="interface in zisko.multicastor.program.interfaces">MulticastControllerInterface</A>
-<DD>Lï¿½scht die verknï¿½pften MultiCasts
+<DD>Luescht die verknuepften MultiCasts
 <DT><A HREF="../zisko/multicastor/program/view/MiscTableModel.html#deleteUpdate()"><B>deleteUpdate()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/MiscTableModel.html" title="class in zisko.multicastor.program.view">MiscTableModel</A>
-<DD>Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.
+<DD>Funktion welche aufgerufen wird wenn eine Multicast gelsoecht wird.
 <DT><A HREF="../zisko/multicastor/program/controller/MulticastController.html#destroy()"><B>destroy()</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/MulticastController.html" title="class in zisko.multicastor.program.controller">MulticastController</A>
 <DD>Stops all Multicasts Threads and removes them from corresponding vectors.

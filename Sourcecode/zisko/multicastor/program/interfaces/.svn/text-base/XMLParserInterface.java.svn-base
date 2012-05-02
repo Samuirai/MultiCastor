@@ -18,26 +18,26 @@ public interface XMLParserInterface
 	 * @param pfad
 	 * Ort, an dem die Konfigurationsdatei liegt
 	 * @param v1
-	 * MultiCastData enthält Multicast Konfigurationseinstellungen
+	 * MultiCastData enthaelt Multicast Konfigurationseinstellungen
 	 * @param v2
-	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
+	 * UserLevelData enthaelt persoenliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
 	 * @param v3
-	 * UserInputData enthält den momentanen Stand der GUI, inklusive geöffnetem Fenster und gerade eingetragenen Werten
+	 * UserInputData enthaelt den momentanen Stand der GUI, inklusive geoeffnetem Fenster und gerade eingetragenen Werten
 	 * @param v4
-	 * Die zuletzt geöffneten Konfigurationsdateien
+	 * Die zuletzt geoeffneten Konfigurationsdateien
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws FileNotFoundException
 	 */
 	public void loadConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws SAXException, FileNotFoundException, IOException, WrongConfigurationException;
 	
-	/** Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
+	/** Auslesen einer XML-Konfigurationsdatei fuer den User und aus der Kommandozeile
 	 * @param pfad
 	 * Ort, an dem die Konfigurationsdatei liegt
 	 * @param v1
-	 * MultiCastData enthält Multicast Konfigurationseinstellungen
+	 * MultiCastData enthaelt Multicast Konfigurationseinstellungen
 	 * @param v2
-	 * UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
+	 * UserLevelData enthaelt persoenliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
 	 * @throws SAXException
 	 * @throws FileNotFoundException
 	 * @throws IOException
@@ -54,7 +54,7 @@ public interface XMLParserInterface
 	 */
 	public void loadDefaultULD(Vector<MulticastData> v1, Vector<UserlevelData> v2) throws IOException, SAXException, WrongConfigurationException;
 	
-	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
+	/** Speichert die getaetigten Konfigurationen in einer XML-Datei ab.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
 	 * @param v1
@@ -69,8 +69,8 @@ public interface XMLParserInterface
 	 */
 	public void saveConfig(String pfad, Vector<MulticastData> v1, Vector<UserlevelData> v2, Vector<UserInputData> v3, Vector<String> v4) throws IOException;
 
-	/** Speichert die getätigten Konfigurationen in einer XML-Datei ab.
-	 *  Für Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
+	/** Speichert die getaetigten Konfigurationen in einer XML-Datei ab.
+	 *  Fuer Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
 	 * @param pfad
 	 * Der Ort, an dem die Datei gespeichert werden soll
 	 * @param v1

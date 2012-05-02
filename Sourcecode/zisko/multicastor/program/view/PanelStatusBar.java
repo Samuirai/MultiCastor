@@ -12,8 +12,6 @@ import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Panel welche die Statusbar des jeweiligen Programmteils beinhaltet.
- * @author Daniel Becker
- *
  */
 @SuppressWarnings("serial")
 public class PanelStatusBar extends JPanel {
@@ -72,7 +70,7 @@ public class PanelStatusBar extends JPanel {
 	/**
 	 * Funktion welche angezeigten Traffic in der Statusbar neu anfordert.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	public void updateTraffic(ViewController ctrl){
 		lb_trafficUP.setText(lang.getProperty("status.traffic")+" "+lang.getProperty("status.out")+": "+ctrl.getTotalTrafficUP()+" Mbps");

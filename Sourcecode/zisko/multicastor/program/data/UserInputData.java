@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 public class UserInputData {
-	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> l�uft �ber columnOrderString
+	private ArrayList<Integer> columnOrder; //muss nicht gespeichert werden -> lueuft ueber columnOrderString
 	private ArrayList<Integer> columnVisibility; // siehe columnVisiblityString
 	private String selectedTab = Typ.L3_SENDER.toString();
 	private String groupadress = "";
@@ -368,7 +368,7 @@ public class UserInputData {
 	}
 	
 	/**
-	 * sets the autosaveenabled function
+	 * sets the autosave enabled function
 	 * @param isAutoSaveEnabled string to set it
 	 */
 	public void setIsAutoSaveEnabled(String isAutoSaveEnabled)

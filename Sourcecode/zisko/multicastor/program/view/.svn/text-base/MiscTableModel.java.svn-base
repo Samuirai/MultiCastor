@@ -14,7 +14,7 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kümmert.
+ * Das Tabellenmodel welches sich um die Anzeige der Daten in der Tabelle kuemmert.
  * @author Daniel Becker
  *
  */
@@ -27,19 +27,19 @@ public class MiscTableModel extends AbstractTableModel {
 		this.ctrl=ctrl;
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefügt wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast hinzugefuegt wird.
 	 */
 	public void insertUpdate(){
 		fireTableRowsInserted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast gelsöcht wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast gelsoecht wird.
 	 */
 	public void deleteUpdate(){
 		fireTableRowsDeleted(0, ctrl.getMCCount(typ));
 	}
 	/**
-	 * Funktion welche aufgerufen wird wenn eine Multicast geändert wird.
+	 * Funktion welche aufgerufen wird wenn eine Multicast geaendert wird.
 	 */
 	public void changeUpdate(){
 		fireTableRowsUpdated(0, ctrl.getMCCount(typ));
@@ -86,7 +86,7 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Spalten zurück gibt.
+	 * Funktion welche die Anzahl an Spalten zurueck gibt.
 	 */
 	public int getColumnCount() {
 		int ret = 0;
@@ -140,14 +140,14 @@ public class MiscTableModel extends AbstractTableModel {
 	}
 	@Override
 	/**
-	 * Funktion welche die Anzahl an Tabellenreihen zurück gibt.
+	 * Funktion welche die Anzahl an Tabellenreihen zurueck gibt.
 	 */
 	public int getRowCount() {
 		return ctrl.getMCCount(typ);
 	}
 	@Override
 	/**
-	 * Funktion welche die Daten für eine jeweilige Tabellenzelle anfordert
+	 * Funktion welche die Daten fuer eine jeweilige Tabellenzelle anfordert
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex){
 		MulticastData data = ctrl.getMCData(rowIndex, typ);

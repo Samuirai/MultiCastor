@@ -5,8 +5,8 @@ import java.net.InetAddress;
 import javax.net.ssl.HostnameVerifier;
 
 /**
- * Diese Bean-Klasse h�llt Informationen �ber einen Multicast.
- * Objekte von dieser Klasse werden daf�r benutzt Multicast-
+ * Diese Bean-Klasse huellt Informationen ueber einen Multicast.
+ * Objekte von dieser Klasse werden dafuer benutzt Multicast-
  * Informationen innerhalb des Programms zu verteilen.
  * 
  * !!In dieser Klasse ist keinerlei Logik implementiert!!
@@ -17,7 +17,7 @@ public class MulticastData {
 	// Daten, die gehalten werden
 	//********************************************
 	private InetAddress groupIp = null;  // InetAddress.getByName()
-	private InetAddress sourceIp = null; // siehe dr�ber
+	private InetAddress sourceIp = null; // siehe drueber
 	private int udpPort = -1;
 	private int packetLength = -1;
 	private int ttl = -1;
@@ -117,7 +117,7 @@ public class MulticastData {
 		maxInterruptionTime = d;
 		packetRateAvg = d;
 		packetRateMeasured = d;
-	//	hostID = "";	// muss man mal noch �berlegen ob man das zur�cksetzten m�chte
+	//	hostID = "";	// muss man mal noch ueberlegen ob man das zuruecksetzten muechte
 		numberOfInterruptions = d;
 		averageInterruptionTime = d;
 		packetLossPerSecondAvg = d;

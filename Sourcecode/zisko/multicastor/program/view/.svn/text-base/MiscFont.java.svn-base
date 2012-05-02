@@ -46,7 +46,7 @@ public abstract class MiscFont{
 	/**
 	 * Statische Funktion zum Anfordern der Standardschriftart betimmter Formatierung.
 	 * @param style 0=normal, 1=bold, 2=italic, 3=bolditalic
-	 * @param size die gewählte Schriftgröße
+	 * @param size die gewaehlte Schriftgroeße
 	 * @return die angeforderte Standardschrift.
 	 */
 	public static Font getFont(int style, float size){

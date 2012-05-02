@@ -11,7 +11,7 @@ import zisko.multicastor.program.controller.ViewController;
 
 /**
  * Selbstdefinierter Handler, der die zu loggenden Nachrichten formatiert und ausgibt.
- * @author Thomas Lüder
+ * @author Thomas Lueder
  */
 
 public class MulticastLogHandler extends ConsoleHandler	{
@@ -75,7 +75,7 @@ public class MulticastLogHandler extends ConsoleHandler	{
 		    os.close();
 		} catch (IOException e) {
 			System.out.println("Log file could not be written to disk. Please check if you have writing permission in the MultiCastor directory.");
-			//System.out.println("Logdatei konnte nicht erstellt werden. Bitte prÃ¼fen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.");
+			//System.out.println("Logdatei konnte nicht erstellt werden. Bitte pruefen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.");
 			e.printStackTrace();
 		}
 	}

@@ -3,7 +3,7 @@ package zisko.multicastor.program.data;
 import zisko.multicastor.program.data.MulticastData.Typ;
 
 /**
- * Diese Klasse enthält die Informationen was genau in dem User 
+ * Diese Klasse enthaelt die Informationen was genau in dem User 
  * Interface angezeigt wird. Dabei entspricht jede Variable einem Element in der GUI.
  *
  */

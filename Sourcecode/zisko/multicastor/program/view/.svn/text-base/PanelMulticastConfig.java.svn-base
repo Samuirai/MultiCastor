@@ -17,7 +17,7 @@ import zisko.multicastor.program.model.NetworkAdapter;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 /**
- * Das KonfigurationPanel für Multicasts (links unten im Programm).
+ * Das KonfigurationPanel fuer Multicasts (links unten im Programm).
  * Dient zum Einstellen und Erstellen von Multicast Sendern und Receivern
  * @author Daniel Becker
  *
@@ -49,8 +49,8 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	/**
 	 * Konstruktor welcher das komplette Configuration Panel initialisiert
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
 		setBorder(new MiscBorder("MultiCast Configuration"));
@@ -62,7 +62,7 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	/**
 	 * Initialisiert die Standard Textfelder des KonfigurationsPanels
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	private void createGUIstandard(Typ typ) {
 		tf_groupIPaddress.setToolTipText("Enter MultiCast group IP address here!");
@@ -77,9 +77,9 @@ public class PanelMulticastConfig extends JPanel {
 		}
 	}
 	/**
-	 * Funktion welche die spezifischen Textfelder für einen Programmteil erstellt.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * Funktion welche die spezifischen Textfelder fuer einen Programmteil erstellt.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		Vector<InetAddress> temp = null;

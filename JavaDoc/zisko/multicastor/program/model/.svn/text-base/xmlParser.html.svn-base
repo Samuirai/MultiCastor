@@ -144,7 +144,7 @@ java.lang.Object
            java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auslesen einer XML-Konfigurationsdatei fuer den User und aus der Kommandozeile</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -175,7 +175,7 @@ java.lang.Object
            java.util.Vector&lt;<A HREF="../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getätigten Konfigurationen in einer XML-Datei ab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getaetigten Konfigurationen in einer XML-Datei ab.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -187,7 +187,7 @@ java.lang.Object
            java.util.Vector&lt;java.lang.String&gt;&nbsp;v4)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getätigten Konfigurationen in einer XML-Datei ab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getaetigten Konfigurationen in einer XML-Datei ab.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -249,7 +249,7 @@ public void <B>loadConfig</B>(java.lang.String&nbsp;pfad,
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#loadConfig(java.lang.String, java.util.Vector, java.util.Vector, java.util.Vector, java.util.Vector)">loadConfig</A></CODE> in interface <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html" title="interface in zisko.multicastor.program.interfaces">XMLParserInterface</A></CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthält Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen<DD><CODE>v3</CODE> - UserInputData enthält den momentanen Stand der GUI, inklusive geöffnetem Fenster und gerade eingetragenen Werten<DD><CODE>v4</CODE> - Die zuletzt geöffneten Konfigurationsdateien
+<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthaelt Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthaelt persoenliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen<DD><CODE>v3</CODE> - UserInputData enthaelt den momentanen Stand der GUI, inklusive geoeffnetem Fenster und gerade eingetragenen Werten<DD><CODE>v4</CODE> - Die zuletzt geoeffneten Konfigurationsdateien
 <DT><B>Throws:</B>
 <DD><CODE>org.xml.sax.SAXException</CODE>
 <DD><CODE>java.io.FileNotFoundException</CODE>
@@ -271,13 +271,13 @@ public void <B>loadConfig</B>(java.lang.String&nbsp;pfad,
                        <A HREF="../../../../zisko/multicastor/program/model/WrongConfigurationException.html" title="class in zisko.multicastor.program.model">WrongConfigurationException</A></PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#loadConfig(java.lang.String, java.util.Vector, java.util.Vector)">XMLParserInterface</A></CODE></B></DD>
-<DD>Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile
+<DD>Auslesen einer XML-Konfigurationsdatei fuer den User und aus der Kommandozeile
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#loadConfig(java.lang.String, java.util.Vector, java.util.Vector)">loadConfig</A></CODE> in interface <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html" title="interface in zisko.multicastor.program.interfaces">XMLParserInterface</A></CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthält Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthält persönliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
+<DT><B>Parameters:</B><DD><CODE>pfad</CODE> - Ort, an dem die Konfigurationsdatei liegt<DD><CODE>v1</CODE> - MultiCastData enthaelt Multicast Konfigurationseinstellungen<DD><CODE>v2</CODE> - UserLevelData enthaelt persoenliche Einstellungen des Users, zB. welche GUI Elemente angezeigt werden sollen
 <DT><B>Throws:</B>
 <DD><CODE>org.xml.sax.SAXException</CODE>
 <DD><CODE>java.io.FileNotFoundException</CODE>
@@ -298,7 +298,7 @@ public void <B>saveConfig</B>(java.lang.String&nbsp;pfad,
                 throws java.io.IOException</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#saveConfig(java.lang.String, java.util.Vector, java.util.Vector, java.util.Vector, java.util.Vector)">XMLParserInterface</A></CODE></B></DD>
-<DD>Speichert die getätigten Konfigurationen in einer XML-Datei ab.
+<DD>Speichert die getaetigten Konfigurationen in einer XML-Datei ab.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#saveConfig(java.lang.String, java.util.Vector, java.util.Vector, java.util.Vector, java.util.Vector)">saveConfig</A></CODE> in interface <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html" title="interface in zisko.multicastor.program.interfaces">XMLParserInterface</A></CODE></DL>
@@ -320,8 +320,8 @@ public void <B>saveConfig</B>(java.lang.String&nbsp;pfad,
                 throws java.io.IOException</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#saveConfig(java.lang.String, java.util.Vector, java.util.Vector)">XMLParserInterface</A></CODE></B></DD>
-<DD>Speichert die getätigten Konfigurationen in einer XML-Datei ab.
-  Für Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
+<DD>Speichert die getaetigten Konfigurationen in einer XML-Datei ab.
+  Fuer Kommandozeile und manuelle Speicherung einer Konfigurationsdatei durch den Benutzer.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html#saveConfig(java.lang.String, java.util.Vector, java.util.Vector)">saveConfig</A></CODE> in interface <CODE><A HREF="../../../../zisko/multicastor/program/interfaces/XMLParserInterface.html" title="interface in zisko.multicastor.program.interfaces">XMLParserInterface</A></CODE></DL>

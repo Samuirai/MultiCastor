@@ -572,7 +572,7 @@ public class MulticastData {
 
 				String tmp = Integer.toHexString(mmrpGroupMac[i]);
 
-				//Falls negativer Wert wird fffffXX zurückgegeben deswegen nur XX nehmen
+				//Falls negativer Wert wird fffffXX zurueckgegeben deswegen nur XX nehmen
 				if(tmp.length() > 2)
 					tmp = tmp.substring(tmp.length()-2,tmp.length());
 			
@@ -626,7 +626,7 @@ public class MulticastData {
 		for(int i = 0; i < mmrpSourceMac.length; i++){
 			String tmp = Integer.toHexString((int)mmrpSourceMac[i]);
 			
-			//Falls negativer Wert wird fffffXX zurückgegeben deswegen nur XX nehmen
+			//Falls negativer Wert wird fffffXX zurueckgegeben deswegen nur XX nehmen
 			if(tmp.length() > 2)
 				tmp = tmp.substring(tmp.length()-2,tmp.length());
 			

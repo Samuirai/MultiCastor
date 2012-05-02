@@ -14,7 +14,6 @@ import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Ein Panel welches jeweils einen kompletten Programmteil beinhaltet. 
  * Durch diese Panels kann man im Programm tabben.
- * @author Daniel Becker
  *
  */
 @SuppressWarnings("serial")
@@ -40,10 +39,10 @@ public class PanelTabbed extends JPanel {
 	private MiscBorder tablePanelBorder;
 
 	/**
-	 * Konstruktor für einen kompletten Programmteil in der GUI.
+	 * Konstruktor fuer einen kompletten Programmteil in der GUI.
 	 * Hierbei werden alle Komponenten fertig initialisiert.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 * @param typ Gibt an um welchen Programmteil es sich handelt.
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
@@ -89,8 +88,8 @@ public class PanelTabbed extends JPanel {
 	/**
 	 * Initialisiert die Statusbar.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehört.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehoert.
 	 */
 	private void initStatusPanel(ViewController ctrl, Typ typ) {
 		pan_status = new PanelStatusBar();
@@ -125,8 +124,8 @@ public class PanelTabbed extends JPanel {
 	/**
 	 * Initialisiert die Tabelle.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehoert.
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();
@@ -157,8 +156,8 @@ public class PanelTabbed extends JPanel {
 	/**
 	 * Resettet das Aussehen der Tabelle auf das Standard Aussehen.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehoert.
 	 */
 	public void setTableModel(ViewController ctrl, Typ typ) {
 		model = new MiscTableModel(ctrl,typ);

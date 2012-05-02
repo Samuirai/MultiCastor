@@ -11,12 +11,10 @@ import zisko.multicastor.program.controller.ViewController;
 /**
  * Klasse welche die Farben in der Tabelle verwaltet, hierbei muss unterschieden
  * werden ob Multicasts aktiv, inaktiv, selektiert oder deselektiert sind.
- * Weiterhin unterscheidet die Farbe der Tabellenzeilen ob ein Empf�nger von
- * einem Sender empf�ngt (Gr�n), von mehreren Sender empf�ngt (Orange) oder erst
- * k�rzlich eine �nderung in der Art der Daten die empfangen wurden festgestellt
+ * Weiterhin unterscheidet die Farbe der Tabellenzeilen ob ein Empfuenger von
+ * einem Sender empfuengt (Gruen), von mehreren Sender empfuengt (Orange) oder erst
+ * kuerzlich eine uenderung in der Art der Daten die empfangen wurden festgestellt
  * hat (Gelb)
- * 
- * @author Daniel Becker
  * 
  */
 public class WrappingCellRenderer implements TableCellRenderer {
@@ -28,7 +26,7 @@ public class WrappingCellRenderer implements TableCellRenderer {
 	 * Konstruktur.
 	 * 
 	 * @param cellRenderer Erwartet den entsprechenden Zellen-Renderer.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	public WrappingCellRenderer(TableCellRenderer cellRenderer,
 			ViewController ctrl) {
@@ -42,10 +40,10 @@ public class WrappingCellRenderer implements TableCellRenderer {
 	 * 
 	 * @param table Tabelle.
 	 * @param value Wert der Zelle.
-	 * @param isSelected Ob derzeit ausgewählt ja / nein.
+	 * @param isSelected Ob derzeit ausgewaehlt ja / nein.
 	 * @param hasFocus Ob derzeit fokussiert ja / nein.
 	 * @param row Zeile.
-	 * @param colum Spalte.
+	 * @param column Spalte.
 	 * 
 	 * @return Komponente.
 	 */

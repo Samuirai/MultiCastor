@@ -15,55 +15,59 @@ import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.mmrp.*;
 
 /**
- * Die MultiCastMmrpSender-Klasse kümmert sich um das tatsächliche Senden der
- * Multicast-Objekte über das Netzwerk per MMRP Protokoll.
+ * Die MultiCastMmrpSender-Klasse kuemmert sich um das tatsaechliche Senden der
+ * Multicast-Objekte ueber das Netzwerk per MMRP Protokoll.
  * Sie extended{@link MulticastThreadSuper}, ist also ein Runnable. 
  * 
  * Ein MultiCastMmrpSender hat eine Grundkonfiguration, 
- * die nicht mehr abgeändert werden kann, wie zum
- * Beispiel die gesetzten MACs. Soll diese Grundkonfiguration geändert werden,
+ * die nicht mehr abgeaendert werden kann, wie zum
+ * Beispiel die gesetzten MACs. Soll diese Grundkonfiguration geaendert werden,
  * muss eine neue Instanz de Klasse gebildet werden. Das Erleichtert die
- * nachträgliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
+ * nachtraegliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
  * ist.
- * 
- * @author Filip Haase
- * @author Christopher Westphal
  * 
  */
 public class MulticastMmrpSender extends MulticastThreadSuper implements MulticastSenderInterface{
 
+	/**
+	 * Language Manager ist wichtig fuer die multi Language Unterstuetzung 
+	 */
 	private LanguageManager lang = LanguageManager.getInstance();
 	
 	/** Wenn auf wahr, sendet dieser Sender. */
 	private boolean isSending = false;
 	/** Wird fuer die Fehlerausgabe verwendet. */
 	private Logger logger;
+	
+	/** baut das ByteArray fuer die Pakete*/
 	private PacketBuilder myPacketBuilder;
 	
+	/** Anzahl aller Pakete */
 	private int totalPacketCount			= 0;
 	private int resetablePcktCnt			= 0;
 	private int cumulatedResetablePcktCnt	= 0;
 	private int packetRateDes;
 
+	
 	private MulticastController mCtrl;
 	private MMRPSender sender;
 
 	/**
 	 * Einziger Konstruktor der Klasse (Sieht man vom Konstruktor der
 	 * Superklasse ab). Im Konstruktor wird die hostID gesetzt (entspricht dem
-	 * hostnamen des Geräts), der {@link MMRPSender} initialisiert
+	 * hostnamen des Geraets), der {@link MMRPSender} initialisiert
 	 * und das Datenpaket mit dem {@link PacketBuilder} erstellt.
 	 * 
-	 * @param mcBean
-	 *            Das {@link MulticastData}-Object, dass alle f�r den Betrieb
-	 *            n�tigen Daten enth�lt.
+	 * @param multicastData
+	 *            Das {@link MulticastData}-Object, dass alle fuer den Betrieb
+	 *            nuetigen Daten enthuelt.
 	 * @param logger
-	 *            Eine {@link Queue}, �ber den der Sender seine Ausgaben an
+	 *            Eine {@link Queue}, ueber den der Sender seine Ausgaben an
 	 *            den Controller weitergibt.
 	 *          
-	 * @param MultiCtrl
+	 * @param multiCtrl
 	 * 			  Eine Referenz auf den entsprechenden{@link MulticastController}
-	 * 			  damit MulticastStröme ggf. richtig gestoppt werden kann
+	 * 			  damit MulticastStroeme ggf. richtig gestoppt werden kann
 	 */
 	public MulticastMmrpSender(MulticastData multicastData, Logger logger, MulticastController multiCtrl) throws IOException{
 		super(multicastData);
@@ -96,7 +100,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 	}
 	
 	/**
-	 * Methode über die die Kommunikation zum MultiCastController realisiert wird.
+	 * Methode ueber die die Kommunikation zum MultiCastController realisiert wird.
 	 * @param level unterscheidet zwischen Fehlern und Status-Meldungen
 	 * @param mssg Die zu sendende Nachricht (String)
 	 */
@@ -114,10 +118,10 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 	}	
 
 	/**
-	 * Wird der Methode true übergeben, startet der Multicast 
+	 * Wird der Methode true uebergeben, startet der Multicast 
 	 * zu senden. 
 	 * 
-	 * Wird der Methode false übergeben, stoppt 
+	 * Wird der Methode false uebergeben, stoppt 
 	 * sie das senden der Multicasts.
 	 * 
 	 * @param active
@@ -128,7 +132,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		mcData.setActive(active);
 		if(active) {
 			//Setzen der ThreadID, da diese evtl.
-			//im Controller noch einmal ge�ndert wird
+			//im Controller noch einmal geuendert wird
 			myPacketBuilder.alterThreadID(mcData.getThreadID());
 			myPacketBuilder.alterRandomID(mcData.getRandomID());
 			setStillRunning(true);
@@ -172,7 +176,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 		
 		try {
 			sender.registerPath();
-			//Paketzähler auf 0 setzen
+			//Paketzaehler auf 0 setzen
 			totalPacketCount			= 0;
 			resetablePcktCnt			= 0;
 			cumulatedResetablePcktCnt	= 0;
@@ -183,7 +187,7 @@ public class MulticastMmrpSender extends MulticastThreadSuper implements Multica
 				 timeLeft	= 0;
 			
 			while(isSending){
-				//Sleep wenn noch etwas von der letzten Sekunde �brig
+				//Sleep wenn noch etwas von der letzten Sekunde uebrig
 				timeLeft = endTime-System.nanoTime();
 				if(timeLeft>0)	try{
 									Thread.sleep(timeLeft/1000000, (int) (timeLeft%1000000));

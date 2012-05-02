@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import javax.swing.*;
 import zisko.multicastor.program.controller.ViewController;
 /**
- * Das Kontrollpanel für Multicasts. 
- * Mit diesem Panel können Multicasts gestartet, gestoppt und gelöscht werden.
+ * Das Kontrollpanel fuer Multicasts. 
+ * Mit diesem Panel koennen Multicasts gestartet, gestoppt und geloescht werden.
  * @author Daniel Becker
  *
  */
@@ -19,8 +19,8 @@ public class PanelMulticastControl extends JPanel {
 	private JButton newmulticast;
 
 	/**
-	 * Konstruktor für das Kontrollpanel welcher alle zugehörigen GUI Komponenten initialisiert.
-	 * @param ctrl Benötigete Referenz zum GUI Controller
+	 * Konstruktor fuer das Kontrollpanel welcher alle zugehoerigen GUI Komponenten initialisiert.
+	 * @param ctrl Benoetigete Referenz zum GUI Controller
 	 */
 	public PanelMulticastControl(ViewController ctrl){
 		setBorder(new MiscBorder("MultiCast Control"));
@@ -30,7 +30,7 @@ public class PanelMulticastControl extends JPanel {
 	}
 	/**
 	 * Hilfsfunktion welche die Buttons des Kontrollpanels initialisier
-	 * @param ctrl Benötigete Referenz zum GUI Controller
+	 * @param ctrl Benoetigete Referenz zum GUI Controller
 	 */
 	private void initButtons(ViewController ctrl) {
 		start = new JButton("Start");

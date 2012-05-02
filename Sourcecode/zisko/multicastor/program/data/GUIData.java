@@ -105,7 +105,7 @@ public class GUIData {
 	
 	/**
 	 * sets the tab state of L2_RECEIVER
-	 * @param l3_RECEIVER the tab state to be set
+	 * @param l2_RECEIVER the tab state to be set
 	 */
 	public void setL2_RECEIVER(TabState l2_RECEIVER) {
 		L2_RECEIVER = l2_RECEIVER;

@@ -101,8 +101,8 @@ java.lang.Object
 </PRE>
 
 <P>
-Diese Bean-Klasse h�llt Informationen �ber einen Multicast.
- Objekte von dieser Klasse werden daf�r benutzt Multicast-
+Diese Bean-Klasse huellt Informationen ueber einen Multicast.
+ Objekte von dieser Klasse werden dafuer benutzt Multicast-
  Informationen innerhalb des Programms zu verteilen.
  
  !!In dieser Klasse ist keinerlei Logik implementiert!!

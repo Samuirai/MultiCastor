@@ -17,11 +17,8 @@ import zisko.multicastor.program.model.NetworkAdapter.IPType;
 import zisko.multicastor.program.view.MiscBorder.BorderTitle;
 import zisko.multicastor.program.view.MiscBorder.BorderType;
 /**
- * Das KonfigurationPanel für Multicasts (links unten im Programm).
+ * Das KonfigurationPanel fuer Multicasts (links unten im Programm).
  * Dient zum Einstellen und Erstellen von Multicast Sendern und Receivern.
- * 
- * @author Daniel Becker
- * @author Christopher Westphal
  */
 @SuppressWarnings("serial")
 public class PanelMulticastConfig extends JPanel {
@@ -53,8 +50,8 @@ public class PanelMulticastConfig extends JPanel {
 	/**
 	 * Konstruktor welcher das komplette Configuration Panel initialisiert.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	public PanelMulticastConfig(ViewController ctrl, Typ typ){ 
 		this.ctrl=ctrl;
@@ -72,7 +69,7 @@ public class PanelMulticastConfig extends JPanel {
 	/**
 	 * Initialisiert die Standard Textfelder des KonfigurationsPanels.
 	 * 
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	private void createGUIstandard(Typ typ) {
 		add(bt_enter);
@@ -80,7 +77,7 @@ public class PanelMulticastConfig extends JPanel {
 		if(typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER)
 			add(pan_udp_port);
 		add(bt_active);
-		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugef�gt
+		//V1.5: typ==Typ.L3_SENDER || typ==Typ.L2_SENDER hinzugefuegt
 		if(typ==Typ.L3_SENDER || typ==Typ.L2_SENDER ){
 			add(pan_packetrate);
 			add(pan_packetlength);
@@ -90,9 +87,9 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	
 	/**
-	 * Setzt die Tool-Tips für die Eingabefelder.
+	 * Setzt die Tool-Tips fuer die Eingabefelder.
 	 * 
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	private void setToolTips(Typ typ) {
 		if (typ == Typ.L3_RECEIVER || typ == Typ.L3_SENDER) {
@@ -129,7 +126,7 @@ public class PanelMulticastConfig extends JPanel {
 		}
 	}
 	
-	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geaendert wird. */
 	public void reloadLanguage(){
 		PanelTabbed tabpart = null;
 		
@@ -157,10 +154,10 @@ public class PanelMulticastConfig extends JPanel {
 	}
 	
 	/**
-	 * Funktion welche die spezifischen Textfelder für einen Programmteil erstellt.
+	 * Funktion welche die spezifischen Textfelder fuer einen Programmteil erstellt.
 	 * 
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
-	 * @param typ Gibt an zu welchem Programmteil das Panel gehört.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
+	 * @param typ Gibt an zu welchem Programmteil das Panel gehoert.
 	 */
 	private void createAddressFields(ViewController ctrl, Typ typ) {
 		
@@ -196,7 +193,7 @@ public class PanelMulticastConfig extends JPanel {
 		pan_sourceIPaddress.add(cb_sourceIPaddress,BorderLayout.CENTER);
 		add(pan_sourceIPaddress);
 		
-		//V1.5: Layer 2 und Layer 3 Tabs hinzugef�gt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
+		//V1.5: Layer 2 und Layer 3 Tabs hinzugefuegt: typ==Typ.L2_SENDER || typ==Typ.L3_SENDER
 		if(typ==Typ.L2_SENDER || typ==Typ.L3_SENDER){
 			
 			pan_packetrate=new JPanel();

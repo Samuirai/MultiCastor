@@ -109,7 +109,7 @@ java.lang.Object
 </PRE>
 
 <P>
-FileChooser für Speichern und Laden von Config Files
+FileChooser fuer Speichern und Laden von Config Files
 <P>
 
 <P>
@@ -425,7 +425,7 @@ public <B>FrameFileChooser</B>(<A HREF="../../../../zisko/multicastor/program/co
 <DD>Kontruktir des FileChoosers
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - Benöigte Referenz zum GUI Controller<DD><CODE>save</CODE> - gibt an ob es sich um einen Datei speichern Dialog handelt</DL>
+<DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - Benoeigte Referenz zum GUI Controller<DD><CODE>save</CODE> - gibt an ob es sich um einen Datei speichern Dialog handelt</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

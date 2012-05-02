@@ -116,7 +116,7 @@ Interface LoggerInterface</H2>
     java.util.Map&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Die übergebenen Daten werden mit einem Zeitstempel versehen und in einer Logdatei gespeichert.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Die uebergebenen Daten werden mit einem Zeitstempel versehen und in einer Logdatei gespeichert.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -138,10 +138,10 @@ log</H3>
 void <B>log</B>(char&nbsp;c,
          java.util.Map&nbsp;m)</PRE>
 <DL>
-<DD>Die übergebenen Daten werden mit einem Zeitstempel versehen und in einer Logdatei gespeichert.
+<DD>Die uebergebenen Daten werden mit einem Zeitstempel versehen und in einer Logdatei gespeichert.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>c</CODE> - Code welches Ereignis geloggt werden soll.<DD><CODE>m</CODE> - Zusaetzliche Daten falls diese für ein Ereignis benoetigt werden.</DL>
+<DT><B>Parameters:</B><DD><CODE>c</CODE> - Code welches Ereignis geloggt werden soll.<DD><CODE>m</CODE> - Zusaetzliche Daten falls diese fuer ein Ereignis benoetigt werden.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

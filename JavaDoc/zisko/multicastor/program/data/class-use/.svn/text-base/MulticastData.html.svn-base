@@ -194,7 +194,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>ViewController.</B><B><A HREF="../../../../../zisko/multicastor/program/controller/ViewController.html#changeMC(zisko.multicastor.program.data.MulticastData)">changeMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;mcd)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche ein geändertes Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche ein geaendertes Multicast Datenobjekt an den MultiCast Controller weitergibt zur Verarbeitung.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -210,7 +210,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>ViewController.</B><B><A HREF="../../../../../zisko/multicastor/program/controller/ViewController.html#deleteMC(zisko.multicastor.program.data.MulticastData)">deleteMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;mcd)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn ein bestimmter Multicast gelöscht werden soll.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funktion welche aufgerufen wird wenn ein bestimmter Multicast geloescht werden soll.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -323,7 +323,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#addMC(zisko.multicastor.program.data.MulticastData)">addMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fï¿½gt einen MultiCast hinzu</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fuegt einen MultiCast hinzu</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -331,7 +331,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#changeMC(zisko.multicastor.program.data.MulticastData)">changeMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lï¿½scht den vorhanden MultiCast und fï¿½gt einen neuen MultiCast mit entsprechenden Werten hinzu.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luescht den vorhanden MultiCast und fuegt einen neuen MultiCast mit entsprechenden Werten hinzu.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -339,7 +339,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#deleteMC(zisko.multicastor.program.data.MulticastData)">deleteMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lï¿½scht den verknï¿½pften MultiCast</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luescht den verknuepften MultiCast</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -347,7 +347,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#startMC(zisko.multicastor.program.data.MulticastData)">startMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet den verknï¿½pften MultiCast</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet den verknuepften MultiCast</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -355,7 +355,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#stopMC(zisko.multicastor.program.data.MulticastData)">stopMC</A></B>(<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt den verknï¿½pften MultiCast</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt den verknuepften MultiCast</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -371,7 +371,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#deleteMC(java.util.Vector)">deleteMC</A></B>(java.util.Vector&lt;<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lï¿½scht die verknï¿½pften MultiCasts</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luescht die verknuepften MultiCasts</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -381,7 +381,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
            java.util.Vector&lt;<A HREF="../../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auslesen einer XML-Konfigurationsdatei für den User und aus der Kommandozeile</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auslesen einer XML-Konfigurationsdatei fuer den User und aus der Kommandozeile</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -412,7 +412,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
            java.util.Vector&lt;<A HREF="../../../../../zisko/multicastor/program/data/UserlevelData.html" title="class in zisko.multicastor.program.data">UserlevelData</A>&gt;&nbsp;v2)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getätigten Konfigurationen in einer XML-Datei ab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getaetigten Konfigurationen in einer XML-Datei ab.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -424,7 +424,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
            java.util.Vector&lt;java.lang.String&gt;&nbsp;v4)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getätigten Konfigurationen in einer XML-Datei ab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speichert die getaetigten Konfigurationen in einer XML-Datei ab.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -432,7 +432,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#startMC(java.util.Vector)">startMC</A></B>(java.util.Vector&lt;<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet die verknï¿½pften MultiCasts</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Startet die verknuepften MultiCasts</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -440,7 +440,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
 <TD><CODE><B>MulticastControllerInterface.</B><B><A HREF="../../../../../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#stopMC(java.util.Vector)">stopMC</A></B>(java.util.Vector&lt;<A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>&gt;&nbsp;m)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt die verknï¿½pften MultiCasts</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stopt die verknuepften MultiCasts</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -693,7 +693,7 @@ Uses of <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.htm
             boolean&nbsp;repaint)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diese Methode updated den Graph, indem sie je nach ausgewähltem
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diese Methode updated den Graph, indem sie je nach ausgewaehltem
  Radiobutton die entsprechenden Daten aus den <A HREF="../../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data"><CODE>MulticastData</CODE></A>-Objekt extrahiert.</TD>
 </TR>
 </TABLE>

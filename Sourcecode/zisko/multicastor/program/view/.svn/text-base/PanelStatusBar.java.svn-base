@@ -72,7 +72,7 @@ public class PanelStatusBar extends JPanel {
 	}
 	/**
 	 * Funktion welche angezeigten Traffic in der Statusbar neu anfordert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 */
 	public void updateTraffic(ViewController ctrl){
 		lb_trafficUP.setText("Traffic OUT: "+ctrl.getTotalTrafficUP()+" Mbps");

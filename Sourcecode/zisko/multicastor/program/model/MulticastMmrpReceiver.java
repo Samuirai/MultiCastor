@@ -16,23 +16,23 @@ import zisko.multicastor.program.interfaces.MulticastThreadSuper;
 
 
 /**
- * Die MulticastMmrpReceiver-Klasse kümmert sich um das tatsächliche Empfangen der
- * Multicast-Objekte über das Netzwerk per MMRP Protokoll.
+ * Die MulticastMmrpReceiver-Klasse kuemmert sich um das tatsaechliche Empfangen der
+ * Multicast-Objekte ueber das Netzwerk per MMRP Protokoll.
  * Sie extended{@link MulticastThreadSuper}, ist also ein Runnable. 
  * 
  * Ein MulticastMmrpReceiver hat eine Grundkonfiguration, 
- * die nicht mehr abgeändert werden kann, wie zum
- * Beispiel die gesetzten MACs. Soll diese Grundkonfiguration geändert werden,
+ * die nicht mehr abgeaendert werden kann, wie zum
+ * Beispiel die gesetzten MACs. Soll diese Grundkonfiguration geaendert werden,
  * muss eine neue Instanz de Klasse gebildet werden. Das Erleichtert die
- * nachträgliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
+ * nachtraegliche Analyse, Da das Objekt eindeutig einem "Test" zuordnungsbar
  * ist.
- * 
- * @author Filip Haase
- * @author Christopher Westphal
  * 
  */
 public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	
+	/**
+	 * Language Manager ist wichtig fuer die multi Language Unterstuetzung 
+	 */
 	private LanguageManager lang = LanguageManager.getInstance();
 	
 	/** Wenn auf wahr, lauscht dieser Receiver auf ankommende Pakete. */
@@ -45,19 +45,20 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	private byte[] buf = new byte[length];
 	/** Analysiert ankommende Pakete */
 	PacketAnalyzer packetAnalyzer;
+	
 	private MMRPReceiver receiver;
 
 	/**
 	 * Einziger Konstruktor der Klasse (Sieht man vom Konstruktor der
 	 * Superklasse ab). Im Konstruktor wird die hostID gesetzt (entspricht dem
-	 * hostnamen des Geräts), der {@link MMRPReceiver} initialisiert
+	 * hostnamen des Geraets), der {@link MMRPReceiver} initialisiert
 	 * und das Datenpaket mit dem {@link PacketBuilder} erstellt.
 	 * 
-	 * @param mcBean
-	 *            Das {@link MulticastData}-Object, dass alle f�r den Betrieb
-	 *            n�tigen Daten enth�lt.
+	 * @param multicastData
+	 *            Das {@link MulticastData}-Object, dass alle fuer den Betrieb
+	 *            nuetigen Daten enthuelt.
 	 * @param logger
-	 *            Eine {@link Queue}, �ber den der Receiver seine Ausgaben an
+	 *            Eine {@link Queue}, ueber den der Receiver seine Ausgaben an
 	 *            den Controller weitergibt.
 	 */
 	public MulticastMmrpReceiver(MulticastData multicastData, Logger logger) throws IOException{
@@ -89,7 +90,7 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	}
 	
 	/**
-	 * Methode �ber die die Kommunikation zum MultiCastController realisiert wird.
+	 * Methode ueber die die Kommunikation zum MultiCastController realisiert wird.
 	 * @param level unterscheidet zwischen Fehlern und Status-Meldungen
 	 * @param mssg Die zu sendende Nachricht (String)
 	 */
@@ -107,13 +108,13 @@ public class MulticastMmrpReceiver extends MulticastThreadSuper {
 	}
 
 	/**
-	 * Wird der Methode true übergeben, startet der Multicast 
+	 * Wird der Methode true uebergeben, startet der Multicast 
 	 * zu empfangen. 
 	 * 
-	 * Wird der Methode false übergeben, stoppt 
+	 * Wird der Methode false uebergeben, stoppt 
 	 * sie das empfangen der Multicasts.
 	 * 
-	 * @param active
+	 * @param b
 	 *            boolean
 	 */
 	public void setActive(boolean b) {

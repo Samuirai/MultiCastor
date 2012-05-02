@@ -10,8 +10,8 @@ import javax.swing.JTable;
 
 import zisko.multicastor.program.controller.ViewController;
 /**
- * Abstrakte Klasse welche für die Generierung von PopupMenus im Programm zuständig ist.
- * Bisher wurden nur Popups für den Tabellenkopf implementiert, hier kann das Programm um beliebige
+ * Abstrakte Klasse welche fuer die Generierung von PopupMenus im Programm zustaendig ist.
+ * Bisher wurden nur Popups fuer den Tabellenkopf implementiert, hier kann das Programm um beliebige
  * weitere Popup Menus erweitert werden.
  * @author Daniel Becker
  *
@@ -28,9 +28,9 @@ public abstract class PopUpMenu {
 		return ret;
 	}
 	/**
-	 * Statische Funktion welche das Popup für den Tabellenkopf erstellt und anzeigt.
-	 * @param table Die Tabelle zu welcher das Popup gehört.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * Statische Funktion welche das Popup fuer den Tabellenkopf erstellt und anzeigt.
+	 * @param table Die Tabelle zu welcher das Popup gehoert.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 * @param e Das MouseEvent welches das Popup Öffnet
 	 */
 	public static void createTableHeaderPopup(JTable table, ViewController ctrl, MouseEvent e){
@@ -63,8 +63,8 @@ public abstract class PopUpMenu {
 		return selectedColumn;
 	}
 	/**
-	 * Erstellt die zum Table Header Popup gehörenden Checkboxen
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * Erstellt die zum Table Header Popup gehoerenden Checkboxen
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 */
 	public static void createColumnCheckBoxes(ViewController ctrl){
 		int count = ctrl.getTable(ctrl.getSelectedTab()).getModel().getColumnCount();
@@ -87,7 +87,7 @@ public abstract class PopUpMenu {
 	}
 	/**
 	 * Funktion welche die Reihenfolge der Checkboxen im Table Header Popup einstellt
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 */
 	public static void updateCheckBoxes(ViewController ctrl){
 		for(int x = 0 ; x < 11 ; x++){

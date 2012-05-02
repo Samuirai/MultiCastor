@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import zisko.multicastor.program.controller.ViewController;
 /**
- * FileChooser für Speichern und Laden von Config Files
+ * FileChooser fuer Speichern und Laden von Config Files
  * @author Daniel Becker
  *
  */
@@ -28,7 +28,7 @@ public class FrameFileChooser extends JFrame {
 	 */
 	private FileNameExtensionFilter filter;
 	/**
-	 * Hilfsvariable welche bestimmt um was für eine Art von Dialog es sich handelt (Speichern/Laden).
+	 * Hilfsvariable welche bestimmt um was fuer eine Art von Dialog es sich handelt (Speichern/Laden).
 	 */
 	private boolean typeSave;
 	/**
@@ -53,7 +53,7 @@ public class FrameFileChooser extends JFrame {
 	private JCheckBox cb_incremental;
 	/**
 	 * Kontruktir des FileChoosers
-	 * @param ctrl Benöigte Referenz zum GUI Controller
+	 * @param ctrl Benoeigte Referenz zum GUI Controller
 	 * @param save gibt an ob es sich um einen Datei speichern Dialog handelt
 	 */
 	public FrameFileChooser(ViewController ctrl, boolean save){
@@ -105,7 +105,7 @@ public class FrameFileChooser extends JFrame {
 	}
 	/**
 	 * Initialisiert die Dateiauswahl.
-	 * @param ctrl Benötigte Referenz zum GUI Controller.
+	 * @param ctrl Benoetigte Referenz zum GUI Controller.
 	 */
 	private void initFileChooser(ViewController ctrl) {
 		filter = new FileNameExtensionFilter("XML Config Files", "xml");
@@ -124,14 +124,14 @@ public class FrameFileChooser extends JFrame {
 		add(chooser, BorderLayout.CENTER);
 	}
 	/**
-	 * Setzt den Fenstertitel für Laden
+	 * Setzt den Fenstertitel fuer Laden
 	 */
 	private void initLoad() {
 		setTitle("Load Configuration");
 		
 	}
 	/**
-	 * Setzt den Fenstertitel für Speichern
+	 * Setzt den Fenstertitel fuer Speichern
 	 */
 	private void initSave() {
 		setTitle("Save Configuration");

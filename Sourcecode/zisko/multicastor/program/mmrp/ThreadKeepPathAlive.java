@@ -6,11 +6,15 @@ import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapBpfProgram;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
-
+/**
+ * This class maintains the MMRP path connection.  
+ * 
+ */
 public class ThreadKeepPathAlive implements Runnable {
 	private byte[] deviceMACAddress;
 	private byte[] streamMACAddress;
 	private Pcap pcap = null;
+	
 	PcapPacketHandler<String> pcapPacketHandler = new PcapPacketHandler<String>() {
 
 		public void nextPacket(PcapPacket packet, String arg1) {
@@ -29,28 +33,30 @@ public class ThreadKeepPathAlive implements Runnable {
 				cast = cast / 36;
 
 				try {
+					// if message is a leaveAll event
 					if (packet.getByte(17) == (byte) 0x20) {
 						PacketHandler.sendPacket(deviceMACAddress, MMRPPacket
 								.getJoinEmpty(deviceMACAddress,
 										streamMACAddress));
 					} else {
 						switch (cast) {
+						// joinEmpty
 						case 3:
 							PacketHandler.sendPacket(deviceMACAddress,
 									MMRPPacket.getJoinIn(deviceMACAddress,
 											streamMACAddress));
 							break;
+						// empty
 						case 4:
 							PacketHandler.sendPacket(deviceMACAddress,
 									MMRPPacket.getJoinIn(deviceMACAddress,
 											streamMACAddress));
 							break;
+						// leave	
 						case 5:
 							PacketHandler.sendPacket(deviceMACAddress,
 									MMRPPacket.getJoinEmpty(deviceMACAddress,
 											streamMACAddress));
-							break;
-						default:
 							break;
 						}
 					}
@@ -69,6 +75,7 @@ public class ThreadKeepPathAlive implements Runnable {
 		this.deviceMACAddress = deviceMACAddress;
 		this.streamMACAddress = streamMACAddress;
 		this.pcap = PcapHandler.getPcapInstance(deviceMACAddress);
+		// set the filter
 		PcapBpfProgram programm = new PcapBpfProgram();
 		this.pcap.compile(programm, "ether proto 0x88f6", 0, (int) 0xFFFFFF00);
 		this.pcap.setFilter(programm);

@@ -3,18 +3,17 @@ package zisko.multicastor.program.lang;
 /**
  * This exception is thrown if a language file is invalid
  * In the most cases it does not contain all the required key value pairs that are needed. 
- * @author Jonas Traub
  */
 @SuppressWarnings("serial")
 public class InvalidLanguageFileException extends Exception {
 	/**
 	 * The first missing key value
-	 * @see keys in LanguageManager class
+	 * @see LanguageManager.keys
 	 */
 	private String errorKey;
 	/**
 	 * The index the first missing key
-	 * @see keys in LanguageManager class
+	 * @see LanguageManager.keys
 	 */
 	private int errorIndex;
 	/**
@@ -27,7 +26,7 @@ public class InvalidLanguageFileException extends Exception {
 	 * @param errorIndex The first missing key value
 	 * @param errorKey The index the first missing key
 	 * @param keys the reference to the used key array for the validation
-	 * @see keys in LanguageManager class
+	 * @see LanguageManager.keys
 	 */
 	public InvalidLanguageFileException(int errorIndex,String errorKey,String[] keys){
 		this.errorIndex=errorIndex;

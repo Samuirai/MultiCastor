@@ -183,7 +183,7 @@ Static method in class zisko.multicastor.program.view.<A HREF="../zisko/multicas
 <DD>Statische Funktion zum Anfordern der Standardschriftart betimmter Formatierung.
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getFrame()"><B>getFrame()</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche das Frame zurückgibt in welchem das MultiCastor Tool gezeichnet wird.
+<DD>Hilfsfunktion welche das Frame zurueckgibt in welchem das MultiCastor Tool gezeichnet wird.
 <DT><A HREF="../zisko/multicastor/program/view/FrameMain.html#getGraphSize()"><B>getGraphSize()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/FrameMain.html" title="class in zisko.multicastor.program.view">FrameMain</A>
 <DD>&nbsp;
@@ -207,10 +207,10 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/model/NetworkAdapter.html#getipv4Adapters()"><B>getipv4Adapters()</B></A> - 
 Static method in class zisko.multicastor.program.model.<A HREF="../zisko/multicastor/program/model/NetworkAdapter.html" title="class in zisko.multicastor.program.model">NetworkAdapter</A>
-<DD>Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zurück gibt.
+<DD>Funktion welche alle vergebenen IPv4 Netzwerkadressen im System als Vector zurueck gibt.
 <DT><A HREF="../zisko/multicastor/program/model/NetworkAdapter.html#getipv6Adapters()"><B>getipv6Adapters()</B></A> - 
 Static method in class zisko.multicastor.program.model.<A HREF="../zisko/multicastor/program/model/NetworkAdapter.html" title="class in zisko.multicastor.program.model">NetworkAdapter</A>
-<DD>Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zurück gibt.
+<DD>Funktion welche alle vergebenen IPv6 Netzwerkadressen im System als Vector zurueck gibt.
 <DT><A HREF="../zisko/multicastor/program/data/MulticastData.html#getJitter()"><B>getJitter()</B></A> - 
 Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>
 <DD>&nbsp;
@@ -219,7 +219,7 @@ Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/view/ReceiverGraph.html#getJitterRB()"><B>getJitterRB()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/ReceiverGraph.html" title="class in zisko.multicastor.program.view">ReceiverGraph</A>
-<DD>Getter für den "Jitter"-Radiobutton
+<DD>Getter fuer den "Jitter"-Radiobutton
 <DT><A HREF="../zisko/multicastor/program/controller/MulticastController.html#getLastConfigs()"><B>getLastConfigs()</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/MulticastController.html" title="class in zisko.multicastor.program.controller">MulticastController</A>
 <DD>Returns last three opened Configuration files as Strings in a Vector.
@@ -234,7 +234,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/view/ReceiverGraph.html#getLostPktsRB()"><B>getLostPktsRB()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/ReceiverGraph.html" title="class in zisko.multicastor.program.view">ReceiverGraph</A>
-<DD>Getter für den "Lost Packets"-Radiobutton
+<DD>Getter fuer den "Lost Packets"-Radiobutton
 <DT><A HREF="../zisko/multicastor/program/view/FrameMain.html#getM_info()"><B>getM_info()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/FrameMain.html" title="class in zisko.multicastor.program.view">FrameMain</A>
 <DD>&nbsp;
@@ -252,7 +252,7 @@ Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/view/PanelGraph.html#getMaxY()"><B>getMaxY()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/PanelGraph.html" title="class in zisko.multicastor.program.view">PanelGraph</A>
-<DD>Getter für den maximalen Y-Wert der Skala
+<DD>Getter fuer den maximalen Y-Wert der Skala
 <DT><A HREF="../zisko/multicastor/program/view/FrameMain.html#getMb_menubar()"><B>getMb_menubar()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/FrameMain.html" title="class in zisko.multicastor.program.view">FrameMain</A>
 <DD>&nbsp;
@@ -270,7 +270,7 @@ Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicast
 <DD>Gibt den Vektor mit MulticastData-Objekten in dem alle Objekte des Typs gespeichert sind.
 <DT><A HREF="../zisko/multicastor/program/view/ReceiverGraph.html#getMeasPktRtRB()"><B>getMeasPktRtRB()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/ReceiverGraph.html" title="class in zisko.multicastor.program.view">ReceiverGraph</A>
-<DD>Getter für den "Measured Packet Rate"-Radiobutton
+<DD>Getter fuer den "Measured Packet Rate"-Radiobutton
 <DT><A HREF="../zisko/multicastor/program/view/FrameMain.html#getMi_about()"><B>getMi_about()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/FrameMain.html" title="class in zisko.multicastor.program.view">FrameMain</A>
 <DD>&nbsp;
@@ -426,7 +426,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getPanTabbed(zisko.multicastor.program.data.MulticastData.Typ)"><B>getPanTabbed(MulticastData.Typ)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche einen bestimten Programmteil zurück gibt.
+<DD>Hilfsfunktion welche einen bestimten Programmteil zurueck gibt.
 <DT><A HREF="../zisko/multicastor/program/data/UserInputData.html#getPort()"><B>getPort()</B></A> - 
 Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/UserInputData.html" title="class in zisko.multicastor.program.data">UserInputData</A>
 <DD>&nbsp;
@@ -435,10 +435,10 @@ Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicast
 <DD>Adds up the measuredPacketRate from MulticastSenders
 <DT><A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#getPPSSender(zisko.multicastor.program.data.MulticastData.Typ)"><B>getPPSSender(MulticastData.Typ)</B></A> - 
 Method in interface zisko.multicastor.program.interfaces.<A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html" title="interface in zisko.multicastor.program.interfaces">MulticastControllerInterface</A>
-<DD>Gibt die globale real gesendete Paketrate zurï¿½ck
+<DD>Gibt die globale real gesendete Paketrate zurueck
 <DT><A HREF="../zisko/multicastor/program/view/PanelGraph.html#getPreferredSize()"><B>getPreferredSize()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/PanelGraph.html" title="class in zisko.multicastor.program.view">PanelGraph</A>
-<DD>Gibt die aktuelle und damit bevorzugte Größe des Panels zurück
+<DD>Gibt die aktuelle und damit bevorzugte Groeße des Panels zurueck
 <DT><A HREF="../zisko/multicastor/program/view/FrameMain.html#getRb_beginner()"><B>getRb_beginner()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/FrameMain.html" title="class in zisko.multicastor.program.view">FrameMain</A>
 <DD>&nbsp;
@@ -468,7 +468,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getSelectedRows(zisko.multicastor.program.data.MulticastData.Typ)"><B>getSelectedRows(MulticastData.Typ)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche ein Integer Array mit den Selektierten Zeilen einer Tabele zurückgibt.
+<DD>Hilfsfunktion welche ein Integer Array mit den Selektierten Zeilen einer Tabele zurueckgibt.
 <DT><A HREF="../zisko/multicastor/program/data/UserInputData.html#getSelectedRows()"><B>getSelectedRows()</B></A> - 
 Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/UserInputData.html" title="class in zisko.multicastor.program.data">UserInputData</A>
 <DD>&nbsp;
@@ -477,7 +477,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getSelectedTab()"><B>getSelectedTab()</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche den Programmteil zurückgibt welcher im Moment per Tab selektiert ist.
+<DD>Hilfsfunktion welche den Programmteil zurueckgibt welcher im Moment per Tab selektiert ist.
 <DT><A HREF="../zisko/multicastor/program/data/UserInputData.html#getSelectedTab()"><B>getSelectedTab()</B></A> - 
 Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/UserInputData.html" title="class in zisko.multicastor.program.data">UserInputData</A>
 <DD>&nbsp;
@@ -498,7 +498,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getSnakeDir()"><B>getSnakeDir()</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche die Richtung im SnakeProgramm zurückgibt.
+<DD>Hilfsfunktion welche die Richtung im SnakeProgramm zurueckgibt.
 <DT><A HREF="../zisko/multicastor/program/data/MulticastData.html#getSourceIp()"><B>getSourceIp()</B></A> - 
 Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>
 <DD>&nbsp;
@@ -519,7 +519,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getTable(zisko.multicastor.program.data.MulticastData.Typ)"><B>getTable(MulticastData.Typ)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welche die Tabelle des jeweiligen Programmteil zurückgibt.
+<DD>Hilfsfunktion welche die Tabelle des jeweiligen Programmteil zurueckgibt.
 <DT><A HREF="../zisko/multicastor/program/view/PanelTabbed.html#getTable()"><B>getTable()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/PanelTabbed.html" title="class in zisko.multicastor.program.view">PanelTabbed</A>
 <DD>&nbsp;
@@ -531,7 +531,7 @@ Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/controller/ViewController.html#getTableModel(zisko.multicastor.program.data.MulticastData.Typ)"><B>getTableModel(MulticastData.Typ)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>
-<DD>Hilfsfunktion welches das Model der jeweiligen Tabelle zurückgibt.
+<DD>Hilfsfunktion welches das Model der jeweiligen Tabelle zurueckgibt.
 <DT><A HREF="../zisko/multicastor/program/view/PanelTabbed.html#getTableModel()"><B>getTableModel()</B></A> - 
 Method in class zisko.multicastor.program.view.<A HREF="../zisko/multicastor/program/view/PanelTabbed.html" title="class in zisko.multicastor.program.view">PanelTabbed</A>
 <DD>&nbsp;
@@ -600,7 +600,7 @@ Method in class zisko.multicastor.program.data.<A HREF="../zisko/multicastor/pro
 <DD>&nbsp;
 <DT><A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html#getUserLevel(zisko.multicastor.program.data.MulticastData.Typ, zisko.multicastor.program.data.UserlevelData.Userlevel)"><B>getUserLevel(MulticastData.Typ, UserlevelData.Userlevel)</B></A> - 
 Method in interface zisko.multicastor.program.interfaces.<A HREF="../zisko/multicastor/program/interfaces/MulticastControllerInterface.html" title="interface in zisko.multicastor.program.interfaces">MulticastControllerInterface</A>
-<DD>Diese Methode gibt ein UserLevelData Objekt zurï¿½ck in dem gespeichert ist 
+<DD>Diese Methode gibt ein UserLevelData Objekt zurueck in dem gespeichert ist 
  welche GUI Elemente angezeigt werden.
 <DT><A HREF="../zisko/multicastor/program/controller/MulticastController.html#getUserlevelBeginnerDefaultValues(zisko.multicastor.program.data.MulticastData.Typ)"><B>getUserlevelBeginnerDefaultValues(MulticastData.Typ)</B></A> - 
 Method in class zisko.multicastor.program.controller.<A HREF="../zisko/multicastor/program/controller/MulticastController.html" title="class in zisko.multicastor.program.controller">MulticastController</A>

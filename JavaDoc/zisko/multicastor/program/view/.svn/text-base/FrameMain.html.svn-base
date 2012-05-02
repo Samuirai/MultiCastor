@@ -583,7 +583,7 @@ public <B>FrameMain</B>(<A HREF="../../../../zisko/multicastor/program/controlle
 <DD>Konstruktor welche das Hauptfenster des Multicastor tools erstellt, konfiguriert und anzeigt.
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - Benötigte Referenz zum GUI Controller</DL>
+<DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - Benoetigte Referenz zum GUI Controller</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

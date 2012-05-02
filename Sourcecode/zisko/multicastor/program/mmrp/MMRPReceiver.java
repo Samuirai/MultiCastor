@@ -8,7 +8,10 @@ import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 
 
-
+/**
+ * Receives packets which are send from the stream. 
+ *
+ */
 public class MMRPReceiver extends MMRPEntity {
 
 	private boolean found;
@@ -25,7 +28,9 @@ public class MMRPReceiver extends MMRPEntity {
 			found = true;
 		}
 	};
-
+/**
+ * Stops the procedure which caputures the packets
+ */
 	public void stopLoop() {
 		stop = true;
 		
@@ -36,7 +41,12 @@ public class MMRPReceiver extends MMRPEntity {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * 
+	 * @param deviceMACAddress is a byte array which contains the MAC address of the network device.
+	 * @param streamMACAddress is a byte array which contains the Address of the multicast group
+	 * @throws IOException if the network device was not found
+	 */
 	public MMRPReceiver(byte[] deviceMACAddress, byte[] streamMACAddress)
 			throws IOException {
 		super(deviceMACAddress, streamMACAddress);
@@ -47,7 +57,12 @@ public class MMRPReceiver extends MMRPEntity {
 				0, (int) 0xFFFFFF00);
 		this.pcap.setFilter(programm);
 	}
-
+	/**
+	 * Capture all packets which has the stream MAC address as destination
+	 * 
+	 * @param buffer in which the content of the packet will be written
+	 * @return true if capture a packet.
+	 */
 	public boolean waitForDataPacketAndGetIt(byte[] buffer) {
 		found = false;
 		foundPacket = buffer;

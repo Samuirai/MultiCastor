@@ -105,12 +105,12 @@ java.lang.Object
 </PRE>
 
 <P>
-Die MultiCastSender-Klasse kümmert sich um das tatsächliche Senden der Multicast-
- Objekte über das Netzwerk.
+Die MultiCastSender-Klasse kuemmert sich um das tatsaechliche Senden der Multicast-
+ Objekte ueber das Netzwerk.
  Sie extended <A HREF="../../../../zisko/multicastor/program/interfaces/MulticastThreadSuper.html" title="class in zisko.multicastor.program.interfaces"><CODE>MulticastThreadSuper</CODE></A>, ist also ein Runnable.
- Ein MultiCastSender hat eine Grundkonfiguration, die nicht mehr abgeändert werden kann,
- wie zum Beispiel die gesetzten IPs. Soll diese Grundkonfiguration geändert werden, muss
- eine neue Instanz der Klasse gebildet werden. Das Erleichtert die nächträgliche Analyse,
+ Ein MultiCastSender hat eine Grundkonfiguration, die nicht mehr abgeaendert werden kann,
+ wie zum Beispiel die gesetzten IPs. Soll diese Grundkonfiguration geaendert werden, muss
+ eine neue Instanz der Klasse gebildet werden. Das Erleichtert die naechtraegliche Analyse,
  Da das Objekt eindeutig einem "Test" zuordnungsbar ist.
 <P>
 
@@ -136,7 +136,7 @@ Die MultiCastSender-Klasse kümmert sich um das tatsächliche Senden der Multicast
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/model/MulticastSender.sendingMethod.html" title="enum in zisko.multicastor.program.model">MulticastSender.sendingMethod</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variablen für die verschiedenen Sendemethoden</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variablen fuer die verschiedenen Sendemethoden</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -179,7 +179,7 @@ Die MultiCastSender-Klasse kümmert sich um das tatsächliche Senden der Multicast
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/model/MulticastSender.html#setActive(boolean)">setActive</A></B>(boolean&nbsp;active)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wird der Methode true übergeben, meldet diese sich bei der Multicastgruppe an
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wird der Methode true uebergeben, meldet diese sich bei der Multicastgruppe an
  und startet zu senden.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -256,13 +256,13 @@ public <B>MulticastSender</B>(<A HREF="../../../../zisko/multicastor/program/dat
                        java.util.logging.Logger&nbsp;_logger)</PRE>
 <DL>
 <DD>Einziger Konstruktor der Klasse (Sieht man vom Konstruktor der Superklasse ab).
- Im Konstruktor wird die hostID gesetzt (entspricht dem hostnamen des Geräts),
+ Im Konstruktor wird die hostID gesetzt (entspricht dem hostnamen des Geraets),
  der MultiCastSocket initialisiert, das Network-Interface
- über das die Multicasts gesendet werden sollen gesetzt und das Datenpaket
+ ueber das die Multicasts gesendet werden sollen gesetzt und das Datenpaket
  mit dem <A HREF="../../../../zisko/multicastor/program/model/PacketBuilder.html" title="class in zisko.multicastor.program.model"><CODE>PacketBuilder</CODE></A> erstellt.
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>mcBean</CODE> - Das <A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data"><CODE>MulticastData</CODE></A>-Object, dass alle für den Betrieb nötigen Daten enthält.<DD><CODE>_messages</CODE> - Eine <CODE>Queue</CODE>, über den der Sender seine Ausgaben an den Controller weitergibt.</DL>
+<DT><B>Parameters:</B><DD><CODE>mcBean</CODE> - Das <A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data"><CODE>MulticastData</CODE></A>-Object, dass alle fuer den Betrieb noetigen Daten enthaelt.<DD><CODE>_messages</CODE> - Eine <CODE>Queue</CODE>, ueber den der Sender seine Ausgaben an den Controller weitergibt.</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -280,9 +280,9 @@ setActive</H3>
 <PRE>
 public void <B>setActive</B>(boolean&nbsp;active)</PRE>
 <DL>
-<DD>Wird der Methode true übergeben, meldet diese sich bei der Multicastgruppe an
+<DD>Wird der Methode true uebergeben, meldet diese sich bei der Multicastgruppe an
  und startet zu senden.
- Wird der Methode false übergeben, stoppt sie das senden der Multicasts und
+ Wird der Methode false uebergeben, stoppt sie das senden der Multicasts und
  veranlasst damit auch das Abmelden von der Multicastgruppe.
 <P>
 <DD><DL>
@@ -301,9 +301,9 @@ public void <B>setActive</B>(boolean&nbsp;active,
                       <A HREF="../../../../zisko/multicastor/program/model/MulticastSender.sendingMethod.html" title="enum in zisko.multicastor.program.model">MulticastSender.sendingMethod</A>&nbsp;_method)</PRE>
 <DL>
 <DD>Siehe public void setActive(boolean active).
- Es lässt sich zusätzlich die Art und Weise angeben, mit der gesendet wird (diese
- Möglichkeit wird in der aktuellen Version nur auf Modulebene unterstützt
- und zielt auf spätere Versionen des ByteTools und Testzwecke ab)
+ Es laesst sich zusaetzlich die Art und Weise angeben, mit der gesendet wird (diese
+ Moeglichkeit wird in der aktuellen Version nur auf Modulebene unterstuetzt
+ und zielt auf spaetere Versionen des ByteTools und Testzwecke ab)
 <P>
 <DD><DL>
 </DL>

@@ -37,9 +37,9 @@ public class PanelTabbed extends JPanel {
 	private ArrayList<TableColumn> columns;
 
 	/**
-	 * Konstruktor für einen kompletten Programmteil in der GUI.
+	 * Konstruktor fuer einen kompletten Programmteil in der GUI.
 	 * Hierbei werden alle Komponenten fertig initialisiert.
-	 * @param ctrl Benötigte Referenz zum GUI Controller
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
 	 * @param typ Gibt an um welchen Programmteil es sich handelt
 	 */
 	public PanelTabbed(ViewController ctrl, Typ typ) {
@@ -74,16 +74,16 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Initialisiert die Statusbar
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehört
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Statusbar gehoert
 	 */
 	private void initStatusPanel(ViewController ctrl, Typ typ) {
 		pan_status = new PanelStatusBar();
 	}
 	/**
 	 * Initialisiert den Graph und die Console der GUI
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehören
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Komponenten gehoeren
 	 */
 	private void initConsolePanel(ViewController ctrl, Typ typ) {
 		tab_console = new JTabbedPane();
@@ -106,8 +106,8 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Initialisiert die Tabelle
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehoert
 	 */
 	private void initTablePanel(ViewController ctrl, Typ typ) {
 		pan_table = new JPanel();
@@ -136,8 +136,8 @@ public class PanelTabbed extends JPanel {
 	}
 	/**
 	 * Resettet das Aussehen der Tabelle auf das Standard Aussehen
-	 * @param ctrl Benötigte Referenz zum GUI Controller
-	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehört
+	 * @param ctrl Benoetigte Referenz zum GUI Controller
+	 * @param typ Gibt den Programmteil an zu welchem die Tabelle gehoert
 	 */
 	public void setTableModel(ViewController ctrl, Typ typ) {
 		model = new MiscTableModel(ctrl,typ);

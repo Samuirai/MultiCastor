@@ -112,18 +112,18 @@ java.lang.Object
 
 <P>
 Zeichnet einen Grafen auf einer Flache mit einer
- Höhe von 100 Pixeln und einer variablen Breite.
+ Hoehe von 100 Pixeln und einer variablen Breite.
  Der Graph selber ist 66 Pixel hoch (fest) und ebenfalls variabel breit (wird bei resize gestaucht).
- Mittels der Update-Funktion kann ein Funktionswert hinzugefügt werden.
+ Mittels der Update-Funktion kann ein Funktionswert hinzugefuegt werden.
  Es werden die letzten 62 Werte (Die 60 Sekunden der Skala + Ursprung + einen Wert außerhalb der Skala
- (übergang zum rechten Rand)) in einem Array gespeichert.
- Sind 62 Werte erreicht, werden die ersten Werte wieder überschrieben usw.
+ (uebergang zum rechten Rand)) in einem Array gespeichert.
+ Sind 62 Werte erreicht, werden die ersten Werte wieder ueberschrieben usw.
 <P>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
-  <DD>Jannik Müller</DD>
+  <DD>Jannik Mueller</DD>
 <DT><B>See Also:</B><DD><A HREF="../../../../serialized-form.html#zisko.multicastor.program.view.PanelGraph">Serialized Form</A></DL>
 <HR>
 
@@ -235,7 +235,7 @@ Zeichnet einen Grafen auf einer Flache mit einer
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/PanelGraph.html#getMaxY()">getMaxY</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter für den maximalen Y-Wert der Skala</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter fuer den maximalen Y-Wert der Skala</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -243,7 +243,7 @@ Zeichnet einen Grafen auf einer Flache mit einer
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/PanelGraph.html#getPreferredSize()">getPreferredSize</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gibt die aktuelle und damit bevorzugte Größe des Panels zurück</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gibt die aktuelle und damit bevorzugte Groeße des Panels zurueck</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -259,7 +259,7 @@ Zeichnet einen Grafen auf einer Flache mit einer
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/PanelGraph.html#moveSnakeAndUpdateView(zisko.multicastor.program.view.SnakeGimmick.SNAKE_DIRECTION)">moveSnakeAndUpdateView</A></B>(<A HREF="../../../../zisko/multicastor/program/view/SnakeGimmick.SNAKE_DIRECTION.html" title="enum in zisko.multicastor.program.view">SnakeGimmick.SNAKE_DIRECTION</A>&nbsp;d)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Macht dasselbe wie moveSnake, aber macht zusätzlich ein viewUpdate</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Macht dasselbe wie moveSnake, aber macht zusaetzlich ein viewUpdate</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -284,7 +284,7 @@ Zeichnet einen Grafen auf einer Flache mit einer
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/PanelGraph.html#setMaxY(int)">setMaxY</A></B>(int&nbsp;maxY)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setter für den maximalen Y-Wert der Skala</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setter fuer den maximalen Y-Wert der Skala</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -392,7 +392,7 @@ public <B>PanelGraph</B>(int&nbsp;maxY,
 <DD>Einziger Konstruktor der Klasse
 <P>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>maxY</CODE> - der höchst mögliche Y-Wert (int)<DD><CODE>labelOfX</CODE> - Beschriftung der X-Achse (String)<DD><CODE>labelOfY</CODE> - Beschriftung der Y-Achse (String)<DD><CODE>staticScale</CODE> - Bestimmt ob der höchstmögliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)</DL>
+<DT><B>Parameters:</B><DD><CODE>maxY</CODE> - der hoechst moegliche Y-Wert (int)<DD><CODE>labelOfX</CODE> - Beschriftung der X-Achse (String)<DD><CODE>labelOfY</CODE> - Beschriftung der Y-Achse (String)<DD><CODE>staticScale</CODE> - Bestimmt ob der hoechstmoegliche Y-Wert automatisch angepasst werden soll (false) oder nicht (true)</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -410,7 +410,7 @@ getPreferredSize</H3>
 <PRE>
 public java.awt.Dimension <B>getPreferredSize</B>()</PRE>
 <DL>
-<DD>Gibt die aktuelle und damit bevorzugte Größe des Panels zurück
+<DD>Gibt die aktuelle und damit bevorzugte Groeße des Panels zurueck
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE>getPreferredSize</CODE> in class <CODE>javax.swing.JComponent</CODE></DL>
@@ -452,7 +452,7 @@ public void <B>updateGraph</B>(int&nbsp;value,
  <br>   - Funktionswerte < 0 werden 0
  <p/>
  staticScale false: Skala wird ggf. angepasst.
- Dazu wird ein counter benutzt, um zu überprüfen, ob die Werte dauerhaft
+ Dazu wird ein counter benutzt, um zu ueberpruefen, ob die Werte dauerhaft
  klein bleiben. Ist der Count bei einem gewissen Wert,
  wird die Skala wieder angepasst. MaxY sinkt nicht unter 10.
  <br> - value > maximaler Y-Wert: max. Y-Wert wird gleich value
@@ -470,7 +470,7 @@ moveSnakeAndUpdateView</H3>
 <PRE>
 public void <B>moveSnakeAndUpdateView</B>(<A HREF="../../../../zisko/multicastor/program/view/SnakeGimmick.SNAKE_DIRECTION.html" title="enum in zisko.multicastor.program.view">SnakeGimmick.SNAKE_DIRECTION</A>&nbsp;d)</PRE>
 <DL>
-<DD>Macht dasselbe wie moveSnake, aber macht zusätzlich ein viewUpdate
+<DD>Macht dasselbe wie moveSnake, aber macht zusaetzlich ein viewUpdate
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>d</CODE> - </DL>
@@ -483,7 +483,7 @@ getMaxY</H3>
 <PRE>
 public int <B>getMaxY</B>()</PRE>
 <DL>
-<DD>Getter für den maximalen Y-Wert der Skala
+<DD>Getter fuer den maximalen Y-Wert der Skala
 <P>
 <DD><DL>
 
@@ -497,7 +497,7 @@ setMaxY</H3>
 <PRE>
 public void <B>setMaxY</B>(int&nbsp;maxY)</PRE>
 <DL>
-<DD>Setter für den maximalen Y-Wert der Skala
+<DD>Setter fuer den maximalen Y-Wert der Skala
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>maxY</CODE> - der neue maximale Y-Wert</DL>

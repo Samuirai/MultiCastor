@@ -131,8 +131,8 @@ public class MulticastController {
 	 *            Programmereignisse und regelmaessig ermittelte
 	 *            Durchschnittswerte zu loggen. Wird null uebergeben wird dies
 	 *            in den Systemoutput geschrieben.
-	 * @param setzt
-	 *            die intervall zeit f�r den konsolen tabellen output
+	 * @param pPrintTableIntervall
+	 *            die intervall zeit fuer den konsolen tabellen output
 	 */
 	public MulticastController(ViewController viewController, Logger logger,
 			int pPrintTableIntervall) {
@@ -174,7 +174,6 @@ public class MulticastController {
 		updateTask = new UpdateTask(logger, mcMap_sender_l3, mcMap_receiver_l3, mcMap_sender_l2, mcMap_receiver_l2, view_controller);
 		timer1 = new Timer();
 		timer1.schedule(updateTask, 3000, 1000);
-
 		if (view_controller != null) {
 			RunSnakeRun n = new RunSnakeRun(view_controller);
 			timer2 = new Timer();
@@ -243,7 +242,7 @@ public class MulticastController {
 	/**
 	 * Diese Methode muss aufgerufen werden, wenn sich Einstellungen des
 	 * Multicasts aendern. Zum Beispeil die GroupIP. Hier wird der vorhandene
-	 * Multicast geloescht und anschlie�end der Multicast neu erzeugt.
+	 * Multicast geloescht und anschlieueend der Multicast neu erzeugt.
 	 * 
 	 * @param m Refernez auf das Datenobjekt, welches veraendert wurde.
 	 */
@@ -430,9 +429,7 @@ public class MulticastController {
 	 * 
 	 * @param path
 	 *            Pfad zur GUI Konfigurationsdatei.
-	 * @param complete
-	 *            Wenn true gesetzt, wird der Standardpfad genommen.
-	 * @param v
+	 * @param data
 	 *            Alle zu speichernden GUI Configs.
 	 */
 	public void saveGUIConfig(String path, GUIData data) {
@@ -458,8 +455,6 @@ public class MulticastController {
 	 * 
 	 * @param path
 	 *            Pfad zur Konfigurationsdatei.
-	 * @param complete
-	 *            Wenn true gesetzt, wird der Standardpfad genommen.
 	 * @param v
 	 *            Alle zu speichernden Multicasts.
 	 */
@@ -929,7 +924,7 @@ public class MulticastController {
 	}
 
 	/**
-	 * setzt das Zeitintervall f�r die Ausgabe der Tabelle auf der Konsole
+	 * setzt das Zeitintervall fuer die Ausgabe der Tabelle auf der Konsole
 	 * 
 	 * @param printTableTime Zeitintervall in milliseconds
 	 */

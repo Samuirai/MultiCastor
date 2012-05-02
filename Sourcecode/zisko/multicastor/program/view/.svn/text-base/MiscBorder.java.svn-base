@@ -8,14 +8,14 @@ import java.util.Vector;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 /**
- * Hilfsklasse zum verwalten der Ränder für Textfelder.
+ * Hilfsklasse zum verwalten der Raender fuer Textfelder.
  * @author Daniel Becker 
  *
  */
 @SuppressWarnings("serial")
 public class MiscBorder extends TitledBorder {
 	/**
-	 * Enum welches bestimmt ob der Rahmen rot, grün oder neutral gezeichnet werden muss, 
+	 * Enum welches bestimmt ob der Rahmen rot, gruen oder neutral gezeichnet werden muss, 
 	 * je nach dem ob ein Korrekter Input vorliegt.
 	 * @author Daniel Becker
 	 *
@@ -43,8 +43,8 @@ public class MiscBorder extends TitledBorder {
 	static Font f = MiscFont.getFont(0,12);
 	private Color c = Color.black;
 	/**
-	 * initialisiert die 3 Vectoren welche die fertigen Ränder halten, so müssen zur Laufzeit keine neuen genertiert werden.
-	 * Die können abgefragt werden sobald sie benötigt werden.
+	 * initialisiert die 3 Vectoren welche die fertigen Raender halten, so muessen zur Laufzeit keine neuen genertiert werden.
+	 * Die koennen abgefragt werden sobald sie benoetigt werden.
 	 */
 	static {
 		for(int i = 0; i < ipv4Names.length; i++){

@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * Klasse für das Snake-Gimmick. Es wird ein 90x90px großes
+ * Klasse fuer das Snake-Gimmick. Es wird ein 90x90px großes
  * Feld gezeichnet. Jedes Snake-"Feld" ist 3x3px groß
  * <br>
  * <br>
@@ -11,7 +11,7 @@ import java.awt.Graphics;
  * <br>
  * <pre>
  * {@code 
- * +++++++++ Update der Snake mit moveSnake(snakeDir). Gibt Status als int zurück +++++
+ * +++++++++ Update der Snake mit moveSnake(snakeDir). Gibt Status als int zurueck +++++
  *  
  * 
  *  switch(mySnakeGimmick.moveSnake(snakeDir)){
@@ -59,7 +59,7 @@ public class SnakeGimmick {
 	}
 	
 	/**
-	 * Setzt das Snake-Feld auf die Anfangswerte (zurück)
+	 * Setzt das Snake-Feld auf die Anfangswerte (zurueck)
 	 */
 	public void initSnake(){
 		//setze alle Felder -1 (unbesetzt)
@@ -107,7 +107,7 @@ public class SnakeGimmick {
 	}
 	
 	/**
-	 * Setzt die Snake ein Feld weiter und prüft die Folgen (Apfel gefunden,
+	 * Setzt die Snake ein Feld weiter und prueft die Folgen (Apfel gefunden,
 	 * Crash)
 	 * @param d die Richtung in die die Snake bewegt werden soll
 	 * @return einen Status als int-Wert<br> 1: Apfel gefunden<br>0: nichts passiert<br>-1: Crash
@@ -115,8 +115,8 @@ public class SnakeGimmick {
 	public int moveSnake(SNAKE_DIRECTION d){
 		Boolean foundApple = false;
 		//Die Richtung aus die die Snake kommt, ist nicht erlaubt!
-		//Sollte diese Richtung übergeben werden,
-		//läuft die Snake weiter in die vorige Richtung
+		//Sollte diese Richtung uebergeben werden,
+		//laeuft die Snake weiter in die vorige Richtung
 		if( (lastD==SNAKE_DIRECTION.N) && (d==SNAKE_DIRECTION.S)  ) d = SNAKE_DIRECTION.N;
 		if( (lastD==SNAKE_DIRECTION.S) && (d==SNAKE_DIRECTION.N)  ) d = SNAKE_DIRECTION.S;
 		if( (lastD==SNAKE_DIRECTION.W) && (d==SNAKE_DIRECTION.E)  ) d = SNAKE_DIRECTION.W;
@@ -135,7 +135,7 @@ public class SnakeGimmick {
 						break;		
 		}
 		
-		//"Umbrüche" an den Rändern berücksichtigen
+		//"Umbrueche" an den Raendern beruecksichtigen
 		if(headY<0)		headY = 29;
 		if(headY>29)	headY = 0;
 		if(headX<0)		headX = 29;
@@ -160,7 +160,7 @@ public class SnakeGimmick {
 //Wird nur erreicht, wenn es keine Kollision gab
 	
 		//Wenn kein Apfel gefunden wurde,
-		//müssen die anderen Indizes umgeändert werden
+		//muessen die anderen Indizes umgeaendert werden
 		if(!foundApple){
 			int[] temp = new int[2];
 			temp[0] = headX;
@@ -182,13 +182,13 @@ public class SnakeGimmick {
 	
 	/**
 	 * Sucht ein Teil der Snake innerhalb des Spielfelds.
-	 * @param index index des gesuchten Snake-Körperteil
-	 * @param lastX x-Position des letzten Körperteils (die "Ausgangsposition")
-	 * @param lastY y-Position des letzten Körperteils (die "Ausgangsposition")
+	 * @param index index des gesuchten Snake-Koerperteil
+	 * @param lastX x-Position des letzten Koerperteils (die "Ausgangsposition")
+	 * @param lastY y-Position des letzten Koerperteils (die "Ausgangsposition")
 	 * @return int[2] mit [0] = x-Position, [1] = y-Position
 	 */
 	private int[] findSnakeBodyPart(int index, int lastX, int lastY){
-		//Östliches Feld überprüfen
+		//Östliches Feld ueberpruefen
 		if(lastX<29)		if(snakeField[lastX+1][lastY]==index)	return new int[]{	(lastX+1),
 																						 lastY  };
 		if(lastX==29)		if(snakeField[0][lastY]		 ==index)	return new int[]{	 0,
@@ -198,12 +198,12 @@ public class SnakeGimmick {
 																						 lastY  };
 		if(lastX==0)		if(snakeField[29][lastY]      ==index)	return new int[]{	 29,
 																						 lastY  };
-		//Nördliches Feld
+		//Noerdliches Feld
 		if(lastY<29)		if(snakeField[lastX][lastY+1]==index)	return new int[]{	lastX,
 																						(lastY+1)};
 		if(lastY==29)		if(snakeField[lastX][0]      ==index)	return new int[]{	lastX,
 																						0        };
-		//Südliches Feld
+		//Suedliches Feld
 		if(lastY>0)			if(snakeField[lastX][lastY-1]==index)	return new int[]{	lastX,
 																						(lastY-1)};
 		if(lastY==0)		if(snakeField[lastX][29]==index)		return new int[]{	lastX,
@@ -214,8 +214,8 @@ public class SnakeGimmick {
 	  /**
 	   * Apfel "zieht um".
 	   * Neue Location random. Sollte es ein Spieler geschafft haben,
-	   * alle Felder mit der Schlange zu füllen,
-	   * würde das Game hier in eine Endlosschleife laufen
+	   * alle Felder mit der Schlange zu fuellen,
+	   * wuerde das Game hier in eine Endlosschleife laufen
 	   */
 	  public void dropNewApple(){
 		  int newAppleX,

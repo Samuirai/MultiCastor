@@ -29,9 +29,8 @@ import zisko.multicastor.program.lang.LanguageManager;
  * Tabs (Titeln) benutzt wird. 
  * 
  * Links steht dabei jeweils ein Icon
- * in der Mitte der Titel und rechts ein Schließen Button.
+ * in der Mitte der Titel und rechts ein Schliessueen Button.
  * 
- * @author Filip Haase
  * @version 2.0
  */
 @SuppressWarnings("serial")
@@ -42,12 +41,12 @@ public class ButtonTabComponent extends JPanel{
 	private ViewController vCtrl;
 	
 	/**
-	 * Der Konstruktor speichert die übergeben Pane, und erzeugt direkt das neue
+	 * Der Konstruktor speichert die uebergeben Pane, und erzeugt direkt das neue
 	 * Label mit Bild und Text
 	 * 
-	 * Außerdem wird ein TabButton zum schließen hinzugefügt.
+	 * Aussueerdem wird ein TabButton zum schliessueen hinzugefuegt.
 	 * 
-	 * @param pPane Die TabPane zu der diese Komponente gehört
+	 * @param pPane Die TabPane zu der diese Komponente gehoert
 	 * @param path Der Pfad zum Icon welches zum Tab geladen werden soll
 	 */
 	public ButtonTabComponent(final DraggableTabbedPane pPane, String path, ViewController pVCtrl){
@@ -88,10 +87,8 @@ public class ButtonTabComponent extends JPanel{
 	
 	/**
 	 * Die private Klasse TabButton.
-	 * Sie ist dafür verantwortlich einen Button zum schließen der Tabs zu erzeugen
-	 * und enthält auch den ActionListener, der die Tabs dann wirklich schließt.
-	 * 
-	 * @author Filip Haase
+	 * Sie ist dafuer verantwortlich einen Button zum schliessueen der Tabs zu erzeugen
+	 * und enthaelt auch den ActionListener, der die Tabs dann wirklich schliessuet.
 	 */
 	private class TabButton extends JButton implements ActionListener {
         public TabButton() {
@@ -115,7 +112,7 @@ public class ButtonTabComponent extends JPanel{
         }
  
         /**
-         *  actionPerformed, kümmert sich darum den Tab zu schließen
+         *  actionPerformed, kuemmert sich darum den Tab zu schliessueen
          *  wenn der Button geschlossen wird
          *  
          *  @param ActionEvent e, wird nicht benutzt
@@ -140,7 +137,7 @@ public class ButtonTabComponent extends JPanel{
         /**
          * paint the cross
          * 
-         * @param g Standart für painComponent Methoden von AWT
+         * @param g Standart fuer painComponent Methoden von AWT
          */
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -163,11 +160,11 @@ public class ButtonTabComponent extends JPanel{
  
     private final static MouseListener buttonMouseListener = new MouseAdapter() {
     	/**
-    	 * Funktion welche dafür sorgt den Rahmen
-    	 * für den "Hover-Effekt" zu zeichnen
+    	 * Funktion welche dafuer sorgt den Rahmen
+    	 * fuer den "Hover-Effekt" zu zeichnen
     	 * 
-    	 * @param e, das MouseEvent über welches
-    	 * der entsprechende Button ausgewählt werden kann
+    	 * @param e, das MouseEvent ueber welches
+    	 * der entsprechende Button ausgewaehlt werden kann
     	 */
         public void mouseEntered(MouseEvent e) {
             Component component = e.getComponent();
@@ -178,11 +175,11 @@ public class ButtonTabComponent extends JPanel{
         }
 
     	/**
-    	 * Funktion welche dafür sorgt den Rahmen
-    	 * für den "Hover-Effekt" wieder zu entfernen
+    	 * Funktion welche dafuer sorgt den Rahmen
+    	 * fuer den "Hover-Effekt" wieder zu entfernen
     	 * 
-    	 * @param e, das MouseEvent über welches
-    	 * der entsprechende Button ausgewählt werden kann
+    	 * @param e, das MouseEvent ueber welches
+    	 * der entsprechende Button ausgewaehlt werden kann
     	 */
         public void mouseExited(MouseEvent e) {
             Component component = e.getComponent();

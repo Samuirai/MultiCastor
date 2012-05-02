@@ -15,9 +15,7 @@ import zisko.multicastor.program.lang.LanguageManager;
 
 /**
  * Klasse, die den Inhalt des "+"-Panels definiert. Im "+" Panel erscheint
- * eine Übersicht, welche die Möglichkeit bietet, alle verfügbaren Panels zu öffnen.
- * 
- * @author Filip Haase
+ * eine ss�bersicht, welche die Moeglichkeit bietet, alle verfuegbaren Panels zu oeffnen.
  *
  */
 
@@ -55,7 +53,7 @@ public class PanelPlus extends JPanel{
 		initComponents(true);
 	}
 	
-	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geaendert wird. */
 	public void reloadLanguage() {
 		initComponents(false);
 	}

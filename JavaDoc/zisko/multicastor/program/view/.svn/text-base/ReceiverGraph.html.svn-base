@@ -112,14 +112,14 @@ java.lang.Object
 <DL>
 <DT><B>Author:</B></DT>
   <DD>jannik
- Diese Klasse ist ein "Wrapper" für die PanelGraph-Klasse.
- Sie lässt den user zwischen 3 Graphen "wechseln":
+ Diese Klasse ist ein "Wrapper" fuer die PanelGraph-Klasse.
+ Sie laesst den user zwischen 3 Graphen "wechseln":
  <br>- Jitter
  <br>- Lost Packets
  <br>- Measured Packet Rate
- <br>Intern wird nur ein Graph verändert.
+ <br>Intern wird nur ein Graph veraendert.
  Anders als die PanelGraph-Klasse, erwartet diese Klasse beim Update ein Array aus MulticastData-Objekten,
- aus denen sie den jeweils benötigten Wert extrahiert.</DD>
+ aus denen sie den jeweils benoetigten Wert extrahiert.</DD>
 <DT><B>See Also:</B><DD><A HREF="../../../../serialized-form.html#zisko.multicastor.program.view.ReceiverGraph">Serialized Form</A></DL>
 <HR>
 
@@ -238,7 +238,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.html#getJitterRB()">getJitterRB</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter für den "Jitter"-Radiobutton</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter fuer den "Jitter"-Radiobutton</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -246,7 +246,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.html#getLostPktsRB()">getLostPktsRB</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter für den "Lost Packets"-Radiobutton</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter fuer den "Lost Packets"-Radiobutton</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -254,7 +254,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.html#getMeasPktRtRB()">getMeasPktRtRB</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter für den "Measured Packet Rate"-Radiobutton</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Getter fuer den "Measured Packet Rate"-Radiobutton</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -262,7 +262,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.html#selectionChanged(zisko.multicastor.program.view.ReceiverGraph.valueType)">selectionChanged</A></B>(<A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.valueType.html" title="enum in zisko.multicastor.program.view">ReceiverGraph.valueType</A>&nbsp;newValueType)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wird aufgerufen, wenn ein andere Radiobutton ausgewählt wird</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wird aufgerufen, wenn ein andere Radiobutton ausgewaehlt wird</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -271,7 +271,7 @@ java.lang.Object
             boolean&nbsp;repaint)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diese Methode updated den Graph, indem sie je nach ausgewähltem
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diese Methode updated den Graph, indem sie je nach ausgewaehltem
  Radiobutton die entsprechenden Daten aus den <A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data"><CODE>MulticastData</CODE></A>-Objekt extrahiert.</TD>
 </TR>
 </TABLE>
@@ -348,7 +348,7 @@ ReceiverGraph</H3>
 public <B>ReceiverGraph</B>(<A HREF="../../../../zisko/multicastor/program/controller/ViewController.html" title="class in zisko.multicastor.program.controller">ViewController</A>&nbsp;ctrl)</PRE>
 <DL>
 <DD>Konstruktor. Erwartet einen <CODE>viewController</CODE> als Parameter, der die
- Radiobuttons überwacht.
+ Radiobuttons ueberwacht.
 <P>
 <DL>
 <DT><B>Parameters:</B><DD><CODE>ctrl</CODE> - der <CODE>viewController</CODE> der ReceiverGraph-Instanz</DL>
@@ -369,7 +369,7 @@ getJitterRB</H3>
 <PRE>
 public javax.swing.JRadioButton <B>getJitterRB</B>()</PRE>
 <DL>
-<DD>Getter für den "Jitter"-Radiobutton
+<DD>Getter fuer den "Jitter"-Radiobutton
 <P>
 <DD><DL>
 
@@ -383,7 +383,7 @@ getLostPktsRB</H3>
 <PRE>
 public javax.swing.JRadioButton <B>getLostPktsRB</B>()</PRE>
 <DL>
-<DD>Getter für den "Lost Packets"-Radiobutton
+<DD>Getter fuer den "Lost Packets"-Radiobutton
 <P>
 <DD><DL>
 
@@ -397,7 +397,7 @@ getMeasPktRtRB</H3>
 <PRE>
 public javax.swing.JRadioButton <B>getMeasPktRtRB</B>()</PRE>
 <DL>
-<DD>Getter für den "Measured Packet Rate"-Radiobutton
+<DD>Getter fuer den "Measured Packet Rate"-Radiobutton
 <P>
 <DD><DL>
 
@@ -411,7 +411,7 @@ selectionChanged</H3>
 <PRE>
 public void <B>selectionChanged</B>(<A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.valueType.html" title="enum in zisko.multicastor.program.view">ReceiverGraph.valueType</A>&nbsp;newValueType)</PRE>
 <DL>
-<DD>Wird aufgerufen, wenn ein andere Radiobutton ausgewählt wird
+<DD>Wird aufgerufen, wenn ein andere Radiobutton ausgewaehlt wird
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>newValueType</CODE> - der neue <A HREF="../../../../zisko/multicastor/program/view/ReceiverGraph.valueType.html" title="enum in zisko.multicastor.program.view"><CODE>ReceiverGraph.valueType</CODE></A></DL>
@@ -425,7 +425,7 @@ updateGraph</H3>
 public void <B>updateGraph</B>(<A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data">MulticastData</A>[]&nbsp;mcDataArray,
                         boolean&nbsp;repaint)</PRE>
 <DL>
-<DD>Diese Methode updated den Graph, indem sie je nach ausgewähltem
+<DD>Diese Methode updated den Graph, indem sie je nach ausgewaehltem
  Radiobutton die entsprechenden Daten aus den <A HREF="../../../../zisko/multicastor/program/data/MulticastData.html" title="class in zisko.multicastor.program.data"><CODE>MulticastData</CODE></A>-Objekt extrahiert.
  Danach wird intern die updateGraph(int)-Methode aufgerufen.
 <P>

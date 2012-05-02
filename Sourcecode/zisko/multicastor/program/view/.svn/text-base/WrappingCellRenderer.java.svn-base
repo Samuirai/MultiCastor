@@ -10,7 +10,7 @@ import zisko.multicastor.program.data.MulticastData.senderState;
 /**
  * Klasse welche die Farben in der Tabelle verwaltet, hierbei muss unterschieden werden ob Multicasts aktiv,
  * inaktiv, selektiert oder deselektiert sind. Weiterhin unterscheidet die Farbe der Tabellenzeilen ob ein
- * Empfänger von einem Sender empfängt (Grün), von mehreren Sender empfängt (Orange) oder erst kürzlich 
+ * Empfaenger von einem Sender empfaengt (Gruen), von mehreren Sender empfaengt (Orange) oder erst kuerzlich 
  * eine Änderung in der Art der Daten die empfangen wurden festgestellt hat (Gelb)
  * @author Daniel Becker
  *

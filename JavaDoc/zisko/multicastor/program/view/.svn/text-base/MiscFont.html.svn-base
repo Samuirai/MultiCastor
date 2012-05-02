@@ -217,7 +217,7 @@ public static java.awt.Font <B>getFont</B>(int&nbsp;style,
 <DD>Statische Funktion zum Anfordern der Standardschriftart betimmter Formatierung.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>style</CODE> - 0=normal, 1=bold, 2=italic, 3=bolditalic<DD><CODE>size</CODE> - die gewählte Schriftgröße
+<DT><B>Parameters:</B><DD><CODE>style</CODE> - 0=normal, 1=bold, 2=italic, 3=bolditalic<DD><CODE>size</CODE> - die gewaehlte Schriftgroeße
 <DT><B>Returns:</B><DD>die angeforderte Standardschrift.</DL>
 </DD>
 </DL>

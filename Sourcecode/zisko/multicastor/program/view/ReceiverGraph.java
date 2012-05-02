@@ -11,15 +11,14 @@ import zisko.multicastor.program.data.MulticastData;
 
 /**
  * 
- * @author jannik
- * Diese Klasse ist ein "Wrapper" f�r die PanelGraph-Klasse.
- * Sie l�sst den user zwischen 3 Graphen "wechseln":
+ * Diese Klasse ist ein "Wrapper" fuer die PanelGraph-Klasse.
+ * Sie luesst den user zwischen 3 Graphen "wechseln":
  * <br>- Jitter
  * <br>- Lost Packets
  * <br>- Measured Packet Rate
- * <br>Intern wird nur ein Graph ver�ndert.
+ * <br>Intern wird nur ein Graph veruendert.
  * Anders als die PanelGraph-Klasse, erwartet diese Klasse beim Update ein Array aus MulticastData-Objekten,
- * aus denen sie den jeweils ben�tigten Wert extrahiert.
+ * aus denen sie den jeweils benuetigten Wert extrahiert.
  */
 @SuppressWarnings("serial")
 public class ReceiverGraph extends PanelGraph{
@@ -49,9 +48,9 @@ public class ReceiverGraph extends PanelGraph{
 	Font					rbFont			= new Font("SansSerif", Font.PLAIN, 10);
 	
 	/**
-	 * Konstruktor. Erwartet einen {@link viewController} als Parameter, der die
-	 * Radiobuttons �berwacht.
-	 * @param ctrl der {@link viewController} der ReceiverGraph-Instanz
+	 * Konstruktor. Erwartet einen {@link zisko.multicastor.program.controller.viewController} als Parameter, der die
+	 * Radiobuttons ueberwacht.
+	 * @param ctrl der {@link controller.viewController} der ReceiverGraph-Instanz
 	 */
 	public ReceiverGraph(ViewController ctrl){
 		super(50, "", "", false);
@@ -100,7 +99,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 	
 	/**
-	 * Getter f�r den "Jitter"-Radiobutton
+	 * Getter fuer den "Jitter"-Radiobutton
 	 * @return "Jitter"-Radiobutton-Instanz
 	 */
 	public JRadioButton getJitterRB() {
@@ -108,7 +107,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 
 	/**
-	 * Getter f�r den "Lost Packets"-Radiobutton
+	 * Getter fuer den "Lost Packets"-Radiobutton
 	 * @return "Lost Packets"-Radiobutton-Instanz
 	 */
 	public JRadioButton getLostPktsRB() {
@@ -116,7 +115,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 
 	/**
-	 * Getter f�r den "Measured Packet Rate"-Radiobutton
+	 * Getter fuer den "Measured Packet Rate"-Radiobutton
 	 * @return "Measured Packet Rate"-Radiobutton-Instanz
 	 */
 	public JRadioButton getMeasPktRtRB() {
@@ -124,7 +123,7 @@ public class ReceiverGraph extends PanelGraph{
 	}
 
 	/**
-	 * Wird aufgerufen, wenn ein andere Radiobutton ausgew�hlt wird
+	 * Wird aufgerufen, wenn ein andere Radiobutton ausgewuehlt wird
 	 * @param newValueType der neue {@link valueType}
 	 */
 	public void selectionChanged(valueType newValueType){
@@ -133,11 +132,11 @@ public class ReceiverGraph extends PanelGraph{
 	}
 	
 	/**
-	 * Diese Methode updated den Graph, indem sie je nach ausgew�hltem
-	 * Radiobutton die entsprechenden Daten aus den {@link MulticastData}-Objekt extrahiert.
+	 * Diese Methode updated den Graph, indem sie je nach ausgewuehltem
+	 * Radiobutton die entsprechenden Daten aus den {@link zisko.multicastor.program.data.MulticastData}-Objekt extrahiert.
 	 * Danach wird intern die updateGraph(int)-Methode aufgerufen.
-	 * @param mcData
-	 * @param Gibt an, ob der Graph neugezeichnet werden soll oder nicht.
+	 * @param mcDataArray
+	 * @param repaint Gibt an, ob der Graph neugezeichnet werden soll oder nicht.
 	 */
 	public void updateGraph(MulticastData[] mcDataArray, boolean repaint){
 		int newValue=0;
@@ -163,7 +162,7 @@ public class ReceiverGraph extends PanelGraph{
 		}
 	}
 	
-	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geändert wird. */
+	/** Diese Methode aktualisiert den textuellen Inhalt, wenn die Sprache geaendert wird. */
 	public void reloadLanguage(){
 		setLblX(lang.getProperty("graph.time"));
 		setLblY(lang.getProperty("graph.y"));

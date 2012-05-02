@@ -113,11 +113,11 @@ Package zisko.multicastor.program.controller
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/controller/ViewController.MessageTyp.html" title="enum in zisko.multicastor.program.controller">ViewController.MessageTyp</A></B></TD>
-<TD>Enum welches angibt um was für eine Art von GUI Benachrichtigung es sich handelt.</TD>
+<TD>Enum welches angibt um was fuer eine Art von GUI Benachrichtigung es sich handelt.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../zisko/multicastor/program/controller/ViewController.UpdateTyp.html" title="enum in zisko.multicastor.program.controller">ViewController.UpdateTyp</A></B></TD>
-<TD>Enum welches angibt um was für eine Art von GUI Update es sich handelt.</TD>
+<TD>Enum welches angibt um was fuer eine Art von GUI Update es sich handelt.</TD>
 </TR>
 </TABLE>
 &nbsp;

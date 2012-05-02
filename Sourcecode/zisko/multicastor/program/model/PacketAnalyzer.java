@@ -8,6 +8,10 @@ import zisko.multicastor.program.data.MulticastData;
 import zisko.multicastor.program.data.MulticastData.Source;
 import zisko.multicastor.program.data.MulticastData.senderState;
 
+
+/**
+ * PacketAnalyzer wertet die Pakete fuer den Empfaenger aus. Er erstellt auch die Werte fuer die Tabelle.
+ */
 public class PacketAnalyzer {
 	/** Objekt in dem die ermittelten Werte gespeichert werden. */
 	private MulticastData mcData;
@@ -28,7 +32,6 @@ public class PacketAnalyzer {
 	/** Wird verwendet, um zu verhindern, dass gerade gestartete MulticastReceiver 
 	 * in den Status RecentlyChanged gehen. */
 	private int lastActivated = 0;
-	// Avg values
 	/** Wird zur Berechnung der minuetlichen Durschnittswerte verwendet. */
 	private int updateMinHelper = 0;
 	/** Wird zur Berechnung des durschnittlichen Jitterwertes pro Minute verwendet. */
@@ -72,7 +75,7 @@ public class PacketAnalyzer {
 	
 	/** Used to track how much the SenderID changes. */
 	private int senderChanges = 0;
-	/** Speichert wann die letzte �nderung war. */
+	/** Speichert wann die letzte uenderung war. */
 	private int recently_changed = 0;
 	
 	/** Wird genutzt, wenn fuer eine gewisse Zeit keine Pakete mehr empfangen wurden. */
@@ -88,7 +91,7 @@ public class PacketAnalyzer {
 	 * So kann die naechste erwartete Paketnummer berechnet werden. */
 	int internerPacketCount = 0;
 	/** Wird fuer PacketLostPerSecond genutzt. Hier werden fehlende Paketnummern 
-	 * eingetragen, auf die anschlie�end geprueft wird. */
+	 * eingetragen, auf die anschlieueend geprueft wird. */
 	Vector<Integer> missingPackets;
 	
 	/**
@@ -99,11 +102,11 @@ public class PacketAnalyzer {
 	 */
 	public PacketAnalyzer(MulticastData multicastData, Logger logger, int pLength){
 		if (multicastData==null){
-			System.out.println("B�ser Fehler!!! multicastData ist null im PacketAnalyzer.");
+			System.out.println("Bueser Fehler!!! multicastData ist null im PacketAnalyzer.");
 		}
 		mcData = multicastData;
 		if(logger == null){
-			System.out.println("B�ser Fehler!!! Message Queue ist null im PacketAnalyzer.");
+			System.out.println("Bueser Fehler!!! Message Queue ist null im PacketAnalyzer.");
 		}
 		this.logger = logger;
 		this.length = pLength;
@@ -327,7 +330,7 @@ public class PacketAnalyzer {
 		mcData.setPacketSource(source);
 		
 		// uses analyzePacketOnce on next received packet, too
-			// sorgt dafür, dass jegliche Änderungen erst mit einer Sekunde Verzögerungen 
+			// sorgt dafuer, dass jegliche Aenderungen erst mit einer Sekunde Verzoegerungen 
 			//  in der GUI erscheinen -> updatet aber auch einige Werte deshalb nur einmal pro Sekunde
 		setComplete(true);
 		
@@ -417,6 +420,9 @@ public class PacketAnalyzer {
 		}
 	}
 	
+	/**
+	 * returnt den <code>complete</code> Wert.
+	 */
 	private Boolean getComplete(){
 		synchronized (complete) {
 			return complete;
