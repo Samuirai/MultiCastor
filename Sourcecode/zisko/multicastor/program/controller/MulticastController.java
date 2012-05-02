@@ -491,6 +491,15 @@ public class MulticastController {
 		data.setABOUT(GUIData.TabState.invisible);
 		data.setPLUS(GUIData.TabState.visible);
 
+		data.Default_L2_GroupMac = view_controller.guidata.Default_L2_GroupMac;
+		data.Default_L2_PacketLength = view_controller.guidata.Default_L2_PacketLength;
+		data.Default_L2_PacketRateDesired = view_controller.guidata.Default_L2_PacketRateDesired;
+		data.Default_L3_GroupIp = view_controller.guidata.Default_L3_GroupIp;
+		data.Default_L3_PacketLength = view_controller.guidata.Default_L3_PacketLength;
+		data.Default_L3_Ttl = view_controller.guidata.Default_L3_Ttl;
+		data.Default_L3_PacketRateDesired = view_controller.guidata.Default_L3_PacketRateDesired;
+		data.Default_L3_UdpPort = view_controller.guidata.Default_L3_UdpPort;
+		
 		// set the new state if they are visible
 		for (int i = 0; i < view_controller.getFrame().getTabpane()
 				.getTabCount(); ++i) {

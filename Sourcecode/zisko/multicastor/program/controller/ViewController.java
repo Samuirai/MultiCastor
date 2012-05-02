@@ -148,8 +148,9 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	
 	/**
 	 * stores the setting of the GUI like tab position and selection
+	 * @author Daniel Becker
 	 */
-	private GUIData guidata;
+	public GUIData guidata;
 	
 	/**
 	 * Provides information about the initialization status.
@@ -734,22 +735,22 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		if(initFinished){
 			//Only for L3
 			if(typ == Typ.L3_SENDER || typ == Typ.L3_RECEIVER){
-				getPanConfig(typ).getTf_groupIPaddress().setText(guidata.Default_L3.getGroupIp().toString());
-				getPanConfig(typ).getTf_udp_port().setText(((Integer)guidata.Default_L3.getUdpPort()).toString());
+				getPanConfig(typ).getTf_groupIPaddress().setText(guidata.Default_L3_GroupIp);
+				getPanConfig(typ).getTf_udp_port().setText(guidata.Default_L3_UdpPort);
 
 				//Only L3 Sender
 				if(typ == Typ.L3_SENDER){	
-					getPanConfig(typ).getTf_ttl().setText(((Integer)guidata.Default_L3.getTtl()).toString());
-					getPanConfig(typ).getTf_packetrate().setText(((Integer)guidata.Default_L3.getPacketRateDesired()).toString());
-					getPanConfig(typ).getTf_udp_packetlength().setText(((Integer)guidata.Default_L3.getPacketLength()).toString());
+					getPanConfig(typ).getTf_ttl().setText(guidata.Default_L3_Ttl);
+					getPanConfig(typ).getTf_packetrate().setText(guidata.Default_L3_PacketRateDesired);
+					getPanConfig(typ).getTf_udp_packetlength().setText(guidata.Default_L3_PacketLength);
 				}
 			}else{
-				getPanConfig(typ).getTf_groupIPaddress().setText(guidata.Default_L2.getMmrpGroupMacAsString());
+				getPanConfig(typ).getTf_groupIPaddress().setText(guidata.Default_L2_GroupMac);
 				
 				//Only L2 Sender
 				if(typ == Typ.L2_SENDER){
-					getPanConfig(typ).getTf_packetrate().setText(((Integer)guidata.Default_L2.getPacketRateDesired()).toString());
-					getPanConfig(typ).getTf_udp_packetlength().setText(((Integer)guidata.Default_L2.getPacketRateDesired()).toString());
+					getPanConfig(typ).getTf_packetrate().setText(guidata.Default_L2_PacketRateDesired);
+					getPanConfig(typ).getTf_udp_packetlength().setText(guidata.Default_L2_PacketLength);
 				}
 			}
 			getPanConfig(typ).getCb_sourceIPaddress().removeItemAt(0);

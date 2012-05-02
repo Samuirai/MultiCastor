@@ -19,8 +19,7 @@ public class GUIData {
 	//This are default values for the whole programm
 	//therefore we use them as public, because they
 	//do not need to be protected in any form
-	public MulticastData Default_L2;
-	public MulticastData Default_L3;
+
 	public String Default_L3_GroupIp="";
 	public String Default_L3_UdpPort="";
 	public String Default_L3_Ttl="";
@@ -29,6 +28,7 @@ public class GUIData {
 	public String Default_L2_GroupMac="";
 	public String Default_L2_PacketRateDesired="";
 	public String Default_L2_PacketLength="";
+
 	
 	//********************************************
 	// Eigene Datentypen
