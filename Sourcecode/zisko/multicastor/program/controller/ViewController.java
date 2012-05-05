@@ -175,7 +175,6 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @throws NeedRestartException 
 	 */
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getSource().toString());
 		//Wenn Draggable Tabbed Pane entfernt wurde
 		if(f.isPaneDel()) f.openPane();
 		//Wenn "Views" ausgewaehlt werden
