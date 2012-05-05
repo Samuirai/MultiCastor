@@ -10,7 +10,6 @@ import javax.swing.event.ChangeListener;
 
 import zisko.multicastor.program.controller.ViewController;
 import zisko.multicastor.program.data.MulticastData.Typ;
-import zisko.multicastor.program.data.UserlevelData.Userlevel;
 import zisko.multicastor.program.lang.LanguageManager;
 /**
  * Hauptfenster des MultiCastor Tools
@@ -102,7 +101,6 @@ public class FrameMain extends JFrame {
 		return lastConfigs;
 	}
 	private int aboutPanelState = 0; // 0 = invisible, 1 = visible, closeButton unhovered, 2 = visible close button hovered
-	private Userlevel level = Userlevel.EXPERT;
 	private Vector<String> lastConfigs=new Vector<String>();
 	private Separator mi_separator;
 	
@@ -633,12 +631,6 @@ public class FrameMain extends JFrame {
 	}
 	public JCheckBoxMenuItem getMi_autoSave() {
 		return mi_autoSave;
-	}
-	public void setLevel(Userlevel level) {
-		this.level = level;
-	}
-	public Userlevel getLevel() {
-		return level;
 	}
 	
 	/**

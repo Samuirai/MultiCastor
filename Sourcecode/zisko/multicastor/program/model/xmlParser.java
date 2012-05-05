@@ -56,18 +56,6 @@ public class xmlParser implements zisko.multicastor.program.interfaces.XMLParser
 		packetRateDesired, typ, sourceMac, groupMac
 	}
 	
-	/** XML Tag Namen */
-	/*private enum uldTag{
-		startButton, stopButton, newButton, selectAllButton,
-		deselectAllButton, deleteButton, statusBar, controlPanel, 
-		configPanel, groupIpField, sourceIpField, portField,
-		packetLengthField, ttlField, packetRateField, activeField,
-		enterField, saveConfigDialog, loadConfigDialog, 
-		userLevelRadioGrp, autoSaveCheckbox, snakeGame, 
-		popupsEnabled, startStopCheckBox, graph, 
-		graphTyp, console, typ, userlevel
-	}*/
-	
 	/** Konstruktor
 	 * @param logger Logger fuer die Ausgaben
 	 */

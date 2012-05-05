@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -299,7 +300,7 @@ public class LanguageManager extends Properties{
 	 */
 	private void loadLanguage(String currentLangFile) throws FileNotFoundException, IOException, InvalidLanguageFileException{
 		FileInputStream fis=new FileInputStream(currentLangFile);
-		load(fis);
+		this.load(new InputStreamReader(fis,"UTF8"));
 		fis.close();
 		//Check the Language File
 		//Remember: If there is an one file with all keys loaded before

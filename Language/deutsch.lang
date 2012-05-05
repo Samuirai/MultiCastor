@@ -1,66 +1,66 @@
-﻿mi.autoSave			=Automatisch speichern
-mi.changeWindowTitle=Fenstertitel aendern
+mi.autoSave			=Automatisch speichern
+mi.changeWindowTitle=Fenstertitel ändern
 mi.language			=Sprache
 mi.saveConfiguration=Konfiguration speichern
 mi.saveAllMc		=Alle Multicastdaten speichern
-mi.saveSelectedMc	=Ausgewaehlte Multicastdaten speichern
+mi.saveSelectedMc	=Ausgewählte Multicastdaten speichern
 mi.loadConfiguration=Konfiguration laden
 mi.loadMc			=Multicastdaten laden
-mi.loadAdditionalMc	=zusaetzliche Multicastdaten laden
+mi.loadAdditionalMc	=zusätzliche Multicastdaten laden
 mi.errorFileNotFound=Fehler: Datei nicht gefunden
 mi.snake			=Snake (Schlangenspiel)
 mi.help				=Hilfe
 mi.exit				=Beenden
 mi.about			=Über
-mi.beginner			=Anfaenger
+mi.beginner			=Anfänger
 mi.expert			=Experte
 mi.custom			=Benutzerdefiniert
-mi.menu				=Menue
+mi.menu				=Menü
 mi.options			=Optionen
 mi.userLevel		=Benutzer Level
 mi.views			=Ansichten
-mi.layer2Receiver	=Schicht 2 Empfaenger
+mi.layer2Receiver	=Schicht 2 Empfänger
 mi.layer2Sender		=Schicht 2 Sender
-mi.layer3Receiver	=Schicht 3 Empfaenger
+mi.layer3Receiver	=Schicht 3 Empfänger
 mi.layer3Sender		=Schicht 3 Sender
 mi.info				=Info
 tab.l2s				=S2 Sender
 tab.l3s				=S3 Sender
-tab.l2r				=S2 Empfaenger
-tab.l3r				=S3 Empfaenger
+tab.l2r				=S2 Empfänger
+tab.l3r				=S3 Empfänger
 tab.graph			=Diagramm
 tab.console			=Konsole	
-plus.l2rDescription		=Öffnet die Schicht 2 Empfaenger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geoeffnet. Wenn sie geoeffnet ist, wird sie fokussiert.
-plus.l2sDescription		=Öffnet die Schicht 2 Sender Registerkarte (mit MMRP). Wenn die Registerkarte geschlossen ist, wird sie geoeffnet. Wenn sie geoeffnet ist, wird sie fokussiert.
-plus.l3rDescription		=Öffnet die Schicht 3 Empfaenger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geoeffnet. Wenn sie geoeffnet ist, wird sie fokussiert.
-plus.l3sDescription		=Öffnet die Schicht 3 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geoeffnet. Wenn sie geoeffnet ist, wird sie fokussiert.
-plus.aboutDescription	=Öffnet die Über-Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geoeffnet. Wenn sie geoeffnet ist, wird sie fokussiert.
+plus.l2rDescription		=Öffnet die Schicht 2 Empfänger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
+plus.l2sDescription		=Öffnet die Schicht 2 Sender Registerkarte (mit MMRP). Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
+plus.l3rDescription		=Öffnet die Schicht 3 Empfänger Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
+plus.l3sDescription		=Öffnet die Schicht 3 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
+plus.aboutDescription	=Öffnet die Über-Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 miscBorder.mcOverwiew	=MultiCast Übersicht
-miscBorder.mcControl=MultiCast Steuerung
+miscBorder.mcControl=MultiCast Steürung
 miscBorder.mcConfig	= MultiCast Konfiguration
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.udpPort				=UDP Port
 miscBorder.packetRate			=Paketrate
-miscBorder.packetLength			=Paketlaenge
+miscBorder.packetLength			=Paketlänge
 miscBorder.timeToLive			=Lebenszeit
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.MacGroupAddress		=Mac Gruppenadresse
 miscBorder.NetworkInterface		=Netzwerk Interface
-config.message.ipFirst			=Bitte erst die IP waehlen
-config.message.ipFirstShort		=IP zuerst
+config.message.ipFirst			=Bitte erst die IP wählen
+config.message.ipFirstShort		=IP zürst
 button.start		=Start
 button.stop			=Stop
-button.delete		=Loeschen
-button.deSelectAll	=Alle An-/Abwaehlen
+button.delete		=Löschen
+button.deSelectAll	=Alle An-/Abwählen
 button.new			=Neu
 button.active		=Aktiv
 button.inactive		=Inaktiv
-button.add			=Hinzufuegen
-button.change		=aendern
-button.changeAll	=alle aendern
-status.mcSelected	=Ausgewaehlte MultiCasts
+button.add			=Hinzufügen
+button.change		=ändern
+button.changeAll	=alle ändern
+status.mcSelected	=Ausgewählte MultiCasts
 status.mcTotal		=Anzahl MultiCasts
 status.traffic		=Datentransfer
 status.in			=EIN
@@ -72,89 +72,89 @@ graph.jitter		=Fluktuation
 graph.lostPackets	=Verlorene Pakete
 graph.measuredPacketRate=ermittelte Paketrate
 graph.packetsPerSec	=Pakete pro Sekunde (Summe)
-graph.current		=Aktuell
+graph.current		=Aktüll
 
 # Will create a message like: Not enough memory. You have XXX MB. You need minimum XXX MB to start MultiCastor.
 # MC will show this message if there are not enough free memory in heap.
-error.memory.part1	=Nicht genug Speicher. Sie verfuegen ueber 
-error.memory.part2	=Sie benoetigen mindestens
+error.memory.part1	=Nicht genug Speicher. Sie verfügen über 
+error.memory.part2	=Sie benötigen mindestens
 error.memory.part3	=um MultiCastor zu starten.
 error.memory.title	=MultiCastor: Speicherfehler
 
 # MC will show this message if there are less them 10% free memory in heap.
 warning.memory.title=Ihr Arbeitsspeicher ist fast voll.(<10% verbleibend)\n\
  Bitte versuchen sie ihre Dateien zu speichern und \
- versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schliessueen.\n\n
+ versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schliessüen.\n\n
 warning.memory.freeMemory =Freier Speicher
-warning.memory.allocMemory=Aktuell reservierter Speicher
-warning.memory.maxMemory  =Maximal verfuegbarer Speicher
+warning.memory.allocMemory=Aktüll reservierter Speicher
+warning.memory.maxMemory  =Maximal verfügbarer Speicher
 
 logger.info.startWithGui=MultiCastor gestartet mit GUI
 logger.info.startNoGui	=MultiCastor gestartet ohne GUI
 logger.info.startGuiFile=MultiCastor gestartet mit GUI und Datei
 
 error.config.notSpecified=Konfigurationsdatei nicht angegeben.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' fuer mehr Informationen ein.\n\n\
- Der Pfad zur Konfigurationsdatei wir benoetigt,\n\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benötigt,\n\
  um MultiCastor ohne GUI zu starten.
 
-error.config.wrongFormat =Die Konfigurationsdatei hat das falsche Format oder ist beschaedigt. Bitte nutzen sie eine gueltige Konfigurationsdatei.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' fuer mehr Informationen ein.\n\n\
- Der Pfad zur Konfigurationsdatei wir benoetigt,\n\
+error.config.wrongFormat =Die Konfigurationsdatei hat das falsche Format oder ist beschädigt. Bitte nutzen sie eine gültige Konfigurationsdatei.\n\nNutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benötigt,\n\
  um MultiCastor ohne GUI zu starten.
  
-error.invalidParameter	 =Kein gueltiger Parameter.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' fuer mehr Informationen ein.
+error.invalidParameter	 =Kein gültiger Parameter.\n\nUsage:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.
 
-error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte pruefen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.
+error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte prüfen sie, ob Sie im MultiCastor-Verzeichnis Schreibberechtigung besitzen.
 
 error.network.noHostName	=Hostname kann nicht ermittelt werden. Fehlermeldung:
 error.network.settingUDP	=Fehler beim setzen des UDP-Port:
 error.network.noDefaultPort	=FATALER FEHLER: STANDART-PORT KANN NICHT ZUGEWIESEN WERDEN
-error.network.sourceIP		=Fehler beim setzen der Quell-IP
+error.network.sourceIP		=Fehler beim setzen der Qüll-IP
 
-error.mr.logger 	=FATALER FEHLER - Kann Multicast-Empfaenger nicht ohne 'Logger' erstellen
+error.mr.logger 	=FATALER FEHLER - Kann Multicast-Empfänger nicht ohne 'Logger' erstellen
 error.mc.logger		=Fehler im MulticastController: Logger-Objekt ist null
-error.mr.mcdata		=Fehler beim Anlegen des Multicast-Empfaengers. 'MulticastData' darf nicht leer sein.
+error.mr.mcdata		=Fehler beim Anlegen des Multicast-Empfängers. 'MulticastData' darf nicht leer sein.
 
 console.helptext		=Nutze:\tjava -jar multiCastor.jar [-h] [-g] configuration-file-path\n\t\
- geben sie 'java -jar multiCastor.jar -h' fuer mehr Informationen ein.\n\n\
- Der Pfad zur Konfigurationsdatei wir benoetigt,\n\
+ geben sie 'java -jar multiCastor.jar -h' für mehr Informationen ein.\n\n\
+ Der Pfad zur Konfigurationsdatei wir benötigt,\n\
  um MultiCastor ohne GUI zu starten.\n\n\
- Fuer mehr Informationen zu gueltigen Konfigurationsdateien\n\
+ Für mehr Informationen zu gültigen Konfigurationsdateien\n\
  lesen sie bitte das Benutzerhandbuch.\n\n\
  Optionen:\n\
  \t\t-h\tZeigt diese Hilfenachricht an\n\
  \t\t-g\tStartet MultiCastor ohne\n\
- \t\t\teine grafische Benutzeroberflaeche
+ \t\t\teine grafische Benutzeroberfläche
 
 info.longUpdateTime		 =Die Aktualisierungszeit ist sehr lange
-warning.longUpdateTime	 =Die Aktualisierung des GUI dauert sehr lange. Konsultieren sie das Benutzerhandbuch fuer mehr Informationen.
+warning.longUpdateTime	 =Die Aktualisierung des GUI daürt sehr lange. Konsultieren sie das Benutzerhandbuch für mehr Informationen.
 
-warning.invalidNetAdapter=Ungueltiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.
+warning.invalidNetAdapter=Ungültiger Netzwerkadapter. Netzwerkadapter wurde auf localhost gesetzt.
 
 toolTip.closeThisTab	 	=schlieﬂe diese Registerkarte
-toolTip.mcAddressRange		=Waehlen sie eine Multicast IP Adresse (IPV4 oder IPV6)
-toolTip.ipFirst			=Geben sie erst eine IP Adresse an und waehlen sie dann das Netzwerkinterace
+toolTip.mcAddressRange		=Wählen sie eine Multicast IP Adresse (IPV4 oder IPV6)
+toolTip.ipFirst			=Geben sie erst eine IP Adresse an und wählen sie dann das Netzwerkinterace
 toolTip.specifyUDPPort		=Geben sie den UDP Port an
 toolTip.specifyTTL		=Geben sie die Lebenszeit an
 toolTip.specifyPacketRate	=Spezifizieren sie die Paketrate
-toolTip.specifyPacketLength	=Spezifizieren sie die Paketlaenge
-toolTip.selectNetInterface	=Waehlen sie ein Netzwerkinterface fuer Multicast
-toolTip.selectMacAddress	=Waehlen sie eine Multicast Mac Adresse
+toolTip.specifyPacketLength	=Spezifizieren sie die Paketlänge
+toolTip.selectNetInterface	=Wählen sie ein Netzwerkinterface für Multicast
+toolTip.selectMacAddress	=Wählen sie eine Multicast Mac Adresse
 
-message.setNewTitle		=Bitte geben sie einen neuen Titel ein
-message.noMcCreated		=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden koennten.
-message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewaehlt. Sie koennen beliebige Tabellenzeilen waehlen. Mehrfachauswahl ist mit gedrueckter Strg-Taste moeglich.
-message.canNotOpenHelpPart1	=Die Hilfedatei konnte nicht geoeffnet werden. Sie finden die Datei unter dem Pfad
-message.canNotOpenHelpPart2 	=Sie benoetigen eine PDF Reader um die Hilfedatei anzuzeigen.
+message.setNewTitle		=Bitte geben sie einen neün Titel ein
+message.noMcCreated		=Sie haben noch keine Multicastdaten angelegt, die gespeichert werden könnten.
+message.noMcSelected		=Zur Zeit sind keine Multicast Daten ausgewählt. Sie können beliebige Tabellenzeilen wählen. Mehrfachauswahl ist mit gedrückter Strg-Taste möglich.
+message.canNotOpenHelpPart1	=Die Hilfedatei konnte nicht geöffnet werden. Sie finden die Datei unter dem Pfad
+message.canNotOpenHelpPart2 	=Sie benötigen eine PDF Reader um die Hilfedatei anzuzeigen.
 message.useDefaultPort		=Versuche Standartport 4711 zu setzen...
 message.mcActivated		=MultiCast-Sender aktiviert
 message.mcDeaktivated		=MultiCast-Sender deaktiviert
-message.mcAdded			=MultiCast hinzugefuegt
-message.mcDeleted		=MultiCast geloescht
+message.mcAdded			=MultiCast hinzugefügt
+message.mcDeleted		=MultiCast gelöscht
 message.mcAdvisePart1		=Konnte Multicast nicht starten :
-message.mcAdvisePart2		= Empfehle eine Aenderung.
+message.mcAdvisePart2		= Empfehle eine änderung.
 message.mcStartRunning		=Versuchte einen bereits laufenden MultiCast zu starten
 message.mcStopNotRunning	=Versuchte einen bereits nicht laufenden MultiCast zu stoppen
 message.joinMcPart1		=Bei Multicast Gruppe angemeldet
@@ -168,15 +168,15 @@ message.sleepPeak 			=Schlafen nach Ende des Sendens mit PEAK-Methode fehlgeschl
 message.senderWorkingAgain  =Sender arbeitet wieder
 message.problemIp			=Problem beim Senden via IP
 message.tryReconnect		=Versuche neu zu verbinden ... 
-message.senderFail			=Sender funktioniert noch nicht ordnungsgemaessue.
-message.senderViaIp			=Da das Senden ueber die IP nicht erreichbar ist
+message.senderFail			=Sender funktioniert noch nicht ordnungsgemässü.
+message.senderViaIp			=Da das Senden über die IP nicht erreichbar ist
 message.sendingWarning		=Sende Warnung
-message.whileSending		=Waehrend Senden von:
-message.whileSendingSleepFail =Waehrend Senden von (Schlafen fehlgeschlagen):
+message.whileSending		=Während Senden von:
+message.whileSendingSleepFail =Während Senden von (Schlafen fehlgeschlagen):
 message.packetsSendTotal 	=Packete insgesamt gesendet
 message.defaultPort4711		=Versuche default Port 4711 zu setzen ...
-message.receiverMcObj		=Empfaenger mit MC-Objekt gestartet.
-message.receiverStartFail 	=Konnte Empfaenger nicht starten.
+message.receiverMcObj		=Empfänger mit MC-Objekt gestartet.
+message.receiverStartFail 	=Konnte Empfänger nicht starten.
 message.mcgroupMcobj		=MC-Gruppe des MC-Objekts verlassen.
 essage.mcgroupLeaveFail		=Konnte MC-Gruppe des MC-Objekts nicht verlassen.
 message.packetReceiver		=Fehler beim Empfangen von Paketen:
@@ -185,13 +185,13 @@ message.mmrpSender			=Konnte MMRP-Sender nicht erstellen
 message.mcSenderActivated	=MultiCast-Sender aktiviert
 message.mcSenderDeactivated	=MultiCast-Sender deaktiviert
 message.problemSending		=Problem beim Senden
-message.registerMmrpSender	=Konnte Pfad fuer MMRP-Sender nicht registrieren. Stop.
-message.receiverInterfaceFail =Kann Empfaenger nicht erstellen. Die Schnittstelle scheint nicht MMRP-faehig zu sein.
+message.registerMmrpSender	=Konnte Pfad für MMRP-Sender nicht registrieren. Stop.
+message.receiverInterfaceFail =Kann Empfänger nicht erstellen. Die Schnittstelle scheint nicht MMRP-fähig zu sein.
 message.jnetpcapNotInstalled =jnetpcap wahrscheinlich nicht installiert
-message.registerReceiverPath =Konnte Empfaengerpfad nicht registrieren
-message.deregisterReceiverPath =Konnte Empfaengerpfad nicht deregistrieren
+message.registerReceiverPath =Konnte Empfängerpfad nicht registrieren
+message.deregisterReceiverPath =Konnte Empfängerpfad nicht deregistrieren
 message.unsatisfiedLinkError =[Warnung] UnsatisfiedLinkError. Ist jnetpcap installiert?
-message.loadDeviceFail		=[Warnung] Geraete koennen nicht geladen werden, moeglicherweise treten deshalb Probleme in Layer 2 auf. Haben Sie das Programm als Root / Admin gestartet?
+message.loadDeviceFail		=[Warnung] Geräte können nicht geladen werden, möglicherweise treten deshalb Probleme in Layer 2 auf. Haben Sie das Programm als Root / Admin gestartet?
 message.savedGUI		=GUI Konfiguration gespeichert
 message.savedGUINot		=GUI Konfiguration konnte nicht gespeichert werden
 message.savedMCConfig		=Multicast Konfiguration gespeichert
@@ -218,7 +218,7 @@ message.mcc.ErrorDefault	=Error in default Konfigurationsdatei.
 message.mcc.Error		=Error in Konfigurationsdatei.
 message.mcc.unexcpectedError	=Unerwarteter Error vom Typ: 
 message.mcc.usedPath		=  Benutzter Pfad:  
-message.mc.undefined 		=Uebergebener Typ in getMCs im MulticastController ist UNDEFINED.
+message.mc.undefined 		=übergebener Typ in getMCs im MulticastController ist UNDEFINED.
 
 about.license  = Lizensiert unter GPLv3.
 about.labelDev = Entwickler:
