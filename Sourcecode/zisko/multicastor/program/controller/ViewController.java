@@ -175,6 +175,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 	 * @throws NeedRestartException 
 	 */
 	public void actionPerformed(ActionEvent e) {
+
 		//Wenn Draggable Tabbed Pane entfernt wurde
 		if(f.isPaneDel()) f.openPane();
 		//Wenn "Views" ausgewaehlt werden
@@ -1368,6 +1369,7 @@ public class ViewController implements 	ActionListener, MouseListener, ChangeLis
 		inputData_S2 = new UserInputData();
 		inputData_R2 = new UserInputData();
 		
+		//levelData = new UserlevelData();
 		f = new FrameMain(this);
 		addKeyAndContainerListenerToAll(f);
 		try {

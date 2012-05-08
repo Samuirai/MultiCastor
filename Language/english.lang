@@ -192,6 +192,7 @@ message.registerReceiverPath =Could not register receiver path
 message.deregisterReceiverPath =Could not deregister receiver path
 message.unsatisfiedLinkError =[Warning] UnsatisfiedLinkError. Is jnetpcap installed?
 message.loadDeviceFail		=[Warning] Not able to load devices, there will possibly be problems with using Layer 2. Did you start as root / admin?
+message.pcapDeviceFail		=Could not find any devices for Layer 2.\n Do you have JNetPcap installed, and did you start as root / admin?\n It seems like you could not use Layer 2 functionality while runtime.
 message.savedGUI		=Saved GUI Configuration.
 message.savedGUINot		=Could not save GUI Configuration.
 message.savedMCConfig		=Saved Multicastconfiguration.

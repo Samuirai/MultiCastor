@@ -59,11 +59,10 @@ public class PcapHandler {
 			try {
 				r = Pcap.findAllDevs(alldevs, errbuf);
 			} catch (NoClassDefFoundError e) {
-				System.out.println("[Warning] NoClassDefFoundError. jnetpcap probably not installed.");
+				//System.out.println("[Warning] NoClassDefFoundError. jnetpcap probably not installed.");
 				r = 0;
 			}
 			if (r == Pcap.NOT_OK || alldevs.isEmpty()) {
-				System.out.println("Error Stuff");
 				throw new IOException();
 			}
 			for (int i = 0; i < alldevs.size(); i++) {

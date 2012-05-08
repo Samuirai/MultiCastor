@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 
 import zisko.multicastor.program.lang.LanguageManager;
 import zisko.multicastor.program.model.MulticastLogHandler;
+import zisko.multicastor.program.model.NetworkAdapter;
 import zisko.multicastor.program.model.WrongConfigurationException;
 
 /**
@@ -90,6 +91,11 @@ public class Main {
 			logger.addHandler(consoleHandlerWithGUI);
 			logSystemInformation(logger);
 			logger.info(lang.getProperty("logger.info.startWithGui"));
+			
+			//Fehler für fehlende JNetPcap
+			if(NetworkAdapter.hasJpcapMissing){
+				logger.warning(lang.getProperty("message.pcapDeviceFail"));
+			}
 
 			controller.loadDefaultMulticastConfig();
 			controller.loadGUIConfig("",true);
@@ -117,6 +123,11 @@ public class Main {
 					logSystemInformation(logger);
 					logger.info(lang.getProperty("logger.info.startNoGui"));
 
+					//Fehler für fehlende JNetPcap
+					if(NetworkAdapter.hasJpcapMissing){
+						logger.info(lang.getProperty("message.pcapDeviceFail"));
+					}
+					
 					controller.loadConfigWithoutGUI(pfad);
 
 				} catch (FileNotFoundException e) {

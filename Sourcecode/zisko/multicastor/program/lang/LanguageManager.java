@@ -211,6 +211,7 @@ public class LanguageManager extends Properties{
 		"message.deregisterReceiverPath",
 		"message.unsatisfiedLinkError",
 		"message.loadDeviceFail",
+		"message.pcapDeviceFail",
 		"message.savedGUI",
 		"message.savedGUINot",
 		"message.savedMCConfig",

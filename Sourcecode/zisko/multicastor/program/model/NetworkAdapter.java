@@ -18,6 +18,7 @@ import zisko.multicastor.program.lang.LanguageManager;
  */
 public abstract class NetworkAdapter {
 	
+	public static boolean hasJpcapMissing = false;
 	/** 
 	 * Network Type
 	 */
@@ -89,8 +90,9 @@ public abstract class NetworkAdapter {
 		try {
 			r = Pcap.findAllDevs(alldevs, errbuf);
 		} catch (UnsatisfiedLinkError e) {
-			System.out.println(lang.getProperty("message.unsatisfiedLinkError"));
+			//System.out.println(lang.getProperty("message.unsatisfiedLinkError"));
 			r = 0;
+			hasJpcapMissing = true;
 		}
 		if (!(r == Pcap.NOT_OK) && !(alldevs.isEmpty())) {
 			for(PcapIf p : alldevs){
@@ -113,7 +115,8 @@ public abstract class NetworkAdapter {
 			macInterfaces = tmpMacAdress;
 			macInterfacesName = tmpNameList;
 		}else{
-			System.out.println(lang.getProperty("message.loadDeviceFail"));
+			//System.out.println(lang.getProperty("message.loadDeviceFail"));
+			hasJpcapMissing = true;
 		}
 	}
 	/**
