@@ -221,7 +221,11 @@ message.mcc.unexcpectedError	=Unexpected error of type:
 message.mcc.usedPath		= Used path: 
 message.mc.undefined 		=Overgiven type in getMCs in MulticastController is UNDEFINED.
 
-about.license  = Licensed under GPLv3.
-about.labelDev = Developers:
+about.license =Licensed under GPLv3.
+about.text1 =MultiCastor is a tool which is able to send and receive multicasts.
+about.text2 =It was developed by students as a software engineering project at the University of Cooperative
+about.text3 =Education Stuttgart under the direction of Markus Rentschler and Andreas Stuckert.
+about.mc1 =Developers MultiCastor Version 1.0 (TIT09AIB):
+about.mc2 =Developers MultiCastor Version 2.0 (TIT10AID):
 
 general.device = Device

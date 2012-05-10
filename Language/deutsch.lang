@@ -217,10 +217,14 @@ message.mcc.NotLoaded		=Konfigurationsdatei konnte nicht geladen werden.
 message.mcc.ErrorDefault	=Error in default Konfigurationsdatei.
 message.mcc.Error		=Error in Konfigurationsdatei.
 message.mcc.unexcpectedError	=Unerwarteter Error vom Typ: 
-message.mcc.usedPath		=  Benutzter Pfad:  
+message.mcc.usedPath		=Benutzter Pfad:  
 message.mc.undefined 		=übergebener Typ in getMCs im MulticastController ist UNDEFINED.
 
-about.license  = Lizensiert unter GPLv3.
-about.labelDev = Entwickler:
+about.license =Lizensiert unter GPLv3.
+about.text1 =MultiCastor ist ein Tool zum Senden und Empfangen von Multicast-Datenströmen.
+about.text2 =Es wurde als Projekt im Fach Software Engineering an der Dualen Hochschule Stuttgart unter
+about.text3 =Leitung der Dozenten Markus Rentschler und Andreas Stuckert von unten genannten Studenten erstellt:
+about.mc1 =Entwickler MultiCastor Version 1.0 (TIT09AIB):
+about.mc2 =Entwickler MultiCastor Version 2.0 (TIT10AID):
 
 general.device = Gerät

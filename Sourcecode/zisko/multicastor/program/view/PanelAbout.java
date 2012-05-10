@@ -22,16 +22,28 @@ public class PanelAbout extends javax.swing.JPanel{
     private javax.swing.JLabel lb_image;
     private LanguageManager lang;
     
-    private JLabel labelDev = new JLabel();
+    private JLabel labelAbout1 = new JLabel();
+    private JLabel labelAbout2 = new JLabel();
+    private JLabel labelAbout3 = new JLabel();
+    private JLabel labelMC1 = new JLabel();
+    private JLabel labelMC2 = new JLabel();
     private JLabel labelLicense = new JLabel();
 
-    /* Namen der Entwickler als Konstanten. */
-    public static final String developer1 = "Jonas Traub";
-    public static final String developer2 = "Matthis Hauschild";
-    public static final String developer3 = "Sebastian Koralewski";
-    public static final String developer4 = "Filip Haase";
-    public static final String developer5 = "Fabian Faessueler";
-    public static final String developer6 = "Christopher Westphal";
+    /* Namen der Entwickler der Version 2.0 als Konstanten. */
+    public static final String mc2_developer1 = "Jonas Traub";
+    public static final String mc2_developer2 = "Matthis Hauschild";
+    public static final String mc2_developer3 = "Sebastian Koralewski";
+    public static final String mc2_developer4 = "Filip Haase";
+    public static final String mc2_developer5 = "Fabian Fäßler";
+    public static final String mc2_developer6 = "Christopher Westphal";
+
+    /* Namen der Entwickler der Version 1.0 als Konstanten. */
+    public static final String mc1_developer1 = "Bastian Wagener";
+    public static final String mc1_developer2 = "Johannes Beutel";
+    public static final String mc1_developer3 = "Thomas Lüder";
+    public static final String mc1_developer4 = "Daniel Becker";
+    public static final String mc1_developer5 = "Daniela Gerz";
+    public static final String mc1_developer6 = "Jannik Müller";
     
     public PanelAbout() {
     	initComponents();
@@ -40,9 +52,13 @@ public class PanelAbout extends javax.swing.JPanel{
     /** Methode, die beim Aendern der Sprache den Inhalt aktualisiert. */
     public void reloadLanguage() {
     	
-		labelDev.setText(lang.getProperty("about.labelDev"));
 		labelLicense.setText(lang.getProperty("about.license"));
-    	
+		labelAbout1.setText(lang.getProperty("about.text1"));
+		labelAbout2.setText(lang.getProperty("about.text2"));
+		labelAbout3.setText(lang.getProperty("about.text3"));
+		labelMC1.setText(lang.getProperty("about.mc1"));
+		labelMC2.setText(lang.getProperty("about.mc2"));
+		
     }
     
     /** Mit Hilfe dieser Methode werden die einzelnen GUI-Komponenten initialisiert. */
@@ -81,24 +97,54 @@ public class PanelAbout extends javax.swing.JPanel{
         labelLicense.setFont(new Font("Helvetica", Font.BOLD, 11));
         panel_about_inner.add(labelLicense);
         
+        /* Platzhalter (5 Pixel hoch) */
+        panel_about_inner.add(Box.createRigidArea(new Dimension(0, 5)));
+        
+        /* Entwickler-Überschrift (Sorry für Crap-Code, aber musste schnell gehen! -.-) */
+        labelAbout1.setText(lang.getProperty("about.text1"));
+        labelAbout2.setText(lang.getProperty("about.text2"));
+        labelAbout3.setText(lang.getProperty("about.text3"));
+        panel_about_inner.add(labelAbout1);
+        panel_about_inner.add(labelAbout2);
+        panel_about_inner.add(labelAbout3);
+        
         /* Platzhalter (20 Pixel hoch) */
         panel_about_inner.add(Box.createRigidArea(new Dimension(0, 20)));
         
-        /* Entwickler-ss�berschrift */
-        labelDev.setText(lang.getProperty("about.labelDev"));
-        labelDev.setFont(new Font("Helvetica", Font.BOLD, 12));
-        panel_about_inner.add(labelDev);  
+        /* Entwickler-Überschrift */
+        labelMC2.setText(lang.getProperty("about.mc2"));
+        labelMC2.setFont(new Font("Helvetica", Font.BOLD, 12));
+        panel_about_inner.add(labelMC2); 
         
         /* Platzhalter (5 Pixel hoch) */
         panel_about_inner.add(Box.createRigidArea(new Dimension(0, 5)));
         
-        /* Auflistung der Entwickler */
-        panel_about_inner.add(new JLabel(developer1));
-        panel_about_inner.add(new JLabel(developer2));
-        panel_about_inner.add(new JLabel(developer3));
-        panel_about_inner.add(new JLabel(developer4));
-        panel_about_inner.add(new JLabel(developer5));
-        panel_about_inner.add(new JLabel(developer6));
+        /* Auflistung der Entwickler Version 2.0 */
+        panel_about_inner.add(new JLabel(mc2_developer1));
+        panel_about_inner.add(new JLabel(mc2_developer2));
+        panel_about_inner.add(new JLabel(mc2_developer3));
+        panel_about_inner.add(new JLabel(mc2_developer4));
+        panel_about_inner.add(new JLabel(mc2_developer5));
+        panel_about_inner.add(new JLabel(mc2_developer6));
+        
+        /* Platzhalter (20 Pixel hoch) */
+        panel_about_inner.add(Box.createRigidArea(new Dimension(0, 20)));
+        
+        /* Entwickler-Überschrift */
+        labelMC1.setText(lang.getProperty("about.mc1"));
+        labelMC1.setFont(new Font("Helvetica", Font.BOLD, 12));
+        panel_about_inner.add(labelMC1);  
+        
+        /* Platzhalter (5 Pixel hoch) */
+        panel_about_inner.add(Box.createRigidArea(new Dimension(0, 5)));
+        
+        /* Auflistung der Entwickler Version 1.0 */
+        panel_about_inner.add(new JLabel(mc1_developer1));
+        panel_about_inner.add(new JLabel(mc1_developer2));
+        panel_about_inner.add(new JLabel(mc1_developer3));
+        panel_about_inner.add(new JLabel(mc1_developer4));
+        panel_about_inner.add(new JLabel(mc1_developer5));
+        panel_about_inner.add(new JLabel(mc1_developer6));
         
         /* Box-Layout in X-Richtung definieren, um den generierten Inhalte einzufuegen. */
         BoxLayout panel_aboutLayoutOuter = new BoxLayout(panel_about_outer, BoxLayout.X_AXIS);

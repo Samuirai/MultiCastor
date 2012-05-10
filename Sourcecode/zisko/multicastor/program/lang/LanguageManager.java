@@ -240,7 +240,11 @@ public class LanguageManager extends Properties{
 		"message.mcc.usedPath",
 		"message.mc.undefined",
 		"about.license",
-		"about.labelDev",
+		"about.text1",
+		"about.text2",
+		"about.text3",
+		"about.mc1",
+		"about.mc2",
 		"general.device"
 	};
 	
