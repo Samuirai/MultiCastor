@@ -58,8 +58,8 @@ public class MulticastLogHandler extends ConsoleHandler	{
 
 		//Ausgabe mit Level- und Datuminformationen
 		Level level = record.getLevel();
-		String message=("["+level+"]" + "["+date+"] " + record.getMessage());
-		String message_file=("["+level+"]" + "["+date_file+"] " +record.getMessage());
+		String message=("["+date+"]" + "["+level+"] " + record.getMessage());
+		String message_file=("["+date_file+"]" + "["+level+"] " + record.getMessage());
 		String message_window=(record.getMessage());
 		
 		System.out.println(message);
