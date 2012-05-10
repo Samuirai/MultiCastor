@@ -36,20 +36,20 @@ plus.l3rDescription		=Öffnet die Schicht 3 Empfänger Registerkarte. Wenn die R
 plus.l3sDescription		=Öffnet die Schicht 3 Sender Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 plus.aboutDescription	=Öffnet die Über-Registerkarte. Wenn die Registerkarte geschlossen ist, wird sie geöffnet. Wenn sie geöffnet ist, wird sie fokussiert.
 miscBorder.mcOverwiew	=MultiCast Übersicht
-miscBorder.mcControl=MultiCast Steürung
+miscBorder.mcControl=MultiCast Steuerung
 miscBorder.mcConfig	= MultiCast Konfiguration
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.udpPort				=UDP Port
 miscBorder.packetRate			=Paketrate
 miscBorder.packetLength			=Paketlänge
-miscBorder.timeToLive			=Lebenszeit
+miscBorder.timeToLive			=TTL
 miscBorder.ipGroupAddress		=IP Gruppenadresse
 miscBorder.ipNetworkInterface	=IP Netzwerk Interface
 miscBorder.MacGroupAddress		=Mac Gruppenadresse
 miscBorder.NetworkInterface		=Netzwerk Interface
 config.message.ipFirst			=Bitte erst die IP wählen
-config.message.ipFirstShort		=IP zürst
+config.message.ipFirstShort		=IP zuerst
 button.start		=Start
 button.stop			=Stop
 button.delete		=Löschen
@@ -72,7 +72,7 @@ graph.jitter		=Fluktuation
 graph.lostPackets	=Verlorene Pakete
 graph.measuredPacketRate=ermittelte Paketrate
 graph.packetsPerSec	=Pakete pro Sekunde (Summe)
-graph.current		=Aktüll
+graph.current		=Aktuell
 
 # Will create a message like: Not enough memory. You have XXX MB. You need minimum XXX MB to start MultiCastor.
 # MC will show this message if there are not enough free memory in heap.
@@ -84,9 +84,9 @@ error.memory.title	=MultiCastor: Speicherfehler
 # MC will show this message if there are less them 10% free memory in heap.
 warning.memory.title=Ihr Arbeitsspeicher ist fast voll.(<10% verbleibend)\n\
  Bitte versuchen sie ihre Dateien zu speichern und \
- versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schliessüen.\n\n
+ versuchen sie Speicher frei zu geben in dem sie Sender/Receiver oder Tabs schließen.\n\n
 warning.memory.freeMemory =Freier Speicher
-warning.memory.allocMemory=Aktüll reservierter Speicher
+warning.memory.allocMemory=Aktuell reservierter Speicher
 warning.memory.maxMemory  =Maximal verfügbarer Speicher
 
 logger.info.startWithGui=MultiCastor gestartet mit GUI
@@ -111,7 +111,7 @@ error.logfile.canNotWrite=Logdatei konnte nicht erstellt werden. Bitte prüfen s
 error.network.noHostName	=Hostname kann nicht ermittelt werden. Fehlermeldung:
 error.network.settingUDP	=Fehler beim setzen des UDP-Port:
 error.network.noDefaultPort	=FATALER FEHLER: STANDART-PORT KANN NICHT ZUGEWIESEN WERDEN
-error.network.sourceIP		=Fehler beim setzen der Qüll-IP
+error.network.sourceIP		=Fehler beim Setzen der Quell-IP
 
 error.mr.logger 	=FATALER FEHLER - Kann Multicast-Empfänger nicht ohne 'Logger' erstellen
 error.mc.logger		=Fehler im MulticastController: Logger-Objekt ist null
@@ -137,7 +137,7 @@ toolTip.closeThisTab	 	=schlieﬂe diese Registerkarte
 toolTip.mcAddressRange		=Wählen sie eine Multicast IP Adresse (IPV4 oder IPV6)
 toolTip.ipFirst			=Geben sie erst eine IP Adresse an und wählen sie dann das Netzwerkinterace
 toolTip.specifyUDPPort		=Geben sie den UDP Port an
-toolTip.specifyTTL		=Geben sie die Lebenszeit an
+toolTip.specifyTTL		=Geben sie die TTL an
 toolTip.specifyPacketRate	=Spezifizieren sie die Paketrate
 toolTip.specifyPacketLength	=Spezifizieren sie die Paketlänge
 toolTip.selectNetInterface	=Wählen sie ein Netzwerkinterface für Multicast
