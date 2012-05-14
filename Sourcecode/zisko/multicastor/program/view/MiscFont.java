@@ -21,7 +21,7 @@ public abstract class MiscFont{
 	 */
 	static{
 		try {
-			mc_font = Font.createFont(Font.PLAIN, MiscFont.class.getResourceAsStream("/zisko/multicastor/resources/fonts/DejaVuSans.ttf"));
+			mc_font = Font.createFont(Font.PLAIN, MiscFont.class.getResourceAsStream("/zisko/multicastor/resources/fonts/MC.ttf"));
 		} catch (FontFormatException e) {
 			System.out.println("ERROR: Font format exception! Program Exit!");
 			e.printStackTrace();
